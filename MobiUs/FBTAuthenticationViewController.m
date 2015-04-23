@@ -35,7 +35,9 @@
 
 - (void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error
 {
+    
     Firebase *authRef = [[FirebaseShared sharedInstance] firebaseRootReference];
+
     if (!error)
     {
          NSLog(@"logged in with google? %@", [GPPSignIn sharedInstance].authentication);

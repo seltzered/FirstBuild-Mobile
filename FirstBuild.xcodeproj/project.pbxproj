@@ -20,6 +20,8 @@
 		5B88581B1A7308DF00F22325 /* Animations.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B88581A1A7308DF00F22325 /* Animations.xcassets */; };
 		5B88581C1A7310DB00F22325 /* PT_Sans-Narrow-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67926FF119ED8BA000E346C2 /* PT_Sans-Narrow-Web-Regular.ttf */; };
 		5B8C108A1A39EC2A00F481E6 /* ProductAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8C10891A39EC2A00F481E6 /* ProductAddViewController.m */; };
+		5B9925E61AE824BC00B337CB /* LedgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9925E51AE824BC00B337CB /* LedgeViewController.m */; };
+		5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9925E81AE8251800B337CB /* FSTLedge.m */; };
 		5B99DFC51AB1EB2D00247034 /* FSTParagon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B99DFC41AB1EB2D00247034 /* FSTParagon.m */; };
 		5B99DFC71AB1F2E400247034 /* Paragon.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B99DFC61AB1F2E400247034 /* Paragon.storyboard */; };
 		5B99E0111AB32DA100247034 /* ParagonEngineeringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B99E0101AB32DA100247034 /* ParagonEngineeringViewController.m */; };
@@ -84,6 +86,10 @@
 		5B8C10871A39324C00F481E6 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		5B8C10881A39EC2A00F481E6 /* ProductAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductAddViewController.h; sourceTree = "<group>"; };
 		5B8C10891A39EC2A00F481E6 /* ProductAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductAddViewController.m; sourceTree = "<group>"; };
+		5B9925E41AE824BC00B337CB /* LedgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LedgeViewController.h; sourceTree = "<group>"; };
+		5B9925E51AE824BC00B337CB /* LedgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LedgeViewController.m; sourceTree = "<group>"; };
+		5B9925E71AE8251800B337CB /* FSTLedge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTLedge.h; sourceTree = "<group>"; };
+		5B9925E81AE8251800B337CB /* FSTLedge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTLedge.m; sourceTree = "<group>"; };
 		5B99DFC31AB1EB2D00247034 /* FSTParagon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagon.h; sourceTree = "<group>"; };
 		5B99DFC41AB1EB2D00247034 /* FSTParagon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagon.m; sourceTree = "<group>"; };
 		5B99DFC61AB1F2E400247034 /* Paragon.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Paragon.storyboard; sourceTree = "<group>"; };
@@ -250,6 +256,8 @@
 				5BC364891A2FAC1A00D03B9C /* FSTMilkyWeigh.m */,
 				5BC364981A32624F00D03B9C /* FSTChillHubDevice.h */,
 				5BC364991A32624F00D03B9C /* FSTChillHubDevice.m */,
+				5B9925E71AE8251800B337CB /* FSTLedge.h */,
+				5B9925E81AE8251800B337CB /* FSTLedge.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -265,6 +273,8 @@
 				5B7FB5571A43C6DF00553797 /* ChillHubDevicesTableViewController.m */,
 				5BC7C7B21A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.h */,
 				5BC7C7B31A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m */,
+				5B9925E41AE824BC00B337CB /* LedgeViewController.h */,
+				5B9925E51AE824BC00B337CB /* LedgeViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -644,10 +654,12 @@
 				5BCDFBF51A65584A006E6055 /* WifiCommissioningNetworksTableViewController.m in Sources */,
 				5BCDFBF21A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m in Sources */,
 				5BC5A1CD19EF6584009C93B1 /* FBTUser.m in Sources */,
+				5B9925E61AE824BC00B337CB /* LedgeViewController.m in Sources */,
 				5BC5A1D019EF6638009C93B1 /* Constants.m in Sources */,
 				5B7FB5581A43C6DF00553797 /* ChillHubDevicesTableViewController.m in Sources */,
 				5B99E0871A1AA744005FB881 /* FSTNetwork.m in Sources */,
 				5BC5A1C219EF5E79009C93B1 /* FBTAuthenticationViewController.m in Sources */,
+				5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */,
 				5B99E0811A1A5D10005FB881 /* WifiCommissioningViewController.m in Sources */,
 				5BBFAD0219E4965500E42575 /* ProductCollectionViewCell.m in Sources */,
 				5B99E0111AB32DA100247034 /* ParagonEngineeringViewController.m in Sources */,

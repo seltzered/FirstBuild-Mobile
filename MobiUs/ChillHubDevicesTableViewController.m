@@ -7,7 +7,9 @@
 //
 #import "ChillHubDevicesTableViewController.h"
 #import "FSTMilkyWeigh.h"
+#import "FSTLedge.h"
 #import "ScaleViewController.h"
+#import "LedgeViewController.h"
 #import "ChillHubDeviceTableViewCell.h"
 
 @interface ChillHubDevicesTableViewController ()
@@ -29,14 +31,22 @@
         ScaleViewController* scale = (ScaleViewController*) segue.destinationViewController;
         scale.milkyWeigh = (FSTMilkyWeigh*)deviceSelected;
     }
+    else if ([segue.destinationViewController isKindOfClass:[LedgeViewController class]] )
+    {
+        LedgeViewController* ledge = (LedgeViewController*) segue.destinationViewController;
+        ledge.ledge = (FSTLedge*)deviceSelected;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+
     //TODO: consider using another pattern here ...
     //putting the firebase setups stuff inside viewWillAppear
     //because prepareForSegue in the parent controller loads after
     //viewDidLoad
+    //TODO: clean this up and make it more generic
+    
     Firebase* ref = [self.chillhub.firebaseRef childByAppendingPath:@"milkyWeighs"];
     [ref removeAllObservers];
     [self.products removeAllObjects];
@@ -103,6 +113,74 @@
             }
         }
     }];
+    
+    //hack...
+    
+    Firebase* ledgesRef = [self.chillhub.firebaseRef childByAppendingPath:@"ledges"];
+    [ledgesRef removeAllObservers];
+    
+    [ledgesRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        {
+            FSTLedge* ledge = [FSTLedge new];
+            ledge.identifier = snapshot.key;
+            ledge.firebaseRef = snapshot.ref;
+            id rawVal = snapshot.value;
+            if (rawVal != [NSNull null])
+            {
+                NSDictionary* val = rawVal;
+                if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+                {
+                    ledge.online = YES;
+                }
+                else
+                {
+                    ledge.online = NO;
+                }
+            }
+            [self.products addObject:ledge];
+            [self.tableView reloadData];
+        }
+        
+    }];
+    
+    [ledgesRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+        for (long i=self.products.count-1; i>-1; i--)
+        {
+            FSTLedge* ledge = [self.products objectAtIndex:i];
+            if ([ledge.identifier isEqualToString:snapshot.key])
+            {
+                [self.products removeObject:ledge];
+                [self.tableView reloadData];
+                break;
+            }
+            
+        }
+    }];
+    
+    [ledgesRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+        for (long i=self.products.count-1; i>-1; i--)
+        {
+            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
+            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
+            {
+                id rawVal = snapshot.value;
+                if (rawVal != [NSNull null])
+                {
+                    NSDictionary* val = rawVal;
+                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+                    {
+                        chillhubDevice.online = YES;
+                    }
+                    else
+                    {
+                        chillhubDevice.online = NO;
+                    }
+                    [self.tableView reloadData];
+                }
+                break;
+            }
+        }
+    }];
 
     
 }
@@ -128,10 +206,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ChillHubDeviceTableViewCell *productCell = [tableView dequeueReusableCellWithIdentifier:@"milkyWeighCell" forIndexPath:indexPath];
+    FSTProduct * product = self.products[indexPath.row];
+    ChillHubDeviceTableViewCell *productCell;
+    
+    if ( [product isKindOfClass:[FSTMilkyWeigh class]])
+    {
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"milkyWeighCell" forIndexPath:indexPath];
+    }
+    else if ([product isKindOfClass:[FSTLedge class]])
+    {
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"ledgeCell" forIndexPath:indexPath];
+    }
+
     productCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    FSTProduct * product = self.products[indexPath.row];
     if (product.online)
     {
         productCell.userInteractionEnabled = YES;
@@ -155,6 +243,10 @@
     if ([product isKindOfClass:[FSTMilkyWeigh class]])
     {
         [self performSegueWithIdentifier:@"segueMilkyWeigh" sender:product];
+    }
+    else if ([product isKindOfClass:[FSTLedge class]])
+    {
+        [self performSegueWithIdentifier:@"segueLedge" sender:product];
     }
 }
 
