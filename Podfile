@@ -10,6 +10,7 @@ pod 'SSKeychain'
 pod 'ActionSheetPicker-3.0'
 pod 'google-plus-ios-sdk'
 pod 'Facebook-iOS-SDK'
+pod "Color-Picker-for-iOS"
 
 #target 'FirstBuild' do
 

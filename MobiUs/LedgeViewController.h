@@ -7,17 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <HRColorPickerView.h>
 
 #import "FSTLedge.h"
+#import "HRColorMapView.h"
+
 
 @interface LedgeViewController : UIViewController
 
 @property (strong, nonatomic) FSTLedge *ledge;
-
-@property (strong, nonatomic) IBOutlet UISlider *sliderR;
-
-@property (strong, nonatomic) IBOutlet UISlider *sliderG;
-
-@property (strong, nonatomic) IBOutlet UISlider *sliderB;
 
 @end
