@@ -12,8 +12,12 @@
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
         </mutableArray>
         <mutableArray key="fontawesome-webfont.ttf">
+            <string>FontAwesome</string>
             <string>FontAwesome</string>
             <string>FontAwesome</string>
         </mutableArray>
@@ -244,6 +248,84 @@
                                     <outlet property="disabledView" destination="6Nq-o1-jvB" id="A9c-2S-oaN"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="beerBankCell" rowHeight="72" id="qWg-zA-gFx" customClass="ChillHubDeviceTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qWg-zA-gFx" id="ldF-oQ-cCR">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBankIcon" translatesAutoresizingMaskIntoConstraints="NO" id="7za-M5-Ey3">
+                                            <rect key="frame" x="5" y="16" width="60" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="Ip5-Rs-ROc"/>
+                                                <constraint firstAttribute="height" constant="44" id="W0q-Wo-3zW"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BeerBank" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZW0-Vi-dAZ">
+                                            <rect key="frame" x="70" y="13" width="522" height="28"/>
+                                            <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="24"/>
+                                            <color key="textColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5BB-hz-xbE">
+                                            <rect key="frame" x="571" y="27" width="16" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="16" id="ScB-5f-8vx"/>
+                                                <constraint firstAttribute="height" constant="18" id="UOo-J6-ywa"/>
+                                            </constraints>
+                                            <state key="normal" image="icon_chevron_blue_right">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Take one down pass it around." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MMy-D6-oWM">
+                                            <rect key="frame" x="70" y="41" width="519" height="24"/>
+                                            <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="20"/>
+                                            <color key="textColor" red="0.49803924560000001" green="0.49411767719999999" blue="0.50588238240000005" alpha="1" colorSpace="deviceRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view alpha="0.75" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQz-hj-Mbg" userLabel="disabledView">
+                                            <rect key="frame" x="5" y="5" width="590" height="62"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" offline" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="juz-s1-sYP">
+                                                    <rect key="frame" x="246" y="18" width="99" height="28"/>
+                                                    <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="24"/>
+                                                    <color key="textColor" red="0.94117653369999998" green="0.40000003579999999" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="juz-s1-sYP" secondAttribute="centerY" id="EUq-vs-UCE"/>
+                                                <constraint firstAttribute="centerX" secondItem="juz-s1-sYP" secondAttribute="centerX" id="l1F-7Q-0fh"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="TQz-hj-Mbg" secondAttribute="bottom" constant="5" id="0HS-ff-7Wj"/>
+                                        <constraint firstItem="7za-M5-Ey3" firstAttribute="leading" secondItem="ldF-oQ-cCR" secondAttribute="leading" constant="5" id="D5V-FC-rMb"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ZW0-Vi-dAZ" secondAttribute="trailing" id="Duy-cN-6Ml"/>
+                                        <constraint firstItem="TQz-hj-Mbg" firstAttribute="leading" secondItem="ldF-oQ-cCR" secondAttribute="leading" constant="5" id="FW8-CM-Uwv"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MMy-D6-oWM" secondAttribute="trailing" constant="3" id="OJP-bI-R9T"/>
+                                        <constraint firstItem="ZW0-Vi-dAZ" firstAttribute="leading" secondItem="7za-M5-Ey3" secondAttribute="trailing" constant="5" id="OTE-aV-ULV"/>
+                                        <constraint firstItem="MMy-D6-oWM" firstAttribute="top" secondItem="ZW0-Vi-dAZ" secondAttribute="bottom" id="RLN-vw-leP"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5BB-hz-xbE" secondAttribute="trailing" constant="5" id="XTZ-VV-JDm"/>
+                                        <constraint firstAttribute="trailing" secondItem="TQz-hj-Mbg" secondAttribute="trailing" constant="5" id="gn0-w7-Zst"/>
+                                        <constraint firstItem="MMy-D6-oWM" firstAttribute="leading" secondItem="7za-M5-Ey3" secondAttribute="trailing" constant="5" id="jxb-rD-Cdq"/>
+                                        <constraint firstItem="7za-M5-Ey3" firstAttribute="centerY" secondItem="ZW0-Vi-dAZ" secondAttribute="centerY" constant="11.5" id="meX-Sz-sG4"/>
+                                        <constraint firstItem="7za-M5-Ey3" firstAttribute="top" secondItem="ldF-oQ-cCR" secondAttribute="top" constant="16" id="pEF-dB-SPF"/>
+                                        <constraint firstAttribute="centerY" secondItem="5BB-hz-xbE" secondAttribute="centerY" id="uQv-2R-1gs"/>
+                                        <constraint firstItem="TQz-hj-Mbg" firstAttribute="top" secondItem="ldF-oQ-cCR" secondAttribute="top" constant="5" id="wpA-Ts-SuJ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailsButton" destination="5BB-hz-xbE" id="wdN-Xz-ryP"/>
+                                    <outlet property="disabledView" destination="TQz-hj-Mbg" id="8de-Fj-Vqo"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="v0e-D7-gki" id="mez-zf-k7U"/>
@@ -253,11 +335,73 @@
                     <connections>
                         <segue destination="bBS-3V-dRh" kind="show" identifier="segueMilkyWeigh" id="gJN-IY-zSg"/>
                         <segue destination="KcH-pC-Jrz" kind="show" identifier="segueLedge" id="lH9-uH-eVs"/>
+                        <segue destination="xaQ-ip-fvh" kind="show" identifier="segueBeerBank" id="cwi-kK-MxQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ZL-Fc-R5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="726" y="1107"/>
+        </scene>
+        <!--Beer Bank View Controller-->
+        <scene sceneID="bV2-Im-Peh">
+            <objects>
+                <viewController id="xaQ-ip-fvh" customClass="BeerBankViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="waS-11-52c"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Uf-Sg-xLX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ySO-Gn-eV2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="451"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5km-pK-DZ0">
+                                <rect key="frame" x="46" y="30" width="508" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free Your Beer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5H-hI-qLN">
+                                        <rect key="frame" x="152" y="0.0" width="85" height="50"/>
+                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
+                                        <color key="textColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O21-Vw-onK">
+                                        <rect key="frame" x="287" y="9" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.94117653369999998" green="0.40000003579999999" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <connections>
+                                            <action selector="openSwitchClicked:" destination="xaQ-ip-fvh" eventType="valueChanged" id="uba-Xe-7E9"/>
+                                        </connections>
+                                    </switch>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="732-Vt-ale"/>
+                                    <constraint firstAttribute="centerY" secondItem="m5H-hI-qLN" secondAttribute="centerY" constant="0.5" id="E8d-Hc-EKb"/>
+                                    <constraint firstItem="O21-Vw-onK" firstAttribute="leading" secondItem="m5H-hI-qLN" secondAttribute="trailing" constant="50" id="ZBb-8A-Mb5"/>
+                                    <constraint firstAttribute="height" secondItem="m5H-hI-qLN" secondAttribute="height" id="a1c-x8-6ue"/>
+                                    <constraint firstAttribute="centerY" secondItem="O21-Vw-onK" secondAttribute="centerY" constant="0.5" id="n18-E9-wqw"/>
+                                    <constraint firstAttribute="centerX" secondItem="m5H-hI-qLN" secondAttribute="centerX" constant="60" id="zGx-26-tfO"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBottle" translatesAutoresizingMaskIntoConstraints="NO" id="ocU-rY-OxD">
+                                <rect key="frame" x="16" y="80" width="568" height="371"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="5km-pK-DZ0" secondAttribute="trailing" constant="30" id="0zj-0E-SE3"/>
+                            <constraint firstItem="ocU-rY-OxD" firstAttribute="top" secondItem="waS-11-52c" secondAttribute="bottom" constant="80" id="HBa-vk-92J"/>
+                            <constraint firstItem="ocU-rY-OxD" firstAttribute="leading" secondItem="ySO-Gn-eV2" secondAttribute="leadingMargin" id="MI0-P6-K4c"/>
+                            <constraint firstItem="5km-pK-DZ0" firstAttribute="top" secondItem="ySO-Gn-eV2" secondAttribute="topMargin" constant="30" id="RYh-x2-9I7"/>
+                            <constraint firstItem="5Uf-Sg-xLX" firstAttribute="top" secondItem="ocU-rY-OxD" secondAttribute="bottom" id="hrs-mT-ufK"/>
+                            <constraint firstItem="5km-pK-DZ0" firstAttribute="leading" secondItem="ySO-Gn-eV2" secondAttribute="leadingMargin" constant="30" id="pwP-bw-YYT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ocU-rY-OxD" secondAttribute="trailing" id="sCo-9E-CTF"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="alarmSetButton" destination="O21-Vw-onK" id="3Me-1b-9lp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8GP-De-23E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1410" y="486"/>
         </scene>
         <!--Ledge View Controller-->
         <scene sceneID="dvZ-jS-IVM">
@@ -338,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3A4-zK-Fib" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1719" y="693.5"/>
+            <point key="canvasLocation" x="1937" y="847.5"/>
         </scene>
         <!--Scale View Controller-->
         <scene sceneID="Luh-jh-P2T">
@@ -406,6 +550,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="beerBankIcon" width="85" height="86"/>
+        <image name="beerBottle" width="565" height="848"/>
         <image name="bg_milkyweigh_base" width="1019" height="276"/>
         <image name="bg_milkyweigh_no_milk-2" width="2671" height="3814"/>
         <image name="icon_chevron_blue_right" width="28" height="47"/>

@@ -35,6 +35,8 @@
 		5B9EF0FF19DEEE1000E8D9F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B9EF0FE19DEEE1000E8D9F1 /* Images.xcassets */; };
 		5B9EF10219DEEE1000E8D9F1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B9EF10019DEEE1000E8D9F1 /* LaunchScreen.xib */; };
 		5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA94D5A1A5C9EDE00F9AD79 /* MilkGallonClippingView.m */; };
+		5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E7E01AF7F4BA00730031 /* BeerBankViewController.m */; };
+		5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E7E31AF7F4E800730031 /* FSTBeerBank.m */; };
 		5BBB0B9A19F1DE8C001D5DF1 /* ScaleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBB0B9919F1DE8C001D5DF1 /* ScaleViewController.m */; };
 		5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBC7A791A66F7F100A79080 /* WifiCommissioningFoundViewController.m */; };
 		5BBFACFF19E495FC00E42575 /* ProductCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFACFE19E495FC00E42575 /* ProductCollectionViewController.m */; };
@@ -115,6 +117,10 @@
 		5B9EF12319DF08E700E8D9F1 /* MobiUs.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiUs.pch; sourceTree = "<group>"; };
 		5BA94D591A5C9EDE00F9AD79 /* MilkGallonClippingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilkGallonClippingView.h; sourceTree = "<group>"; };
 		5BA94D5A1A5C9EDE00F9AD79 /* MilkGallonClippingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilkGallonClippingView.m; sourceTree = "<group>"; };
+		5BB1E7DF1AF7F4BA00730031 /* BeerBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerBankViewController.h; sourceTree = "<group>"; };
+		5BB1E7E01AF7F4BA00730031 /* BeerBankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeerBankViewController.m; sourceTree = "<group>"; };
+		5BB1E7E21AF7F4E800730031 /* FSTBeerBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBeerBank.h; sourceTree = "<group>"; };
+		5BB1E7E31AF7F4E800730031 /* FSTBeerBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBeerBank.m; sourceTree = "<group>"; };
 		5BBB0B9819F1DE8C001D5DF1 /* ScaleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScaleViewController.h; sourceTree = "<group>"; };
 		5BBB0B9919F1DE8C001D5DF1 /* ScaleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScaleViewController.m; sourceTree = "<group>"; };
 		5BBC7A761A65BD7200A79080 /* splashvideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = splashvideo.mp4; sourceTree = "<group>"; };
@@ -258,6 +264,8 @@
 				5BC364991A32624F00D03B9C /* FSTChillHubDevice.m */,
 				5B9925E71AE8251800B337CB /* FSTLedge.h */,
 				5B9925E81AE8251800B337CB /* FSTLedge.m */,
+				5BB1E7E21AF7F4E800730031 /* FSTBeerBank.h */,
+				5BB1E7E31AF7F4E800730031 /* FSTBeerBank.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -275,6 +283,8 @@
 				5BC7C7B31A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m */,
 				5B9925E41AE824BC00B337CB /* LedgeViewController.h */,
 				5B9925E51AE824BC00B337CB /* LedgeViewController.m */,
+				5BB1E7DF1AF7F4BA00730031 /* BeerBankViewController.h */,
+				5BB1E7E01AF7F4BA00730031 /* BeerBankViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -649,6 +659,7 @@
 				5B99E0841A1AA63F005FB881 /* WifiCommissioningNetworkListViewController.m in Sources */,
 				5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */,
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
+				5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */,
 				5BC364811A2F63C200D03B9C /* FSTDeviceAuth.m in Sources */,
 				5BF9482F19EC15E300CB8BCF /* MenuViewController.m in Sources */,
 				5BCDFBF51A65584A006E6055 /* WifiCommissioningNetworksTableViewController.m in Sources */,
@@ -664,6 +675,7 @@
 				5BBFAD0219E4965500E42575 /* ProductCollectionViewCell.m in Sources */,
 				5B99E0111AB32DA100247034 /* ParagonEngineeringViewController.m in Sources */,
 				5BC7C7B41A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m in Sources */,
+				5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */,
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
 				5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */,
 				5BBB0B9A19F1DE8C001D5DF1 /* ScaleViewController.m in Sources */,

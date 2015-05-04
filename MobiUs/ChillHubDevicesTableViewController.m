@@ -8,8 +8,10 @@
 #import "ChillHubDevicesTableViewController.h"
 #import "FSTMilkyWeigh.h"
 #import "FSTLedge.h"
+#import "FSTBeerBank.h"
 #import "ScaleViewController.h"
 #import "LedgeViewController.h"
+#import "BeerBankViewController.h"
 #import "ChillHubDeviceTableViewCell.h"
 
 @interface ChillHubDevicesTableViewController ()
@@ -35,6 +37,11 @@
     {
         LedgeViewController* ledge = (LedgeViewController*) segue.destinationViewController;
         ledge.ledge = (FSTLedge*)deviceSelected;
+    }
+    else if ([segue.destinationViewController isKindOfClass:[BeerBankViewController class]] )
+    {
+        BeerBankViewController* bank = (BeerBankViewController*) segue.destinationViewController;
+        bank.beerBank = (FSTBeerBank*)deviceSelected;
     }
 }
 
@@ -183,6 +190,74 @@
         }
     }];
 
+    //more hack....
+    
+    Firebase* beerBankRef = [self.chillhub.firebaseRef childByAppendingPath:@"beerbanks"];
+    [beerBankRef removeAllObservers];
+    
+    [beerBankRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        {
+            FSTBeerBank* bank = [FSTBeerBank new];
+            bank.identifier = snapshot.key;
+            bank.firebaseRef = snapshot.ref;
+            id rawVal = snapshot.value;
+            if (rawVal != [NSNull null])
+            {
+                NSDictionary* val = rawVal;
+                if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+                {
+                    bank.online = YES;
+                }
+                else
+                {
+                    bank.online = NO;
+                }
+            }
+            [self.products addObject:bank];
+            [self.tableView reloadData];
+        }
+        
+    }];
+    
+    [beerBankRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+        for (long i=self.products.count-1; i>-1; i--)
+        {
+            FSTBeerBank* bank = [self.products objectAtIndex:i];
+            if ([bank.identifier isEqualToString:snapshot.key])
+            {
+                [self.products removeObject:bank];
+                [self.tableView reloadData];
+                break;
+            }
+            
+        }
+    }];
+    
+    [beerBankRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+        for (long i=self.products.count-1; i>-1; i--)
+        {
+            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
+            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
+            {
+                id rawVal = snapshot.value;
+                if (rawVal != [NSNull null])
+                {
+                    NSDictionary* val = rawVal;
+                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+                    {
+                        chillhubDevice.online = YES;
+                    }
+                    else
+                    {
+                        chillhubDevice.online = NO;
+                    }
+                    [self.tableView reloadData];
+                }
+                break;
+            }
+        }
+    }];
+
     
 }
 
@@ -218,6 +293,10 @@
     {
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ledgeCell" forIndexPath:indexPath];
     }
+    else if ([product isKindOfClass:[FSTBeerBank class]])
+    {
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"beerBankCell" forIndexPath:indexPath];
+    }
 
     productCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -248,6 +327,10 @@
     else if ([product isKindOfClass:[FSTLedge class]])
     {
         [self performSegueWithIdentifier:@"segueLedge" sender:product];
+    }
+    else if ([product isKindOfClass:[FSTBeerBank class]])
+    {
+        [self performSegueWithIdentifier:@"segueBeerBank" sender:product];
     }
 }
 
