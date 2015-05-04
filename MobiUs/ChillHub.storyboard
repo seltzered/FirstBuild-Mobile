@@ -11,6 +11,7 @@
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
         </mutableArray>
         <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
@@ -267,15 +268,29 @@
                         <viewControllerLayoutGuide type="bottom" id="D3j-iT-tKV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VNs-7X-9B2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="451"/>
+                        <rect key="frame" x="0.0" y="44" width="600" height="451"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03J-Za-Vin" customClass="HRColorPickerView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="451"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPy-qy-cud">
+                                        <rect key="frame" x="505" y="2" width="90" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="1hg-7q-8ld"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="18"/>
+                                        <state key="normal" title="Record">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="recordButtonClicked:" destination="KcH-pC-Jrz" eventType="touchUpInside" id="Dt5-Xv-z2A"/>
+                                        </connections>
+                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cNX-tk-RxF" userLabel="Color Map view" customClass="HRColorMapView">
-                                        <rect key="frame" x="0.0" y="15" width="600" height="436"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <rect key="frame" x="0.0" y="35" width="600" height="416"/>
+                                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="saturationUpperLimit">
                                                 <integer key="value" value="1"/>
@@ -289,12 +304,14 @@
                                         </connections>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="cNX-tk-RxF" secondAttribute="bottom" id="8l5-ny-mVR"/>
-                                    <constraint firstItem="cNX-tk-RxF" firstAttribute="top" secondItem="03J-Za-Vin" secondAttribute="top" constant="15" id="E1J-nU-xVI"/>
+                                    <constraint firstItem="cNX-tk-RxF" firstAttribute="top" secondItem="03J-Za-Vin" secondAttribute="top" constant="35" id="E1J-nU-xVI"/>
                                     <constraint firstItem="cNX-tk-RxF" firstAttribute="leading" secondItem="03J-Za-Vin" secondAttribute="leading" id="HXX-Ft-Mrh"/>
                                     <constraint firstAttribute="width" secondItem="cNX-tk-RxF" secondAttribute="width" id="Vyw-ln-gEB"/>
+                                    <constraint firstItem="hPy-qy-cud" firstAttribute="top" secondItem="03J-Za-Vin" secondAttribute="top" constant="2" id="b77-ai-M45"/>
+                                    <constraint firstAttribute="trailing" secondItem="hPy-qy-cud" secondAttribute="trailing" constant="5" id="p63-Ps-YTk"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
@@ -311,7 +328,10 @@
                             <constraint firstAttribute="centerY" secondItem="03J-Za-Vin" secondAttribute="centerY" id="u4J-eb-xLP"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buttonRecord" destination="hPy-qy-cud" id="W8T-Nu-ioo"/>
                         <outlet property="colorMapView" destination="cNX-tk-RxF" id="doX-Su-DrN"/>
                         <outlet property="colorPickerView" destination="03J-Za-Vin" id="4wZ-tq-XcO"/>
                     </connections>

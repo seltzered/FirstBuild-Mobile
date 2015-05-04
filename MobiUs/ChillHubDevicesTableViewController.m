@@ -50,6 +50,7 @@
     Firebase* ref = [self.chillhub.firebaseRef childByAppendingPath:@"milkyWeighs"];
     [ref removeAllObservers];
     [self.products removeAllObjects];
+    [self.tableView reloadData];
     
     [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         {

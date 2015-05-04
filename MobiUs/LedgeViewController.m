@@ -14,6 +14,7 @@
 @interface LedgeViewController ()
 @property (strong, nonatomic) IBOutlet HRColorMapView *colorMapView;
 @property (strong, nonatomic) IBOutlet HRColorPickerView *colorPickerView;
+@property (strong, nonatomic) IBOutlet UIButton *buttonRecord;
 
 @end
 
@@ -33,6 +34,20 @@
             uint8_t pixelG = (((rgbValue) & 0xFF00)>>8);
             uint8_t pixelB = (((rgbValue) & 0xFF));
             self.colorPickerView.backgroundColor = [UIColor colorWithRed:pixelR/255.0 green:pixelG/255.0 blue:pixelB/255.0 alpha:1.0];
+            
+            uint32_t rgbRecordingValue = [(NSNumber *)[val objectForKey:@"rgbRecordingActual"] floatValue];
+            UIButton* button = self.buttonRecord;
+            if(rgbRecordingValue==1)
+            {
+                [button setTitle:@"Recording..." forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            }
+            else
+            {
+                [button setTitle:@"Record" forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            }
+
         }
         NSLog(@"%@ -> %@", snapshot.key, snapshot.value);
     }];
@@ -65,6 +80,21 @@
     }
     
     return webColor;
+}
+- (IBAction)recordButtonClicked:(id)sender
+{
+    Firebase *ref = [self.ledge.firebaseRef childByAppendingPath:@"rgbRecording"];
+    UIButton* button = (UIButton*)sender;
+    if([button.titleLabel.text isEqualToString:@"Record"])
+    {
+        [ref setValue:[NSNumber numberWithInt:1]];
+        
+    }
+    else
+    {
+        [ref setValue:[NSNumber numberWithInt:0]];
+        
+    }
 }
 
 - (IBAction)colorChanged:(id)sender {
