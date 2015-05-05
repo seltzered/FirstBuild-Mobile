@@ -12,6 +12,6 @@
 
 @interface BeerBankViewController : UIViewController
 @property (strong, nonatomic) FSTBeerBank *beerBank;
-@property (strong, nonatomic) IBOutlet UISwitch *alarmSetButton;
-
+@property (strong, nonatomic) IBOutlet UIButton *unlockButton;
+@property (strong, nonatomic) IBOutlet UIView *overlayView;
 @end

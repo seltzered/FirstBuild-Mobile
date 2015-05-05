@@ -16,6 +16,8 @@
 
 @implementation BeerBankViewController
 
+bool animating = false;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -25,41 +27,58 @@
         if (rawVal != [NSNull null])
         {
             NSDictionary* val = rawVal;
-            uint32_t alarmSetValue = [(NSNumber *)[val objectForKey:@"alarm_set"] floatValue];
+            uint32_t timeRemaining = [(NSNumber *)[val objectForKey:@"time_remaining"] floatValue];
             
-            if (alarmSetValue==1)
+            if (!animating)
             {
-                self.alarmSetButton.on = false;
-            }
-            else
-            {
-               self.alarmSetButton.on = true;
+                [self displayOverlayWithSecondsRemaining:timeRemaining];
             }
         }
         NSLog(@"%@ -> %@", snapshot.key, snapshot.value);
     }];
+}
 
-    // Do any additional setup after loading the view.
+-(void)displayOverlayWithSecondsRemaining: (uint32_t)timeRemaining
+{
+    self.unlockButton.hidden = true;
+    CGFloat boundingHeight = self.view.frame.size.height;
+    
+    [UIView animateWithDuration:timeRemaining animations:^{
+        if (self.overlayView.transform.ty==0)
+        {
+            [self.overlayView setTransform:CGAffineTransformMakeTranslation(0,-boundingHeight)];
+        }
+    } completion:^(BOOL finished) {
+        self.unlockButton.hidden = false;
+        animating = false;
+    }];
+    
+}
+
+-(void)removeOverlay
+{
+    self.unlockButton.hidden = true;
+    
+    [UIView animateWithDuration:1 animations:^{
+        [self.overlayView setTransform:CGAffineTransformMakeTranslation(0,0)];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)unlockButtonPressed:(id)sender {
+    Firebase *ref = [self.beerBank.firebaseRef childByAppendingPath:@"beer_alarm"];
+    [ref setValue:[NSNumber numberWithInt:1]];
+    [self removeOverlay];
+}
+
 - (IBAction)openSwitchClicked:(id)sender
 {
-    Firebase *ref = [self.beerBank.firebaseRef childByAppendingPath:@"alarm_set"];
-    
-    if(self.alarmSetButton.on)
-    {
-        [ref setValue:[NSNumber numberWithInt:0]];
-        
-    }
-    else
-    {
-        [ref setValue:[NSNumber numberWithInt:1]];
-        
-    }
+   
 }
 
 /*

@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
@@ -354,49 +355,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="451"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5km-pK-DZ0">
-                                <rect key="frame" x="46" y="30" width="508" height="50"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBottle" translatesAutoresizingMaskIntoConstraints="NO" id="ocU-rY-OxD">
+                                <rect key="frame" x="16" y="50" width="568" height="401"/>
+                            </imageView>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNh-6J-xC4" userLabel="overlayView">
+                                <rect key="frame" x="0.0" y="451" width="600" height="451"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free Your Beer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5H-hI-qLN">
-                                        <rect key="frame" x="152" y="0.0" width="85" height="50"/>
-                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
-                                        <color key="textColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O21-Vw-onK">
-                                        <rect key="frame" x="287" y="9" width="51" height="31"/>
-                                        <color key="onTintColor" red="0.94117653369999998" green="0.40000003579999999" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="aap-AH-BXL">
+                                        <rect key="frame" x="225" y="169" width="150" height="113"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qey-ZI-wfn">
+                                        <rect key="frame" x="277" y="287" width="46" height="37"/>
+                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="19"/>
+                                        <state key="normal" title="Unlock">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                         <connections>
-                                            <action selector="openSwitchClicked:" destination="xaQ-ip-fvh" eventType="valueChanged" id="uba-Xe-7E9"/>
+                                            <action selector="unlockButtonPressed:" destination="xaQ-ip-fvh" eventType="touchUpInside" id="Gu9-on-6lM"/>
                                         </connections>
-                                    </switch>
+                                    </button>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="732-Vt-ale"/>
-                                    <constraint firstAttribute="centerY" secondItem="m5H-hI-qLN" secondAttribute="centerY" constant="0.5" id="E8d-Hc-EKb"/>
-                                    <constraint firstItem="O21-Vw-onK" firstAttribute="leading" secondItem="m5H-hI-qLN" secondAttribute="trailing" constant="50" id="ZBb-8A-Mb5"/>
-                                    <constraint firstAttribute="height" secondItem="m5H-hI-qLN" secondAttribute="height" id="a1c-x8-6ue"/>
-                                    <constraint firstAttribute="centerY" secondItem="O21-Vw-onK" secondAttribute="centerY" constant="0.5" id="n18-E9-wqw"/>
-                                    <constraint firstAttribute="centerX" secondItem="m5H-hI-qLN" secondAttribute="centerX" constant="60" id="zGx-26-tfO"/>
+                                    <constraint firstAttribute="centerX" secondItem="qey-ZI-wfn" secondAttribute="centerX" id="5xQ-aa-ifN"/>
+                                    <constraint firstItem="qey-ZI-wfn" firstAttribute="top" secondItem="aap-AH-BXL" secondAttribute="bottom" constant="5" id="Uvg-Eo-IbG"/>
+                                    <constraint firstAttribute="centerY" secondItem="aap-AH-BXL" secondAttribute="centerY" id="czb-x2-JQe"/>
+                                    <constraint firstItem="aap-AH-BXL" firstAttribute="height" secondItem="xNh-6J-xC4" secondAttribute="height" multiplier="1:4" id="mBv-2T-jRt"/>
+                                    <constraint firstAttribute="centerX" secondItem="aap-AH-BXL" secondAttribute="centerX" id="zIw-LO-Uoi"/>
+                                    <constraint firstItem="aap-AH-BXL" firstAttribute="width" secondItem="xNh-6J-xC4" secondAttribute="width" multiplier="1:4" id="zz5-2U-gaV"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBottle" translatesAutoresizingMaskIntoConstraints="NO" id="ocU-rY-OxD">
-                                <rect key="frame" x="16" y="80" width="568" height="371"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="5km-pK-DZ0" secondAttribute="trailing" constant="30" id="0zj-0E-SE3"/>
-                            <constraint firstItem="ocU-rY-OxD" firstAttribute="top" secondItem="waS-11-52c" secondAttribute="bottom" constant="80" id="HBa-vk-92J"/>
+                            <constraint firstItem="ocU-rY-OxD" firstAttribute="top" secondItem="waS-11-52c" secondAttribute="bottom" constant="50" id="HBa-vk-92J"/>
+                            <constraint firstItem="xNh-6J-xC4" firstAttribute="height" secondItem="ySO-Gn-eV2" secondAttribute="height" id="IAc-Yl-6tk"/>
+                            <constraint firstItem="xNh-6J-xC4" firstAttribute="width" secondItem="ySO-Gn-eV2" secondAttribute="width" id="LmT-Ej-7YR"/>
                             <constraint firstItem="ocU-rY-OxD" firstAttribute="leading" secondItem="ySO-Gn-eV2" secondAttribute="leadingMargin" id="MI0-P6-K4c"/>
-                            <constraint firstItem="5km-pK-DZ0" firstAttribute="top" secondItem="ySO-Gn-eV2" secondAttribute="topMargin" constant="30" id="RYh-x2-9I7"/>
+                            <constraint firstAttribute="centerX" secondItem="xNh-6J-xC4" secondAttribute="centerX" id="dDV-3Z-5dS"/>
+                            <constraint firstItem="5Uf-Sg-xLX" firstAttribute="top" secondItem="xNh-6J-xC4" secondAttribute="top" id="eqd-pb-El4"/>
                             <constraint firstItem="5Uf-Sg-xLX" firstAttribute="top" secondItem="ocU-rY-OxD" secondAttribute="bottom" id="hrs-mT-ufK"/>
-                            <constraint firstItem="5km-pK-DZ0" firstAttribute="leading" secondItem="ySO-Gn-eV2" secondAttribute="leadingMargin" constant="30" id="pwP-bw-YYT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ocU-rY-OxD" secondAttribute="trailing" id="sCo-9E-CTF"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="alarmSetButton" destination="O21-Vw-onK" id="3Me-1b-9lp"/>
+                        <outlet property="overlayView" destination="xNh-6J-xC4" id="zTi-v0-hT6"/>
+                        <outlet property="unlockButton" destination="qey-ZI-wfn" id="Qpj-2M-OZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GP-De-23E" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -557,6 +561,7 @@
         <image name="icon_chevron_blue_right" width="28" height="47"/>
         <image name="icon_milkyweigh_item" width="483" height="450"/>
         <image name="light" width="57" height="86"/>
+        <image name="lock" width="251" height="337"/>
         <image name="reveal-icon" width="22" height="17"/>
     </resources>
 </document>
