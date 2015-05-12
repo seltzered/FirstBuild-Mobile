@@ -8,11 +8,9 @@ The navigation is driven by SWRevealViewController which maps to a specific prod
 
 ##Current Products 
 - ChillHub 
-- SousVide
-- LineCook
+- Paragon
 
 ###ChillHub
 
-###SousVide
+###Paragon
 
-###LineCook
