@@ -363,6 +363,10 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="aap-AH-BXL">
                                         <rect key="frame" x="225" y="169" width="150" height="113"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="HNe-he-lSS" appends="YES" id="3i7-Ol-0SA"/>
+                                        </connections>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qey-ZI-wfn">
                                         <rect key="frame" x="277" y="287" width="46" height="37"/>
@@ -385,13 +389,28 @@
                                     <constraint firstItem="aap-AH-BXL" firstAttribute="width" secondItem="xNh-6J-xC4" secondAttribute="width" multiplier="1:4" id="zz5-2U-gaV"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGF-vG-fxT">
+                                <rect key="frame" x="549" y="15" width="20" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="PSr-aP-Wl8"/>
+                                    <constraint firstAttribute="height" constant="25" id="luo-YU-igQ"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="lock">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="relockIconClicked:" destination="xaQ-ip-fvh" eventType="touchUpInside" id="m66-uA-DtP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ocU-rY-OxD" firstAttribute="top" secondItem="waS-11-52c" secondAttribute="bottom" constant="50" id="HBa-vk-92J"/>
                             <constraint firstItem="xNh-6J-xC4" firstAttribute="height" secondItem="ySO-Gn-eV2" secondAttribute="height" id="IAc-Yl-6tk"/>
+                            <constraint firstItem="PGF-vG-fxT" firstAttribute="top" secondItem="waS-11-52c" secondAttribute="bottom" constant="15" id="LRH-oD-vKR"/>
                             <constraint firstItem="xNh-6J-xC4" firstAttribute="width" secondItem="ySO-Gn-eV2" secondAttribute="width" id="LmT-Ej-7YR"/>
                             <constraint firstItem="ocU-rY-OxD" firstAttribute="leading" secondItem="ySO-Gn-eV2" secondAttribute="leadingMargin" id="MI0-P6-K4c"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PGF-vG-fxT" secondAttribute="trailing" constant="15" id="Og4-7z-bZc"/>
                             <constraint firstAttribute="centerX" secondItem="xNh-6J-xC4" secondAttribute="centerX" id="dDV-3Z-5dS"/>
                             <constraint firstItem="5Uf-Sg-xLX" firstAttribute="top" secondItem="xNh-6J-xC4" secondAttribute="top" id="eqd-pb-El4"/>
                             <constraint firstItem="5Uf-Sg-xLX" firstAttribute="top" secondItem="ocU-rY-OxD" secondAttribute="bottom" id="hrs-mT-ufK"/>
@@ -400,10 +419,16 @@
                     </view>
                     <connections>
                         <outlet property="overlayView" destination="xNh-6J-xC4" id="zTi-v0-hT6"/>
+                        <outlet property="relockButton" destination="PGF-vG-fxT" id="8Xj-bm-oZJ"/>
                         <outlet property="unlockButton" destination="qey-ZI-wfn" id="Qpj-2M-OZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GP-De-23E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="HNe-he-lSS">
+                    <connections>
+                        <action selector="lockIconTapGesture:" destination="xaQ-ip-fvh" id="7Gp-nX-17x"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1410" y="486"/>
         </scene>
@@ -466,6 +491,11 @@
                                         <color key="value" red="0.41733217592592592" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="hPy-qy-cud"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

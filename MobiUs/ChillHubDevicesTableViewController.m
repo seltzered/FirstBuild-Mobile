@@ -67,15 +67,15 @@
                 id rawVal = snapshot.value;
                 if (rawVal != [NSNull null])
                 {
-                    NSDictionary* val = rawVal;
-                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-                    {
+//                    NSDictionary* val = rawVal;
+//                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//                    {
                         milkyWeigh.online = YES;
-                    }
-                    else
-                    {
-                        milkyWeigh.online = NO;
-                    }
+//                    }
+//                    else
+//                    {
+//                        milkyWeigh.online = NO;
+//                    }
                 }
                 [self.products addObject:milkyWeigh];
                 [self.tableView reloadData];
@@ -97,30 +97,30 @@
         }
     }];
     
-    [ref observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-        for (long i=self.products.count-1; i>-1; i--)
-        {
-            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
-            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
-            {
-                id rawVal = snapshot.value;
-                if (rawVal != [NSNull null])
-                {
-                    NSDictionary* val = rawVal;
-                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-                    {
-                        chillhubDevice.online = YES;
-                    }
-                    else
-                    {
-                        chillhubDevice.online = NO;
-                    }
-                    [self.tableView reloadData];
-                }
-                break;
-            }
-        }
-    }];
+//    [ref observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+//        for (long i=self.products.count-1; i>-1; i--)
+//        {
+//            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
+//            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
+//            {
+//                id rawVal = snapshot.value;
+//                if (rawVal != [NSNull null])
+//                {
+//                    NSDictionary* val = rawVal;
+//                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//                    {
+//                        chillhubDevice.online = YES;
+//                    }
+//                    else
+//                    {
+//                        chillhubDevice.online = NO;
+//                    }
+//                    [self.tableView reloadData];
+//                }
+//                break;
+//            }
+//        }
+//    }];
     
     //hack...
     
@@ -135,15 +135,15 @@
             id rawVal = snapshot.value;
             if (rawVal != [NSNull null])
             {
-                NSDictionary* val = rawVal;
-                if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-                {
+//                NSDictionary* val = rawVal;
+//                if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//                {
                     ledge.online = YES;
-                }
-                else
-                {
-                    ledge.online = NO;
-                }
+//                }
+//                else
+//                {
+//                    ledge.online = NO;
+//                }
             }
             [self.products addObject:ledge];
             [self.tableView reloadData];
@@ -165,30 +165,30 @@
         }
     }];
     
-    [ledgesRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-        for (long i=self.products.count-1; i>-1; i--)
-        {
-            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
-            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
-            {
-                id rawVal = snapshot.value;
-                if (rawVal != [NSNull null])
-                {
-                    NSDictionary* val = rawVal;
-                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-                    {
-                        chillhubDevice.online = YES;
-                    }
-                    else
-                    {
-                        chillhubDevice.online = NO;
-                    }
-                    [self.tableView reloadData];
-                }
-                break;
-            }
-        }
-    }];
+//    [ledgesRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+//        for (long i=self.products.count-1; i>-1; i--)
+//        {
+//            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
+//            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
+//            {
+//                id rawVal = snapshot.value;
+//                if (rawVal != [NSNull null])
+//                {
+//                    NSDictionary* val = rawVal;
+//                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//                    {
+//                        chillhubDevice.online = YES;
+//                    }
+//                    else
+//                    {
+//                        chillhubDevice.online = NO;
+//                    }
+//                    [self.tableView reloadData];
+//                }
+//                break;
+//            }
+//        }
+//    }];
 
     //more hack....
     
@@ -203,15 +203,15 @@
             id rawVal = snapshot.value;
             if (rawVal != [NSNull null])
             {
-                NSDictionary* val = rawVal;
-                if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-                {
+//                NSDictionary* val = rawVal;
+//                if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//                {
                     bank.online = YES;
-                }
-                else
-                {
-                    bank.online = NO;
-                }
+//                }
+//                else
+//                {
+//                    bank.online = NO;
+//                }
             }
             [self.products addObject:bank];
             [self.tableView reloadData];
@@ -233,30 +233,30 @@
         }
     }];
     
-    [beerBankRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-        for (long i=self.products.count-1; i>-1; i--)
-        {
-            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
-            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
-            {
-                id rawVal = snapshot.value;
-                if (rawVal != [NSNull null])
-                {
-                    NSDictionary* val = rawVal;
-                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-                    {
-                        chillhubDevice.online = YES;
-                    }
-                    else
-                    {
-                        chillhubDevice.online = NO;
-                    }
-                    [self.tableView reloadData];
-                }
-                break;
-            }
-        }
-    }];
+//    [beerBankRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+//        for (long i=self.products.count-1; i>-1; i--)
+//        {
+//            FSTChillHubDevice *chillhubDevice = [self.products objectAtIndex:i];
+//            if ([chillhubDevice.identifier isEqualToString:snapshot.key])
+//            {
+//                id rawVal = snapshot.value;
+//                if (rawVal != [NSNull null])
+//                {
+//                    NSDictionary* val = rawVal;
+//                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//                    {
+//                        chillhubDevice.online = YES;
+//                    }
+//                    else
+//                    {
+//                        chillhubDevice.online = NO;
+//                    }
+//                    [self.tableView reloadData];
+//                }
+//                break;
+//            }
+//        }
+//    }];
 
     
 }

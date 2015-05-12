@@ -14,4 +14,5 @@
 @property (strong, nonatomic) FSTBeerBank *beerBank;
 @property (strong, nonatomic) IBOutlet UIButton *unlockButton;
 @property (strong, nonatomic) IBOutlet UIView *overlayView;
+@property (strong, nonatomic) IBOutlet UIButton *relockButton;
 @end

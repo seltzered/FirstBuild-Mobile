@@ -28,10 +28,23 @@ bool animating = false;
         {
             NSDictionary* val = rawVal;
             uint32_t timeRemaining = [(NSNumber *)[val objectForKey:@"time_remaining"] floatValue];
+            uint32_t beerAlarm = [(NSNumber *)[val objectForKey:@"beer_alarm"] floatValue];
             
-            if (!animating)
+            //if the beer alarm is 0 (open to take one), its not currently animating, and there is some time remaining then update
+            if (!animating && beerAlarm==0 && timeRemaining > 0)
             {
+                NSLog(@"firebase value changed, displaying overlay");
                 [self displayOverlayWithSecondsRemaining:timeRemaining];
+            }
+            else if (beerAlarm==1)
+            {
+                NSLog(@"firebase value changed, QUICKLY showing overlay");
+                [self.overlayView.layer removeAllAnimations];
+                [self displayOverlayWithSecondsRemaining:0];
+            }
+            else
+            {
+                NSLog(@"firebase value changed, but nothing to do");
             }
         }
         NSLog(@"%@ -> %@", snapshot.key, snapshot.value);
@@ -41,24 +54,35 @@ bool animating = false;
 -(void)displayOverlayWithSecondsRemaining: (uint32_t)timeRemaining
 {
     self.unlockButton.hidden = true;
+    NSLog(@"animate %d", timeRemaining);
     CGFloat boundingHeight = self.view.frame.size.height;
     
-    [UIView animateWithDuration:timeRemaining animations:^{
-        if (self.overlayView.transform.ty==0)
+    [UIView animateWithDuration:timeRemaining delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        //if (self.overlayView.transform.ty==0)
         {
             [self.overlayView setTransform:CGAffineTransformMakeTranslation(0,-boundingHeight)];
         }
     } completion:^(BOOL finished) {
         self.unlockButton.hidden = false;
+        self.relockButton.hidden = true;
         animating = false;
     }];
     
+}
+- (IBAction)lockIconTapGesture:(id)sender {
+    [self unlock];
+}
+
+- (IBAction)relockIconClicked:(id)sender {
+    Firebase *ref = [self.beerBank.firebaseRef childByAppendingPath:@"beer_alarm"];
+    [ref setValue:[NSNumber numberWithInt:1]];
+    [self displayOverlayWithSecondsRemaining:0];
 }
 
 -(void)removeOverlay
 {
     self.unlockButton.hidden = true;
-    
+    self.relockButton.hidden = false;
     [UIView animateWithDuration:1 animations:^{
         [self.overlayView setTransform:CGAffineTransformMakeTranslation(0,0)];
     } completion:^(BOOL finished) {
@@ -71,24 +95,15 @@ bool animating = false;
 }
 
 - (IBAction)unlockButtonPressed:(id)sender {
-    Firebase *ref = [self.beerBank.firebaseRef childByAppendingPath:@"beer_alarm"];
-    [ref setValue:[NSNumber numberWithInt:1]];
-    [self removeOverlay];
+    [self unlock];
 }
 
-- (IBAction)openSwitchClicked:(id)sender
+-(void)unlock
 {
-   
+    Firebase *ref = [self.beerBank.firebaseRef childByAppendingPath:@"beer_alarm"];
+    [ref setValue:[NSNumber numberWithInt:0]];
+    [self removeOverlay];
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
