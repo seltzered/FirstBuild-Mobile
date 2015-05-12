@@ -23,7 +23,7 @@
 		5B9925E61AE824BC00B337CB /* LedgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9925E51AE824BC00B337CB /* LedgeViewController.m */; };
 		5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9925E81AE8251800B337CB /* FSTLedge.m */; };
 		5B99DFC51AB1EB2D00247034 /* FSTParagon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B99DFC41AB1EB2D00247034 /* FSTParagon.m */; };
-		5B99DFC71AB1F2E400247034 /* Paragon.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B99DFC61AB1F2E400247034 /* Paragon.storyboard */; };
+		5B99DFC71AB1F2E400247034 /* ParagonEngineering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B99DFC61AB1F2E400247034 /* ParagonEngineering.storyboard */; };
 		5B99E0111AB32DA100247034 /* ParagonEngineeringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B99E0101AB32DA100247034 /* ParagonEngineeringViewController.m */; };
 		5B99E07E1A1A593F005FB881 /* WifiCommissioningStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B99E07D1A1A593F005FB881 /* WifiCommissioningStoryboard.storyboard */; };
 		5B99E0811A1A5D10005FB881 /* WifiCommissioningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B99E0801A1A5D10005FB881 /* WifiCommissioningViewController.m */; };
@@ -53,6 +53,17 @@
 		5BC5A1CD19EF6584009C93B1 /* FBTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC5A1CC19EF6584009C93B1 /* FBTUser.m */; };
 		5BC5A1D019EF6638009C93B1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC5A1CF19EF6638009C93B1 /* Constants.m */; };
 		5BC7C7B41A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BC7C7B31A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m */; };
+		5BCBB9D41B02991B00B8E043 /* FSTParagon.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BCBB9D31B02991B00B8E043 /* FSTParagon.storyboard */; };
+		5BCBB9D71B02A1A100B8E043 /* FSTCookingMethodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9D61B02A1A100B8E043 /* FSTCookingMethodViewController.m */; };
+		5BCBB9DA1B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9D91B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m */; };
+		5BCBB9DD1B02A22B00B8E043 /* FSTBeefSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9DC1B02A22B00B8E043 /* FSTBeefSettingsViewController.m */; };
+		5BCBB9E01B02A24100B8E043 /* FSTReadyToPreheatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9DF1B02A24100B8E043 /* FSTReadyToPreheatViewController.m */; };
+		5BCBB9E31B02A25200B8E043 /* FSTPreheatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9E21B02A25200B8E043 /* FSTPreheatingViewController.m */; };
+		5BCBB9E61B02A4DD00B8E043 /* FSTReadyToCookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9E51B02A4DD00B8E043 /* FSTReadyToCookViewController.m */; };
+		5BCBB9E91B02A51700B8E043 /* FSTCookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9E81B02A51700B8E043 /* FSTCookingViewController.m */; };
+		5BCBB9EC1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */; };
+		5BCBB9EF1B02A64E00B8E043 /* FSTCancelPreheatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9EE1B02A64E00B8E043 /* FSTCancelPreheatViewController.m */; };
+		5BCBB9F21B02A67500B8E043 /* FSTCookingStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCBB9F11B02A67500B8E043 /* FSTCookingStopViewController.m */; };
 		5BCDFBF21A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCDFBF11A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m */; };
 		5BCDFBF51A65584A006E6055 /* WifiCommissioningNetworksTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BCDFBF41A65584A006E6055 /* WifiCommissioningNetworksTableViewController.m */; };
 		5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD467CC1A35ED54009BAC36 /* FirebaseShared.m */; };
@@ -94,7 +105,7 @@
 		5B9925E81AE8251800B337CB /* FSTLedge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTLedge.m; sourceTree = "<group>"; };
 		5B99DFC31AB1EB2D00247034 /* FSTParagon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagon.h; sourceTree = "<group>"; };
 		5B99DFC41AB1EB2D00247034 /* FSTParagon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagon.m; sourceTree = "<group>"; };
-		5B99DFC61AB1F2E400247034 /* Paragon.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Paragon.storyboard; sourceTree = "<group>"; };
+		5B99DFC61AB1F2E400247034 /* ParagonEngineering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ParagonEngineering.storyboard; sourceTree = "<group>"; };
 		5B99E00F1AB32DA100247034 /* ParagonEngineeringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParagonEngineeringViewController.h; sourceTree = "<group>"; };
 		5B99E0101AB32DA100247034 /* ParagonEngineeringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParagonEngineeringViewController.m; sourceTree = "<group>"; };
 		5B99E07D1A1A593F005FB881 /* WifiCommissioningStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WifiCommissioningStoryboard.storyboard; sourceTree = "<group>"; };
@@ -156,6 +167,27 @@
 		5BC5A1CF19EF6638009C93B1 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		5BC7C7B21A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChillHubDeviceTableViewCell.h; sourceTree = "<group>"; };
 		5BC7C7B31A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChillHubDeviceTableViewCell.m; sourceTree = "<group>"; };
+		5BCBB9D31B02991B00B8E043 /* FSTParagon.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FSTParagon.storyboard; sourceTree = SOURCE_ROOT; };
+		5BCBB9D51B02A1A100B8E043 /* FSTCookingMethodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingMethodViewController.h; sourceTree = "<group>"; };
+		5BCBB9D61B02A1A100B8E043 /* FSTCookingMethodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingMethodViewController.m; sourceTree = "<group>"; };
+		5BCBB9D81B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingMethodSubSelectionViewController.h; sourceTree = "<group>"; };
+		5BCBB9D91B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingMethodSubSelectionViewController.m; sourceTree = "<group>"; };
+		5BCBB9DB1B02A22B00B8E043 /* FSTBeefSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBeefSettingsViewController.h; sourceTree = "<group>"; };
+		5BCBB9DC1B02A22B00B8E043 /* FSTBeefSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBeefSettingsViewController.m; sourceTree = "<group>"; };
+		5BCBB9DE1B02A24100B8E043 /* FSTReadyToPreheatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTReadyToPreheatViewController.h; sourceTree = "<group>"; };
+		5BCBB9DF1B02A24100B8E043 /* FSTReadyToPreheatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTReadyToPreheatViewController.m; sourceTree = "<group>"; };
+		5BCBB9E11B02A25200B8E043 /* FSTPreheatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPreheatingViewController.h; sourceTree = "<group>"; };
+		5BCBB9E21B02A25200B8E043 /* FSTPreheatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPreheatingViewController.m; sourceTree = "<group>"; };
+		5BCBB9E41B02A4DD00B8E043 /* FSTReadyToCookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTReadyToCookViewController.h; sourceTree = "<group>"; };
+		5BCBB9E51B02A4DD00B8E043 /* FSTReadyToCookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTReadyToCookViewController.m; sourceTree = "<group>"; };
+		5BCBB9E71B02A51700B8E043 /* FSTCookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingViewController.h; sourceTree = "<group>"; };
+		5BCBB9E81B02A51700B8E043 /* FSTCookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingViewController.m; sourceTree = "<group>"; };
+		5BCBB9EA1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCustomCookSettingsViewController.h; sourceTree = "<group>"; };
+		5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCustomCookSettingsViewController.m; sourceTree = "<group>"; };
+		5BCBB9ED1B02A64E00B8E043 /* FSTCancelPreheatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCancelPreheatViewController.h; sourceTree = "<group>"; };
+		5BCBB9EE1B02A64E00B8E043 /* FSTCancelPreheatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCancelPreheatViewController.m; sourceTree = "<group>"; };
+		5BCBB9F01B02A67500B8E043 /* FSTCookingStopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingStopViewController.h; sourceTree = "<group>"; };
+		5BCBB9F11B02A67500B8E043 /* FSTCookingStopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingStopViewController.m; sourceTree = "<group>"; };
 		5BCDFBF01A64CFA6006E6055 /* WifiCommissioningPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiCommissioningPasswordViewController.h; sourceTree = "<group>"; };
 		5BCDFBF11A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiCommissioningPasswordViewController.m; sourceTree = "<group>"; };
 		5BCDFBF31A65584A006E6055 /* WifiCommissioningNetworksTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiCommissioningNetworksTableViewController.h; sourceTree = "<group>"; };
@@ -325,7 +357,8 @@
 		5B99DFC11AB1EA2F00247034 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				5B99DFC61AB1F2E400247034 /* Paragon.storyboard */,
+				5B99DFC61AB1F2E400247034 /* ParagonEngineering.storyboard */,
+				5BCBB9D31B02991B00B8E043 /* FSTParagon.storyboard */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -335,6 +368,26 @@
 			children = (
 				5B99E00F1AB32DA100247034 /* ParagonEngineeringViewController.h */,
 				5B99E0101AB32DA100247034 /* ParagonEngineeringViewController.m */,
+				5BCBB9D51B02A1A100B8E043 /* FSTCookingMethodViewController.h */,
+				5BCBB9D61B02A1A100B8E043 /* FSTCookingMethodViewController.m */,
+				5BCBB9D81B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.h */,
+				5BCBB9D91B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m */,
+				5BCBB9DB1B02A22B00B8E043 /* FSTBeefSettingsViewController.h */,
+				5BCBB9DC1B02A22B00B8E043 /* FSTBeefSettingsViewController.m */,
+				5BCBB9DE1B02A24100B8E043 /* FSTReadyToPreheatViewController.h */,
+				5BCBB9DF1B02A24100B8E043 /* FSTReadyToPreheatViewController.m */,
+				5BCBB9E11B02A25200B8E043 /* FSTPreheatingViewController.h */,
+				5BCBB9E21B02A25200B8E043 /* FSTPreheatingViewController.m */,
+				5BCBB9E41B02A4DD00B8E043 /* FSTReadyToCookViewController.h */,
+				5BCBB9E51B02A4DD00B8E043 /* FSTReadyToCookViewController.m */,
+				5BCBB9E71B02A51700B8E043 /* FSTCookingViewController.h */,
+				5BCBB9E81B02A51700B8E043 /* FSTCookingViewController.m */,
+				5BCBB9EA1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.h */,
+				5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */,
+				5BCBB9ED1B02A64E00B8E043 /* FSTCancelPreheatViewController.h */,
+				5BCBB9EE1B02A64E00B8E043 /* FSTCancelPreheatViewController.m */,
+				5BCBB9F01B02A67500B8E043 /* FSTCookingStopViewController.h */,
+				5BCBB9F11B02A67500B8E043 /* FSTCookingStopViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -597,8 +650,9 @@
 				5BF9482D19EC15BB00CB8BCF /* ChillHub.storyboard in Resources */,
 				5BF9483119EC15F900CB8BCF /* Main.storyboard in Resources */,
 				5B174DE01A60717000A00505 /* FirstBuildAssets.xcassets in Resources */,
+				5BCBB9D41B02991B00B8E043 /* FSTParagon.storyboard in Resources */,
 				5B9EF10219DEEE1000E8D9F1 /* LaunchScreen.xib in Resources */,
-				5B99DFC71AB1F2E400247034 /* Paragon.storyboard in Resources */,
+				5B99DFC71AB1F2E400247034 /* ParagonEngineering.storyboard in Resources */,
 				5B9EF0FF19DEEE1000E8D9F1 /* Images.xcassets in Resources */,
 				5B174DE61A64266100A00505 /* fontawesome-webfont.ttf in Resources */,
 				67926FF919EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf in Resources */,
@@ -650,6 +704,7 @@
 			files = (
 				5BC3648A1A2FAC1A00D03B9C /* FSTMilkyWeigh.m in Sources */,
 				5BC3648D1A3112EE00D03B9C /* FSTBackgroundLayer.m in Sources */,
+				5BCBB9DA1B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m in Sources */,
 				5BBFACFF19E495FC00E42575 /* ProductCollectionViewController.m in Sources */,
 				5BC3647E1A2F637800D03B9C /* FSTDevice.m in Sources */,
 				5BC364971A3260E200D03B9C /* FSTChillHub.m in Sources */,
@@ -658,29 +713,38 @@
 				5B174DDB1A5F40C500A00505 /* ProductAddWrapperViewController.m in Sources */,
 				5B99E0841A1AA63F005FB881 /* WifiCommissioningNetworkListViewController.m in Sources */,
 				5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */,
+				5BCBB9E01B02A24100B8E043 /* FSTReadyToPreheatViewController.m in Sources */,
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
 				5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */,
 				5BC364811A2F63C200D03B9C /* FSTDeviceAuth.m in Sources */,
 				5BF9482F19EC15E300CB8BCF /* MenuViewController.m in Sources */,
+				5BCBB9EF1B02A64E00B8E043 /* FSTCancelPreheatViewController.m in Sources */,
 				5BCDFBF51A65584A006E6055 /* WifiCommissioningNetworksTableViewController.m in Sources */,
 				5BCDFBF21A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m in Sources */,
+				5BCBB9E61B02A4DD00B8E043 /* FSTReadyToCookViewController.m in Sources */,
 				5BC5A1CD19EF6584009C93B1 /* FBTUser.m in Sources */,
 				5B9925E61AE824BC00B337CB /* LedgeViewController.m in Sources */,
+				5BCBB9E91B02A51700B8E043 /* FSTCookingViewController.m in Sources */,
 				5BC5A1D019EF6638009C93B1 /* Constants.m in Sources */,
 				5B7FB5581A43C6DF00553797 /* ChillHubDevicesTableViewController.m in Sources */,
+				5BCBB9D71B02A1A100B8E043 /* FSTCookingMethodViewController.m in Sources */,
 				5B99E0871A1AA744005FB881 /* FSTNetwork.m in Sources */,
 				5BC5A1C219EF5E79009C93B1 /* FBTAuthenticationViewController.m in Sources */,
 				5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */,
+				5BCBB9EC1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m in Sources */,
 				5B99E0811A1A5D10005FB881 /* WifiCommissioningViewController.m in Sources */,
+				5BCBB9E31B02A25200B8E043 /* FSTPreheatingViewController.m in Sources */,
 				5BBFAD0219E4965500E42575 /* ProductCollectionViewCell.m in Sources */,
 				5B99E0111AB32DA100247034 /* ParagonEngineeringViewController.m in Sources */,
 				5BC7C7B41A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m in Sources */,
+				5BCBB9F21B02A67500B8E043 /* FSTCookingStopViewController.m in Sources */,
 				5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */,
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
 				5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */,
 				5BBB0B9A19F1DE8C001D5DF1 /* ScaleViewController.m in Sources */,
 				5B99E08A1A1E9CFF005FB881 /* WifiCommissioningErrorViewController.m in Sources */,
 				5B9EF0F719DEEE1000E8D9F1 /* AppDelegate.m in Sources */,
+				5BCBB9DD1B02A22B00B8E043 /* FSTBeefSettingsViewController.m in Sources */,
 				5B9EF0F419DEEE1000E8D9F1 /* main.m in Sources */,
 				5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */,
 				5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */,
