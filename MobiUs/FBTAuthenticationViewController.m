@@ -12,7 +12,8 @@
 #import "FirebaseShared.h"
 #import "FBTUser.h"
 #import <GoogleOpenSource/GoogleOpenSource.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface FBTAuthenticationViewController ()
 
@@ -67,14 +68,31 @@
 
 #pragma mark FBLoginViewDelegate
 
--(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
+
+-(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error
 {
+    NSLog(@"Facebook Logged in loginButton");
+    if (!error)
+    {
+        [self firebaseLoginWithFacebookAccessToken];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Facebook Authentication Failed." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+
+    }
 }
 
--(void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
+-(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
+{
+    NSLog(@"Facebook logged out from main auth screen");
+}
+
+-(void)firebaseLoginWithFacebookAccessToken
 {
     Firebase *authRef = [[FirebaseShared sharedInstance] firebaseRootReference];
-    NSString *fbAccessToken = [FBSession activeSession].accessTokenData.accessToken;
+    NSString *fbAccessToken = [[FBSDKAccessToken currentAccessToken] tokenString];
     [authRef authWithOAuthProvider:@"facebook" token:fbAccessToken
                withCompletionBlock:^(NSError *error, FAuthData *authData) {
                    if (error) {
@@ -87,50 +105,70 @@
                    }
                }];
 }
-
--(void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
-{
-    // Handle possible errors that can occur during login
-    NSString *alertMessage, *alertTitle;
-    
-    // If the user should perform an action outside of you app to recover,
-    // the SDK will provide a message for the user, you just need to surface it.
-    // This conveniently handles cases like Facebook password change or unverified Facebook accounts.
-    if ([FBErrorUtility shouldNotifyUserForError:error]) {
-        alertTitle = @"Facebook error";
-        alertMessage = [FBErrorUtility userMessageForError:error];
-        
-        // This code will handle session closures that happen outside of the app
-        // You can take a look at our error handling guide to know more about it
-        // https://developers.facebook.com/docs/ios/errors
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
-        alertTitle = @"Session Error";
-        alertMessage = @"Your current session is no longer valid. Please log in again.";
-        
-        // If the user has cancelled a login, we will do nothing.
-        // You can also choose to show the user a message if cancelling login will result in
-        // the user not being able to complete a task they had initiated in your app
-        // (like accessing FB-stored information or posting to Facebook)
-    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
-        NSLog(@"user cancelled login");
-        
-        // For simplicity, this sample handles other errors with a generic message
-        // You can checkout our error handling guide for more detailed information
-        // https://developers.facebook.com/docs/ios/errors
-    } else {
-        alertTitle  = @"Something went wrong";
-        alertMessage = @"Please try again later.";
-        NSLog(@"Unexpected error:%@", error);
-    }
-    
-    if (alertMessage) {
-        [[[UIAlertView alloc] initWithTitle:alertTitle
-                                    message:alertMessage
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-    }
-}
+//-(void)loginViewFetchedUserInfo:(FBLoginView *)loginView user:(id<FBGraphUser>)user
+//{
+//}
+//
+//-(void)loginViewShowingLoggedInUser:(FBLoginView *)loginView
+//{
+//    Firebase *authRef = [[FirebaseShared sharedInstance] firebaseRootReference];
+//    NSString *fbAccessToken = [FBSession activeSession].accessTokenData.accessToken;
+//    [authRef authWithOAuthProvider:@"facebook" token:fbAccessToken
+//               withCompletionBlock:^(NSError *error, FAuthData *authData) {
+//                   if (error) {
+//                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Facebook Login Failed." delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//                       [alert show];
+//                   } else {
+//                       FBTUser* user = [FBTUser sharedInstance];
+//                       user.token = authData.token;
+//                       [self loadMainAppWithUidString:authData.uid];
+//                   }
+//               }];
+//}
+//
+//-(void)loginView:(FBLoginView *)loginView handleError:(NSError *)error
+//{
+//    // Handle possible errors that can occur during login
+//    NSString *alertMessage, *alertTitle;
+//    
+//    // If the user should perform an action outside of you app to recover,
+//    // the SDK will provide a message for the user, you just need to surface it.
+//    // This conveniently handles cases like Facebook password change or unverified Facebook accounts.
+//    if ([FBErrorUtility shouldNotifyUserForError:error]) {
+//        alertTitle = @"Facebook error";
+//        alertMessage = [FBErrorUtility userMessageForError:error];
+//        
+//        // This code will handle session closures that happen outside of the app
+//        // You can take a look at our error handling guide to know more about it
+//        // https://developers.facebook.com/docs/ios/errors
+//    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryAuthenticationReopenSession) {
+//        alertTitle = @"Session Error";
+//        alertMessage = @"Your current session is no longer valid. Please log in again.";
+//        
+//        // If the user has cancelled a login, we will do nothing.
+//        // You can also choose to show the user a message if cancelling login will result in
+//        // the user not being able to complete a task they had initiated in your app
+//        // (like accessing FB-stored information or posting to Facebook)
+//    } else if ([FBErrorUtility errorCategoryForError:error] == FBErrorCategoryUserCancelled) {
+//        NSLog(@"user cancelled login");
+//        
+//        // For simplicity, this sample handles other errors with a generic message
+//        // You can checkout our error handling guide for more detailed information
+//        // https://developers.facebook.com/docs/ios/errors
+//    } else {
+//        alertTitle  = @"Something went wrong";
+//        alertMessage = @"Please try again later.";
+//        NSLog(@"Unexpected error:%@", error);
+//    }
+//    
+//    if (alertMessage) {
+//        [[[UIAlertView alloc] initWithTitle:alertTitle
+//                                    message:alertMessage
+//                                   delegate:nil
+//                          cancelButtonTitle:@"OK"
+//                          otherButtonTitles:nil] show];
+//    }
+//}
 
 
 #pragma mark UIViewController
@@ -138,8 +176,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.facebookLoginView.delegate = self;
+    self.facebookLoginButton.delegate = self;
     [self initGoogleAuth];
+    if ([FBSDKAccessToken currentAccessToken]) {
+        NSLog(@"Facebook already logged in");
+        [self firebaseLoginWithFacebookAccessToken];
+    }
 }
 
 - (void) loadMainAppWithUidString: (NSString*) uid

@@ -16,7 +16,8 @@
 #import "MenuViewController.h"
 #import "MobiNavigationController.h"
 #import <RBStoryboardLink.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <GooglePlus/GooglePlus.h>
 #import "ProductAddViewController.h"
 
@@ -80,7 +81,7 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     if (indexPath.row == kLogout)
     {
         [[GPPSignIn sharedInstance] signOut];
-        [[FBSession activeSession] closeAndClearTokenInformation];
+        [[[FBSDKLoginManager alloc] init] logOut];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

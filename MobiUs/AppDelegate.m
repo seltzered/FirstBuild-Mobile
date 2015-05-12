@@ -10,7 +10,8 @@
 #import <Firebase/Firebase.h>
 #import <RKMIMETypes.h>
 #import <GooglePlus/GooglePlus.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface AppDelegate ()
 
@@ -29,7 +30,10 @@
     self.objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
     [[self.objectManager HTTPClient] setDefaultHeader:@"content-type" value:RKMIMETypeJSON];
     self.objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
-    return YES;
+    
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
+    
 }
 
 
@@ -44,7 +48,10 @@
     }
     else
     {
-        return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+        return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                              openURL:url
+                                                    sourceApplication:sourceApplication
+                                                           annotation:annotation];
     }
 
 }
@@ -64,7 +71,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-     [FBAppEvents activateApp];
+     [FBSDKAppEvents activateApp];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

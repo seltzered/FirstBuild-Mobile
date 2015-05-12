@@ -1,44 +1,59 @@
 PODS:
-  - ActionSheetPicker-3.0 (1.3.11)
+  - ActionSheetPicker-3.0 (1.6.2)
   - AFNetworking (1.3.4)
-  - Bolts (1.1.3)
+  - Bolts (1.1.5):
+    - Bolts/AppLinks (= 1.1.5)
+    - Bolts/Tasks (= 1.1.5)
+  - Bolts/AppLinks (1.1.5):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.1.5)
   - Color-Picker-for-iOS (2.0)
-  - Facebook-iOS-SDK (3.22.0):
-    - Bolts (~> 1.0)
-  - Firebase (2.1.2)
+  - FBSDKCoreKit (4.1.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.1.0)
+    - FBSDKCoreKit/no-arc (= 4.1.0)
+  - FBSDKCoreKit/arc (4.1.0):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.1.0):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.1.0):
+    - FBSDKCoreKit
+  - Firebase (2.2.2)
   - google-plus-ios-sdk (1.7.1)
   - ISO8601DateFormatterValueTransformer (0.6.0):
     - RKValueTransformers (~> 1.1.0)
-  - RBStoryboardLink (0.1.0)
-  - RestKit (0.24.0):
-    - RestKit/Core (= 0.24.0)
-  - RestKit/Core (0.24.0):
+  - RBStoryboardLink (0.1.4)
+  - RestKit (0.24.1):
+    - RestKit/Core (= 0.24.1)
+  - RestKit/Core (0.24.1):
     - RestKit/CoreData
     - RestKit/Network
     - RestKit/ObjectMapping
-  - RestKit/CoreData (0.24.0):
+  - RestKit/CoreData (0.24.1):
     - RestKit/ObjectMapping
-  - RestKit/Network (0.24.0):
+  - RestKit/Network (0.24.1):
     - AFNetworking (~> 1.3.0)
     - RestKit/ObjectMapping
     - RestKit/Support
     - SOCKit
-  - RestKit/ObjectMapping (0.24.0):
+  - RestKit/ObjectMapping (0.24.1):
     - ISO8601DateFormatterValueTransformer (~> 0.6.0)
     - RestKit/Support
     - RKValueTransformers (~> 1.1.0)
-  - RestKit/Support (0.24.0):
-    - TransitionKit (= 2.1.0)
-  - RKValueTransformers (1.1.1)
+  - RestKit/Support (0.24.1):
+    - TransitionKit (~> 2.1.0)
+  - RKValueTransformers (1.1.2)
   - SOCKit (1.1)
-  - SSKeychain (1.2.2)
+  - SSKeychain (1.2.3)
   - SWRevealViewController (2.3.0)
-  - TransitionKit (2.1.0)
+  - TransitionKit (2.1.1)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
   - Color-Picker-for-iOS
-  - Facebook-iOS-SDK
+  - FBSDKCoreKit
+  - FBSDKLoginKit
   - Firebase
   - google-plus-ios-sdk
   - RBStoryboardLink
@@ -47,20 +62,21 @@ DEPENDENCIES:
   - SWRevealViewController
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: 26a7dbcd84f2551d0edab3a59d007c0bb3aa007a
+  ActionSheetPicker-3.0: cc9f90ae785070623e9b972270013c3242190fb0
   AFNetworking: cf8e418e16f0c9c7e5c3150d019a3c679d015018
-  Bolts: e431c88fd02115d4a34016c2100bbfa4d2d5b146
+  Bolts: aac24961496d504aa56fc267cde95162a71bac39
   Color-Picker-for-iOS: 4f02cd927f9b1d9292831bcdbd0ab55cd8ace4f6
-  Facebook-iOS-SDK: 141cba3ba6c484380eb38c573110af9e4fbf8962
-  Firebase: 83d40785e3d3e68ed37d487c33c5411c13b2f3cd
+  FBSDKCoreKit: 469ed167195f860dbd2b4c4bbaa33d2e90598db9
+  FBSDKLoginKit: ff6224762732e3698f30942e4544321b8c7a23e6
+  Firebase: e35cdd2561bf4fea9c1e384e9400a9c173d19e47
   google-plus-ios-sdk: 47adbe03ea904bdb7aa1c0eca282a23c4686e1bc
   ISO8601DateFormatterValueTransformer: 3ac3a721381697cab4e792d8049ce2f2e9ad3036
-  RBStoryboardLink: 438a56a29ef5a433d33d2f045533d6ca8d1f7755
-  RestKit: 34ba15ca955f7d5436a4120b7f19884f3df056a8
-  RKValueTransformers: d016f1967ae67997e492520fd0f9c512ccf168ae
+  RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
+  RestKit: 1987b5efef289c6b27bd980714d6ca48d3871b78
+  RKValueTransformers: 66ac5e4f077fdbe3496e792d89eeff4c3eb67701
   SOCKit: c7376ac262bea9115b8f749358f762522a47d392
-  SSKeychain: 88767e903ee8d274ed380e364d96b7a101235286
+  SSKeychain: 3f42991739c6c60a9cf1bbd4dff6c0d3694bcf3d
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
-  TransitionKit: bc306605fb5e05a743c18d42239dc0e211619547
+  TransitionKit: 3a14b6acc7cf2d1dd3e454e24dbad1cfab9a1ef1
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.37.1

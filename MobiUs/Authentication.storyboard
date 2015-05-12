@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="91T-Df-jik">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="91T-Df-jik">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Authentication View Controller-->
@@ -40,7 +40,7 @@
                                             <constraint firstAttribute="width" constant="250" id="SfI-ko-20L"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vk-ZJ-0TQ" customClass="FBLoginView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Vk-ZJ-0TQ" customClass="FBSDKLoginButton">
                                         <rect key="frame" x="175" y="156" width="250" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="LRP-TN-Hw0"/>
@@ -84,7 +84,7 @@
                     </view>
                     <connections>
                         <outlet property="controlView" destination="0ti-5E-beY" id="BJp-cI-drT"/>
-                        <outlet property="facebookLoginView" destination="0Vk-ZJ-0TQ" id="JZS-Xe-UnP"/>
+                        <outlet property="facebookLoginButton" destination="0Vk-ZJ-0TQ" id="VgM-Gr-MU5"/>
                         <outlet property="googleLoginView" destination="yNJ-MY-ueE" id="raD-GF-ZJr"/>
                         <outlet property="loginActivityIndicator" destination="miw-gV-7qZ" id="fy4-SX-Onb"/>
                         <segue destination="DcP-Cs-3CM" kind="showDetail" identifier="main" id="HTj-6K-evd"/>
