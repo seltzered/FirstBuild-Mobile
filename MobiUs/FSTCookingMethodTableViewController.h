@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FSTCookingMethod.h"
+#import "FSTCookingMethods.h"
 
 @protocol FSTCookingMethodTableViewControllerDelegate
 
-- (NSDictionary *) dataRequestedFromChild;
+- (FSTCookingMethods *) dataRequestedFromChild;
 - (void) cookingMethodSelected: (FSTCookingMethod*)cookignMethod;
 
 @end

@@ -11,5 +11,7 @@
 @interface FSTCookingMethod : NSObject
 
 @property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) NSNumber* time;
+@property (nonatomic, retain) NSNumber* temperature;
 
 @end

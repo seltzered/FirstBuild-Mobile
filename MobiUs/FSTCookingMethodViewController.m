@@ -7,6 +7,7 @@
 //
 
 #import "FSTCookingMethodViewController.h"
+#import "FSTCookingMethods.h"
 
 @interface FSTCookingMethodViewController ()
 
@@ -14,7 +15,9 @@
 
 @implementation FSTCookingMethodViewController
 
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     if ([self.childViewControllers[0] isKindOfClass:[FSTCookingMethodTableViewController class]])
@@ -28,9 +31,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSDictionary*) dataRequestedFromChild
+- (FSTCookingMethods*) dataRequestedFromChild
 {
-    return nil;
+    return [[FSTCookingMethods alloc]init];
 }
 
 - (void) cookingMethodSelected:(FSTCookingMethod *)cookignMethod

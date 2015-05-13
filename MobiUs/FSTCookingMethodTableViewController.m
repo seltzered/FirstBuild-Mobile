@@ -10,21 +10,20 @@
 
 @interface FSTCookingMethodTableViewController ()
 
+@property (nonatomic,retain) FSTCookingMethods* methods;
+
 @end
 
 @implementation FSTCookingMethodTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.clearsSelectionOnViewWillAppear = NO;
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSMutableDictionary * dataFromParent = (NSMutableDictionary*)[self.delegate dataRequestedFromChild];
- 
+    self.methods = [self.delegate dataRequestedFromChild];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,26 +34,23 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.methods.cookingMethods.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath];
+    
+    cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.item]).name;
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
