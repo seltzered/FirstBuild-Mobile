@@ -15,6 +15,14 @@
                     <view key="view" contentMode="scaleToFill" id="bu5-6h-Vdo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wid-Od-RfP">
+                                <rect key="frame" x="43" y="74" width="600" height="600"/>
+                                <connections>
+                                    <segue destination="v8P-8o-YpD" kind="embed" id="PQV-x6-ygV"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -33,6 +41,14 @@
                     <view key="view" contentMode="scaleToFill" id="adE-WO-zXm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ypW-hx-ohj">
+                                <rect key="frame" x="-156" y="13" width="600" height="600"/>
+                                <connections>
+                                    <segue destination="v8P-8o-YpD" kind="embed" id="srD-EZ-vmo"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
@@ -184,5 +200,23 @@
             </objects>
             <point key="canvasLocation" x="297" y="1190"/>
         </scene>
+        <!--Cooking Method Table View Controller-->
+        <scene sceneID="9V9-m9-PON">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="v8P-8o-YpD" customClass="FSTCookingMethodTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="sXj-ct-Hz4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tableView>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K5D-Ld-FCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="533" y="-513"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="PQV-x6-ygV"/>
+    </inferredMetricsTieBreakers>
 </document>

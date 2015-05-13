@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTCookingMethodViewController : UIViewController
+#import "FSTCookingMethodTableViewController.h"
+
+@interface FSTCookingMethodViewController : UIViewController <FSTCookingMethodTableViewControllerDelegate>
 
 @end

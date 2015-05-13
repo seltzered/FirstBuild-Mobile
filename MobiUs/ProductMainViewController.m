@@ -19,6 +19,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //TODO: implement loading of cloud products
+    //TODO: clean up hide/nohide garbage
+    //[self loadCloudProducts];
+    [self hideProducts:NO];
+    [self hideNoProducts:YES];
+}
+
+- (void)loadCloudProducts
+{
     //TODO: not sure if this is the correct pattern. we want to show the "no products"
     //found if there really aren't any products. since there is no timeout concept on the firebase
     //API then am not sure what the correct method is for detecting a network error.
@@ -57,7 +67,6 @@
         }
     });
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
