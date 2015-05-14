@@ -8,6 +8,7 @@
 
 #import "FSTCookingMethodViewController.h"
 #import "FSTCookingMethods.h"
+#import "FSTCookingMethodSubSelectionViewController.h"
 
 @interface FSTCookingMethodViewController ()
 
@@ -31,14 +32,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    FSTCookingMethod* cookingMethod = (FSTCookingMethod*)sender;
+    
+    if ([segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]])
+    {
+        ((FSTCookingMethodSubSelectionViewController*)segue.destinationViewController).cookingMethod = cookingMethod;
+    }
+}
+
 - (FSTCookingMethods*) dataRequestedFromChild
 {
     return [[FSTCookingMethods alloc]init];
 }
 
-- (void) cookingMethodSelected:(FSTCookingMethod *)cookignMethod
+- (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod
 {
-    
+    [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
 }
 
 

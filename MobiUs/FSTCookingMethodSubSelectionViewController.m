@@ -7,6 +7,8 @@
 //
 
 #import "FSTCookingMethodSubSelectionViewController.h"
+#import "FSTCookingMethods.h"
+#import "FSTSousVideCookingMethods.h"
 
 @interface FSTCookingMethodSubSelectionViewController ()
 
@@ -16,12 +18,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    if ([self.childViewControllers[0] isKindOfClass:[FSTCookingMethodTableViewController class]])
+    {
+        ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (FSTCookingMethods*) dataRequestedFromChild
+{
+    if ([self.cookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
+    {
+        return (FSTCookingMethods*)[[FSTSousVideCookingMethods alloc]init];
+    }
+    return nil;
+}
+
+- (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod
+{
+    [self performSegueWithIdentifier:@"" sender:cookingMethod];
 }
 
 /*

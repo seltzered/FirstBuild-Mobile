@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,9 +48,14 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.item]).name;
+    cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.row]).name;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    FSTCookingMethod* method = self.methods.cookingMethods[indexPath.row];
+    [self.delegate cookingMethodSelected:method];
 }
 
 /*

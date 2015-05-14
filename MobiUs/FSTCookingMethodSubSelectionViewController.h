@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTCookingMethodTableViewController.h"
+#import "FSTCookingMethod.h"
 
-@interface FSTCookingMethodSubSelectionViewController : UIViewController
+@interface FSTCookingMethodSubSelectionViewController : UIViewController<FSTCookingMethodTableViewControllerDelegate>
+
+@property (nonatomic,retain) FSTCookingMethod* cookingMethod;
 
 @end

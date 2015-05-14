@@ -10,4 +10,15 @@
 
 @implementation FSTBeefSousVideCookingMethod
 
+- (id) init
+{
+    self = [super init];
+    if (self)
+    {
+        self.name = @"Beef";
+    }
+    return self;
+    
+}
+
 @end

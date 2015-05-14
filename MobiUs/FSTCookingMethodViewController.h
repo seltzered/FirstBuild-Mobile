@@ -12,6 +12,4 @@
 
 @interface FSTCookingMethodViewController : UIViewController <FSTCookingMethodTableViewControllerDelegate>
 
-@property (nonatomic,retain) NSArray* cookingMethods;
-
 @end

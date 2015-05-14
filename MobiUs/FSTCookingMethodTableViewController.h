@@ -13,7 +13,7 @@
 @protocol FSTCookingMethodTableViewControllerDelegate
 
 - (FSTCookingMethods *) dataRequestedFromChild;
-- (void) cookingMethodSelected: (FSTCookingMethod*)cookignMethod;
+- (void) cookingMethodSelected: (FSTCookingMethod*)cookingMethod;
 
 @end
 
