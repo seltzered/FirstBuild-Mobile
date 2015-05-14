@@ -84,10 +84,6 @@
     }
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
 - (IBAction)revealButtonClick:(id)sender {
     [self.revealViewController rightRevealToggle:sender];
 }

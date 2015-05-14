@@ -29,7 +29,6 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     [super viewDidLoad];
     self.products = [[NSMutableArray alloc] init];
    
-    //TODO: cloud disabled
     //[self configureFirebaseDevices];
     
     FSTParagon* paragon = [FSTParagon new];

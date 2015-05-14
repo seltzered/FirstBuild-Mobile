@@ -170,7 +170,7 @@
         <!--Storyboard Link-->
         <scene sceneID="enf-Dr-59R">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="sZO-RU-ozf" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="sZO-RU-ozf" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6g1-Kz-rO7"/>
                         <viewControllerLayoutGuide type="bottom" id="zno-5t-uMx"/>
@@ -178,12 +178,6 @@
                     <view key="view" contentMode="scaleToFill" id="0pg-JD-Mhk">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q6w-mr-tpK">
-                                <rect key="frame" x="-217" y="-214" width="600" height="476"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <userDefinedRuntimeAttributes>
@@ -198,7 +192,7 @@
         <!--Storyboard Link-->
         <scene sceneID="tjj-Ew-KcD">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="lhL-8p-Ygk" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                <viewController id="lhL-8p-Ygk" customClass="RBStoryboardLink" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ihD-du-QRK"/>
                         <viewControllerLayoutGuide type="bottom" id="DZO-xX-x2Q"/>
@@ -206,12 +200,6 @@
                     <view key="view" contentMode="scaleToFill" id="NiN-yg-S5j">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ffd-yO-llu">
-                                <rect key="frame" x="-217" y="-214" width="600" height="476"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <userDefinedRuntimeAttributes>
@@ -345,7 +333,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="Jgl-rU-8hw" secondAttribute="centerX" id="55f-S8-IdQ"/>
                                     <constraint firstItem="sET-fH-K4D" firstAttribute="top" secondItem="Jgl-rU-8hw" secondAttribute="bottom" constant="40" id="6gP-3H-uck"/>
@@ -422,7 +410,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="h3X-C2-8Es">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="2pO-qk-Ksp">
                             <size key="itemSize" width="443" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -612,7 +600,7 @@
                     <connections>
                         <outlet property="productCollection" destination="h3X-C2-8Es" id="qsO-XY-k8R"/>
                         <segue destination="sZO-RU-ozf" kind="show" identifier="segueChillHub" id="1Dx-g3-3f3"/>
-                        <segue destination="dJA-hw-Leo" kind="show" identifier="segueAddProducts" id="Ucb-Xj-qPs"/>
+                        <segue destination="dJA-hw-Leo" kind="show" identifier="segueAddProduct" id="Ucb-Xj-qPs"/>
                         <segue destination="lhL-8p-Ygk" kind="show" identifier="segueParagon" id="zVb-95-6Ce"/>
                     </connections>
                 </collectionViewController>
@@ -674,7 +662,7 @@
                         <viewControllerLayoutGuide type="bottom" id="NqU-tM-NCh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pvn-iy-rW3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-vn-kjC">
