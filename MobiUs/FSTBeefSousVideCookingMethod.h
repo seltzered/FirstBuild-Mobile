@@ -10,4 +10,7 @@
 
 @interface FSTBeefSousVideCookingMethod : FSTSousVideCookingMethod
 
+@property (nonatomic, retain) NSArray* thicknesses;
+@property (nonatomic, retain) NSArray* donenesses; // :)
+
 @end

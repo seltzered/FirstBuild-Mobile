@@ -41,7 +41,7 @@
 
 - (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod
 {
-    [self performSegueWithIdentifier:@"" sender:cookingMethod];
+    [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
 }
 
 /*
