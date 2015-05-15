@@ -23,6 +23,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)thicknessPanGesture:(id)sender {
+    UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
+    
+    NSLog(@"state %d", gesture.state);
+}
 
 /*
 #pragma mark - Navigation
