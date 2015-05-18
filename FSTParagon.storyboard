@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
@@ -148,11 +149,41 @@
                                     <constraint firstAttribute="height" constant="80" id="Ehf-54-Ihb"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBg-Rr-jBB" userLabel="thicknessSelectionView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBg-Rr-jBB" userLabel="thicknessSelectionView">
                                 <rect key="frame" x="0.0" y="142" width="600" height="300"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pu-xM-iZg" userLabel="thicknessLabelView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="SZj-Wa-Dzo"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIX-yF-mrY" userLabel="blueBarView">
+                                        <rect key="frame" x="0.0" y="50" width="600" height="20"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="XK2-Kh-Bay"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40M-W5-3Ff" userLabel="meatView">
+                                        <rect key="frame" x="120" y="70" width="360" height="230"/>
+                                        <color key="backgroundColor" red="0.50196081399917603" green="0.25098040699958801" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" red="0.94117653369999998" green="0.40000003579999999" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="7Pu-xM-iZg" secondAttribute="width" id="2Eq-ka-EYB"/>
+                                    <constraint firstItem="40M-W5-3Ff" firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" multiplier="0.6" id="Awp-z6-UJb"/>
+                                    <constraint firstItem="HIX-yF-mrY" firstAttribute="top" secondItem="7Pu-xM-iZg" secondAttribute="bottom" id="COq-z8-8WJ"/>
+                                    <constraint firstItem="7Pu-xM-iZg" firstAttribute="top" secondItem="YBg-Rr-jBB" secondAttribute="top" id="Eox-x2-zoE"/>
+                                    <constraint firstAttribute="bottom" secondItem="40M-W5-3Ff" secondAttribute="bottom" id="ItC-F7-6EE"/>
+                                    <constraint firstAttribute="centerX" secondItem="7Pu-xM-iZg" secondAttribute="centerX" id="K94-1r-8yb"/>
+                                    <constraint firstAttribute="centerX" secondItem="40M-W5-3Ff" secondAttribute="centerX" id="MJ4-FU-czv"/>
+                                    <constraint firstItem="40M-W5-3Ff" firstAttribute="top" secondItem="HIX-yF-mrY" secondAttribute="bottom" id="NFl-x6-sDO"/>
+                                    <constraint firstAttribute="centerX" secondItem="HIX-yF-mrY" secondAttribute="centerX" id="fLS-BU-TtB"/>
+                                    <constraint firstItem="HIX-yF-mrY" firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" id="fRE-JL-k1P"/>
                                     <constraint firstAttribute="height" constant="300" id="hpa-lo-xf4"/>
                                 </constraints>
                                 <connections>
@@ -193,6 +224,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="meatView" destination="40M-W5-3Ff" id="aqC-c5-JR7"/>
                         <outlet property="thicknessSelectionView" destination="YBg-Rr-jBB" id="mc5-Vi-T0J"/>
                     </connections>
                 </viewController>
