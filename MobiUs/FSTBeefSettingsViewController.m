@@ -29,6 +29,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
     _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
     _maxHeight = self.thicknessSelectionView.frame.size.height;
     _meatHeightOffset = self.meatView.frame.origin.y;
@@ -54,7 +59,7 @@
         _startingHeight = self.thicknessSelectionView.frame.size.height;
         _startingOrigin = self.thicknessSelectionView.frame.origin.y;
         
-        NSLog(@"start (frame o:%f,s:%f) (bounds o:%f, s:%f)", self.thicknessSelectionView.frame.origin.y, self.thicknessSelectionView.frame.size.height, self.thicknessSelectionView.bounds.origin.y, self.thicknessSelectionView.bounds.size.height);
+        NSLog(@"start (frame o:%f,s:%f) (bounds o:%f, s:%f) (top: %f,bottom: %f)", self.thicknessSelectionView.frame.origin.y, self.thicknessSelectionView.frame.size.height, self.thicknessSelectionView.bounds.origin.y, self.thicknessSelectionView.bounds.size.height,_yBoundsTop,_yBoundsBottom);
     }
     else if (newOrigin > _yBoundsTop && newOrigin < _yBoundsBottom)
     {
