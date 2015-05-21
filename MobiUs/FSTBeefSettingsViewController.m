@@ -45,6 +45,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)continueTapGesture:(id)sender {
+    NSLog(@"touched continue");
+    [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+}
+
 - (IBAction)thicknessPanGesture:(id)sender {
     UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
     

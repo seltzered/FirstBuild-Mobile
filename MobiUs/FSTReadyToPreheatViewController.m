@@ -23,6 +23,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)cancelLabelClick:(id)sender {
+    [self performSegueWithIdentifier:@"segueCancel" sender:self];
+}
+- (IBAction)tempTapMoveNextClick:(id)sender {
+    [self performSegueWithIdentifier:@"seguePreheating" sender:self];
+}
 
 /*
 #pragma mark - Navigation
