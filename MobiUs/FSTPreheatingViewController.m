@@ -23,6 +23,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)hackTapGesture:(id)sender {
+    [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+}
 
 /*
 #pragma mark - Navigation
