@@ -13,8 +13,10 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
+            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
@@ -581,7 +583,57 @@
                     <view key="view" contentMode="scaleToFill" id="c63-FH-8tU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="READY TO COOK!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nf4-MS-h0q">
+                                <rect key="frame" x="0.0" y="25" width="600" height="52"/>
+                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
+                                <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpm-M2-LR6" userLabel="timeAndTemperatureView">
+                                <rect key="frame" x="0.0" y="87" width="600" height="25"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="niv-CP-6dn"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steak (medium-rare), 1&quot; thick" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o14-6r-nV0" userLabel="cookingLabel">
+                                <rect key="frame" x="0.0" y="117" width="600" height="22"/>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Gi-JK3" userLabel="midView">
+                                <rect key="frame" x="0.0" y="149" width="600" height="381"/>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VC-59-Gr7" userLabel="buttonsWrapperView">
+                                <rect key="frame" x="0.0" y="545" width="600" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="X3w-1w-vkH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3VC-59-Gr7" firstAttribute="top" secondItem="59z-Gi-JK3" secondAttribute="bottom" constant="15" id="0f3-US-i4e"/>
+                            <constraint firstAttribute="width" secondItem="xpm-M2-LR6" secondAttribute="width" id="2fv-cg-6Tk"/>
+                            <constraint firstItem="nf4-MS-h0q" firstAttribute="top" secondItem="5e7-Fh-D9p" secondAttribute="bottom" constant="5" id="D2D-dc-GdQ"/>
+                            <constraint firstAttribute="width" secondItem="3VC-59-Gr7" secondAttribute="width" id="Op2-a5-1dM"/>
+                            <constraint firstAttribute="centerX" secondItem="59z-Gi-JK3" secondAttribute="centerX" id="VaQ-Ew-H6e"/>
+                            <constraint firstAttribute="centerX" secondItem="o14-6r-nV0" secondAttribute="centerX" id="VcD-7Z-Kgb"/>
+                            <constraint firstItem="des-kT-A8c" firstAttribute="top" secondItem="3VC-59-Gr7" secondAttribute="bottom" constant="5" id="Y5X-z7-Iy8"/>
+                            <constraint firstAttribute="centerX" secondItem="xpm-M2-LR6" secondAttribute="centerX" id="ZWa-dQ-ye4"/>
+                            <constraint firstItem="o14-6r-nV0" firstAttribute="width" secondItem="c63-FH-8tU" secondAttribute="width" id="fQO-C9-q6b"/>
+                            <constraint firstAttribute="centerX" secondItem="nf4-MS-h0q" secondAttribute="centerX" id="oVa-EH-c9B"/>
+                            <constraint firstAttribute="width" secondItem="nf4-MS-h0q" secondAttribute="width" id="pjE-Zp-Tex"/>
+                            <constraint firstItem="59z-Gi-JK3" firstAttribute="top" secondItem="o14-6r-nV0" secondAttribute="bottom" constant="10" id="rpD-NX-jKP"/>
+                            <constraint firstAttribute="centerX" secondItem="3VC-59-Gr7" secondAttribute="centerX" id="uWQ-RH-1QC"/>
+                            <constraint firstItem="o14-6r-nV0" firstAttribute="top" secondItem="xpm-M2-LR6" secondAttribute="bottom" constant="5" id="vh9-cF-Hdp"/>
+                            <constraint firstItem="59z-Gi-JK3" firstAttribute="width" secondItem="c63-FH-8tU" secondAttribute="width" id="xLQ-Bb-Ll4"/>
+                            <constraint firstItem="xpm-M2-LR6" firstAttribute="top" secondItem="nf4-MS-h0q" secondAttribute="bottom" constant="10" id="yBS-Kj-ciK"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnS-CR-y0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
