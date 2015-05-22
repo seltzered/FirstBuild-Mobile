@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTCircleProgressView.h"
 
 @interface FSTCookingViewController : UIViewController
+@property (strong, nonatomic) IBOutlet FSTCircleProgressView *circleProgressView;
 
 @end

@@ -23,6 +23,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)continueButtonTap:(id)sender {
+    [self performSegueWithIdentifier:@"segueCooking" sender:self];
+}
 
 /*
 #pragma mark - Navigation

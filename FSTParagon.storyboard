@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -16,6 +17,8 @@
             <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
+            <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
@@ -609,9 +612,31 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VC-59-Gr7" userLabel="buttonsWrapperView">
                                 <rect key="frame" x="0.0" y="545" width="600" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1w-gJ-U7A" userLabel="cancelButtonWrapperView">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUV-e9-RbN" userLabel="continueButtonWrapperView">
+                                        <rect key="frame" x="300" y="1" width="300" height="50"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="bmW-xS-W9C" appends="YES" id="KpH-e3-upO"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="bUV-e9-RbN" secondAttribute="centerY" constant="-1" id="1dM-Bq-n0G"/>
+                                    <constraint firstAttribute="centerY" secondItem="U1w-gJ-U7A" secondAttribute="centerY" id="2FZ-jB-xh6"/>
+                                    <constraint firstItem="U1w-gJ-U7A" firstAttribute="leading" secondItem="3VC-59-Gr7" secondAttribute="leading" id="98g-xB-yqA"/>
+                                    <constraint firstItem="bUV-e9-RbN" firstAttribute="height" secondItem="3VC-59-Gr7" secondAttribute="height" id="Ny7-mb-IRA"/>
+                                    <constraint firstAttribute="trailing" secondItem="bUV-e9-RbN" secondAttribute="trailing" id="PCX-JQ-KhP"/>
+                                    <constraint firstItem="U1w-gJ-U7A" firstAttribute="width" secondItem="3VC-59-Gr7" secondAttribute="width" multiplier="0.5" id="PH8-jF-Tck"/>
                                     <constraint firstAttribute="height" constant="50" id="X3w-1w-vkH"/>
+                                    <constraint firstItem="bUV-e9-RbN" firstAttribute="width" secondItem="3VC-59-Gr7" secondAttribute="width" multiplier="0.5" id="lZj-HX-PCs"/>
+                                    <constraint firstItem="U1w-gJ-U7A" firstAttribute="height" secondItem="3VC-59-Gr7" secondAttribute="height" id="w6e-6g-5XM"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -635,8 +660,16 @@
                             <constraint firstItem="xpm-M2-LR6" firstAttribute="top" secondItem="nf4-MS-h0q" secondAttribute="bottom" constant="10" id="yBS-Kj-ciK"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="ktp-73-2Pg" kind="show" identifier="segueCooking" id="0pB-2U-wDL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnS-CR-y0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="bmW-xS-W9C" userLabel="tapContinueButtonGesture">
+                    <connections>
+                        <action selector="continueButtonTap:" destination="zGa-nc-t4X" id="pXH-0s-3bS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3345" y="370"/>
         </scene>
@@ -651,8 +684,63 @@
                     <view key="view" contentMode="scaleToFill" id="K61-Ka-9YT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW COOKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMu-Ed-3Sd" userLabel="cookingStatusLabel">
+                                <rect key="frame" x="0.0" y="30" width="600" height="39"/>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="30"/>
+                                <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steak (medium-rare) at 140 F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we0-iW-tbm" userLabel="cookingModeLabel">
+                                <rect key="frame" x="0.0" y="79" width="600" height="29"/>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="22"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eho-uD-hb8" userLabel="progressView">
+                                <rect key="frame" x="0.0" y="118" width="600" height="422"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-nm-WVn" userLabel="circleProgressView" customClass="FSTCircleProgressView">
+                                        <rect key="frame" x="89" y="0.0" width="422" height="422"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ONX-nm-WVn" secondAttribute="height" multiplier="1:1" id="blU-Q2-8yI"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="ONX-nm-WVn" secondAttribute="centerY" id="09I-73-szQ"/>
+                                    <constraint firstItem="ONX-nm-WVn" firstAttribute="height" secondItem="Eho-uD-hb8" secondAttribute="height" id="44C-3L-JHy"/>
+                                    <constraint firstAttribute="centerX" secondItem="ONX-nm-WVn" secondAttribute="centerX" id="7Jf-Hj-O51"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKQ-z6-QqS" userLabel="completeButtonWrapperView">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <color key="backgroundColor" red="0.2196078598" green="0.59215688710000003" blue="0.73725491759999995" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Fcy-y5-LfI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="aMu-Ed-3Sd" secondAttribute="centerX" id="6ZB-Qi-YFK"/>
+                            <constraint firstAttribute="centerX" secondItem="bKQ-z6-QqS" secondAttribute="centerX" id="7Bh-kd-5YM"/>
+                            <constraint firstItem="we0-iW-tbm" firstAttribute="top" secondItem="aMu-Ed-3Sd" secondAttribute="bottom" constant="10" id="8wn-9A-ci2"/>
+                            <constraint firstAttribute="centerX" secondItem="we0-iW-tbm" secondAttribute="centerX" id="9Hh-OX-RTV"/>
+                            <constraint firstItem="aMu-Ed-3Sd" firstAttribute="top" secondItem="s3l-qE-nxY" secondAttribute="bottom" constant="10" id="Dbi-xx-vM0"/>
+                            <constraint firstAttribute="centerX" secondItem="Eho-uD-hb8" secondAttribute="centerX" id="MJH-mX-i8V"/>
+                            <constraint firstAttribute="width" secondItem="bKQ-z6-QqS" secondAttribute="width" id="OVB-6U-7aS"/>
+                            <constraint firstAttribute="width" secondItem="Eho-uD-hb8" secondAttribute="width" id="YrN-jD-mME"/>
+                            <constraint firstAttribute="width" secondItem="we0-iW-tbm" secondAttribute="width" id="hH5-UH-soJ"/>
+                            <constraint firstItem="Eho-uD-hb8" firstAttribute="top" secondItem="we0-iW-tbm" secondAttribute="bottom" constant="10" id="hLj-Oc-LJ1"/>
+                            <constraint firstItem="aMu-Ed-3Sd" firstAttribute="width" secondItem="K61-Ka-9YT" secondAttribute="width" id="om1-g5-OUg"/>
+                            <constraint firstItem="hBx-nA-wFa" firstAttribute="top" secondItem="bKQ-z6-QqS" secondAttribute="bottom" id="wOl-QA-x2O"/>
+                            <constraint firstItem="bKQ-z6-QqS" firstAttribute="top" secondItem="Eho-uD-hb8" secondAttribute="bottom" constant="10" id="yyU-TL-wPL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="circleProgressView" destination="ONX-nm-WVn" id="UFM-Oh-TJB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sm7-qE-Bch" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
