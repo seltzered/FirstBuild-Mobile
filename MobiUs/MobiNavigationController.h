@@ -10,4 +10,5 @@
 
 @interface MobiNavigationController : UINavigationController
 @property (nonatomic,strong)UIView *logoView;
+- (void)setHeaderImageNamed: (NSString*)imageName withFrameRect: (CGRect)frame;
 @end

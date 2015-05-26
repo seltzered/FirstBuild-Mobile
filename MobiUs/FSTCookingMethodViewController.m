@@ -9,6 +9,7 @@
 #import "FSTCookingMethodViewController.h"
 #import "FSTCookingMethods.h"
 #import "FSTCookingMethodSubSelectionViewController.h"
+#import "MobiNavigationController.h"
 
 @interface FSTCookingMethodViewController ()
 
@@ -25,6 +26,10 @@
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
+    
+    MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
+    [navigation setHeaderImageNamed:@"paragonHeader" withFrameRect:CGRectMake(0, 0, 85, 30)];
+    [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
 }
 
 - (void)didReceiveMemoryWarning {

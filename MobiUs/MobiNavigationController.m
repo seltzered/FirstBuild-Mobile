@@ -9,22 +9,35 @@
 #import "MobiNavigationController.h"
 
 @interface MobiNavigationController ()
-
 @end
 
 @implementation MobiNavigationController
 
+CGFloat _midX = 0;
+CGFloat _midY = 0;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _midX = CGRectGetMidX(self.navigationBar.frame);
+    _midY = CGRectGetMidY(self.navigationBar.frame);
     
-    self.logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_1b_orange_no_firstbuild"]];
-    [self.logoView setFrame:CGRectMake(0, 0, 44, 26)];
-    CGPoint superCenter = CGPointMake(CGRectGetMidX(self.navigationBar.frame), CGRectGetMidY(self.navigationBar.frame));
+    [self setHeaderImageNamed:@"logo_1b_orange_no_firstbuild" withFrameRect:CGRectMake(0, 0, 44, 26)];
+}
 
+
+- (void)setHeaderImageNamed: (NSString*)imageName withFrameRect: (CGRect)frame
+{
+    if (self.logoView)
+    {
+        [self.logoView removeFromSuperview];
+    }
+    
+    self.logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
+    [self.logoView setFrame:frame];
+    CGPoint superCenter = CGPointMake(_midX, _midY);
     [self.logoView setCenter:superCenter];
     [self.navigationBar addSubview:self.logoView];
     [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x00B5CC)];
-
 }
 
 - (void)didReceiveMemoryWarning {
