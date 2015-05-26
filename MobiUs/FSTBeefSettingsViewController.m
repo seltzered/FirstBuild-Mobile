@@ -25,6 +25,8 @@
     CGFloat _yBoundsTop;
     CGFloat _yBoundsBottom;
     FSTBeefSousVideCookingMethod* _beefCookingMethod;
+    
+    NSNumber* _currentThickness;
 }
 
 - (void)viewDidLoad {
@@ -38,6 +40,27 @@
     _meatHeightOffset = self.meatView.frame.origin.y;
     _yBoundsBottom = (self.thicknessSelectionView.frame.origin.y + _maxHeight) - _meatHeightOffset;
     _yBoundsTop = self.thicknessSelectionView.frame.origin.y;
+}
+
+- (void)drawBeefSettingsLabel
+{
+    UIFont *timeFont = [UIFont fontWithName:@"PT Sans Narrow" size:18.0];
+    NSDictionary *timeFontDict = [NSDictionary dictionaryWithObject: timeFont forKey:NSFontAttributeName];
+    
+    UIFont *labelFont = [UIFont fontWithName:@"PT Sans Narrow" size:13.0];
+    NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
+    
+    
+    NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:@143.5] objectForKey:_currentThickness]))[1]);
+    
+    DLog(@"val: %@", hour);
+    
+    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: timeFontDict];
+    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: labelFontDict];
+    
+    [hourString appendAttributedString:hourLabel];
+
+    self.beefSettingsLabel.text = [hour stringValue];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,26 +86,33 @@
         _startingHeight = self.thicknessSelectionView.frame.size.height;
         _startingOrigin = self.thicknessSelectionView.frame.origin.y;
         
-        NSLog(@"start (frame o:%f,s:%f) (bounds o:%f, s:%f) (top: %f,bottom: %f)", self.thicknessSelectionView.frame.origin.y, self.thicknessSelectionView.frame.size.height, self.thicknessSelectionView.bounds.origin.y, self.thicknessSelectionView.bounds.size.height,_yBoundsTop,_yBoundsBottom);
+        DLog(@"start (frame o:%f,s:%f) (bounds o:%f, s:%f) (top: %f,bottom: %f)", self.thicknessSelectionView.frame.origin.y, self.thicknessSelectionView.frame.size.height, self.thicknessSelectionView.bounds.origin.y, self.thicknessSelectionView.bounds.size.height,_yBoundsTop,_yBoundsBottom);
     }
     else if (newOrigin > _yBoundsTop && newOrigin < _yBoundsBottom)
     {
         CGRect frame = self.thicknessSelectionView.frame;
         frame.origin.y = newOrigin;
         frame.size.height = newHeight;
-        [self.thicknessSelectionView setFrame:frame];
         
-         NSLog(@"translation: %f, gesture y %f, new y %f, new height %f, converted %f", yTranslation, yGestureLocation,frame.origin.y, frame.size.height, [self meatThicknessWithActualViewHeight:frame.size.height]);
+        _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height]];
+        
+        DLog(@"translation: %f, gesture y %f, new y %f, new height %f, converted %@", yTranslation, yGestureLocation,frame.origin.y, frame.size.height, _currentThickness);
+        
+        self.beefSizeVerticalConstraint.constant =  newOrigin - (self.timeTemperatureView.frame.origin.y + self.timeTemperatureView.frame.size.height);
+        [self.thicknessSelectionView needsUpdateConstraints];
+        [self.thicknessSelectionView setFrame:frame];
+        [self drawBeefSettingsLabel];
     }
+    
 }
 
-- (CGFloat) meatThicknessWithActualViewHeight: (CGFloat)height
+- (double) meatThicknessWithActualViewHeight: (CGFloat)height
 {
     int index = floor((height-_meatHeightOffset)/(_maxHeight-_meatHeightOffset) * _beefCookingMethod.thicknesses.count);
     if (index < _beefCookingMethod.thicknesses.count)
     {
         NSNumber *thickness = [_beefCookingMethod.thicknesses objectAtIndex:index];
-        return [thickness floatValue];
+        return [thickness doubleValue];
     }
     return 0;
 }

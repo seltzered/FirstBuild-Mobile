@@ -10,4 +10,8 @@
 
 @interface FSTBeefSettingsViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UILabel *beefSettingsLabel;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *beefSizeVerticalConstraint;
+@property (strong, nonatomic) IBOutlet UIView *timeTemperatureView;
+
 @end

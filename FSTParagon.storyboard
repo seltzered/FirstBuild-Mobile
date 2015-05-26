@@ -154,7 +154,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEEF SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmQ-bU-RnQ" userLabel="Beef Settings">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEEF SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmQ-bU-RnQ" userLabel="beefSettingsLabel">
                                 <rect key="frame" x="0.0" y="30" width="600" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="EeQ-Ot-PLU"/>
@@ -326,8 +326,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="beefSettingsLabel" destination="HmQ-bU-RnQ" id="l4C-qs-IPd"/>
+                        <outlet property="beefSizeVerticalConstraint" destination="LeN-0h-XBi" id="JN9-ub-WGN"/>
                         <outlet property="meatView" destination="40M-W5-3Ff" id="aqC-c5-JR7"/>
                         <outlet property="thicknessSelectionView" destination="YBg-Rr-jBB" id="mc5-Vi-T0J"/>
+                        <outlet property="timeTemperatureView" destination="K77-uO-2PX" id="mFi-kY-9MR"/>
                         <segue destination="rkF-e7-Olw" kind="show" identifier="seguePreheat" id="Rki-aX-SFE"/>
                     </connections>
                 </viewController>
