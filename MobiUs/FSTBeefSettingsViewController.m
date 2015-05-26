@@ -31,6 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -40,27 +41,45 @@
     _meatHeightOffset = self.meatView.frame.origin.y;
     _yBoundsBottom = (self.thicknessSelectionView.frame.origin.y + _maxHeight) - _meatHeightOffset;
     _yBoundsTop = self.thicknessSelectionView.frame.origin.y;
+    
+    CGRect frame = self.thicknessSelectionView.frame;
+    _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height-1]];
+    [self drawBeefSettingsLabel];
+
 }
 
 - (void)drawBeefSettingsLabel
 {
-    UIFont *timeFont = [UIFont fontWithName:@"PT Sans Narrow" size:18.0];
-    NSDictionary *timeFontDict = [NSDictionary dictionaryWithObject: timeFont forKey:NSFontAttributeName];
+    //setup segments of the top label
+    UIFont *boldFont = [UIFont fontWithName:@"PT Sans Narrow" size:22.0];
+    NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
     
-    UIFont *labelFont = [UIFont fontWithName:@"PT Sans Narrow" size:13.0];
+    UIFont *labelFont = [UIFont fontWithName:@"PT Sans Narrow" size:18.0];
     NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
     
+    NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:@143.5] objectForKey:_currentThickness]))[0]);
+    NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:@143.5] objectForKey:_currentThickness]))[1]);
     
-    NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:@143.5] objectForKey:_currentThickness]))[1]);
+    DLog(@"val: %@:%@", hour, minute);
     
-    DLog(@"val: %@", hour);
-    
-    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: timeFontDict];
-    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: labelFontDict];
+    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: boldFontDict];
+    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H : " attributes: labelFontDict];
+    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[minute stringValue] attributes: boldFontDict];
+    NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: labelFontDict];
+    NSMutableAttributedString *separator = [[NSMutableAttributedString alloc] initWithString:@"  |  " attributes: boldFontDict];
+    NSMutableAttributedString *temperature = [[NSMutableAttributedString alloc] initWithString:@"143.5" attributes: boldFontDict];
+    NSMutableAttributedString *degreeString = [[NSMutableAttributedString alloc] initWithString:@"\u00b0" attributes:boldFontDict];
+    NSMutableAttributedString *temperatureLabel = [[NSMutableAttributedString alloc] initWithString:@" F" attributes: boldFontDict];
     
     [hourString appendAttributedString:hourLabel];
+    [hourString appendAttributedString:minuteString];
+    [hourString appendAttributedString:minuteLabel];
+    [hourString appendAttributedString:separator];
+    [hourString appendAttributedString:temperature];
+    [hourString appendAttributedString:degreeString];
+    [hourString appendAttributedString:temperatureLabel];
 
-    self.beefSettingsLabel.text = [hour stringValue];
+    [self.beefSettingsLabel setAttributedText:hourString];
 }
 
 - (void)didReceiveMemoryWarning {
