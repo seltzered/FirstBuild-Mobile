@@ -103,7 +103,7 @@
 
 - (void)setTintColor:(UIColor *)tintColor {
     self.progressLayer.progressColor = tintColor;
-    self.progressLabel.textColor = tintColor;
+    self.progressLabel.textColor = [UIColor whiteColor];
 }
 
 - (NSString *)stringFromTimeInterval:(NSTimeInterval)interval shortDate:(BOOL)shortDate {

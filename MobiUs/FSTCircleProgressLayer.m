@@ -22,7 +22,7 @@
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
 @property (nonatomic, strong) CAShapeLayer *progressLayerEnd;
 
-@property (nonatomic, assign) CGRect frame;
+//@property (nonatomic, assign) CGRect frame;
 
 @end
 
@@ -52,14 +52,22 @@
     
     self.path = [self drawPathWithArcCenter];
     self.fillColor = [UIColor clearColor].CGColor;
-    self.strokeColor = [UIColor colorWithRed:0.86f green:0.86f blue:0.86f alpha:0.4f].CGColor;
-    self.lineWidth = 20;
+    UIColor* strokeColor =UIColorFromRGB(0xD43326);
+    self.strokeColor = [strokeColor colorWithAlphaComponent:0.5].CGColor;
+    self.shadowColor = [UIColor whiteColor].CGColor;
+    self.shadowOpacity = .8;
+    //self.shadowPath = self.path;
+    self.shadowRadius = 3;
+    self.shadowOffset = CGSizeMake(0, 0);
+    
+    
+    self.lineWidth = 25;
     
     self.progressLayer = [CAShapeLayer layer];
     self.progressLayer.path = [self drawPathWithArcCenter];
     self.progressLayer.fillColor = [UIColor clearColor].CGColor;
     self.progressLayer.strokeColor = [UIColor whiteColor].CGColor;
-    self.progressLayer.lineWidth = 12;
+    self.progressLayer.lineWidth = 14;
     self.progressLayer.lineCap = kCALineJoinMiter;
     self.progressLayer.lineJoin = kCALineJoinRound;
     
@@ -121,9 +129,7 @@
         if ((progress * 100) > 100) {
             progress = 1.0f;
         }
-        
-        NSLog(@"Percent = %f", progress);
-        
+                
         return progress;
     }
     else
