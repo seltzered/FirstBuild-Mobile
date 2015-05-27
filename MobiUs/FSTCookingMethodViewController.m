@@ -28,7 +28,7 @@
     }
     
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
-    [navigation setHeaderImageNamed:@"paragonHeader" withFrameRect:CGRectMake(0, 0, 85, 30)];
+    [navigation setHeaderImageNamed:@"paragonHeader" withFrameRect:CGRectMake(0, 0, 120, 25)];
     [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
 }
 

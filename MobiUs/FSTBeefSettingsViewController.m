@@ -50,8 +50,9 @@
 
 - (void)drawBeefSettingsLabel
 {
+   
     //setup segments of the top label
-    UIFont *boldFont = [UIFont fontWithName:@"PT Sans Narrow" size:22.0];
+    UIFont *boldFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:22.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
     
     UIFont *labelFont = [UIFont fontWithName:@"PT Sans Narrow" size:18.0];

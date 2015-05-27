@@ -15,7 +15,7 @@
     self = [super init];
     if (self)
     {
-        self.name = @"Sous Vide";
+        self.name = @"SOUS VIDE";
     }
     return self;
     

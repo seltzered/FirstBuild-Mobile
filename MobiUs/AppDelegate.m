@@ -31,6 +31,8 @@
     [[self.objectManager HTTPClient] setDefaultHeader:@"content-type" value:RKMIMETypeJSON];
     self.objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
     
+    DLog(@"%@", [UIFont fontNamesForFamilyName:@"PT Sans Narrow"]);
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
     

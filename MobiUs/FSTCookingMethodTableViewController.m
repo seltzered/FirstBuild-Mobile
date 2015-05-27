@@ -7,6 +7,7 @@
 //
 
 #import "FSTCookingMethodTableViewController.h"
+#import "UIDashedLineView.h"
 
 @interface FSTCookingMethodTableViewController ()
 
@@ -19,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -49,6 +50,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath];
     
     cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.row]).name;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font = [UIFont fontWithName:@"PTSans-NarrowBold" size:22];
+    
+    UIDashedLineView *lineView = [[UIDashedLineView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
+    lineView.backgroundColor = [UIColor clearColor];
+    [cell.contentView addSubview:lineView];
     
     return cell;
 }
@@ -56,6 +64,34 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     FSTCookingMethod* method = self.methods.cookingMethods[indexPath.row];
     [self.delegate cookingMethodSelected:method];
+}
+
+
+//note: this and viewDidLayoutSubviews are hacks to get the cells to go all the way to the left
+//not sure why this is necessary.
+//todo: revisit
+//http://stackoverflow.com/questions/25770119/ios-8-uitableview-separator-inset-0-not-working
+//
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 /*
