@@ -21,8 +21,6 @@
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;
-
-
 @end
 
 @implementation FSTCookingViewController
@@ -45,7 +43,6 @@
     self.circleProgressView.status = NSLocalizedString(@"Stuff", nil);
     self.circleProgressView.tintColor = tintColor;
     self.circleProgressView.elapsedTime = 0;
-    
 
 }
 

@@ -21,9 +21,9 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
-            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
@@ -146,29 +146,42 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypW-hx-ohj">
-                                <rect key="frame" x="16" y="75" width="568" height="465"/>
+                                <rect key="frame" x="16" y="75" width="568" height="450"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="v8P-8o-YpD" kind="embed" id="srD-EZ-vmo"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ciZ-Vh-jmL">
-                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
-                                <color key="backgroundColor" red="0.19215686274509805" green="0.19607843137254902" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mS-z3-yYn" userLabel="cancelViewWrapper">
+                                <rect key="frame" x="15" y="530" width="570" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-3R-9EM">
+                                        <rect key="frame" x="251" y="16" width="69" height="34"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="dzi-Jn-jKi"/>
+                                    <constraint firstAttribute="centerY" secondItem="yCE-3R-9EM" secondAttribute="centerY" constant="-0.5" id="gIh-XR-lFA"/>
+                                    <constraint firstAttribute="centerX" secondItem="yCE-3R-9EM" secondAttribute="centerX" id="rcX-jI-wyw"/>
+                                    <constraint firstAttribute="height" constant="65" id="zfE-gD-3st"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="15"/>
-                                <state key="normal" title="Custom">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="30"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="tSd-Ug-HyZ" kind="show" id="OzA-Bl-ig2"/>
-                                </connections>
-                            </button>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="1.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -176,16 +189,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ypW-hx-ohj" secondAttribute="trailing" id="8Aw-pj-9PX"/>
                             <constraint firstAttribute="trailing" secondItem="QJ0-OZ-dPB" secondAttribute="trailing" id="9OS-Sv-mA7"/>
                             <constraint firstItem="o6x-O8-DUi" firstAttribute="top" secondItem="z3N-A3-hsZ" secondAttribute="bottom" id="BjD-2p-TcJ"/>
-                            <constraint firstItem="V2e-EA-DKC" firstAttribute="top" secondItem="ciZ-Vh-jmL" secondAttribute="bottom" id="CGs-jz-onh"/>
+                            <constraint firstAttribute="centerX" secondItem="6mS-z3-yYn" secondAttribute="centerX" id="Cem-9T-bxI"/>
                             <constraint firstAttribute="centerX" secondItem="o6x-O8-DUi" secondAttribute="centerX" id="UP0-dz-3st"/>
                             <constraint firstAttribute="centerX" secondItem="ypW-hx-ohj" secondAttribute="centerX" id="WgG-lm-SZr"/>
-                            <constraint firstAttribute="centerX" secondItem="ciZ-Vh-jmL" secondAttribute="centerX" id="XvX-jF-OZD"/>
                             <constraint firstItem="ypW-hx-ohj" firstAttribute="top" secondItem="o6x-O8-DUi" secondAttribute="bottom" id="aLw-Jj-DTD"/>
                             <constraint firstItem="QJ0-OZ-dPB" firstAttribute="leading" secondItem="adE-WO-zXm" secondAttribute="leading" id="bwM-ql-SXw"/>
                             <constraint firstAttribute="width" secondItem="o6x-O8-DUi" secondAttribute="width" id="gIs-RF-cCa"/>
                             <constraint firstItem="QJ0-OZ-dPB" firstAttribute="top" secondItem="z3N-A3-hsZ" secondAttribute="bottom" id="jUy-W1-7fp"/>
-                            <constraint firstAttribute="width" secondItem="ciZ-Vh-jmL" secondAttribute="width" id="p86-WD-5En"/>
-                            <constraint firstItem="ciZ-Vh-jmL" firstAttribute="top" secondItem="ypW-hx-ohj" secondAttribute="bottom" id="v0q-su-qRL"/>
+                            <constraint firstItem="V2e-EA-DKC" firstAttribute="top" secondItem="6mS-z3-yYn" secondAttribute="bottom" constant="5" id="qpH-W3-KAZ"/>
+                            <constraint firstItem="6mS-z3-yYn" firstAttribute="width" secondItem="adE-WO-zXm" secondAttribute="width" multiplier="0.95" id="vrf-sj-Idj"/>
+                            <constraint firstItem="6mS-z3-yYn" firstAttribute="top" secondItem="ypW-hx-ohj" secondAttribute="bottom" constant="5" id="ylO-xh-QQo"/>
                             <constraint firstItem="V2e-EA-DKC" firstAttribute="top" secondItem="QJ0-OZ-dPB" secondAttribute="bottom" id="zVi-TS-ScU"/>
                         </constraints>
                     </view>
@@ -805,17 +818,17 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Steak (medium-rare) at 140° F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we0-iW-tbm" userLabel="cookingModeLabel">
-                                <rect key="frame" x="0.0" y="79" width="600" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steak (medium-rare) at 140° F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we0-iW-tbm" userLabel="cookingModeLabel">
+                                <rect key="frame" x="0.0" y="79" width="600" height="26"/>
                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eho-uD-hb8" userLabel="progressView">
-                                <rect key="frame" x="0.0" y="118" width="600" height="407"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eho-uD-hb8" userLabel="progressView">
+                                <rect key="frame" x="0.0" y="115" width="600" height="410"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-nm-WVn" userLabel="circleProgressView" customClass="FSTCircleProgressView">
-                                        <rect key="frame" x="97" y="0.0" width="407" height="407"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-nm-WVn" userLabel="circleProgressView" customClass="FSTCircleProgressView">
+                                        <rect key="frame" x="95" y="0.0" width="410" height="410"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="ONX-nm-WVn" secondAttribute="height" multiplier="1:1" id="blU-Q2-8yI"/>
                                         </constraints>
@@ -930,7 +943,7 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="v8P-8o-YpD" customClass="FSTCookingMethodTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="sXj-ct-Hz4">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="465"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="450"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="l0y-jM-v2O">
