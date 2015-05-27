@@ -47,17 +47,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sg9-W6-UnA" userLabel="imageWrapperView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paragonSousVideBackground" translatesAutoresizingMaskIntoConstraints="NO" id="mA2-rC-f8P" userLabel="background">
-                                        <rect key="frame" x="0.0" y="-1902" width="600" height="4404"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paragonBackgroundBeef@1x" translatesAutoresizingMaskIntoConstraints="NO" id="mA2-rC-f8P" userLabel="background">
+                                        <rect key="frame" x="39" y="-44" width="523" height="668"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="mA2-rC-f8P" secondAttribute="trailing" id="0TY-cm-T31"/>
-                                    <constraint firstItem="mA2-rC-f8P" firstAttribute="leading" secondItem="sg9-W6-UnA" secondAttribute="leading" id="DsB-Qs-Gzt"/>
                                     <constraint firstAttribute="centerY" secondItem="mA2-rC-f8P" secondAttribute="centerY" id="cyW-nR-6B8"/>
                                     <constraint firstAttribute="centerX" secondItem="mA2-rC-f8P" secondAttribute="centerX" id="tQh-jD-qeu"/>
                                 </constraints>
@@ -85,15 +83,14 @@
                         </subviews>
                         <color key="backgroundColor" red="0.94117653369999998" green="0.40000003579999999" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="sg9-W6-UnA" secondAttribute="width" id="04A-xJ-dYJ"/>
                             <constraint firstItem="qQV-PC-wkI" firstAttribute="top" secondItem="wid-Od-RfP" secondAttribute="bottom" id="0bG-aa-5Dk"/>
+                            <constraint firstItem="qQV-PC-wkI" firstAttribute="top" secondItem="sg9-W6-UnA" secondAttribute="bottom" id="1a0-a1-HQc"/>
                             <constraint firstAttribute="centerX" secondItem="wid-Od-RfP" secondAttribute="centerX" id="8pl-Jb-3ls"/>
                             <constraint firstItem="wid-Od-RfP" firstAttribute="leading" secondItem="bu5-6h-Vdo" secondAttribute="leadingMargin" id="G43-lf-Vkz"/>
+                            <constraint firstItem="sg9-W6-UnA" firstAttribute="top" secondItem="hPz-QQ-InC" secondAttribute="bottom" id="Hjj-oU-UPl"/>
                             <constraint firstItem="9T6-lk-Y9U" firstAttribute="width" secondItem="bu5-6h-Vdo" secondAttribute="width" id="Lp7-62-3tm"/>
-                            <constraint firstAttribute="centerY" secondItem="sg9-W6-UnA" secondAttribute="centerY" id="M8U-cx-160"/>
-                            <constraint firstAttribute="centerX" secondItem="sg9-W6-UnA" secondAttribute="centerX" id="UCy-gD-7V4"/>
                             <constraint firstItem="9T6-lk-Y9U" firstAttribute="top" secondItem="hPz-QQ-InC" secondAttribute="bottom" id="VrN-ct-nAq"/>
-                            <constraint firstAttribute="height" secondItem="sg9-W6-UnA" secondAttribute="height" id="aK2-eP-iuD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sg9-W6-UnA" secondAttribute="trailing" constant="-16" id="cs8-rF-j5M"/>
                             <constraint firstAttribute="centerX" secondItem="9T6-lk-Y9U" secondAttribute="centerX" id="gzO-rD-3vP"/>
                             <constraint firstItem="NUP-1R-w0H" firstAttribute="centerX" secondItem="9T6-lk-Y9U" secondAttribute="centerX" id="hK7-zi-4Hu"/>
                             <constraint firstItem="wid-Od-RfP" firstAttribute="top" secondItem="9T6-lk-Y9U" secondAttribute="bottom" id="hQD-eW-mQh"/>
@@ -101,6 +98,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="NUP-1R-w0H" secondAttribute="trailing" constant="-16" id="msd-hd-hvj"/>
                             <constraint firstItem="NUP-1R-w0H" firstAttribute="leading" secondItem="bu5-6h-Vdo" secondAttribute="leadingMargin" constant="-16" id="q8E-Or-jCT"/>
                             <constraint firstItem="NUP-1R-w0H" firstAttribute="centerY" secondItem="9T6-lk-Y9U" secondAttribute="centerY" id="rOD-sd-3Xe"/>
+                            <constraint firstItem="sg9-W6-UnA" firstAttribute="leading" secondItem="bu5-6h-Vdo" secondAttribute="leadingMargin" constant="-16" id="zht-Ub-jzP"/>
                         </constraints>
                     </view>
                     <connections>
@@ -114,7 +112,7 @@
         <!--CookingMethodSubSelectionViewController-->
         <scene sceneID="VQj-zF-S4Q">
             <objects>
-                <viewController id="Sl3-N6-beH" userLabel="CookingMethodSubSelectionViewController" customClass="FSTCookingMethodSubSelectionViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" id="Sl3-N6-beH" userLabel="CookingMethodSubSelectionViewController" customClass="FSTCookingMethodSubSelectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z3N-A3-hsZ"/>
                         <viewControllerLayoutGuide type="bottom" id="V2e-EA-DKC"/>
@@ -123,15 +121,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6x-O8-DUi">
-                                <rect key="frame" x="0.0" y="20" width="600" height="30"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-OZ-dPB" userLabel="imageViewWrapper">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paragonBackgroundBeef" translatesAutoresizingMaskIntoConstraints="NO" id="hZn-iX-rDA">
+                                        <rect key="frame" x="-1651" y="-2180" width="3870" height="4940"/>
+                                        <color key="backgroundColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="QYB-Rh-YyM"/>
+                                    <constraint firstAttribute="centerX" secondItem="hZn-iX-rDA" secondAttribute="centerX" id="Pl9-9F-5Kh"/>
+                                    <constraint firstAttribute="centerY" secondItem="hZn-iX-rDA" secondAttribute="centerY" id="T9o-nT-Ofe"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="hZn-iX-rDA"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6x-O8-DUi" userLabel="headerView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="55"/>
+                                <color key="backgroundColor" red="0.16470588235294117" green="0.16862745098039217" blue="0.17647058823529413" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="QYB-Rh-YyM"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ypW-hx-ohj">
-                                <rect key="frame" x="0.0" y="50" width="600" height="490"/>
+                                <rect key="frame" x="16" y="75" width="568" height="465"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="v8P-8o-YpD" kind="embed" id="srD-EZ-vmo"/>
                                 </connections>
@@ -156,16 +174,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ypW-hx-ohj" firstAttribute="leading" secondItem="adE-WO-zXm" secondAttribute="leadingMargin" id="7ao-gZ-17g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ypW-hx-ohj" secondAttribute="trailing" id="8Aw-pj-9PX"/>
+                            <constraint firstAttribute="trailing" secondItem="QJ0-OZ-dPB" secondAttribute="trailing" id="9OS-Sv-mA7"/>
                             <constraint firstItem="o6x-O8-DUi" firstAttribute="top" secondItem="z3N-A3-hsZ" secondAttribute="bottom" id="BjD-2p-TcJ"/>
                             <constraint firstItem="V2e-EA-DKC" firstAttribute="top" secondItem="ciZ-Vh-jmL" secondAttribute="bottom" id="CGs-jz-onh"/>
                             <constraint firstAttribute="centerX" secondItem="o6x-O8-DUi" secondAttribute="centerX" id="UP0-dz-3st"/>
                             <constraint firstAttribute="centerX" secondItem="ypW-hx-ohj" secondAttribute="centerX" id="WgG-lm-SZr"/>
                             <constraint firstAttribute="centerX" secondItem="ciZ-Vh-jmL" secondAttribute="centerX" id="XvX-jF-OZD"/>
                             <constraint firstItem="ypW-hx-ohj" firstAttribute="top" secondItem="o6x-O8-DUi" secondAttribute="bottom" id="aLw-Jj-DTD"/>
+                            <constraint firstItem="QJ0-OZ-dPB" firstAttribute="leading" secondItem="adE-WO-zXm" secondAttribute="leading" id="bwM-ql-SXw"/>
                             <constraint firstAttribute="width" secondItem="o6x-O8-DUi" secondAttribute="width" id="gIs-RF-cCa"/>
-                            <constraint firstAttribute="width" secondItem="ypW-hx-ohj" secondAttribute="width" id="iAc-v2-Rg3"/>
+                            <constraint firstItem="QJ0-OZ-dPB" firstAttribute="top" secondItem="z3N-A3-hsZ" secondAttribute="bottom" id="jUy-W1-7fp"/>
                             <constraint firstAttribute="width" secondItem="ciZ-Vh-jmL" secondAttribute="width" id="p86-WD-5En"/>
                             <constraint firstItem="ciZ-Vh-jmL" firstAttribute="top" secondItem="ypW-hx-ohj" secondAttribute="bottom" id="v0q-su-qRL"/>
+                            <constraint firstItem="V2e-EA-DKC" firstAttribute="top" secondItem="QJ0-OZ-dPB" secondAttribute="bottom" id="zVi-TS-ScU"/>
                         </constraints>
                     </view>
                     <connections>
@@ -864,12 +887,12 @@
         <scene sceneID="9V9-m9-PON">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="v8P-8o-YpD" customClass="FSTCookingMethodTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="sXj-ct-Hz4">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="525"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="sXj-ct-Hz4">
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="465"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="l0y-jM-v2O">
-                            <rect key="frame" x="0.0" y="0.0" width="568" height="43"/>
+                            <rect key="frame" x="0.0" y="66" width="568" height="43"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -892,9 +915,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="paragonSousVideBackground" width="3828" height="4403"/>
+        <image name="paragonBackgroundBeef" width="3870" height="4940"/>
+        <image name="paragonBackgroundBeef@1x" width="523" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PQV-x6-ygV"/>
+        <segue reference="srD-EZ-vmo"/>
     </inferredMetricsTieBreakers>
 </document>

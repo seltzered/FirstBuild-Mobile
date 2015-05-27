@@ -57,7 +57,7 @@
     UIDashedLineView *lineView = [[UIDashedLineView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
     lineView.backgroundColor = [UIColor clearColor];
     [cell.contentView addSubview:lineView];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
