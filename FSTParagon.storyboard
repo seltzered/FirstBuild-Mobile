@@ -18,6 +18,7 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
@@ -30,7 +31,9 @@
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
-            <string>PTSans-Narrow</string>
+        </mutableArray>
+        <mutableArray key="fontawesome-webfont.ttf">
+            <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -49,8 +52,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sg9-W6-UnA" userLabel="imageWrapperView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paragonBackgroundBeef@1x" translatesAutoresizingMaskIntoConstraints="NO" id="mA2-rC-f8P" userLabel="background">
-                                        <rect key="frame" x="39" y="-44" width="523" height="668"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paragonSousVideBackground@1x" translatesAutoresizingMaskIntoConstraints="NO" id="mA2-rC-f8P" userLabel="background">
+                                        <rect key="frame" x="10" y="-44" width="580" height="668"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
@@ -124,21 +127,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-OZ-dPB" userLabel="imageViewWrapper">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paragonBackgroundBeef" translatesAutoresizingMaskIntoConstraints="NO" id="hZn-iX-rDA">
-                                        <rect key="frame" x="-1651" y="-2180" width="3870" height="4940"/>
-                                        <color key="backgroundColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paragonBackgroundBeef@1x" translatesAutoresizingMaskIntoConstraints="NO" id="hZn-iX-rDA">
+                                        <rect key="frame" x="39" y="-44" width="523" height="668"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="hZn-iX-rDA" secondAttribute="centerX" id="Pl9-9F-5Kh"/>
                                     <constraint firstAttribute="centerY" secondItem="hZn-iX-rDA" secondAttribute="centerY" id="T9o-nT-Ofe"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="hZn-iX-rDA"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6x-O8-DUi" userLabel="headerView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="55"/>
@@ -475,26 +473,46 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EyJ-kd-r1V" userLabel="buttonWrapperView">
-                                <rect key="frame" x="0.0" y="545" width="600" height="50"/>
+                                <rect key="frame" x="15" y="545" width="570" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X Cancel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lg3-0B-V9c">
-                                        <rect key="frame" x="0.0" y="15" width="600" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5d-78-QLx">
+                                        <rect key="frame" x="225" y="12" width="21" height="27"/>
+                                        <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="26"/>
+                                        <color key="textColor" red="0.83137254901960789" green="0.20000000000000001" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lg3-0B-V9c">
+                                        <rect key="frame" x="0.0" y="9" width="570" height="34"/>
                                         <gestureRecognizers/>
-                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                        <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="Mng-xH-UgX" appends="YES" id="K8T-jl-wRc"/>
                                         </connections>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="BBm-ew-oAv"/>
                                     <constraint firstAttribute="centerX" secondItem="Lg3-0B-V9c" secondAttribute="centerX" id="FAq-aH-mGO"/>
                                     <constraint firstAttribute="centerY" secondItem="Lg3-0B-V9c" secondAttribute="centerY" constant="-0.5" id="JRl-G3-0LX"/>
+                                    <constraint firstAttribute="centerX" secondItem="c5d-78-QLx" secondAttribute="centerX" constant="50" id="LAc-s0-TGm"/>
+                                    <constraint firstAttribute="centerY" secondItem="c5d-78-QLx" secondAttribute="centerY" constant="-0.5" id="iNd-DM-QE1"/>
                                     <constraint firstAttribute="width" secondItem="Lg3-0B-V9c" secondAttribute="width" id="two-mL-9N9"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                        <color key="value" red="0.83137254901960789" green="0.20000000000000001" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="1.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -507,7 +525,7 @@
                             <constraint firstItem="nwH-Dd-IKC" firstAttribute="top" secondItem="9GR-aE-Qlm" secondAttribute="bottom" constant="15" id="NfB-Yv-WcZ"/>
                             <constraint firstAttribute="centerX" secondItem="G7b-eW-wFJ" secondAttribute="centerX" constant="6" id="Pae-LT-bBf"/>
                             <constraint firstItem="1Em-Bl-xOY" firstAttribute="top" secondItem="EyJ-kd-r1V" secondAttribute="bottom" constant="5" id="UPq-2I-LTN"/>
-                            <constraint firstItem="EyJ-kd-r1V" firstAttribute="width" secondItem="v9w-7b-xNt" secondAttribute="width" id="cFp-Fd-BwU"/>
+                            <constraint firstItem="EyJ-kd-r1V" firstAttribute="width" secondItem="v9w-7b-xNt" secondAttribute="width" multiplier="0.95" id="cFp-Fd-BwU"/>
                             <constraint firstItem="N8x-dd-BpD" firstAttribute="width" secondItem="v9w-7b-xNt" secondAttribute="width" id="dGT-Pl-uTg"/>
                             <constraint firstAttribute="centerX" secondItem="9GR-aE-Qlm" secondAttribute="centerX" id="dIV-Nj-wRk"/>
                             <constraint firstItem="nwH-Dd-IKC" firstAttribute="width" secondItem="v9w-7b-xNt" secondAttribute="width" multiplier="0.7" id="koc-cq-kBw"/>
@@ -915,8 +933,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="paragonBackgroundBeef" width="3870" height="4940"/>
         <image name="paragonBackgroundBeef@1x" width="523" height="667"/>
+        <image name="paragonSousVideBackground@1x" width="580" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="srD-EZ-vmo"/>

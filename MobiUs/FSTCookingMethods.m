@@ -15,8 +15,7 @@
     self = [super init];
     if (self) {
         FSTSousVideCookingMethod *cookingMethod = [[FSTSousVideCookingMethod alloc] init];
-        FSTSousVideCookingMethod *cookingMethod2 = [[FSTSousVideCookingMethod alloc] init];
-        self.cookingMethods = [[NSArray alloc] initWithObjects:cookingMethod,cookingMethod2, nil];
+        self.cookingMethods = [[NSArray alloc] initWithObjects:cookingMethod, nil];
     }
     return self;
 }
