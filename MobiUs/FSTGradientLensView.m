@@ -30,6 +30,31 @@
     CGContextDrawRadialGradient (context, gradient, gradCenter, 0, gradCenter, gradRadius, kCGGradientDrawsAfterEndLocation);
     
     CGGradientRelease(gradient);
+    
+    UIColor* fillColor = UIColorFromRGB(0x16A7C0);
+    UIColor* strokeColor = UIColorFromRGB(0x16A7C0);
+    UIBezierPath* path = [UIBezierPath bezierPath];
+    [path moveToPoint: CGPointMake(self.bounds.size.width/2-7,3)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2,12)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2+7,3)];
+    [fillColor setFill];
+    [path fill];
+    [strokeColor setStroke];
+    path.lineWidth = 2;
+    [path stroke];
+    
+    fillColor = UIColorFromRGB(0x16A7C0);
+    strokeColor = UIColorFromRGB(0x16A7C0);
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint: CGPointMake(self.bounds.size.width/2-7,self.bounds.size.height-3)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2,self.bounds.size.height-12)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2+7,self.bounds.size.height-3)];
+    [fillColor setFill];
+    [path fill];
+    [strokeColor setStroke];
+    path.lineWidth = 2;
+    [path stroke];
+
 }
 
 
