@@ -13,5 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *beefSettingsLabel;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *beefSizeVerticalConstraint;
 @property (strong, nonatomic) IBOutlet UIView *timeTemperatureView;
+@property (strong, nonatomic) IBOutlet UIView *donenessSelectionsView;
 
+@property (strong, nonatomic) IBOutlet UIView *selectorOutlineView;
 @end

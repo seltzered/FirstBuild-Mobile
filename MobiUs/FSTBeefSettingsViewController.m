@@ -20,13 +20,14 @@
 {
     CGFloat _startingHeight;
     CGFloat _startingOrigin;
+    CGFloat _startingSelectorXOrigin;
     CGFloat _maxHeight;
     CGFloat _meatHeightOffset;
     CGFloat _yBoundsTop;
     CGFloat _yBoundsBottom;
     FSTBeefSousVideCookingMethod* _beefCookingMethod;
-    
     NSNumber* _currentThickness;
+    NSArray* _temperatureMidPointViews;
 }
 
 - (void)viewDidLoad {
@@ -46,7 +47,10 @@
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height-1]];
     [self drawBeefSettingsLabel];
 
+    _temperatureMidPointViews = [[NSMutableArray alloc]initWithArray:self.donenessSelectionsView.subviews];
+    
 }
+
 
 - (void)drawBeefSettingsLabel
 {
@@ -89,8 +93,43 @@
 }
 
 - (IBAction)continueTapGesture:(id)sender {
-    NSLog(@"touched continue");
+    DLog(@"touched continue");
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+}
+
+- (IBAction)selectorPanGesture:(id)sender {
+   
+    UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
+    UIView* v = gesture.view;
+    CGFloat xTranslation = [gesture translationInView:v].x;
+    CGFloat newXOrigin = _startingSelectorXOrigin + xTranslation;
+    
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        _startingSelectorXOrigin = v.frame.origin.x;
+        DLog("STARTING (%f), top left (%f,%f), top right (%f,%f), bottom left (%f,%f), bottom right (%f,%f), height %f, width %f",
+             _startingSelectorXOrigin,
+             v.frame.origin.x, v.frame.origin.y,
+             v.frame.origin.x+v.frame.size.width, v.frame.origin.y,
+             v.frame.origin.x, v.frame.origin.y+v.frame.size.height,
+             v.frame.origin.x+v.frame.size.width, v.frame.origin.y+v.frame.size.height,
+             v.frame.size.height, v.frame.size.width);
+    }
+    else
+    {
+        CGRect frame = v.frame;
+        frame.origin.x = newXOrigin;
+        [v setFrame:frame];
+        
+        DLog("CHANGING (%f), top left (%f,%f), top right (%f,%f), bottom left (%f,%f), bottom right (%f,%f), height %f, width %f",
+             xTranslation,
+             v.frame.origin.x, v.frame.origin.y,
+             v.frame.origin.x+v.frame.size.width, v.frame.origin.y,
+             v.frame.origin.x, v.frame.origin.y+v.frame.size.height,
+             v.frame.origin.x+v.frame.size.width, v.frame.origin.y+v.frame.size.height,
+             v.frame.size.height, v.frame.size.width);
+    }
+    
 }
 
 - (IBAction)thicknessPanGesture:(id)sender {

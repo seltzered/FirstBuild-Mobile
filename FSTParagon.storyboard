@@ -380,7 +380,7 @@
                                                 <rect key="frame" x="5" y="5" width="560" height="35"/>
                                                 <color key="backgroundColor" red="0.45490196078431372" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Szv-Uj-CXg" userLabel="selectorView">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Szv-Uj-CXg" userLabel="donenessSelectionsView">
                                                 <rect key="frame" x="10" y="5" width="550" height="35"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Az9-0B-C8o" userLabel="position1View">
@@ -421,11 +421,11 @@
                                                             <constraint firstItem="fZh-qh-5eQ" firstAttribute="leading" secondItem="Dov-ct-pVT" secondAttribute="leading" id="tQV-vU-A5a"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NV7-h9-URh" userLabel="position4View">
-                                                        <rect key="frame" x="84" y="0.0" width="44" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NV7-h9-URh" userLabel="position4View">
+                                                        <rect key="frame" x="84" y="0.0" width="42" height="35"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YdT-6b-IYT" userLabel="dotLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="44" height="35"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YdT-6b-IYT" userLabel="dotLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
                                                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="3"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -439,8 +439,8 @@
                                                             <constraint firstAttribute="trailing" secondItem="YdT-6b-IYT" secondAttribute="trailing" id="rND-63-ycX"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebo-Dl-KtJ" userLabel="position5View">
-                                                        <rect key="frame" x="128" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebo-Dl-KtJ" userLabel="position5View">
+                                                        <rect key="frame" x="126" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOh-C1-HjB" userLabel="mediumRareLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -459,8 +459,8 @@
                                                             <constraint firstAttribute="centerX" secondItem="FOh-C1-HjB" secondAttribute="centerX" id="rFc-EB-9vX"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhb-M2-9S1" userLabel="position6View">
-                                                        <rect key="frame" x="170" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rhb-M2-9S1" userLabel="position6View">
+                                                        <rect key="frame" x="168" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgH-UP-qZp" userLabel="dotLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -477,8 +477,8 @@
                                                             <constraint firstItem="HgH-UP-qZp" firstAttribute="top" secondItem="rhb-M2-9S1" secondAttribute="top" id="dXD-sI-l1X"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u9l-Pi-EBn" userLabel="position7View">
-                                                        <rect key="frame" x="212" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9l-Pi-EBn" userLabel="position7View">
+                                                        <rect key="frame" x="210" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ds-sb-cns" userLabel="dotLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -495,11 +495,11 @@
                                                             <constraint firstAttribute="bottom" secondItem="8ds-sb-cns" secondAttribute="bottom" id="xQV-9F-vPO"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dPI-mt-GnX" userLabel="position8View">
-                                                        <rect key="frame" x="254" y="0.0" width="44" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPI-mt-GnX" userLabel="position8View">
+                                                        <rect key="frame" x="252" y="0.0" width="43" height="35"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PyE-uf-u5U" userLabel="mediumLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="44" height="35"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PyE-uf-u5U" userLabel="mediumLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="43" height="35"/>
                                                                 <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="16"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -513,8 +513,8 @@
                                                             <constraint firstAttribute="bottom" secondItem="PyE-uf-u5U" secondAttribute="bottom" id="saW-vH-xI0"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Jg-cw-miB" userLabel="position9View">
-                                                        <rect key="frame" x="298" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Jg-cw-miB" userLabel="position9View">
+                                                        <rect key="frame" x="295" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9Y-qH-Mh5" userLabel="dotLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -531,8 +531,8 @@
                                                             <constraint firstItem="j9Y-qH-Mh5" firstAttribute="leading" secondItem="3Jg-cw-miB" secondAttribute="leading" id="ytW-Ai-HhU"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ea2-MW-19u" userLabel="position10View">
-                                                        <rect key="frame" x="340" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ea2-MW-19u" userLabel="position10View">
+                                                        <rect key="frame" x="337" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwG-pG-z0c" userLabel="dotLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -549,8 +549,8 @@
                                                             <constraint firstItem="qwG-pG-z0c" firstAttribute="top" secondItem="Ea2-MW-19u" secondAttribute="top" id="xnS-EH-aZM"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vju-gP-JR8" userLabel="position11View">
-                                                        <rect key="frame" x="382" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vju-gP-JR8" userLabel="position11View">
+                                                        <rect key="frame" x="379" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7Z-b7-0ep" userLabel="mediumWellLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -567,11 +567,11 @@
                                                             <constraint firstItem="J7Z-b7-0ep" firstAttribute="leading" secondItem="vju-gP-JR8" secondAttribute="leading" id="ssg-a2-QV1"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="snM-iV-gOY" userLabel="position12View">
-                                                        <rect key="frame" x="424" y="0.0" width="44" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snM-iV-gOY" userLabel="position12View">
+                                                        <rect key="frame" x="421" y="0.0" width="42" height="35"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkB-q2-cef" userLabel="dotLabel">
-                                                                <rect key="frame" x="0.0" y="0.0" width="44" height="35"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkB-q2-cef" userLabel="dotLabel">
+                                                                <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
                                                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="3"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -585,8 +585,8 @@
                                                             <constraint firstAttribute="bottom" secondItem="vkB-q2-cef" secondAttribute="bottom" id="VfD-We-FHx"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mjf-dL-6EC" userLabel="position13View">
-                                                        <rect key="frame" x="468" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mjf-dL-6EC" userLabel="position13View">
+                                                        <rect key="frame" x="463" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JPN-3v-isq" userLabel="dotLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -603,8 +603,8 @@
                                                             <constraint firstAttribute="trailing" secondItem="JPN-3v-isq" secondAttribute="trailing" id="Gvu-fF-GF9"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hde-uz-dod" userLabel="position14View">
-                                                        <rect key="frame" x="510" y="0.0" width="42" height="35"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hde-uz-dod" userLabel="position14View">
+                                                        <rect key="frame" x="505" y="0.0" width="42" height="35"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="W" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gU-0I-Dkr" userLabel="wellLabel">
                                                                 <rect key="frame" x="0.0" y="0.0" width="42" height="35"/>
@@ -700,6 +700,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7m-8g-bGq" userLabel="selectorOutlineView">
                                         <rect key="frame" x="248" y="-5" width="105" height="55"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
                                                 <color key="value" red="0.086274509803921567" green="0.65490196078431373" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
@@ -712,14 +713,17 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="5zv-A7-cTZ" appends="YES" id="CXj-B4-crm"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Az9-0B-C8o" firstAttribute="width" secondItem="b7m-8g-bGq" secondAttribute="width" multiplier="0.4" id="6CM-70-dhu"/>
                                     <constraint firstAttribute="centerX" secondItem="b7m-8g-bGq" secondAttribute="centerX" id="KQ0-kM-70c"/>
-                                    <constraint firstItem="b7m-8g-bGq" firstAttribute="top" secondItem="e87-cj-2VL" secondAttribute="top" constant="-5" id="UPD-wj-MVg"/>
-                                    <constraint firstAttribute="bottom" secondItem="b7m-8g-bGq" secondAttribute="bottom" constant="-5" id="d9c-Rb-EqG"/>
+                                    <constraint firstAttribute="top" secondItem="b7m-8g-bGq" secondAttribute="top" constant="5" id="UPD-wj-MVg"/>
+                                    <constraint firstItem="b7m-8g-bGq" firstAttribute="bottom" secondItem="e87-cj-2VL" secondAttribute="bottom" constant="5" id="d9c-Rb-EqG"/>
                                     <constraint firstAttribute="bottom" secondItem="qKS-uF-ZRx" secondAttribute="bottom" id="e1g-JF-wmc"/>
                                     <constraint firstAttribute="height" constant="45" id="eEe-en-jRa"/>
                                     <constraint firstAttribute="centerX" secondItem="qKS-uF-ZRx" secondAttribute="centerX" id="gGk-oS-XlA"/>
@@ -782,23 +786,30 @@
                     <connections>
                         <outlet property="beefSettingsLabel" destination="mN0-Om-TES" id="FTx-m0-ivi"/>
                         <outlet property="beefSizeVerticalConstraint" destination="LeN-0h-XBi" id="JN9-ub-WGN"/>
+                        <outlet property="donenessSelectionsView" destination="Szv-Uj-CXg" id="MYh-SY-UCn"/>
                         <outlet property="meatView" destination="40M-W5-3Ff" id="aqC-c5-JR7"/>
+                        <outlet property="selectorOutlineView" destination="b7m-8g-bGq" id="Z0e-QY-b0Z"/>
                         <outlet property="thicknessSelectionView" destination="YBg-Rr-jBB" id="mc5-Vi-T0J"/>
                         <outlet property="timeTemperatureView" destination="K77-uO-2PX" id="mFi-kY-9MR"/>
                         <segue destination="rkF-e7-Olw" kind="show" identifier="seguePreheat" id="Rki-aX-SFE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ivi-Ge-PcI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="hqu-gf-agf">
+                <panGestureRecognizer minimumNumberOfTouches="1" id="hqu-gf-agf" userLabel="thicknessPanGesture">
                     <connections>
                         <action selector="thicknessPanGesture:" destination="kJb-ug-w9e" id="54G-wb-6qi"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="4wk-Qm-3D6">
+                <tapGestureRecognizer id="4wk-Qm-3D6" userLabel="continueTapGesture">
                     <connections>
                         <action selector="continueTapGesture:" destination="kJb-ug-w9e" id="LRs-CW-AQd"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="5zv-A7-cTZ" userLabel="selectorPanGesture">
+                    <connections>
+                        <action selector="selectorPanGesture:" destination="kJb-ug-w9e" id="2Ix-dX-Fpf"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1095" y="370"/>
         </scene>
