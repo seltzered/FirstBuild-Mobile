@@ -27,7 +27,7 @@
     CGFloat _yBoundsBottom;
     FSTBeefSousVideCookingMethod* _beefCookingMethod;
     NSNumber* _currentThickness;
-    NSArray* _temperatureMidPointViews;
+    NSMutableArray* _temperatureXOrigins;
 }
 
 - (void)viewDidLoad {
@@ -46,9 +46,14 @@
     CGRect frame = self.thicknessSelectionView.frame;
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height-1]];
     [self drawBeefSettingsLabel];
-
-    _temperatureMidPointViews = [[NSMutableArray alloc]initWithArray:self.donenessSelectionsView.subviews];
     
+     _temperatureXOrigins = [[NSMutableArray alloc]init];
+    for (uint8_t i=0; i< self.donenessSelectionsView.subviews.count; i++)
+    {
+        NSNumber* originX = [[NSNumber alloc] initWithFloat:((UIView*)(self.donenessSelectionsView.subviews[i])).frame.origin.x];
+        DLog(@"originX %@", originX);
+        [_temperatureXOrigins insertObject:originX atIndex:i];
+    }
 }
 
 
@@ -101,33 +106,40 @@
    
     UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
     UIView* v = gesture.view;
-    CGFloat xTranslation = [gesture translationInView:v].x;
+    CGFloat xTranslation = [gesture translationInView:self.donenessSelectionsView].x;
     CGFloat newXOrigin = _startingSelectorXOrigin + xTranslation;
     
     if (gesture.state == UIGestureRecognizerStateBegan)
     {
         _startingSelectorXOrigin = v.frame.origin.x;
-        DLog("STARTING (%f), top left (%f,%f), top right (%f,%f), bottom left (%f,%f), bottom right (%f,%f), height %f, width %f",
-             _startingSelectorXOrigin,
-             v.frame.origin.x, v.frame.origin.y,
-             v.frame.origin.x+v.frame.size.width, v.frame.origin.y,
-             v.frame.origin.x, v.frame.origin.y+v.frame.size.height,
-             v.frame.origin.x+v.frame.size.width, v.frame.origin.y+v.frame.size.height,
-             v.frame.size.height, v.frame.size.width);
     }
     else
     {
         CGRect frame = v.frame;
         frame.origin.x = newXOrigin;
         [v setFrame:frame];
+
+        float shortestDistance=MAXFLOAT;
+        uint8_t shortestDistanceIndex=0;
         
-        DLog("CHANGING (%f), top left (%f,%f), top right (%f,%f), bottom left (%f,%f), bottom right (%f,%f), height %f, width %f",
-             xTranslation,
-             v.frame.origin.x, v.frame.origin.y,
-             v.frame.origin.x+v.frame.size.width, v.frame.origin.y,
-             v.frame.origin.x, v.frame.origin.y+v.frame.size.height,
-             v.frame.origin.x+v.frame.size.width, v.frame.origin.y+v.frame.size.height,
-             v.frame.size.height, v.frame.size.width);
+        for (uint8_t i=0; i < _temperatureXOrigins.count; i++)
+        {
+            float distance = fabs(newXOrigin - [_temperatureXOrigins[i] floatValue]) ;
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                shortestDistanceIndex = i;
+            }
+        }
+        
+        NSLog(@"shortest origin distance: (st:%f, x: %f, dist:%f, ix: %d)", _startingSelectorXOrigin, newXOrigin, shortestDistance, shortestDistanceIndex);
+        
+        if (gesture.state == UIGestureRecognizerStateEnded)
+        {
+            CGRect finalFrame = v.frame;
+            finalFrame.origin.x = [_temperatureXOrigins[shortestDistanceIndex] floatValue];
+            [v setFrame:finalFrame];
+        }
     }
     
 }
