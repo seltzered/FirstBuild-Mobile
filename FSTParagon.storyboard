@@ -347,14 +347,14 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIX-yF-mrY" userLabel="blueBarView" customClass="FSTArrowEndedLine">
-                                        <rect key="frame" x="0.0" y="50" width="600" height="50"/>
+                                        <rect key="frame" x="0.0" y="25" width="600" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="XK2-Kh-Bay"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40M-W5-3Ff" userLabel="meatView">
-                                        <rect key="frame" x="120" y="80" width="360" height="217"/>
+                                        <rect key="frame" x="120" y="55" width="360" height="242"/>
                                         <color key="backgroundColor" red="0.39215686274509803" green="0.11372549019607843" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -368,7 +368,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7Pu-xM-iZg" secondAttribute="width" multiplier="2.5" id="2Eq-ka-EYB"/>
                                     <constraint firstItem="40M-W5-3Ff" firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" multiplier="0.6" id="Awp-z6-UJb"/>
-                                    <constraint firstItem="HIX-yF-mrY" firstAttribute="top" secondItem="7Pu-xM-iZg" secondAttribute="bottom" id="COq-z8-8WJ"/>
+                                    <constraint firstItem="HIX-yF-mrY" firstAttribute="top" secondItem="7Pu-xM-iZg" secondAttribute="bottom" constant="-25" id="COq-z8-8WJ"/>
                                     <constraint firstItem="7Pu-xM-iZg" firstAttribute="top" secondItem="YBg-Rr-jBB" secondAttribute="top" id="Eox-x2-zoE"/>
                                     <constraint firstAttribute="bottom" secondItem="40M-W5-3Ff" secondAttribute="bottom" id="ItC-F7-6EE"/>
                                     <constraint firstAttribute="centerX" secondItem="7Pu-xM-iZg" secondAttribute="centerX" id="K94-1r-8yb"/>
