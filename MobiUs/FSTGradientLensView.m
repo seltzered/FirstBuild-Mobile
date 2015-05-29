@@ -13,6 +13,8 @@
 
 - (void)drawRect:(CGRect)rect {
     
+    
+    //lens gradient
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGFloat gradLocations[2] = {0.0f, 1.0f};
@@ -31,24 +33,27 @@
     
     CGGradientRelease(gradient);
     
+    
+    //top triangle
     UIColor* fillColor = UIColorFromRGB(0x16A7C0);
     UIColor* strokeColor = UIColorFromRGB(0x16A7C0);
     UIBezierPath* path = [UIBezierPath bezierPath];
-    [path moveToPoint: CGPointMake(self.bounds.size.width/2-7,3)];
-    [path addLineToPoint: CGPointMake(self.bounds.size.width/2,12)];
-    [path addLineToPoint: CGPointMake(self.bounds.size.width/2+7,3)];
+    [path moveToPoint: CGPointMake(self.bounds.size.width/2-self.bounds.size.width*.12,3)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2,self.bounds.size.height*.22)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2+self.bounds.size.width*.12,3)];
     [fillColor setFill];
     [path fill];
     [strokeColor setStroke];
     path.lineWidth = 2;
     [path stroke];
     
+    //bottom triangle
     fillColor = UIColorFromRGB(0x16A7C0);
     strokeColor = UIColorFromRGB(0x16A7C0);
     path = [UIBezierPath bezierPath];
-    [path moveToPoint: CGPointMake(self.bounds.size.width/2-7,self.bounds.size.height-3)];
-    [path addLineToPoint: CGPointMake(self.bounds.size.width/2,self.bounds.size.height-12)];
-    [path addLineToPoint: CGPointMake(self.bounds.size.width/2+7,self.bounds.size.height-3)];
+    [path moveToPoint: CGPointMake(self.bounds.size.width/2-self.bounds.size.width*.12,self.bounds.size.height-3)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2,self.bounds.size.height-self.bounds.size.height*.22)];
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/2+self.bounds.size.width*.12,self.bounds.size.height-3)];
     [fillColor setFill];
     [path fill];
     [strokeColor setStroke];
