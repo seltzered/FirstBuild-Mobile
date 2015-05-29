@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -235,6 +236,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bz9-5R-T6S" userLabel="backgroundView">
+                                <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPx-tM-qJl">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEEF SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmQ-bU-RnQ" userLabel="beefLabel">
                                 <rect key="frame" x="0.0" y="30" width="600" height="22"/>
                                 <constraints>
@@ -262,8 +273,8 @@
                                     <constraint firstAttribute="width" secondItem="mN0-Om-TES" secondAttribute="width" id="j9m-Ss-7Vm"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBg-Rr-jBB" userLabel="thicknessSelectionView">
-                                <rect key="frame" x="0.0" y="97" width="600" height="307"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YBg-Rr-jBB" userLabel="thicknessSelectionView">
+                                <rect key="frame" x="0.0" y="97" width="600" height="297"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pu-xM-iZg" userLabel="thicknessLabelView">
                                         <rect key="frame" x="180" y="0.0" width="240" height="50"/>
@@ -337,7 +348,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40M-W5-3Ff" userLabel="meatView">
-                                        <rect key="frame" x="120" y="100" width="360" height="207"/>
+                                        <rect key="frame" x="120" y="80" width="360" height="217"/>
                                         <color key="backgroundColor" red="0.39215686274509803" green="0.11372549019607843" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -356,7 +367,7 @@
                                     <constraint firstAttribute="bottom" secondItem="40M-W5-3Ff" secondAttribute="bottom" id="ItC-F7-6EE"/>
                                     <constraint firstAttribute="centerX" secondItem="7Pu-xM-iZg" secondAttribute="centerX" id="K94-1r-8yb"/>
                                     <constraint firstAttribute="centerX" secondItem="40M-W5-3Ff" secondAttribute="centerX" id="MJ4-FU-czv"/>
-                                    <constraint firstItem="40M-W5-3Ff" firstAttribute="top" secondItem="HIX-yF-mrY" secondAttribute="bottom" id="NFl-x6-sDO"/>
+                                    <constraint firstItem="40M-W5-3Ff" firstAttribute="top" secondItem="HIX-yF-mrY" secondAttribute="centerY" constant="5" id="NFl-x6-sDO"/>
                                     <constraint firstAttribute="centerX" secondItem="HIX-yF-mrY" secondAttribute="centerX" id="fLS-BU-TtB"/>
                                     <constraint firstItem="HIX-yF-mrY" firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" id="fRE-JL-k1P"/>
                                 </constraints>
@@ -365,13 +376,13 @@
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image is for reference only" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fD-in-fYh" userLabel="imageforLabel">
-                                <rect key="frame" x="0.0" y="409" width="600" height="16"/>
+                                <rect key="frame" x="0.0" y="399" width="600" height="16"/>
                                 <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="12"/>
                                 <color key="textColor" red="0.8901960784313725" green="0.4392156862745098" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e87-cj-2VL" userLabel="donenessSelectionView">
-                                <rect key="frame" x="0.0" y="435" width="600" height="45"/>
+                                <rect key="frame" x="0.0" y="425" width="600" height="45"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qKS-uF-ZRx" userLabel="outerPartView">
                                         <rect key="frame" x="15" y="0.0" width="570" height="45"/>
@@ -732,7 +743,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jmo-f9-vNa" userLabel="continueButtonHolderView">
-                                <rect key="frame" x="30" y="530" width="540" height="65"/>
+                                <rect key="frame" x="30" y="520" width="540" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ud7-p5-j3H">
                                         <rect key="frame" x="0.0" y="16" width="540" height="34"/>
@@ -767,7 +778,7 @@
                             <constraint firstItem="Jmo-f9-vNa" firstAttribute="top" secondItem="e87-cj-2VL" secondAttribute="bottom" constant="50" id="6uU-JL-Arb"/>
                             <constraint firstItem="4fD-in-fYh" firstAttribute="width" secondItem="tr6-bk-Hey" secondAttribute="width" id="DDV-Ow-7v8"/>
                             <constraint firstItem="4fD-in-fYh" firstAttribute="top" secondItem="YBg-Rr-jBB" secondAttribute="bottom" constant="5" id="EaK-C9-YUq"/>
-                            <constraint firstItem="VZZ-y1-m06" firstAttribute="top" secondItem="Jmo-f9-vNa" secondAttribute="bottom" constant="5" id="Faf-sz-8M6"/>
+                            <constraint firstItem="VZZ-y1-m06" firstAttribute="top" secondItem="Jmo-f9-vNa" secondAttribute="bottom" constant="15" id="Faf-sz-8M6"/>
                             <constraint firstAttribute="centerX" secondItem="K77-uO-2PX" secondAttribute="centerX" id="HT2-5n-z4Z"/>
                             <constraint firstItem="e87-cj-2VL" firstAttribute="top" secondItem="4fD-in-fYh" secondAttribute="bottom" constant="10" id="KSK-79-jqT"/>
                             <constraint firstItem="YBg-Rr-jBB" firstAttribute="top" secondItem="K77-uO-2PX" secondAttribute="bottom" id="LeN-0h-XBi"/>

@@ -15,15 +15,19 @@
     CGFloat bh = self.bounds.size.height;
     CGFloat bw = self.bounds.size.width;
     
-    UIColor* fillColor = UIColorFromRGB(0x16A7C0);
+    UIColor* fillColor = [UIColorFromRGB(0x16A7C0) colorWithAlphaComponent:.7];
     UIColor* strokeColor = UIColorFromRGB(0xffffff);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
     UIBezierPath* path = [UIBezierPath bezierPath];
     
     CGFloat xinset = bw*.1;
-    CGFloat ystart = bh/2 - 2;
+    CGFloat ystart = - 2;
     CGFloat yend = ystart + bh;
     CGFloat ymid = ystart + bh/2;
     CGFloat ygap = 6;
+    
     
     //top left
     [path moveToPoint: CGPointMake(-2,ystart)];
@@ -52,10 +56,20 @@
     //close
     [path addLineToPoint: CGPointMake(-2,ystart)];
 
+    
+    CGContextSaveGState(context);
+    CGContextSetShadowWithColor(context, CGSizeMake(0, 2), 2.0, [[UIColor lightGrayColor]CGColor]);
+    
+//    CGContextSaveGState(context);
+//    CGContextSetShadowWithColor(context, CGSizeMake(0, -2), 2.0, [[UIColor lightGrayColor]CGColor]);
     [fillColor setFill];
     [path fill];
+    
+    CGContextRestoreGState(context);
+    
     [strokeColor setStroke];
     path.lineWidth = 2;
+
     [path stroke];
 }
 
