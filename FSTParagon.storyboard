@@ -294,13 +294,13 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-VS-hXE" userLabel="fractionView">
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-VS-hXE" userLabel="fractionView">
                                                 <rect key="frame" x="26" y="5" width="25" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-uA-QIH" userLabel="numeratorLabel">
                                                         <rect key="frame" x="0.0" y="15" width="25" height="0.0"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -314,7 +314,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NG-33-lsI" userLabel="denominatorLabel">
                                                         <rect key="frame" x="0.0" y="40" width="25" height="0.0"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
+                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -387,6 +387,13 @@
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="hqu-gf-agf" appends="YES" id="C6r-Zu-Rkw"/>
                                 </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bge-8V-o39" userLabel="blackSeparatorView">
+                                <rect key="frame" x="0.0" y="394" width="600" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="YbI-XU-Zea"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image is for reference only" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fD-in-fYh" userLabel="imageforLabel">
                                 <rect key="frame" x="0.0" y="399" width="600" height="16"/>
@@ -797,7 +804,9 @@
                             <constraint firstItem="e87-cj-2VL" firstAttribute="top" secondItem="4fD-in-fYh" secondAttribute="bottom" constant="10" id="KSK-79-jqT"/>
                             <constraint firstItem="YBg-Rr-jBB" firstAttribute="top" secondItem="K77-uO-2PX" secondAttribute="bottom" id="LeN-0h-XBi"/>
                             <constraint firstAttribute="centerX" secondItem="bz9-5R-T6S" secondAttribute="centerX" id="LeN-zc-Lvr"/>
+                            <constraint firstAttribute="centerX" secondItem="Bge-8V-o39" secondAttribute="centerX" id="Ms0-WH-3O2"/>
                             <constraint firstAttribute="centerX" secondItem="HmQ-bU-RnQ" secondAttribute="centerX" id="Rbs-mh-5Ax"/>
+                            <constraint firstItem="Bge-8V-o39" firstAttribute="width" secondItem="tr6-bk-Hey" secondAttribute="width" id="TSU-Ay-mhG"/>
                             <constraint firstItem="HmQ-bU-RnQ" firstAttribute="top" secondItem="ydp-wa-x11" secondAttribute="bottom" constant="10" id="UWH-h5-h0a"/>
                             <constraint firstAttribute="width" secondItem="K77-uO-2PX" secondAttribute="width" id="VZ5-kc-rHo"/>
                             <constraint firstAttribute="width" secondItem="e87-cj-2VL" secondAttribute="width" id="afB-az-SuE"/>
@@ -806,6 +815,7 @@
                             <constraint firstItem="K77-uO-2PX" firstAttribute="top" secondItem="HmQ-bU-RnQ" secondAttribute="bottom" constant="5" id="dMq-7r-FBl"/>
                             <constraint firstAttribute="centerX" secondItem="Jmo-f9-vNa" secondAttribute="centerX" id="kC8-dX-pPh"/>
                             <constraint firstItem="HmQ-bU-RnQ" firstAttribute="width" secondItem="tr6-bk-Hey" secondAttribute="width" id="lCg-ms-7T3"/>
+                            <constraint firstItem="Bge-8V-o39" firstAttribute="top" secondItem="YBg-Rr-jBB" secondAttribute="bottom" id="raN-jd-UJZ"/>
                             <constraint firstAttribute="width" secondItem="bz9-5R-T6S" secondAttribute="width" id="y1K-dc-uXz"/>
                             <constraint firstItem="Jmo-f9-vNa" firstAttribute="width" secondItem="tr6-bk-Hey" secondAttribute="width" multiplier="0.9" id="yEH-WO-6H6"/>
                             <constraint firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" id="zr4-wd-2X0"/>
@@ -820,6 +830,7 @@
                         <outlet property="meatView" destination="40M-W5-3Ff" id="aqC-c5-JR7"/>
                         <outlet property="numeratorLabel" destination="EvA-uA-QIH" id="hB0-op-7bm"/>
                         <outlet property="selectorOutlineView" destination="b7m-8g-bGq" id="Z0e-QY-b0Z"/>
+                        <outlet property="thicknessLabelView" destination="7Pu-xM-iZg" id="5uO-f5-WKT"/>
                         <outlet property="thicknessSelectionView" destination="YBg-Rr-jBB" id="mc5-Vi-T0J"/>
                         <outlet property="timeTemperatureView" destination="K77-uO-2PX" id="mFi-kY-9MR"/>
                         <outlet property="wholeNumberLabel" destination="1Hk-rs-4W2" id="rts-pg-BvW"/>

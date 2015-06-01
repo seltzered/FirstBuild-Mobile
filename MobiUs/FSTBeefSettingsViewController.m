@@ -14,7 +14,11 @@
 @property (strong, nonatomic) IBOutlet UIView *thicknessSelectionView;
 @property (strong, nonatomic) IBOutlet UIView *meatView;
 
+
+
 @end
+
+const uint8_t TEMPERATURE_START_INDEX = 6;
 
 @implementation FSTBeefSettingsViewController
 {
@@ -27,6 +31,7 @@
     CGFloat _yBoundsBottom;
     FSTBeefSousVideCookingMethod* _beefCookingMethod;
     NSNumber* _currentThickness;
+    NSNumber* _currentTemperature;
     NSMutableArray* _temperatureXOrigins;
 }
 
@@ -45,6 +50,8 @@
     
     CGRect frame = self.thicknessSelectionView.frame;
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height-1]];
+    _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
+    
     [self updateLabels];
     
      _temperatureXOrigins = [[NSMutableArray alloc]init];
@@ -56,19 +63,18 @@
     }
 }
 
-
 - (void)updateLabels
 {
    
-    //setup segments of the top label
+    //temperature label
     UIFont *boldFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:22.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
     
     UIFont *labelFont = [UIFont fontWithName:@"PT Sans Narrow" size:18.0];
     NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
     
-    NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:@143.5] objectForKey:_currentThickness]))[0]);
-    NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:@143.5] objectForKey:_currentThickness]))[1]);
+    NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
+    NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[1]);
     
     DLog(@"val: %@:%@", hour, minute);
     
@@ -77,7 +83,7 @@
     NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[minute stringValue] attributes: boldFontDict];
     NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: labelFontDict];
     NSMutableAttributedString *separator = [[NSMutableAttributedString alloc] initWithString:@"  |  " attributes: boldFontDict];
-    NSMutableAttributedString *temperature = [[NSMutableAttributedString alloc] initWithString:@"143.5" attributes: boldFontDict];
+    NSMutableAttributedString *temperature = [[NSMutableAttributedString alloc] initWithString:[_currentTemperature stringValue] attributes: boldFontDict];
     NSMutableAttributedString *degreeString = [[NSMutableAttributedString alloc] initWithString:@"\u00b0" attributes:boldFontDict];
     NSMutableAttributedString *temperatureLabel = [[NSMutableAttributedString alloc] initWithString:@" F" attributes: boldFontDict];
     
@@ -91,11 +97,21 @@
 
     [self.beefSettingsLabel setAttributedText:hourString];
     
+    // thickness label
     NSArray* labelDetails = (NSArray*)([_beefCookingMethod.thicknessLabels objectForKey:_currentThickness]);
+    
     self.wholeNumberLabel.text = (NSString*)labelDetails[0];
     self.numeratorLabel.text = (NSString*)labelDetails[1];
-    self.denominatorLabel.text = (NSString*)(labelDetails[2]);
+    self.denominatorLabel.text = (NSString*)labelDetails[2];
     
+    if (((NSString*)labelDetails[1]).length==0)
+    {
+        self.fractionView.hidden = YES;
+    }
+    else
+    {
+        self.fractionView.hidden = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,12 +156,15 @@
         
         NSLog(@"shortest origin distance: (st:%f, x: %f, dist:%f, ix: %d)", _startingSelectorXOrigin, newXOrigin, shortestDistance, shortestDistanceIndex);
         
+        _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[shortestDistanceIndex] doubleValue]];
+        
         if (gesture.state == UIGestureRecognizerStateEnded)
         {
             CGRect finalFrame = v.frame;
             finalFrame.origin.x = [_temperatureXOrigins[shortestDistanceIndex] floatValue];
             [v setFrame:finalFrame];
         }
+        [self updateLabels];
     }
     
 }
@@ -162,8 +181,6 @@
     {
         _startingHeight = self.thicknessSelectionView.frame.size.height;
         _startingOrigin = self.thicknessSelectionView.frame.origin.y;
-        
-        DLog(@"start (frame o:%f,s:%f) (bounds o:%f, s:%f) (top: %f,bottom: %f)", self.thicknessSelectionView.frame.origin.y, self.thicknessSelectionView.frame.size.height, self.thicknessSelectionView.bounds.origin.y, self.thicknessSelectionView.bounds.size.height,_yBoundsTop,_yBoundsBottom);
     }
     else if (newOrigin > _yBoundsTop && newOrigin < _yBoundsBottom)
     {
@@ -172,8 +189,6 @@
         frame.size.height = newHeight;
         
         _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height]];
-        
-        DLog(@"translation: %f, gesture y %f, new y %f, new height %f, converted %@", yTranslation, yGestureLocation,frame.origin.y, frame.size.height, _currentThickness);
         
         self.beefSizeVerticalConstraint.constant =  newOrigin - (self.timeTemperatureView.frame.origin.y + self.timeTemperatureView.frame.size.height);
         [self.thicknessSelectionView needsUpdateConstraints];
