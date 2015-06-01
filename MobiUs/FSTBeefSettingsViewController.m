@@ -112,6 +112,9 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     {
         self.fractionView.hidden = NO;
     }
+    
+    // middle of meat view label
+    self.meatViewLabel.text = [_beefCookingMethod.donenessLabels objectForKey:_currentTemperature];
 }
 
 - (void)didReceiveMemoryWarning {

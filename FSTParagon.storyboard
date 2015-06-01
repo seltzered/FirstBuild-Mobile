@@ -39,6 +39,7 @@
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
         </mutableArray>
         <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
@@ -238,7 +239,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEEF SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmQ-bU-RnQ" userLabel="beefLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEEF SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmQ-bU-RnQ" userLabel="beefLabel">
                                 <rect key="frame" x="0.0" y="30" width="600" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="EeQ-Ot-PLU"/>
@@ -250,7 +251,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K77-uO-2PX" userLabel="timeTemperatureView">
                                 <rect key="frame" x="0.0" y="57" width="600" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mN0-Om-TES" userLabel="beefSettingsLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mN0-Om-TES" userLabel="beefSettingsLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -287,7 +288,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pu-xM-iZg" userLabel="thicknessLabelView">
                                         <rect key="frame" x="165" y="0.0" width="270" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hk-rs-4W2" userLabel="wholeNumberLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hk-rs-4W2" userLabel="wholeNumberLabel">
                                                 <rect key="frame" x="5" y="0.0" width="16" height="50"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="34"/>
@@ -297,21 +298,21 @@
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-VS-hXE" userLabel="fractionView">
                                                 <rect key="frame" x="26" y="5" width="25" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-uA-QIH" userLabel="numeratorLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-uA-QIH" userLabel="numeratorLabel">
                                                         <rect key="frame" x="0.0" y="15" width="25" height="0.0"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fx-i1-vHa" userLabel="dividerView">
+                                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fx-i1-vHa" userLabel="dividerView">
                                                         <rect key="frame" x="6" y="17" width="13" height="2"/>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="2" id="j1v-nq-Aj4"/>
                                                         </constraints>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NG-33-lsI" userLabel="denominatorLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NG-33-lsI" userLabel="denominatorLabel">
                                                         <rect key="frame" x="0.0" y="40" width="25" height="0.0"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="15"/>
@@ -333,7 +334,7 @@
                                                     <constraint firstAttribute="centerX" secondItem="9NG-33-lsI" secondAttribute="centerX" id="uz6-wN-KIL"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCHES THICK" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxW-kn-Z49" userLabel="inchesThickLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCHES THICK" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxW-kn-Z49" userLabel="inchesThickLabel">
                                                 <rect key="frame" x="179" y="14" width="86" height="22"/>
                                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -362,7 +363,20 @@
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40M-W5-3Ff" userLabel="meatView">
                                         <rect key="frame" x="75" y="55" width="450" height="242"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQM-pu-muo" userLabel="meatViewLabel">
+                                                <rect key="frame" x="0.0" y="103" width="450" height="37"/>
+                                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="28"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.39215686274509803" green="0.11372549019607843" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="IQM-pu-muo" firstAttribute="width" secondItem="40M-W5-3Ff" secondAttribute="width" id="Vbl-fa-yNc"/>
+                                            <constraint firstAttribute="centerY" secondItem="IQM-pu-muo" secondAttribute="centerY" constant="-0.5" id="Vji-mf-LOz"/>
+                                            <constraint firstAttribute="centerX" secondItem="IQM-pu-muo" secondAttribute="centerX" id="VtS-DU-hXZ"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="10"/>
@@ -828,6 +842,7 @@
                         <outlet property="donenessSelectionsView" destination="Szv-Uj-CXg" id="MYh-SY-UCn"/>
                         <outlet property="fractionView" destination="WGa-VS-hXE" id="bcj-gM-eK6"/>
                         <outlet property="meatView" destination="40M-W5-3Ff" id="aqC-c5-JR7"/>
+                        <outlet property="meatViewLabel" destination="IQM-pu-muo" id="lE0-Vu-aKe"/>
                         <outlet property="numeratorLabel" destination="EvA-uA-QIH" id="hB0-op-7bm"/>
                         <outlet property="selectorOutlineView" destination="b7m-8g-bGq" id="Z0e-QY-b0Z"/>
                         <outlet property="thicknessLabelView" destination="7Pu-xM-iZg" id="5uO-f5-WKT"/>

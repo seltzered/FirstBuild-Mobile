@@ -20,5 +20,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *numeratorLabel;
 @property (strong, nonatomic) IBOutlet UILabel *denominatorLabel;
 @property (strong, nonatomic) IBOutlet UIView *thicknessLabelView;
+@property (strong, nonatomic) IBOutlet UILabel *meatViewLabel;
 
 @end
