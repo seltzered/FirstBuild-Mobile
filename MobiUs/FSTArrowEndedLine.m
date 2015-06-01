@@ -15,7 +15,7 @@
     CGFloat bh = self.bounds.size.height;
     CGFloat bw = self.bounds.size.width;
     
-    UIColor* fillColor = [UIColorFromRGB(0x16A7C0) colorWithAlphaComponent:.7];
+    UIColor* fillColor = [UIColorFromRGB(0x16A7C0) colorWithAlphaComponent:.5];
     UIColor* strokeColor = UIColorFromRGB(0xffffff);
     
     CGContextRef context = UIGraphicsGetCurrentContext();

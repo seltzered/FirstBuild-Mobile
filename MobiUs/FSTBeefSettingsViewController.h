@@ -16,4 +16,10 @@
 @property (strong, nonatomic) IBOutlet UIView *donenessSelectionsView;
 
 @property (strong, nonatomic) IBOutlet UIView *selectorOutlineView;
+@property (strong, nonatomic) IBOutlet UILabel *wholeNumberLabel;
+
+@property (strong, nonatomic) IBOutlet UIView *fractionView;
+@property (strong, nonatomic) IBOutlet UILabel *numeratorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *denominatorLabel;
+
 @end

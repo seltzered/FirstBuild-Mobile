@@ -23,6 +23,8 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
@@ -283,7 +285,7 @@
                                 <rect key="frame" x="0.0" y="97" width="600" height="297"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pu-xM-iZg" userLabel="thicknessLabelView">
-                                        <rect key="frame" x="180" y="0.0" width="240" height="50"/>
+                                        <rect key="frame" x="165" y="0.0" width="270" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hk-rs-4W2" userLabel="wholeNumberLabel">
                                                 <rect key="frame" x="5" y="0.0" width="16" height="50"/>
@@ -295,21 +297,24 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-VS-hXE" userLabel="fractionView">
                                                 <rect key="frame" x="26" y="5" width="25" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-uA-QIH" userLabel="numeratorLabel">
-                                                        <rect key="frame" x="129" y="2" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvA-uA-QIH" userLabel="numeratorLabel">
+                                                        <rect key="frame" x="0.0" y="15" width="25" height="0.0"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIT-F0-NmH" userLabel="dividerLabel">
-                                                        <rect key="frame" x="129" y="2" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NG-33-lsI" userLabel="denominatorLabel">
-                                                        <rect key="frame" x="129" y="2" width="42" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2fx-i1-vHa" userLabel="dividerView">
+                                                        <rect key="frame" x="6" y="17" width="13" height="2"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="2" id="j1v-nq-Aj4"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NG-33-lsI" userLabel="denominatorLabel">
+                                                        <rect key="frame" x="0.0" y="40" width="25" height="0.0"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -317,17 +322,19 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="2rJ-1V-Sl5"/>
+                                                    <constraint firstAttribute="centerX" secondItem="EvA-uA-QIH" secondAttribute="centerX" id="4zA-D8-wos"/>
+                                                    <constraint firstAttribute="width" secondItem="9NG-33-lsI" secondAttribute="width" id="6iL-Js-9Zd"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9NG-33-lsI" secondAttribute="bottom" id="95X-UA-KX7"/>
+                                                    <constraint firstItem="2fx-i1-vHa" firstAttribute="width" secondItem="WGa-VS-hXE" secondAttribute="width" multiplier="0.5" id="BVp-iY-HXm"/>
+                                                    <constraint firstAttribute="centerY" secondItem="2fx-i1-vHa" secondAttribute="centerY" constant="2" id="FAf-Gw-3aQ"/>
+                                                    <constraint firstAttribute="centerX" secondItem="2fx-i1-vHa" secondAttribute="centerX" id="LR4-yB-s0z"/>
+                                                    <constraint firstItem="2fx-i1-vHa" firstAttribute="top" secondItem="EvA-uA-QIH" secondAttribute="bottom" constant="2" id="Unm-Em-WrU"/>
+                                                    <constraint firstAttribute="width" secondItem="EvA-uA-QIH" secondAttribute="width" id="h6V-8L-wEs"/>
+                                                    <constraint firstAttribute="centerX" secondItem="9NG-33-lsI" secondAttribute="centerX" id="uz6-wN-KIL"/>
                                                 </constraints>
-                                                <variation key="default">
-                                                    <mask key="subviews">
-                                                        <exclude reference="EvA-uA-QIH"/>
-                                                        <exclude reference="tIT-F0-NmH"/>
-                                                        <exclude reference="9NG-33-lsI"/>
-                                                    </mask>
-                                                </variation>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INCHES THICK" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxW-kn-Z49" userLabel="inchesThickLabel">
-                                                <rect key="frame" x="149" y="14" width="86" height="22"/>
+                                                <rect key="frame" x="179" y="14" width="86" height="22"/>
                                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -354,7 +361,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="40M-W5-3Ff" userLabel="meatView">
-                                        <rect key="frame" x="120" y="55" width="360" height="242"/>
+                                        <rect key="frame" x="75" y="55" width="450" height="242"/>
                                         <color key="backgroundColor" red="0.39215686274509803" green="0.11372549019607843" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -366,8 +373,8 @@
                                 </subviews>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="7Pu-xM-iZg" secondAttribute="width" multiplier="2.5" id="2Eq-ka-EYB"/>
-                                    <constraint firstItem="40M-W5-3Ff" firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" multiplier="0.6" id="Awp-z6-UJb"/>
+                                    <constraint firstItem="7Pu-xM-iZg" firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" multiplier="0.45" id="2Eq-ka-EYB"/>
+                                    <constraint firstItem="40M-W5-3Ff" firstAttribute="width" secondItem="YBg-Rr-jBB" secondAttribute="width" multiplier="0.75" id="Awp-z6-UJb"/>
                                     <constraint firstItem="HIX-yF-mrY" firstAttribute="top" secondItem="7Pu-xM-iZg" secondAttribute="bottom" constant="-25" id="COq-z8-8WJ"/>
                                     <constraint firstItem="7Pu-xM-iZg" firstAttribute="top" secondItem="YBg-Rr-jBB" secondAttribute="top" id="Eox-x2-zoE"/>
                                     <constraint firstAttribute="bottom" secondItem="40M-W5-3Ff" secondAttribute="bottom" id="ItC-F7-6EE"/>
@@ -807,11 +814,15 @@
                     <connections>
                         <outlet property="beefSettingsLabel" destination="mN0-Om-TES" id="FTx-m0-ivi"/>
                         <outlet property="beefSizeVerticalConstraint" destination="LeN-0h-XBi" id="JN9-ub-WGN"/>
+                        <outlet property="denominatorLabel" destination="9NG-33-lsI" id="yJl-8R-j23"/>
                         <outlet property="donenessSelectionsView" destination="Szv-Uj-CXg" id="MYh-SY-UCn"/>
+                        <outlet property="fractionView" destination="WGa-VS-hXE" id="bcj-gM-eK6"/>
                         <outlet property="meatView" destination="40M-W5-3Ff" id="aqC-c5-JR7"/>
+                        <outlet property="numeratorLabel" destination="EvA-uA-QIH" id="hB0-op-7bm"/>
                         <outlet property="selectorOutlineView" destination="b7m-8g-bGq" id="Z0e-QY-b0Z"/>
                         <outlet property="thicknessSelectionView" destination="YBg-Rr-jBB" id="mc5-Vi-T0J"/>
                         <outlet property="timeTemperatureView" destination="K77-uO-2PX" id="mFi-kY-9MR"/>
+                        <outlet property="wholeNumberLabel" destination="1Hk-rs-4W2" id="rts-pg-BvW"/>
                         <segue destination="rkF-e7-Olw" kind="show" identifier="seguePreheat" id="Rki-aX-SFE"/>
                     </connections>
                 </viewController>

@@ -45,7 +45,7 @@
     
     CGRect frame = self.thicknessSelectionView.frame;
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height-1]];
-    [self drawBeefSettingsLabel];
+    [self updateLabels];
     
      _temperatureXOrigins = [[NSMutableArray alloc]init];
     for (uint8_t i=0; i< self.donenessSelectionsView.subviews.count; i++)
@@ -57,7 +57,7 @@
 }
 
 
-- (void)drawBeefSettingsLabel
+- (void)updateLabels
 {
    
     //setup segments of the top label
@@ -90,6 +90,12 @@
     [hourString appendAttributedString:temperatureLabel];
 
     [self.beefSettingsLabel setAttributedText:hourString];
+    
+    NSArray* labelDetails = (NSArray*)([_beefCookingMethod.thicknessLabels objectForKey:_currentThickness]);
+    self.wholeNumberLabel.text = (NSString*)labelDetails[0];
+    self.numeratorLabel.text = (NSString*)labelDetails[1];
+    self.denominatorLabel.text = (NSString*)(labelDetails[2]);
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -172,7 +178,7 @@
         self.beefSizeVerticalConstraint.constant =  newOrigin - (self.timeTemperatureView.frame.origin.y + self.timeTemperatureView.frame.size.height);
         [self.thicknessSelectionView needsUpdateConstraints];
         [self.thicknessSelectionView setFrame:frame];
-        [self drawBeefSettingsLabel];
+        [self updateLabels];
     }
     
 }
