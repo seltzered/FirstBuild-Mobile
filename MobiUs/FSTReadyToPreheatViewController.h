@@ -12,4 +12,7 @@
 
 @property (nonatomic,retain) FSTCookingMethod* cookingMethod;
 
+@property (strong, nonatomic) IBOutlet UILabel *temperatureLabel;
+
+
 @end

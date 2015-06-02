@@ -891,7 +891,7 @@
                                 <color key="textColor" red="0.83137254901960789" green="0.20000000000000001" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140◦" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GR-aE-Qlm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GR-aE-Qlm" userLabel="temperatureLabel">
                                 <rect key="frame" x="0.0" y="134" width="600" height="43"/>
                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="33"/>
                                 <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -974,6 +974,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="temperatureLabel" destination="9GR-aE-Qlm" id="6Np-nC-ahA"/>
                         <segue destination="vum-57-ud9" kind="show" identifier="segueCancel" id="bOJ-GP-cW9"/>
                         <segue destination="Yg1-bw-06J" kind="show" identifier="seguePreheating" id="Vi4-UN-pNd"/>
                     </connections>

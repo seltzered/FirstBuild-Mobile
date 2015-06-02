@@ -21,7 +21,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.cookingMethod.session.paragonCookingStages[0];
+    self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,14 +36,5 @@
     [self performSegueWithIdentifier:@"seguePreheating" sender:self];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
