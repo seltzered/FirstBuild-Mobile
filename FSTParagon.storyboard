@@ -1037,6 +1037,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZg-2G-EBk" userLabel="temperatureScroller">
                                 <rect key="frame" x="0.0" y="205" width="600" height="305"/>
                                 <subviews>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9or-bJ-rAO" userLabel="temperatureScrollerBackground">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="305"/>
+                                        <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-ZG-oY7" userLabel="topOrangeBarView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="5"/>
                                         <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1045,7 +1049,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCf-tF-mVY" userLabel="temperatureBox">
-                                        <rect key="frame" x="180" y="0.0" width="240" height="90"/>
+                                        <rect key="frame" x="180" y="0.0" width="240" height="70"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBG-NO-lfF">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="24"/>
@@ -1053,10 +1057,10 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khW-jb-3y2" userLabel="currentTemperatureLabel">
-                                                <rect key="frame" x="0.0" y="26" width="240" height="65"/>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khW-jb-3y2" userLabel="currentTemperatureLabel">
+                                                <rect key="frame" x="0.0" y="24" width="240" height="51"/>
                                                 <gestureRecognizers/>
-                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="50"/>
+                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="39"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <connections>
@@ -1067,12 +1071,12 @@
                                         <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="aBG-NO-lfF" secondAttribute="width" id="2WB-s9-0an"/>
-                                            <constraint firstItem="khW-jb-3y2" firstAttribute="top" secondItem="aBG-NO-lfF" secondAttribute="bottom" constant="2" id="HQ0-WP-IVU"/>
+                                            <constraint firstItem="khW-jb-3y2" firstAttribute="top" secondItem="aBG-NO-lfF" secondAttribute="bottom" id="HQ0-WP-IVU"/>
                                             <constraint firstAttribute="centerX" secondItem="aBG-NO-lfF" secondAttribute="centerX" id="NZL-N4-6yO"/>
                                             <constraint firstItem="khW-jb-3y2" firstAttribute="width" secondItem="VCf-tF-mVY" secondAttribute="width" id="a1w-Yo-dju"/>
                                             <constraint firstItem="aBG-NO-lfF" firstAttribute="top" secondItem="VCf-tF-mVY" secondAttribute="top" id="ts7-S5-Ga7"/>
                                             <constraint firstAttribute="centerX" secondItem="khW-jb-3y2" secondAttribute="centerX" id="yyA-Fa-Hkc"/>
-                                            <constraint firstAttribute="height" constant="90" id="z4V-T0-ZjW"/>
+                                            <constraint firstAttribute="height" constant="70" id="z4V-T0-ZjW"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1080,9 +1084,13 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gcP-ZG-oY7" secondAttribute="width" id="0WV-wJ-sk1"/>
                                     <constraint firstAttribute="centerX" secondItem="gcP-ZG-oY7" secondAttribute="centerX" id="Bkf-Vl-NYk"/>
+                                    <constraint firstItem="9or-bJ-rAO" firstAttribute="leading" secondItem="fZg-2G-EBk" secondAttribute="leading" id="cBu-HD-m1b"/>
                                     <constraint firstItem="VCf-tF-mVY" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="top" id="cNT-VE-L2y"/>
                                     <constraint firstItem="VCf-tF-mVY" firstAttribute="width" secondItem="fZg-2G-EBk" secondAttribute="width" multiplier="0.4" id="e54-uP-wxO"/>
+                                    <constraint firstAttribute="bottom" secondItem="9or-bJ-rAO" secondAttribute="bottom" id="g2m-ao-gwq"/>
                                     <constraint firstAttribute="centerX" secondItem="VCf-tF-mVY" secondAttribute="centerX" id="i70-uP-vgD"/>
+                                    <constraint firstAttribute="trailing" secondItem="9or-bJ-rAO" secondAttribute="trailing" id="pdL-Mj-7BF"/>
+                                    <constraint firstItem="9or-bJ-rAO" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="top" id="tT2-Eq-dGL"/>
                                     <constraint firstItem="gcP-ZG-oY7" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="top" id="ztK-GT-bUO"/>
                                 </constraints>
                             </view>

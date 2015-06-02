@@ -11,7 +11,6 @@
 @interface FSTReadyToPreheatViewController : UIViewController
 
 @property (nonatomic,retain) FSTCookingMethod* cookingMethod;
-
 @property (strong, nonatomic) IBOutlet UILabel *temperatureLabel;
 
 

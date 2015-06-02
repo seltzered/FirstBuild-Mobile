@@ -7,6 +7,7 @@
 //
 
 #import "FSTReadyToPreheatViewController.h"
+#import "FSTPreheatingViewController.h"
 
 @interface FSTReadyToPreheatViewController ()
 
@@ -23,6 +24,14 @@
 {
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.cookingMethod.session.paragonCookingStages[0];
     self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[FSTPreheatingViewController class]])
+    {
+        ((FSTPreheatingViewController*)segue.destinationViewController).cookingMethod = self.cookingMethod;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
