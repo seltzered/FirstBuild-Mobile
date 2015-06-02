@@ -14,4 +14,7 @@
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) FSTParagonCookingSession* session;
 
+- (FSTParagonCookingSession*) createCookingSession;
+- (FSTParagonCookingStage*) addStageToCookingSession;
+
 @end

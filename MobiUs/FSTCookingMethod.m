@@ -13,11 +13,19 @@
 -(id) init
 {
     self = [super init];
-    if (self)
-    {
-        self.session = [[FSTParagonCookingSession alloc] init];
-    }
-    
     return self;
+}
+
+- (FSTParagonCookingSession*) createCookingSession
+{
+    self.session = [[FSTParagonCookingSession alloc] init];
+    return self.session;
+}
+
+- (FSTParagonCookingStage*) addStageToCookingSession
+{
+    FSTParagonCookingStage* stage = [[FSTParagonCookingStage alloc] init];
+    [self.session.paragonCookingStages addObject:stage];
+    return stage;
 }
 @end

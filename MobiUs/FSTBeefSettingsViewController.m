@@ -8,6 +8,7 @@
 
 #import "FSTBeefSettingsViewController.h"
 #import "FSTBeefSousVideCookingMethod.h"
+#import "FSTReadyToPreheatViewController.h"
 
 @interface FSTBeefSettingsViewController ()
 
@@ -32,6 +33,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     FSTBeefSousVideCookingMethod* _beefCookingMethod;
     NSNumber* _currentThickness;
     NSNumber* _currentTemperature;
+    NSArray* _currentCookTimeArray;
     NSMutableArray* _temperatureXOrigins;
 }
 
@@ -42,6 +44,10 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    //create a new cooking session and a single stage cook
+    [self.cookingMethod createCookingSession];
+    [self.cookingMethod addStageToCookingSession];
+    
     _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
     _maxHeight = self.thicknessSelectionView.frame.size.height;
     _meatHeightOffset = self.meatView.frame.origin.y;
@@ -51,10 +57,10 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     CGRect frame = self.thicknessSelectionView.frame;
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height-1]];
     _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
-    
+    _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
     [self updateLabels];
     
-     _temperatureXOrigins = [[NSMutableArray alloc]init];
+    _temperatureXOrigins = [[NSMutableArray alloc]init];
     for (uint8_t i=0; i< self.donenessSelectionsView.subviews.count; i++)
     {
         NSNumber* originX = [[NSNumber alloc] initWithFloat:((UIView*)(self.donenessSelectionsView.subviews[i])).frame.origin.x];
@@ -123,8 +129,19 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 }
 
 - (IBAction)continueTapGesture:(id)sender {
-    DLog(@"touched continue");
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.cookingMethod.session.paragonCookingStages[0]);
+    stage.targetTemperature = _currentTemperature;
+    double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
+    stage.cookTimeRequested = [NSNumber numberWithDouble:cookingMinutes];
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{    
+    if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
+    {
+        ((FSTReadyToPreheatViewController*)segue.destinationViewController).cookingMethod = self.cookingMethod;
+    }
 }
 
 - (IBAction)selectorPanGesture:(id)sender {
@@ -160,6 +177,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
         NSLog(@"shortest origin distance: (st:%f, x: %f, dist:%f, ix: %d)", _startingSelectorXOrigin, newXOrigin, shortestDistance, shortestDistanceIndex);
         
         _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[shortestDistanceIndex] doubleValue]];
+        _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
         
         if (gesture.state == UIGestureRecognizerStateEnded)
         {
@@ -176,7 +194,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
     
     CGFloat yTranslation =[gesture translationInView:gesture.view.superview].y;
-    CGFloat yGestureLocation = [gesture locationInView:gesture.view.superview].y;
+//    CGFloat yGestureLocation = [gesture locationInView:gesture.view.superview].y;
     CGFloat newOrigin = _startingOrigin + yTranslation;
     CGFloat newHeight = _startingHeight - yTranslation;
     
@@ -192,6 +210,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
         frame.size.height = newHeight;
         
         _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height]];
+        _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
         
         self.beefSizeVerticalConstraint.constant =  newOrigin - (self.timeTemperatureView.frame.origin.y + self.timeTemperatureView.frame.size.height);
         [self.thicknessSelectionView needsUpdateConstraints];

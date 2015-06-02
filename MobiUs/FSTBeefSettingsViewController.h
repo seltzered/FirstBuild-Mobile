@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FSTCookingMethod.h"
+
 @interface FSTBeefSettingsViewController : UIViewController
+
+@property (nonatomic,retain) FSTCookingMethod* cookingMethod;
 
 @property (strong, nonatomic) IBOutlet UILabel *beefSettingsLabel;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *beefSizeVerticalConstraint;

@@ -9,6 +9,8 @@
 #import "FSTCookingMethodSubSelectionViewController.h"
 #import "FSTCookingMethods.h"
 #import "FSTSousVideCookingMethods.h"
+#import "FSTBeefSousVideCookingMethod.h"
+#import "FSTBeefSettingsViewController.h"
 
 @interface FSTCookingMethodSubSelectionViewController ()
 
@@ -41,17 +43,22 @@
 
 - (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod
 {
-    [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
+    if ([cookingMethod isKindOfClass:[FSTBeefSousVideCookingMethod class]])
+    {
+        [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
+    }
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    FSTCookingMethod* cookingMethod = (FSTCookingMethod*)sender;
+    
+    if ([segue.destinationViewController isKindOfClass:[FSTBeefSettingsViewController class]])
+    {
+        ((FSTBeefSettingsViewController*)segue.destinationViewController).cookingMethod = cookingMethod;
+    }
 }
-*/
+
 
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FSTCookingMethod.h"
 @interface FSTReadyToPreheatViewController : UIViewController
+
+@property (nonatomic,retain) FSTCookingMethod* cookingMethod;
 
 @end
