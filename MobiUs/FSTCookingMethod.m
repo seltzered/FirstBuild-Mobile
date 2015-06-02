@@ -10,4 +10,14 @@
 
 @implementation FSTCookingMethod
 
+-(id) init
+{
+    self = [super init];
+    if (self)
+    {
+        self.session = [[FSTParagonCookingSession alloc] init];
+    }
+    
+    return self;
+}
 @end

@@ -16,6 +16,8 @@
 		5B174DE61A64266100A00505 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B8C10871A39324C00F481E6 /* fontawesome-webfont.ttf */; };
 		5B3E180B1A41CC76004F1FA0 /* ProductMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E180A1A41CC76004F1FA0 /* ProductMainViewController.m */; };
 		5B4460261B1E00C9001A4953 /* FSTBeefView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4460251B1E00C9001A4953 /* FSTBeefView.m */; };
+		5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */; };
+		5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */; };
 		5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */; };
 		5B7338BA1B0F9856004C931E /* FSTCircleProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338B91B0F9856004C931E /* FSTCircleProgressLayer.m */; };
 		5B7338BD1B0F9A7E004C931E /* FSTCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BC1B0F9A7E004C931E /* FSTCircleProgressView.m */; };
@@ -108,6 +110,10 @@
 		5B3E180A1A41CC76004F1FA0 /* ProductMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductMainViewController.m; sourceTree = "<group>"; };
 		5B4460241B1E00C9001A4953 /* FSTBeefView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBeefView.h; sourceTree = "<group>"; };
 		5B4460251B1E00C9001A4953 /* FSTBeefView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBeefView.m; sourceTree = "<group>"; };
+		5B4460271B1E25D5001A4953 /* FSTParagonCookingSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonCookingSession.h; sourceTree = "<group>"; };
+		5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonCookingSession.m; sourceTree = "<group>"; };
+		5B44602A1B1E2601001A4953 /* FSTParagonCookingStage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonCookingStage.h; sourceTree = "<group>"; };
+		5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonCookingStage.m; sourceTree = "<group>"; };
 		5B4486CB1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiCommissioningNetworkTableViewCell.h; sourceTree = "<group>"; };
 		5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiCommissioningNetworkTableViewCell.m; sourceTree = "<group>"; };
 		5B7338B81B0F9856004C931E /* FSTCircleProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCircleProgressLayer.h; sourceTree = "<group>"; };
@@ -407,6 +413,10 @@
 				5BCBBA001B03CA5200B8E043 /* FSTCookingMethods.m */,
 				5BCBBA021B03E92300B8E043 /* FSTSousVideCookingMethods.h */,
 				5BCBBA031B03E92300B8E043 /* FSTSousVideCookingMethods.m */,
+				5B4460271B1E25D5001A4953 /* FSTParagonCookingSession.h */,
+				5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */,
+				5B44602A1B1E2601001A4953 /* FSTParagonCookingStage.h */,
+				5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -781,6 +791,7 @@
 				5BC3648D1A3112EE00D03B9C /* FSTBackgroundLayer.m in Sources */,
 				5BCBB9DA1B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m in Sources */,
 				5BBFACFF19E495FC00E42575 /* ProductCollectionViewController.m in Sources */,
+				5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */,
 				5BCBB9FE1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m in Sources */,
 				5BC3647E1A2F637800D03B9C /* FSTDevice.m in Sources */,
 				5BC364971A3260E200D03B9C /* FSTChillHub.m in Sources */,
@@ -832,6 +843,7 @@
 				5B9EF0F719DEEE1000E8D9F1 /* AppDelegate.m in Sources */,
 				5BCBB9DD1B02A22B00B8E043 /* FSTBeefSettingsViewController.m in Sources */,
 				5B9EF0F419DEEE1000E8D9F1 /* main.m in Sources */,
+				5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */,
 				5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */,
 				5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */,
 				5B8C108A1A39EC2A00F481E6 /* ProductAddViewController.m in Sources */,

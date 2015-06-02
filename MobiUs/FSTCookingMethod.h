@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FSTParagonCookingSession.h"
 
 @interface FSTCookingMethod : NSObject
 
 @property (nonatomic, retain) NSString* name;
-@property (nonatomic, retain) NSNumber* time;
-@property (nonatomic, retain) NSNumber* temperature;
+@property (nonatomic, retain) FSTParagonCookingSession* session;
 
 @end
