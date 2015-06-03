@@ -14,4 +14,6 @@
 @property (nonatomic,retain) FSTParagon* currentParagon;
 @property (strong, nonatomic) IBOutlet UILabel *currentTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *targetTemperatureLabel;
+@property (strong, nonatomic) IBOutlet UIView *temperatureScrollerView;
+@property (strong, nonatomic) IBOutlet UIView *topOrangeBarView;
 @end
