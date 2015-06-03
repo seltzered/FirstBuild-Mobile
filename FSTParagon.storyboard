@@ -1063,9 +1063,6 @@
                                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="39"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
-                                                <connections>
-                                                    <outletCollection property="gestureRecognizers" destination="Skf-NL-UGD" appends="YES" id="lQe-q2-PtG"/>
-                                                </connections>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1160,11 +1157,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aA4-IY-sso" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Skf-NL-UGD" userLabel="hackTapGesture">
-                    <connections>
-                        <action selector="hackTapGesture:" destination="Yg1-bw-06J" id="atz-z0-fvY"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2609" y="370"/>
         </scene>

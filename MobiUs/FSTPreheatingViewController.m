@@ -14,6 +14,9 @@
 
 @implementation FSTPreheatingViewController
 
+FSTParagonCookingStage* _cookingStage;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -23,6 +26,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.currentParagon.delegate = self;
+    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.targetTemperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
     
@@ -32,17 +36,25 @@
     
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    self.currentParagon.delegate = nil;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)hackTapGesture:(id)sender {
-    [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
-}
+
 
 - (void)actualTemperatureChanged:(NSNumber *)actualTemperature
 {
     self.currentTemperatureLabel.text = [actualTemperature stringValue];
+    
+    if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
+    {
+        [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+    }
 }
 
 
