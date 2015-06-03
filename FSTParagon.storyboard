@@ -906,9 +906,6 @@
                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="19"/>
                                 <color key="textColor" red="0.35294117647058826" green="0.35686274509803922" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="FEB-4Y-FbH" appends="YES" id="qNa-aa-gXS"/>
-                                </connections>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paragon cooktop to continue." textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="N8x-dd-BpD">
                                 <rect key="frame" x="0.0" y="217" width="600" height="25"/>
@@ -983,11 +980,6 @@
                 <tapGestureRecognizer id="Mng-xH-UgX" userLabel="cancelTap">
                     <connections>
                         <action selector="cancelLabelClick:" destination="rkF-e7-Olw" id="YjX-xj-RrF"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="FEB-4Y-FbH" userLabel="tempTap-MoveNext">
-                    <connections>
-                        <action selector="tempTapMoveNextClick:" destination="rkF-e7-Olw" id="iUH-JD-HrE"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

@@ -15,6 +15,7 @@
 @optional
 - (void) actualTemperatureChanged: (NSNumber*)actualTemperature;
 - (void) cookTimeElapsedChanged: (NSNumber*)elapsedTime;
+- (void) cookModeChanged;
 
 @end
 
@@ -27,6 +28,7 @@
 
 #ifdef SIMULATE_PARAGON
 - (void)startSimulatePreheat;
+- (void)startSimulateCookModeChanged;
 
 #endif
 

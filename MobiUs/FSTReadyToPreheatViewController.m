@@ -22,8 +22,13 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.currentParagon.delegate = self;
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
+    
+#ifdef SIMULATE_PARAGON
+    [self.currentParagon startSimulateCookModeChanged];
+#endif
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -38,10 +43,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)cancelLabelClick:(id)sender {
     [self performSegueWithIdentifier:@"segueCancel" sender:self];
 }
-- (IBAction)tempTapMoveNextClick:(id)sender {
+
+- (void)cookModeChanged
+{
     [self performSegueWithIdentifier:@"seguePreheating" sender:self];
 }
 
