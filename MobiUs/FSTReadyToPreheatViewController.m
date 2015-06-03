@@ -24,7 +24,7 @@ NSObject* _cookModeChangedObserver;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
-                                                      object:nil
+                                                      object:self.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
                                    {

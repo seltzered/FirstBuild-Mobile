@@ -22,7 +22,6 @@ CGFloat _scrollViewSizeY;
 CGFloat _temperaturePrecisionDegrees = 0.5;
 CGFloat _minTemperatureDegrees = 72;
 CGFloat _rangeMinAndMaxTemperatures ;
-CGFloat _numberOfDivisions;
 CGFloat _heightIncrementOnChange;
 NSMutableArray* _tempHeightLookup;
 
@@ -32,20 +31,17 @@ NSObject* _temperatureChangedObserver;
     [super viewDidLoad];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-
+    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
-                        object:nil
+                        object:self.currentParagon
                          queue:nil
                     usingBlock:^(NSNotification *notification)
     {
-        NSLog(@"%@", notification.name);
-        NSLog(@"%@", notification.object);
-        NSNumber* actualTemperature = (NSNumber*)notification.object;
+        NSNumber* actualTemperature = _cookingStage.actualTemperature;
         self.currentTemperatureLabel.text = [actualTemperature stringValue];
         
-        CGFloat _change = [actualTemperature doubleValue] ;
-        CGFloat _newYOrigin = _scrollViewBottom - (_change * _heightIncrementOnChange);
-        NSLog(@"bottom: %f, top: %f, incr: %f, new y origin: %f", _scrollViewBottom, _scrollViewTop, _heightIncrementOnChange, _newYOrigin);
+        CGFloat _newTemp = [actualTemperature doubleValue] ;
+        CGFloat _newYOrigin = _scrollViewBottom - (_heightIncrementOnChange*(_newTemp - _minTemperatureDegrees));
         
         if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
         {
@@ -57,7 +53,6 @@ NSObject* _temperatureChangedObserver;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //self.currentParagon.delegate = self;
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.targetTemperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
@@ -67,15 +62,7 @@ NSObject* _temperatureChangedObserver;
     _scrollViewSizeY = _scrollViewBottom - _scrollViewTop;
     
     _rangeMinAndMaxTemperatures = [_cookingStage.targetTemperature doubleValue] - _minTemperatureDegrees;
-    _numberOfDivisions = _rangeMinAndMaxTemperatures / _temperaturePrecisionDegrees;
-    _heightIncrementOnChange = _scrollViewSizeY / _numberOfDivisions;
-    
-    
-//    _tempHeightLookup = [[NSMutableArray alloc]init];
-//    for (uint16_t i = 0; i<=_numberOfDivisions; i++)
-//    {
-//        [_tempHeightLookup addObject:[NSNumber numberWithDouble:<#(double)#>]]
-//    }
+    _heightIncrementOnChange = _scrollViewSizeY / _rangeMinAndMaxTemperatures;
     
 #ifdef SIMULATE_PARAGON
     [self.currentParagon startSimulatePreheat];

@@ -59,7 +59,7 @@ NSArray* _simulateCook ;
 - (void)startSimulateCookModeChanged
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
     });
 }
 
@@ -75,7 +75,7 @@ NSArray* _simulateCook ;
         }
         stage.actualTemperature = _simulatePreheat[_simulatePreheatIndex];
 
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:stage.actualTemperature];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
 
         _simulatePreheatIndex++;
         [self simulatePreheat];
