@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "FSTCookingMethodTableViewController.h"
+#import "FSTParagon.h"
 
 @interface FSTCookingMethodViewController : UIViewController <FSTCookingMethodTableViewControllerDelegate>
+@property (strong, nonatomic) FSTParagon* product;
 
 @end

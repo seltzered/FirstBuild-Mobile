@@ -21,7 +21,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.cookingMethod.session.paragonCookingStages[0];
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.targetTemperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
 }
 

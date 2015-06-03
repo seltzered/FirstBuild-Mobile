@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTCookingMethodTableViewController.h"
-#import "FSTCookingMethod.h"
+#import "FSTParagon.h"
 
 @interface FSTCookingMethodSubSelectionViewController : UIViewController<FSTCookingMethodTableViewControllerDelegate>
 
-@property (nonatomic,retain) FSTCookingMethod* cookingMethod;
+@property (nonatomic,retain) FSTParagon* currentParagon;
 
 @end

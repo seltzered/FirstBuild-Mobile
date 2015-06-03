@@ -17,11 +17,13 @@
 
 @implementation FSTCookingMethodViewController
 
+FSTCookingMethods* _methods;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
+    _methods = [[FSTCookingMethods alloc]init];
     if ([self.childViewControllers[0] isKindOfClass:[FSTCookingMethodTableViewController class]])
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
@@ -32,24 +34,28 @@
     [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    FSTCookingMethod* cookingMethod = (FSTCookingMethod*)sender;
-    
+{    
     if ([segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]])
     {
-        ((FSTCookingMethodSubSelectionViewController*)segue.destinationViewController).cookingMethod = cookingMethod;
+        ((FSTCookingMethodSubSelectionViewController*)segue.destinationViewController).currentParagon = self.product;
+        self.product.currentCookingMethod = (FSTCookingMethod*)sender;
     }
 }
 
 - (FSTCookingMethods*) dataRequestedFromChild
 {
-    return [[FSTCookingMethods alloc]init];
+    return _methods;
 }
 
 - (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod

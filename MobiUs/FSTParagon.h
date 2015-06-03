@@ -7,11 +7,14 @@
 //
 
 #import "FSTProduct.h"
+#import "FSTParagonCookingSession.h"
+#import "FSTCookingMethod.h"
+
 
 @interface FSTParagon : FSTProduct
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
-
+@property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
 
 @end

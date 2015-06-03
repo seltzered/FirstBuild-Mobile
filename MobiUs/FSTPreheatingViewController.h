@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSTCookingMethod.h"
+#import "FSTParagon.h"
 
 @interface FSTPreheatingViewController : UIViewController
 
-@property (nonatomic,retain) FSTCookingMethod* cookingMethod;
+@property (nonatomic,retain) FSTParagon* currentParagon;
 @property (strong, nonatomic) IBOutlet UILabel *currentTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *targetTemperatureLabel;
 @end

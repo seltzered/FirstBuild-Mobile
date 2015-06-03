@@ -27,14 +27,18 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (FSTCookingMethods*) dataRequestedFromChild
 {
-    if ([self.cookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
+    if ([self.currentParagon.currentCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
     {
         return (FSTCookingMethods*)[[FSTSousVideCookingMethods alloc]init];
     }
@@ -52,11 +56,10 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    FSTCookingMethod* cookingMethod = (FSTCookingMethod*)sender;
-    
-    if ([segue.destinationViewController isKindOfClass:[FSTBeefSettingsViewController class]])
+    if ([sender isKindOfClass:[FSTCookingMethod class]] && [segue.destinationViewController isKindOfClass:[FSTBeefSettingsViewController class]])
     {
-        ((FSTBeefSettingsViewController*)segue.destinationViewController).cookingMethod = cookingMethod;
+        self.currentParagon.currentCookingMethod = (FSTCookingMethod*)sender;
+        ((FSTBeefSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
 

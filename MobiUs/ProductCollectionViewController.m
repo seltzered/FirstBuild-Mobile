@@ -15,6 +15,7 @@
 #import "FSTParagon.h"
 #import "ChillHubViewController.h"
 #import "MobiNavigationController.h"
+#import "FSTCookingMethodViewController.h"
 
 @interface ProductCollectionViewController ()
 
@@ -125,7 +126,8 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     
     if ([sender isKindOfClass:[FSTParagon class]])
     {
-        //TODO: set product in the view
+        FSTCookingMethodViewController *vc = (FSTCookingMethodViewController*)destination.scene;
+        vc.product = sender;
     }
     else if ([sender isKindOfClass:[FSTChillHub class]])
     {

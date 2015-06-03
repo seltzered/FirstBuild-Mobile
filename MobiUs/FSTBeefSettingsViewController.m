@@ -15,8 +15,6 @@
 @property (strong, nonatomic) IBOutlet UIView *thicknessSelectionView;
 @property (strong, nonatomic) IBOutlet UIView *meatView;
 
-
-
 @end
 
 const uint8_t TEMPERATURE_START_INDEX = 6;
@@ -45,8 +43,8 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 - (void)viewDidAppear:(BOOL)animated
 {
     //create a new cooking session and a single stage cook
-    [self.cookingMethod createCookingSession];
-    [self.cookingMethod addStageToCookingSession];
+    [self.currentParagon.currentCookingMethod createCookingSession];
+    [self.currentParagon.currentCookingMethod addStageToCookingSession];
     
     _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
     _maxHeight = self.thicknessSelectionView.frame.size.height;
@@ -129,7 +127,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 }
 
 - (IBAction)continueTapGesture:(id)sender {
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.cookingMethod.session.paragonCookingStages[0]);
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     stage.targetTemperature = _currentTemperature;
     double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     stage.cookTimeRequested = [NSNumber numberWithDouble:cookingMinutes];
@@ -140,7 +138,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 {    
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
-        ((FSTReadyToPreheatViewController*)segue.destinationViewController).cookingMethod = self.cookingMethod;
+        ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
 

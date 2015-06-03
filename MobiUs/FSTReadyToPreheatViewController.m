@@ -22,7 +22,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.cookingMethod.session.paragonCookingStages[0];
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
 }
 
@@ -30,7 +30,7 @@
 {
     if ([segue.destinationViewController isKindOfClass:[FSTPreheatingViewController class]])
     {
-        ((FSTPreheatingViewController*)segue.destinationViewController).cookingMethod = self.cookingMethod;
+        ((FSTPreheatingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
 
