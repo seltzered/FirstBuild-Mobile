@@ -10,11 +10,24 @@
 #import "FSTParagonCookingSession.h"
 #import "FSTCookingMethod.h"
 
+@protocol FSTParagonDelegate
+
+@optional
+- (void) actualTemperatureChanged: (NSNumber*)actualTemperature;
+- (void) cookTimeElapsedChanged: (NSNumber*)elapsedTime;
+
+@end
 
 @interface FSTParagon : FSTProduct
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 @property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
+@property (nonatomic, strong) id<FSTParagonDelegate> delegate;
+
+#ifdef SIMULATE_PARAGON
+- (void)startSimulatePreheat;
+
+#endif
 
 @end

@@ -16,13 +16,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    self.currentParagon.delegate = self;
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.targetTemperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
+    
+#ifdef SIMULATE_PARAGON
+    [self.currentParagon startSimulatePreheat];
+#endif
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,6 +38,11 @@
 }
 - (IBAction)hackTapGesture:(id)sender {
     [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+}
+
+- (void)actualTemperatureChanged:(NSNumber *)actualTemperature
+{
+    self.currentTemperatureLabel.text = [actualTemperature stringValue];
 }
 
 

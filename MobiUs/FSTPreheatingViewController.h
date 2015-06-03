@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTParagon.h"
 
-@interface FSTPreheatingViewController : UIViewController
+@interface FSTPreheatingViewController : UIViewController <FSTParagonDelegate>
 
 @property (nonatomic,retain) FSTParagon* currentParagon;
 @property (strong, nonatomic) IBOutlet UILabel *currentTemperatureLabel;

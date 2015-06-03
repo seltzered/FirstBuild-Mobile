@@ -51,11 +51,13 @@
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
     }
-    
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //todo: need to investigate...this is called twice once on initial load
+    //where the sender is an FSTCookingMethodTableViewController and then the proper one when
+    //it is segue'ing into another view. this is called before viewDidLoad as well.
     if ([sender isKindOfClass:[FSTCookingMethod class]] && [segue.destinationViewController isKindOfClass:[FSTBeefSettingsViewController class]])
     {
         self.currentParagon.currentCookingMethod = (FSTCookingMethod*)sender;
