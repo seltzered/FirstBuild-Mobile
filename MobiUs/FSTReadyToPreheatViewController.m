@@ -15,14 +15,27 @@
 
 @implementation FSTReadyToPreheatViewController
 
+NSObject* _cookModeChangedObserver;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+                                   {
+                                       [self performSegueWithIdentifier:@"seguePreheating" sender:self];
+                                   }];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.currentParagon.delegate = self;
+    //self.currentParagon.delegate = self;
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
     
@@ -37,6 +50,8 @@
     {
         ((FSTPreheatingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,11 +61,6 @@
 
 - (IBAction)cancelLabelClick:(id)sender {
     [self performSegueWithIdentifier:@"segueCancel" sender:self];
-}
-
-- (void)cookModeChanged
-{
-    [self performSegueWithIdentifier:@"seguePreheating" sender:self];
 }
 
 

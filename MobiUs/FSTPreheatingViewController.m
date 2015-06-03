@@ -26,15 +26,38 @@ CGFloat _numberOfDivisions;
 CGFloat _heightIncrementOnChange;
 NSMutableArray* _tempHeightLookup;
 
+NSObject* _temperatureChangedObserver;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
+    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+                        object:nil
+                         queue:nil
+                    usingBlock:^(NSNotification *notification)
+    {
+        NSLog(@"%@", notification.name);
+        NSLog(@"%@", notification.object);
+        NSNumber* actualTemperature = (NSNumber*)notification.object;
+        self.currentTemperatureLabel.text = [actualTemperature stringValue];
+        
+        CGFloat _change = [actualTemperature doubleValue] ;
+        CGFloat _newYOrigin = _scrollViewBottom - (_change * _heightIncrementOnChange);
+        NSLog(@"bottom: %f, top: %f, incr: %f, new y origin: %f", _scrollViewBottom, _scrollViewTop, _heightIncrementOnChange, _newYOrigin);
+        
+        if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
+        {
+            [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+        }
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.currentParagon.delegate = self;
+    //self.currentParagon.delegate = self;
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.targetTemperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
@@ -62,7 +85,8 @@ NSMutableArray* _tempHeightLookup;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    self.currentParagon.delegate = nil;
+    //self.currentParagon.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,18 +94,18 @@ NSMutableArray* _tempHeightLookup;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)actualTemperatureChanged:(NSNumber *)actualTemperature
-{
-    self.currentTemperatureLabel.text = [actualTemperature stringValue];
-    
-    CGFloat _change = [actualTemperature doubleValue] ;
-    CGFloat _newYOrigin = _scrollViewBottom - (_change * _heightIncrementOnChange);
-    NSLog(@"bottom: %f, top: %f, incr: %f, new y origin: %f", _scrollViewBottom, _scrollViewTop, _heightIncrementOnChange, _newYOrigin);
-    
-    if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
-    {
-        [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
-    }
-}
+//- (void)actualTemperatureChanged:(NSNumber *)actualTemperature
+//{
+//    self.currentTemperatureLabel.text = [actualTemperature stringValue];
+//    
+//    CGFloat _change = [actualTemperature doubleValue] ;
+//    CGFloat _newYOrigin = _scrollViewBottom - (_change * _heightIncrementOnChange);
+//    NSLog(@"bottom: %f, top: %f, incr: %f, new y origin: %f", _scrollViewBottom, _scrollViewTop, _heightIncrementOnChange, _newYOrigin);
+//    
+//    if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
+//    {
+//        [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+//    }
+//}
 
 @end

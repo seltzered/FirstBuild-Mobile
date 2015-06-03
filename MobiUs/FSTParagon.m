@@ -10,6 +10,9 @@
 
 @implementation FSTParagon
 
+NSString * const FSTActualTemperatureChangedNotification = @"FSTActualTemperatureChangedNotification";
+NSString * const FSTCookModeChangedNotification = @"FSTCookModeChangedNotification";
+
 #ifdef SIMULATE_PARAGON
 uint8_t _simulatePreheatIndex = 0;
 uint8_t _simulateCookIndex = 0;
@@ -56,7 +59,7 @@ NSArray* _simulateCook ;
 - (void)startSimulateCookModeChanged
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.delegate cookModeChanged];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:nil];
     });
 }
 
@@ -70,13 +73,10 @@ NSArray* _simulateCook ;
         {
             _simulatePreheatIndex = 0;
         }
-        
         stage.actualTemperature = _simulatePreheat[_simulatePreheatIndex];
-        if (self.delegate)
-        {
-            [self.delegate actualTemperatureChanged:stage.actualTemperature];
 
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:stage.actualTemperature];
+
         _simulatePreheatIndex++;
         [self simulatePreheat];
         
