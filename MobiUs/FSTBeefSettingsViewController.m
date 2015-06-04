@@ -171,9 +171,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
                 shortestDistanceIndex = i;
             }
         }
-        
-        NSLog(@"shortest origin distance: (st:%f, x: %f, dist:%f, ix: %d)", _startingSelectorXOrigin, newXOrigin, shortestDistance, shortestDistanceIndex);
-        
+
         _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[shortestDistanceIndex] doubleValue]];
         _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
         
@@ -192,7 +190,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
     
     CGFloat yTranslation =[gesture translationInView:gesture.view.superview].y;
-//    CGFloat yGestureLocation = [gesture locationInView:gesture.view.superview].y;
     CGFloat newOrigin = _startingOrigin + yTranslation;
     CGFloat newHeight = _startingHeight - yTranslation;
     

@@ -29,7 +29,14 @@ NSArray* _simulateCook ;
 #ifdef SIMULATE_PARAGON
 - (void)startSimulatePreheat
 {
-    _simulatePreheat =  @[@127,
+    _simulatePreheat =  @[@73,
+                          @80,
+                          @85,
+                          @87,
+                          @95,
+                          @100,
+                          @110,
+                          @127,
                           @128,
                           @130,
                           @133,
@@ -58,14 +65,14 @@ NSArray* _simulateCook ;
 
 - (void)startSimulateCookModeChanged
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
     });
 }
 
 - (void)simulatePreheat
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentCookingMethod.session.paragonCookingStages[0];
         
         //reset back to 0 if we hit the end

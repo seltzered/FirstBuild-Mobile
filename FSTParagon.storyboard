@@ -1027,10 +1027,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZg-2G-EBk" userLabel="temperatureScroller">
-                                <rect key="frame" x="0.0" y="205" width="600" height="305"/>
+                                <rect key="frame" x="0.0" y="360" width="600" height="150"/>
                                 <subviews>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9or-bJ-rAO" userLabel="temperatureScrollerBackground">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="305"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                                         <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-ZG-oY7" userLabel="topOrangeBarView">
@@ -1073,6 +1073,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gcP-ZG-oY7" secondAttribute="width" id="0WV-wJ-sk1"/>
                                     <constraint firstAttribute="centerX" secondItem="gcP-ZG-oY7" secondAttribute="centerX" id="Bkf-Vl-NYk"/>
+                                    <constraint firstAttribute="height" constant="150" id="VVy-jU-Inw"/>
                                     <constraint firstItem="9or-bJ-rAO" firstAttribute="leading" secondItem="fZg-2G-EBk" secondAttribute="leading" id="cBu-HD-m1b"/>
                                     <constraint firstItem="VCf-tF-mVY" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="top" id="cNT-VE-L2y"/>
                                     <constraint firstItem="VCf-tF-mVY" firstAttribute="width" secondItem="fZg-2G-EBk" secondAttribute="width" multiplier="0.4" id="e54-uP-wxO"/>
@@ -1136,15 +1137,16 @@
                             <constraint firstAttribute="width" secondItem="fZg-2G-EBk" secondAttribute="width" id="rfk-Nj-iB2"/>
                             <constraint firstItem="VvA-nT-Zsb" firstAttribute="top" secondItem="eVu-Hg-F9d" secondAttribute="bottom" id="sIL-WA-Kbm"/>
                             <constraint firstAttribute="width" secondItem="eVu-Hg-F9d" secondAttribute="width" id="soZ-dd-hMR"/>
-                            <constraint firstItem="fZg-2G-EBk" firstAttribute="top" secondItem="RyY-Xg-zwD" secondAttribute="bottom" constant="50" id="vPV-xQ-C8F"/>
                             <constraint firstItem="1F3-4d-maq" firstAttribute="width" secondItem="lIF-GZ-kSf" secondAttribute="width" multiplier="0.95" id="wCI-jj-9fN"/>
                             <constraint firstAttribute="width" secondItem="VvA-nT-Zsb" secondAttribute="width" id="yyC-XJ-WTi"/>
                             <constraint firstAttribute="centerX" secondItem="fZg-2G-EBk" secondAttribute="centerX" id="zys-Ou-Oow"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonWrapperView" destination="1F3-4d-maq" id="Fbg-oV-uZD"/>
                         <outlet property="currentTemperatureLabel" destination="khW-jb-3y2" id="JhV-nY-7Nd"/>
                         <outlet property="targetTemperatureLabel" destination="VvA-nT-Zsb" id="ahB-Nq-si5"/>
+                        <outlet property="temperatureScrollerHeightConstraint" destination="VVy-jU-Inw" id="raO-AE-H46"/>
                         <outlet property="temperatureScrollerView" destination="fZg-2G-EBk" id="2PF-rM-oud"/>
                         <outlet property="topOrangeBarView" destination="RyY-Xg-zwD" id="jgd-yG-iNH"/>
                         <segue destination="zGa-nc-t4X" kind="show" identifier="segueReadyToCook" id="oON-Z6-pjc"/>
