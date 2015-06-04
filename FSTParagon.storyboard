@@ -41,6 +41,7 @@
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
         </mutableArray>
         <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
@@ -1176,19 +1177,30 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpm-M2-LR6" userLabel="timeAndTemperatureView">
                                 <rect key="frame" x="0.0" y="87" width="600" height="25"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOb-OY-pSa" userLabel="tempLabel">
+                                        <rect key="frame" x="0.0" y="2" width="600" height="22"/>
+                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
+                                        <color key="textColor" red="0.42745098039215684" green="0.43137254901960786" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="ZOb-OY-pSa" secondAttribute="centerY" id="SV8-lb-b6G"/>
+                                    <constraint firstAttribute="centerX" secondItem="ZOb-OY-pSa" secondAttribute="centerX" id="SYE-i0-nHz"/>
+                                    <constraint firstAttribute="width" secondItem="ZOb-OY-pSa" secondAttribute="width" id="hdt-wS-KWl"/>
                                     <constraint firstAttribute="height" constant="25" id="niv-CP-6dn"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steak (medium-rare), 1&quot; thick" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o14-6r-nV0" userLabel="cookingLabel">
-                                <rect key="frame" x="0.0" y="117" width="600" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o14-6r-nV0" userLabel="cookingLabel">
+                                <rect key="frame" x="0.0" y="117" width="600" height="0.0"/>
                                 <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Gi-JK3" userLabel="midView">
-                                <rect key="frame" x="0.0" y="149" width="600" height="381"/>
+                                <rect key="frame" x="0.0" y="127" width="600" height="403"/>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VC-59-Gr7" userLabel="buttonsWrapperView">
@@ -1242,6 +1254,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cookingLabel" destination="o14-6r-nV0" id="0qY-uW-JJE"/>
+                        <outlet property="tempLabel" destination="ZOb-OY-pSa" id="8qE-mL-ZIE"/>
                         <segue destination="ktp-73-2Pg" kind="show" identifier="segueCooking" id="0pB-2U-wDL"/>
                     </connections>
                 </viewController>

@@ -7,6 +7,7 @@
 //
 
 #import "FSTPreheatingViewController.h"
+#import "FSTReadyToCookViewController.h"
 
 @interface FSTPreheatingViewController ()
 
@@ -87,8 +88,11 @@ NSObject* _temperatureChangedObserver;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //self.currentParagon.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
+    if ([segue.destinationViewController isKindOfClass:[FSTReadyToCookViewController class]])
+    {
+        ((FSTReadyToCookViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    }    
 }
 
 - (void)didReceiveMemoryWarning {

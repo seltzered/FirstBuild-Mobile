@@ -30,7 +30,7 @@ FSTCookingMethods* _methods;
     }
     
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
-    [navigation setHeaderImageNamed:@"paragonHeader" withFrameRect:CGRectMake(0, 0, 120, 25)];
+    [navigation setHeaderImageNamed:@"PNG_logo_paragon_white" withFrameRect:CGRectMake(0, 0, 120, 30)];
     [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
 }
 
