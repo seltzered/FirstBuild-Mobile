@@ -131,6 +131,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     stage.targetTemperature = _currentTemperature;
     double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     stage.cookTimeRequested = [NSNumber numberWithDouble:cookingMinutes];
+    stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
 }
 
@@ -138,6 +139,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 {    
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
+        
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }

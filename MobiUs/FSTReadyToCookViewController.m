@@ -54,6 +54,7 @@ FSTParagonCookingStage* _cookingStage;
     [hourString appendAttributedString:temperatureLabel];
     
     [self.tempLabel setAttributedText:hourString];
+    [self.cookingLabel setText:_cookingStage.cookingLabel];
 }
 
 - (void)didReceiveMemoryWarning {
