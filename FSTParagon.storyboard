@@ -922,6 +922,9 @@
                                 <color key="textColor" red="0.35294117650000001" green="0.35686274509999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="paragonReadyToPreheat" translatesAutoresizingMaskIntoConstraints="NO" id="e9G-7G-Z8J">
+                                <rect key="frame" x="0.0" y="262" width="600" height="238"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EyJ-kd-r1V" userLabel="buttonWrapperView">
                                 <rect key="frame" x="15" y="520" width="570" height="65"/>
                                 <subviews>
@@ -959,10 +962,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="EyJ-kd-r1V" firstAttribute="top" secondItem="e9G-7G-Z8J" secondAttribute="bottom" constant="20" id="4d8-KT-V3L"/>
+                            <constraint firstAttribute="centerX" secondItem="e9G-7G-Z8J" secondAttribute="centerX" id="5Xb-2g-cBZ"/>
                             <constraint firstItem="N8x-dd-BpD" firstAttribute="top" secondItem="nwH-Dd-IKC" secondAttribute="bottom" id="DmD-gJ-8Um"/>
                             <constraint firstAttribute="centerX" secondItem="EyJ-kd-r1V" secondAttribute="centerX" id="Fex-sN-YFV"/>
                             <constraint firstItem="9GR-aE-Qlm" firstAttribute="top" secondItem="G7b-eW-wFJ" secondAttribute="bottom" id="Fje-Nk-JJB"/>
                             <constraint firstItem="G7b-eW-wFJ" firstAttribute="top" secondItem="iB9-Al-1Gn" secondAttribute="bottom" constant="71" id="Io4-Jm-X3d"/>
+                            <constraint firstItem="e9G-7G-Z8J" firstAttribute="top" secondItem="N8x-dd-BpD" secondAttribute="bottom" constant="20" id="Jgv-PP-dLa"/>
+                            <constraint firstItem="e9G-7G-Z8J" firstAttribute="width" secondItem="v9w-7b-xNt" secondAttribute="width" id="LaP-gS-qmh"/>
                             <constraint firstAttribute="centerX" secondItem="N8x-dd-BpD" secondAttribute="centerX" id="Meu-rl-bff"/>
                             <constraint firstItem="nwH-Dd-IKC" firstAttribute="top" secondItem="9GR-aE-Qlm" secondAttribute="bottom" constant="15" id="NfB-Yv-WcZ"/>
                             <constraint firstAttribute="centerX" secondItem="G7b-eW-wFJ" secondAttribute="centerX" constant="6" id="Pae-LT-bBf"/>
@@ -1560,6 +1567,7 @@
     <resources>
         <image name="paragonBackgroundBeef@1x" width="523" height="667"/>
         <image name="paragonReadyToCook" width="168" height="253"/>
+        <image name="paragonReadyToPreheat" width="640" height="374"/>
         <image name="paragonSousVideBackground@1x" width="580" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
