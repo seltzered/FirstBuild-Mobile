@@ -20,8 +20,15 @@ extern NSString * const FSTCookModeChangedNotification;
 @property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
 
 #ifdef SIMULATE_PARAGON
-- (void)startSimulatePreheat;
-- (void)startSimulateCookModeChanged;
+//- (void)startSimulatePreheat;
+//- (void)startSimulateCookModeChanged;
+//- (void)startSimulateReadyToCook;
+//- (void)simulateHeatingWithTemperatureIncrement: (uint8_t) increment;
+- (void)startSimulateHeating;
+- (void)startSimulatePowerOn;
+- (void)setSimulatorHeatingUpdateInterval: (NSTimeInterval)interval;
+- (void)setSimulatorHeatingTemperatureIncrement: (uint8_t)increment;
+
 
 #endif
 

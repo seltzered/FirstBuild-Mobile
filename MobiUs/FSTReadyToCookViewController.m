@@ -7,23 +7,39 @@
 //
 
 #import "FSTReadyToCookViewController.h"
+#import "UILabel+MultiLineAutoSize.h"
 
 @interface FSTReadyToCookViewController ()
+
 
 @end
 
 @implementation FSTReadyToCookViewController
 
 FSTParagonCookingStage* _cookingStage;
+NSObject* _temperatureChangedObserver;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     // Do any additional setup after loading the view.
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+                                                      object:self.currentParagon
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+    {
+        [self.actualTemperatureLabel setText:[_cookingStage.actualTemperature stringValue]];
+    }];
+                                   
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    //wrap bottom label
+    [self.bottomLabel adjustFontSizeToFitMultiLine];
+    
     //temperature label
     UIFont *boldFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:22.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
@@ -55,6 +71,12 @@ FSTParagonCookingStage* _cookingStage;
     
     [self.tempLabel setAttributedText:hourString];
     [self.cookingLabel setText:_cookingStage.cookingLabel];
+    
+    [self.actualTemperatureLabel setText:[_cookingStage.actualTemperature stringValue]];
+#ifdef SIMULATE_PARAGON
+    [self.currentParagon setSimulatorHeatingUpdateInterval:3000];
+    [self.currentParagon setSimulatorHeatingTemperatureIncrement:1];
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

@@ -81,7 +81,8 @@ NSObject* _temperatureChangedObserver;
     self.temperatureScrollerView.hidden = YES;
 
 #ifdef SIMULATE_PARAGON
-    [self.currentParagon startSimulatePreheat];
+    [self.currentParagon setSimulatorHeatingTemperatureIncrement:5];
+    [self.currentParagon setSimulatorHeatingUpdateInterval:250];
 #endif
     
 }

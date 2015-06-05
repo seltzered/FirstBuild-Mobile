@@ -26,6 +26,9 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
@@ -1199,9 +1202,49 @@
                                 <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Gi-JK3" userLabel="midView">
+                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Gi-JK3" userLabel="midView">
                                 <rect key="frame" x="0.0" y="127" width="600" height="403"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9z-Hp-a29" userLabel="CURRENT TEMP">
+                                        <rect key="frame" x="0.0" y="10" width="600" height="26"/>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqS-TY-zcl" userLabel="actualTemperatureLabel">
+                                        <rect key="frame" x="0.0" y="41" width="600" height="52"/>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="paragonReadyToCook" translatesAutoresizingMaskIntoConstraints="NO" id="tAk-8Y-mBK">
+                                        <rect key="frame" x="216" y="103" width="168" height="215"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submerge your vaccuum-sealed bag of food in the pot of water." textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumScaleFactor="0.80000000000000027" translatesAutoresizingMaskIntoConstraints="NO" id="mwR-GY-3g1" userLabel="SUBMERGE LABEL">
+                                        <rect key="frame" x="45" y="328" width="510" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Ol1-3t-ILl"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="L9z-Hp-a29" firstAttribute="top" secondItem="59z-Gi-JK3" secondAttribute="top" constant="10" id="298-9Z-qMa"/>
+                                    <constraint firstAttribute="centerX" secondItem="tAk-8Y-mBK" secondAttribute="centerX" id="ACo-q1-fwl"/>
+                                    <constraint firstItem="PqS-TY-zcl" firstAttribute="width" secondItem="59z-Gi-JK3" secondAttribute="width" id="D59-Ar-kQJ"/>
+                                    <constraint firstItem="mwR-GY-3g1" firstAttribute="width" secondItem="59z-Gi-JK3" secondAttribute="width" multiplier="0.85" id="Dno-WZ-Y7V"/>
+                                    <constraint firstItem="PqS-TY-zcl" firstAttribute="top" secondItem="L9z-Hp-a29" secondAttribute="bottom" constant="5" id="bHT-XI-BJ4"/>
+                                    <constraint firstAttribute="centerX" secondItem="PqS-TY-zcl" secondAttribute="centerX" id="cPV-tZ-E08"/>
+                                    <constraint firstAttribute="centerX" secondItem="mwR-GY-3g1" secondAttribute="centerX" id="f0i-85-edA"/>
+                                    <constraint firstAttribute="bottom" secondItem="mwR-GY-3g1" secondAttribute="bottom" constant="25" id="kLr-Sy-T6K"/>
+                                    <constraint firstItem="tAk-8Y-mBK" firstAttribute="top" secondItem="PqS-TY-zcl" secondAttribute="bottom" constant="10" id="kRC-Mu-yMj"/>
+                                    <constraint firstItem="L9z-Hp-a29" firstAttribute="width" secondItem="59z-Gi-JK3" secondAttribute="width" id="ktL-On-ho1"/>
+                                    <constraint firstItem="mwR-GY-3g1" firstAttribute="top" secondItem="tAk-8Y-mBK" secondAttribute="bottom" constant="10" id="rYV-ym-fmm"/>
+                                    <constraint firstAttribute="centerX" secondItem="L9z-Hp-a29" secondAttribute="centerX" id="s0Z-wy-vbY"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VC-59-Gr7" userLabel="buttonsWrapperView">
                                 <rect key="frame" x="0.0" y="545" width="600" height="50"/>
@@ -1254,6 +1297,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actualTemperatureLabel" destination="PqS-TY-zcl" id="EIR-Sf-afG"/>
+                        <outlet property="bottomLabel" destination="mwR-GY-3g1" id="swh-7z-utg"/>
                         <outlet property="cookingLabel" destination="o14-6r-nV0" id="0qY-uW-JJE"/>
                         <outlet property="tempLabel" destination="ZOb-OY-pSa" id="8qE-mL-ZIE"/>
                         <segue destination="ktp-73-2Pg" kind="show" identifier="segueCooking" id="0pB-2U-wDL"/>
@@ -1469,6 +1514,7 @@
     </scenes>
     <resources>
         <image name="paragonBackgroundBeef@1x" width="523" height="667"/>
+        <image name="paragonReadyToCook" width="168" height="253"/>
         <image name="paragonSousVideBackground@1x" width="580" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>

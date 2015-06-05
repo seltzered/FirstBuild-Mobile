@@ -40,7 +40,7 @@ NSObject* _cookModeChangedObserver;
     self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
     
 #ifdef SIMULATE_PARAGON
-    [self.currentParagon startSimulateCookModeChanged];
+    [self.currentParagon startSimulatePowerOn];
 #endif
 }
 
