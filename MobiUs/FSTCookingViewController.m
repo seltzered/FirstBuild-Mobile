@@ -54,6 +54,7 @@ NSObject* _timeElapsedChangedObserver;
    {
        self.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
        [self makeAndSetTimeRemainingLabel];
+
    }];
     
     self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue];
@@ -77,7 +78,7 @@ NSObject* _timeElapsedChangedObserver;
     UIFont *bigFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:50.0];
     NSDictionary *bigFontDict = [NSDictionary dictionaryWithObject: bigFont forKey:NSFontAttributeName];
     
-    UIFont *medFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:37.0];
+    UIFont *medFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:43.0];
     NSDictionary *medFontDict = [NSDictionary dictionaryWithObject: medFont forKey:NSFontAttributeName];
     
     UIFont *smallFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:23.0];
@@ -86,6 +87,8 @@ NSObject* _timeElapsedChangedObserver;
     double timeRemaining = [_cookingStage.cookTimeRequested doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
     int hour = timeRemaining / 60;
     int minutes = fmod(timeRemaining, 60.0);
+    
+    
     
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
@@ -99,6 +102,13 @@ NSObject* _timeElapsedChangedObserver;
     [hourString appendAttributedString:minuteLabel];
 
     [self.timeRemainingLabel setAttributedText:hourString];
+    
+    //time complete label
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate* timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+    
+    [dateFormatter setDateFormat:@"HH:mm a"];
+    self.doneAtLabel.text = [dateFormatter stringFromDate:timeComplete];
 }
 
 - (void)didReceiveMemoryWarning {
