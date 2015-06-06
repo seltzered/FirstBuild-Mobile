@@ -14,6 +14,7 @@
 
 extern NSString * const FSTActualTemperatureChangedNotification;
 extern NSString * const FSTCookModeChangedNotification;
+extern NSString * const FSTElapsedTimeChangedNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
@@ -28,6 +29,7 @@ extern NSString * const FSTCookModeChangedNotification;
 - (void)startSimulatePowerOn;
 - (void)setSimulatorHeatingUpdateInterval: (NSTimeInterval)interval;
 - (void)setSimulatorHeatingTemperatureIncrement: (uint8_t)increment;
+- (void)startSimulatingTimeWithTemperatureRegulating;
 
 
 #endif

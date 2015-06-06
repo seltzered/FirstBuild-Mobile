@@ -8,6 +8,7 @@
 
 #import "FSTReadyToCookViewController.h"
 #import "UILabel+MultiLineAutoSize.h"
+#import "FSTCookingViewController.h"
 
 @interface FSTReadyToCookViewController ()
 
@@ -23,6 +24,7 @@ NSObject* _temperatureChangedObserver;
 - (void)viewDidLoad {
     [super viewDidLoad];
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+    
     // Do any additional setup after loading the view.
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -77,6 +79,15 @@ NSObject* _temperatureChangedObserver;
     [self.currentParagon setSimulatorHeatingUpdateInterval:3000];
     [self.currentParagon setSimulatorHeatingTemperatureIncrement:1];
 #endif
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
+    if ([segue.destinationViewController isKindOfClass:[FSTCookingViewController class]])
+    {
+        ((FSTCookingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

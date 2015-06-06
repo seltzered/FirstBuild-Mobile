@@ -25,60 +25,76 @@
 
 @implementation FSTCookingViewController
 
+FSTParagonCookingStage* _cookingStage;
+NSObject* _temperatureChangedObserver;
+NSObject* _timeElapsedChangedObserver;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
 
-    self.circleProgressView.timeLimit = 60*8;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+                                                      object:self.currentParagon
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+    {
+        //
+    }];
+    
+    _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+                                                      object:self.currentParagon
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+   {
+       self.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue]/60;
+       DLog("elapsed %@", _cookingStage.cookTimeElapsed);
+   }];
+    
+    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue];
     self.circleProgressView.elapsedTime = 0;
     
-    [self startTimer];
+    //[self startTimer];
+    [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
     
-    self.session = [[Session alloc] init];
-    self.session.state = kSessionStateStop;
-    self.session.startDate = [NSDate date];
-    self.session.finishDate = nil;
-    self.session.state = kSessionStateStart;
+//    self.session = [[Session alloc] init];
+//    self.session.state = kSessionStateStop;
+//    self.session.startDate = [NSDate date];
+//    self.session.finishDate = nil;
+//    self.session.state = kSessionStateStart;
     
     UIColor *tintColor = UIColorFromRGB(0xD43326);
-    self.circleProgressView.status = NSLocalizedString(@"Stuff", nil);
+    //self.circleProgressView.status = NSLocalizedString(@"Stuff", nil);
     self.circleProgressView.tintColor = tintColor;
     self.circleProgressView.elapsedTime = 0;
 
 }
 
-- (void)startTimer {
-    if ((!self.timer) || (![self.timer isValid])) {
-        
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.00
-                                                      target:self
-                                                    selector:@selector(poolTimer)
-                                                    userInfo:nil
-                                                     repeats:YES];
-    }
-}
-
-- (void)poolTimer
-{
-    if ((self.session) && (self.session.state == kSessionStateStart))
-    {
-        self.circleProgressView.elapsedTime = self.session.progressTime;
-    }
-}
+//- (void)startTimer {
+//    if ((!self.timer) || (![self.timer isValid])) {
+//        
+//        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.00
+//                                                      target:self
+//                                                    selector:@selector(poolTimer)
+//                                                    userInfo:nil
+//                                                     repeats:YES];
+//    }
+//}
+//
+//- (void)poolTimer
+//{
+//    if ((self.session) && (self.session.state == kSessionStateStart))
+//    {
+//        self.circleProgressView.elapsedTime = self.session.progressTime;
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
 
