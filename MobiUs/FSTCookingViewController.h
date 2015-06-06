@@ -16,4 +16,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
 @property (strong, nonatomic) IBOutlet UILabel *doneAtLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cookingModeLabel;
 @end

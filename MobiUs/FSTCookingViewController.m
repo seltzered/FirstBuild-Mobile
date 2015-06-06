@@ -33,6 +33,9 @@ NSObject* _timeElapsedChangedObserver;
     [super viewDidLoad];
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
 
+    NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@ at %@%@", _cookingStage.cookingLabel, [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
+    self.cookingModeLabel.text = cookingModelLabelText;
+    
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -40,7 +43,8 @@ NSObject* _timeElapsedChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-        //
+        //um, do nothing right now view doesn't support anything
+        //todo: remove ?
     }];
     
     _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -48,47 +52,54 @@ NSObject* _timeElapsedChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
    {
-       self.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue]/60;
-       DLog("elapsed %@", _cookingStage.cookTimeElapsed);
+       self.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
+       [self makeAndSetTimeRemainingLabel];
    }];
     
     self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue];
     self.circleProgressView.elapsedTime = 0;
     
-    //[self startTimer];
-    [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
-    
-//    self.session = [[Session alloc] init];
-//    self.session.state = kSessionStateStop;
-//    self.session.startDate = [NSDate date];
-//    self.session.finishDate = nil;
-//    self.session.state = kSessionStateStart;
-    
     UIColor *tintColor = UIColorFromRGB(0xD43326);
-    //self.circleProgressView.status = NSLocalizedString(@"Stuff", nil);
     self.circleProgressView.tintColor = tintColor;
     self.circleProgressView.elapsedTime = 0;
+    
+#ifdef SIMULATE_PARAGON
+    [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
+#endif
 
 }
 
-//- (void)startTimer {
-//    if ((!self.timer) || (![self.timer isValid])) {
-//        
-//        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.00
-//                                                      target:self
-//                                                    selector:@selector(poolTimer)
-//                                                    userInfo:nil
-//                                                     repeats:YES];
-//    }
-//}
-//
-//- (void)poolTimer
-//{
-//    if ((self.session) && (self.session.state == kSessionStateStart))
-//    {
-//        self.circleProgressView.elapsedTime = self.session.progressTime;
-//    }
-//}
+- (void)makeAndSetTimeRemainingLabel
+{
+    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+
+    //temperature label
+    UIFont *bigFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:50.0];
+    NSDictionary *bigFontDict = [NSDictionary dictionaryWithObject: bigFont forKey:NSFontAttributeName];
+    
+    UIFont *medFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:37.0];
+    NSDictionary *medFontDict = [NSDictionary dictionaryWithObject: medFont forKey:NSFontAttributeName];
+    
+    UIFont *smallFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:23.0];
+    NSDictionary *smallFontDict = [NSDictionary dictionaryWithObject: smallFont forKey:NSFontAttributeName];
+    
+    double timeRemaining = [_cookingStage.cookTimeRequested doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+    int hour = timeRemaining / 60;
+    int minutes = fmod(timeRemaining, 60.0);
+    
+    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
+    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
+    NSMutableAttributedString *colonLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: medFontDict];
+    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",minutes]  attributes: bigFontDict];
+    NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: smallFontDict];
+    
+    [hourString appendAttributedString:hourLabel];
+    [hourString appendAttributedString:colonLabel];
+    [hourString appendAttributedString:minuteString];
+    [hourString appendAttributedString:minuteLabel];
+
+    [self.timeRemainingLabel setAttributedText:hourString];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

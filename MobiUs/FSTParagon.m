@@ -147,7 +147,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentCookingMethod.session.paragonCookingStages[0];
     _actualTemperatureSimulation = [stage.targetTemperature floatValue] + randomFloat(-2, 2);
     stage.actualTemperature = [NSNumber numberWithInt:_actualTemperatureSimulation];
-    _elapsedTime = _elapsedTime + 1;
+    _elapsedTime = _elapsedTime + (1/60.0f);
     stage.cookTimeElapsed = [NSNumber numberWithDouble:_elapsedTime];
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
