@@ -21,17 +21,37 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 @implementation FSTBeefSettingsViewController
 {
+    //starting height of the view for the thickness pan gesture
     CGFloat _startingHeight;
+    
+    //starting origin of the view for the thickness pan gesture
     CGFloat _startingOrigin;
-    CGFloat _startingSelectorXOrigin;
+    
+    //max height the thickness view can go
     CGFloat _maxHeight;
+    
+    //where does the meat view actually start.
     CGFloat _meatHeightOffset;
+    
+    //bounding of the thickness view top
     CGFloat _yBoundsTop;
+    
+    //bounding of the thickness view bottom
     CGFloat _yBoundsBottom;
-    FSTBeefSousVideCookingMethod* _beefCookingMethod;
+    
+    //data values for corresponding view relationships
     NSNumber* _currentThickness;
     NSNumber* _currentTemperature;
+    FSTBeefSousVideCookingMethod* _beefCookingMethod;
+    
+    //where is the selector view positioned for the selector pan gesture
+    CGFloat _startingSelectorXOrigin;
+    
+    //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
+    
+    //array of the X origins for the donesness views; storyboard defines these
+    //ensure the doneness objects in the corresponding model object line up
     NSMutableArray* _temperatureXOrigins;
 }
 
@@ -46,18 +66,27 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self.currentParagon.currentCookingMethod createCookingSession];
     [self.currentParagon.currentCookingMethod addStageToCookingSession];
     
-    _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
+    //how big can the thickness selection view grow
     _maxHeight = self.thicknessSelectionView.frame.size.height;
-    _meatHeightOffset = self.meatView.frame.origin.y;
-    _yBoundsBottom = (self.thicknessSelectionView.frame.origin.y + _maxHeight) - _meatHeightOffset;
-    _yBoundsTop = self.thicknessSelectionView.frame.origin.y;
     
-    CGRect frame = self.thicknessSelectionView.frame;
-    _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height-1]];
+    //where does the actual view for the meat start
+    _meatHeightOffset = self.meatView.frame.origin.y;
+    
+    //set the bounds to which the entire set of things in the thickness view can move
+    //need to restrict the bottom by subtracting the height (y origin of meat portion of view)
+    //that way the meat view doesnt go out of the southern bounds
+    _yBoundsTop = self.thicknessSelectionView.frame.origin.y;
+    _yBoundsBottom = (_yBoundsTop + _maxHeight) - _meatHeightOffset;
+    
+    //set up or data objects
+    _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
+    _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:self.thicknessSelectionView.frame.size.height-1]];
     _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
     _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
     [self updateLabels];
     
+    //loop through all of the subviews of the different temperatures and add their X origin to
+    //an array of locations to be later used for a loop
     _temperatureXOrigins = [[NSMutableArray alloc]init];
     for (uint8_t i=0; i< self.donenessSelectionsView.subviews.count; i++)
     {
@@ -79,8 +108,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     
     NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
     NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[1]);
-    
-    DLog(@"val: %@:%@", hour, minute);
     
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: boldFontDict];
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H : " attributes: labelFontDict];
@@ -219,6 +246,9 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 - (double) meatThicknessWithActualViewHeight: (CGFloat)height
 {
+    //find our closest index of thicknesss based on the height of the current view in relation
+    //to the maximum size it can grow. that will then give a proportion we can use to search
+    //in an array of thicknesses and find the closest one
     int index = floor((height-_meatHeightOffset)/(_maxHeight-_meatHeightOffset) * _beefCookingMethod.thicknesses.count);
     if (index < _beefCookingMethod.thicknesses.count)
     {

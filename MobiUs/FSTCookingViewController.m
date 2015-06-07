@@ -88,8 +88,6 @@ NSObject* _timeElapsedChangedObserver;
     int hour = timeRemaining / 60;
     int minutes = fmod(timeRemaining, 60.0);
     
-    
-    
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
     NSMutableAttributedString *colonLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: medFontDict];
