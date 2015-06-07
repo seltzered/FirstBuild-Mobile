@@ -105,7 +105,7 @@ NSObject* _timeElapsedChangedObserver;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate* timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
     
-    [dateFormatter setDateFormat:@"HH:mm a"];
+    [dateFormatter setDateFormat:@"hh:mm a"];
     self.doneAtLabel.text = [dateFormatter stringFromDate:timeComplete];
 }
 

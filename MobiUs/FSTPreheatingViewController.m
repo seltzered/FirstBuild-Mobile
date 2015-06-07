@@ -74,6 +74,8 @@ NSObject* _temperatureChangedObserver;
        
     }];
     
+   
+    
 }
 
 -(void)viewDidLayoutSubviews
@@ -85,6 +87,34 @@ NSObject* _temperatureChangedObserver;
     
     _rangeMinAndMaxTemperatures = [_cookingStage.targetTemperature doubleValue] - _minTemperatureDegrees;
     _heightIncrementOnChange = scrollViewSizeYMax / _rangeMinAndMaxTemperatures;
+
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    CGRect frame = self.temperatureScrollerView.frame;
+    frame.size.height = 30;
+    //frame.size.width = 300;
+    frame.origin.y = self.temperatureScrollerView.frame.size.height-frame.size.height;
+    UIImageView *pulse =[[UIImageView alloc] initWithFrame:self.temperatureScrollerView.frame];
+    pulse.image=[UIImage imageNamed:@"pulse.png"];
+    [self.view addSubview:pulse];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2];
+    [UIView setAnimationDelay:.5];
+    [UIView setAnimationRepeatCount:HUGE_VAL];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    //todo: 200 is hardcoded
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(0,-200);
+    //CGAffineTransform transform2 = CGAffineTransformMakeScale(.7,.7);
+    //CGAffineTransform final = CGAffineTransformConcat(transform, transform2);
+    pulse.transform = transform;
+    
+    // Commit the changes
+    [UIView commitAnimations];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -98,8 +128,9 @@ NSObject* _temperatureChangedObserver;
 #ifdef SIMULATE_PARAGON
     [self.currentParagon startSimulateHeating];
     [self.currentParagon setSimulatorHeatingTemperatureIncrement:1];
-    [self.currentParagon setSimulatorHeatingUpdateInterval:50];
+    [self.currentParagon setSimulatorHeatingUpdateInterval:200];
 #endif
+    
     
 }
 
