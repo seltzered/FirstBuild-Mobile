@@ -19,4 +19,5 @@
 @property (strong, nonatomic) IBOutlet UIView *buttonWrapperView;
 @property (strong, nonatomic) IBOutlet UIView *temperatureBox;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *temperatureScrollerHeightConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *scrollerViewDistanceFromClosestUIElementConstraint;
 @end

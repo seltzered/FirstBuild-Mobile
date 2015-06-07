@@ -17,14 +17,23 @@
 
 FSTParagonCookingStage* _cookingStage;
 
-CGFloat _scrollViewTop;
+//bottom of the scrollview
 CGFloat _scrollViewBottom;
-CGFloat _scrollViewSizeY;
+
+//max size of the scrollview
+CGFloat _scrollViewSizeYMax;
+
+//min start temperature
 CGFloat _minTemperatureDegrees = 72;
+
+//target temperature - min temperature
 CGFloat _rangeMinAndMaxTemperatures ;
+
+//how much to change with each temperature increment
 CGFloat _heightIncrementOnChange;
+
+//the height of the label, need to discount that in our calculations
 CGFloat _temperatureViewHeight;
-NSMutableArray* _tempHeightLookup;
 
 NSObject* _temperatureChangedObserver;
 
@@ -48,18 +57,20 @@ NSObject* _temperatureChangedObserver;
         }
         
         CGFloat newTemp = [actualTemperature doubleValue] ;
+        
+        //find the temperature in proportion to the view
         CGFloat newHeight = _heightIncrementOnChange*(newTemp - _minTemperatureDegrees) + _temperatureViewHeight;
         CGFloat newYOrigin = _scrollViewBottom - newHeight - _temperatureViewHeight;
         
+        //create and set the new frame
         CGRect frame = self.temperatureScrollerView.frame;
-        
         self.temperatureScrollerHeightConstraint.constant = newHeight;
         [self.temperatureScrollerView needsUpdateConstraints];
         frame.origin.y = newYOrigin;
         frame.size.height = newHeight;
         self.temperatureScrollerView.frame = frame;
+        
         self.temperatureScrollerView.hidden = NO;
-//        NSLog(@" y origin %f, newHeight %f, scrollViewBottom %f, scrollViewTop %f, scrollViewSize %f", frame.origin.y, newHeight, _scrollViewBottom, _scrollViewTop, _scrollViewSizeY);
        
     }];
     
@@ -67,12 +78,13 @@ NSObject* _temperatureChangedObserver;
 
 -(void)viewDidLayoutSubviews
 {
-    _scrollViewTop = self.topOrangeBarView.frame.origin.y + self.topOrangeBarView.frame.size.height;
-    _scrollViewBottom = self.buttonWrapperView.frame.origin.y - _temperatureViewHeight;
-    _scrollViewSizeY = _scrollViewBottom - _scrollViewTop;
+    _scrollViewBottom = self.buttonWrapperView.frame.origin.y - _temperatureViewHeight - self.scrollerViewDistanceFromClosestUIElementConstraint.constant;
 
+    CGFloat scrollViewTopMax = self.topOrangeBarView.frame.origin.y + self.topOrangeBarView.frame.size.height;
+    CGFloat scrollViewSizeYMax = _scrollViewBottom - scrollViewTopMax;
+    
     _rangeMinAndMaxTemperatures = [_cookingStage.targetTemperature doubleValue] - _minTemperatureDegrees;
-    _heightIncrementOnChange = _scrollViewSizeY / _rangeMinAndMaxTemperatures;
+    _heightIncrementOnChange = scrollViewSizeYMax / _rangeMinAndMaxTemperatures;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,7 +95,6 @@ NSObject* _temperatureChangedObserver;
     self.temperatureScrollerView.hidden = YES;
      _temperatureViewHeight = self.temperatureBox.frame.origin.y + self.temperatureBox.frame.size.height;
    
-
 #ifdef SIMULATE_PARAGON
     [self.currentParagon startSimulateHeating];
     [self.currentParagon setSimulatorHeatingTemperatureIncrement:1];
@@ -103,7 +114,6 @@ NSObject* _temperatureChangedObserver;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
