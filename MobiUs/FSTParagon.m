@@ -137,9 +137,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 - (void)simulatePowerOn
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
-    [self setSimulatorHeatingTemperatureIncrement:5];
-    [self setSimulatorHeatingUpdateInterval:200];
-    _currentSimulationState = kPARAGON_SIMULATOR_STATE_HEATING;
+
 }
 
 - (void)simulateRegulateCookingTick

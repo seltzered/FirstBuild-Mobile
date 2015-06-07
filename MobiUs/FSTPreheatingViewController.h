@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UIView *temperatureScrollerView;
 @property (strong, nonatomic) IBOutlet UIView *topOrangeBarView;
 @property (strong, nonatomic) IBOutlet UIView *buttonWrapperView;
+@property (strong, nonatomic) IBOutlet UIView *temperatureBox;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *temperatureScrollerHeightConstraint;
 @end
