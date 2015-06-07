@@ -60,5 +60,10 @@
     }
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+    self.headerLabel.text = [self.currentParagon.currentCookingMethod.name stringByAppendingString:@"?"];
+}
+
 
 @end
