@@ -7,6 +7,7 @@
 //
 
 #import "FSTPreheatingViewController.h"
+#import "FSTReadyToCookViewController.h"
 
 @interface FSTPreheatingViewController ()
 
@@ -16,15 +17,23 @@
 
 FSTParagonCookingStage* _cookingStage;
 
-CGFloat _scrollViewTop;
+//bottom of the scrollview
 CGFloat _scrollViewBottom;
-CGFloat _scrollViewSizeY;
-CGFloat _temperaturePrecisionDegrees = 0.5;
+
+//max size of the scrollview
+CGFloat _scrollViewSizeYMax;
+
+//min start temperature
 CGFloat _minTemperatureDegrees = 72;
+
+//target temperature - min temperature
 CGFloat _rangeMinAndMaxTemperatures ;
-CGFloat _numberOfDivisions;
+
+//how much to change with each temperature increment
 CGFloat _heightIncrementOnChange;
-NSMutableArray* _tempHeightLookup;
+
+//the height of the label, need to discount that in our calculations
+CGFloat _temperatureViewHeight;
 
 NSObject* _temperatureChangedObserver;
 
@@ -32,80 +41,111 @@ NSObject* _temperatureChangedObserver;
     [super viewDidLoad];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-
+    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
-                        object:nil
+                        object:self.currentParagon
                          queue:nil
                     usingBlock:^(NSNotification *notification)
     {
-        NSLog(@"%@", notification.name);
-        NSLog(@"%@", notification.object);
-        NSNumber* actualTemperature = (NSNumber*)notification.object;
-        self.currentTemperatureLabel.text = [actualTemperature stringValue];
         
-        CGFloat _change = [actualTemperature doubleValue] ;
-        CGFloat _newYOrigin = _scrollViewBottom - (_change * _heightIncrementOnChange);
-        NSLog(@"bottom: %f, top: %f, incr: %f, new y origin: %f", _scrollViewBottom, _scrollViewTop, _heightIncrementOnChange, _newYOrigin);
+        NSNumber* actualTemperature = _cookingStage.actualTemperature;
+        self.currentTemperatureLabel.text = [actualTemperature stringValue];
         
         if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
         {
             [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
         }
+        
+        CGFloat newTemp = [actualTemperature doubleValue] ;
+        
+        //find the temperature in proportion to the view
+        CGFloat newHeight = _heightIncrementOnChange*(newTemp - _minTemperatureDegrees) + _temperatureViewHeight;
+        CGFloat newYOrigin = _scrollViewBottom - newHeight - _temperatureViewHeight;
+        
+        //create and set the new frame
+        CGRect frame = self.temperatureScrollerView.frame;
+        self.temperatureScrollerHeightConstraint.constant = newHeight;
+        [self.temperatureScrollerView needsUpdateConstraints];
+        frame.origin.y = newYOrigin;
+        frame.size.height = newHeight;
+        self.temperatureScrollerView.frame = frame;
+        
+        self.temperatureScrollerView.hidden = NO;
+       
     }];
     
+   
+    
+}
+
+-(void)viewDidLayoutSubviews
+{
+    _scrollViewBottom = self.buttonWrapperView.frame.origin.y - _temperatureViewHeight - self.scrollerViewDistanceFromClosestUIElementConstraint.constant;
+
+    CGFloat scrollViewTopMax = self.topOrangeBarView.frame.origin.y + self.topOrangeBarView.frame.size.height;
+    CGFloat scrollViewSizeYMax = _scrollViewBottom - scrollViewTopMax;
+    
+    _rangeMinAndMaxTemperatures = [_cookingStage.targetTemperature doubleValue] - _minTemperatureDegrees;
+    _heightIncrementOnChange = scrollViewSizeYMax / _rangeMinAndMaxTemperatures;
+
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    CGRect frame = self.temperatureScrollerView.frame;
+    frame.size.height = 30;
+    //frame.size.width = 300;
+    frame.origin.y = self.temperatureScrollerView.frame.size.height-frame.size.height;
+    UIImageView *pulse =[[UIImageView alloc] initWithFrame:self.temperatureScrollerView.frame];
+    pulse.image=[UIImage imageNamed:@"pulse.png"];
+    [self.view addSubview:pulse];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:2];
+    [UIView setAnimationDelay:.5];
+    [UIView setAnimationRepeatCount:HUGE_VAL];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    //todo: 200 is hardcoded
+    CGAffineTransform transform = CGAffineTransformMakeTranslation(0,-200);
+    //CGAffineTransform transform2 = CGAffineTransformMakeScale(.7,.7);
+    //CGAffineTransform final = CGAffineTransformConcat(transform, transform2);
+    pulse.transform = transform;
+    
+    // Commit the changes
+    [UIView commitAnimations];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    //self.currentParagon.delegate = self;
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
     self.targetTemperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
-    
-    _scrollViewTop = self.topOrangeBarView.frame.origin.y + self.topOrangeBarView.frame.size.height;
-    _scrollViewBottom = self.temperatureScrollerView.frame.origin.y + self.temperatureScrollerView.frame.size.height;
-    _scrollViewSizeY = _scrollViewBottom - _scrollViewTop;
-    
-    _rangeMinAndMaxTemperatures = [_cookingStage.targetTemperature doubleValue] - _minTemperatureDegrees;
-    _numberOfDivisions = _rangeMinAndMaxTemperatures / _temperaturePrecisionDegrees;
-    _heightIncrementOnChange = _scrollViewSizeY / _numberOfDivisions;
-    
-    
-//    _tempHeightLookup = [[NSMutableArray alloc]init];
-//    for (uint16_t i = 0; i<=_numberOfDivisions; i++)
-//    {
-//        [_tempHeightLookup addObject:[NSNumber numberWithDouble:<#(double)#>]]
-//    }
-    
+    self.temperatureScrollerView.hidden = YES;
+     _temperatureViewHeight = self.temperatureBox.frame.origin.y + self.temperatureBox.frame.size.height;
+   
 #ifdef SIMULATE_PARAGON
-    [self.currentParagon startSimulatePreheat];
+    [self.currentParagon startSimulateHeating];
+    [self.currentParagon setSimulatorHeatingTemperatureIncrement:1];
+    [self.currentParagon setSimulatorHeatingUpdateInterval:200];
 #endif
+    
     
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //self.currentParagon.delegate = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
+    if ([segue.destinationViewController isKindOfClass:[FSTReadyToCookViewController class]])
+    {
+        ((FSTReadyToCookViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    }    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-//- (void)actualTemperatureChanged:(NSNumber *)actualTemperature
-//{
-//    self.currentTemperatureLabel.text = [actualTemperature stringValue];
-//    
-//    CGFloat _change = [actualTemperature doubleValue] ;
-//    CGFloat _newYOrigin = _scrollViewBottom - (_change * _heightIncrementOnChange);
-//    NSLog(@"bottom: %f, top: %f, incr: %f, new y origin: %f", _scrollViewBottom, _scrollViewTop, _heightIncrementOnChange, _newYOrigin);
-//    
-//    if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
-//    {
-//        [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
-//    }
-//}
 
 @end

@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTCircleProgressView.h"
+#import "FSTParagon.h"
 
 @interface FSTCookingViewController : UIViewController
 @property (strong, nonatomic) IBOutlet FSTCircleProgressView *circleProgressView;
+@property (nonatomic,retain) FSTParagon* currentParagon;
 
+@property (strong, nonatomic) IBOutlet UILabel *timeRemainingLabel;
+@property (strong, nonatomic) IBOutlet UILabel *doneAtLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cookingModeLabel;
 @end

@@ -22,7 +22,7 @@
 
 @property (nonatomic) NSTimeInterval timeLimit;
 
-@property (nonatomic, retain) NSString *status;
+//@property (nonatomic, retain) NSString *status;
 
 @property (assign, nonatomic, readonly) double percent;
 

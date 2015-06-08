@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTParagon.h"
 
 @interface FSTReadyToCookViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UILabel *cookingLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tempLabel;
+@property (nonatomic,retain) FSTParagon* currentParagon;
+@property (strong, nonatomic) IBOutlet UILabel *actualTemperatureLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *bottomLabel;
 @end

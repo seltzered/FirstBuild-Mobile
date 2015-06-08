@@ -25,44 +25,88 @@
 
 @implementation FSTCookingViewController
 
+FSTParagonCookingStage* _cookingStage;
+NSObject* _temperatureChangedObserver;
+NSObject* _timeElapsedChangedObserver;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
 
-    self.circleProgressView.timeLimit = 60*8;
+    NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@ at %@%@", _cookingStage.cookingLabel, [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
+    self.cookingModeLabel.text = cookingModelLabelText;
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+                                                      object:self.currentParagon
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+    {
+        //um, do nothing right now view doesn't support anything
+        //todo: remove ?
+    }];
+    
+    _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+                                                      object:self.currentParagon
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+   {
+       self.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
+       [self makeAndSetTimeRemainingLabel];
+
+   }];
+    
+    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue];
     self.circleProgressView.elapsedTime = 0;
-    
-    [self startTimer];
-    
-    self.session = [[Session alloc] init];
-    self.session.state = kSessionStateStop;
-    self.session.startDate = [NSDate date];
-    self.session.finishDate = nil;
-    self.session.state = kSessionStateStart;
     
     UIColor *tintColor = UIColorFromRGB(0xD43326);
-    self.circleProgressView.status = NSLocalizedString(@"Stuff", nil);
     self.circleProgressView.tintColor = tintColor;
     self.circleProgressView.elapsedTime = 0;
+    
+#ifdef SIMULATE_PARAGON
+    [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
+#endif
 
 }
 
-- (void)startTimer {
-    if ((!self.timer) || (![self.timer isValid])) {
-        
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.00
-                                                      target:self
-                                                    selector:@selector(poolTimer)
-                                                    userInfo:nil
-                                                     repeats:YES];
-    }
-}
-
-- (void)poolTimer
+- (void)makeAndSetTimeRemainingLabel
 {
-    if ((self.session) && (self.session.state == kSessionStateStart))
-    {
-        self.circleProgressView.elapsedTime = self.session.progressTime;
-    }
+    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+
+    //temperature label
+    UIFont *bigFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:50.0];
+    NSDictionary *bigFontDict = [NSDictionary dictionaryWithObject: bigFont forKey:NSFontAttributeName];
+    
+    UIFont *medFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:43.0];
+    NSDictionary *medFontDict = [NSDictionary dictionaryWithObject: medFont forKey:NSFontAttributeName];
+    
+    UIFont *smallFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:23.0];
+    NSDictionary *smallFontDict = [NSDictionary dictionaryWithObject: smallFont forKey:NSFontAttributeName];
+    
+    double timeRemaining = [_cookingStage.cookTimeRequested doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+    int hour = timeRemaining / 60;
+    int minutes = fmod(timeRemaining, 60.0);
+    
+    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
+    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
+    NSMutableAttributedString *colonLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: medFontDict];
+    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",minutes]  attributes: bigFontDict];
+    NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: smallFontDict];
+    
+    [hourString appendAttributedString:hourLabel];
+    [hourString appendAttributedString:colonLabel];
+    [hourString appendAttributedString:minuteString];
+    [hourString appendAttributedString:minuteLabel];
+
+    [self.timeRemainingLabel setAttributedText:hourString];
+    
+    //time complete label
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate* timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+    
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    self.doneAtLabel.text = [dateFormatter stringFromDate:timeComplete];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,15 +114,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
 

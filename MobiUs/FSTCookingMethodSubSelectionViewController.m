@@ -27,11 +27,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -63,6 +58,11 @@
         self.currentParagon.currentCookingMethod = (FSTCookingMethod*)sender;
         ((FSTBeefSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    self.headerLabel.text = [self.currentParagon.currentCookingMethod.name stringByAppendingString:@"?"];
 }
 
 
