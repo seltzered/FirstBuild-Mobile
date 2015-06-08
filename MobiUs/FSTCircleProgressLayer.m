@@ -82,6 +82,16 @@
     [self addSublayer:self.progressLayer];
     [self addSublayer:_progressLayerEnd];
     
+    //set up background pulsing
+    CABasicAnimation* shadowAnimation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
+    shadowAnimation.fromValue = @(0.0);
+    shadowAnimation.toValue = @(0.8);
+    shadowAnimation.repeatCount = HUGE_VALF; // runs indefinitely
+    shadowAnimation.duration = 2.0;
+    shadowAnimation.autoreverses = YES; // repeats opacity transition to fade in, out (fromvalue and tovalue alternate)
+    shadowAnimation.removedOnCompletion = YES; // not sure if needed, hopefully finishes at end of view
+    [self addAnimation:shadowAnimation forKey:nil]; // animate the shadow pulse
+    
 }
 
 - (CGPathRef)drawPathWithArcCenter {

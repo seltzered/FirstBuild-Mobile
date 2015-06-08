@@ -47,7 +47,7 @@ NSObject* _temperatureChangedObserver;
                          queue:nil
                     usingBlock:^(NSNotification *notification)
     {
-        
+        // add UIViewAnimation for changing temperature
         NSNumber* actualTemperature = _cookingStage.actualTemperature;
         self.currentTemperatureLabel.text = [actualTemperature stringValue];
         
@@ -60,15 +60,20 @@ NSObject* _temperatureChangedObserver;
         
         //find the temperature in proportion to the view
         CGFloat newHeight = _heightIncrementOnChange*(newTemp - _minTemperatureDegrees) + _temperatureViewHeight;
-        CGFloat newYOrigin = _scrollViewBottom - newHeight - _temperatureViewHeight;
         
-        //create and set the new frame
-        CGRect frame = self.temperatureScrollerView.frame;
+        // update constraints with height corresponding to temperature.
         self.temperatureScrollerHeightConstraint.constant = newHeight;
         [self.temperatureScrollerView needsUpdateConstraints];
-        frame.origin.y = newYOrigin;
-        frame.size.height = newHeight;
-        self.temperatureScrollerView.frame = frame;
+
+        [UIView animateWithDuration:0.3 delay:0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^(void) {
+                             [self.temperatureScrollerView layoutIfNeeded];
+                         }
+                         completion: ^(BOOL complete) {
+                             
+                         }
+         ];
         
         self.temperatureScrollerView.hidden = NO;
        
@@ -83,10 +88,10 @@ NSObject* _temperatureChangedObserver;
     _scrollViewBottom = self.buttonWrapperView.frame.origin.y - _temperatureViewHeight - self.scrollerViewDistanceFromClosestUIElementConstraint.constant;
 
     CGFloat scrollViewTopMax = self.topOrangeBarView.frame.origin.y + self.topOrangeBarView.frame.size.height;
-    CGFloat scrollViewSizeYMax = _scrollViewBottom - scrollViewTopMax;
+    _scrollViewSizeYMax = _scrollViewBottom - scrollViewTopMax;
     
     _rangeMinAndMaxTemperatures = [_cookingStage.targetTemperature doubleValue] - _minTemperatureDegrees;
-    _heightIncrementOnChange = scrollViewSizeYMax / _rangeMinAndMaxTemperatures;
+    _heightIncrementOnChange = _scrollViewSizeYMax / _rangeMinAndMaxTemperatures;
 
 }
 
@@ -98,23 +103,37 @@ NSObject* _temperatureChangedObserver;
     frame.origin.y = self.temperatureScrollerView.frame.size.height-frame.size.height;
     UIImageView *pulse =[[UIImageView alloc] initWithFrame:self.temperatureScrollerView.frame];
     pulse.image=[UIImage imageNamed:@"pulse.png"];
+    pulse.alpha = 0.0;
     [self.view addSubview:pulse];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:2];
-    [UIView setAnimationDelay:.5];
-    [UIView setAnimationRepeatCount:HUGE_VAL];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    [UIView setAnimationBeginsFromCurrentState:YES];
+    [self pulseAnimation:pulse];
     
-    //todo: 200 is hardcoded
-    CGAffineTransform transform = CGAffineTransformMakeTranslation(0,-200);
-    //CGAffineTransform transform2 = CGAffineTransformMakeScale(.7,.7);
-    //CGAffineTransform final = CGAffineTransformConcat(transform, transform2);
-    pulse.transform = transform;
-    
-    // Commit the changes
-    [UIView commitAnimations];
+}
+
+- (void)pulseAnimation:(UIImageView*)pulse {
+    //pulse.alpha = 0.0; // start transparent to fade in
+    NSLog(@"pulseAnimation called");
+    [UIView animateWithDuration:2.0
+                          delay:0.5
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionRepeat
+                     animations: ^(void) {
+                         //todo: 200 is hardcoded
+                         CGAffineTransform transform = CGAffineTransformMakeTranslation(0,-_scrollViewSizeYMax);
+                         //CGAffineTransform transform2 = CGAffineTransformMakeScale(.7,.7);
+                         //CGAffineTransform final = CGAffineTransformConcat(transform, transform2);
+                         pulse.transform = transform;
+                     }
+                     completion:nil
+    ];
+    // alpha animation
+    [UIView animateWithDuration:1.0
+                          delay:0.5
+                        options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat
+                     animations: ^(void) {
+                         pulse.alpha=1.0;
+                     }
+                     completion: nil
+     ];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -133,6 +152,7 @@ NSObject* _temperatureChangedObserver;
     
     
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
