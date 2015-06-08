@@ -61,7 +61,6 @@
     [path stroke];
     
     //translucent square frame
-    
     strokeColor = [UIColor colorWithWhite:0.8 alpha:0.6];
     path = [UIBezierPath bezierPath];
     [path moveToPoint: CGPointMake(self.bounds.size.width/4, self.bounds.size.height/4)]; // top left corner
