@@ -59,6 +59,18 @@
     [strokeColor setStroke];
     path.lineWidth = 2;
     [path stroke];
+    
+    //translucent square frame
+    strokeColor = [UIColor colorWithWhite:0.8 alpha:0.6];
+    path = [UIBezierPath bezierPath];
+    [path moveToPoint: CGPointMake(self.bounds.size.width/4, self.bounds.size.height/4)]; // top left corner
+    [path addLineToPoint: CGPointMake(3*self.bounds.size.width/4, self.bounds.size.height/4)]; // top right
+    [path addLineToPoint: CGPointMake(3*self.bounds.size.width/4, 3*self.bounds.size.height/4)]; // bottom right
+    [path addLineToPoint: CGPointMake(self.bounds.size.width/4, 3*self.bounds.size.height/4)]; // bottom left
+    [path addLineToPoint:CGPointMake(self.bounds.size.width/4, self.bounds.size.height/4)]; // finish curve
+    [strokeColor setStroke];
+    path.lineWidth = 1;
+    [path stroke];
 
 }
 
