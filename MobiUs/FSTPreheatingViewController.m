@@ -47,7 +47,6 @@ NSObject* _temperatureChangedObserver;
                          queue:nil
                     usingBlock:^(NSNotification *notification)
     {
-        // add UIViewAnimation for changing temperature
         NSNumber* actualTemperature = _cookingStage.actualTemperature;
         self.currentTemperatureLabel.text = [actualTemperature stringValue];
         
@@ -76,10 +75,8 @@ NSObject* _temperatureChangedObserver;
          ];
         
         self.temperatureScrollerView.hidden = NO;
-       
     }];
     
-   
     
 }
 
@@ -105,26 +102,25 @@ NSObject* _temperatureChangedObserver;
     pulse.image=[UIImage imageNamed:@"pulse.png"];
     pulse.alpha = 0.0;
     [self.view addSubview:pulse];
-    
+
     [self pulseAnimation:pulse];
     
 }
 
-- (void)pulseAnimation:(UIImageView*)pulse {
-    //pulse.alpha = 0.0; // start transparent to fade in
-    NSLog(@"pulseAnimation called");
+- (void)pulseAnimation:(UIImageView *)pulse { // might need to call and repeat through NSTimer or some other object, since the animation never updates
+
+    // movement animation
     [UIView animateWithDuration:2.0
                           delay:0.5
-                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionRepeat
+                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat
                      animations: ^(void) {
-                         //todo: 200 is hardcoded
-                         CGAffineTransform transform = CGAffineTransformMakeTranslation(0,-_scrollViewSizeYMax);
-                         //CGAffineTransform transform2 = CGAffineTransformMakeScale(.7,.7);
-                         //CGAffineTransform final = CGAffineTransformConcat(transform, transform2);
+                         CGAffineTransform transform = CGAffineTransformMakeTranslation(0,-self.temperatureScrollerHeightConstraint.constant); // needs to go to top of red area (was at -_scrollViewSizeYMax)
+                         // need to update the y value, this block only calls once.
                          pulse.transform = transform;
                      }
                      completion:nil
     ];
+    
     // alpha animation
     [UIView animateWithDuration:1.0
                           delay:0.5
@@ -134,7 +130,8 @@ NSObject* _temperatureChangedObserver;
                      }
                      completion: nil
      ];
-}
+
+   }
 
 - (void)viewWillAppear:(BOOL)animated
 {

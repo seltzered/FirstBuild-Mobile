@@ -22,5 +22,5 @@
 @property (strong, nonatomic) IBOutlet UIView *scrollerBackgroundView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *scrollerViewDistanceFromClosestUIElementConstraint;
 
--(void)pulseAnimation: (UIImageView*) pulse;
+-(void)pulseAnimation: (UIImageView *) pulse;
 @end
