@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) CBPeripheral* currentPeripheral;
 @property (nonatomic, strong) CBCentralManager* centralManager;
+@property (nonatomic, strong) CBPeripheralManager* peripheralManager;
 
 @property (nonatomic, strong) CBCharacteristic* probeTemp;
 @property (nonatomic, strong) CBCharacteristic* sousVideTemp;

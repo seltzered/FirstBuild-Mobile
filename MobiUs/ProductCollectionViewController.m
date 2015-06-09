@@ -126,8 +126,11 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     
     if ([sender isKindOfClass:[FSTParagon class]])
     {
-        FSTCookingMethodViewController *vc = (FSTCookingMethodViewController*)destination.scene;
-        vc.product = sender;
+        if ([destination.scene isKindOfClass:[FSTCookingMethodViewController class]])
+        {
+            FSTCookingMethodViewController *vc = (FSTCookingMethodViewController*)destination.scene;
+            vc.product = sender;
+        }
     }
     else if ([sender isKindOfClass:[FSTChillHub class]])
     {

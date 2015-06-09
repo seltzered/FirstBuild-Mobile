@@ -166,7 +166,7 @@
     }
     
     //TODO: hard code
-    CBUUID *myUUID = [CBUUID UUIDWithString:@"14333333-3333-3333-3333-333333333337"];
+    CBUUID *myUUID = [CBUUID UUIDWithString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
     [self.centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:myUUID] options:nil];
 }
 
@@ -183,6 +183,8 @@
 {
     self.currentPeripheral = peripheral;
     self.currentPeripheral.delegate  = self;
+ CBUUID *myUUID = [CBUUID UUIDWithString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
+    //[self.currentPeripheral discoverServices:[NSArray arrayWithObject:myUUID]];
     [self.currentPeripheral discoverServices:nil];
     NSLog(@"Peripheral connected");
 
@@ -200,6 +202,7 @@
     }
 }
 
+
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service
              error:(NSError *)error {
 
@@ -211,7 +214,7 @@
             self.sousVideTemp = characteristic;
             
         }
-        else if ([[characteristic.UUID UUIDString] isEqualToString:@"16333333-3333-3333-3333-333333330003"])
+        else if ([[characteristic.UUID UUIDString] isEqualToString:@"71B1A100-E3AE-46FF-BB0A-E37D0BA79496"])
         {
             NSLog(@"got probe temp");
             self.probeTemp = characteristic;
