@@ -53,7 +53,7 @@
     self.path = [self drawPathWithArcCenter];
     self.fillColor = [UIColor clearColor].CGColor;
     UIColor* strokeColor =UIColorFromRGB(0xD43326);
-    self.strokeColor = [strokeColor colorWithAlphaComponent:0.5].CGColor;
+    self.strokeColor = [strokeColor colorWithAlphaComponent:0.5].CGColor; // played with alpha (from 0.5)
     self.shadowColor = [UIColor whiteColor].CGColor;
     self.shadowOpacity = .8;
     //self.shadowPath = self.path;
@@ -87,7 +87,7 @@
     shadowAnimation.fromValue = @(0.0);
     shadowAnimation.toValue = @(0.8);
     shadowAnimation.repeatCount = HUGE_VALF; // runs indefinitely
-    shadowAnimation.duration = 2.0;
+    shadowAnimation.duration = 1.7; // down from 2.0
     shadowAnimation.autoreverses = YES; // repeats opacity transition to fade in, out (fromvalue and tovalue alternate)
     shadowAnimation.removedOnCompletion = YES; // not sure if needed, hopefully finishes at end of view
     [self addAnimation:shadowAnimation forKey:nil]; // animate the shadow pulse
