@@ -47,7 +47,6 @@ NSObject* _temperatureChangedObserver;
                          queue:nil
                     usingBlock:^(NSNotification *notification)
     {
-        // add UIViewAnimation for changing temperature
         NSNumber* actualTemperature = _cookingStage.actualTemperature;
         self.currentTemperatureLabel.text = [actualTemperature stringValue];
         
@@ -99,17 +98,17 @@ NSObject* _temperatureChangedObserver;
     frame.size.height = 30;
     //frame.size.width = 300;
     frame.origin.y = self.temperatureScrollerView.frame.size.height-frame.size.height;
-    UIImageView *pulse =[[UIImageView alloc] initWithFrame:self.temperatureScrollerView.frame]; // pulse is defined
+    UIImageView *pulse =[[UIImageView alloc] initWithFrame:self.temperatureScrollerView.frame];
     pulse.image=[UIImage imageNamed:@"pulse.png"];
     pulse.alpha = 0.0;
     [self.view addSubview:pulse];
-    // initialize alpha animation
+
     [self pulseAnimation:pulse];
     
 }
 
 - (void)pulseAnimation:(UIImageView *)pulse { // might need to call and repeat through NSTimer or some other object, since the animation never updates
-    //NSLog(@"pulseAnimation called");
+
     // movement animation
     [UIView animateWithDuration:2.0
                           delay:0.5
@@ -122,6 +121,7 @@ NSObject* _temperatureChangedObserver;
                      completion:nil
     ];
     
+    // alpha animation
     [UIView animateWithDuration:1.0
                           delay:0.5
                         options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat

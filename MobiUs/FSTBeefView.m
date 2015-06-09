@@ -25,7 +25,7 @@
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)gradColors, gradLocations);
     CGColorSpaceRelease(colorSpace);
 
-    CGFloat widthOffset = 5.0; // set blown closer to side edges.
+    CGFloat widthOffset = 5.0; // set brown closer to side edges.
 
     //CGContextSaveGState(context); // begin drawing over this?
     CGPoint center = CGPointMake(rect.size.width/2, rect.size.height/2);
@@ -44,14 +44,14 @@
     
     //bottom
     CGContextDrawLinearGradient(context, gradient,  CGPointMake(0, rect.size.height), CGPointMake(0,0), kCGGradientDrawsAfterEndLocation);
-    
-    //left
+       //left
     CGContextDrawLinearGradient(context, gradient, center, CGPointMake(-widthOffset, rect.size.height/2), kCGGradientDrawsAfterEndLocation);
     //right
     CGContextDrawLinearGradient(context, gradient, center, CGPointMake(rect.size.width + widthOffset, rect.size.height/2), kCGGradientDrawsAfterEndLocation);
-    
     // smooth gradient from center
     CGContextDrawRadialGradient(context, gradient, center, 0, center, rect.size.width/2, kCGGradientDrawsAfterEndLocation);
+
+  
     
     CGGradientRelease(gradient);
 
