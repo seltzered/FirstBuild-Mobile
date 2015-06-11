@@ -97,7 +97,7 @@
     self.progressLayer = [[FSTCircleProgressLayer alloc] init];
     self.progressLayer.frame = self.bounds;
     self.progressLayer.backgroundColor = [UIColor clearColor].CGColor;
-    [self.layer addSublayer:self.progressLayer];
+    [self.layer addSublayer:self.progressLayer]; // was addSublayer
     
 }
 

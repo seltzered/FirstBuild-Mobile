@@ -35,7 +35,7 @@ NSObject* _timeElapsedChangedObserver;
 
     NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@ at %@%@", _cookingStage.cookingLabel, [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
     self.cookingModeLabel.text = cookingModelLabelText;
-    
+    [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -56,7 +56,7 @@ NSObject* _timeElapsedChangedObserver;
        [self makeAndSetTimeRemainingLabel];
 
    }];
-    
+    [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
     self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue];
     self.circleProgressView.elapsedTime = 0;
     
@@ -107,6 +107,9 @@ NSObject* _timeElapsedChangedObserver;
     
     [dateFormatter setDateFormat:@"hh:mm a"];
     self.doneAtLabel.text = [dateFormatter stringFromDate:timeComplete];
+    [self.doneAtLabel.superview bringSubviewToFront:self.doneAtLabel];
+    [self.timeRemainingLabel.superview bringSubviewToFront:self.timeRemainingLabel]; // pull labels before the circle
+    
 }
 
 - (void)didReceiveMemoryWarning {

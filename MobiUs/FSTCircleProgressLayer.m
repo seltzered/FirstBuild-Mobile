@@ -21,6 +21,7 @@
 @property (assign, nonatomic) double initialProgress;
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
 @property (nonatomic, strong) CAShapeLayer *progressLayerEnd;
+@property (nonatomic, strong) CAShapeLayer *textBackground;
 
 //@property (nonatomic, assign) CGRect frame;
 
@@ -44,6 +45,8 @@
     self.path = [self drawPathWithArcCenter];
     self.progressLayer.path = [self drawPathWithArcCenter];
     self.progressLayerEnd.path = [self drawPathWithArcCenter];
+    self.textBackground.path = [self drawTextBackground];
+    self.textBackground.lineWidth = self.frame.size.width/3 - self.lineWidth/2; // fills the whole circle
     
     [super layoutSublayers];
 }
@@ -54,10 +57,10 @@
     self.fillColor = [UIColor clearColor].CGColor;
     UIColor* strokeColor =UIColorFromRGB(0xD43326);
     self.strokeColor = [strokeColor colorWithAlphaComponent:0.5].CGColor; // played with alpha (from 0.5)
-    self.shadowColor = [UIColor whiteColor].CGColor;
+    self.shadowColor = [UIColor whiteColor].CGColor; // changed from white
     self.shadowOpacity = .8;
-    //self.shadowPath = self.path;
-    self.shadowRadius = 3;
+    //self.shadowPath = self.path; // i think this is needed to keep it out of the inner circle
+    self.shadowRadius = 2.0; // down from 3
     self.shadowOffset = CGSizeMake(0, 0);
     
     
@@ -70,18 +73,34 @@
     self.progressLayer.lineWidth = 14;
     self.progressLayer.lineCap = kCALineJoinMiter;
     self.progressLayer.lineJoin = kCALineJoinRound;
+    self.progressLayer.shadowColor = [UIColor whiteColor].CGColor;
     
     self.progressLayerEnd = [CAShapeLayer layer];
     self.progressLayerEnd.path = [self drawPathWithArcCenter];
     self.progressLayerEnd.lineWidth = self.lineWidth;
-    self.progressLayerEnd.strokeColor = [UIColor whiteColor].CGColor   ;
+    self.progressLayerEnd.strokeColor = [UIColor whiteColor].CGColor;
     self.progressLayerEnd.fillColor = [UIColor clearColor].CGColor;
     self.progressLayerEnd.lineCap = kCALineJoinMiter;
     self.progressLayerEnd.lineJoin = kCALineJoinRound;
+    self.progressLayerEnd.shadowOpacity = 0.0;
+    
+    self.textBackground = [CAShapeLayer layer];
+    self.textBackground.path = [self drawTextBackground];
+    UIColor *backColor = [UIColor grayColor]; // stroke fills whole circle in
+    self.textBackground.strokeColor = [backColor colorWithAlphaComponent:0.7].CGColor; //background translucent
+    self.textBackground.fillColor = [UIColor clearColor].CGColor;
+    self.textBackground.lineCap = kCALineJoinMiter;
+    self.textBackground.lineJoin = kCALineJoinMiter;
+    self.textBackground.shadowColor = [UIColor clearColor].CGColor;
+    self.textBackground.shadowOpacity = 0.0; // make shadows start transparent
+    //self.shadowPath = self.path;
+    self.textBackground.shadowRadius = 0.0;
+    self.textBackground.shadowOffset = CGSizeMake(0, 0);
     
     [self addSublayer:self.progressLayer];
     [self addSublayer:_progressLayerEnd];
-    
+    [self insertSublayer:self.textBackground above:self];
+    //[self addSublayer:self.textBackground];
     //set up background pulsing
     CABasicAnimation* shadowAnimation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
     shadowAnimation.fromValue = @(0.0);
@@ -91,7 +110,7 @@
     shadowAnimation.autoreverses = YES; // repeats opacity transition to fade in, out (fromvalue and tovalue alternate)
     shadowAnimation.removedOnCompletion = YES; // not sure if needed, hopefully finishes at end of view
     [self addAnimation:shadowAnimation forKey:nil]; // animate the shadow pulse
-    
+    // trying it on the line subview rather than the whole layer
 }
 
 - (CGPathRef)drawPathWithArcCenter {
@@ -105,6 +124,13 @@
                                        clockwise:YES].CGPath;
 }
 
+- (CGPathRef)drawTextBackground {
+    return [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2)
+                                          radius:(self.frame.size.width/3 - (self.lineWidth/2))/2
+                                      startAngle:(-M_PI/2)
+                                        endAngle:3*M_PI/2
+                                       clockwise:YES].CGPath;
+}
 
 - (void)setElapsedTime:(NSTimeInterval)elapsedTime {
     _initialProgress = [self calculatePercent:_elapsedTime toTime:_timeLimit];
