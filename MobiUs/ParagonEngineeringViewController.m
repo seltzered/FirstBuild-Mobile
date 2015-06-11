@@ -18,6 +18,17 @@
 -(void)viewDidLoad
 {
     self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    //self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+}
+
+-(void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request
+{
+    NSLog(@"wtf");
+}
+-(void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
+    NSLog(@"fire it up");
+    self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
 }
 
 - (IBAction)tempPanGestureAction:(UIPanGestureRecognizer*)sender {
@@ -161,18 +172,37 @@
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
     if (central.state != CBCentralManagerStatePoweredOn) {
+        //NSLog(@"state changed! %@", central.state);
         //TODO: other states
         return;
     }
-    
+    CBUUID *deviceUUID = [CBUUID UUIDWithString:@"75CEDCFB-2CF6-E3BF-C884-AA6FC24C3B21"];
+   
+
+    //[self.centralManager retrieveConnectedPeripheralsWithServices:];
+    //[self.centralManager retrievePeripheralsWithIdentifiers:[NSArray arrayWithObject:deviceUUID]];
     //TODO: hard code
     CBUUID *myUUID = [CBUUID UUIDWithString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
     [self.centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:myUUID] options:nil];
+    //[self.centralManager retrieveConnectedPeripheralsWithServices:[NSArray arrayWithObject:myUUID]];
+    //[self.centralManager retrievePeripheralsWithIdentifiers:[NSArray arrayWithObject:deviceUUID]];
+
 }
 
+
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
+{
+    self.currentPeripheral =  (CBPeripheral*)peripherals[0];
+    [self.centralManager stopScan];
+    self.currentPeripheral.delegate = self;
+    [self.centralManager connectPeripheral:self.currentPeripheral options:nil];
+    
+    
+}
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     NSLog(@"did discover %@", peripheral.identifier);
+     NSString *uuidString = [NSString stringWithFormat:@"%@", [[peripheral identifier] UUIDString]];
     [self.centralManager stopScan];
     self.currentPeripheral = peripheral;
     self.currentPeripheral.delegate = self;
@@ -214,7 +244,7 @@
             self.sousVideTemp = characteristic;
             
         }
-        else if ([[characteristic.UUID UUIDString] isEqualToString:@"71B1A100-E3AE-46FF-BB0A-E37D0BA79496"])
+        else if ([[characteristic.UUID UUIDString] isEqualToString:@"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"])
         {
             NSLog(@"got probe temp");
             self.probeTemp = characteristic;
@@ -236,7 +266,7 @@
     NSData *data = self.probeTemp.value;
     Byte bytes[2] ;
     [data getBytes:bytes length:2];
-    NSLog(@"more %02x", bytes[1] );
+    NSLog(@"more %02x %02x", bytes[0], bytes[1] );
     self.probeTempLabel.text = [NSString stringWithFormat:@"%d", bytes[1]];
     [self updateProbeTemp];
 }

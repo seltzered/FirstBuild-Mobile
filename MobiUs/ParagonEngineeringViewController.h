@@ -10,7 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 
-@interface ParagonEngineeringViewController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface ParagonEngineeringViewController : UIViewController <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
 @property (nonatomic, strong) CBPeripheral* currentPeripheral;
 @property (nonatomic, strong) CBCentralManager* centralManager;
