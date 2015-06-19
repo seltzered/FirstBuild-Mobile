@@ -10,8 +10,28 @@
 
 @implementation FSTBleCentralManager
 
+NSString * const FSTBleCentralManagerDeviceFound = @"FSTBleCentralManagerDeviceFound";
+NSString * const FSTBleCentralManagerDeviceUnFound = @"FSTBleCentralManagerDeviceUnFound";
+
+NSMutableArray* _discoveredDevicesCache;
+NSMutableArray* _discoveredDevicesActiveScan;
+NSTimer* _discoveryTimer;
+BOOL _scanning = NO;
+NSUUID* _currentServiceScanningUuid ;
+
 CBCentralManager* _centralManager;
 CBPeripheralManager * _peripheralManager; //temporary
+
++ (id) sharedInstance {
+    
+    static FSTBleCentralManager *sharedSingletonInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedSingletonInstance = [[self alloc] init];
+    });
+    return sharedSingletonInstance;
+}
+
 
 - (instancetype)init
 {
@@ -56,11 +76,57 @@ CBPeripheralManager * _peripheralManager; //temporary
     }
 }
 
--(void)scanForDevicesWithServiceUUID: (NSUUID*)uuid
+-(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString
 {
-    if (_centralManager.state == CBCentralManagerStatePoweredOn)
+    if (uuidString && uuidString.length > 0)
     {
-        [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:uuid] options:nil];
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:uuidString];
+        _currentServiceScanningUuid = uuid;
+        if (_centralManager.state == CBCentralManagerStatePoweredOn)
+        {
+            _discoveredDevicesActiveScan = [[NSMutableArray alloc]init];
+            _discoveredDevicesCache = [[NSMutableArray alloc]init];
+            _discoveryTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(discoveryTimerTimeout:) userInfo:nil repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:_discoveryTimer forMode:NSRunLoopCommonModes];
+            _scanning = YES;
+            
+            [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
+        }
+        else
+        {
+            DLog(@"central is not powered on, can't scan");
+        }
+    }
+}
+
+-(void)discoveryTimerTimeout:(NSTimer *)timer
+{
+    if (_scanning == YES)
+    {
+        //stop scanning to refresh discovered list
+        [_centralManager stopScan];
+        
+        //first remove any objects from the cache that were in the active scan
+        [_discoveredDevicesCache removeObjectsInArray:_discoveredDevicesActiveScan];
+        
+        //now loop through any devices left over (these weren't in the last scan)
+        for (CBPeripheral* peripheral in _discoveredDevicesCache)
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceUnFound object:peripheral];
+        }
+        
+        //our cache is now what was discovered over the last active search
+        _discoveredDevicesCache = [NSMutableArray arrayWithArray:_discoveredDevicesActiveScan];
+        
+        //new clean array of active devices
+        _discoveredDevicesActiveScan = [[NSMutableArray alloc]init];
+        
+        //start scanning again
+        [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
+    }
+    else
+    {
+        [timer invalidate];
     }
 }
 
@@ -90,7 +156,26 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    BOOL _alreadyAnnouncedPeripheral = NO;
     
+    //add it to the list of pending devices found
+    [_discoveredDevicesActiveScan addObject:peripheral];
+    
+    //search through the previous list to find any objects we discovered the last time
+    for (CBPeripheral* p in _discoveredDevicesCache)
+    {
+        if (p.identifier == peripheral.identifier)
+        {
+            _alreadyAnnouncedPeripheral = YES;
+            break;
+        }
+    }
+
+    if (!_alreadyAnnouncedPeripheral)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceFound object:peripheral];
+    }
+
 }
 
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral

@@ -12,4 +12,13 @@
 //TODO: temporarily need CBPeripheralManagerDelegate
 @interface FSTBleCentralManager : NSObject <CBCentralManagerDelegate, CBPeripheralManagerDelegate>
 
+
+extern NSString * const FSTBleCentralManagerDeviceFound;
+extern NSString * const FSTBleCentralManagerDeviceUnFound;
+
+
+-(void)scanForDevicesWithServiceUUIDString: (NSString*)uuid;
+
++(id) sharedInstance;
+
 @end

@@ -42,7 +42,8 @@
                         <constraints>
                             <constraint firstItem="0dP-VA-e0B" firstAttribute="top" secondItem="Adr-MS-MvD" secondAttribute="bottom" id="7MZ-vH-ld9"/>
                             <constraint firstItem="t7d-c2-9x9" firstAttribute="bottom" secondItem="Adr-MS-MvD" secondAttribute="bottom" id="GXY-bc-Kc6"/>
-                            <constraint firstAttribute="width" secondItem="t7d-c2-9x9" secondAttribute="width" id="OKr-vT-OdA"/>
+                            <constraint firstItem="t7d-c2-9x9" firstAttribute="leading" secondItem="xkW-6F-wav" secondAttribute="leading" id="Sbc-Fg-yUM"/>
+                            <constraint firstAttribute="trailing" secondItem="t7d-c2-9x9" secondAttribute="trailing" id="XVl-zI-JOK"/>
                             <constraint firstItem="t7d-c2-9x9" firstAttribute="top" secondItem="RlM-h1-5eJ" secondAttribute="bottom" id="dFU-zx-4Ci"/>
                             <constraint firstAttribute="centerX" secondItem="Adr-MS-MvD" secondAttribute="centerX" id="hd2-gH-ESB"/>
                             <constraint firstAttribute="centerX" secondItem="t7d-c2-9x9" secondAttribute="centerX" id="nEj-Jg-RBg"/>
@@ -62,8 +63,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="y2n-qb-Rh2">
+                            <rect key="frame" x="0.0" y="66" width="600" height="2"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tRa-7M-FTC" userLabel="bleDeviceCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bleDeviceCell" id="tRa-7M-FTC" userLabel="bleDeviceCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tRa-7M-FTC" id="ecM-P5-QNP">
                                     <autoresizingMask key="autoresizingMask"/>

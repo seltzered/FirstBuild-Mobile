@@ -16,6 +16,7 @@
 #import "ChillHubViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTCookingMethodViewController.h"
+#import "FSTBleCentralManager.h"
 
 @interface ProductCollectionViewController ()
 
@@ -31,11 +32,17 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     self.products = [[NSMutableArray alloc] init];
    
     //[self configureFirebaseDevices];
+    [self configureBleDevices];
     
     FSTParagon* paragon = [FSTParagon new];
     [self.products addObject:paragon];
     
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+}
+
+-(void)configureBleDevices
+{
+    [FSTBleCentralManager sharedInstance];
 }
 
 -(void)configureFirebaseDevices
