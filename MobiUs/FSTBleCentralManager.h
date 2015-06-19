@@ -18,6 +18,7 @@ extern NSString * const FSTBleCentralManagerDeviceUnFound;
 
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuid;
+-(void)stopScanning;
 
 +(id) sharedInstance;
 

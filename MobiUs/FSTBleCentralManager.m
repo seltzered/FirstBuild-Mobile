@@ -78,31 +78,55 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString
 {
-    if (uuidString && uuidString.length > 0)
+    if (_scanning == YES)
     {
+       DLog(@"already scanning");
+    }
+    else if (!uuidString)
+    {
+        DLog(@"uuidString null");
+    }
+    else if (uuidString.length ==0)
+    {
+        DLog(@"uuidString length is 0");
+    }
+    else if (_centralManager.state != CBCentralManagerStatePoweredOn)
+    {
+        DLog(@"central is not powered on, can't scan");
+    }
+    else
+    {
+        DLog(@"scanning...");
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:uuidString];
         _currentServiceScanningUuid = uuid;
-        if (_centralManager.state == CBCentralManagerStatePoweredOn)
-        {
-            _discoveredDevicesActiveScan = [[NSMutableArray alloc]init];
-            _discoveredDevicesCache = [[NSMutableArray alloc]init];
-            _discoveryTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(discoveryTimerTimeout:) userInfo:nil repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:_discoveryTimer forMode:NSRunLoopCommonModes];
-            _scanning = YES;
-            
-            [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
-        }
-        else
-        {
-            DLog(@"central is not powered on, can't scan");
-        }
+        _discoveredDevicesActiveScan = [[NSMutableArray alloc]init];
+        _discoveredDevicesCache = [[NSMutableArray alloc]init];
+        _scanning = YES;
+
+        //start a periodic timer to stop and start the scan, this is so we can find
+        //devices that are no longer online
+        _discoveryTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(discoveryTimerTimeout:) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_discoveryTimer forMode:NSRunLoopCommonModes];
+
+        [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
     }
+}
+
+-(void)stopScanning
+{
+     DLog(@"stop scanning...");
+    _scanning = NO;
+    _currentServiceScanningUuid = nil;
+    [_centralManager stopScan];
+    [_discoveryTimer invalidate];
 }
 
 -(void)discoveryTimerTimeout:(NSTimer *)timer
 {
     if (_scanning == YES)
     {
+        DLog(@"scanning...periodic poke...");
+        
         //stop scanning to refresh discovered list
         [_centralManager stopScan];
         
@@ -123,10 +147,6 @@ CBPeripheralManager * _peripheralManager; //temporary
         
         //start scanning again
         [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
-    }
-    else
-    {
-        [timer invalidate];
     }
 }
 

@@ -66,7 +66,7 @@ NSObject* _undiscoveryObserver;
         }
     }];
     
-    _discoveryObserver = [center addObserverForName:FSTBleCentralManagerDeviceUnFound
+    _undiscoveryObserver = [center addObserverForName:FSTBleCentralManagerDeviceUnFound
                                              object:nil
                                               queue:nil
                                          usingBlock:^(NSNotification *notification)
@@ -83,7 +83,9 @@ NSObject* _undiscoveryObserver;
 }
 
 -(void)dealloc {
+    [[FSTBleCentralManager sharedInstance] stopScanning];
     [[NSNotificationCenter defaultCenter] removeObserver:_discoveryObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_undiscoveryObserver];
 }
 
 - (void)didReceiveMemoryWarning {
