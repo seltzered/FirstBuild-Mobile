@@ -42,6 +42,10 @@
 		5B9EF0F719DEEE1000E8D9F1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9EF0F619DEEE1000E8D9F1 /* AppDelegate.m */; };
 		5B9EF0FF19DEEE1000E8D9F1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B9EF0FE19DEEE1000E8D9F1 /* Images.xcassets */; };
 		5B9EF10219DEEE1000E8D9F1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B9EF10019DEEE1000E8D9F1 /* LaunchScreen.xib */; };
+		5BA3A96E1B345DAF00E51C51 /* FSTBleCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */; };
+		5BA3A9741B34722000E51C51 /* BLECommissioning.Storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA3A9731B34722000E51C51 /* BLECommissioning.Storyboard */; };
+		5BA3A9771B3475EF00E51C51 /* FSTBleCommissioningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A9761B3475EF00E51C51 /* FSTBleCommissioningViewController.m */; };
+		5BA3A97A1B34760700E51C51 /* FSTBleCommissioningTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A9791B34760700E51C51 /* FSTBleCommissioningTableViewController.m */; };
 		5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA94D5A1A5C9EDE00F9AD79 /* MilkGallonClippingView.m */; };
 		5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E7E01AF7F4BA00730031 /* BeerBankViewController.m */; };
 		5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E7E31AF7F4E800730031 /* FSTBeerBank.m */; };
@@ -159,6 +163,13 @@
 		5B9EF10119DEEE1000E8D9F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5B9EF11D19DEFEF000E8D9F1 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		5B9EF12319DF08E700E8D9F1 /* MobiUs.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiUs.pch; sourceTree = "<group>"; };
+		5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleCentralManager.h; sourceTree = "<group>"; };
+		5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleCentralManager.m; sourceTree = "<group>"; };
+		5BA3A9731B34722000E51C51 /* BLECommissioning.Storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BLECommissioning.Storyboard; sourceTree = "<group>"; };
+		5BA3A9751B3475EF00E51C51 /* FSTBleCommissioningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleCommissioningViewController.h; sourceTree = "<group>"; };
+		5BA3A9761B3475EF00E51C51 /* FSTBleCommissioningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleCommissioningViewController.m; sourceTree = "<group>"; };
+		5BA3A9781B34760700E51C51 /* FSTBleCommissioningTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleCommissioningTableViewController.h; sourceTree = "<group>"; };
+		5BA3A9791B34760700E51C51 /* FSTBleCommissioningTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleCommissioningTableViewController.m; sourceTree = "<group>"; };
 		5BA94D591A5C9EDE00F9AD79 /* MilkGallonClippingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilkGallonClippingView.h; sourceTree = "<group>"; };
 		5BA94D5A1A5C9EDE00F9AD79 /* MilkGallonClippingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilkGallonClippingView.m; sourceTree = "<group>"; };
 		5BB1E7DF1AF7F4BA00730031 /* BeerBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerBankViewController.h; sourceTree = "<group>"; };
@@ -548,6 +559,7 @@
 		5B9EF0F019DEEE1000E8D9F1 /* FirstBuild */ = {
 			isa = PBXGroup;
 			children = (
+				5BA3A96F1B3470FA00E51C51 /* BLECommissioning */,
 				5B99DFBF1AB1EA2200247034 /* Paragon */,
 				5B99E0791A1A5870005FB881 /* WifiCommissioning */,
 				5BC5A1BC19EF5E6B009C93B1 /* Authentication */,
@@ -579,6 +591,42 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5BA3A96F1B3470FA00E51C51 /* BLECommissioning */ = {
+			isa = PBXGroup;
+			children = (
+				5BA3A9721B34715900E51C51 /* views */,
+				5BA3A9711B34715400E51C51 /* model */,
+				5BA3A9701B34714300E51C51 /* controllers */,
+			);
+			name = BLECommissioning;
+			sourceTree = "<group>";
+		};
+		5BA3A9701B34714300E51C51 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5BA3A9751B3475EF00E51C51 /* FSTBleCommissioningViewController.h */,
+				5BA3A9761B3475EF00E51C51 /* FSTBleCommissioningViewController.m */,
+				5BA3A9781B34760700E51C51 /* FSTBleCommissioningTableViewController.h */,
+				5BA3A9791B34760700E51C51 /* FSTBleCommissioningTableViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		5BA3A9711B34715400E51C51 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		5BA3A9721B34715900E51C51 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				5BA3A9731B34722000E51C51 /* BLECommissioning.Storyboard */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
 		5BC3648E1A3249EA00D03B9C /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -599,6 +647,8 @@
 			children = (
 				6743AE1D19E30E46000D9CF3 /* MobiNavigationController.h */,
 				6743AE1E19E30E46000D9CF3 /* MobiNavigationController.m */,
+				5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */,
+				5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -733,6 +783,7 @@
 			files = (
 				5BC5A1C619EF6314009C93B1 /* Authentication.storyboard in Resources */,
 				5BF9482D19EC15BB00CB8BCF /* ChillHub.storyboard in Resources */,
+				5BA3A9741B34722000E51C51 /* BLECommissioning.Storyboard in Resources */,
 				5BF9483119EC15F900CB8BCF /* Main.storyboard in Resources */,
 				5B174DE01A60717000A00505 /* FirstBuildAssets.xcassets in Resources */,
 				5BCBB9D41B02991B00B8E043 /* FSTParagon.storyboard in Resources */,
@@ -789,9 +840,11 @@
 			files = (
 				5BC3648A1A2FAC1A00D03B9C /* FSTMilkyWeigh.m in Sources */,
 				5BC3648D1A3112EE00D03B9C /* FSTBackgroundLayer.m in Sources */,
+				5BA3A96E1B345DAF00E51C51 /* FSTBleCentralManager.m in Sources */,
 				5BCBB9DA1B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m in Sources */,
 				5BBFACFF19E495FC00E42575 /* ProductCollectionViewController.m in Sources */,
 				5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */,
+				5BA3A97A1B34760700E51C51 /* FSTBleCommissioningTableViewController.m in Sources */,
 				5BCBB9FE1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m in Sources */,
 				5BC3647E1A2F637800D03B9C /* FSTDevice.m in Sources */,
 				5BC364971A3260E200D03B9C /* FSTChillHub.m in Sources */,
@@ -830,6 +883,7 @@
 				5B99E0811A1A5D10005FB881 /* WifiCommissioningViewController.m in Sources */,
 				5BCBB9E31B02A25200B8E043 /* FSTPreheatingViewController.m in Sources */,
 				5BBFAD0219E4965500E42575 /* ProductCollectionViewCell.m in Sources */,
+				5BA3A9771B3475EF00E51C51 /* FSTBleCommissioningViewController.m in Sources */,
 				5B4460261B1E00C9001A4953 /* FSTBeefView.m in Sources */,
 				5BCBBA041B03E92300B8E043 /* FSTSousVideCookingMethods.m in Sources */,
 				5B99E0111AB32DA100247034 /* ParagonEngineeringViewController.m in Sources */,

@@ -23,15 +23,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    
     switch (indexPath.row) {
         case 0:
             CellIdentifier = @"chillhub";
+            break;
+            
+        case 1:
+            CellIdentifier = @"paragon";
             break;
             
         default:
