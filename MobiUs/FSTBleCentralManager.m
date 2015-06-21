@@ -53,7 +53,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 {
     if (name && name.length > 0)
     {
-        NSString *keyname =[NSString stringWithFormat:@"%@%@", @"ble-devices-", name];
+        NSString *keyname = [NSString stringWithFormat:@"%@%@", @"ble-devices-", name];
         
         if (_centralManager.state == CBCentralManagerStatePoweredOn)
         {
@@ -71,8 +71,18 @@ CBPeripheralManager * _peripheralManager; //temporary
 {
     if (name && name.length > 0)
     {
-        NSString *keyname =[NSString stringWithFormat:@"%@%@", @"ble-devices-", name];
-        [[NSUserDefaults standardUserDefaults] setObject:[uuid UUIDString] forKey:keyname];
+//        NSMutableArray* savedDevices = [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
+//        if (savedDevices)
+//        {
+//            if ([savedDevices o])
+//        }
+//        else
+//        {
+//            
+//        }
+//        
+//        NSString *keyname =[NSString stringWithFormat:@"%@%@", @"ble-devices-", name];
+//        [[NSUserDefaults standardUserDefaults] setObject:[uuid UUIDString] forKey:keyname];
     }
 }
 

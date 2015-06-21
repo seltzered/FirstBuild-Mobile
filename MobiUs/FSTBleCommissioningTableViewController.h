@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTBleCommissioningTableViewController : UITableViewController
+@interface FSTBleCommissioningTableViewController : UITableViewController <UIAlertViewDelegate>
 
 @end
