@@ -67,22 +67,19 @@ CBPeripheralManager * _peripheralManager; //temporary
     }
 }
 
--(void)savePeripheralHavingUUID: (NSUUID*)uuid withName: (NSString*)name
+-(void)savePeripheralHavingUUIDString: (NSString*)uuid withName: (NSString*)name
 {
     if (name && name.length > 0)
     {
-//        NSMutableArray* savedDevices = [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
-//        if (savedDevices)
-//        {
-//            if ([savedDevices o])
-//        }
-//        else
-//        {
-//            
-//        }
-//        
-//        NSString *keyname =[NSString stringWithFormat:@"%@%@", @"ble-devices-", name];
-//        [[NSUserDefaults standardUserDefaults] setObject:[uuid UUIDString] forKey:keyname];
+        NSMutableDictionary* savedDevices = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"]];
+        
+        if (!savedDevices)
+        {
+            savedDevices = [[NSMutableDictionary alloc]init];
+        }
+        
+        [savedDevices setObject:name forKey:uuid];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
     }
 }
 

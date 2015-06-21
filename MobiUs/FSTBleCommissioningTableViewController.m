@@ -147,7 +147,7 @@ CBPeripheral* _currentlySelectedPeripheral;
             
             if (friendlyName.length > 0)
             {
-                [[FSTBleCentralManager sharedInstance] savePeripheralHavingUUID:_currentlySelectedPeripheral.identifier withName:friendlyName];
+                [[FSTBleCentralManager sharedInstance] savePeripheralHavingUUIDString:[_currentlySelectedPeripheral.identifier UUIDString] withName:friendlyName];
             }
             //TODO: error handling if friendlyName is empty
             //TODO: error handling if name already exists? overwrite?

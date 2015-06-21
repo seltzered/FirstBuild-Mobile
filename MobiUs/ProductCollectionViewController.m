@@ -43,7 +43,7 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 -(void)configureBleDevices
 {
     [FSTBleCentralManager sharedInstance];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:<#(NSString *)#>
+//    [[NSUserDefaults standardUserDefaults] remo
 }
 
 -(void)configureFirebaseDevices
