@@ -26,6 +26,7 @@
 
 static NSString * const reuseIdentifier = @"ProductCell";
 static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
+NSObject* _connectedToBleObserver;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +36,16 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     [self configureBleDevices];
     
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    _connectedToBleObserver = [center addObserverForName:FSTBleCentralManagerPoweredOn
+                                                  object:nil
+                                                   queue:nil
+                                                    usingBlock:^(NSNotification *notification)
+   {
+       [self connectBleDevices];
+   }];
 }
 
 -(void)configureBleDevices
@@ -54,6 +65,23 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
             paragon.bleUuid = [[NSUUID alloc]initWithUUIDString:key];
             paragon.friendlyName = [devices objectForKeyedSubscript:key];
             [self.products addObject:paragon];
+        }
+        
+        if ([[FSTBleCentralManager sharedInstance] isPoweredOn])
+        {
+            [self connectBleDevices];
+        }
+    }
+}
+
+- (void)connectBleDevices
+{
+    for (FSTProduct* product in self.products)
+    {
+        if ([product isKindOfClass:[FSTParagon class]])
+        {
+            FSTParagon* paragon = (FSTParagon*)product;
+            [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:paragon.bleUuid];
         }
     }
 }

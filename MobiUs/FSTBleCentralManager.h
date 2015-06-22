@@ -15,12 +15,17 @@
 
 extern NSString * const FSTBleCentralManagerDeviceFound;
 extern NSString * const FSTBleCentralManagerDeviceUnFound;
-
+extern NSString * const FSTBleCentralManagerPoweredOn;
+extern NSString * const FSTBleCentralManagerPoweredOff;
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuid;
 -(void)stopScanning;
 -(void)savePeripheralHavingUUIDString: (NSString*)uuid withName: (NSString*)name;
-- (NSDictionary*)getSavedPeripherals;
+-(NSDictionary*)getSavedPeripherals;
+-(void)connectToSavedPeripheralWithUUID: (NSUUID*) uuid;
+-(void)connectToNewPeripheral: (CBPeripheral*) peripheral;
+
+@property BOOL isPoweredOn;
 
 +(id) sharedInstance;
 

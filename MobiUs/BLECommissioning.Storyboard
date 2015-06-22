@@ -2,7 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YX5-5X-5Oy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
+            <string>PTSans-NarrowBold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Ble Commissioning View Controller-->
         <scene sceneID="JyT-OU-yrF">
@@ -53,7 +59,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXy-by-n3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="495" y="66"/>
+            <point key="canvasLocation" x="483" y="264"/>
         </scene>
         <!--Ble Commissioning Table View Controller-->
         <scene sceneID="Ag1-AK-VEO">
@@ -81,10 +87,96 @@
                             <outlet property="delegate" destination="dOI-ob-UzF" id="4jo-ZL-gub"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="K3l-7d-HEu" kind="show" identifier="segueConnecting" id="Pfx-d9-XFO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMn-bX-ei6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1383" y="264"/>
+            <point key="canvasLocation" x="1327" y="264"/>
+        </scene>
+        <!--Ble Connecting View Controller-->
+        <scene sceneID="gA3-ey-ck0">
+            <objects>
+                <viewController id="K3l-7d-HEu" customClass="FSTBleConnectingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oZk-PI-AjH"/>
+                        <viewControllerLayoutGuide type="bottom" id="meY-Y3-Ecx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O3O-kA-Sqn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="connecting..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMp-Iq-NcJ">
+                                <rect key="frame" x="247" y="283" width="100" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="HMp-Iq-NcJ" secondAttribute="centerY" constant="-3.5" id="XMg-dq-FwS"/>
+                            <constraint firstAttribute="centerX" secondItem="HMp-Iq-NcJ" secondAttribute="centerX" constant="3" id="bLM-Z4-Tcp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="wK9-FT-hz9" kind="show" identifier="segueConnected" id="MVM-Ps-LWm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gtE-eL-p9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2145" y="264"/>
+        </scene>
+        <!--Ble Connected View Controller-->
+        <scene sceneID="gGZ-bS-KaY">
+            <objects>
+                <viewController id="wK9-FT-hz9" customClass="FSTBleConnectedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OTr-WA-7aQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="TZp-d8-0QY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Qwl-LE-ezy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8x-ir-vf1" userLabel="continueButtonHolderView">
+                                <rect key="frame" x="45" y="500" width="510" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpp-Qf-stZ">
+                                        <rect key="frame" x="0.0" y="16" width="540" height="34"/>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wpp-Qf-stZ" secondAttribute="width" id="IY5-R2-3MQ"/>
+                                    <constraint firstAttribute="centerX" secondItem="Wpp-Qf-stZ" secondAttribute="centerX" id="K8U-RK-8Tn"/>
+                                    <constraint firstAttribute="height" constant="65" id="KzV-qC-VtI"/>
+                                    <constraint firstAttribute="centerY" secondItem="Wpp-Qf-stZ" secondAttribute="centerY" id="kbQ-K4-acB"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="U8x-ir-vf1" firstAttribute="width" secondItem="Qwl-LE-ezy" secondAttribute="width" multiplier="0.85" id="hpk-VO-Ii2"/>
+                            <constraint firstItem="TZp-d8-0QY" firstAttribute="top" secondItem="U8x-ir-vf1" secondAttribute="bottom" constant="15" id="n0w-ZL-M6A"/>
+                            <constraint firstAttribute="centerX" secondItem="U8x-ir-vf1" secondAttribute="centerX" id="yVc-c8-KxZ"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zdP-qL-ke5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2957" y="264"/>
         </scene>
     </scenes>
 </document>
