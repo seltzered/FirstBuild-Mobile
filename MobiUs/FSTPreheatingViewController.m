@@ -37,6 +37,8 @@ CGFloat _temperatureViewHeight;
 
 NSObject* _temperatureChangedObserver;
 
+NSTimer* _pulseTimer;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -102,29 +104,20 @@ NSObject* _temperatureChangedObserver;
     pulse.image=[UIImage imageNamed:@"pulse.png"];
     pulse.alpha = 0.0;
     [self.view addSubview:pulse];
-
-    [self pulseAnimation:pulse];
+    
+    [self pulseAnimation:pulse]; // begin repeat invocation and alpha animation
     
 }
 
 - (void)pulseAnimation:(UIImageView *)pulse { // might need to call and repeat through NSTimer or some other object, since the animation never updates
-
-    // movement animation
-    [UIView animateWithDuration:2.0
-                          delay:0.5
-                        options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat
-                     animations: ^(void) {
-                         CGAffineTransform transform = CGAffineTransformMakeTranslation(0,-self.temperatureScrollerHeightConstraint.constant); // needs to go to top of red area (was at -_scrollViewSizeYMax)
-                         // need to update the y value, this block only calls once.
-                         pulse.transform = transform;
-                     }
-                     completion:nil
-    ];
+    _pulseTimer = [NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(moveOnePulse:) userInfo:pulse repeats:YES]; // starts interval that calls moveOnePulse with this pulse
     
+    [_pulseTimer fire]; // start it once at the start, then it will repeat at the next interval
+
     // alpha animation
-    [UIView animateWithDuration:1.0
-                          delay:0.5
-                        options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat
+        [UIView animateWithDuration:1.25
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat
                      animations: ^(void) {
                          pulse.alpha=1.0;
                      }
@@ -132,6 +125,24 @@ NSObject* _temperatureChangedObserver;
      ];
 
    }
+
+-(void)moveOnePulse:(NSTimer *)timer {
+    UIImageView *pulse = [timer userInfo];
+    pulse.transform = CGAffineTransformIdentity; // resets to original position, apparently all these
+    // transformations are stored, as matrices of course, so when setting a new transform it just transitions to a new transform matrix, never actually changing the position
+    
+    [UIView animateWithDuration:2.5
+                          delay:0.0 // this should be twice the alpha animation delay
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations: ^(void) {
+                         CGAffineTransform transform = CGAffineTransformMakeTranslation(0, -self.temperatureScrollerHeightConstraint.constant + pulse.frame.size.height); // height contraint increases, add height to keep pulse within it
+                         // movement animation
+                         pulse.transform = transform;
+                     }
+                     completion:nil
+     ];
+
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -154,6 +165,8 @@ NSObject* _temperatureChangedObserver;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
+    [_pulseTimer invalidate]; // free the timer to stop calling the animation
+    _pulseTimer = nil;
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToCookViewController class]])
     {
         ((FSTReadyToCookViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
