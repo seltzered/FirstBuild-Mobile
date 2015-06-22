@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTCustomCookSettingsViewController : UIViewController
+@interface FSTCustomCookSettingsViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
+
+@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+
+-(void)updateLabels;
 
 @end

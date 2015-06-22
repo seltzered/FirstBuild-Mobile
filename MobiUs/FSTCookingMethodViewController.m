@@ -58,5 +58,9 @@ FSTCookingMethods* _methods;
     [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
 }
 
+- (IBAction)customTap:(id)sender {
+    [self performSegueWithIdentifier:@"segueCustom" sender:self];
+
+}
 
 @end
