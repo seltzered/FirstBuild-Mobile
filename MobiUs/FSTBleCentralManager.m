@@ -14,6 +14,7 @@ NSString * const FSTBleCentralManagerDeviceFound = @"FSTBleCentralManagerDeviceF
 NSString * const FSTBleCentralManagerDeviceUnFound = @"FSTBleCentralManagerDeviceUnFound";
 NSString * const FSTBleCentralManagerPoweredOn = @"FSTBleCentralManagerPoweredOn";
 NSString * const FSTBleCentralManagerPoweredOff = @"FSTBleCentralManagerPoweredOff";
+NSString * const FSTBleCentralManagerDeviceConnected = @"FSTBleCentralManagerDeviceConnected";
 
 NSMutableArray* _discoveredDevicesCache;
 NSMutableArray* _discoveredDevicesActiveScan;
@@ -208,6 +209,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 -(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     DLog(@"peripheral connected... %@", [peripheral.identifier UUIDString]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceConnected object:peripheral];
 }
 
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error

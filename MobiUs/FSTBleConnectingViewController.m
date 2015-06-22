@@ -15,9 +15,29 @@
 
 @implementation FSTBleConnectingViewController
 
+NSObject* _deviceConnectedObserver;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    __weak typeof(self) weakSelf = self;
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
+    _deviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
+                                               object:nil
+                                                queue:nil
+                                           usingBlock:^(NSNotification *notification)
+    {
+        if (self.peripheral == (CBPeripheral*)notification.object)
+        {
+            [weakSelf performSegueWithIdentifier:@"segueConnected" sender:self];
+        }
+    }];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
 }
 
 - (void)didReceiveMemoryWarning {
