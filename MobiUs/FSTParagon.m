@@ -54,6 +54,11 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     
 }
 
+#pragma mark - CBPeripheralDelegate
+
+
+#pragma mark - Simulations
+
 #ifdef SIMULATE_PARAGON
 
 - (void) startParagonSimulator

@@ -34,16 +34,28 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     //[self configureFirebaseDevices];
     [self configureBleDevices];
     
-    FSTParagon* paragon = [FSTParagon new];
-    [self.products addObject:paragon];
-    
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
 
 -(void)configureBleDevices
 {
-    [FSTBleCentralManager sharedInstance];
-//    [[NSUserDefaults standardUserDefaults] remo
+    NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+    
+    if (!devices || devices.count==0)
+    {
+        [self.delegate noItemsInCollection];
+    }
+    else
+    {
+        for (id key in devices)
+        {
+            FSTParagon* paragon = [FSTParagon new];
+            paragon.online = NO;
+            paragon.bleUuid = [[NSUUID alloc]initWithUUIDString:key];
+            paragon.friendlyName = [devices objectForKeyedSubscript:key];
+            [self.products addObject:paragon];
+        }
+    }
 }
 
 -(void)configureFirebaseDevices
@@ -158,9 +170,8 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     return self.products.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     FSTProduct * product = self.products[indexPath.row];
     ProductCollectionViewCell *productCell;
     
@@ -170,9 +181,9 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     }
     else if ([product isKindOfClass:[FSTParagon class]])
     {
-        //TODO: temp code...
-        product.online = YES;
+        
         productCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierParagon forIndexPath:indexPath];
+        productCell.friendlyName.text = product.friendlyName;
     }
     
     if (product.online)

@@ -83,6 +83,12 @@ CBPeripheralManager * _peripheralManager; //temporary
     }
 }
 
+- (NSDictionary*)getSavedPeripherals
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
+
+}
+
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString
 {
     if (_scanning == YES)
