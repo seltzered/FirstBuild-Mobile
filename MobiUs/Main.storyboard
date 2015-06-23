@@ -586,6 +586,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="0.745528996" green="0.1847289792" blue="0.22502783100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ixf-tc-4Kd" secondAttribute="trailing" id="8DD-B3-fEX"/>
                                     <constraint firstItem="ixf-tc-4Kd" firstAttribute="leading" secondItem="Swc-7F-06T" secondAttribute="leading" id="S90-pd-dJe"/>
@@ -599,6 +600,7 @@
                                     <outlet property="disabledView" destination="DYe-wK-2Vz" id="vdZ-6k-zCb"/>
                                     <outlet property="friendlyName" destination="cFZ-8N-DQI" id="dwy-9G-8zN"/>
                                     <outlet property="mainView" destination="ixf-tc-4Kd" id="van-tZ-C65"/>
+                                    <outletCollection property="gestureRecognizers" destination="JPq-wy-XYV" appends="YES" id="Q7C-rH-Y06"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -610,6 +612,7 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="productCollection" destination="h3X-C2-8Es" id="qsO-XY-k8R"/>
+                        <outlet property="swipeLeftGesture" destination="JPq-wy-XYV" id="xCw-zc-HcI"/>
                         <segue destination="sZO-RU-ozf" kind="show" identifier="segueChillHub" id="1Dx-g3-3f3"/>
                         <segue destination="dJA-hw-Leo" kind="show" identifier="segueAddProduct" id="Ucb-Xj-qPs"/>
                         <segue destination="lhL-8p-Ygk" kind="show" identifier="segueParagon" id="zVb-95-6Ce"/>
@@ -621,6 +624,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <swipeGestureRecognizer direction="left" id="JPq-wy-XYV">
+                    <connections>
+                        <action selector="swipeLeft:" destination="vMY-F1-92f" id="vXg-Ec-EPc"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1396" y="828.5"/>
         </scene>

@@ -12,5 +12,6 @@
 @interface FSTBleConnectingViewController : UIViewController
 
 @property (nonatomic, strong) CBPeripheral* peripheral;
+@property (nonatomic, strong) NSString* friendlyName;
 
 @end

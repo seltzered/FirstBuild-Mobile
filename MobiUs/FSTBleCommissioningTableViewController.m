@@ -10,6 +10,7 @@
 
 #import "FSTBleCommissioningTableViewController.h"
 #import "FSTBleCentralManager.h"
+#import "FSTBleConnectingViewController.h"
 
 @interface FSTBleCommissioningTableViewController ()
 
@@ -25,6 +26,8 @@ NSObject* _discoveryObserver;
 NSObject* _undiscoveryObserver;
 
 UIAlertView* _friendlyNamePrompt;
+NSString* _friendlyName;
+
 
 CBPeripheral* _currentlySelectedPeripheral;
 
@@ -86,7 +89,13 @@ CBPeripheral* _currentlySelectedPeripheral;
     [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
 }
 
--(void)dealloc {
+-(void)dealloc
+{
+    [self cleanup];
+}
+
+-(void)cleanup
+{
     [[FSTBleCentralManager sharedInstance] stopScanning];
     [[NSNotificationCenter defaultCenter] removeObserver:_discoveryObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_undiscoveryObserver];
@@ -133,6 +142,18 @@ CBPeripheral* _currentlySelectedPeripheral;
     _currentlySelectedPeripheral = (CBPeripheral*)(_devices[indexPath.item]);
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [self cleanup];
+    
+    if ([segue.identifier isEqualToString:@"segueConnecting"])
+    {
+        FSTBleConnectingViewController* vc = (FSTBleConnectingViewController*)segue.destinationViewController;
+        vc.peripheral = _currentlySelectedPeripheral;
+        vc.friendlyName = _friendlyName;
+    }
+}
+
 
 #pragma mark - UIAlertViewDelegate
 
@@ -142,12 +163,12 @@ CBPeripheral* _currentlySelectedPeripheral;
     {
         if (buttonIndex == 1)
         {
-            NSString* friendlyName =[alertView textFieldAtIndex:0].text;
-            DLog(@"OK Pressed %@", friendlyName);
+            _friendlyName =[alertView textFieldAtIndex:0].text;
+            DLog(@"OK Pressed %@", _friendlyName);
             
-            if (friendlyName.length > 0)
+            if (_friendlyName.length > 0)
             {
-                [[FSTBleCentralManager sharedInstance] savePeripheralHavingUUIDString:[_currentlySelectedPeripheral.identifier UUIDString] withName:friendlyName];
+                [self performSegueWithIdentifier:@"segueConnecting" sender:self];
             }
             //TODO: error handling if friendlyName is empty
             //TODO: error handling if name already exists? overwrite?

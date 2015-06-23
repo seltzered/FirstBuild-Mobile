@@ -28,8 +28,10 @@ NSObject* _deviceConnectedObserver;
                                                 queue:nil
                                            usingBlock:^(NSNotification *notification)
     {
-        if (self.peripheral == (CBPeripheral*)notification.object)
+        if (weakSelf.peripheral == (CBPeripheral*)notification.object)
         {
+            
+            [[FSTBleCentralManager sharedInstance] savePeripheralHavingUUIDString:[weakSelf.peripheral.identifier UUIDString] withName:self.friendlyName];
             [weakSelf performSegueWithIdentifier:@"segueConnected" sender:self];
         }
     }];
@@ -49,15 +51,5 @@ NSObject* _deviceConnectedObserver;
 {
     [[FSTBleCentralManager sharedInstance] connectToNewPeripheral:self.peripheral];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
