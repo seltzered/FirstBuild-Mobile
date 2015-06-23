@@ -56,15 +56,15 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     
+    [super viewDidLoad];
+    //create a new cooking session and a single stage cook
+    [self.currentParagon.currentCookingMethod createCookingSession];
+    [self.currentParagon.currentCookingMethod addStageToCookingSession];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    //create a new cooking session and a single stage cook
-    [self.currentParagon.currentCookingMethod createCookingSession];
-    [self.currentParagon.currentCookingMethod addStageToCookingSession];
     
     //how big can the thickness selection view grow
     _maxHeight = self.thicknessSelectionView.frame.size.height;
