@@ -12,6 +12,9 @@
 
 NSString * const FSTBleCentralManagerDeviceFound = @"FSTBleCentralManagerDeviceFound";
 NSString * const FSTBleCentralManagerDeviceUnFound = @"FSTBleCentralManagerDeviceUnFound";
+NSString * const FSTBleCentralManagerPoweredOn = @"FSTBleCentralManagerPoweredOn";
+NSString * const FSTBleCentralManagerPoweredOff = @"FSTBleCentralManagerPoweredOff";
+NSString * const FSTBleCentralManagerDeviceConnected = @"FSTBleCentralManagerDeviceConnected";
 
 NSMutableArray* _discoveredDevicesCache;
 NSMutableArray* _discoveredDevicesActiveScan;
@@ -41,7 +44,7 @@ CBPeripheralManager * _peripheralManager; //temporary
         //temporary hack for BLE ACM
         //this startup then triggers the central manager initialization. once the service
         //callback check is removed we need to start the central manager here instead of in peripheralManagerDidUpdateState
-       
+        self.isPoweredOn = NO;
         _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     }
     return self;
@@ -49,20 +52,37 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 #pragma mark - External Methods
 
--(void)connectToSavedPeripheralWithName: (NSString*)name
+-(void)connectToSavedPeripheralWithUUID: (NSUUID*) uuid
 {
-    if (name && name.length > 0)
+    if (uuid)
     {
-        NSString *keyname = [NSString stringWithFormat:@"%@%@", @"ble-devices-", name];
-        
         if (_centralManager.state == CBCentralManagerStatePoweredOn)
         {
-            NSUUID * identifier = [[NSUUID alloc] initWithUUIDString:[[NSUserDefaults standardUserDefaults] objectForKey:keyname]];
-            NSArray* results = [_centralManager retrievePeripheralsWithIdentifiers:[[NSArray alloc] initWithObjects:identifier, nil]];
+            NSArray* results = [_centralManager retrievePeripheralsWithIdentifiers:[[NSArray alloc] initWithObjects:uuid, nil]];
             if (results[0])
             {
+                DLog(@"connecting to ... %@", [uuid UUIDString]);
                 [_centralManager connectPeripheral:results[0] options:nil];
             }
+        }
+        else
+        {
+            DLog(@"central not powered");
+        }
+    }
+}
+
+-(void)connectToNewPeripheral: (CBPeripheral*) peripheral
+{
+    if (peripheral)
+    {
+        if (_centralManager.state == CBCentralManagerStatePoweredOn)
+        {
+            [_centralManager connectPeripheral:peripheral options:nil];
+        }
+        else
+        {
+            DLog(@"central not powered");
         }
     }
 }
@@ -81,6 +101,12 @@ CBPeripheralManager * _peripheralManager; //temporary
         [savedDevices setObject:name forKey:uuid];
         [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
     }
+}
+
+- (NSDictionary*)getSavedPeripherals
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
+
 }
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString
@@ -163,17 +189,27 @@ CBPeripheralManager * _peripheralManager; //temporary
 {
     if (central.state != CBCentralManagerStatePoweredOn) {
         DLog("central state changed, nothing to do %ld", (long)central.state);
-        return;
+        self.isPoweredOn = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerPoweredOff object:self];
     }
-    
-    if (central.state == CBCentralManagerStatePoweredOn) {
+    else if (central.state == CBCentralManagerStatePoweredOn) {
+        self.isPoweredOn = YES;
         DLog(@"central powered on");
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerPoweredOn object:self];
+
     }
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     
+}
+
+
+-(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+{
+    DLog(@"peripheral connected... %@", [peripheral.identifier UUIDString]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceConnected object:peripheral];
 }
 
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
@@ -205,10 +241,6 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 }
 
--(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
-{
-    
-}
 
 -(void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
 {

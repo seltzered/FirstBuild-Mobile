@@ -26,6 +26,8 @@
 
 static NSString * const reuseIdentifier = @"ProductCell";
 static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
+NSObject* _connectedToBleObserver;
+NSObject* _deviceConnectedObserver;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,16 +36,74 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     //[self configureFirebaseDevices];
     [self configureBleDevices];
     
-    FSTParagon* paragon = [FSTParagon new];
-    [self.products addObject:paragon];
+    __weak typeof(self) weakSelf = self;
     
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    _connectedToBleObserver = [center addObserverForName:FSTBleCentralManagerPoweredOn
+                                                  object:nil
+                                                   queue:nil
+                                                    usingBlock:^(NSNotification *notification)
+   {
+       [weakSelf connectBleDevices];
+   }];
+    
+    
+    
+    _deviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
+                                                   object:nil
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+    {
+        for (FSTParagon* paragon in weakSelf.products)
+        {
+            if ([paragon.identifier isEqualToString: [((CBPeripheral*)(notification.object)).identifier UUIDString]])
+            {
+                paragon.online = YES;
+                [self.collectionView reloadData];
+            }
+        }
+    }];
 }
 
 -(void)configureBleDevices
 {
-    [FSTBleCentralManager sharedInstance];
-//    [[NSUserDefaults standardUserDefaults] remo
+    NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+    
+    if (!devices || devices.count==0)
+    {
+        [self.delegate noItemsInCollection];
+    }
+    else
+    {
+        for (id key in devices)
+        {
+            FSTParagon* paragon = [FSTParagon new];
+            paragon.online = NO;
+            paragon.bleUuid = [[NSUUID alloc]initWithUUIDString:key];
+            paragon.friendlyName = [devices objectForKeyedSubscript:key];
+            [self.products addObject:paragon];
+        }
+        
+        if ([[FSTBleCentralManager sharedInstance] isPoweredOn])
+        {
+            [self connectBleDevices];
+        }
+    }
+}
+
+- (void)connectBleDevices
+{
+    for (FSTProduct* product in self.products)
+    {
+        if ([product isKindOfClass:[FSTParagon class]])
+        {
+            FSTParagon* paragon = (FSTParagon*)product;
+            [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:paragon.bleUuid];
+        }
+    }
 }
 
 -(void)configureFirebaseDevices
@@ -158,9 +218,8 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     return self.products.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     FSTProduct * product = self.products[indexPath.row];
     ProductCollectionViewCell *productCell;
     
@@ -170,9 +229,9 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     }
     else if ([product isKindOfClass:[FSTParagon class]])
     {
-        //TODO: temp code...
-        product.online = YES;
+        
         productCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierParagon forIndexPath:indexPath];
+        productCell.friendlyName.text = product.friendlyName;
     }
     
     if (product.online)
@@ -221,6 +280,40 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 - (UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+#pragma mark - Gestures
+
+- (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer
+{
+    CGPoint tapLocation = [gestureRecognizer locationInView:self.collectionView];
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapLocation];
+
+    if(gestureRecognizer.state == UIGestureRecognizerStateEnded && indexPath)
+    {
+        DLog(@"deleting item at location %ld", (long)indexPath.item);
+        UIAlertView *deleteAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Delete?"
+                                    message:@"Are you sure you want to delete this device?"
+                                    delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        [deleteAlert show];
+
+        //TODO: real code (add delete view)
+        
+    }
+}
+
+#pragma mark - <UIAlertViewDelegate>
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"selected button index = %ld", buttonIndex);
+    if (buttonIndex == 1)
+    {
+        NSLog(@"delete");
+        // Do what you need to do to delete the cell
+        [self.collectionView reloadData];
+    }
 }
 
 @end

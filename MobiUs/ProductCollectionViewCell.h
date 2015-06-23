@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *arrowButton;
 @property (strong, nonatomic) IBOutlet UILabel *offlineLabel;
 @property (strong, nonatomic) IBOutlet UIView *disabledView;
+@property (strong, nonatomic) IBOutlet UILabel *friendlyName;
 
 @end

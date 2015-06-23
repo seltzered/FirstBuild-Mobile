@@ -19,6 +19,7 @@
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
         </mutableArray>
         <mutableArray key="fontawesome-webfont.ttf">
             <string>FontAwesome</string>
@@ -516,9 +517,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="443" height="200"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_paragon_product" translatesAutoresizingMaskIntoConstraints="NO" id="SnE-kS-cX0">
-                                                    <rect key="frame" x="10" y="32" width="230" height="135"/>
+                                                    <rect key="frame" x="10" y="50" width="230" height="100"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="135" id="CK7-aP-F7P"/>
+                                                        <constraint firstAttribute="height" constant="100" id="CK7-aP-F7P"/>
                                                         <constraint firstAttribute="width" constant="230" id="oJt-if-I97"/>
                                                     </constraints>
                                                 </imageView>
@@ -536,6 +537,12 @@
                                                         <constraint firstAttribute="height" constant="1" id="R6D-TE-kcu"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friendlyName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFZ-8N-DQI" userLabel="friendlyname">
+                                                    <rect key="frame" x="10" y="151" width="75" height="21"/>
+                                                    <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="16"/>
+                                                    <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-wK-2Vz" userLabel="disabledView">
                                                     <rect key="frame" x="5" y="7" width="400" height="188"/>
                                                     <subviews>
@@ -564,6 +571,8 @@
                                                 <constraint firstAttribute="centerY" secondItem="SnE-kS-cX0" secondAttribute="centerY" id="GLk-uV-4pJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="DYe-wK-2Vz" secondAttribute="bottom" constant="5" id="LR0-jJ-pTg"/>
                                                 <constraint firstItem="DYe-wK-2Vz" firstAttribute="leading" secondItem="ixf-tc-4Kd" secondAttribute="leading" constant="5" id="OoZ-6L-DVC"/>
+                                                <constraint firstItem="cFZ-8N-DQI" firstAttribute="leading" secondItem="SnE-kS-cX0" secondAttribute="leading" id="VoX-ow-3Ed"/>
+                                                <constraint firstItem="cFZ-8N-DQI" firstAttribute="top" secondItem="SnE-kS-cX0" secondAttribute="bottom" constant="1" id="YY0-PV-C4j"/>
                                                 <constraint firstItem="lZy-0O-urh" firstAttribute="leading" secondItem="ixf-tc-4Kd" secondAttribute="leading" id="ZOO-nJ-1EE"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wuo-OD-EKS" secondAttribute="trailing" constant="10" id="axd-kD-0W7"/>
                                                 <constraint firstAttribute="centerY" secondItem="Wuo-OD-EKS" secondAttribute="centerY" id="byO-Ck-Aww"/>
@@ -577,6 +586,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" red="0.745528996" green="0.1847289792" blue="0.22502783100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ixf-tc-4Kd" secondAttribute="trailing" id="8DD-B3-fEX"/>
                                     <constraint firstItem="ixf-tc-4Kd" firstAttribute="leading" secondItem="Swc-7F-06T" secondAttribute="leading" id="S90-pd-dJe"/>
@@ -588,7 +598,9 @@
                                 <connections>
                                     <outlet property="arrowButton" destination="Wuo-OD-EKS" id="7Lc-0g-5X1"/>
                                     <outlet property="disabledView" destination="DYe-wK-2Vz" id="vdZ-6k-zCb"/>
+                                    <outlet property="friendlyName" destination="cFZ-8N-DQI" id="dwy-9G-8zN"/>
                                     <outlet property="mainView" destination="ixf-tc-4Kd" id="van-tZ-C65"/>
+                                    <outletCollection property="gestureRecognizers" destination="JPq-wy-XYV" appends="YES" id="Q7C-rH-Y06"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -600,6 +612,7 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="productCollection" destination="h3X-C2-8Es" id="qsO-XY-k8R"/>
+                        <outlet property="swipeLeftGesture" destination="JPq-wy-XYV" id="xCw-zc-HcI"/>
                         <segue destination="sZO-RU-ozf" kind="show" identifier="segueChillHub" id="1Dx-g3-3f3"/>
                         <segue destination="dJA-hw-Leo" kind="show" identifier="segueAddProduct" id="Ucb-Xj-qPs"/>
                         <segue destination="lhL-8p-Ygk" kind="show" identifier="segueParagon" id="zVb-95-6Ce"/>
@@ -611,6 +624,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <swipeGestureRecognizer direction="left" id="JPq-wy-XYV">
+                    <connections>
+                        <action selector="swipeLeft:" destination="vMY-F1-92f" id="vXg-Ec-EPc"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1396" y="828.5"/>
         </scene>

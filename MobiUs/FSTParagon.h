@@ -5,12 +5,13 @@
 //  Created by Myles Caley on 3/12/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
+#import <CoreBluetooth/CoreBluetooth.h>
 
 #import "FSTProduct.h"
 #import "FSTParagonCookingSession.h"
 #import "FSTCookingMethod.h"
 
-@interface FSTParagon : FSTProduct
+@interface FSTParagon : FSTProduct <CBPeripheralDelegate>
 
 extern NSString * const FSTActualTemperatureChangedNotification;
 extern NSString * const FSTCookModeChangedNotification;
@@ -19,6 +20,7 @@ extern NSString * const FSTElapsedTimeChangedNotification;
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 @property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
+@property (nonatomic, strong) NSUUID* bleUuid;
 
 #ifdef SIMULATE_PARAGON
 //- (void)startSimulatePreheat;
