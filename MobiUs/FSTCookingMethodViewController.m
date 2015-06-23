@@ -7,6 +7,8 @@
 //
 
 #import "FSTCookingMethodViewController.h"
+#import "FSTCustomCookSettingsViewController.h"
+#import "FSTBeefSousVideCookingMethod.h"
 #import "FSTCookingMethods.h"
 #import "FSTCookingMethodSubSelectionViewController.h"
 #import "MobiNavigationController.h"
@@ -45,6 +47,9 @@ FSTCookingMethods* _methods;
     {
         ((FSTCookingMethodSubSelectionViewController*)segue.destinationViewController).currentParagon = self.product;
         self.product.currentCookingMethod = (FSTCookingMethod*)sender;
+    } else if ([segue.destinationViewController isKindOfClass:[FSTCustomCookSettingsViewController class]]) {
+        ((FSTCustomCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product; // set paragon to selected product
+        self.product.currentCookingMethod = (FSTCookingMethod*) [[FSTSousVideCookingMethod alloc] init];//_methods.cookingMethods[0];////need to set this to something, just generic cooking method object hopefully. It crashes at the preheat screen
     }
 }
 

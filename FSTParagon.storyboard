@@ -1652,7 +1652,7 @@
                                     <constraint firstAttribute="height" constant="20" id="zX9-Oj-IeS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIi-zr-GZK" userLabel="continueButtonHolderView">
@@ -1665,7 +1665,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.70980392156862748" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="ygc-uL-GpJ" secondAttribute="centerX" id="GaA-Wc-M37"/>
@@ -1679,6 +1679,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="2f2-Gw-Vi2" appends="YES" id="FyQ-cj-Cxc"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fP0-PX-tzh" userLabel="temperatureButtonWrapperView">
                                 <rect key="frame" x="302.5" y="105" width="279.5" height="50"/>
@@ -1704,7 +1707,7 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
-                                        <color key="value" red="0.10196078431372549" green="0.59215686274509804" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.0" green="0.70980392156862748" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <real key="value" value="1.5"/>
@@ -1724,7 +1727,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.70980392156862748" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="26d-f2-ok7"/>
@@ -1766,7 +1769,7 @@
                                         <rect key="frame" x="0.0" y="-0.5" width="279.5" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="highlightedColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1777,11 +1780,12 @@
                                     <constraint firstItem="EGp-Wl-hju" firstAttribute="width" secondItem="zzF-yO-WgE" secondAttribute="width" id="tWd-kz-o5O"/>
                                 </constraints>
                             </view>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOP-ZX-Zoa">
-                                <rect key="frame" x="174" y="192" width="250" height="216"/>
+                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOP-ZX-Zoa">
+                                <rect key="frame" x="224" y="192" width="150" height="216"/>
+                                <color key="tintColor" red="0.10196078431372549" green="0.59215686274509804" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="0rQ-nO-0qa"/>
-                                    <constraint firstAttribute="height" constant="250" id="4YU-po-Era"/>
+                                    <constraint firstAttribute="width" constant="150" id="0rQ-nO-0qa"/>
+                                    <constraint firstAttribute="height" constant="300" id="4YU-po-Era"/>
                                 </constraints>
                             </pickerView>
                         </subviews>
@@ -1812,8 +1816,13 @@
                     </view>
                     <connections>
                         <outlet property="picker" destination="XOP-ZX-Zoa" id="1h9-qa-1gy"/>
+                        <outlet property="temperatureButtonHolder" destination="fP0-PX-tzh" id="0Fm-50-06D"/>
+                        <outlet property="temperatureButtonLabel" destination="0kk-fa-8Ev" id="gJu-uc-xiN"/>
                         <outlet property="temperatureLabel" destination="EGp-Wl-hju" id="OaD-VF-Iie"/>
+                        <outlet property="timeButtonHolder" destination="hMj-UR-ghE" id="XI9-kN-rza"/>
+                        <outlet property="timeButtonLabel" destination="8c5-nv-rBI" id="HoK-sV-A7R"/>
                         <outlet property="timeLabel" destination="Xqc-d5-wZd" id="MYX-jL-hq2"/>
+                        <segue destination="rkF-e7-Olw" kind="show" identifier="segueCustomPreheat" id="zTN-hz-fZw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="waU-oa-qnA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1825,6 +1834,11 @@
                 <tapGestureRecognizer id="MwY-H7-ncn">
                     <connections>
                         <action selector="temperatureTapGesture:" destination="tSd-Ug-HyZ" id="wMZ-72-0Tc"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="2f2-Gw-Vi2">
+                    <connections>
+                        <action selector="continueTapGesture:" destination="tSd-Ug-HyZ" id="rCp-Oe-FEM"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -1887,5 +1901,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PQV-x6-ygV"/>
+        <segue reference="zTN-hz-fZw"/>
     </inferredMetricsTieBreakers>
 </document>
