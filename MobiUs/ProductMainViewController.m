@@ -17,17 +17,58 @@
 
 @implementation ProductMainViewController
 
-- (void)viewDidLoad {
+//BOOL _hasBleProducts = NO;
+NSObject* _kvoObserver;
+
+
+//TODO: re-implement loading of cloud products
+//TODO: clean up hide/nohide garbage
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    self.hasBleProducts = NO;
+    self.hasFirebaseProducts = NO;
     
-    //TODO: implement loading of cloud products
-    //TODO: clean up hide/nohide garbage
-    //[self loadCloudProducts];
-    [self hideProducts:NO];
-    [self hideNoProducts:YES];
+    [self addObserver:self forKeyPath:@"hasBleProducts" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    
+    [self checkForBleProducts];
+    //[self checkForCloudProducts];
+
 }
 
-- (void)loadCloudProducts
+-(void) dealloc
+{
+    [self removeObserver:self forKeyPath:@"hasBleProducts"];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    
+    if (self.hasFirebaseProducts || self.hasBleProducts)
+    {
+        [self hideNoProducts:NO];
+        [self hideNoProducts:YES];
+    }
+    else
+    {
+        [self hideProducts:YES];
+        [self hideNoProducts:NO];
+    }
+}
+
+- (void)checkForBleProducts
+{
+    NSArray* bleDevices = [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
+    if (bleDevices && bleDevices.count > 0)
+    {
+        self.hasBleProducts = YES;
+    }
+    else
+    {
+         self.hasBleProducts = NO;
+    }
+}
+
+- (void)checkForCloudProducts
 {
     //TODO: not sure if this is the correct pattern. we want to show the "no products"
     //found if there really aren't any products. since there is no timeout concept on the firebase
@@ -36,31 +77,26 @@
     Firebase * ref = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices"];
     [ref removeAllObservers];
     
-    BOOL __block hasProducts = NO;
+    __weak typeof(self) weakSelf = self;
     
-    self.noProductsView.hidden = YES;
-    self.productsCollectionView.hidden = YES;
-    
-    [self hideNoProducts:YES];
     [self.loadingIndicator startAnimating];
-    
+
     //detect if we have any products/if the products are removed it is
     //detected in the embeded collection view controller and we registered as a delegate
     [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        [self.loadingIndicator stopAnimating];
-        [self hideProducts:NO];
-        [self hideNoProducts:YES];
-        hasProducts = YES;
+        [weakSelf.loadingIndicator stopAnimating];
+        [weakSelf hideProducts:NO];
+        [weakSelf hideNoProducts:YES];
+        weakSelf.hasFirebaseProducts = YES;
     } withCancelBlock:^(NSError *error) {
         //TODO: if its really a permission error then we need to handle this differently
         DLog(@"%@",error.localizedDescription);
-        [self.loadingIndicator stopAnimating];
-        [self hideNoProducts:NO];
+        [weakSelf.loadingIndicator stopAnimating];
     }];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        if (!hasProducts)
+        if (!self.hasFirebaseProducts)
         {
             [self.loadingIndicator stopAnimating];
             [self noItemsInCollection];
