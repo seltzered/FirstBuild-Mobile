@@ -217,6 +217,7 @@ CBPeripheralManager * _peripheralManager; //temporary
     
 }
 
+
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
     BOOL _alreadyAnnouncedPeripheral = NO;
