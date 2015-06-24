@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface FSTBleConnectingViewController : UIViewController
+@interface FSTBleConnectingViewController : UIViewController <CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBPeripheral* peripheral;
 @property (nonatomic, strong) NSString* friendlyName;
