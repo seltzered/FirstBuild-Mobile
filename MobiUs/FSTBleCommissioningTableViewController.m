@@ -124,21 +124,21 @@ CBPeripheral* _currentlySelectedPeripheral;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bleDeviceCell" forIndexPath:indexPath];
     
     CBPeripheral* peripheral = (CBPeripheral*)(_devices[indexPath.item]);
-    NSString* label = [NSString stringWithFormat:@"%@,%@", peripheral.name, [peripheral.identifier UUIDString]];
+    NSString* label = [NSString stringWithFormat:@"%@,%@", peripheral.name, [peripheral.identifier UUIDString]]; // was NSString*
     
     cell.textLabel.text = label;
-    
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
+    [cell.textLabel setHighlightedTextColor:UIColorFromRGB(0x02B7CC)]; // lighter color
     return cell;
 }
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _friendlyNamePrompt = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter a name for this device", @"") message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+       _friendlyNamePrompt = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter a name for this device", @"") message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
     [_friendlyNamePrompt setAlertViewStyle:UIAlertViewStylePlainTextInput];
     _friendlyNamePrompt.tag = 1;
     [_friendlyNamePrompt show];
-    
     _currentlySelectedPeripheral = (CBPeripheral*)(_devices[indexPath.item]);
 }
 
@@ -151,6 +151,10 @@ CBPeripheral* _currentlySelectedPeripheral;
         FSTBleConnectingViewController* vc = (FSTBleConnectingViewController*)segue.destinationViewController;
         vc.peripheral = _currentlySelectedPeripheral;
         vc.friendlyName = _friendlyName;
+        
+        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+        // has a problem with dismissing the keyboard
+
     }
 }
 

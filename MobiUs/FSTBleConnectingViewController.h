@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) CBPeripheral* peripheral;
 @property (nonatomic, strong) NSString* friendlyName;
+@property (weak, nonatomic) IBOutlet UIImageView *searchingIcon;
 
 @end
