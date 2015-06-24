@@ -41,7 +41,12 @@ CBPeripheral* _currentlySelectedPeripheral;
     if ([segue.identifier isEqualToString:@"tableSegue"]) {
         FSTBleCommissioningTableViewController* tableController = segue.destinationViewController;
         tableController.devices = devices;
+        tableController.delegate = self;
     }
+}
+
+-(void)paragonSelected{
+    [self performSegueWithIdentifier:@"connectingSegue" sender:self];
 }
 
 @end

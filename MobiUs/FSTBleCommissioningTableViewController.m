@@ -172,7 +172,8 @@ CBPeripheral* _currentlySelectedPeripheral;
             
             if (_friendlyName.length > 0)
             {
-                [self performSegueWithIdentifier:@"segueConnecting" sender:self];
+                [self.delegate paragonSelected]; // this will call the segue method.
+                //[self performSegueWithIdentifier:@"segueConnecting" sender:self];
             }
             //TODO: error handling if friendlyName is empty
             //TODO: error handling if name already exists? overwrite?

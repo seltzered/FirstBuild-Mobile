@@ -105,6 +105,7 @@
                     <connections>
                         <outlet property="activityWheel" destination="ub8-Cq-MYc" id="pun-05-CXs"/>
                         <outlet property="wheelBackground" destination="M0B-Jg-fSQ" id="HJW-NY-Iih"/>
+                        <segue destination="K3l-7d-HEu" kind="show" identifier="connectingSegue" id="rmC-Uu-h0n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXy-by-n3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -145,7 +146,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMn-bX-ei6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1319" y="246"/>
+            <point key="canvasLocation" x="1291" y="-58"/>
         </scene>
         <!--Ble Connecting View Controller-->
         <scene sceneID="gA3-ey-ck0">
@@ -156,7 +157,7 @@
                         <viewControllerLayoutGuide type="bottom" id="meY-Y3-Ecx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="O3O-kA-Sqn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5xU-zI-tT1">
@@ -265,11 +266,11 @@
                         <viewControllerLayoutGuide type="bottom" id="TZp-d8-0QY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qwl-LE-ezy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8x-ir-vf1" userLabel="continueButtonHolderView">
-                                <rect key="frame" x="45" y="220" width="510" height="65"/>
+                                <rect key="frame" x="45" y="520" width="510" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpp-Qf-stZ">
                                         <rect key="frame" x="0.0" y="16" width="510" height="34"/>
@@ -354,18 +355,18 @@
                         <viewControllerLayoutGuide type="bottom" id="81I-wS-gcY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cmw-5R-V5F">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-warning-error" translatesAutoresizingMaskIntoConstraints="NO" id="xWB-9l-m7I">
-                                <rect key="frame" x="160" y="-122" width="281" height="194"/>
+                                <rect key="frame" x="160" y="28" width="281" height="194"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="194" id="0uQ-le-YTR"/>
                                     <constraint firstAttribute="width" constant="281" id="ERT-2y-jZg"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBV-yq-1wA">
-                                <rect key="frame" x="216" y="80" width="168" height="38"/>
+                                <rect key="frame" x="216" y="230" width="168" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="dQh-8E-tfs"/>
                                 </constraints>
@@ -374,7 +375,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We were unable to connect to Paragon Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9j-Bz-GTD">
-                                <rect key="frame" x="147" y="126" width="307" height="53"/>
+                                <rect key="frame" x="147" y="276" width="307" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="307" id="N30-Th-VsE"/>
                                 </constraints>
@@ -405,4 +406,7 @@
         <image name="icon-paragon-with-pot" width="600" height="581"/>
         <image name="icon-warning-error" width="600" height="581"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="rmC-Uu-h0n"/>
+    </inferredMetricsTieBreakers>
 </document>

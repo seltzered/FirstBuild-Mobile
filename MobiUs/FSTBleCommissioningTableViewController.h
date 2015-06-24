@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FSTBleCommissioningTableViewControllerDelegate
+
+-(void)paragonSelected;
+
+@end
 @interface FSTBleCommissioningTableViewController : UITableViewController <UIAlertViewDelegate>
 
+@property (nonatomic, weak) id<FSTBleCommissioningTableViewControllerDelegate>delegate;
 @property (nonatomic, strong) NSMutableArray* devices;
 @end
