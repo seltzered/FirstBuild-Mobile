@@ -10,4 +10,5 @@
 
 @interface FSTBleCommissioningTableViewController : UITableViewController <UIAlertViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray* devices;
 @end

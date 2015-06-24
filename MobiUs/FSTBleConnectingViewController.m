@@ -97,6 +97,8 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     }
     else
     {
+        [self performSegueWithIdentifier:@"segueError" sender:self];
+        [[FSTBleCentralManager sharedInstance]savePeripheralHavingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon 1"];
         DLog(@"<<<<<<FAILED TO READ CHARACTERISTIC, TERMINATE CONNECTION>>>>>>>>>>");
     }
 }

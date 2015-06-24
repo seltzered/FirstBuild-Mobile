@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */; };
+		517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */; };
 		5B0583691B1562C3003782E2 /* UIDashedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0583681B1562C3003782E2 /* UIDashedLineView.m */; };
 		5B05836C1B15F4DE003782E2 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */; };
 		5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B174DD41A5DB94700A00505 /* SCSiriWaveformView.m */; };
@@ -104,6 +105,8 @@
 		18B446C5B84ADBDC6A8F7CC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		517EC1071B3B32AB0025ECA1 /* FSTBleFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleFoundViewController.h; sourceTree = "<group>"; };
 		517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleFoundViewController.m; sourceTree = "<group>"; };
+		517EC10A1B3B4E8C0025ECA1 /* FSTBleErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleErrorViewController.h; sourceTree = "<group>"; };
+		517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleErrorViewController.m; sourceTree = "<group>"; };
 		5B0583671B1562C3003782E2 /* UIDashedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDashedLineView.h; sourceTree = "<group>"; };
 		5B0583681B1562C3003782E2 /* UIDashedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDashedLineView.m; sourceTree = "<group>"; };
 		5B05836A1B15F4DE003782E2 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -623,6 +626,8 @@
 				517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */,
 				5BA3A97E1B38B47300E51C51 /* FSTBleConnectedViewController.h */,
 				5BA3A97F1B38B47300E51C51 /* FSTBleConnectedViewController.m */,
+				517EC10A1B3B4E8C0025ECA1 /* FSTBleErrorViewController.h */,
+				517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -874,6 +879,7 @@
 				5BE2A72A1B17BD3F00EFA91A /* FSTGradientLensView.m in Sources */,
 				5BCBB9E01B02A24100B8E043 /* FSTReadyToPreheatViewController.m in Sources */,
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
+				517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */,
 				5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */,
 				5B7338BD1B0F9A7E004C931E /* FSTCircleProgressView.m in Sources */,
 				5BC364811A2F63C200D03B9C /* FSTDeviceAuth.m in Sources */,
