@@ -11,6 +11,7 @@
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -200,6 +201,59 @@
             </objects>
             <point key="canvasLocation" x="2145" y="264"/>
         </scene>
+        <!--Ble Found View Controller-->
+        <scene sceneID="ruX-zO-Etf">
+            <objects>
+                <viewController id="yXt-Iw-Lwc" customClass="FSTBleFoundViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bd6-dc-0X2"/>
+                        <viewControllerLayoutGuide type="bottom" id="CaB-7N-f5b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1Z0-s4-ODb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-paragon-with-pot" translatesAutoresizingMaskIntoConstraints="NO" id="jXL-gM-MKG">
+                                <rect key="frame" x="160" y="28" width="281" height="194"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="194" id="4BU-Xd-3a9"/>
+                                    <constraint firstAttribute="width" constant="281" id="dML-tM-cIw"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Got it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-96-25a">
+                                <rect key="frame" x="240" y="230" width="120" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="PKk-ti-OKD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="29"/>
+                                <color key="textColor" red="0.91764705879999997" green="0.27450980390000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We found your Paragon." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgf-16-8Eg">
+                                <rect key="frame" x="167" y="276" width="267" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="S4F-fv-5wp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jgf-16-8Eg" firstAttribute="centerX" secondItem="811-96-25a" secondAttribute="centerX" constant="0.5" id="60J-4Y-B4D"/>
+                            <constraint firstItem="jXL-gM-MKG" firstAttribute="centerX" secondItem="811-96-25a" secondAttribute="centerX" constant="0.5" id="P97-y9-UTf"/>
+                            <constraint firstAttribute="centerX" secondItem="jXL-gM-MKG" secondAttribute="centerX" constant="-0.5" id="U8a-UD-Kla"/>
+                            <constraint firstItem="811-96-25a" firstAttribute="top" secondItem="jXL-gM-MKG" secondAttribute="bottom" constant="8" id="bWL-eM-Xz7"/>
+                            <constraint firstItem="Jgf-16-8Eg" firstAttribute="top" secondItem="811-96-25a" secondAttribute="bottom" constant="8" id="wvE-px-0BN"/>
+                            <constraint firstAttribute="centerY" secondItem="jXL-gM-MKG" secondAttribute="centerY" constant="175" id="x7V-h3-Z08"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O1B-MD-55X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1839" y="802"/>
+        </scene>
         <!--Ble Connected View Controller-->
         <scene sceneID="gGZ-bS-KaY">
             <objects>
@@ -293,5 +347,6 @@
     <resources>
         <image name="cell_paragon_product_logo" width="457" height="155"/>
         <image name="cell_paragon_product_logo_grey" width="457" height="155"/>
+        <image name="icon-paragon-with-pot" width="600" height="581"/>
     </resources>
 </document>
