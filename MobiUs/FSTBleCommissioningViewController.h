@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FSTBleCommissioningViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityWheel;
+@property (weak, nonatomic) IBOutlet UIView *wheelBackground;
 
 @end

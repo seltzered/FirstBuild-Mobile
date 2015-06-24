@@ -16,7 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [[self.wheelBackground layer] setCornerRadius:self.wheelBackground.frame.size.height/2];
+    [self.activityWheel insertSubview:self.wheelBackground atIndex:0];
+
+    
 }
 
 - (void)didReceiveMemoryWarning {

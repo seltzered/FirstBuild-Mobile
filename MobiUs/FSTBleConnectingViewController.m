@@ -21,6 +21,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+        
     __weak typeof(self) weakSelf = self;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
@@ -39,6 +40,23 @@ CBCharacteristic* _manufacturerNameCharacteristic;
             [weakSelf.peripheral discoverServices:services];
         }
     }];
+    
+    NSMutableArray *imgListArray = [NSMutableArray array];
+    for (int i=11; i <= 33; i++) {
+        NSString *strImgeName = [NSString stringWithFormat:@"pulsing rings_%05d.png", i];
+        UIImage *image = [UIImage imageNamed:strImgeName];
+        if (!image) {
+            NSLog(@"Could not load image named: %@", strImgeName);
+        }
+        else {
+            [imgListArray addObject:image];
+        }
+    }
+    
+    [self.searchingIcon setAnimationImages:imgListArray];
+    [self.searchingIcon setAnimationDuration:.75];
+    [self.searchingIcon startAnimating];
+
 }
 
 - (void) peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
