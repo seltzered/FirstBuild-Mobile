@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
 @interface FSTBleFoundViewController : UIViewController
 
+@property (nonatomic, strong) CBPeripheral* peripheral;
 @end

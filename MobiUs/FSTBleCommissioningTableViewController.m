@@ -25,8 +25,8 @@ NSMutableArray* _devices; // just pass the selection rather than the devices
 NSObject* _discoveryObserver;
 NSObject* _undiscoveryObserver;
 */
-UIAlertView* _friendlyNamePrompt;
-NSString* _friendlyName;
+//UIAlertView* _friendlyNamePrompt;
+//NSString* _friendlyName;
 
 
 CBPeripheral* _currentlySelectedPeripheral;
@@ -70,13 +70,17 @@ CBPeripheral* _currentlySelectedPeripheral;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-       _friendlyNamePrompt = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter a name for this device", @"") message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+     /*  _friendlyNamePrompt = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter a name for this device", @"") message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
     [_friendlyNamePrompt setAlertViewStyle:UIAlertViewStylePlainTextInput];
     _friendlyNamePrompt.tag = 1;
     [_friendlyNamePrompt show];
+      */
     _currentlySelectedPeripheral = (CBPeripheral*)(_devices[indexPath.item]);
-    [self.delegate getSelectedPeripheral:_currentlySelectedPeripheral];
+    [self.delegate getSelectedPeripheral:_currentlySelectedPeripheral]; // could combine these delegate methods
+    [self.delegate paragonSelected]; // this will call the segue method.
+    //[self performSegueWithIdentifier:@"segueConnecting" sender:self];
 }
+
 /*
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -93,7 +97,7 @@ CBPeripheral* _currentlySelectedPeripheral;
 
     }
 } // moved to commissioning view controller
-*/
+
 
 #pragma mark - UIAlertViewDelegate
 
@@ -120,6 +124,6 @@ CBPeripheral* _currentlySelectedPeripheral;
         }
     }
 }
-
+*/
 
 @end
