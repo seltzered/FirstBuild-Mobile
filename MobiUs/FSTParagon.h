@@ -7,11 +7,11 @@
 //
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#import "FSTProduct.h"
+#import "FSTBleProduct.h"
 #import "FSTParagonCookingSession.h"
 #import "FSTCookingMethod.h"
 
-@interface FSTParagon : FSTProduct <CBPeripheralDelegate>
+@interface FSTParagon : FSTBleProduct
 
 extern NSString * const FSTActualTemperatureChangedNotification;
 extern NSString * const FSTCookModeChangedNotification;

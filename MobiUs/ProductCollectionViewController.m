@@ -28,77 +28,105 @@ static NSString * const reuseIdentifier = @"ProductCell";
 static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 NSObject* _connectedToBleObserver;
 NSObject* _deviceConnectedObserver;
+NSObject* _newDeviceBoundObserver;
+
 NSIndexPath *_indexPathForDeletion;
 
-- (void)viewDidLoad {
+//TODO firebase objects
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.products = [[NSMutableArray alloc] init];
-   
-    //[self configureFirebaseDevices];
+    [self.delegate itemCountChanged:0];
+    
+    //get all the saved BLE peripherals
     [self configureBleDevices];
     
-    __weak typeof(self) weakSelf = self;
-    
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    
-    _connectedToBleObserver = [center addObserverForName:FSTBleCentralManagerPoweredOn
-                                                  object:nil
-                                                   queue:nil
-                                                    usingBlock:^(NSNotification *notification)
-   {
-       [weakSelf connectBleDevices];
-   }];
-    
-    
-    
-    _deviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
-                                                   object:nil
-                                                    queue:nil
-                                               usingBlock:^(NSNotification *notification)
-    {
-        for (FSTParagon* paragon in weakSelf.products)
-        {
-            if ([paragon.identifier isEqualToString: [((CBPeripheral*)(notification.object)).identifier UUIDString]])
-            {
-                paragon.online = YES;
-                [weakSelf.collectionView reloadData];
-            }
-        }
-    }];
 }
 
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_connectedToBleObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
 }
 
+#pragma mark - Device Configuration
+
+//TODO need to store device type so we can have other types of devices
 -(void)configureBleDevices
 {
     NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    __weak typeof(self) weakSelf = self;
     
-    if (!devices || devices.count==0)
+    for (id key in devices)
     {
-        [self.delegate noItemsInCollection];
+        FSTParagon* paragon = [FSTParagon new];
+        paragon.online = NO;
+        paragon.bleUuid = [[NSUUID alloc]initWithUUIDString:key];
+        paragon.friendlyName = [devices objectForKeyedSubscript:key];
+        [self.products addObject:paragon];
+        [self.delegate itemCountChanged:self.products.count];
     }
-    else
+    
+    //attempt to connect to the BLE devices
+    if ([[FSTBleCentralManager sharedInstance] isPoweredOn])
     {
-        for (id key in devices)
-        {
-            FSTParagon* paragon = [FSTParagon new];
-            paragon.online = NO;
-            paragon.bleUuid = [[NSUUID alloc]initWithUUIDString:key];
-            paragon.friendlyName = [devices objectForKeyedSubscript:key];
-            [self.products addObject:paragon];
-        }
-        
-        if ([[FSTBleCentralManager sharedInstance] isPoweredOn])
-        {
-            [self connectBleDevices];
-        }
+        [self connectBleDevices];
     }
+    
+    //also listen for power on signal before connecting to devices
+    _connectedToBleObserver = [center addObserverForName:FSTBleCentralManagerPoweredOn
+                                                  object:nil
+                                                   queue:nil
+                                              usingBlock:^(NSNotification *notification)
+    {
+       [weakSelf connectBleDevices];
+    }];
+    
+    
+    //when a device is connected check and see if we have it in our products list
+    //we may get messages here about devices that are connected that are not saved yet (commissioning)
+    //in that case we listen to FSTBleCentralManagerNewDeviceBound
+    _deviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
+                                                   object:nil
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+    {
+        //search through attached products and mark online anything we already have stored
+        for (FSTProduct* product in weakSelf.products)
+        {
+            if ([product isKindOfClass:[FSTParagon class]])
+            {
+                FSTParagon* paragon = (FSTParagon*)product;
+                if ([paragon.identifier isEqualToString: [((CBPeripheral*)(notification.object)).identifier UUIDString]])
+                {
+                    paragon.online = YES;
+                    [weakSelf.collectionView reloadData];
+                }
+            }
+        }
+    }];
+    
+    //notify us of any new BLE devices that were added
+    _newDeviceBoundObserver = [center addObserverForName:FSTBleCentralManagerNewDeviceBound
+                                                  object:nil
+                                                   queue:nil
+                                              usingBlock:^(NSNotification *notification)
+    {
+       CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
+       NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+       
+       FSTParagon* paragon = [FSTParagon new];
+       paragon.online = YES;
+       paragon.bleUuid = peripheral.identifier;
+       paragon.friendlyName = [devices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
+       [self.products addObject:paragon];
+       [self.delegate itemCountChanged:self.products.count];
+       [weakSelf.collectionView reloadData];
+    }];
 }
 
 - (void)connectBleDevices
@@ -119,6 +147,7 @@ NSIndexPath *_indexPathForDeletion;
     Firebase *chillhubsRef = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices/chillhubs"];
     [chillhubsRef removeAllObservers];
     
+    //device added
     [chillhubsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
         FSTChillHub* chillhub = [FSTChillHub new];
         chillhub.firebaseRef = snapshot.ref ;
@@ -140,8 +169,10 @@ NSIndexPath *_indexPathForDeletion;
         
         [self.products addObject:chillhub];
         [self.productCollection reloadData];
+        [self.delegate itemCountChanged:self.products.count];
     }];
     
+    //device removed
     [chillhubsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
         for (long i=self.products.count-1; i>-1; i--)
         {
@@ -153,12 +184,10 @@ NSIndexPath *_indexPathForDeletion;
                 break;
             }
         }
-        if (self.products.count == 0)
-        {
-            [self.delegate noItemsInCollection];
-        }
+        [self.delegate itemCountChanged:self.products.count];
     }];
     
+    //device online,offline status
     [chillhubsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
         for (long i=self.products.count-1; i>-1; i--)
         {
@@ -321,7 +350,7 @@ NSIndexPath *_indexPathForDeletion;
         
         if (self.products.count==0)
         {
-            [self.delegate noItemsInCollection];
+            [self.delegate itemCountChanged:0];
         }
     }
 }

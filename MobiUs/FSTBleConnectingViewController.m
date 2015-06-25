@@ -93,7 +93,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     if (!error)
     {
         [self performSegueWithIdentifier:@"segueConnected" sender:self];
-        [[FSTBleCentralManager sharedInstance]savePeripheralHavingUUIDString:[self.peripheral.identifier UUIDString] withName:self.friendlyName];
+        [[FSTBleCentralManager sharedInstance] savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:self.friendlyName];
     }
     else
     {

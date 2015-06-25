@@ -17,7 +17,5 @@
 @property (strong, nonatomic) IBOutlet UIView *productsCollectionView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (strong, nonatomic) IBOutlet UIImageView *teardropImage;
-@property (nonatomic) BOOL hasBleProducts;
-@property (nonatomic) BOOL hasFirebaseProducts;
 
 @end
