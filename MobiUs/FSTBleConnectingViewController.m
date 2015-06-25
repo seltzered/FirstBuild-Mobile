@@ -20,7 +20,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // not loading?
         
     __weak typeof(self) weakSelf = self;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];

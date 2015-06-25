@@ -12,9 +12,13 @@
 
 -(void)paragonSelected;
 
+-(void)getSelectedPeripheral:(CBPeripheral*)peripheral;
+
 @end
 @interface FSTBleCommissioningTableViewController : UITableViewController <UIAlertViewDelegate>
 
 @property (nonatomic, weak) id<FSTBleCommissioningTableViewControllerDelegate>delegate;
+
+//@property (nonatomic, strong) CBPeripheral* currentlySelectedPeripheral;
 @property (nonatomic, strong) NSMutableArray* devices;
 @end
