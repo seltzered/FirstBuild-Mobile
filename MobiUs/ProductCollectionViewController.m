@@ -28,6 +28,7 @@ static NSString * const reuseIdentifier = @"ProductCell";
 static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 NSObject* _connectedToBleObserver;
 NSObject* _deviceConnectedObserver;
+NSIndexPath *_indexPathForDeletion;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,10 +63,16 @@ NSObject* _deviceConnectedObserver;
             if ([paragon.identifier isEqualToString: [((CBPeripheral*)(notification.object)).identifier UUIDString]])
             {
                 paragon.online = YES;
-                [self.collectionView reloadData];
+                [weakSelf.collectionView reloadData];
             }
         }
     }];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_connectedToBleObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
 }
 
 -(void)configureBleDevices
@@ -287,32 +294,35 @@ NSObject* _deviceConnectedObserver;
 - (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer
 {
     CGPoint tapLocation = [gestureRecognizer locationInView:self.collectionView];
-    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:tapLocation];
+    _indexPathForDeletion = [self.collectionView indexPathForItemAtPoint:tapLocation];
 
-    if(gestureRecognizer.state == UIGestureRecognizerStateEnded && indexPath)
+    if(gestureRecognizer.state == UIGestureRecognizerStateEnded && _indexPathForDeletion)
     {
-        DLog(@"deleting item at location %ld", (long)indexPath.item);
+        DLog(@"deleting item at location %ld", (long)_indexPathForDeletion.item);
         UIAlertView *deleteAlert = [[UIAlertView alloc]
                                     initWithTitle:@"Delete?"
                                     message:@"Are you sure you want to delete this device?"
                                     delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
         [deleteAlert show];
-
-        //TODO: real code (add delete view)
-        
     }
 }
 
 #pragma mark - <UIAlertViewDelegate>
 
+//TODO assumes delete alertview
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"selected button index = %ld", buttonIndex);
     if (buttonIndex == 1)
     {
         NSLog(@"delete");
-        // Do what you need to do to delete the cell
+        [self.products removeObjectAtIndex:_indexPathForDeletion.item];
         [self.collectionView reloadData];
+        
+        if (self.products.count==0)
+        {
+            [self.delegate noItemsInCollection];
+        }
     }
 }
 

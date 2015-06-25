@@ -15,11 +15,13 @@
 
 #import "MenuViewController.h"
 #import "MobiNavigationController.h"
+#import "ProductAddViewController.h"
+
+#import <SWRevealViewController.h>
 #import <RBStoryboardLink.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <GooglePlus/GooglePlus.h>
-#import "ProductAddViewController.h"
 
 @implementation SWUITableViewCell
 @end
@@ -29,9 +31,13 @@
 typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     kHome,
     kAddNewProduct,
-  //  kSettings,
     kLogout
 };
+
+NSString * const FSTMenuItemSelectedNotification = @"FSTMenuItemSelectedNotification";
+NSString * const FSTMenuItemAddNewProduct = @"FSTMenuItemAddNewProduct";
+NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
+
 
 #pragma mark - Table view data source
 
@@ -57,11 +63,7 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
         case kAddNewProduct:
             CellIdentifier = @"addNewProduct";
             break;
-//        
-//        case kSettings:
-//            CellIdentifier = @"settings";
-//            break;
-            
+          
         case kLogout:
             CellIdentifier = @"logout";
             break;
@@ -73,17 +75,28 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: CellIdentifier forIndexPath: indexPath];
     
     return cell;
-
 }
 
+//TODO move the logout stuff out of here and put as a handler in the login section
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [self.revealViewController rightRevealToggle:self];
     if (indexPath.row == kLogout)
     {
         [[GPPSignIn sharedInstance] signOut];
         [[[FBSDKLoginManager alloc] init] logOut];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+    else if (indexPath.row == kAddNewProduct)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTMenuItemSelectedNotification object:FSTMenuItemAddNewProduct];
+    }
+    else if (indexPath.row == kHome)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTMenuItemSelectedNotification object:FSTMenuItemHome];
+    }
+    
 }
 
 #pragma mark state preservation / restoration

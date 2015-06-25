@@ -8,6 +8,7 @@
 
 #import "ProductMainViewController.h"
 #import "FirebaseShared.h"
+#import "MenuViewController.h"
 #import <Firebase/Firebase.h>
 #import <SWRevealViewController.h>
 
@@ -19,26 +20,44 @@
 
 //BOOL _hasBleProducts = NO;
 NSObject* _kvoObserver;
-
+NSObject* _menuItemSelectedObserver;
 
 //TODO: re-implement loading of cloud products
-//TODO: clean up hide/nohide garbage
+//TODO: continue clean up hide/nohide with KVO
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.hasBleProducts = NO;
     self.hasFirebaseProducts = NO;
     
+    __weak typeof(self) weakSelf = self;
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
+    _menuItemSelectedObserver = [center addObserverForName:FSTMenuItemSelectedNotification
+                                                   object:nil
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+    {
+        NSString* item = (NSString*)notification.object;
+        if([item isEqual:FSTMenuItemAddNewProduct])
+        {
+            [weakSelf performSegueWithIdentifier:@"segueAddNewProduct" sender:self];
+        }
+        if([item isEqual:FSTMenuItemHome])
+        {
+            [self.navigationController popToRootViewControllerAnimated:NO];
+        }
+    }];
+    
     [self addObserver:self forKeyPath:@"hasBleProducts" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
     [self checkForBleProducts];
-    //[self checkForCloudProducts];
-
 }
 
 -(void) dealloc
 {
-    [self removeObserver:self forKeyPath:@"hasBleProducts"];
+    //[self removeObserver:self forKeyPath:@"hasBleProducts"];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{

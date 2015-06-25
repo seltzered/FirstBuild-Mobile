@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SWRevealViewController.h>
+
 #import "ProductCollectionViewController.h"
 
 @interface ProductMainViewController : UIViewController <ProductCollectionViewDelegate>

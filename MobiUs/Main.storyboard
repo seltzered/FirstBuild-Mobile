@@ -51,7 +51,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-873" y="20"/>
+            <point key="canvasLocation" x="-1389" y="868"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="9e0-dr-U2g">
@@ -106,9 +106,6 @@
                                         <constraint firstItem="5lv-qG-aPO" firstAttribute="leading" secondItem="Y4r-VH-wKH" secondAttribute="leadingMargin" constant="55" id="vs1-FX-JxT"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="wIO-cl-fNE" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="IRJ-Qz-t2I"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="addNewProduct" id="981-sZ-xjd">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -129,9 +126,6 @@
                                         <constraint firstAttribute="centerY" secondItem="SJD-qF-2Rr" secondAttribute="centerY" id="j4Y-id-10N"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="YOg-WN-cug" kind="custom" identifier="" customClass="SWRevealViewControllerSeguePushController" id="GrA-Tt-mV2"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="logout" id="oBq-zc-eN5">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -167,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xm0-Rp-QOA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-147" y="-483"/>
+            <point key="canvasLocation" x="-667" y="-203"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="enf-Dr-59R">
@@ -189,7 +183,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M38-qo-hbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2573" y="1297"/>
+            <point key="canvasLocation" x="2101" y="2113"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="tjj-Ew-KcD">
@@ -211,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRD-tt-Q2W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2558" y="626"/>
+            <point key="canvasLocation" x="2110" y="1546"/>
         </scene>
         <!--Mobi Navigation Controller-->
         <scene sceneID="sz5-Lr-6cD">
@@ -331,7 +325,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="YOg-WN-cug" kind="show" id="8yk-ZM-Efx"/>
+                                            <segue destination="dJA-hw-Leo" kind="show" identifier="segueAddNewProduct" id="VJe-HR-x9M"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -630,7 +624,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1396" y="828.5"/>
+            <point key="canvasLocation" x="549" y="1708"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="wPy-96-W5c">
@@ -653,24 +647,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EiV-CA-Qd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3678" y="-902"/>
-        </scene>
-        <!--Mobi Navigation Controller-->
-        <scene sceneID="2z4-mr-q5p">
-            <objects>
-                <navigationController id="YOg-WN-cug" customClass="MobiNavigationController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Jg7-4l-bbj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.84313732389999996" green="0.85098046059999999" blue="0.85490202900000001" alpha="1" colorSpace="deviceRGB"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="dJA-hw-Leo" kind="relationship" relationship="rootViewController" id="uL2-Kk-aJq"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y5e-vO-iBk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="923" y="-477"/>
+            <point key="canvasLocation" x="3614" y="642"/>
         </scene>
         <!--Product Add Wrapper View Controller-->
         <scene sceneID="O4i-X2-52u">
@@ -681,10 +658,10 @@
                         <viewControllerLayoutGuide type="bottom" id="NqU-tM-NCh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pvn-iy-rW3">
-                        <rect key="frame" x="0.0" y="64" width="600" height="476"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-vn-kjC">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-vn-kjC">
                                 <rect key="frame" x="0.0" y="108" width="600" height="368"/>
                                 <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
@@ -714,21 +691,14 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="key-FJ-Dlc">
-                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="ELj-5P-vlj">
-                            <color key="tintColor" red="0.0" green="0.70980392156862748" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                            <connections>
-                                <action selector="revealButtonClick:" destination="dJA-hw-Leo" id="Mbv-cn-mP3"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="key-FJ-Dlc"/>
                     <connections>
                         <outlet property="lblHeader" destination="Mhr-bm-7Kd" id="PL7-kf-Rc3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oMj-KT-1gU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1747" y="-477"/>
+            <point key="canvasLocation" x="1483" y="156"/>
         </scene>
         <!--Product Add View Controller-->
         <scene sceneID="fqg-0B-fS7">
@@ -831,7 +801,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cy1-Nv-JC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2544" y="-607.5"/>
+            <point key="canvasLocation" x="2328" y="868"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="mvz-nu-pfQ">
@@ -854,7 +824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTY-qA-MHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3678" y="-342"/>
+            <point key="canvasLocation" x="3614" y="1178"/>
         </scene>
     </scenes>
     <resources>
@@ -868,8 +838,6 @@
         <image name="teardrop" width="33" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IRJ-Qz-t2I"/>
-        <segue reference="8yk-ZM-Efx"/>
-        <segue reference="Ucb-Xj-qPs"/>
+        <segue reference="VJe-HR-x9M"/>
     </inferredMetricsTieBreakers>
 </document>
