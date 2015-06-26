@@ -24,6 +24,8 @@
 
 @implementation ProductCollectionViewController
 
+#pragma mark - Private
+
 static NSString * const reuseIdentifier = @"ProductCell";
 static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 NSObject* _connectedToBleObserver;
@@ -32,6 +34,7 @@ NSObject* _newDeviceBoundObserver;
 
 NSIndexPath *_indexPathForDeletion;
 
+#pragma mark - <UIViewDelegate>
 //TODO firebase objects
 - (void)viewDidLoad
 {
@@ -52,6 +55,16 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark - Device Configuration
 
 //TODO need to store device type so we can have other types of devices
@@ -61,11 +74,12 @@ NSIndexPath *_indexPathForDeletion;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     __weak typeof(self) weakSelf = self;
     
+    //grab all our saved products and put them in a product array
     for (id key in devices)
     {
         FSTParagon* paragon = [FSTParagon new];
         paragon.online = NO;
-        paragon.bleUuid = [[NSUUID alloc]initWithUUIDString:key];
+        paragon.savedUuid = [[NSUUID alloc]initWithUUIDString:key];
         paragon.friendlyName = [devices objectForKeyedSubscript:key];
         [self.products addObject:paragon];
         [self.delegate itemCountChanged:self.products.count];
@@ -95,14 +109,18 @@ NSIndexPath *_indexPathForDeletion;
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
+        CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
+        
         //search through attached products and mark online anything we already have stored
         for (FSTProduct* product in weakSelf.products)
         {
             if ([product isKindOfClass:[FSTParagon class]])
             {
                 FSTParagon* paragon = (FSTParagon*)product;
-                if ([paragon.identifier isEqualToString: [((CBPeripheral*)(notification.object)).identifier UUIDString]])
+                if ([paragon.identifier isEqualToString: [peripheral.identifier UUIDString]])
                 {
+                    paragon.peripheral = peripheral;
+                    paragon.peripheral.delegate = paragon;
                     paragon.online = YES;
                     [weakSelf.collectionView reloadData];
                 }
@@ -116,16 +134,19 @@ NSIndexPath *_indexPathForDeletion;
                                                    queue:nil
                                               usingBlock:^(NSNotification *notification)
     {
-       CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
-       NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
-       
-       FSTParagon* paragon = [FSTParagon new];
-       paragon.online = YES;
-       paragon.bleUuid = peripheral.identifier;
-       paragon.friendlyName = [devices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
-       [self.products addObject:paragon];
-       [self.delegate itemCountChanged:self.products.count];
-       [weakSelf.collectionView reloadData];
+        CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
+        NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+
+        //TODO type
+        FSTParagon* product = [FSTParagon new];
+        product.online = YES;
+        product.peripheral = peripheral;
+        product.peripheral.delegate = product;
+        [product.peripheral discoverServices:nil];
+        product.friendlyName = [devices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
+        [self.products addObject:(FSTParagon*)product];
+        [self.delegate itemCountChanged:self.products.count];
+        [weakSelf.collectionView reloadData];
     }];
 }
 
@@ -136,92 +157,9 @@ NSIndexPath *_indexPathForDeletion;
         if ([product isKindOfClass:[FSTParagon class]])
         {
             FSTParagon* paragon = (FSTParagon*)product;
-            [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:paragon.bleUuid];
+            [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:paragon.savedUuid];
         }
     }
-}
-
--(void)configureFirebaseDevices
-{
-    //TODO: support multiple device types
-    Firebase *chillhubsRef = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices/chillhubs"];
-    [chillhubsRef removeAllObservers];
-    
-    //device added
-    [chillhubsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-        FSTChillHub* chillhub = [FSTChillHub new];
-        chillhub.firebaseRef = snapshot.ref ;
-        chillhub.identifier = snapshot.key;
-        id rawVal = snapshot.value;
-        if (rawVal != [NSNull null])
-        {
-            NSDictionary* val = rawVal;
-            if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-            {
-                chillhub.online = YES;
-            }
-            else
-            {
-                chillhub.online = NO;
-            }
-            [self.productCollection reloadData];
-        }
-        
-        [self.products addObject:chillhub];
-        [self.productCollection reloadData];
-        [self.delegate itemCountChanged:self.products.count];
-    }];
-    
-    //device removed
-    [chillhubsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-        for (long i=self.products.count-1; i>-1; i--)
-        {
-            FSTChillHub *chillhub = [self.products objectAtIndex:i];
-            if ([chillhub.identifier isEqualToString:snapshot.key])
-            {
-                [self.products removeObject:chillhub];
-                [self.productCollection reloadData];
-                break;
-            }
-        }
-        [self.delegate itemCountChanged:self.products.count];
-    }];
-    
-    //device online,offline status
-    [chillhubsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-        for (long i=self.products.count-1; i>-1; i--)
-        {
-            FSTChillHub *chillhub = [self.products objectAtIndex:i];
-            if ([chillhub.identifier isEqualToString:snapshot.key])
-            {
-                id rawVal = snapshot.value;
-                if (rawVal != [NSNull null])
-                {
-                    NSDictionary* val = rawVal;
-                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-                    {
-                        chillhub.online = YES;
-                    }
-                    else
-                    {
-                        chillhub.online = NO;
-                    }
-                    [self.productCollection reloadData];
-                }
-                break;
-            }
-        }
-    }];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [self.collectionView.collectionViewLayout invalidateLayout];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) prepareForSegue: (UIStoryboardSegue *) segue sender: (id) sender
@@ -354,5 +292,118 @@ NSIndexPath *_indexPathForDeletion;
         }
     }
 }
+
+#pragma mark - BONEYARD
+
+//-(void)configureFirebaseDevices
+//{
+//    //TODO: support multiple device types
+//    Firebase *chillhubsRef = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices/chillhubs"];
+//    [chillhubsRef removeAllObservers];
+//    
+//    //device added
+//    [chillhubsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+//        FSTChillHub* chillhub = [FSTChillHub new];
+//        chillhub.firebaseRef = snapshot.ref ;
+//        chillhub.identifier = snapshot.key;
+//        id rawVal = snapshot.value;
+//        if (rawVal != [NSNull null])
+//        {
+//            NSDictionary* val = rawVal;
+//            if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//            {
+//                chillhub.online = YES;
+//            }
+//            else
+//            {
+//                chillhub.online = NO;
+//            }
+//            [self.productCollection reloadData];
+//        }
+//        
+//        [self.products addObject:chillhub];
+//        [self.productCollection reloadData];
+//        [self.delegate itemCountChanged:self.products.count];
+//    }];
+//    
+//    //device removed
+//    [chillhubsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
+//        for (long i=self.products.count-1; i>-1; i--)
+//        {
+//            FSTChillHub *chillhub = [self.products objectAtIndex:i];
+//            if ([chillhub.identifier isEqualToString:snapshot.key])
+//            {
+//                [self.products removeObject:chillhub];
+//                [self.productCollection reloadData];
+//                break;
+//            }
+//        }
+//        [self.delegate itemCountChanged:self.products.count];
+//    }];
+//    
+//    //device online,offline status
+//    [chillhubsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
+//        for (long i=self.products.count-1; i>-1; i--)
+//        {
+//            FSTChillHub *chillhub = [self.products objectAtIndex:i];
+//            if ([chillhub.identifier isEqualToString:snapshot.key])
+//            {
+//                id rawVal = snapshot.value;
+//                if (rawVal != [NSNull null])
+//                {
+//                    NSDictionary* val = rawVal;
+//                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
+//                    {
+//                        chillhub.online = YES;
+//                    }
+//                    else
+//                    {
+//                        chillhub.online = NO;
+//                    }
+//                    [self.productCollection reloadData];
+//                }
+//                break;
+//            }
+//        }
+//    }];
+//}
+//
+
+
+//- (void)checkForCloudProducts
+//{
+//    //TODO: not sure if this is the correct pattern. we want to show the "no products"
+//    //found if there really aren't any products. since there is no timeout concept on the firebase
+//    //API then am not sure what the correct method is for detecting a network error.
+//
+//    Firebase * ref = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices"];
+//    [ref removeAllObservers];
+//
+//    __weak typeof(self) weakSelf = self;
+//
+//    [self.loadingIndicator startAnimating];
+//
+//    //detect if we have any products/if the products are removed it is
+//    //detected in the embeded collection view controller and we registered as a delegate
+//    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+//        [weakSelf.loadingIndicator stopAnimating];
+//        [weakSelf hideProducts:NO];
+//        [weakSelf hideNoProducts:YES];
+//        weakSelf.hasFirebaseProducts = YES;
+//    } withCancelBlock:^(NSError *error) {
+//        //TODO: if its really a permission error then we need to handle this differently
+//        DLog(@"%@",error.localizedDescription);
+//        [weakSelf.loadingIndicator stopAnimating];
+//    }];
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        if (!self.hasFirebaseProducts)
+//        {
+//            [self.loadingIndicator stopAnimating];
+//            [self noItemsInCollection];
+//        }
+//    });
+//}
 
 @end

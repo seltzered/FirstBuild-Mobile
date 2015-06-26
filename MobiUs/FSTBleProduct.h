@@ -12,5 +12,7 @@
 @interface FSTBleProduct : FSTProduct <CBPeripheralDelegate>
 
 @property (strong,nonatomic) CBPeripheral* peripheral;
+@property (strong,nonatomic) NSUUID* savedUuid;
+@property (strong,nonatomic) NSMutableDictionary* characteristics;
 
 @end

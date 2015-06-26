@@ -10,4 +10,13 @@
 
 @implementation FSTBleProduct
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.characteristics = [[NSMutableDictionary alloc]init];
+    }
+    return self;
+}
+
 @end

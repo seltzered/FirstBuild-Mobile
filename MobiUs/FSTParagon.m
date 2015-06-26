@@ -10,10 +10,29 @@
 
 @implementation FSTParagon
 
-NSString * const FSTActualTemperatureChangedNotification = @"FSTActualTemperatureChangedNotification";
-NSString * const FSTCookModeChangedNotification = @"FSTCookModeChangedNotification";
-NSString * const FSTElapsedTimeChangedNotification = @"FSTElapsedTimeChangedNotification";
+//notifications
+NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
+NSString * const FSTCookModeChangedNotification             = @"FSTCookModeChangedNotification";
+NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 
+//app info service
+NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
+NSString * const FSTCharacteristicAppInfo               = @"318DB1F5-67F1-119B-6A41-1EECA0C744CE"; //read
+
+//acm service
+NSString * const FSTServiceParagon                      = @"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F";
+NSString * const FSTCharacteristicSpecialFeatures       = @"E7CDDD9D-DCAC-4D70-A0E1-D3B6DFEB5E4C"; //read,notify,write
+NSString * const FSTCharacteristicProbeFirmwareInfo     = @"83D33E5C-68EA-4158-8655-1A2AC0313FF6"; //read
+NSString * const FSTCharacteristicErrorState            = @"5BCBF6B1-DE80-94B6-0F4B-99FB984707B6"; //read,notify
+NSString * const FSTCharacteristicProbeConnectionState  = @"6B402ECC-3DDA-8BB4-9E42-F121D7E1CF69"; //read,notify
+NSString * const FSTCharacteristicBatteryLevel          = @"A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7"; //read,notify
+NSString * const FSTCharacteristicBurnerStatus          = @"A1B9F907-D440-4278-97FE-0FBB4AEE93FD"; //read,notify
+NSString * const FSTCharacteristicTargetTemperature     = @"71B1A100-E3AE-46FF-BB0A-E37D0BA79496"; //read,notify,write
+NSString * const FSTCharacteristicElapsedTime           = @"998142D1-658E-33E2-DFC0-32091E2354EC"; //read,notify
+NSString * const FSTCharacteristicCookTime              = @"C4510188-9062-4D28-97EF-4FB32FFE1AC5"; //read,write
+NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"; //read,notify
+
+__weak NSTimer* _readCharacteristicsTimer;
 
 #ifdef SIMULATE_PARAGON
 
@@ -47,6 +66,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 - (id)init
 {
     self = [super init];
+    
 #ifdef SIMULATE_PARAGON
     [self startParagonSimulator];
 #endif
@@ -54,7 +74,88 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     
 }
 
+-(void)dealloc
+{
+    [_readCharacteristicsTimer invalidate];
+}
+
 #pragma mark - CBPeripheralDelegate
+
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+{
+    NSLog(@"=======================================================================");
+    NSLog(@"SERVICE %@", [service.UUID UUIDString]);
+    
+    for (CBCharacteristic *characteristic in service.characteristics)
+    {
+        [self.characteristics setObject:characteristic forKey:[characteristic.UUID UUIDString]];
+        NSLog(@"    CHARACTERISTIC %@", [characteristic.UUID UUIDString]);
+
+        if (characteristic.properties & CBCharacteristicPropertyWrite)
+        {
+            //NSLog(@"        CAN WRITE");
+        }
+        
+        if (characteristic.properties & CBCharacteristicPropertyNotify)
+        {
+            //[self.peripheral readValueForCharacteristic:characteristic];
+//           [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            //NSLog(@"        CAN NOTIFY");
+        }
+        
+        if (characteristic.properties & CBCharacteristicPropertyRead)
+        {
+            //NSLog(@"        CAN READ");
+        }
+        
+        if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)
+        {
+            //NSLog(@"        CAN WRITE WITHOUT RESPONSE");
+        }
+    }
+}
+
+
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
+{
+    __weak typeof(self) weakSelf = self;
+    _readCharacteristicsTimer = [NSTimer timerWithTimeInterval:5.0 target:weakSelf selector:@selector(readCharacteristicsTimerTimeout:) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_readCharacteristicsTimer forMode:NSRunLoopCommonModes];
+    NSArray * services;
+    services = [self.peripheral services];
+    for (CBService *service in services)
+    {
+        //if ([[service.UUID UUIDString] isEqualToString:@"180A"])
+        {
+            //NSLog(@"found device service %@");
+            [self.peripheral discoverCharacteristics:nil forService:service];
+        }
+    }
+}
+
+-(void)readCharacteristicsTimerTimeout:(NSTimer *)timer
+{
+    for (id key in self.characteristics)
+    {
+        CBCharacteristic* characteristic = [self.characteristics objectForKey:key];
+        [self.peripheral readValueForCharacteristic:characteristic];
+    }
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    NSLog(@"characteristic %@ changed value %@", characteristic.UUID, characteristic.value);
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    NSLog(@"characteristic %@ notification failed %@", characteristic.UUID, error);
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    
+}
 
 
 #pragma mark - Simulations

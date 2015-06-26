@@ -20,8 +20,6 @@
 
 NSObject* _menuItemSelectedObserver;
 
-//TODO: re-implement loading of cloud products
-//TODO: continue clean up hide/nohide with KVO
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,90 +44,22 @@ NSObject* _menuItemSelectedObserver;
         }
     }];
     
-//    [self addObserver:self forKeyPath:@"hasBleProducts" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
-//    
-//    [self checkForBleProducts];
 }
 
 -(void) dealloc
 {
-   // [self removeObserver:self forKeyPath:@"hasBleProducts"];
     [[NSNotificationCenter defaultCenter] removeObserver:_menuItemSelectedObserver];
-
 }
-
-//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-//    
-//    if (self.hasFirebaseProducts || self.hasBleProducts)
-//    {
-//        [self hideNoProducts:NO];
-//        [self hideNoProducts:YES];
-//    }
-//    else
-//    {
-//        [self hideProducts:YES];
-//        [self hideNoProducts:NO];
-//    }
-//}
-//
-//- (void)checkForBleProducts
-//{
-//    NSArray* bleDevices = [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
-//    if (bleDevices && bleDevices.count > 0)
-//    {
-//        self.hasBleProducts = YES;
-//    }
-//    else
-//    {
-//         self.hasBleProducts = NO;
-//    }
-//}
-
-//- (void)checkForCloudProducts
-//{
-//    //TODO: not sure if this is the correct pattern. we want to show the "no products"
-//    //found if there really aren't any products. since there is no timeout concept on the firebase
-//    //API then am not sure what the correct method is for detecting a network error.
-//    
-//    Firebase * ref = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices"];
-//    [ref removeAllObservers];
-//    
-//    __weak typeof(self) weakSelf = self;
-//    
-//    [self.loadingIndicator startAnimating];
-//
-//    //detect if we have any products/if the products are removed it is
-//    //detected in the embeded collection view controller and we registered as a delegate
-//    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-//        [weakSelf.loadingIndicator stopAnimating];
-//        [weakSelf hideProducts:NO];
-//        [weakSelf hideNoProducts:YES];
-//        weakSelf.hasFirebaseProducts = YES;
-//    } withCancelBlock:^(NSError *error) {
-//        //TODO: if its really a permission error then we need to handle this differently
-//        DLog(@"%@",error.localizedDescription);
-//        [weakSelf.loadingIndicator stopAnimating];
-//    }];
-//    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        
-//        if (!self.hasFirebaseProducts)
-//        {
-//            [self.loadingIndicator stopAnimating];
-//            [self noItemsInCollection];
-//        }
-//    });
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // intercept the segue to the embedded container controller
+    // intercept the segue to the embedded container controller so we can be a delegate
+    // and listen for changes in the data to determine what to do in the main screen
     NSString * segueName = segue.identifier;
     if ([segueName isEqualToString: @"segueCollectionView"]) {
         ProductCollectionViewController * productsCollection = (ProductCollectionViewController *) [segue destinationViewController];
