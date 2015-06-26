@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		515340E91B3C31C60035DEBA /* FSTBleNamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 515340E81B3C31C60035DEBA /* FSTBleNamingViewController.m */; };
+		517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */; };
+		517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */; };
 		5B0583691B1562C3003782E2 /* UIDashedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0583681B1562C3003782E2 /* UIDashedLineView.m */; };
 		5B05836C1B15F4DE003782E2 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */; };
 		5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B174DD41A5DB94700A00505 /* SCSiriWaveformView.m */; };
@@ -102,6 +105,12 @@
 
 /* Begin PBXFileReference section */
 		18B446C5B84ADBDC6A8F7CC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		515340E71B3C31C60035DEBA /* FSTBleNamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleNamingViewController.h; sourceTree = "<group>"; };
+		515340E81B3C31C60035DEBA /* FSTBleNamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleNamingViewController.m; sourceTree = "<group>"; };
+		517EC1071B3B32AB0025ECA1 /* FSTBleFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleFoundViewController.h; sourceTree = "<group>"; };
+		517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleFoundViewController.m; sourceTree = "<group>"; };
+		517EC10A1B3B4E8C0025ECA1 /* FSTBleErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleErrorViewController.h; sourceTree = "<group>"; };
+		517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleErrorViewController.m; sourceTree = "<group>"; };
 		5B0583671B1562C3003782E2 /* UIDashedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDashedLineView.h; sourceTree = "<group>"; };
 		5B0583681B1562C3003782E2 /* UIDashedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDashedLineView.m; sourceTree = "<group>"; };
 		5B05836A1B15F4DE003782E2 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -617,10 +626,16 @@
 				5BA3A9761B3475EF00E51C51 /* FSTBleCommissioningViewController.m */,
 				5BA3A9781B34760700E51C51 /* FSTBleCommissioningTableViewController.h */,
 				5BA3A9791B34760700E51C51 /* FSTBleCommissioningTableViewController.m */,
+				515340E71B3C31C60035DEBA /* FSTBleNamingViewController.h */,
+				515340E81B3C31C60035DEBA /* FSTBleNamingViewController.m */,
 				5BA3A97B1B38B46500E51C51 /* FSTBleConnectingViewController.h */,
 				5BA3A97C1B38B46500E51C51 /* FSTBleConnectingViewController.m */,
+				517EC1071B3B32AB0025ECA1 /* FSTBleFoundViewController.h */,
+				517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */,
 				5BA3A97E1B38B47300E51C51 /* FSTBleConnectedViewController.h */,
 				5BA3A97F1B38B47300E51C51 /* FSTBleConnectedViewController.m */,
+				517EC10A1B3B4E8C0025ECA1 /* FSTBleErrorViewController.h */,
+				517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -874,6 +889,7 @@
 				5BE2A72A1B17BD3F00EFA91A /* FSTGradientLensView.m in Sources */,
 				5BCBB9E01B02A24100B8E043 /* FSTReadyToPreheatViewController.m in Sources */,
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
+				517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */,
 				5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */,
 				5B7338BD1B0F9A7E004C931E /* FSTCircleProgressView.m in Sources */,
 				5BC364811A2F63C200D03B9C /* FSTDeviceAuth.m in Sources */,
@@ -884,6 +900,7 @@
 				5BCBB9F81B03905F00B8E043 /* FSTCookingMethod.m in Sources */,
 				5BCDFBF21A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m in Sources */,
 				5B0583691B1562C3003782E2 /* UIDashedLineView.m in Sources */,
+				515340E91B3C31C60035DEBA /* FSTBleNamingViewController.m in Sources */,
 				5BCBB9E61B02A4DD00B8E043 /* FSTReadyToCookViewController.m in Sources */,
 				5BA3A9801B38B47300E51C51 /* FSTBleConnectedViewController.m in Sources */,
 				5BC5A1CD19EF6584009C93B1 /* FBTUser.m in Sources */,
@@ -918,6 +935,7 @@
 				5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */,
 				5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */,
 				5B8C108A1A39EC2A00F481E6 /* ProductAddViewController.m in Sources */,
+				517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */,
 				5B174DD81A5DE1DE00A00505 /* MilkGallonStand.m in Sources */,
 				5B7338BA1B0F9856004C931E /* FSTCircleProgressLayer.m in Sources */,
 				6743AE1F19E30E46000D9CF3 /* MobiNavigationController.m in Sources */,

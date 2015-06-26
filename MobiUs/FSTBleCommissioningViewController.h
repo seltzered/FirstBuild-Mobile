@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTBleCommissioningTableViewController.h"
 
-@interface FSTBleCommissioningViewController : UIViewController
+@interface FSTBleCommissioningViewController : UIViewController<FSTBleCommissioningTableViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityWheel;
 @property (weak, nonatomic) IBOutlet UIView *wheelBackground;
 

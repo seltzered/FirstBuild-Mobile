@@ -9,7 +9,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #import "FSTBleCommissioningTableViewController.h"
-#import "FSTBleCentralManager.h"
+//#import "FSTBleCentralManager.h"
 #import "FSTBleConnectingViewController.h"
 
 @interface FSTBleCommissioningTableViewController ()
@@ -19,14 +19,14 @@
 @implementation FSTBleCommissioningTableViewController
 
 //array that stores the data for the table view
-NSMutableArray* _devices;
+NSMutableArray* _devices; // just pass the selection rather than the devices
 
-//observers
+/*//observers
 NSObject* _discoveryObserver;
 NSObject* _undiscoveryObserver;
-
-UIAlertView* _friendlyNamePrompt;
-NSString* _friendlyName;
+*/
+//UIAlertView* _friendlyNamePrompt;
+//NSString* _friendlyName;
 
 
 CBPeripheral* _currentlySelectedPeripheral;
@@ -34,71 +34,6 @@ CBPeripheral* _currentlySelectedPeripheral;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    _devices = [[NSMutableArray alloc]init];
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    
-    //since we are using self in the block callback below we need to create a weak
-    //reference so ARC can actually dealloc when the view  unload (and observers can removed in dealloc)
-    __weak typeof(self) weakSelf = self;
-    
-    _discoveryObserver = [center addObserverForName:FSTBleCentralManagerDeviceFound
-                                                   object:nil
-                                                    queue:nil
-                                               usingBlock:^(NSNotification *notification)
-    {
-        CBPeripheral* peripheral = (CBPeripheral*)notification.object;
-        BOOL found = NO;
-        
-        DLog("found a peripheral and was notified in ble commissioning %@", [peripheral.identifier UUIDString]);
-        
-        for (CBPeripheral* p in _devices)
-        {
-            if ([p isEqual:peripheral])
-            {
-                found = YES;
-                return;
-            }
-        }
-        
-        if (found==NO)
-        {
-            DLog("peripheral doesn't exist adding to table");
-            [_devices addObject:peripheral];
-            [weakSelf.tableView reloadData];
-        }
-        else
-        {
-            DLog(@"peripheral already exists in table");
-        }
-    }];
-    
-    _undiscoveryObserver = [center addObserverForName:FSTBleCentralManagerDeviceUnFound
-                                             object:nil
-                                              queue:nil
-                                         usingBlock:^(NSNotification *notification)
-    {
-        CBPeripheral* peripheral = (CBPeripheral*)notification.object;
-
-        [_devices removeObject:peripheral];
-        DLog(@"device undiscovered %@", [peripheral.identifier UUIDString]);
-        [weakSelf.tableView reloadData];
-    }];
-    
-    
-    [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
-}
-
--(void)dealloc
-{
-    [self cleanup];
-}
-
--(void)cleanup
-{
-    [[FSTBleCentralManager sharedInstance] stopScanning];
-    [[NSNotificationCenter defaultCenter] removeObserver:_discoveryObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_undiscoveryObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,13 +70,18 @@ CBPeripheral* _currentlySelectedPeripheral;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-       _friendlyNamePrompt = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter a name for this device", @"") message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
+     /*  _friendlyNamePrompt = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter a name for this device", @"") message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
     [_friendlyNamePrompt setAlertViewStyle:UIAlertViewStylePlainTextInput];
     _friendlyNamePrompt.tag = 1;
     [_friendlyNamePrompt show];
+      */
     _currentlySelectedPeripheral = (CBPeripheral*)(_devices[indexPath.item]);
+    [self.delegate getSelectedPeripheral:_currentlySelectedPeripheral]; // could combine these delegate methods
+    [self.delegate paragonSelected]; // this will call the segue method.
+    //[self performSegueWithIdentifier:@"segueConnecting" sender:self];
 }
 
+/*
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [self cleanup];
@@ -156,7 +96,7 @@ CBPeripheral* _currentlySelectedPeripheral;
         // has a problem with dismissing the keyboard
 
     }
-}
+} // moved to commissioning view controller
 
 
 #pragma mark - UIAlertViewDelegate
@@ -172,7 +112,8 @@ CBPeripheral* _currentlySelectedPeripheral;
             
             if (_friendlyName.length > 0)
             {
-                [self performSegueWithIdentifier:@"segueConnecting" sender:self];
+                [self.delegate paragonSelected]; // this will call the segue method.
+                //[self performSegueWithIdentifier:@"segueConnecting" sender:self];
             }
             //TODO: error handling if friendlyName is empty
             //TODO: error handling if name already exists? overwrite?
@@ -183,6 +124,6 @@ CBPeripheral* _currentlySelectedPeripheral;
         }
     }
 }
-
+*/
 
 @end

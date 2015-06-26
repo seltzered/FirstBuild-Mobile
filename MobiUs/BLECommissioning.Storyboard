@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YX5-5X-5Oy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
+            <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
         </mutableArray>
@@ -29,7 +36,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7d-c2-9x9" userLabel="tableContainerView">
                                 <rect key="frame" x="0.0" y="200" width="600" height="300"/>
                                 <connections>
-                                    <segue destination="dOI-ob-UzF" kind="embed" id="YAc-N4-T7v"/>
+                                    <segue destination="dOI-ob-UzF" kind="embed" identifier="tableSegue" id="YAc-N4-T7v"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adr-MS-MvD" userLabel="bottomView">
@@ -103,6 +110,7 @@
                     <connections>
                         <outlet property="activityWheel" destination="ub8-Cq-MYc" id="pun-05-CXs"/>
                         <outlet property="wheelBackground" destination="M0B-Jg-fSQ" id="HJW-NY-Iih"/>
+                        <segue destination="K3l-7d-HEu" kind="show" identifier="connectingSegue" id="rmC-Uu-h0n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXy-by-n3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -143,7 +151,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wMn-bX-ei6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1327" y="264"/>
+            <point key="canvasLocation" x="1291" y="-58"/>
         </scene>
         <!--Ble Connecting View Controller-->
         <scene sceneID="gA3-ey-ck0">
@@ -154,7 +162,7 @@
                         <viewControllerLayoutGuide type="bottom" id="meY-Y3-Ecx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="O3O-kA-Sqn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5xU-zI-tT1">
@@ -193,12 +201,78 @@
                     </view>
                     <connections>
                         <outlet property="searchingIcon" destination="5xU-zI-tT1" id="aY2-6v-RXd"/>
-                        <segue destination="wK9-FT-hz9" kind="show" identifier="segueConnected" id="MVM-Ps-LWm"/>
+                        <segue destination="tYU-FK-F39" kind="show" identifier="segueError" id="kwF-8O-7vH"/>
+                        <segue destination="yXt-Iw-Lwc" kind="show" identifier="segueFound" id="U3c-1y-20k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtE-eL-p9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2145" y="264"/>
+            <point key="canvasLocation" x="2207" y="224"/>
+        </scene>
+        <!--Ble Found View Controller-->
+        <scene sceneID="ruX-zO-Etf">
+            <objects>
+                <viewController id="yXt-Iw-Lwc" customClass="FSTBleFoundViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bd6-dc-0X2"/>
+                        <viewControllerLayoutGuide type="bottom" id="CaB-7N-f5b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1Z0-s4-ODb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Got it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-96-25a">
+                                <rect key="frame" x="240" y="268" width="120" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="PKk-ti-OKD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="29"/>
+                                <color key="textColor" red="0.91764705879999997" green="0.27450980390000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We found your Paragon." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgf-16-8Eg">
+                                <rect key="frame" x="167" y="314" width="267" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="267" id="S4F-fv-5wp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-paragon-with-pot" translatesAutoresizingMaskIntoConstraints="NO" id="jXL-gM-MKG">
+                                <rect key="frame" x="160.5" y="65" width="280" height="195"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="4BU-Xd-3a9"/>
+                                    <constraint firstAttribute="width" constant="280" id="dML-tM-cIw"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jgf-16-8Eg" firstAttribute="centerX" secondItem="811-96-25a" secondAttribute="centerX" constant="0.5" id="60J-4Y-B4D"/>
+                            <constraint firstItem="jXL-gM-MKG" firstAttribute="centerX" secondItem="811-96-25a" secondAttribute="centerX" constant="0.5" id="P97-y9-UTf"/>
+                            <constraint firstItem="jXL-gM-MKG" firstAttribute="top" secondItem="Bd6-dc-0X2" secondAttribute="bottom" constant="45" id="Rip-7O-ZIu"/>
+                            <constraint firstAttribute="centerX" secondItem="jXL-gM-MKG" secondAttribute="centerX" constant="-0.5" id="U8a-UD-Kla"/>
+                            <constraint firstItem="811-96-25a" firstAttribute="top" secondItem="jXL-gM-MKG" secondAttribute="bottom" constant="8" id="bWL-eM-Xz7"/>
+                            <constraint firstItem="Jgf-16-8Eg" firstAttribute="top" secondItem="811-96-25a" secondAttribute="bottom" constant="8" id="wvE-px-0BN"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="6f2-0B-qLh" appends="YES" id="oxH-iW-dFv"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <segue destination="8N2-ej-NXM" kind="show" identifier="segueNaming" id="Cqu-FA-QyC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O1B-MD-55X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6f2-0B-qLh">
+                    <connections>
+                        <action selector="paragonTap:" destination="yXt-Iw-Lwc" id="cYm-Lj-Lv0"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1759" y="1068"/>
         </scene>
         <!--Ble Connected View Controller-->
         <scene sceneID="gGZ-bS-KaY">
@@ -209,11 +283,11 @@
                         <viewControllerLayoutGuide type="bottom" id="TZp-d8-0QY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qwl-LE-ezy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8x-ir-vf1" userLabel="continueButtonHolderView">
-                                <rect key="frame" x="45" y="220" width="510" height="65"/>
+                                <rect key="frame" x="45" y="520" width="510" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpp-Qf-stZ">
                                         <rect key="frame" x="0.0" y="16" width="510" height="34"/>
@@ -287,11 +361,181 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2957" y="264"/>
+            <point key="canvasLocation" x="3309" y="396"/>
+        </scene>
+        <!--Ble Error View Controller-->
+        <scene sceneID="tnm-4Y-kkO">
+            <objects>
+                <viewController id="tYU-FK-F39" customClass="FSTBleErrorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gUF-Tg-tWN"/>
+                        <viewControllerLayoutGuide type="bottom" id="81I-wS-gcY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cmw-5R-V5F">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-warning-error" translatesAutoresizingMaskIntoConstraints="NO" id="xWB-9l-m7I">
+                                <rect key="frame" x="160.5" y="65" width="280" height="195"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="0uQ-le-YTR"/>
+                                    <constraint firstAttribute="width" constant="280" id="ERT-2y-jZg"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBV-yq-1wA">
+                                <rect key="frame" x="200" y="268" width="200" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="dQh-8E-tfs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="29"/>
+                                <color key="textColor" red="0.91764705879999997" green="0.27450980390000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We were unable to connect to Paragon Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9j-Bz-GTD">
+                                <rect key="frame" x="147" y="314" width="307" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="307" id="N30-Th-VsE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xWB-9l-m7I" firstAttribute="centerX" secondItem="iBV-yq-1wA" secondAttribute="centerX" constant="0.5" id="2Uc-pT-YbQ"/>
+                            <constraint firstItem="B9j-Bz-GTD" firstAttribute="centerX" secondItem="iBV-yq-1wA" secondAttribute="centerX" constant="0.5" id="3Xd-Po-ceV"/>
+                            <constraint firstItem="B9j-Bz-GTD" firstAttribute="top" secondItem="iBV-yq-1wA" secondAttribute="bottom" constant="8" id="F9k-Vo-yoV"/>
+                            <constraint firstAttribute="centerX" secondItem="xWB-9l-m7I" secondAttribute="centerX" constant="-0.5" id="Wgb-5o-IUj"/>
+                            <constraint firstItem="xWB-9l-m7I" firstAttribute="top" secondItem="gUF-Tg-tWN" secondAttribute="bottom" constant="45" id="eKi-nw-U9P"/>
+                            <constraint firstItem="iBV-yq-1wA" firstAttribute="top" secondItem="xWB-9l-m7I" secondAttribute="bottom" constant="8" id="ncN-te-3LS"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9EK-BV-pJv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2559" y="960"/>
+        </scene>
+        <!--Ble Naming View Controller-->
+        <scene sceneID="eDe-Dn-JpM">
+            <objects>
+                <viewController id="8N2-ej-NXM" customClass="FSTBleNamingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QAu-2K-rmn"/>
+                        <viewControllerLayoutGuide type="bottom" id="qBa-aM-Jvp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleAspectFill" id="dJT-tH-wQ2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-my-name-is-paragon" translatesAutoresizingMaskIntoConstraints="NO" id="xQH-GA-oha">
+                                <rect key="frame" x="160" y="65" width="280" height="195"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="195" id="BED-cm-V96"/>
+                                    <constraint firstAttribute="width" constant="280" id="H5y-Ay-XmX"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PR-dU-q4K" userLabel="BottomView">
+                                <rect key="frame" x="21" y="297" width="558" height="288"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Your Paragon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxq-Pf-VNN">
+                                        <rect key="frame" x="189" y="8" width="180.5" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="XPq-X3-F6e"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AN2-Hs-vdh">
+                                        <rect key="frame" x="28" y="33" width="502" height="21"/>
+                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="15"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q7b-iF-peN">
+                                        <rect key="frame" x="70" y="62" width="419" height="29"/>
+                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="19"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ga-aH-8Nj" userLabel="continueButtonHolderView">
+                                        <rect key="frame" x="56" y="203" width="446" height="65"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yym-Ou-ham">
+                                                <rect key="frame" x="0.0" y="16" width="446" height="34"/>
+                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="65" id="GWx-iI-KcF"/>
+                                            <constraint firstAttribute="centerY" secondItem="Yym-Ou-ham" secondAttribute="centerY" id="MFG-Ip-cWf"/>
+                                            <constraint firstAttribute="width" secondItem="Yym-Ou-ham" secondAttribute="width" id="ih4-Rc-K1T"/>
+                                            <constraint firstAttribute="centerX" secondItem="Yym-Ou-ham" secondAttribute="centerX" id="rZN-ex-ZIO"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="azY-co-nTp" appends="YES" id="cRG-8U-Kkh"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="bxq-Pf-VNN" secondAttribute="centerX" constant="-0.5" id="61Y-2U-gJt"/>
+                                    <constraint firstItem="AN2-Hs-vdh" firstAttribute="top" secondItem="bxq-Pf-VNN" secondAttribute="bottom" constant="-9" id="6KI-6V-jh8"/>
+                                    <constraint firstAttribute="width" secondItem="Q7b-iF-peN" secondAttribute="width" multiplier="4:3" id="AVE-DQ-iy3"/>
+                                    <constraint firstAttribute="centerX" secondItem="Yym-Ou-ham" secondAttribute="centerX" id="Ajx-if-SaI"/>
+                                    <constraint firstAttribute="centerX" secondItem="Q7b-iF-peN" secondAttribute="centerX" constant="-0.5" id="H7Q-di-xfZ"/>
+                                    <constraint firstItem="2ga-aH-8Nj" firstAttribute="width" secondItem="1PR-dU-q4K" secondAttribute="width" multiplier="4:5" id="Hbw-51-55p"/>
+                                    <constraint firstItem="bxq-Pf-VNN" firstAttribute="top" secondItem="1PR-dU-q4K" secondAttribute="top" constant="8" id="OQr-cb-6kl"/>
+                                    <constraint firstItem="Q7b-iF-peN" firstAttribute="top" secondItem="AN2-Hs-vdh" secondAttribute="bottom" constant="8" id="U48-ct-pbD"/>
+                                    <constraint firstItem="bxq-Pf-VNN" firstAttribute="centerX" secondItem="AN2-Hs-vdh" secondAttribute="centerX" id="cPx-ai-X3X"/>
+                                    <constraint firstAttribute="width" secondItem="AN2-Hs-vdh" secondAttribute="width" multiplier="10:9" id="qKZ-Fx-mIu"/>
+                                    <constraint firstAttribute="bottom" secondItem="2ga-aH-8Nj" secondAttribute="bottom" constant="20" id="rgw-yY-maz"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qBa-aM-Jvp" firstAttribute="top" secondItem="1PR-dU-q4K" secondAttribute="bottom" constant="15" id="281-1L-WDR"/>
+                            <constraint firstItem="1PR-dU-q4K" firstAttribute="trailing" secondItem="dJT-tH-wQ2" secondAttribute="trailingMargin" constant="-5" id="GSu-vl-p8e"/>
+                            <constraint firstItem="1PR-dU-q4K" firstAttribute="top" secondItem="xQH-GA-oha" secondAttribute="bottom" constant="37" id="PfG-WA-y1n"/>
+                            <constraint firstItem="1PR-dU-q4K" firstAttribute="leading" secondItem="dJT-tH-wQ2" secondAttribute="leadingMargin" constant="5" id="SG3-HX-HL9"/>
+                            <constraint firstAttribute="centerX" secondItem="xQH-GA-oha" secondAttribute="centerX" id="YvE-fB-cvb"/>
+                            <constraint firstItem="xQH-GA-oha" firstAttribute="top" secondItem="QAu-2K-rmn" secondAttribute="bottom" constant="45" id="osp-fG-di7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomView" destination="1PR-dU-q4K" id="zep-Xl-eId"/>
+                        <outlet property="paragonNameField" destination="Q7b-iF-peN" id="bpu-a9-LTn"/>
+                        <segue destination="wK9-FT-hz9" kind="show" identifier="segueConnected" id="mRM-hB-aw0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F3I-wg-KWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="azY-co-nTp">
+                    <connections>
+                        <action selector="continueTap:" destination="8N2-ej-NXM" id="Uva-fM-BTC"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="2595" y="1746"/>
         </scene>
     </scenes>
     <resources>
         <image name="cell_paragon_product_logo" width="457" height="155"/>
         <image name="cell_paragon_product_logo_grey" width="457" height="155"/>
+        <image name="icon-my-name-is-paragon" width="600" height="581"/>
+        <image name="icon-paragon-with-pot" width="600" height="581"/>
+        <image name="icon-warning-error" width="600" height="581"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="rmC-Uu-h0n"/>
+    </inferredMetricsTieBreakers>
 </document>

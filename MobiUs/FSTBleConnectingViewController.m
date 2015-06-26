@@ -8,6 +8,7 @@
 
 #import "FSTBleConnectingViewController.h"
 #import "FSTBleCentralManager.h"
+#import "FSTBleFoundViewController.h"
 
 @interface FSTBleConnectingViewController ()
 
@@ -20,7 +21,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // not loading?
         
     __weak typeof(self) weakSelf = self;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -92,18 +93,28 @@ CBCharacteristic* _manufacturerNameCharacteristic;
 {
     if (!error)
     {
-        [self performSegueWithIdentifier:@"segueConnected" sender:self];
-        [[FSTBleCentralManager sharedInstance] savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:self.friendlyName];
+
+        [self performSegueWithIdentifier:@"segueFound" sender:self]; // changed from segueConnected
+        [[FSTBleCentralManager sharedInstance] savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon"];
     }
     else
     {
+        [self performSegueWithIdentifier:@"segueError" sender:self];
+        //[[FSTBleCentralManager sharedInstance]savePeripheralHavingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon 1"]; // should this happen? probably do not want to save this
         DLog(@"<<<<<<FAILED TO READ CHARACTERISTIC, TERMINATE CONNECTION>>>>>>>>>>");
     }
 }
 
--(void)dealloc
+-(void)dealloc // when does this happen?
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
+}
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segueFound"]) {
+        FSTBleFoundViewController *vc = segue.destinationViewController;
+        vc.peripheral = self.peripheral; // we have to do this for a while don't we, is there a better way? // why does this happen later? after the connected screen! maybe it goes through segues through the navigation controller? need to dealloc something else?
+    }
 }
 
 - (void)didReceiveMemoryWarning {
