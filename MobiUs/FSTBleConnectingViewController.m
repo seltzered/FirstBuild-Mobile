@@ -115,6 +115,8 @@ CBCharacteristic* _manufacturerNameCharacteristic;
         FSTBleFoundViewController *vc = segue.destinationViewController;
         vc.peripheral = self.peripheral; // we have to do this for a while don't we, is there a better way? // why does this happen later? after the connected screen! maybe it goes through segues through the navigation controller? need to dealloc something else?
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
+
 }
 
 - (void)didReceiveMemoryWarning {
