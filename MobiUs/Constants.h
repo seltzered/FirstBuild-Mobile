@@ -17,7 +17,7 @@ FOUNDATION_EXPORT NSString *const FirebaseUrl;
 
 #ifdef DEBUG
 #   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#   define SIMULATE_PARAGON
+//#   define SIMULATE_PARAGON
 #else
 #   define DLog(...)
 #endif

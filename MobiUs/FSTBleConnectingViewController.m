@@ -93,8 +93,9 @@ CBCharacteristic* _manufacturerNameCharacteristic;
 {
     if (!error)
     {
+
         [self performSegueWithIdentifier:@"segueFound" sender:self]; // changed from segueConnected
-        //[[FSTBleCentralManager sharedInstance]savePeripheralHavingUUIDString:[self.peripheral.identifier UUIDString] withName:self.friendlyName]; // this will have to happen after naming (two vc's down)
+        [[FSTBleCentralManager sharedInstance] savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon"];
     }
     else
     {

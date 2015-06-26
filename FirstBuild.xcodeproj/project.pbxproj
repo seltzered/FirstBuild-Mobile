@@ -51,6 +51,7 @@
 		5BA3A97A1B34760700E51C51 /* FSTBleCommissioningTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A9791B34760700E51C51 /* FSTBleCommissioningTableViewController.m */; };
 		5BA3A97D1B38B46500E51C51 /* FSTBleConnectingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A97C1B38B46500E51C51 /* FSTBleConnectingViewController.m */; };
 		5BA3A9801B38B47300E51C51 /* FSTBleConnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A97F1B38B47300E51C51 /* FSTBleConnectedViewController.m */; };
+		5BA3A9871B3C95FF00E51C51 /* FSTBleProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */; };
 		5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA94D5A1A5C9EDE00F9AD79 /* MilkGallonClippingView.m */; };
 		5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E7E01AF7F4BA00730031 /* BeerBankViewController.m */; };
 		5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E7E31AF7F4E800730031 /* FSTBeerBank.m */; };
@@ -185,6 +186,8 @@
 		5BA3A97C1B38B46500E51C51 /* FSTBleConnectingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleConnectingViewController.m; sourceTree = "<group>"; };
 		5BA3A97E1B38B47300E51C51 /* FSTBleConnectedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleConnectedViewController.h; sourceTree = "<group>"; };
 		5BA3A97F1B38B47300E51C51 /* FSTBleConnectedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleConnectedViewController.m; sourceTree = "<group>"; };
+		5BA3A9851B3C95FF00E51C51 /* FSTBleProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleProduct.h; sourceTree = "<group>"; };
+		5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleProduct.m; sourceTree = "<group>"; };
 		5BA94D591A5C9EDE00F9AD79 /* MilkGallonClippingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MilkGallonClippingView.h; sourceTree = "<group>"; };
 		5BA94D5A1A5C9EDE00F9AD79 /* MilkGallonClippingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MilkGallonClippingView.m; sourceTree = "<group>"; };
 		5BB1E7DF1AF7F4BA00730031 /* BeerBankViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeerBankViewController.h; sourceTree = "<group>"; };
@@ -688,6 +691,8 @@
 				5BC3649C1A32661B00D03B9C /* FSTProduct.m */,
 				5BD467CB1A35ED54009BAC36 /* FirebaseShared.h */,
 				5BD467CC1A35ED54009BAC36 /* FirebaseShared.m */,
+				5BA3A9851B3C95FF00E51C51 /* FSTBleProduct.h */,
+				5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -941,6 +946,7 @@
 				5BCBB9F51B0386CE00B8E043 /* FSTCookingMethodTableViewController.m in Sources */,
 				5BE2A72D1B18AB2300EFA91A /* FSTArrowEndedLine.m in Sources */,
 				5BCBB9FB1B03909000B8E043 /* FSTSousVideCookingMethod.m in Sources */,
+				5BA3A9871B3C95FF00E51C51 /* FSTBleProduct.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,6 +1067,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = FirstBuild;
 				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1084,6 +1091,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = FirstBuild;
 				PROVISIONING_PROFILE = "";
+				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

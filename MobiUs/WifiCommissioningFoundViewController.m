@@ -25,7 +25,8 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)okClick:(id)sender {
-     [self.revealViewController performSegueWithIdentifier:@"sw_front" sender:self];
+    // [self.revealViewController performSegueWithIdentifier:@"sw_front" sender:self];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

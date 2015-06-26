@@ -12,7 +12,7 @@
 
 @required
 
-- (void) noItemsInCollection;
+- (void) itemCountChanged: (NSUInteger)count;
 
 @end
 

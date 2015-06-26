@@ -29,7 +29,7 @@
 
 - (IBAction)continueTapGesture:(id)sender
 {
-    [self.revealViewController performSegueWithIdentifier:@"sw_front" sender:self];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

@@ -15,6 +15,8 @@ NSString * const FSTBleCentralManagerDeviceUnFound = @"FSTBleCentralManagerDevic
 NSString * const FSTBleCentralManagerPoweredOn = @"FSTBleCentralManagerPoweredOn";
 NSString * const FSTBleCentralManagerPoweredOff = @"FSTBleCentralManagerPoweredOff";
 NSString * const FSTBleCentralManagerDeviceConnected = @"FSTBleCentralManagerDeviceConnected";
+NSString * const FSTBleCentralManagerNewDeviceBound = @"FSTBleCentralManagerNewDeviceBound";
+
 
 NSMutableArray* _discoveredDevicesCache;
 NSMutableArray* _discoveredDevicesActiveScan;
@@ -87,7 +89,7 @@ CBPeripheralManager * _peripheralManager; //temporary
     }
 }
 
--(void)savePeripheralHavingUUIDString: (NSString*)uuid withName: (NSString*)name
+-(void)savePeripheral: (CBPeripheral*)peripheral havingUUIDString: (NSString*)uuid withName: (NSString*)name
 {
     if (name && name.length > 0)
     {
@@ -98,8 +100,21 @@ CBPeripheralManager * _peripheralManager; //temporary
             savedDevices = [[NSMutableDictionary alloc]init];
         }
         
-        [savedDevices setObject:name forKey:uuid];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
+        if (![savedDevices objectForKey:uuid])
+        {
+            //if this is the first time this UUID has been saved, announce a new device is fully bound and saved
+            DLog(@"device doesn't exist");
+            [savedDevices setObject:name forKey:uuid];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerNewDeviceBound object:peripheral];
+        }
+        else
+        {
+            //otherwise just save it
+            [savedDevices setObject:name forKey:uuid];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
+        }
     }
 }
 

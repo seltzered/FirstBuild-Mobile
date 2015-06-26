@@ -37,7 +37,7 @@
 
 - (IBAction)continueTap:(id)sender {
     
-    [[FSTBleCentralManager sharedInstance]savePeripheralHavingUUIDString:[self.peripheral.identifier UUIDString] withName:self.paragonNameField.text]; // get text from box and save peripheral
+    [[FSTBleCentralManager sharedInstance]savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:self.paragonNameField.text]; // get text from box and save peripheral
     [self performSegueWithIdentifier:@"segueConnected" sender:self];
 }
 

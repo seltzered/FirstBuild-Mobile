@@ -24,6 +24,15 @@
 @end
 
 @interface SWUITableViewCell : UITableViewCell
+
+
+
+extern NSString * const FSTMenuItemSelectedNotification;
+extern NSString * const FSTMenuItemAddNewProduct;
+extern NSString * const FSTMenuItemHome ;
+
+
+
 @property (nonatomic) IBOutlet UILabel *label;
 @end
 
