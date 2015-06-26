@@ -17,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.hidesBackButton = true;
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timedSegue:) userInfo:nil repeats:NO];
     // Do any additional setup after loading the view.
 }
 
@@ -25,11 +27,12 @@
  // this is bad, it performs too many segues and doesn't dealloc view controllers safely
 }
 */
-- (IBAction)paragonTap:(id)sender {
+- (void)timedSegue:(NSTimer*)timer {
     
     [self performSegueWithIdentifier:@"segueNaming" sender:self];
     // Press the icon. just to test segues until I figure out when the segue actually happens. 
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
