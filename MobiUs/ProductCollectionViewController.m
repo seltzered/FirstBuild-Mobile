@@ -125,6 +125,8 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     bleProduct.peripheral = peripheral;
                     bleProduct.peripheral.delegate = bleProduct;
+                    DLog(@"discovering services for peripheral %@", bleProduct.peripheral.identifier);
+                    [bleProduct.peripheral discoverServices:nil];
                     bleProduct.online = YES;
                     [weakSelf.collectionView reloadData];
                 }
