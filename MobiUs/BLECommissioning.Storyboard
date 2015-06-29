@@ -9,10 +9,8 @@
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
-            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
@@ -266,95 +264,6 @@
             </objects>
             <point key="canvasLocation" x="1759" y="1068"/>
         </scene>
-        <!--Ble Connected View Controller-->
-        <scene sceneID="gGZ-bS-KaY">
-            <objects>
-                <viewController id="wK9-FT-hz9" customClass="FSTBleConnectedViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OTr-WA-7aQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="TZp-d8-0QY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Qwl-LE-ezy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8x-ir-vf1" userLabel="continueButtonHolderView">
-                                <rect key="frame" x="45" y="520" width="510" height="65"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpp-Qf-stZ">
-                                        <rect key="frame" x="0.0" y="16" width="510" height="34"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Wpp-Qf-stZ" secondAttribute="width" id="IY5-R2-3MQ"/>
-                                    <constraint firstAttribute="centerX" secondItem="Wpp-Qf-stZ" secondAttribute="centerX" id="K8U-RK-8Tn"/>
-                                    <constraint firstAttribute="height" constant="65" id="KzV-qC-VtI"/>
-                                    <constraint firstAttribute="centerY" secondItem="Wpp-Qf-stZ" secondAttribute="centerY" id="kbQ-K4-acB"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="co8-jK-aji" appends="YES" id="HCj-m5-mfH"/>
-                                </connections>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_paragon_product_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Vai-C9-zT1">
-                                <rect key="frame" x="172" y="8" width="256.5" height="118"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="256" id="bSO-RJ-wOk"/>
-                                    <constraint firstAttribute="height" constant="118" id="tHu-QY-ggO"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Success!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kiy-aY-1Wa">
-                                <rect key="frame" x="240" y="132" width="120" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="Got-3L-Zvp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="29"/>
-                                <color key="textColor" red="0.91764705882352937" green="0.27450980392156865" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Your Paragon is now ready to use." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mP5-m1-cfu">
-                                <rect key="frame" x="167" y="167" width="267" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="267" id="I9x-CD-SaX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Kiy-aY-1Wa" firstAttribute="centerX" secondItem="mP5-m1-cfu" secondAttribute="centerX" constant="-0.5" id="2me-zH-W6y"/>
-                            <constraint firstItem="Vai-C9-zT1" firstAttribute="top" secondItem="OTr-WA-7aQ" secondAttribute="bottom" constant="45" id="F9x-Dp-K64"/>
-                            <constraint firstItem="Kiy-aY-1Wa" firstAttribute="top" secondItem="Vai-C9-zT1" secondAttribute="bottom" constant="35" id="TFq-uN-Uri"/>
-                            <constraint firstItem="U8x-ir-vf1" firstAttribute="width" secondItem="Qwl-LE-ezy" secondAttribute="width" multiplier="0.85" id="hpk-VO-Ii2"/>
-                            <constraint firstAttribute="centerX" secondItem="Vai-C9-zT1" secondAttribute="centerX" id="lKW-er-voZ"/>
-                            <constraint firstItem="TZp-d8-0QY" firstAttribute="top" secondItem="U8x-ir-vf1" secondAttribute="bottom" constant="15" id="n0w-ZL-M6A"/>
-                            <constraint firstItem="mP5-m1-cfu" firstAttribute="top" secondItem="Kiy-aY-1Wa" secondAttribute="bottom" id="qQG-jT-d5M"/>
-                            <constraint firstItem="Kiy-aY-1Wa" firstAttribute="centerX" secondItem="Vai-C9-zT1" secondAttribute="centerX" id="v8C-Ut-f8R"/>
-                            <constraint firstAttribute="centerX" secondItem="U8x-ir-vf1" secondAttribute="centerX" id="yVc-c8-KxZ"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zdP-qL-ke5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="co8-jK-aji">
-                    <connections>
-                        <action selector="continueTapGesture:" destination="wK9-FT-hz9" id="2v5-Nc-YI8"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="3309" y="396"/>
-        </scene>
         <!--Ble Error View Controller-->
         <scene sceneID="tnm-4Y-kkO">
             <objects>
@@ -507,7 +416,6 @@
                     <connections>
                         <outlet property="bottomView" destination="1PR-dU-q4K" id="zep-Xl-eId"/>
                         <outlet property="paragonNameField" destination="Q7b-iF-peN" id="bpu-a9-LTn"/>
-                        <segue destination="wK9-FT-hz9" kind="show" identifier="segueConnected" id="mRM-hB-aw0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F3I-wg-KWk" userLabel="First Responder" sceneMemberID="firstResponder"/>

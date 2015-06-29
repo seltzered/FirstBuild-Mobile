@@ -38,7 +38,7 @@
 - (IBAction)continueTap:(id)sender {
     
     [[FSTBleCentralManager sharedInstance]savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:self.paragonNameField.text]; // get text from box and save peripheral
-    [self performSegueWithIdentifier:@"segueConnected" sender:self];
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 -(void)beganEditingText {
