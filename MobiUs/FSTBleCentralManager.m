@@ -16,7 +16,7 @@ NSString * const FSTBleCentralManagerPoweredOn = @"FSTBleCentralManagerPoweredOn
 NSString * const FSTBleCentralManagerPoweredOff = @"FSTBleCentralManagerPoweredOff";
 NSString * const FSTBleCentralManagerDeviceConnected = @"FSTBleCentralManagerDeviceConnected";
 NSString * const FSTBleCentralManagerNewDeviceBound = @"FSTBleCentralManagerNewDeviceBound";
-
+NSString * const FSTBleCentralManagerDeviceNameChanged = @"FSTBleCentralManagerDeviceNameChanged";
 
 NSMutableArray* _discoveredDevicesCache;
 NSMutableArray* _discoveredDevicesActiveScan;
@@ -114,6 +114,8 @@ CBPeripheralManager * _peripheralManager; //temporary
             //otherwise just save it
             [savedDevices setObject:name forKey:uuid];
             [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceNameChanged object:peripheral];
+
         }
     }
 }

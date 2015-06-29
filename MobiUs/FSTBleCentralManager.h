@@ -12,15 +12,13 @@
 //TODO: temporarily need CBPeripheralManagerDelegate
 @interface FSTBleCentralManager : NSObject <CBCentralManagerDelegate, CBPeripheralManagerDelegate>
 
-
 extern NSString * const FSTBleCentralManagerDeviceFound;
 extern NSString * const FSTBleCentralManagerDeviceUnFound;
 extern NSString * const FSTBleCentralManagerPoweredOn;
 extern NSString * const FSTBleCentralManagerPoweredOff;
 extern NSString * const FSTBleCentralManagerDeviceConnected;
 extern NSString * const FSTBleCentralManagerNewDeviceBound;
-
-
+extern NSString * const FSTBleCentralManagerDeviceNameChanged;
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuid;
 -(void)stopScanning;

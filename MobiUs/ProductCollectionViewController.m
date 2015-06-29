@@ -31,6 +31,7 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 NSObject* _connectedToBleObserver;
 NSObject* _deviceConnectedObserver;
 NSObject* _newDeviceBoundObserver;
+NSObject* _deviceRenamedObserver;
 
 NSIndexPath *_indexPathForDeletion;
 
@@ -53,6 +54,7 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_connectedToBleObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceRenamedObserver];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -148,6 +150,25 @@ NSIndexPath *_indexPathForDeletion;
         [self.delegate itemCountChanged:self.products.count];
         [weakSelf.collectionView reloadData];
     }];
+    
+    //notify us of any BLE devices that were renamed
+    _deviceRenamedObserver = [center addObserverForName:FSTBleCentralManagerDeviceNameChanged
+                                                  object:nil
+                                                   queue:nil
+                                              usingBlock:^(NSNotification *notification)
+    {
+       CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
+       for (FSTProduct* product in weakSelf.products)
+       {
+           if ([product.identifier isEqualToString: [peripheral.identifier UUIDString]])
+           {
+               product.friendlyName = [devices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
+               [weakSelf.collectionView reloadData];
+               break;
+           }
+       }
+   }];
+    
 }
 
 - (void)connectBleDevices
