@@ -12,5 +12,7 @@
 @interface FSTBleCommissioningViewController : UIViewController<FSTBleCommissioningTableViewControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityWheel;
 @property (weak, nonatomic) IBOutlet UIView *wheelBackground;
+@property (weak, nonatomic) IBOutlet UIView *singletonView;
+@property (weak, nonatomic) IBOutlet UIImageView *searchingIcon;
 
 @end

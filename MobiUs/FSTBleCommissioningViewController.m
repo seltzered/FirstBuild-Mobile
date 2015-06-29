@@ -29,6 +29,7 @@ CBPeripheral* _currentlySelectedPeripheral;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.singletonView.hidden = false; //false; // defaults to searching view
     //--moved from commissioning view controller---//
     _devices = [[NSMutableArray alloc]init];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -41,54 +42,99 @@ CBPeripheral* _currentlySelectedPeripheral;
                                              object:nil
                                               queue:nil
                                          usingBlock:^(NSNotification *notification)
-                          {
-                              CBPeripheral* peripheral = (CBPeripheral*)notification.object;
-                              BOOL found = NO;
-                              
-                              DLog("found a peripheral and was notified in ble commissioning %@", [peripheral.identifier UUIDString]);
-                              
-                              for (CBPeripheral* p in _devices)
-                              {
-                                  if ([p isEqual:peripheral])
-                                  {
-                                      found = YES;
-                                      return;
-                                  }
-                              }
-                              
-                              if (found==NO)
-                              {
-                                  DLog("peripheral doesn't exist adding to table");
-                                  [_devices addObject:peripheral];
-                                  //[weakSelf.tableView reloadData];
-                                  tableController.devices = _devices; // reset table data
-                                  [tableController.tableView reloadData]; // better way to do this? why only on second time
-                                  //hopefully it doesn't happen before the segue (we could force the segue call earlier in this function)
-                              }
-                              else
-                              {
-                                  DLog(@"peripheral already exists in table");
-                              }
-                          }];
+    {
+      CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+      BOOL found = NO;
+      
+      DLog("found a peripheral and was notified in ble commissioning %@", [peripheral.identifier UUIDString]);
+      
+      for (CBPeripheral* p in _devices)
+      {
+          if ([p isEqual:peripheral])
+          {
+              found = YES;
+              return;
+          }
+      }
+      
+      if (found==NO)
+      {
+          DLog("peripheral doesn't exist adding to table");
+          [_devices addObject:peripheral];
+          //[weakSelf.tableView reloadData];
+          tableController.devices = _devices; // reset table data
+          [tableController.tableView reloadData]; // better way to do this? why only on second time
+          //hopefully it doesn't happen before the segue (we could force the segue call earlier in this function)
+      }
+      else
+      {
+          DLog(@"peripheral already exists in table");
+      }
+      
+      if ([_devices count] > 1) {
+          self.singletonView.hidden = true; // users can go ahead and interact with the table
+      } else {
+          self.singletonView.hidden = false;
+         if ([_devices count] == 1)
+         {
+            _currentlySelectedPeripheral = _devices[0];
+            [self performSegueWithIdentifier:@"plainConnectingSegue" sender:self];
+         }
+        // perform segue with the first item in the erray
+      } // checks when adding or removing devices
+    }];
     
     _undiscoveryObserver = [center addObserverForName:FSTBleCentralManagerDeviceUnFound
                                                object:nil
                                                 queue:nil
                                            usingBlock:^(NSNotification *notification)
-                            {
-                                CBPeripheral* peripheral = (CBPeripheral*)notification.object;
-                                
-                                [_devices removeObject:peripheral];
-                                DLog(@"device undiscovered %@", [peripheral.identifier UUIDString]);
-                                tableController.devices = _devices; // reset table data
-                                [tableController.tableView reloadData];
-                                //[weakSelf.tableView reloadData];
-                            }];
+    {
+        CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+        
+        [_devices removeObject:peripheral];
+        DLog(@"device undiscovered %@", [peripheral.identifier UUIDString]);
+        tableController.devices = _devices; // reset table data
+        [tableController.tableView reloadData];
+        //[weakSelf.tableView reloadData];
+        
+        if ([_devices count] > 1) {
+            self.singletonView.hidden = true;
+        } else {
+            self.singletonView.hidden = false;
+            if ([_devices count] == 1)
+            {
+                _currentlySelectedPeripheral = _devices[0];
+                [self performSegueWithIdentifier:@"plainConnectingSegue" sender:self];
+            }
+            // perform segue with the first item in the erray
+        } // checks when adding or removing devices
+    }
+    ];
     
     
     [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
     
     [self.wheelBackground.layer setCornerRadius:self.wheelBackground.frame.size.width/2]; // make it a circle
+    
+    // animate singleton view
+    NSMutableArray *imgListArray = [NSMutableArray array];
+    for (int i=11; i <= 33; i++) {
+        NSString *strImgeName = [NSString stringWithFormat:@"pulsing rings_%05d.png", i];
+        UIImage *image = [UIImage imageNamed:strImgeName];
+        if (!image) {
+            NSLog(@"Could not load image named: %@", strImgeName);
+        }
+        else {
+            [imgListArray addObject:image];
+        }
+    }
+    
+    [self.searchingIcon setAnimationImages:imgListArray];
+    [self.searchingIcon setAnimationDuration:.75];
+    [self.searchingIcon startAnimating];
+    
+
+    
 }
 
 -(void)dealloc
@@ -113,10 +159,15 @@ CBPeripheral* _currentlySelectedPeripheral;
         vc.peripheral = _currentlySelectedPeripheral;
         vc.friendlyName = @"My Paragon 1";  // dummy name //_friendlyName;
         
-        [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+       // [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
         // has a problem with dismissing the keyboard
         
-    } else if ([segue.identifier isEqualToString:@"tableSegue"]) {
+    } else if ([segue.identifier isEqualToString:@"plainConnectingSegue"]) {
+        FSTBleConnectingViewController* vc = (FSTBleConnectingViewController*)segue.destinationViewController;
+        vc.peripheral = _currentlySelectedPeripheral;
+        vc.friendlyName = @"My Paragon 1";  // dummy name //_friendlyName;
+        
+    }else if ([segue.identifier isEqualToString:@"tableSegue"]) {
         tableController = segue.destinationViewController; // this is where it initally sets
         tableController.devices = _devices;
         tableController.delegate = self;
