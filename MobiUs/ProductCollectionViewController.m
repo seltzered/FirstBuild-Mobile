@@ -315,7 +315,9 @@ NSIndexPath *_indexPathForDeletion;
     if (buttonIndex == 1)
     {
         NSLog(@"delete");
+        FSTParagon * deletedItem = self.products[_indexPathForDeletion.item];
         [self.products removeObjectAtIndex:_indexPathForDeletion.item];
+        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]]; // hopefully identifier is a UUID String
         [self.collectionView reloadData];
         
         if (self.products.count==0)

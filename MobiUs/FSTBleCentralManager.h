@@ -26,7 +26,7 @@ extern NSString * const FSTBleCentralManagerDeviceNameChanged;
 -(NSDictionary*)getSavedPeripherals;
 -(CBPeripheral*) connectToSavedPeripheralWithUUID: (NSUUID*) uuid;
 -(void)connectToNewPeripheral: (CBPeripheral*) peripheral;
-
+-(void)deleteSavedPeripheralWithUUIDString: (NSString*) uuidString;
 @property BOOL isPoweredOn;
 
 +(id) sharedInstance;
