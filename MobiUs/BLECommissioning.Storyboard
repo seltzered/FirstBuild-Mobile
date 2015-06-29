@@ -16,6 +16,7 @@
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
+            <string>PTSans-Narrow</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -88,12 +89,49 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zhI-dz-qQa" userLabel="searchingView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VEE-9S-kLt">
+                                        <rect key="frame" x="180" y="30" width="240" height="240"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="byd-GO-Sjl"/>
+                                            <constraint firstAttribute="width" constant="240" id="puU-Wo-qqU"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="cell_paragon_product_logo_grey" translatesAutoresizingMaskIntoConstraints="NO" id="d7h-G2-ZJw" userLabel="Paragon Image View">
+                                        <rect key="frame" x="213" y="188" width="175" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="5x7-eZ-M4g"/>
+                                            <constraint firstAttribute="width" constant="175" id="WSQ-L8-4Ws"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m33-Ka-D9M">
+                                        <rect key="frame" x="210" y="259" width="180" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="sya-dN-a8X"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="VEE-9S-kLt" firstAttribute="centerX" secondItem="d7h-G2-ZJw" secondAttribute="centerX" id="FcY-Aa-Jrv"/>
+                                    <constraint firstItem="d7h-G2-ZJw" firstAttribute="centerX" secondItem="m33-Ka-D9M" secondAttribute="centerX" constant="0.5" id="LR8-UP-a2M"/>
+                                    <constraint firstItem="d7h-G2-ZJw" firstAttribute="top" secondItem="VEE-9S-kLt" secondAttribute="bottom" constant="15" id="TAp-7b-wRF"/>
+                                    <constraint firstAttribute="centerX" secondItem="VEE-9S-kLt" secondAttribute="centerX" id="X7r-Es-OaP"/>
+                                    <constraint firstItem="m33-Ka-D9M" firstAttribute="top" secondItem="d7h-G2-ZJw" secondAttribute="bottom" constant="30" id="iyO-mM-pxg"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0dP-VA-e0B" firstAttribute="top" secondItem="Adr-MS-MvD" secondAttribute="bottom" id="7MZ-vH-ld9"/>
                             <constraint firstItem="t7d-c2-9x9" firstAttribute="bottom" secondItem="Adr-MS-MvD" secondAttribute="top" id="GXY-bc-Kc6"/>
                             <constraint firstItem="t7d-c2-9x9" firstAttribute="leading" secondItem="xkW-6F-wav" secondAttribute="leading" id="Sbc-Fg-yUM"/>
+                            <constraint firstItem="zhI-dz-qQa" firstAttribute="height" secondItem="xkW-6F-wav" secondAttribute="height" id="U8i-Zu-i8q"/>
                             <constraint firstItem="t7d-c2-9x9" firstAttribute="top" secondItem="tBT-eB-OgB" secondAttribute="bottom" constant="8" id="Wb0-FT-QVI"/>
                             <constraint firstAttribute="trailing" secondItem="t7d-c2-9x9" secondAttribute="trailing" id="XVl-zI-JOK"/>
                             <constraint firstAttribute="centerX" secondItem="gi6-Mv-2OD" secondAttribute="centerX" constant="-5" id="bm6-XS-M3V"/>
@@ -101,14 +139,20 @@
                             <constraint firstAttribute="centerX" secondItem="Adr-MS-MvD" secondAttribute="centerX" id="hd2-gH-ESB"/>
                             <constraint firstAttribute="centerX" secondItem="tBT-eB-OgB" secondAttribute="centerX" id="m5y-uF-ipi"/>
                             <constraint firstAttribute="centerX" secondItem="t7d-c2-9x9" secondAttribute="centerX" id="nEj-Jg-RBg"/>
+                            <constraint firstAttribute="centerX" secondItem="zhI-dz-qQa" secondAttribute="centerX" id="r0n-Y1-UUN"/>
+                            <constraint firstItem="zhI-dz-qQa" firstAttribute="width" secondItem="xkW-6F-wav" secondAttribute="width" id="syt-Gy-BjZ"/>
                             <constraint firstAttribute="width" secondItem="Adr-MS-MvD" secondAttribute="width" id="wsE-AO-bEy"/>
                             <constraint firstItem="gi6-Mv-2OD" firstAttribute="top" secondItem="RlM-h1-5eJ" secondAttribute="bottom" id="x5S-JS-tsA"/>
+                            <constraint firstAttribute="centerY" secondItem="zhI-dz-qQa" secondAttribute="centerY" id="zXy-So-VWd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityWheel" destination="ub8-Cq-MYc" id="pun-05-CXs"/>
+                        <outlet property="searchingIcon" destination="VEE-9S-kLt" id="58C-kd-7sP"/>
+                        <outlet property="singletonView" destination="zhI-dz-qQa" id="1ez-QJ-JTO"/>
                         <outlet property="wheelBackground" destination="M0B-Jg-fSQ" id="HJW-NY-Iih"/>
                         <segue destination="K3l-7d-HEu" kind="show" identifier="connectingSegue" id="rmC-Uu-h0n"/>
+                        <segue destination="K3l-7d-HEu" kind="custom" identifier="plainConnectingSegue" customClass="PushSegueNoAnimation" id="umZ-Kd-yCu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXy-by-n3O" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -191,12 +235,13 @@
                         <constraints>
                             <constraint firstItem="x2q-V0-MIB" firstAttribute="centerX" secondItem="Yba-98-Hpr" secondAttribute="centerX" constant="0.5" id="1OW-Yj-qMv"/>
                             <constraint firstItem="Yba-98-Hpr" firstAttribute="top" secondItem="x2q-V0-MIB" secondAttribute="bottom" constant="30" id="IwL-PN-TvY"/>
-                            <constraint firstItem="5xU-zI-tT1" firstAttribute="top" secondItem="oZk-PI-AjH" secondAttribute="bottom" constant="30" id="Lxa-Pd-qVQ"/>
+                            <constraint firstItem="5xU-zI-tT1" firstAttribute="top" secondItem="oZk-PI-AjH" secondAttribute="bottom" constant="30" id="NmK-SR-dCB"/>
                             <constraint firstItem="5xU-zI-tT1" firstAttribute="centerX" secondItem="x2q-V0-MIB" secondAttribute="centerX" id="WUN-gx-YSY"/>
                             <constraint firstAttribute="centerX" secondItem="5xU-zI-tT1" secondAttribute="centerX" id="gd5-iH-jly"/>
                             <constraint firstItem="x2q-V0-MIB" firstAttribute="top" secondItem="5xU-zI-tT1" secondAttribute="bottom" constant="15" id="oLV-UB-B1O"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="6df-yj-87L"/>
                     <connections>
                         <outlet property="searchingIcon" destination="5xU-zI-tT1" id="aY2-6v-RXd"/>
                         <segue destination="tYU-FK-F39" kind="show" identifier="segueError" id="kwF-8O-7vH"/>
@@ -315,7 +360,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9EK-BV-pJv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2559" y="960"/>
+            <point key="canvasLocation" x="2511" y="1004"/>
         </scene>
         <!--Ble Naming View Controller-->
         <scene sceneID="eDe-Dn-JpM">
@@ -436,6 +481,6 @@
         <image name="icon-warning-error" width="600" height="581"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rmC-Uu-h0n"/>
+        <segue reference="umZ-Kd-yCu"/>
     </inferredMetricsTieBreakers>
 </document>

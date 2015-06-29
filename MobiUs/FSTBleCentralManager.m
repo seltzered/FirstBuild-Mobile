@@ -130,6 +130,12 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 }
 
+-(void) deleteSavedPeripheralWithUUIDString: (NSString*) uuidString {
+    NSMutableDictionary* savedPeripherals = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"]]; // get rid of the uuid keyed device
+    [savedPeripherals removeObjectForKey:uuidString];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedPeripherals] forKey:@"ble-devices"];
+}
+
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString
 {
     if (_scanning == YES)
@@ -165,6 +171,8 @@ CBPeripheralManager * _peripheralManager; //temporary
         [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
     }
 }
+
+
 
 -(void)stopScanning
 {
