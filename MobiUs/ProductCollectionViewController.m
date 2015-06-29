@@ -119,7 +119,9 @@ NSIndexPath *_indexPathForDeletion;
             if ([product isKindOfClass:[FSTBleProduct class]])
             {
                 FSTBleProduct* bleProduct = (FSTBleProduct*)product;
-                if (bleProduct.savedUuid == peripheral.identifier)
+                
+                //need to compare the strings and not the actual object since they are not the same
+                if ([[bleProduct.savedUuid UUIDString] isEqualToString:[peripheral.identifier UUIDString]])
                 {
                     bleProduct.peripheral = peripheral;
                     bleProduct.peripheral.delegate = bleProduct;
@@ -183,10 +185,11 @@ NSIndexPath *_indexPathForDeletion;
 {
     for (FSTProduct* product in self.products)
     {
-        if ([product isKindOfClass:[FSTParagon class]])
+        if ([product isKindOfClass:[FSTBleProduct class]])
         {
-            FSTParagon* paragon = (FSTParagon*)product;
-            [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:paragon.savedUuid];
+            FSTBleProduct* bleDevice = (FSTBleProduct*)product;
+            
+            bleDevice.peripheral = [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:bleDevice.savedUuid];
         }
     }
 }

@@ -24,7 +24,7 @@ extern NSString * const FSTBleCentralManagerDeviceNameChanged;
 -(void)stopScanning;
 -(void)savePeripheral: (CBPeripheral*)peripheral havingUUIDString: (NSString*)uuid withName: (NSString*)name;
 -(NSDictionary*)getSavedPeripherals;
--(void)connectToSavedPeripheralWithUUID: (NSUUID*) uuid;
+-(CBPeripheral*) connectToSavedPeripheralWithUUID: (NSUUID*) uuid;
 -(void)connectToNewPeripheral: (CBPeripheral*) peripheral;
 
 @property BOOL isPoweredOn;

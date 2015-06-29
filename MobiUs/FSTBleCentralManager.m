@@ -54,7 +54,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 #pragma mark - External Methods
 
--(void)connectToSavedPeripheralWithUUID: (NSUUID*) uuid
+-(CBPeripheral*) connectToSavedPeripheralWithUUID: (NSUUID*) uuid
 {
     if (uuid)
     {
@@ -63,8 +63,11 @@ CBPeripheralManager * _peripheralManager; //temporary
             NSArray* results = [_centralManager retrievePeripheralsWithIdentifiers:[[NSArray alloc] initWithObjects:uuid, nil]];
             if (results[0])
             {
-                DLog(@"connecting to ... %@", [uuid UUIDString]);
-                [_centralManager connectPeripheral:results[0] options:nil];
+                CBPeripheral* peripheral = (CBPeripheral*)results[0];
+                peripheral =(CBPeripheral*)results[0];
+                DLog(@"connecting to ... %@", [peripheral.identifier UUIDString]);
+                [_centralManager connectPeripheral:peripheral options:nil];
+                return peripheral;
             }
         }
         else
@@ -72,6 +75,7 @@ CBPeripheralManager * _peripheralManager; //temporary
             DLog(@"central not powered");
         }
     }
+    return nil;
 }
 
 -(void)connectToNewPeripheral: (CBPeripheral*) peripheral
