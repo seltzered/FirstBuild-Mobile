@@ -116,14 +116,14 @@ NSIndexPath *_indexPathForDeletion;
         //search through attached products and mark online anything we already have stored
         for (FSTProduct* product in weakSelf.products)
         {
-            if ([product isKindOfClass:[FSTParagon class]])
+            if ([product isKindOfClass:[FSTBleProduct class]])
             {
-                FSTParagon* paragon = (FSTParagon*)product;
-                if ([paragon.identifier isEqualToString: [peripheral.identifier UUIDString]])
+                FSTBleProduct* bleProduct = (FSTBleProduct*)product;
+                if (bleProduct.savedUuid == peripheral.identifier)
                 {
-                    paragon.peripheral = peripheral;
-                    paragon.peripheral.delegate = paragon;
-                    paragon.online = YES;
+                    bleProduct.peripheral = peripheral;
+                    bleProduct.peripheral.delegate = bleProduct;
+                    bleProduct.online = YES;
                     [weakSelf.collectionView reloadData];
                 }
             }
@@ -137,15 +137,14 @@ NSIndexPath *_indexPathForDeletion;
                                               usingBlock:^(NSNotification *notification)
     {
         CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
-        NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+        NSDictionary* latestDevices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
 
-        //TODO type
-        FSTParagon* product = [FSTParagon new];
+        FSTParagon* product = [FSTParagon new]; //TODO type; paragon hardcoded
         product.online = YES;
         product.peripheral = peripheral;
         product.peripheral.delegate = product;
         [product.peripheral discoverServices:nil];
-        product.friendlyName = [devices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
+        product.friendlyName = [latestDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
         [self.products addObject:(FSTParagon*)product];
         [self.delegate itemCountChanged:self.products.count];
         [weakSelf.collectionView reloadData];
@@ -157,17 +156,26 @@ NSIndexPath *_indexPathForDeletion;
                                                    queue:nil
                                               usingBlock:^(NSNotification *notification)
     {
-       CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
-       for (FSTProduct* product in weakSelf.products)
-       {
-           if ([product.identifier isEqualToString: [peripheral.identifier UUIDString]])
-           {
-               product.friendlyName = [devices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
-               [weakSelf.collectionView reloadData];
-               break;
-           }
-       }
-   }];
+        CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
+        NSDictionary* latestDevices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+        for (FSTProduct* product in weakSelf.products)
+        {
+            //get all ble products in the local products array
+            if ([product isKindOfClass:[FSTBleProduct class]])
+            {
+                FSTBleProduct* bleProduct = (FSTBleProduct*)product;
+                
+                //search for ble peripheral that was renamed
+                if (bleProduct.peripheral.identifier == peripheral.identifier)
+                {
+                    //grab it from the saved list
+                    bleProduct.friendlyName = [latestDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
+                    [weakSelf.collectionView reloadData];
+                    break;
+                }
+            }
+        }
+    }];
     
 }
 
