@@ -32,6 +32,8 @@ NSString * const FSTCharacteristicElapsedTime           = @"998142D1-658E-33E2-D
 NSString * const FSTCharacteristicCookTime              = @"C4510188-9062-4D28-97EF-4FB32FFE1AC5"; //read,write
 NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"; //read,notify
 
+CBCharacteristic* FSTCBCharacteristicTargetTemperature;
+
 __weak NSTimer* _readCharacteristicsTimer;
 
 #ifdef SIMULATE_PARAGON
@@ -93,24 +95,30 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 
         if (characteristic.properties & CBCharacteristicPropertyWrite)
         {
-            //NSLog(@"        CAN WRITE");
+            if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
+            {
+                FSTCBCharacteristicTargetTemperature = characteristic;
+                [self writeHack];
+            }
+            NSLog(@"        CAN WRITE");
         }
         
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
             //[self.peripheral readValueForCharacteristic:characteristic];
-//           [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
-            //NSLog(@"        CAN NOTIFY");
+            //[self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            NSLog(@"        CAN NOTIFY");
         }
         
         if (characteristic.properties & CBCharacteristicPropertyRead)
         {
-            //NSLog(@"        CAN READ");
+            [self.peripheral readValueForCharacteristic:characteristic];
+            NSLog(@"        CAN READ");
         }
         
         if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)
         {
-            //NSLog(@"        CAN WRITE WITHOUT RESPONSE");
+            NSLog(@"        CAN WRITE WITHOUT RESPONSE");
         }
     }
 }
@@ -118,6 +126,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
+    DLog("discovered services for peripheral %@", peripheral.identifier);
     __weak typeof(self) weakSelf = self;
     _readCharacteristicsTimer = [NSTimer timerWithTimeInterval:5.0 target:weakSelf selector:@selector(readCharacteristicsTimerTimeout:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:_readCharacteristicsTimer forMode:NSRunLoopCommonModes];
@@ -125,11 +134,20 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     services = [self.peripheral services];
     for (CBService *service in services)
     {
-        //if ([[service.UUID UUIDString] isEqualToString:@"180A"])
-        {
-            //NSLog(@"found device service %@");
-            [self.peripheral discoverCharacteristics:nil forService:service];
-        }
+        [self.peripheral discoverCharacteristics:nil forService:service];
+    }
+}
+
+- (void)writeHack
+{
+    Byte bytes[2] ;
+    bytes[0] = 0x1f;
+    bytes[1] = 0xff;;
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
+    NSLog(@"writing new up temp...");
+    if (FSTCBCharacteristicTargetTemperature)
+    {
+        [self.peripheral writeValue:data forCharacteristic:FSTCBCharacteristicTargetTemperature type:CBCharacteristicWriteWithResponse];
     }
 }
 
@@ -138,13 +156,104 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     for (id key in self.characteristics)
     {
         CBCharacteristic* characteristic = [self.characteristics objectForKey:key];
-        [self.peripheral readValueForCharacteristic:characteristic];
+        
+        if ([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+        {
+            [self.peripheral readValueForCharacteristic:characteristic];
+        }
+        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicTargetTemperature])
+        {
+            [self.peripheral readValueForCharacteristic:characteristic];
+        }
+        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicElapsedTime])
+        {
+            [self.peripheral readValueForCharacteristic:characteristic];
+        }
+        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicBurnerStatus])
+        {
+            [self.peripheral readValueForCharacteristic:characteristic];
+        }
+        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicCookTime])
+        {
+            [self.peripheral readValueForCharacteristic:characteristic];
+        }
+    }
+}
+
+-(void)assignValueToPropertyFromCharacteristic: (CBCharacteristic*)characteristic
+{
+    FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    
+    
+    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeFirmwareInfo])
+    {
+        
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicSpecialFeatures])
+    {
+        
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
+    {
+        
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState])
+    {
+        
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
+    {
+        
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus])
+    {
+        
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
+    {
+        if (currentStage)
+        {
+//            currentStage.cookTimeElapsed == 5;
+        }
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
+    {
+        if (currentStage)
+        {
+            NSData *data = characteristic.value;
+            Byte bytes[2] ;
+            [data getBytes:bytes length:2];
+            uint16_t raw = OSReadBigInt16(bytes, 0);
+            currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+            NSLog(@"FSTCharacteristicTargetTemperature %@", currentStage.targetTemperature );
+        }
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
+    {
+        if (currentStage)
+        {
+           // currentStage.cookTimeRequested == 5;
+        }
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+    {
+        if (currentStage)
+        {
+            NSData *data = characteristic.value;
+            Byte bytes[2] ;
+            [data getBytes:bytes length:2];
+            uint16_t raw = OSReadBigInt16(bytes, 0);
+            currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+            NSLog(@"FSTCharacteristicCurrentTemperature %@", currentStage.actualTemperature );
+        }
     }
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     NSLog(@"characteristic %@ changed value %@", characteristic.UUID, characteristic.value);
+    [self assignValueToPropertyFromCharacteristic:characteristic];
+
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
