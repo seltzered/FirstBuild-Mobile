@@ -59,6 +59,7 @@ NSIndexPath *_indexPathForDeletion;
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    //[self.collectionView reloadData]; //added by John
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 

@@ -8,6 +8,8 @@
 
 #import "ProductMainViewController.h"
 #import "FirebaseShared.h"
+#import "FSTBleCentralManager.h"
+#import "FSTParagonDisconnectedLabel.h"
 #import "MenuViewController.h"
 #import <Firebase/Firebase.h>
 #import <SWRevealViewController.h>
@@ -19,6 +21,7 @@
 @implementation ProductMainViewController
 
 NSObject* _menuItemSelectedObserver;
+NSObject* _paragonDisconnectedObserver;
 
 - (void)viewDidLoad
 {
@@ -44,11 +47,26 @@ NSObject* _menuItemSelectedObserver;
         }
     }];
     
+    _paragonDisconnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceDisconnected
+                                                       object:nil
+                                                        queue:nil
+                                                   usingBlock:^(NSNotification *notification)
+    {
+        UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];//[self.navigationController topViewController];//
+        //activeController.view.frame = CGRectOffset(activeController.view.frame, 0, activeController.view.frame.size.height/9); // need to figure out how to move sub view controller
+        FSTParagonDisconnectedLabel* warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, activeController.view.frame.size.height/9, activeController.view.frame.size.width, activeController.view.frame.size.height/9)];
+        warningLabel.delegate = self; // set delegate to main home screen
+        [activeController.view addSubview:warningLabel];//addSubview:warningLabel];//add label to take in space that view slid out
+        [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made
+     
+    }];
+    
 }
 
 -(void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_menuItemSelectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_paragonDisconnectedObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -142,6 +160,22 @@ NSObject* _menuItemSelectedObserver;
         }];
     }
     [UIView commitAnimations];
+}
+
+-(void) popFromWarning { // label delegate method
+    [self.navigationController popToViewController:self animated:NO]; // UILabel should do this
+ // this definitely calls
+    UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController]; // get back that swholder (might be a better way)
+    
+    for (UIView* subview in activeController.view.subviews) {
+        if ([subview isKindOfClass:[FSTParagonDisconnectedLabel class]]) {
+            [subview removeFromSuperview];
+        }
+    }
+    
+    //activeController.view.frame = CGRectOffset(activeController.view.frame, 0, -activeController.view.frame.size.height/9); // set back the root view controller (a lot of hard-coding to reset this, maybe its better through a transform or all down from that holder view
+
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made
 }
 
 @end

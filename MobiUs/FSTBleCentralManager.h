@@ -19,6 +19,7 @@ extern NSString * const FSTBleCentralManagerPoweredOff;
 extern NSString * const FSTBleCentralManagerDeviceConnected;
 extern NSString * const FSTBleCentralManagerNewDeviceBound;
 extern NSString * const FSTBleCentralManagerDeviceNameChanged;
+extern NSString * const FSTBleCentralManagerDeviceDisconnected;
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuid;
 -(void)stopScanning;

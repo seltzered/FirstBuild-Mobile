@@ -23,6 +23,8 @@
     [self.bottomView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.bottomView.layer setBorderWidth:2.5F];
     
+    self.navigationItem.hidesBackButton = YES;
+    
     //[self.paragonNameField becomeFirstResponder]; // focus on it? (should happen during editor might call resignFirstResponder on self later.
 }
 

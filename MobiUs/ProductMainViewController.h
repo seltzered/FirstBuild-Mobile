@@ -10,8 +10,9 @@
 #import <SWRevealViewController.h>
 
 #import "ProductCollectionViewController.h"
+#import "FSTParagonDisconnectedLabel.h"
 
-@interface ProductMainViewController : UIViewController <ProductCollectionViewDelegate>
+@interface ProductMainViewController : UIViewController <ProductCollectionViewDelegate, FSTParagonDisconnectedLabelDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *noProductsView;
 @property (strong, nonatomic) IBOutlet UIView *productsCollectionView;
