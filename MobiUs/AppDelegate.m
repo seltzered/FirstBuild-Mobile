@@ -34,7 +34,7 @@
     DLog(@"%@", [UIFont fontNamesForFamilyName:@"PT Sans Narrow"]);
     
     
-   [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"ble-devices"];
+   //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"ble-devices"];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];

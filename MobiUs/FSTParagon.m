@@ -162,7 +162,16 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
                 break;
                 
             case 0xc:
-                self.currentCookMode = kPARAGON_HEATING;
+                //if the cooktop is actually reporting a cook time is set
+                //and we are past the preheating stage then indicate
+                if (currentStage.cookTimeRequestedActual > 0)
+                {
+                    self.currentCookMode = kPARAGON_HEATING_WITH_TIME;
+                }
+                else
+                {
+                    self.currentCookMode = kPARAGON_HEATING;
+                }
                 break;
                 
             default:
@@ -194,12 +203,20 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
             Byte bytes[2] ;
             [data getBytes:bytes length:2];
             uint16_t raw = OSReadBigInt16(bytes, 0);
-//            currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
             NSLog(@"FSTCharacteristicTargetTemperature %@", currentStage.targetTemperature );
         }
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
     {
+        if (currentStage)
+        {
+            NSData *data = characteristic.value;
+            Byte bytes[2] ;
+            [data getBytes:bytes length:2];
+            uint16_t raw = OSReadBigInt16(bytes, 0);
+            currentStage.cookTimeRequestedActual = [[NSNumber alloc] initWithDouble:raw];
+            NSLog(@"FSTCharacteristicCookTime %@", currentStage.cookTimeRequestedActual );
+        }
         //not implemented
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])

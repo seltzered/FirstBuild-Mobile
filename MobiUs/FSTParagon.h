@@ -18,7 +18,8 @@ typedef enum {
     kPARAGON_OFF = 0,
     kPARAGON_SOUS_VIDE_ENABLED,
     kPARAGON_PREHEATING,
-    kPARAGON_HEATING
+    kPARAGON_HEATING,
+    kPARAGON_HEATING_WITH_TIME
 } ParagonCookMode;
 
 extern NSString * const FSTActualTemperatureChangedNotification;

@@ -17,6 +17,7 @@
 #import "MobiNavigationController.h"
 #import "FSTCookingMethodViewController.h"
 #import "FSTBleCentralManager.h"
+#import "FSTCookingViewController.h"
 
 @interface ProductCollectionViewController ()
 
@@ -245,13 +246,13 @@ NSIndexPath *_indexPathForDeletion;
     
     if (product.online)
     {
-        productCell.userInteractionEnabled = YES;
+        //productCell.userInteractionEnabled = YES;
         productCell.disabledView.hidden = YES;
         productCell.arrowButton.hidden = NO;
     }
     else
     {
-        productCell.userInteractionEnabled = NO;
+        //productCell.userInteractionEnabled = NO;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
     }
@@ -266,13 +267,44 @@ NSIndexPath *_indexPathForDeletion;
     FSTProduct * product = self.products[indexPath.row];
     NSLog(@"selected %@", product.identifier);
     
-    if ([product isKindOfClass:[FSTChillHub class]])
+    
+    //HACK TODO -- product needs to be online
+    //if (product.online)
     {
-        [self performSegueWithIdentifier:@"segueChillHub" sender:product];
-    }
-    if ([product isKindOfClass:[FSTParagon class]])
-    {
-        [self performSegueWithIdentifier:@"segueParagon" sender:product];
+        if ([product isKindOfClass:[FSTChillHub class]])
+        {
+            [self performSegueWithIdentifier:@"segueChillHub" sender:product];
+        }
+        if ([product isKindOfClass:[FSTParagon class]])
+        {
+            FSTParagon* paragon = (FSTParagon*)product;
+            
+            ////TODO HACK
+            paragon.currentCookMode = kPARAGON_PREHEATING;
+            
+            if (paragon.currentCookMode == kPARAGON_PREHEATING)
+            {
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil] instantiateViewControllerWithIdentifier:@"FSTPreheatingViewController"];
+                vc.currentParagon = paragon;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if(paragon.currentCookMode == kPARAGON_HEATING)
+            {
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil] instantiateViewControllerWithIdentifier:@"FSTReadyToCookViewController"];
+                vc.currentParagon = paragon;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if(paragon.currentCookMode == kPARAGON_HEATING_WITH_TIME)
+            {
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil] instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
+                vc.currentParagon = paragon;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else
+            {
+                [self performSegueWithIdentifier:@"segueParagon" sender:product];
+            }
+        }
     }
 }
 

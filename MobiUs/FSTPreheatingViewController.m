@@ -204,5 +204,10 @@ NSTimer* _pulseTimer;
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)cancelTap:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
+}
 
 @end

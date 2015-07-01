@@ -78,7 +78,7 @@ NSObject* _cookModeChangedObserver;
 }
 
 - (IBAction)cancelLabelClick:(id)sender {
-    [self performSegueWithIdentifier:@"segueCancel" sender:self];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

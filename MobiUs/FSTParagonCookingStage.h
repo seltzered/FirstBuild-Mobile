@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSNumber* targetTemperature;
 @property (nonatomic, strong) NSNumber* actualTemperature;
 @property (nonatomic, strong) NSNumber* cookTimeRequested;
+@property (nonatomic, strong) NSNumber* cookTimeRequestedActual;
 @property (nonatomic, strong) NSNumber* cookTimeElapsed;
 @property (nonatomic, strong) NSString* cookingLabel;
 @end

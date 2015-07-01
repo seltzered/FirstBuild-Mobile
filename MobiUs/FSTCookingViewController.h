@@ -10,7 +10,7 @@
 #import "FSTCircleProgressView.h"
 #import "FSTParagon.h"
 
-@interface FSTCookingViewController : UIViewController
+@interface FSTCookingViewController : UIViewController <UIAlertViewDelegate>
 @property (strong, nonatomic) IBOutlet FSTCircleProgressView *circleProgressView;
 @property (nonatomic,retain) FSTParagon* currentParagon;
 

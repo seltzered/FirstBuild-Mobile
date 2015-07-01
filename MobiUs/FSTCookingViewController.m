@@ -31,6 +31,9 @@ NSObject* _timeElapsedChangedObserver;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.hidesBackButton = true;
+
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
 
     NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@ at %@%@", _cookingStage.cookingLabel, [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
@@ -51,15 +54,16 @@ NSObject* _timeElapsedChangedObserver;
                                                       object:self.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
-   {
+    {
        self.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
        [self makeAndSetTimeRemainingLabel];
 
-   }];
+    }];
+    
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
     self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue];
     self.circleProgressView.elapsedTime = 0;
-    
+
     UIColor *tintColor = UIColorFromRGB(0xD43326);
     self.circleProgressView.tintColor = tintColor;
     self.circleProgressView.elapsedTime = 0;
@@ -118,6 +122,24 @@ NSObject* _timeElapsedChangedObserver;
 }
 
 
+- (IBAction)completeButtonTap:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                                initWithTitle:@"Return to Main Menu"
+                                message:@"Please turn off the burner on your unit to start a new session."
+                                delegate:self cancelButtonTitle:@"" otherButtonTitles:@"OK", nil];
+    
+    alert.cancelButtonIndex = -1;
+    [alert show];
+
+}
+
+#pragma mark - <UIAlertViewDelegate>
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 @end
 
 // Copyright belongs to original author
