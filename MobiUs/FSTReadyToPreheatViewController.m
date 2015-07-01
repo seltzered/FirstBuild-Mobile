@@ -28,11 +28,7 @@ NSObject* _cookModeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
    {
-       if (self.currentParagon.currentCookMode == kPARAGON_SOUS_VIDE_ENABLED)
-       {
-           [self performSegueWithIdentifier:@"seguePreheating" sender:self];
-       }
-       else if(self.currentParagon.currentCookMode == kPARAGON_PREHEATING)
+       if(self.currentParagon.currentCookMode == kPARAGON_PREHEATING)
        {
            [self performSegueWithIdentifier:@"seguePreheating" sender:self];
        }
