@@ -7,6 +7,7 @@
 //
 
 #import "FSTBleCentralManager.h"
+#import "FSTParagonDisconnectedLabel.h"
 
 @implementation FSTBleCentralManager
 
@@ -17,6 +18,7 @@ NSString * const FSTBleCentralManagerPoweredOff = @"FSTBleCentralManagerPoweredO
 NSString * const FSTBleCentralManagerDeviceConnected = @"FSTBleCentralManagerDeviceConnected";
 NSString * const FSTBleCentralManagerNewDeviceBound = @"FSTBleCentralManagerNewDeviceBound";
 NSString * const FSTBleCentralManagerDeviceNameChanged = @"FSTBleCentralManagerDeviceNameChanged";
+NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManagerDeviceDisconnected";
 
 NSMutableArray* _discoveredDevicesCache;
 NSMutableArray* _discoveredDevicesActiveScan;
@@ -243,6 +245,15 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
+    
+    /*UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    activeController.view.frame = CGRectOffset(activeController.view.frame, 0, activeController.view.frame.size.height/9);
+    FSTParagonDisconnectedLabel* warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, 0, activeController.view.frame.size.width, activeController.view.frame.size.height/9)];
+    warningLabel.delegate = [activeController.navigationController.viewControllers firstObject]; // set delegate to main home screen
+    [activeController.view addSubview:warningLabel];//add label to take in space that view slid out
+    [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made*/
+    // do all this in Product Main
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceDisconnected object:self];
     
 }
 

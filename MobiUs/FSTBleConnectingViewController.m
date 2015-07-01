@@ -57,6 +57,8 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     [self.searchingIcon setAnimationImages:imgListArray];
     [self.searchingIcon setAnimationDuration:.75];
     [self.searchingIcon startAnimating];
+    
+    self.navigationItem.hidesBackButton = YES;
 
 }
 
