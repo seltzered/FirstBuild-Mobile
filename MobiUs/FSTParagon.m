@@ -32,8 +32,6 @@ NSString * const FSTCharacteristicElapsedTime           = @"998142D1-658E-33E2-D
 NSString * const FSTCharacteristicCookTime              = @"C4510188-9062-4D28-97EF-4FB32FFE1AC5"; //read,write
 NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"; //read,notify
 
-CBCharacteristic* FSTCBCharacteristicTargetTemperature;
-
 __weak NSTimer* _readCharacteristicsTimer;
 
 #ifdef SIMULATE_PARAGON
@@ -81,7 +79,145 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     [_readCharacteristicsTimer invalidate];
 }
 
-#pragma mark - CBPeripheralDelegate
+#pragma mark - Interactions
+
+-(void)startHeatingWithTemperature: (NSNumber*)targetTemperature
+{
+    Byte bytes[2] ;
+    OSWriteBigInt16(bytes, 0, [targetTemperature doubleValue]*100);
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
+
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicTargetTemperature];
+    
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+-(void)setCookingTime: (NSNumber*)cookingTime
+{
+    Byte bytes[2] ;
+    OSWriteBigInt16(bytes, 0, [cookingTime unsignedIntegerValue]);
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
+    
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+    
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+-(void)readCharacteristicsTimerTimeout:(NSTimer *)timer
+{
+    [self.peripheral readValueForCharacteristic:[self.characteristics objectForKey:FSTCharacteristicCurrentTemperature]];
+    [self.peripheral readValueForCharacteristic:[self.characteristics objectForKey:FSTCharacteristicTargetTemperature]];
+    [self.peripheral readValueForCharacteristic:[self.characteristics objectForKey:FSTCharacteristicElapsedTime]];
+    [self.peripheral readValueForCharacteristic:[self.characteristics objectForKey:FSTCharacteristicBurnerStatus]];
+    [self.peripheral readValueForCharacteristic:[self.characteristics objectForKey:FSTCharacteristicCookTime]];
+}
+
+-(void)assignValueToPropertyFromCharacteristic: (CBCharacteristic*)characteristic
+{
+    FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+
+    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeFirmwareInfo])
+    {
+        //not implemented
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicSpecialFeatures])
+    {
+        //not implemented
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
+    {
+        //not implemented
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState])
+    {
+        //not implemented
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
+    {
+        //not implemented
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus])
+    {
+        //00 00 60 00 00 <-- start sous vide mode
+        //0000 f3 0000 <-- preheat
+        //0000c00000 <-- cookingout
+        NSData *data = characteristic.value;
+        Byte bytes[5] ;
+        [data getBytes:bytes length:5];
+        
+        switch (bytes[4] >> 4)
+        {
+            case 0xf:
+                self.currentCookMode = kPARAGON_PREHEATING;
+                break;
+                
+            case 0x6:
+                self.currentCookMode = kPARAGON_SOUS_VIDE_ENABLED;
+                break;
+                
+            case 0xc:
+                self.currentCookMode = kPARAGON_HEATING;
+                break;
+                
+            default:
+                self.currentCookMode = kPARAGON_OFF;
+                break;
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
+        NSLog(@"FSTCharacteristicBurnerStatus %d", self.currentCookMode );
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
+    {
+        if (currentStage)
+        {
+            NSData *data = characteristic.value;
+            Byte bytes[2] ;
+            [data getBytes:bytes length:2];
+            uint16_t raw = OSReadBigInt16(bytes, 0);
+            currentStage.cookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
+            [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
+            NSLog(@"FSTCharacteristicElapsedTime %@", currentStage.cookTimeElapsed );
+        }
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
+    {
+        if (currentStage)
+        {
+            NSData *data = characteristic.value;
+            Byte bytes[2] ;
+            [data getBytes:bytes length:2];
+            uint16_t raw = OSReadBigInt16(bytes, 0);
+//            currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+            NSLog(@"FSTCharacteristicTargetTemperature %@", currentStage.targetTemperature );
+        }
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
+    {
+        //not implemented
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+    {
+        if (currentStage)
+        {
+            NSData *data = characteristic.value;
+            Byte bytes[2] ;
+            [data getBytes:bytes length:2];
+            uint16_t raw = OSReadBigInt16(bytes, 0);
+            currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+            [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
+            NSLog(@"FSTCharacteristicCurrentTemperature %@", currentStage.actualTemperature );
+        }
+    }
+}
+
+#pragma mark - <CBPeripheralDelegate>
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
@@ -95,11 +231,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 
         if (characteristic.properties & CBCharacteristicPropertyWrite)
         {
-            if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
-            {
-                FSTCBCharacteristicTargetTemperature = characteristic;
-                [self writeHack];
-            }
             NSLog(@"        CAN WRITE");
         }
         
@@ -135,117 +266,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     for (CBService *service in services)
     {
         [self.peripheral discoverCharacteristics:nil forService:service];
-    }
-}
-
-- (void)writeHack
-{
-    Byte bytes[2] ;
-    bytes[0] = 0x1f;
-    bytes[1] = 0xff;;
-    NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
-    NSLog(@"writing new up temp...");
-    if (FSTCBCharacteristicTargetTemperature)
-    {
-        [self.peripheral writeValue:data forCharacteristic:FSTCBCharacteristicTargetTemperature type:CBCharacteristicWriteWithResponse];
-    }
-}
-
--(void)readCharacteristicsTimerTimeout:(NSTimer *)timer
-{
-    for (id key in self.characteristics)
-    {
-        CBCharacteristic* characteristic = [self.characteristics objectForKey:key];
-        
-        if ([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
-        {
-            [self.peripheral readValueForCharacteristic:characteristic];
-        }
-        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicTargetTemperature])
-        {
-            [self.peripheral readValueForCharacteristic:characteristic];
-        }
-        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicElapsedTime])
-        {
-            [self.peripheral readValueForCharacteristic:characteristic];
-        }
-        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicBurnerStatus])
-        {
-            [self.peripheral readValueForCharacteristic:characteristic];
-        }
-        else if([[characteristic.UUID UUIDString] isEqualToString:FSTCharacteristicCookTime])
-        {
-            [self.peripheral readValueForCharacteristic:characteristic];
-        }
-    }
-}
-
--(void)assignValueToPropertyFromCharacteristic: (CBCharacteristic*)characteristic
-{
-    FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
-    
-    
-    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeFirmwareInfo])
-    {
-        
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicSpecialFeatures])
-    {
-        
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
-    {
-        
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState])
-    {
-        
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
-    {
-        
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus])
-    {
-        
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
-    {
-        if (currentStage)
-        {
-//            currentStage.cookTimeElapsed == 5;
-        }
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
-    {
-        if (currentStage)
-        {
-            NSData *data = characteristic.value;
-            Byte bytes[2] ;
-            [data getBytes:bytes length:2];
-            uint16_t raw = OSReadBigInt16(bytes, 0);
-            currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
-            NSLog(@"FSTCharacteristicTargetTemperature %@", currentStage.targetTemperature );
-        }
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
-    {
-        if (currentStage)
-        {
-           // currentStage.cookTimeRequested == 5;
-        }
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
-    {
-        if (currentStage)
-        {
-            NSData *data = characteristic.value;
-            Byte bytes[2] ;
-            [data getBytes:bytes length:2];
-            uint16_t raw = OSReadBigInt16(bytes, 0);
-            currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
-            NSLog(@"FSTCharacteristicCurrentTemperature %@", currentStage.actualTemperature );
-        }
     }
 }
 

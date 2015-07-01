@@ -27,10 +27,31 @@ NSObject* _cookModeChangedObserver;
                                                       object:self.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
-                                   {
-                                       [self performSegueWithIdentifier:@"seguePreheating" sender:self];
-                                   }];
+   {
+       if (self.currentParagon.currentCookMode == kPARAGON_SOUS_VIDE_ENABLED)
+       {
+           [self performSegueWithIdentifier:@"seguePreheating" sender:self];
+       }
+       else if(self.currentParagon.currentCookMode == kPARAGON_PREHEATING)
+       {
+           [self performSegueWithIdentifier:@"seguePreheating" sender:self];
+       }
+       else if(self.currentParagon.currentCookMode == kPARAGON_HEATING)
+       {
+           [self performSegueWithIdentifier:@"seguePreheating" sender:self];
+       }
+   }];
 
+}
+
+-(void)removeObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
+}
+
+-(void)dealloc
+{
+    [self removeObservers];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -46,12 +67,13 @@ NSObject* _cookModeChangedObserver;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self removeObservers];
+
     if ([segue.destinationViewController isKindOfClass:[FSTPreheatingViewController class]])
     {
         ((FSTPreheatingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {

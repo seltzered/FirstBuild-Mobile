@@ -11,7 +11,15 @@
 #import "FSTParagonCookingSession.h"
 #import "FSTCookingMethod.h"
 
-@interface FSTParagon : FSTBleProduct
+@interface FSTParagon : FSTBleProduct 
+
+//paragon cook mode
+typedef enum {
+    kPARAGON_OFF = 0,
+    kPARAGON_SOUS_VIDE_ENABLED,
+    kPARAGON_PREHEATING,
+    kPARAGON_HEATING
+} ParagonCookMode;
 
 extern NSString * const FSTActualTemperatureChangedNotification;
 extern NSString * const FSTCookModeChangedNotification;
@@ -20,6 +28,10 @@ extern NSString * const FSTElapsedTimeChangedNotification;
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 @property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
+@property (atomic) ParagonCookMode currentCookMode;
+
+-(void)startHeatingWithTemperature: (NSNumber*)targetTemperature;
+-(void)setCookingTime: (NSNumber*)cookingTime;
 
 #ifdef SIMULATE_PARAGON
 - (void)startSimulateHeating;

@@ -81,12 +81,14 @@ NSObject* _temperatureChangedObserver;
 #endif
 }
 
+//TODO error handling/segue if we can't set the cook time
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
     if ([segue.destinationViewController isKindOfClass:[FSTCookingViewController class]])
     {
         ((FSTCookingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        [self.currentParagon setCookingTime:_cookingStage.cookTimeRequested];
     }
 }
 

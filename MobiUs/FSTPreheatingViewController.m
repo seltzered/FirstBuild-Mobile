@@ -36,14 +36,39 @@ CGFloat _heightIncrementOnChange;
 CGFloat _temperatureViewHeight;
 
 NSObject* _temperatureChangedObserver;
+NSObject* _cookModeChangedObserver;
 
 NSTimer* _pulseTimer;
 
+#pragma mark UIView
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+    self.targetTemperatureLabel.text = [[_cookingStage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
+    self.temperatureScrollerView.hidden = YES;
+    
+    [self.currentParagon startHeatingWithTemperature:_cookingStage.targetTemperature];
+    
+    //if we are already in heating mode then just transition
+    if(self.currentParagon.currentCookMode == kPARAGON_HEATING)
+    {
+        [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+    }
+    
+    //if we get notice that we are done preheating then move on
+    _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
+                                                   object:self.currentParagon
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+    {
+        if(self.currentParagon.currentCookMode == kPARAGON_HEATING)
+        {
+            [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+        }
+    }];
+    
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
                         object:self.currentParagon
                          queue:nil
@@ -51,11 +76,6 @@ NSTimer* _pulseTimer;
     {
         NSNumber* actualTemperature = _cookingStage.actualTemperature;
         self.currentTemperatureLabel.text = [actualTemperature stringValue];
-        
-        if ([actualTemperature doubleValue] >= [_cookingStage.targetTemperature doubleValue])
-        {
-            [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
-        }
         
         CGFloat newTemp = [actualTemperature doubleValue] ;
         
@@ -78,8 +98,6 @@ NSTimer* _pulseTimer;
         
         self.temperatureScrollerView.hidden = NO;
     }];
-    
-    
 }
 
 -(void)viewDidLayoutSubviews
@@ -108,6 +126,25 @@ NSTimer* _pulseTimer;
     [self pulseAnimation:pulse]; // begin repeat invocation and alpha animation
     
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    _temperatureViewHeight = self.temperatureBox.frame.origin.y + self.temperatureBox.frame.size.height;
+    
+#ifdef SIMULATE_PARAGON
+    [self.currentParagon startSimulateHeating];
+    [self.currentParagon setSimulatorHeatingTemperatureIncrement:1];
+    [self.currentParagon setSimulatorHeatingUpdateInterval:200];
+#endif
+    
+}
+
+-(void)dealloc
+{
+    [self removeObservers];
+}
+
+#pragma mark animations
 
 - (void)pulseAnimation:(UIImageView *)pulse { // might need to call and repeat through NSTimer or some other object, since the animation never updates
     _pulseTimer = [NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(moveOnePulse:) userInfo:pulse repeats:YES]; // starts interval that calls moveOnePulse with this pulse
@@ -144,27 +181,17 @@ NSTimer* _pulseTimer;
 
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
-    self.targetTemperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
-    self.temperatureScrollerView.hidden = YES;
-     _temperatureViewHeight = self.temperatureBox.frame.origin.y + self.temperatureBox.frame.size.height;
-   
-#ifdef SIMULATE_PARAGON
-    [self.currentParagon startSimulateHeating];
-    [self.currentParagon setSimulatorHeatingTemperatureIncrement:1];
-    [self.currentParagon setSimulatorHeatingUpdateInterval:200];
-#endif
-    
-    
-}
+#pragma mark transition
 
+-(void)removeObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
+    [self removeObservers];
     [_pulseTimer invalidate]; // free the timer to stop calling the animation
     _pulseTimer = nil;
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToCookViewController class]])
