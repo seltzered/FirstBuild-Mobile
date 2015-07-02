@@ -33,6 +33,7 @@ NSObject* _connectedToBleObserver;
 NSObject* _deviceConnectedObserver;
 NSObject* _newDeviceBoundObserver;
 NSObject* _deviceRenamedObserver;
+NSObject* _paragonDisconnectedObserver;
 
 NSIndexPath *_indexPathForDeletion;
 
@@ -56,6 +57,7 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceRenamedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_paragonDisconnectedObserver];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -178,6 +180,29 @@ NSIndexPath *_indexPathForDeletion;
                     bleProduct.friendlyName = [latestDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
                     [weakSelf.collectionView reloadData];
                     break;
+                }
+            }
+        }
+    }];
+    
+    //disconnected
+    _paragonDisconnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceDisconnected
+                                                       object:nil
+                                                        queue:nil
+                                                   usingBlock:^(NSNotification *notification)
+    {
+        CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+        
+        for (FSTProduct* product in self.products)
+        {
+            if ([product isKindOfClass:[FSTBleProduct class]])
+            {
+                FSTBleProduct* bleDevice = (FSTBleProduct*)product;
+                
+                if (bleDevice.peripheral == peripheral)
+                {
+                    bleDevice.online = NO;
+                    [weakSelf.collectionView reloadData];
                 }
             }
         }
@@ -378,7 +403,8 @@ NSIndexPath *_indexPathForDeletion;
         NSLog(@"delete");
         FSTParagon * deletedItem = self.products[_indexPathForDeletion.item];
         [self.products removeObjectAtIndex:_indexPathForDeletion.item];
-        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]]; // hopefully identifier is a UUID String
+        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
+        [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
         [self.collectionView reloadData];
         
         if (self.products.count==0)

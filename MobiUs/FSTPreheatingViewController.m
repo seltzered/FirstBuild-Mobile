@@ -49,7 +49,6 @@ NSTimer* _pulseTimer;
     self.targetTemperatureLabel.text = [[_cookingStage.targetTemperature stringValue] stringByAppendingString:@"\u00b0 F"];
     self.temperatureScrollerView.hidden = YES;
     
-    [self.currentParagon startHeatingWithTemperature:_cookingStage.targetTemperature];
     
     __weak typeof(self) weakSelf = self;
     

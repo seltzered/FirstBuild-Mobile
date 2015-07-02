@@ -166,7 +166,10 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 {    
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
-        
+        //TODO HACK 
+        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+        [self.currentParagon startHeatingWithTemperature:stage.targetTemperature];
+
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }

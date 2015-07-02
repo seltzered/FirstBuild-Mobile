@@ -49,6 +49,7 @@ CBPeripheralManager * _peripheralManager; //temporary
         //this startup then triggers the central manager initialization. once the service
         //callback check is removed we need to start the central manager here instead of in peripheralManagerDidUpdateState
         self.isPoweredOn = NO;
+        //_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     }
     return self;
@@ -78,6 +79,11 @@ CBPeripheralManager * _peripheralManager; //temporary
         }
     }
     return nil;
+}
+
+-(void)disconnectPeripheral: (CBPeripheral*)peripheral
+{
+    [_centralManager cancelPeripheralConnection:peripheral];
 }
 
 -(void)connectToNewPeripheral: (CBPeripheral*) peripheral
@@ -136,6 +142,7 @@ CBPeripheralManager * _peripheralManager; //temporary
     NSMutableDictionary* savedPeripherals = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"]]; // get rid of the uuid keyed device
     [savedPeripherals removeObjectForKey:uuidString];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedPeripherals] forKey:@"ble-devices"];
+    
 }
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString
@@ -173,8 +180,6 @@ CBPeripheralManager * _peripheralManager; //temporary
         [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
     }
 }
-
-
 
 -(void)stopScanning
 {
@@ -253,7 +258,7 @@ CBPeripheralManager * _peripheralManager; //temporary
     [activeController.view addSubview:warningLabel];//add label to take in space that view slid out
     [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made*/
     // do all this in Product Main
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceDisconnected object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceDisconnected object:peripheral];
     
 }
 
@@ -280,17 +285,6 @@ CBPeripheralManager * _peripheralManager; //temporary
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceFound object:peripheral];
     }
 
-}
-
-
--(void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals
-{
-    
-}
-
--(void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals
-{
-    
 }
 
 #pragma mark - Peripheral Delegate - temporary
