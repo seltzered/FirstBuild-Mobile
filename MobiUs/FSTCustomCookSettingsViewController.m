@@ -172,6 +172,8 @@ VariableSelection _selection;
 
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
+        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+        [self.currentParagon startHeatingWithTemperature:stage.targetTemperature];
         
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }

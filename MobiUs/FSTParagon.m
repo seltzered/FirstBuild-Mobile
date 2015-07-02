@@ -158,7 +158,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         Byte bytes[5] ;
         [data getBytes:bytes length:5];
         
-        switch (bytes[4] >> 4)
+        switch (bytes[2] >> 4)
         {
             case 0xf:
                 self.currentCookMode = kPARAGON_PREHEATING;
@@ -251,7 +251,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 {
     NSLog(@"=======================================================================");
     NSLog(@"SERVICE %@", [service.UUID UUIDString]);
-    
+        
     for (CBCharacteristic *characteristic in service.characteristics)
     {
         [self.characteristics setObject:characteristic forKey:[characteristic.UUID UUIDString]];
