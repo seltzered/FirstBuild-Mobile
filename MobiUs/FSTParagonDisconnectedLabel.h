@@ -14,6 +14,8 @@
 
 @end
 
+
+//TODO make label generic for all devices
 @interface FSTParagonDisconnectedLabel : UILabel
 
 @property (nonatomic, weak) id<FSTParagonDisconnectedLabelDelegate> delegate;

@@ -21,13 +21,19 @@
 @implementation ProductMainViewController
 
 NSObject* _menuItemSelectedObserver;
-NSObject* _paragonDisconnectedObserver;
+NSObject* _bleDeviceDisconnectedObserver;
+NSObject* _bleDeviceConnectedObserver;
+
+NSMutableArray* _offlineDevices;
+
+FSTParagonDisconnectedLabel* _warningLabel;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     __weak typeof(self) weakSelf = self;
+    _offlineDevices = [[NSMutableArray alloc]init];
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 
@@ -47,16 +53,35 @@ NSObject* _paragonDisconnectedObserver;
         }
     }];
     
-    _paragonDisconnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceDisconnected
+    _bleDeviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
+                                                   object:nil
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+    {
+        CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
+        [_offlineDevices removeObject:peripheral];
+        if (_offlineDevices.count == 0 && _warningLabel)
+        {
+            [_warningLabel removeFromSuperview];
+            _warningLabel = nil;
+        }
+        
+    }];
+
+    
+    _bleDeviceDisconnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceDisconnected
                                                        object:nil
                                                         queue:nil
                                                    usingBlock:^(NSNotification *notification)
     {
+        CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+
+        [_offlineDevices addObject:peripheral];
         UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];//[self.navigationController topViewController];//
         //activeController.view.frame = CGRectOffset(activeController.view.frame, 0, activeController.view.frame.size.height/9); // need to figure out how to move sub view controller
-        FSTParagonDisconnectedLabel* warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, activeController.view.frame.size.height/9, activeController.view.frame.size.width, activeController.view.frame.size.height/9)];
-        warningLabel.delegate = self; // set delegate to main home screen
-        [activeController.view addSubview:warningLabel];//addSubview:warningLabel];//add label to take in space that view slid out
+        _warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, activeController.view.frame.size.height/9, activeController.view.frame.size.width, activeController.view.frame.size.height/9)];
+        _warningLabel.delegate = self; // set delegate to main home screen
+        [activeController.view addSubview:_warningLabel];//addSubview:warningLabel];//add label to take in space that view slid out
         [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made
      
     }];
@@ -66,7 +91,9 @@ NSObject* _paragonDisconnectedObserver;
 -(void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_menuItemSelectedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_paragonDisconnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceDisconnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceConnectedObserver];
+
 }
 
 - (void)didReceiveMemoryWarning {

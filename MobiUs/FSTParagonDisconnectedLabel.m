@@ -17,7 +17,7 @@
     self.backgroundColor = UIColorFromRGB(0xEA461A); // some universal orange color
     UIFont* warningFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:24.0];
     self.font = warningFont;
-    self.text = @"Paragon is not connected";
+    self.text = @"A device is not connected";
     self.textColor = [UIColor whiteColor];
     self.textAlignment = NSTextAlignmentCenter;
     UITapGestureRecognizer* warningTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(paragonWarningTapped)];

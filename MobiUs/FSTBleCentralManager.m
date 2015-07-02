@@ -238,7 +238,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    
+    DLog(@"peripheral failed to connect");
 }
 
 

@@ -33,7 +33,7 @@ NSObject* _connectedToBleObserver;
 NSObject* _deviceConnectedObserver;
 NSObject* _newDeviceBoundObserver;
 NSObject* _deviceRenamedObserver;
-NSObject* _paragonDisconnectedObserver;
+NSObject* _deviceDisconnectedObserver;
 
 NSIndexPath *_indexPathForDeletion;
 
@@ -57,7 +57,7 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceRenamedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_paragonDisconnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceDisconnectedObserver];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -186,7 +186,7 @@ NSIndexPath *_indexPathForDeletion;
     }];
     
     //disconnected
-    _paragonDisconnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceDisconnected
+    _deviceDisconnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceDisconnected
                                                        object:nil
                                                         queue:nil
                                                    usingBlock:^(NSNotification *notification)
@@ -201,7 +201,9 @@ NSIndexPath *_indexPathForDeletion;
                 
                 if (bleDevice.peripheral == peripheral)
                 {
+                    //since it is still in our list lets reconnect
                     bleDevice.online = NO;
+                    [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:bleDevice.peripheral.identifier];
                     [weakSelf.collectionView reloadData];
                 }
             }
