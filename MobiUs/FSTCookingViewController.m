@@ -33,6 +33,8 @@ NSObject* _timeElapsedChangedObserver;
     [super viewDidLoad];
     
     self.navigationItem.hidesBackButton = true;
+    
+    __weak typeof(self) weakSelf = self;
 
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
 
@@ -42,7 +44,7 @@ NSObject* _timeElapsedChangedObserver;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
-                                                      object:self.currentParagon
+                                                      object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
@@ -51,12 +53,12 @@ NSObject* _timeElapsedChangedObserver;
     }];
     
     _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
-                                                      object:self.currentParagon
+                                                      object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-       self.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
-       [self makeAndSetTimeRemainingLabel];
+       weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
+       [weakSelf makeAndSetTimeRemainingLabel];
 
     }];
     
@@ -119,6 +121,17 @@ NSObject* _timeElapsedChangedObserver;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)removeObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
+}
+
+- (void)dealloc
+{
+    [self removeObservers];
 }
 
 

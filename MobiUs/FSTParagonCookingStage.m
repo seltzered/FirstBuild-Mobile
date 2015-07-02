@@ -10,5 +10,17 @@
 
 @implementation FSTParagonCookingStage
 
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _targetTemperature = [NSNumber numberWithInt:0];
+        _actualTemperature = [NSNumber numberWithInt:0];
+        _cookTimeRequested = [NSNumber numberWithInt:0];
+        _cookTimeRequestedActual = [NSNumber numberWithInt:0];
+        _cookTimeElapsed = [NSNumber numberWithInt:0];
+        _cookingLabel = @"";
+    }
+    return self;
+}
 @end

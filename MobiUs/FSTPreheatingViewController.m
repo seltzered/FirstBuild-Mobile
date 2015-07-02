@@ -51,31 +51,34 @@ NSTimer* _pulseTimer;
     
     [self.currentParagon startHeatingWithTemperature:_cookingStage.targetTemperature];
     
+    __weak typeof(self) weakSelf = self;
+    
     //if we are already in heating mode then just transition
     if(self.currentParagon.currentCookMode == kPARAGON_HEATING)
     {
         [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+        return;
     }
     
     //if we get notice that we are done preheating then move on
     _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
-                                                   object:self.currentParagon
+                                                   object:weakSelf.currentParagon
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
-        if(self.currentParagon.currentCookMode == kPARAGON_HEATING)
+        if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING)
         {
-            [self performSegueWithIdentifier:@"segueReadyToCook" sender:self];
+            [weakSelf performSegueWithIdentifier:@"segueReadyToCook" sender:self];
         }
     }];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
-                        object:self.currentParagon
+                        object:weakSelf.currentParagon
                          queue:nil
                     usingBlock:^(NSNotification *notification)
     {
         NSNumber* actualTemperature = _cookingStage.actualTemperature;
-        self.currentTemperatureLabel.text = [actualTemperature stringValue];
+        weakSelf.currentTemperatureLabel.text = [actualTemperature stringValue];
         
         CGFloat newTemp = [actualTemperature doubleValue] ;
         
@@ -83,20 +86,20 @@ NSTimer* _pulseTimer;
         CGFloat newHeight = _heightIncrementOnChange*(newTemp - _minTemperatureDegrees) + _temperatureViewHeight;
         
         // update constraints with height corresponding to temperature.
-        self.temperatureScrollerHeightConstraint.constant = newHeight;
-        [self.temperatureScrollerView needsUpdateConstraints];
+        weakSelf.temperatureScrollerHeightConstraint.constant = newHeight;
+        [weakSelf.temperatureScrollerView needsUpdateConstraints];
 
         [UIView animateWithDuration:0.3 delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^(void) {
-                             [self.temperatureScrollerView layoutIfNeeded];
+                             [weakSelf.temperatureScrollerView layoutIfNeeded];
                          }
                          completion: ^(BOOL complete) {
                              
                          }
          ];
         
-        self.temperatureScrollerView.hidden = NO;
+        weakSelf.temperatureScrollerView.hidden = NO;
     }];
 }
 

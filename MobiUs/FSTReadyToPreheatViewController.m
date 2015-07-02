@@ -23,18 +23,20 @@ NSObject* _cookModeChangedObserver;
     // Do any additional setup after loading the view.
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
+    __weak typeof(self) weakSelf = self;
+    
     _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
-                                                      object:self.currentParagon
+                                                      object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
    {
-       if(self.currentParagon.currentCookMode == kPARAGON_PREHEATING)
+       if(weakSelf.currentParagon.currentCookMode == kPARAGON_PREHEATING)
        {
-           [self performSegueWithIdentifier:@"seguePreheating" sender:self];
+           [weakSelf performSegueWithIdentifier:@"seguePreheating" sender:weakSelf];
        }
-       else if(self.currentParagon.currentCookMode == kPARAGON_HEATING)
+       else if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING)
        {
-           [self performSegueWithIdentifier:@"seguePreheating" sender:self];
+           [weakSelf performSegueWithIdentifier:@"seguePreheating" sender:weakSelf];
        }
    }];
 

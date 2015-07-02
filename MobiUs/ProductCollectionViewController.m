@@ -267,9 +267,7 @@ NSIndexPath *_indexPathForDeletion;
     FSTProduct * product = self.products[indexPath.row];
     NSLog(@"selected %@", product.identifier);
     
-    
-    //HACK TODO -- product needs to be online
-    //if (product.online)
+    if (product.online)
     {
         if ([product isKindOfClass:[FSTChillHub class]])
         {
@@ -278,9 +276,6 @@ NSIndexPath *_indexPathForDeletion;
         if ([product isKindOfClass:[FSTParagon class]])
         {
             FSTParagon* paragon = (FSTParagon*)product;
-            
-            ////TODO HACK
-            paragon.currentCookMode = kPARAGON_PREHEATING;
             
             if (paragon.currentCookMode == kPARAGON_PREHEATING)
             {
@@ -296,7 +291,7 @@ NSIndexPath *_indexPathForDeletion;
             }
             else if(paragon.currentCookMode == kPARAGON_HEATING_WITH_TIME)
             {
-                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil] instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil] instantiateViewControllerWithIdentifier:@"FSTReadyToCookViewController"];
                 vc.currentParagon = paragon;
                 [self.navigationController pushViewController:vc animated:YES];
             }

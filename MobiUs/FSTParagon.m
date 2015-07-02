@@ -67,6 +67,12 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 {
     self = [super init];
     
+    if (self)
+    {
+        //self.currentCookingMethod = [[FSTCookingMethod alloc]init];
+//        [self.currentCookingMethod createCookingSession];
+//        [self.currentCookingMethod addStageToCookingSession];
+    }
 #ifdef SIMULATE_PARAGON
     [self startParagonSimulator];
 #endif
@@ -164,7 +170,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
             case 0xc:
                 //if the cooktop is actually reporting a cook time is set
                 //and we are past the preheating stage then indicate
-                if (currentStage.cookTimeRequestedActual > 0)
+                if ([currentStage.cookTimeRequestedActual integerValue] > 0)
                 {
                     self.currentCookMode = kPARAGON_HEATING_WITH_TIME;
                 }
@@ -271,7 +277,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     }
 }
 
-
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     DLog("discovered services for peripheral %@", peripheral.identifier);
@@ -302,7 +307,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 {
     
 }
-
 
 #pragma mark - Simulations
 

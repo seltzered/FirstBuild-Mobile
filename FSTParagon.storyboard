@@ -41,6 +41,11 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
@@ -1244,7 +1249,7 @@
                         <outlet property="temperatureScrollerHeightConstraint" destination="VVy-jU-Inw" id="raO-AE-H46"/>
                         <outlet property="temperatureScrollerView" destination="fZg-2G-EBk" id="2PF-rM-oud"/>
                         <outlet property="topOrangeBarView" destination="RyY-Xg-zwD" id="jgd-yG-iNH"/>
-                        <segue destination="zGa-nc-t4X" kind="show" identifier="segueReadyToCook" id="oON-Z6-pjc"/>
+                        <segue destination="74k-pv-pbn" kind="show" identifier="segueReadyToCook" id="k37-hw-9fL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aA4-IY-sso" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1259,7 +1264,7 @@
         <!--Ready To Cook View Controller-->
         <scene sceneID="QAf-2c-JNw">
             <objects>
-                <viewController storyboardIdentifier="FSTReadyToCookViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zGa-nc-t4X" customClass="FSTReadyToCookViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FSTReadyToCookViewControllerOLD" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zGa-nc-t4X" customClass="FSTReadyToCookViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5e7-Fh-D9p"/>
                         <viewControllerLayoutGuide type="bottom" id="des-kT-A8c"/>
@@ -1383,6 +1388,7 @@
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="centerX" secondItem="9P1-A2-3Kw" secondAttribute="centerX" id="5Bl-au-PQg"/>
                                             <constraint firstAttribute="centerY" secondItem="9P1-A2-3Kw" secondAttribute="centerY" id="8ZX-c0-xpJ"/>
@@ -1399,6 +1405,9 @@
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="7yx-g5-1dB" appends="YES" id="wRf-ET-cTd"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1449,8 +1458,13 @@
                         <action selector="continueButtonTap:" destination="zGa-nc-t4X" id="pXH-0s-3bS"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="7yx-g5-1dB" userLabel="tapCancelButtonGesture">
+                    <connections>
+                        <action selector="cancelButtonTap:" destination="zGa-nc-t4X" id="Tml-qp-ZM1"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3345" y="370"/>
+            <point key="canvasLocation" x="3329" y="350"/>
         </scene>
         <!--Cooking View Controller-->
         <scene sceneID="UhG-mx-UMt">
@@ -1855,22 +1869,135 @@
             </objects>
             <point key="canvasLocation" x="297" y="-329"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="U5g-Qs-DNm">
+        <!--Ready To Cook View Controller-->
+        <scene sceneID="glX-tJ-YwZ">
             <objects>
-                <viewController id="zxf-On-02Z" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FSTReadyToCookViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="74k-pv-pbn" customClass="FSTReadyToCookViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nWI-YF-Fcb"/>
-                        <viewControllerLayoutGuide type="bottom" id="IBK-Vr-Cje"/>
+                        <viewControllerLayoutGuide type="top" id="WZM-fZ-E7O"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lbf-UK-yr3"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="aB7-p2-CC8">
+                    <view key="view" contentMode="scaleToFill" id="RqH-sX-qYz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW COOKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgO-S3-ZYI">
+                                <rect key="frame" x="0.0" y="25" width="600" height="52"/>
+                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
+                                <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="jTg-Hf-Hpy" userLabel="midView">
+                                <rect key="frame" x="0.0" y="87" width="600" height="433"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oas-zI-5bb" userLabel="CURRENT TEMP">
+                                        <rect key="frame" x="0.0" y="10" width="600" height="26"/>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfI-ei-5qy" userLabel="actualTemperatureLabel">
+                                        <rect key="frame" x="0.0" y="41" width="600" height="52"/>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="paragonReadyToCook" translatesAutoresizingMaskIntoConstraints="NO" id="tYs-Cs-gku">
+                                        <rect key="frame" x="216" y="103" width="168" height="245"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="kP9-pO-t5J" userLabel="SUBMERGE LABEL">
+                                        <rect key="frame" x="45" y="358" width="510" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="db8-ep-7JS"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="Oas-zI-5bb" secondAttribute="centerX" id="4xQ-Lu-R35"/>
+                                    <constraint firstItem="kP9-pO-t5J" firstAttribute="width" secondItem="jTg-Hf-Hpy" secondAttribute="width" multiplier="0.85" id="7H6-uj-7rH"/>
+                                    <constraint firstItem="UfI-ei-5qy" firstAttribute="top" secondItem="Oas-zI-5bb" secondAttribute="bottom" constant="5" id="BBr-Ko-egr"/>
+                                    <constraint firstItem="UfI-ei-5qy" firstAttribute="width" secondItem="jTg-Hf-Hpy" secondAttribute="width" id="KaC-G0-mXu"/>
+                                    <constraint firstItem="tYs-Cs-gku" firstAttribute="top" secondItem="UfI-ei-5qy" secondAttribute="bottom" constant="10" id="NJz-uL-YKA"/>
+                                    <constraint firstItem="Oas-zI-5bb" firstAttribute="top" secondItem="jTg-Hf-Hpy" secondAttribute="top" constant="10" id="Ts2-PC-H8C"/>
+                                    <constraint firstAttribute="centerX" secondItem="kP9-pO-t5J" secondAttribute="centerX" id="aEw-Tk-s2M"/>
+                                    <constraint firstItem="kP9-pO-t5J" firstAttribute="top" secondItem="tYs-Cs-gku" secondAttribute="bottom" constant="10" id="coz-3m-gBj"/>
+                                    <constraint firstAttribute="bottom" secondItem="kP9-pO-t5J" secondAttribute="bottom" constant="25" id="duX-lA-wSo"/>
+                                    <constraint firstAttribute="centerX" secondItem="UfI-ei-5qy" secondAttribute="centerX" id="geE-pc-f3L"/>
+                                    <constraint firstItem="Oas-zI-5bb" firstAttribute="width" secondItem="jTg-Hf-Hpy" secondAttribute="width" id="puV-xl-Ksa"/>
+                                    <constraint firstAttribute="centerX" secondItem="tYs-Cs-gku" secondAttribute="centerX" id="zw5-6H-Lok"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icR-JW-6aU" userLabel="buttonsWrapperView">
+                                <rect key="frame" x="0.0" y="535" width="600" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1m-3h-8RC" userLabel="continueButtonWrapperView">
+                                        <rect key="frame" x="15" y="0.0" width="570" height="50"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAIN MENU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nza-L3-IpI">
+                                                <rect key="frame" x="229" y="8" width="112" height="34"/>
+                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="centerY" secondItem="Nza-L3-IpI" secondAttribute="centerY" id="1pd-tA-6UY"/>
+                                            <constraint firstAttribute="centerX" secondItem="Nza-L3-IpI" secondAttribute="centerX" id="Ytr-7I-Qmr"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="pQm-Rh-1rN" appends="YES" id="ZWi-qc-sUb"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="27h-3h-eI6"/>
+                                    <constraint firstItem="F1m-3h-8RC" firstAttribute="height" secondItem="icR-JW-6aU" secondAttribute="height" id="4yn-lU-Wyg"/>
+                                    <constraint firstItem="F1m-3h-8RC" firstAttribute="width" secondItem="icR-JW-6aU" secondAttribute="width" multiplier="0.95" id="EPq-nr-Fz1"/>
+                                    <constraint firstAttribute="centerY" secondItem="F1m-3h-8RC" secondAttribute="centerY" id="IN8-RP-463"/>
+                                    <constraint firstAttribute="centerX" secondItem="F1m-3h-8RC" secondAttribute="centerX" id="e9N-Eq-DS7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jTg-Hf-Hpy" firstAttribute="top" secondItem="pgO-S3-ZYI" secondAttribute="bottom" constant="10" id="4Gi-8D-cip"/>
+                            <constraint firstAttribute="width" secondItem="icR-JW-6aU" secondAttribute="width" id="87r-jQ-DFM"/>
+                            <constraint firstItem="pgO-S3-ZYI" firstAttribute="top" secondItem="WZM-fZ-E7O" secondAttribute="bottom" constant="5" id="9Wx-By-0XE"/>
+                            <constraint firstAttribute="centerX" secondItem="pgO-S3-ZYI" secondAttribute="centerX" id="GPL-HK-gKs"/>
+                            <constraint firstItem="Lbf-UK-yr3" firstAttribute="top" secondItem="icR-JW-6aU" secondAttribute="bottom" constant="15" id="NKF-Bp-wGP"/>
+                            <constraint firstAttribute="width" secondItem="pgO-S3-ZYI" secondAttribute="width" id="NfD-Po-3Wd"/>
+                            <constraint firstAttribute="centerX" secondItem="icR-JW-6aU" secondAttribute="centerX" id="ca4-9A-Rx1"/>
+                            <constraint firstItem="jTg-Hf-Hpy" firstAttribute="width" secondItem="RqH-sX-qYz" secondAttribute="width" id="qW2-AV-5Qv"/>
+                            <constraint firstItem="icR-JW-6aU" firstAttribute="top" secondItem="jTg-Hf-Hpy" secondAttribute="bottom" constant="15" id="w1s-dG-bLH"/>
+                            <constraint firstAttribute="centerX" secondItem="jTg-Hf-Hpy" secondAttribute="centerX" id="wKA-di-VGt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="actualTemperatureLabel" destination="UfI-ei-5qy" id="s3L-Pf-wCv"/>
+                        <outlet property="bottomLabel" destination="kP9-pO-t5J" id="Hp1-sh-CGP"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="22L-gv-oGM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="khH-dd-OVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="pQm-Rh-1rN" userLabel="tapContinueButtonGesture">
+                    <connections>
+                        <action selector="continueButtonTap:" destination="74k-pv-pbn" id="rdL-an-YRB"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="2609" y="1150"/>
         </scene>
     </scenes>
     <resources>
