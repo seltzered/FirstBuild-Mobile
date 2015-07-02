@@ -182,6 +182,7 @@ NSIndexPath *_indexPathForDeletion;
             }
         }
     }];
+
     
 }
 
@@ -242,6 +243,36 @@ NSIndexPath *_indexPathForDeletion;
         
         productCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierParagon forIndexPath:indexPath];
         productCell.friendlyName.text = product.friendlyName;
+        //TODO we need observers on the cookmode for each paragon in order to set the status
+//        NSString* statusLabel;
+//        
+//        switch (((FSTParagon*)product).currentCookMode)
+//        {
+//            case kPARAGON_HEATING:
+//                statusLabel = @"Cooking";
+//                break;
+//                
+//            case kPARAGON_HEATING_WITH_TIME:
+//                statusLabel = @"Cooking";
+//                break;
+//                
+//            case kPARAGON_OFF:
+//                statusLabel = @"Idle";
+//                break;
+//                
+//            case kPARAGON_SOUS_VIDE_ENABLED:
+//                statusLabel = @"Idle";
+//                break;
+//                
+//            case kPARAGON_PREHEATING:
+//                statusLabel = @"Preheat";
+//                break;
+//                
+//            default:
+//                statusLabel = @"Idle";
+//                break;
+//        }
+//        productCell.statusLabel.text = statusLabel;
     }
     
     if (product.online)

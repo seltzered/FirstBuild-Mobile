@@ -69,9 +69,9 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     
     if (self)
     {
-        //self.currentCookingMethod = [[FSTCookingMethod alloc]init];
-//        [self.currentCookingMethod createCookingSession];
-//        [self.currentCookingMethod addStageToCookingSession];
+        self.currentCookingMethod = [[FSTCookingMethod alloc]init];
+        [self.currentCookingMethod createCookingSession];
+        [self.currentCookingMethod addStageToCookingSession];
     }
 #ifdef SIMULATE_PARAGON
     [self startParagonSimulator];
@@ -150,6 +150,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus])
     {
+        //TODO this is not actually correct. need more information on the ranges etc for what is what
         //00 00 60 00 00 <-- start sous vide mode
         //0000 f3 0000 <-- preheat
         //0000c00000 <-- cookingout
@@ -160,6 +161,10 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         switch (bytes[4] >> 4)
         {
             case 0xf:
+                self.currentCookMode = kPARAGON_PREHEATING;
+                break;
+                
+            case 0xe:
                 self.currentCookMode = kPARAGON_PREHEATING;
                 break;
                 

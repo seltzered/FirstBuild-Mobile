@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *offlineLabel;
 @property (strong, nonatomic) IBOutlet UIView *disabledView;
 @property (strong, nonatomic) IBOutlet UILabel *friendlyName;
+@property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 
 @end

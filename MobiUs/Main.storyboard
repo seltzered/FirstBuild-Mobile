@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -11,9 +11,10 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
+            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
-            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
@@ -510,11 +511,11 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixf-tc-4Kd">
                                             <rect key="frame" x="0.0" y="0.0" width="443" height="200"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_paragon_product" translatesAutoresizingMaskIntoConstraints="NO" id="SnE-kS-cX0">
-                                                    <rect key="frame" x="10" y="50" width="230" height="100"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_paragon_product_logo" translatesAutoresizingMaskIntoConstraints="NO" id="SnE-kS-cX0">
+                                                    <rect key="frame" x="10" y="63" width="175" height="75"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="100" id="CK7-aP-F7P"/>
-                                                        <constraint firstAttribute="width" constant="230" id="oJt-if-I97"/>
+                                                        <constraint firstAttribute="height" constant="75" id="CK7-aP-F7P"/>
+                                                        <constraint firstAttribute="width" constant="175" id="oJt-if-I97"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_chevron_blue_right" translatesAutoresizingMaskIntoConstraints="NO" id="Wuo-OD-EKS">
@@ -532,9 +533,15 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friendlyName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFZ-8N-DQI" userLabel="friendlyname">
-                                                    <rect key="frame" x="10" y="151" width="75" height="21"/>
-                                                    <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="16"/>
+                                                    <rect key="frame" x="20" y="123" width="77" height="21"/>
+                                                    <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="16"/>
                                                     <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tm1-m9-G3a" userLabel="status">
+                                                    <rect key="frame" x="117" y="134" width="0.0" height="0.0"/>
+                                                    <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="16"/>
+                                                    <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYe-wK-2Vz" userLabel="disabledView">
@@ -561,19 +568,21 @@
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstItem="tm1-m9-G3a" firstAttribute="leading" secondItem="cFZ-8N-DQI" secondAttribute="trailing" constant="20" id="7Xh-0d-L5G"/>
                                                 <constraint firstItem="Wuo-OD-EKS" firstAttribute="leading" secondItem="DYe-wK-2Vz" secondAttribute="trailing" constant="5" id="CpT-zI-JJb"/>
                                                 <constraint firstAttribute="centerY" secondItem="SnE-kS-cX0" secondAttribute="centerY" id="GLk-uV-4pJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="DYe-wK-2Vz" secondAttribute="bottom" constant="5" id="LR0-jJ-pTg"/>
                                                 <constraint firstItem="DYe-wK-2Vz" firstAttribute="leading" secondItem="ixf-tc-4Kd" secondAttribute="leading" constant="5" id="OoZ-6L-DVC"/>
-                                                <constraint firstItem="cFZ-8N-DQI" firstAttribute="leading" secondItem="SnE-kS-cX0" secondAttribute="leading" id="VoX-ow-3Ed"/>
-                                                <constraint firstItem="cFZ-8N-DQI" firstAttribute="top" secondItem="SnE-kS-cX0" secondAttribute="bottom" constant="1" id="YY0-PV-C4j"/>
+                                                <constraint firstItem="cFZ-8N-DQI" firstAttribute="top" secondItem="SnE-kS-cX0" secondAttribute="bottom" constant="-15" id="YY0-PV-C4j"/>
                                                 <constraint firstItem="lZy-0O-urh" firstAttribute="leading" secondItem="ixf-tc-4Kd" secondAttribute="leading" id="ZOO-nJ-1EE"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wuo-OD-EKS" secondAttribute="trailing" constant="10" id="axd-kD-0W7"/>
                                                 <constraint firstAttribute="centerY" secondItem="Wuo-OD-EKS" secondAttribute="centerY" id="byO-Ck-Aww"/>
+                                                <constraint firstItem="cFZ-8N-DQI" firstAttribute="leading" secondItem="SnE-kS-cX0" secondAttribute="leading" constant="10" id="eej-AV-Emu"/>
                                                 <constraint firstAttribute="trailing" secondItem="lZy-0O-urh" secondAttribute="trailing" id="nZz-rx-Z1r"/>
                                                 <constraint firstItem="DYe-wK-2Vz" firstAttribute="top" secondItem="lZy-0O-urh" secondAttribute="bottom" constant="5" id="oo2-WR-WpD"/>
                                                 <constraint firstItem="lZy-0O-urh" firstAttribute="top" secondItem="ixf-tc-4Kd" secondAttribute="top" constant="1" id="riS-fX-gdC"/>
                                                 <constraint firstItem="SnE-kS-cX0" firstAttribute="leading" secondItem="ixf-tc-4Kd" secondAttribute="leading" constant="10" id="utd-gc-DQJ"/>
+                                                <constraint firstItem="cFZ-8N-DQI" firstAttribute="centerY" secondItem="tm1-m9-G3a" secondAttribute="centerY" id="yBS-EI-58v"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -594,6 +603,7 @@
                                     <outlet property="disabledView" destination="DYe-wK-2Vz" id="vdZ-6k-zCb"/>
                                     <outlet property="friendlyName" destination="cFZ-8N-DQI" id="dwy-9G-8zN"/>
                                     <outlet property="mainView" destination="ixf-tc-4Kd" id="van-tZ-C65"/>
+                                    <outlet property="statusLabel" destination="tm1-m9-G3a" id="Wfg-kx-Ixs"/>
                                     <outletCollection property="gestureRecognizers" destination="JPq-wy-XYV" appends="YES" id="Q7C-rH-Y06"/>
                                 </connections>
                             </collectionViewCell>
@@ -658,10 +668,10 @@
                         <viewControllerLayoutGuide type="bottom" id="NqU-tM-NCh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Pvn-iy-rW3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-vn-kjC">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-vn-kjC">
                                 <rect key="frame" x="0.0" y="108" width="600" height="368"/>
                                 <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
@@ -831,13 +841,13 @@
         <image name="btn_left_arrow_gray" width="40" height="67"/>
         <image name="btn_plus_bare" width="344" height="344"/>
         <image name="cell_chillhub_product" width="1217" height="463"/>
-        <image name="cell_paragon_product" width="677" height="266"/>
+        <image name="cell_paragon_product_logo" width="457" height="155"/>
         <image name="icon_chevron_blue_right" width="28" height="47"/>
         <image name="reveal-icon" width="22" height="17"/>
         <image name="sad-robot-no-tear" width="751" height="1281"/>
         <image name="teardrop" width="33" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VJe-HR-x9M"/>
+        <segue reference="Ucb-Xj-qPs"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -115,6 +115,20 @@ NSObject* _temperatureChangedObserver;
 - (IBAction)continueButtonTap:(id)sender {
     //TODO BONEYARD
     //[self performSegueWithIdentifier:@"segueCooking" sender:self];
+    
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Return to Main Menu"
+                          message:@"Please turn off the burner on your unit to start a new session."
+                          delegate:self cancelButtonTitle:@"" otherButtonTitles:@"OK", nil];
+    
+    alert.cancelButtonIndex = -1;
+    [alert show];
+}
+
+#pragma mark - <UIAlertViewDelegate>
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
