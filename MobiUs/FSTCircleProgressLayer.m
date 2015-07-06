@@ -55,7 +55,7 @@
     
     self.path = [self drawPathWithArcCenter];
     self.fillColor = [UIColor clearColor].CGColor;
-    UIColor* strokeColor =UIColorFromRGB(0xD43326);
+    UIColor* strokeColor = UIColorFromRGB(0xEA461A);//0xD43326);
     self.strokeColor = [strokeColor colorWithAlphaComponent:0.5].CGColor; // played with alpha (from 0.5)
     self.shadowColor = [UIColor whiteColor].CGColor; // changed from white
     self.shadowOpacity = .8;
