@@ -55,13 +55,13 @@
     
     self.path = [self drawPathWithArcCenter];
     self.fillColor = [UIColor clearColor].CGColor;
-    UIColor* strokeColor = UIColorFromRGB(0xEA461A);//0xD43326);
+    UIColor* strokeColor = UIColorFromRGB(0xE40039);//0xEA461A);//0xD43326);
     self.strokeColor = [strokeColor colorWithAlphaComponent:0.5].CGColor; // played with alpha (from 0.5)
-    self.shadowColor = [UIColor whiteColor].CGColor; // changed from white
+    /*self.shadowColor = [UIColor whiteColor].CGColor; // changed from white
     self.shadowOpacity = .8;
     //self.shadowPath = self.path; // i think this is needed to keep it out of the inner circle
     self.shadowRadius = 2.0; // down from 3
-    self.shadowOffset = CGSizeMake(0, 0);
+    self.shadowOffset = CGSizeMake(0, 0);*/
     
     
     self.lineWidth = 25;
@@ -73,7 +73,7 @@
     self.progressLayer.lineWidth = 14;
     self.progressLayer.lineCap = kCALineJoinMiter;
     self.progressLayer.lineJoin = kCALineJoinRound;
-    self.progressLayer.shadowColor = [UIColor whiteColor].CGColor;
+    //self.progressLayer.shadowColor = [UIColor whiteColor].CGColor;
     
     self.progressLayerEnd = [CAShapeLayer layer];
     self.progressLayerEnd.path = [self drawPathWithArcCenter];
@@ -102,14 +102,14 @@
     [self insertSublayer:self.textBackground above:self];
     //[self addSublayer:self.textBackground];
     //set up background pulsing
-    CABasicAnimation* shadowAnimation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
+    /*CABasicAnimation* shadowAnimation = [CABasicAnimation animationWithKeyPath:@"shadowOpacity"];
     shadowAnimation.fromValue = @(0.0);
     shadowAnimation.toValue = @(0.8);
     shadowAnimation.repeatCount = HUGE_VALF; // runs indefinitely
     shadowAnimation.duration = 1.7; // down from 2.0
     shadowAnimation.autoreverses = YES; // repeats opacity transition to fade in, out (fromvalue and tovalue alternate)
     shadowAnimation.removedOnCompletion = YES; // not sure if needed, hopefully finishes at end of view
-    [self addAnimation:shadowAnimation forKey:nil]; // animate the shadow pulse
+    [self addAnimation:shadowAnimation forKey:nil]; // animate the shadow pulse*/
     // trying it on the line subview rather than the whole layer
 }
 
