@@ -25,6 +25,7 @@
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
+    self.headerLabel.text = [self.currentParagon.currentCookingMethod.name stringByAppendingString:@"?"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,10 +61,10 @@
     }
 }
 
--(void) viewWillAppear:(BOOL)animated
+/*-(void) viewWillAppear:(BOOL)animated
 {
     self.headerLabel.text = [self.currentParagon.currentCookingMethod.name stringByAppendingString:@"?"];
-}
+}*/ // view did load so this only happens when adding on two the stack
 
 
 @end

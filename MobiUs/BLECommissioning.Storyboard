@@ -98,6 +98,12 @@
                                             <constraint firstAttribute="height" constant="150" id="byd-GO-Sjl"/>
                                             <constraint firstAttribute="width" constant="240" id="puU-Wo-qqU"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="byd-GO-Sjl"/>
+                                                <exclude reference="puU-Wo-qqU"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="cell_paragon_product_logo_grey" translatesAutoresizingMaskIntoConstraints="NO" id="d7h-G2-ZJw" userLabel="Paragon Image View">
                                         <rect key="frame" x="213" y="188" width="175" height="48"/>
@@ -120,9 +126,11 @@
                                 <constraints>
                                     <constraint firstItem="VEE-9S-kLt" firstAttribute="centerX" secondItem="d7h-G2-ZJw" secondAttribute="centerX" id="FcY-Aa-Jrv"/>
                                     <constraint firstItem="d7h-G2-ZJw" firstAttribute="centerX" secondItem="m33-Ka-D9M" secondAttribute="centerX" constant="0.5" id="LR8-UP-a2M"/>
+                                    <constraint firstItem="VEE-9S-kLt" firstAttribute="width" secondItem="zhI-dz-qQa" secondAttribute="width" multiplier="0.35" id="Lvd-O6-oJ6"/>
                                     <constraint firstItem="d7h-G2-ZJw" firstAttribute="top" secondItem="VEE-9S-kLt" secondAttribute="bottom" constant="15" id="TAp-7b-wRF"/>
                                     <constraint firstAttribute="centerX" secondItem="VEE-9S-kLt" secondAttribute="centerX" id="X7r-Es-OaP"/>
                                     <constraint firstItem="m33-Ka-D9M" firstAttribute="top" secondItem="d7h-G2-ZJw" secondAttribute="bottom" constant="30" id="iyO-mM-pxg"/>
+                                    <constraint firstItem="VEE-9S-kLt" firstAttribute="height" secondItem="zhI-dz-qQa" secondAttribute="height" multiplier="0.35" id="qcV-nO-8dx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -213,6 +221,12 @@
                                     <constraint firstAttribute="height" constant="150" id="Eju-Ci-492"/>
                                     <constraint firstAttribute="width" constant="240" id="unN-J6-SLB"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Eju-Ci-492"/>
+                                        <exclude reference="unN-J6-SLB"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_paragon_product_logo_grey" translatesAutoresizingMaskIntoConstraints="NO" id="x2q-V0-MIB" userLabel="Paragon Image View">
                                 <rect key="frame" x="213" y="188" width="175" height="48"/>
@@ -234,9 +248,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="x2q-V0-MIB" firstAttribute="centerX" secondItem="Yba-98-Hpr" secondAttribute="centerX" constant="0.5" id="1OW-Yj-qMv"/>
+                            <constraint firstItem="5xU-zI-tT1" firstAttribute="height" secondItem="O3O-kA-Sqn" secondAttribute="height" multiplier="0.35" id="DqC-KH-1hW"/>
                             <constraint firstItem="Yba-98-Hpr" firstAttribute="top" secondItem="x2q-V0-MIB" secondAttribute="bottom" constant="30" id="IwL-PN-TvY"/>
                             <constraint firstItem="5xU-zI-tT1" firstAttribute="top" secondItem="oZk-PI-AjH" secondAttribute="bottom" constant="30" id="NmK-SR-dCB"/>
                             <constraint firstItem="5xU-zI-tT1" firstAttribute="centerX" secondItem="x2q-V0-MIB" secondAttribute="centerX" id="WUN-gx-YSY"/>
+                            <constraint firstItem="5xU-zI-tT1" firstAttribute="width" secondItem="O3O-kA-Sqn" secondAttribute="width" multiplier="0.35" id="d9c-Ae-nAr"/>
                             <constraint firstAttribute="centerX" secondItem="5xU-zI-tT1" secondAttribute="centerX" id="gd5-iH-jly"/>
                             <constraint firstItem="x2q-V0-MIB" firstAttribute="top" secondItem="5xU-zI-tT1" secondAttribute="bottom" constant="15" id="oLV-UB-B1O"/>
                         </constraints>
@@ -283,7 +299,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-paragon-with-pot" translatesAutoresizingMaskIntoConstraints="NO" id="jXL-gM-MKG">
-                                <rect key="frame" x="160.5" y="65" width="280" height="195"/>
+                                <rect key="frame" x="160" y="65" width="280" height="195"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="4BU-Xd-3a9"/>
@@ -322,7 +338,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-warning-error" translatesAutoresizingMaskIntoConstraints="NO" id="xWB-9l-m7I">
-                                <rect key="frame" x="160.5" y="65" width="280" height="195"/>
+                                <rect key="frame" x="160" y="65" width="280" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="0uQ-le-YTR"/>
                                     <constraint firstAttribute="width" constant="280" id="ERT-2y-jZg"/>
@@ -393,14 +409,14 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AN2-Hs-vdh">
-                                        <rect key="frame" x="28" y="33" width="502" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AN2-Hs-vdh">
+                                        <rect key="frame" x="0.0" y="54.5" width="558" height="19.5"/>
                                         <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q7b-iF-peN">
-                                        <rect key="frame" x="70" y="62" width="419" height="29"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q7b-iF-peN">
+                                        <rect key="frame" x="112" y="91.5" width="335" height="29"/>
                                         <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="19"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -435,17 +451,24 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="bxq-Pf-VNN" secondAttribute="centerX" constant="-0.5" id="61Y-2U-gJt"/>
-                                    <constraint firstItem="AN2-Hs-vdh" firstAttribute="top" secondItem="bxq-Pf-VNN" secondAttribute="bottom" constant="-9" id="6KI-6V-jh8"/>
-                                    <constraint firstAttribute="width" secondItem="Q7b-iF-peN" secondAttribute="width" multiplier="4:3" id="AVE-DQ-iy3"/>
+                                    <constraint firstAttribute="width" secondItem="Q7b-iF-peN" secondAttribute="width" multiplier="5:3" id="AVE-DQ-iy3"/>
                                     <constraint firstAttribute="centerX" secondItem="Yym-Ou-ham" secondAttribute="centerX" id="Ajx-if-SaI"/>
                                     <constraint firstAttribute="centerX" secondItem="Q7b-iF-peN" secondAttribute="centerX" constant="-0.5" id="H7Q-di-xfZ"/>
                                     <constraint firstItem="2ga-aH-8Nj" firstAttribute="width" secondItem="1PR-dU-q4K" secondAttribute="width" multiplier="4:5" id="Hbw-51-55p"/>
+                                    <constraint firstAttribute="width" secondItem="AN2-Hs-vdh" secondAttribute="width" id="Jd4-HA-0ka"/>
                                     <constraint firstItem="bxq-Pf-VNN" firstAttribute="top" secondItem="1PR-dU-q4K" secondAttribute="top" constant="8" id="OQr-cb-6kl"/>
+                                    <constraint firstAttribute="centerY" secondItem="bxq-Pf-VNN" secondAttribute="centerY" constant="119" id="PQP-oN-fUD"/>
                                     <constraint firstItem="Q7b-iF-peN" firstAttribute="top" secondItem="AN2-Hs-vdh" secondAttribute="bottom" constant="8" id="U48-ct-pbD"/>
-                                    <constraint firstItem="bxq-Pf-VNN" firstAttribute="centerX" secondItem="AN2-Hs-vdh" secondAttribute="centerX" id="cPx-ai-X3X"/>
-                                    <constraint firstAttribute="width" secondItem="AN2-Hs-vdh" secondAttribute="width" multiplier="10:9" id="qKZ-Fx-mIu"/>
+                                    <constraint firstAttribute="centerX" secondItem="AN2-Hs-vdh" secondAttribute="centerX" id="cV9-vn-MvO"/>
+                                    <constraint firstAttribute="centerY" secondItem="AN2-Hs-vdh" secondAttribute="centerY" constant="80" id="jBc-Kl-HYO"/>
                                     <constraint firstAttribute="bottom" secondItem="2ga-aH-8Nj" secondAttribute="bottom" constant="20" id="rgw-yY-maz"/>
+                                    <constraint firstAttribute="centerY" secondItem="Q7b-iF-peN" secondAttribute="centerY" constant="38" id="txp-pe-H2y"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="U48-ct-pbD"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
