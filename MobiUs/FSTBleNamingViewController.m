@@ -15,11 +15,18 @@
 
 @implementation FSTBleNamingViewController
 
+{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.paragonNameField setDelegate:self];
     // Do any additional setup after loading the view.
-    [self.paragonNameField addTarget:self action:@selector(beganEditingText) forControlEvents:UIControlEventEditingDidBegin];
-    [self.paragonNameField addTarget:self action:@selector(didEnterText) forControlEvents:UIControlEventEditingDidEndOnExit]; // editing does tnot seem to be changing though.
+    //[self.paragonNameField addTarget:self action:@selector(beganEditingText) forControlEvents:UIControlEventEditingDidBegin];
+   // [self.paragonNameField addTarget:self action:@selector(didEnterText) forControlEvents:UIControlEventEditingDidEnd]; // for hitting the enter button
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterText) name:UIKeyboardWillHideNotification object:nil]; // do the same when keyboard hidden on ipad
     [self.bottomView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.bottomView.layer setBorderWidth:2.5F];
     
@@ -43,33 +50,40 @@
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
--(void)beganEditingText {
-    
+//-(void)beganEditingText {
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     //set view above keyboard
     
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations:^(void){
-                         self.view.frame = CGRectOffset(self.view.frame, 0, -4*self.view.frame.size.height/9);
-                         self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.5, 1.5); // yes this is hard-coded
+                         self.view.frame = CGRectOffset(self.view.superview.frame, 0, -4*self.view.frame.size.height/9);
+                         self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, (self.view.frame.size.width/self.paragonNameField.frame.size.width)*.9, (self.view.frame.size.width/self.paragonNameField.frame.size.width)*.9);
                      }
                      completion:nil];
-        
     
+        
+    return YES;
 }
--(void)didEnterText {
-    [self.paragonNameField resignFirstResponder]; // endEditing
+//-(void)didEnterText {
+-(void)textFieldDidEndEditing:(UITextField*)textField {
     
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations:^(void){
                         self.view.transform = CGAffineTransformIdentity;
-                        self.view.frame = CGRectOffset(self.view.frame, 0, 4*self.view.frame.size.height/9);
+                        self.view.frame = [self.view superview].frame; // sets back to outside frame
                      }
                      completion:nil];
-    // set view back down
+    // set view back down // problem with the rotation
+
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder]; // will invoke end editing for return key
+    return YES;
 }
 
 #pragma mark - Navigation

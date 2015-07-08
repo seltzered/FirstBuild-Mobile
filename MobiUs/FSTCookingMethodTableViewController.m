@@ -7,7 +7,7 @@
 //
 
 #import "FSTCookingMethodTableViewController.h"
-#import "UIDashedLineView.h"
+#import "FSTDashedLine.h"
 
 @interface FSTCookingMethodTableViewController ()
 
@@ -21,6 +21,7 @@
     [super viewDidLoad];
     self.clearsSelectionOnViewWillAppear = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -50,14 +51,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath];
     
     cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.row]).name;
-    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = UIColorFromRGB(0xFF0105); // set to red color
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.font = [UIFont fontWithName:@"PTSans-NarrowBold" size:22];
     
-    UIDashedLineView *lineView = [[UIDashedLineView alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
+    FSTDashedLine *lineView = [[FSTDashedLine alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
     lineView.backgroundColor = [UIColor clearColor];
     [cell.contentView addSubview:lineView];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone; // need to modify this, perhaps with custom Cell view class
     return cell;
 }
 
