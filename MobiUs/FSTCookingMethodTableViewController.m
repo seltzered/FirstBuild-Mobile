@@ -18,8 +18,9 @@
 @implementation FSTCookingMethodTableViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = NO; // changing this to yes did nothing, perhaps it doesn't appear again since it is the same tableview twice.
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 }
@@ -27,6 +28,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.methods = [self.delegate dataRequestedFromChild];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,9 +48,9 @@
     return self.methods.cookingMethods.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+     // eventually, the cells will control the subcategories, so the tables load new data depending on the current selection. Perhaps there is some animation to fill in a tableview, and I could reset the table with the selection as the first member (the pointed header could be the selected background view)
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath]; // changed from UITableViewCell,only animation overloaded on this version
     
     cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.row]).name;
     cell.textLabel.textColor = UIColorFromRGB(0xFF0105); // set to red color
@@ -58,13 +60,37 @@
     FSTDashedLine *lineView = [[FSTDashedLine alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
     lineView.backgroundColor = [UIColor clearColor];
     [cell.contentView addSubview:lineView];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone; // need to modify this, perhaps with custom Cell view class
-    return cell;
+    
+    UIView *view = [[UIView alloc]initWithFrame:cell.frame]; // background filling in the whole background
+    view.backgroundColor = UIColorFromRGB(0xFF0105); // same color as text
+    [cell setSelectedBackgroundView:view];
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    return cell; // al this will work in the tableviewcontroller initialization
 }
 
+/*- (NSIndexPath *)tableView:(FSTCookingMethodTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // seems to already be selected before this
+    
+    return indexPath;
+}
+*/
+- (void)tableView:(UITableView*)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone]; // this does select it twice, but it looks fine. I would prefer to set animation to true from the beginning! perhaps custom tableView?
+
+}
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     FSTCookingMethod* method = self.methods.cookingMethods[indexPath.row];
-    [self.delegate cookingMethodSelected:method];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // this
+        tableView.userInteractionEnabled = YES;
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES]; // clear selection property not making a difference // this might be a problem if the selection changes
+        [self.delegate cookingMethodSelected:method]; // perform segue after a delay to show animation
+
+    });
+    tableView.userInteractionEnabled = NO;
+    //
 }
 
 

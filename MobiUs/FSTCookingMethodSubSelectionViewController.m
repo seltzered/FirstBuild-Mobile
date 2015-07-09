@@ -25,7 +25,7 @@
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
-    self.headerLabel.text = [self.currentParagon.currentCookingMethod.name stringByAppendingString:@"?"];
+    self.headerLabel.text = self.currentParagon.currentCookingMethod.name; //stringByAppendingString:@"?"];
 }
 
 - (void)didReceiveMemoryWarning {
