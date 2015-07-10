@@ -90,7 +90,6 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     }
 }
 
-//TODO: error segue
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     if (!error)
@@ -102,7 +101,6 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     else
     {
         [self performSegueWithIdentifier:@"segueError" sender:self];
-        //[[FSTBleCentralManager sharedInstance]savePeripheralHavingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon 1"]; // should this happen? probably do not want to save this
         DLog(@"<<<<<<FAILED TO READ CHARACTERISTIC, TERMINATE CONNECTION>>>>>>>>>>");
     }
 }
