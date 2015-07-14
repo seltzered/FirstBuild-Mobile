@@ -73,12 +73,13 @@
 }
 
 - (NSTimeInterval)timeLimit {
-    return self.progressLayer.timeLimit;
+    return self.progressLayer.timeLimit; // might prefer this getter in some cases
 }
 
 - (void)setTimeLimit:(NSTimeInterval)timeLimit {
     self.progressLayer.timeLimit = timeLimit;
 }
+
 
 - (void)setElapsedTime:(NSTimeInterval)elapsedTime {
     _elapsedTime = elapsedTime;
@@ -86,6 +87,25 @@
    // self.progressLabel.attributedText = [self formatProgressStringFromTimeInterval:elapsedTime];
 }
 
+-(void)setStartingTemp:(CGFloat)startingTemp { // convention would just name a property startingTemp, might be better
+    _startingTemp = startingTemp;
+    self.progressLayer.startingTemp = startingTemp;
+}
+- (void)setTargetTemp:(CGFloat)targetTemp {
+    
+    _targetTemp = targetTemp;
+    self.progressLayer.targetTemp = targetTemp; // set target for reference in Layer drawing
+}
+
+-(void)setLayerState:(ProgressState)layerState {
+    _layerState = layerState;
+    self.progressLayer.layerState = layerState;
+}
+- (void)setCurrentTemp:(CGFloat)currentTemp {
+    _currentTemp = currentTemp;
+    self.progressLayer.currentTemp = currentTemp;
+    
+}
 #pragma mark - Private Methods
 
 - (void)setupViews {
@@ -97,14 +117,13 @@
     self.progressLayer = [[FSTCircleProgressLayer alloc] init];
     self.progressLayer.frame = self.bounds;
     self.progressLayer.backgroundColor = [UIColor clearColor].CGColor;
-    [self.layer addSublayer:self.progressLayer]; // was addSublayer
-    
+    [self.layer addSublayer:self.progressLayer];     
 }
 
-- (void)setTintColor:(UIColor *)tintColor {
+/*- (void)setTintColor:(UIColor *)tintColor {
     self.progressLayer.progressColor = tintColor;
    // self.progressLabel.textColor = [UIColor whiteColor];
-}
+}*/
 
 //- (NSString *)stringFromTimeInterval:(NSTimeInterval)interval shortDate:(BOOL)shortDate {
 //    NSInteger ti = (NSInteger)interval;

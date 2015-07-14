@@ -176,8 +176,8 @@
                                 <exclude reference="sg9-W6-UnA"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="dyY-ms-fkK"/>
                                 <exclude reference="0bG-aa-5Dk"/>
+                                <exclude reference="dyY-ms-fkK"/>
                             </mask>
                         </variation>
                     </view>
@@ -576,7 +576,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="   READY TO               " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7b-eW-wFJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="   READY TO               " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7b-eW-wFJ">
                                 <rect key="frame" x="167" y="45" width="250" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="SVn-k5-8Nh"/>
@@ -585,7 +585,7 @@
                                 <color key="textColor" red="0.83137254901960789" green="0.20000000000000001" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Press START on your Paragon" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="nwH-Dd-IKC">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press START on your Paragon" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="nwH-Dd-IKC">
                                 <rect key="frame" x="0.0" y="123" width="600" height="25"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -639,7 +639,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PREHEAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tve-H1-QfP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREHEAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tve-H1-QfP">
                                 <rect key="frame" x="310" y="45" width="130" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="Wt0-eQ-IE8"/>
@@ -681,11 +681,11 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="6Jn-Bh-8wK"/>
-                                <exclude reference="FZX-Hc-0WG"/>
                                 <exclude reference="Ev8-F0-1h0"/>
                                 <exclude reference="Io4-Jm-X3d"/>
                                 <exclude reference="nj1-BX-Eqx"/>
+                                <exclude reference="6Jn-Bh-8wK"/>
+                                <exclude reference="FZX-Hc-0WG"/>
                                 <exclude reference="kmH-jP-05I"/>
                                 <exclude reference="tiW-w7-rh4"/>
                                 <exclude reference="fCm-Y2-Alq"/>
@@ -700,7 +700,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <segue destination="Yg1-bw-06J" kind="show" identifier="seguePreheating" id="Vi4-UN-pNd"/>
+                        <segue destination="ktp-73-2Pg" kind="show" identifier="seguePreheating" id="4Ck-Rj-PWC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9uV-aG-n2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -893,7 +893,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2609" y="370"/>
+            <point key="canvasLocation" x="2545" y="1018"/>
         </scene>
         <!--Ready To Cook View Controller-->
         <scene sceneID="QAf-2c-JNw">
@@ -1125,7 +1125,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3329" y="350"/>
+            <point key="canvasLocation" x="3329" y="-402"/>
         </scene>
         <!--Cooking View Controller-->
         <scene sceneID="UhG-mx-UMt">
@@ -1182,13 +1182,13 @@
                                                     <constraint firstAttribute="height" constant="60" id="0N5-fo-UPm"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="50"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food will be done at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-xE-spK">
                                                 <rect key="frame" x="135.5" y="206.5" width="123" height="22"/>
                                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.7843137255" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L2-mW-QwO" userLabel="doneAtLabel">
@@ -1197,7 +1197,7 @@
                                                     <constraint firstAttribute="height" constant="20" id="5tv-RW-Gsz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.72941176470588232" green="0.023529411764705882" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -1272,6 +1272,11 @@
                             <constraint firstItem="hBx-nA-wFa" firstAttribute="top" secondItem="bKQ-z6-QqS" secondAttribute="bottom" constant="15" id="wOl-QA-x2O"/>
                             <constraint firstItem="bKQ-z6-QqS" firstAttribute="top" secondItem="Eho-uD-hb8" secondAttribute="bottom" constant="10" id="yyU-TL-wPL"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="kiR-eC-M5K"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="circleProgressView" destination="ONX-nm-WVn" id="UFM-Oh-TJB"/>
@@ -1504,23 +1509,23 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="ckK-Mg-bGC"/>
                                 <exclude reference="zDx-fk-p2D"/>
-                                <exclude reference="iCD-Mz-Iaf"/>
-                                <exclude reference="pTP-ov-Rqu"/>
+                                <exclude reference="ckK-Mg-bGC"/>
                                 <exclude reference="oQv-w6-utr"/>
+                                <exclude reference="pTP-ov-Rqu"/>
+                                <exclude reference="iCD-Mz-Iaf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <exclude reference="BFM-cC-K5Z"/>
                                 <exclude reference="Z4w-BU-Wta"/>
-                                <include reference="ckK-Mg-bGC"/>
                                 <include reference="zDx-fk-p2D"/>
+                                <include reference="ckK-Mg-bGC"/>
+                                <include reference="oQv-w6-utr"/>
+                                <exclude reference="pTP-ov-Rqu"/>
                                 <include reference="iCD-Mz-Iaf"/>
                                 <exclude reference="zxv-w8-7Dj"/>
-                                <exclude reference="pTP-ov-Rqu"/>
-                                <include reference="oQv-w6-utr"/>
                             </mask>
                         </variation>
                     </view>
@@ -1727,7 +1732,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2609" y="1150"/>
+            <point key="canvasLocation" x="2809" y="1846"/>
         </scene>
     </scenes>
     <resources>
@@ -1739,5 +1744,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="PQV-x6-ygV"/>
         <segue reference="Oqm-D3-BPL"/>
+        <segue reference="4Ck-Rj-PWC"/>
     </inferredMetricsTieBreakers>
 </document>
