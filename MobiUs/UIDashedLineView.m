@@ -18,7 +18,7 @@
     CGContextSetLineWidth(cx, thickness);
     CGContextSetLineCap(cx, kCGLineCapRound);
     
-    CGContextSetStrokeColorWithColor(cx, UIColorFromRGB(0x908982).CGColor);
+    CGContextSetStrokeColorWithColor(cx, UIColorFromRGB(0xFF0105).CGColor);
     
     CGFloat ra[] = {1,5};
     CGContextSetLineDash(cx, 0.0, ra, 2); // nb "2" == ra count

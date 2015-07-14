@@ -20,11 +20,20 @@
 
 @interface FSTCircleProgressLayer : CAShapeLayer
 
+typedef enum {
+    kPreheating = 0,
+    kCooking,
+    kSitting
+} ProgressState; // enum to define the progressLayer's states
+
 @property (nonatomic) NSTimeInterval elapsedTime;
 @property (nonatomic) NSTimeInterval timeLimit;
+@property (nonatomic) CGFloat currentTemp;
 @property (assign, nonatomic, readonly) double percent;
 @property (nonatomic) UIColor *progressColor;
-
+@property (nonatomic) ProgressState layerState;
+@property (nonatomic) CGFloat targetTemp;
+@property (nonatomic) CGFloat startingTemp;
 @end
 
 // Copyright belongs to original author

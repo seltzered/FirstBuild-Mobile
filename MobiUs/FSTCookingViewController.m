@@ -28,10 +28,15 @@
 FSTParagonCookingStage* _cookingStage;
 NSObject* _temperatureChangedObserver;
 NSObject* _timeElapsedChangedObserver;
+NSObject* _cookModeChangedObserver;
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    __block ProgressState state = kPreheating; // should load a different layer in these states
+    // this okay?
     self.navigationItem.hidesBackButton = true;
     
     __weak typeof(self) weakSelf = self;
@@ -52,23 +57,48 @@ NSObject* _timeElapsedChangedObserver;
         //todo: remove ?
     }];
     
-    _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+    _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification //???
                                                       object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-       weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
+        weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue]; // good way to test the circle is changing this value to visualize some proportion
+        /*weakSelf.circleProgressView.startingTemp = 0.0;
+        weakSelf.circleProgressView.targetTemp = 100.0;
+        weakSelf.circleProgressView.currentTemp = 35.0; // should call set current temp, and set ticks in preheating stage*/
+        //[weakSelf stateChanged:kCooking]; // hard coding
+        //[weakSelf stateChanged:kSitting]; // for testing
        [weakSelf makeAndSetTimeRemainingLabel];
 
     }];
     
+    _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
+                                                   object:weakSelf.currentParagon
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+                                {
+                                    if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING)
+                                    { // ready to transition to cooking
+                                        state = kCooking;
+                                        [weakSelf stateChanged:state];
+                                    }
+                                }];
+    
+    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+                                                      object:weakSelf.currentParagon
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+                                   {
+                                       NSNumber* actualTemperature = _cookingStage.actualTemperature;
+                                       weakSelf.circleProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
+                                   }];
+    
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
-    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue];
-    self.circleProgressView.elapsedTime = 0;
-
-    UIColor *tintColor = UIColorFromRGB(0xD43326);
-    self.circleProgressView.tintColor = tintColor;
-    self.circleProgressView.elapsedTime = 0;
+    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
+    self.circleProgressView.elapsedTime = 0; // elapsed time increments with cookingStage I suppose
+    // set the temperature ranges
+    self.circleProgressView.targetTemp = [_cookingStage.targetTemperature doubleValue];
+    self.circleProgressView.startingTemp = 72; // was hard coded in preheating
     
 #ifdef SIMULATE_PARAGON
     [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
@@ -76,6 +106,16 @@ NSObject* _timeElapsedChangedObserver;
 
 }
 
+-(void)stateChanged:(ProgressState)state { // might include old state variable, or just use seperate methods for each case,
+
+    switch (state) {
+        case kPreheating:
+        case kCooking:
+        case kSitting: // something with labels, probably the transition phases, also set the initial values like starting/target temps
+            break;
+    }
+    self.circleProgressView.layerState = state;
+}
 - (void)makeAndSetTimeRemainingLabel
 {
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
