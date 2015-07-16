@@ -18,7 +18,8 @@
     CGFloat width = x_end - x_start; // width of the whole line
     CGFloat y = self.frame.size.height/2; // mid point as every y coordinate
     UIBezierPath* underPath = [UIBezierPath bezierPath];
-
+    
+    self.lineWidth = width; // let the viewContoller access that for position calculations
     [underPath moveToPoint:CGPointMake(x_start, y)];
     [underPath addLineToPoint:CGPointMake(x_end, y)];
     [[UIColor lightGrayColor] setStroke];

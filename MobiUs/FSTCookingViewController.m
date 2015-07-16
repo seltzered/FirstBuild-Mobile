@@ -16,8 +16,17 @@
 
 #import "FSTCookingViewController.h"
 #import "Session.h"
+#import "FSTStageBarView.h"
+#import "FSTStageCircleView.h"
 
 @interface FSTCookingViewController ()
+
+@property (weak, nonatomic) IBOutlet FSTStageBarView *stageBar;
+
+@property (weak, nonatomic) IBOutlet FSTStageCircleView *stageCircle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stageCirclePlace;
+
+@property (nonatomic) ProgressState state;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;
@@ -35,8 +44,10 @@ NSObject* _cookModeChangedObserver;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    __block ProgressState state = kPreheating; // should load a different layer in these states
+    //__block ProgressState state = kPreheating; // should load a different layer in these states
     // this okay?
+    //[self stateChanged:kPreheating];
+    
     self.navigationItem.hidesBackButton = true;
     
     __weak typeof(self) weakSelf = self;
@@ -48,24 +59,13 @@ NSObject* _cookModeChangedObserver;
     [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
-    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
-                                                      object:weakSelf.currentParagon
-                                                       queue:nil
-                                                  usingBlock:^(NSNotification *notification)
-    {
-        //um, do nothing right now view doesn't support anything
-        //todo: remove ?
-    }];
-    
     _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification //???
                                                       object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
         weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue]; // good way to test the circle is changing this value to visualize some proportion
-        /*weakSelf.circleProgressView.startingTemp = 0.0;
-        weakSelf.circleProgressView.targetTemp = 100.0;
-        weakSelf.circleProgressView.currentTemp = 35.0; // should call set current temp, and set ticks in preheating stage*/
+       //current temp, and set ticks in preheating stage*/
         //[weakSelf stateChanged:kCooking]; // hard coding
         //[weakSelf stateChanged:kSitting]; // for testing
        [weakSelf makeAndSetTimeRemainingLabel];
@@ -79,8 +79,7 @@ NSObject* _cookModeChangedObserver;
                                 {
                                     if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING)
                                     { // ready to transition to cooking
-                                        state = kCooking;
-                                        [weakSelf stateChanged:state];
+                                    weakSelf.state = kCooking;
                                     }
                                 }];
     
@@ -94,11 +93,15 @@ NSObject* _cookModeChangedObserver;
                                    }];
     
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
-    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
-    self.circleProgressView.elapsedTime = 0; // elapsed time increments with cookingStage I suppose
+    
+        /********TESTING******/
+    self.circleProgressView.timeLimit = 200;//[_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
+    self.circleProgressView.elapsedTime = 180; //0;  elapsed time increments with cookingStage I suppose
     // set the temperature ranges
-    self.circleProgressView.targetTemp = [_cookingStage.targetTemperature doubleValue];
+    self.circleProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
     self.circleProgressView.startingTemp = 72; // was hard coded in preheating
+    self.state = kSitting; // Testing states here. kReady should always show a complete temperature bar
+    /********remove or set back to commented variables***/
     
 #ifdef SIMULATE_PARAGON
     [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
@@ -106,15 +109,51 @@ NSObject* _cookModeChangedObserver;
 
 }
 
--(void)stateChanged:(ProgressState)state { // might include old state variable, or just use seperate methods for each case,
+-(void)viewDidAppear:(BOOL)animated {
+    [self updateStageBarForState:_state]; // set top bar to current global state
+}
 
+//-(void)stateChanged:(ProgressState)state { //might include old state variable, or just use seperate methods for each case,
+-(void)setState:(ProgressState)state {
+    _state = state;
     switch (state) {
         case kPreheating:
+        case kReady:
         case kCooking:
         case kSitting: // something with labels, probably the transition phases, also set the initial values like starting/target temps
             break;
+        default:
+            NSLog(@"NO STATE SELECTED\n");
+            break;
     }
-    self.circleProgressView.layerState = state;
+    
+    [self updateStageBarForState:state];
+    self.circleProgressView.layerState = state; // set state of whole child view
+}
+
+-(void)updateStageBarForState:(ProgressState)state {
+    CGFloat new_x = 0; // change x position of stageCircle
+    CGFloat mid_x = self.stageBar.frame.size.width/2;
+    CGFloat start_x = mid_x - self.stageBar.lineWidth/2; //start of bar
+    switch (state) {
+        case kPreheating:
+            new_x = start_x; // beginning of bar
+            break;
+        // need a ready to cook stage for second point
+        case kReady:
+            new_x = start_x + self.stageBar.lineWidth/3;
+            break;
+        case kCooking:
+            new_x = start_x + 2*self.stageBar.lineWidth/3;
+            break;
+        case kSitting:
+            new_x = start_x + self.stageBar.lineWidth;
+            break;
+        default:
+            NSLog(@"NO STATE FOR STAGE BAR\n");
+            break;
+    }
+    self.stageCirclePlace.constant = new_x - self.stageCircle.frame.size.width/2; // update constraint, centered. Animate block here?
 }
 - (void)makeAndSetTimeRemainingLabel
 {

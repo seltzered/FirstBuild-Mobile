@@ -10,4 +10,6 @@
 
 @interface FSTStageBarView : UIView
 
+@property (nonatomic) CGFloat lineWidth;
+
 @end

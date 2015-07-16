@@ -20,7 +20,7 @@
 }
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    UIBezierPath* circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2) radius:8.0 startAngle:0 endAngle:2*M_PI clockwise:false];
+    UIBezierPath* circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2) radius:10.0 startAngle:0 endAngle:2*M_PI clockwise:false];
     
     CGContextSaveGState(context);
     circlePath.lineWidth = 2.0;

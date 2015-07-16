@@ -22,6 +22,7 @@
 
 typedef enum {
     kPreheating = 0,
+    kReady, // ready to cook
     kCooking,
     kSitting
 } ProgressState; // enum to define the progressLayer's states

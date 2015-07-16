@@ -71,6 +71,8 @@
             ((CAShapeLayer*)[self.markLayers objectForKey:key]).path = ninetyMark.CGPath;
         //CGPathAddPath(mutableTicks, nil, ninetyMark.CGPath);
     } // need a mutable copy
+    NSArray* dashes = [NSArray arrayWithObjects:@(25),@(7), nil]; // for sitting dashed line
+    self.sittingLayer.lineDashPattern = dashes; // 
    // self.temperatureTicks.path = mutableTicks; // change the current path to that mutable copy
     
     [super layoutSublayers];
@@ -101,7 +103,7 @@
     self.progressLayer = [CAShapeLayer layer];
     //self.progressLayer.path = [self drawPathWithArcCenter];
     self.progressLayer.fillColor = [UIColor clearColor].CGColor;
-    self.progressLayer.strokeColor = [[UIColor orangeColor] colorWithAlphaComponent:1.0].CGColor;
+    self.progressLayer.strokeColor = [UIColorFromRGB(0xF0663A) colorWithAlphaComponent:1.0].CGColor; // firstbuild orange from continue button
     self.progressLayer.lineWidth = 30;
     self.progressLayer.lineCap = kCALineJoinMiter;
     self.progressLayer.lineJoin = kCALineJoinRound;
@@ -110,7 +112,7 @@
     self.sittingLayer = [CAShapeLayer layer];
     self.sittingLayer.fillColor = [UIColor clearColor].CGColor;
     self.sittingLayer.strokeColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6].CGColor; // lightening white over the orange bar
-    self.sittingLayer.lineWidth = 23; // smaller than background progress layer
+    self.sittingLayer.lineWidth = 12; // smaller than background progress layer
     self.sittingLayer.lineCap = kCALineJoinMiter;
     self.sittingLayer.lineJoin = kCALineJoinRound;
     
@@ -194,6 +196,11 @@
     [self drawPathsForPercent]; // takes current temp to calculate percent
 }
 
+-(void)setLayerState:(ProgressState)layerState {
+    _layerState = layerState; // called when state changes
+    [self drawPathsForPercent];
+}
+
 -(void)drawPathsForPercent { // also takes state into account
     switch (_layerState) {
         case kPreheating:
@@ -208,6 +215,11 @@
                     ((CAShapeLayer*)[self.markLayers objectForKey:key]).lineWidth = 2.0;
                 }
             }
+            self.sittingLayer.strokeEnd = 0.0F;
+            break;
+        case kReady:
+            [self drawCompleteTicks];// preheating complete
+            self.progressLayer.strokeEnd = 0.0F;
             self.sittingLayer.strokeEnd = 0.0F;
             break;
         case kCooking:
@@ -238,6 +250,7 @@
         case kPreheating:
             _percent = [self calculatePercentWithTemp:_currentTemp];
             break;
+        case kReady: // precent not really used here, could be taken as complete, 100%, after preheating
         case kCooking:
         case kSitting:
             _percent = [self calculatePercent:_elapsedTime toTime:_timeLimit];
