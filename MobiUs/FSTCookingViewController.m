@@ -98,9 +98,11 @@ NSObject* _cookModeChangedObserver;
     self.circleProgressView.timeLimit = 200;//[_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
     self.circleProgressView.elapsedTime = 180; //0;  elapsed time increments with cookingStage I suppose
     // set the temperature ranges
-    self.circleProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
+    self.circleProgressView.targetTemp =170;//[_cookingStage.targetTemperature doubleValue];
     self.circleProgressView.startingTemp = 72; // was hard coded in preheating
-    self.state = kSitting; // Testing states here. kReady should always show a complete temperature bar
+    self.circleProgressView.currentTemp = 90; // TEST, REMOVE
+    self.state = kPreheating; // Testing states here. kReady should always show a complete temperature bar
+    [self makeAndSetTimeRemainingLabel];
     /********remove or set back to commented variables***/
     
 #ifdef SIMULATE_PARAGON
@@ -158,8 +160,9 @@ NSObject* _cookModeChangedObserver;
 - (void)makeAndSetTimeRemainingLabel
 {
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
-
-    //temperature label
+    
+    // create every label first
+    //Fonts
     UIFont *bigFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:50.0];
     NSDictionary *bigFontDict = [NSDictionary dictionaryWithObject: bigFont forKey:NSFontAttributeName];
     
@@ -169,10 +172,18 @@ NSObject* _cookModeChangedObserver;
     UIFont *smallFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:23.0];
     NSDictionary *smallFontDict = [NSDictionary dictionaryWithObject: smallFont forKey:NSFontAttributeName];
     
+    // temperature labels (target temperature already at top with cooking mode
+    double currentTemperature = [_cookingStage.actualTemperature doubleValue];
+    NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.2f %@", currentTemperature, @"\u00b0 F"] attributes: bigFontDict]; // with degrees fareinheit appended
+    
+    double targetTemperature = [_cookingStage.targetTemperature doubleValue];
+    NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.2f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
+    
     double timeRemaining = [_cookingStage.cookTimeRequested doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
     int hour = timeRemaining / 60;
     int minutes = fmod(timeRemaining, 60.0);
     
+    // create the time count down label (only shown during cooking or sitting states)
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
     NSMutableAttributedString *colonLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: medFontDict];
@@ -183,17 +194,46 @@ NSObject* _cookModeChangedObserver;
     [hourString appendAttributedString:colonLabel];
     [hourString appendAttributedString:minuteString];
     [hourString appendAttributedString:minuteLabel];
-
-    [self.timeRemainingLabel setAttributedText:hourString];
     
-    //time complete label
+    //time to complete label
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate* timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+
+    // change label settings for each case
+    self.currentLabel.hidden = false;
+    self.currentOverheadLabel.hidden = false;
+    self.targetLabel.hidden = false; // the default for each case
+    self.targetOverheadLabel.hidden = false;
     
-    [dateFormatter setDateFormat:@"hh:mm a"];
-    self.doneAtLabel.text = [dateFormatter stringFromDate:timeComplete];
-    [self.doneAtLabel.superview bringSubviewToFront:self.doneAtLabel];
-    [self.timeRemainingLabel.superview bringSubviewToFront:self.timeRemainingLabel]; // pull labels before the circle
+    switch (_state) {
+
+        case kPreheating: // need to change text above number labels as well
+            [self.currentOverheadLabel setText:@"Current:"];
+            [self.currentLabel setAttributedText:currentTempString];
+            [self.targetOverheadLabel setText:@"Target:"];
+            [self.targetLabel setAttributedText:targetTempString];
+            break;
+        case kReady:
+            self.currentOverheadLabel.hidden = true;
+            self.currentLabel.hidden = true;
+            self.targetOverheadLabel.hidden = true;
+            self.targetLabel.hidden = true; // image view should be active
+            break;
+        case kCooking:
+            [self.currentOverheadLabel setText:@"Time Remaining:"];
+            [self.currentLabel setAttributedText:hourString];
+            [dateFormatter setDateFormat:@"hh:mm a"];
+            [self.targetOverheadLabel setText:@"Food Will Be Done By:"];
+            self.targetLabel.text = [dateFormatter stringFromDate:timeComplete];
+            break;
+        case kSitting: // still need the maximum time to set the targetLabel, and the labels should change
+            break;
+        default:
+            break;
+    }
+    
+    [self.targetLabel.superview bringSubviewToFront:self.targetLabel];
+    [self.currentLabel.superview bringSubviewToFront:self.currentLabel]; // pull labels before the circle // could change layers instead of hiding labels
     
 }
 
