@@ -64,9 +64,6 @@ NSIndexPath *_indexPathForDeletion;
 {
     //[self.collectionView reloadData]; //added by John
     [self.collectionView.collectionViewLayout invalidateLayout];
-    /*******/
-    [self performSegueWithIdentifier:@"segueParagon" sender:self]; // hardcoding to test REMOVE!!!!!
-    /*******/
 }
 
 - (void)didReceiveMemoryWarning {

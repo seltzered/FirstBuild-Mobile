@@ -95,15 +95,12 @@ NSObject* _cookModeChangedObserver;
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
     
         /********TESTING******/
-    self.circleProgressView.timeLimit = 200;//[_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
-    self.circleProgressView.elapsedTime = 180; //0;  elapsed time increments with cookingStage I suppose
+    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
+    self.circleProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
     // set the temperature ranges
-    self.circleProgressView.targetTemp =170;//[_cookingStage.targetTemperature doubleValue];
+    self.circleProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
     self.circleProgressView.startingTemp = 72; // was hard coded in preheating
-    self.circleProgressView.currentTemp = 90; // TEST, REMOVE
-    self.state = kPreheating; // Testing states here. kReady should always show a complete temperature bar
     [self makeAndSetTimeRemainingLabel];
-    /********remove or set back to commented variables***/
     
 #ifdef SIMULATE_PARAGON
     [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
@@ -204,6 +201,7 @@ NSObject* _cookModeChangedObserver;
     self.currentOverheadLabel.hidden = false;
     self.targetLabel.hidden = false; // the default for each case
     self.targetOverheadLabel.hidden = false;
+    self.instructionImage.hidden = true; // default not visible
     
     switch (_state) {
 
@@ -218,6 +216,7 @@ NSObject* _cookModeChangedObserver;
             self.currentLabel.hidden = true;
             self.targetOverheadLabel.hidden = true;
             self.targetLabel.hidden = true; // image view should be active
+            self.instructionImage.hidden = false;
             break;
         case kCooking:
             [self.currentOverheadLabel setText:@"Time Remaining:"];

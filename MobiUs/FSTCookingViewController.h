@@ -14,6 +14,7 @@
 @interface FSTCookingViewController : UIViewController <UIAlertViewDelegate>
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
 @property (strong, nonatomic) IBOutlet FSTCircleProgressView *circleProgressView;
 @property (nonatomic,retain) FSTParagon* currentParagon;
 @property (weak, nonatomic) IBOutlet UILabel *currentOverheadLabel;
