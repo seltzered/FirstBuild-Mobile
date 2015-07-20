@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		514760431B5D42C000C47E41 /* OpenType in Resources */ = {isa = PBXBuildFile; fileRef = 514760421B5D42C000C47E41 /* OpenType */; };
 		515340E91B3C31C60035DEBA /* FSTBleNamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 515340E81B3C31C60035DEBA /* FSTBleNamingViewController.m */; };
 		51537B541B42C6A700769B35 /* FSTParagonDisconnectedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51537B531B42C6A700769B35 /* FSTParagonDisconnectedLabel.m */; };
 		517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */; };
 		517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */; };
 		518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */; };
 		51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */; };
-		51A13CDB1B4DAD4700BA3CB7 /* OpenType in Resources */ = {isa = PBXBuildFile; fileRef = 51A13CDA1B4DAD4700BA3CB7 /* OpenType */; };
 		51A13CDE1B4DAF8600BA3CB7 /* FSTThinArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A13CDD1B4DAF8600BA3CB7 /* FSTThinArrowView.m */; };
 		51DD77851B4AFA1D0024052A /* FSTDashedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DD77841B4AFA1D0024052A /* FSTDashedLine.m */; };
 		51F8EF401B55961400F40882 /* FSTStageBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF3F1B55961400F40882 /* FSTStageBarView.m */; };
@@ -114,6 +114,7 @@
 
 /* Begin PBXFileReference section */
 		18B446C5B84ADBDC6A8F7CC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		514760421B5D42C000C47E41 /* OpenType */ = {isa = PBXFileReference; lastKnownFileType = folder; path = OpenType; sourceTree = "<group>"; };
 		515340E71B3C31C60035DEBA /* FSTBleNamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleNamingViewController.h; sourceTree = "<group>"; };
 		515340E81B3C31C60035DEBA /* FSTBleNamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleNamingViewController.m; sourceTree = "<group>"; };
 		51537B521B42C6A700769B35 /* FSTParagonDisconnectedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonDisconnectedLabel.h; sourceTree = "<group>"; };
@@ -126,7 +127,6 @@
 		518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSegueNoAnimation.m; sourceTree = "<group>"; };
 		51A13CD51B4D6CFC00BA3CB7 /* FSTPointedHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPointedHeaderView.h; sourceTree = "<group>"; };
 		51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPointedHeaderView.m; sourceTree = "<group>"; };
-		51A13CDA1B4DAD4700BA3CB7 /* OpenType */ = {isa = PBXFileReference; lastKnownFileType = folder; name = OpenType; path = ../../../../Downloads/OpenType; sourceTree = "<group>"; };
 		51A13CDC1B4DAF8600BA3CB7 /* FSTThinArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTThinArrowView.h; sourceTree = "<group>"; };
 		51A13CDD1B4DAF8600BA3CB7 /* FSTThinArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTThinArrowView.m; sourceTree = "<group>"; };
 		51DD77831B4AFA1D0024052A /* FSTDashedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTDashedLine.h; sourceTree = "<group>"; };
@@ -631,10 +631,10 @@
 		5B9EF0F119DEEE1000E8D9F1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				514760421B5D42C000C47E41 /* OpenType */,
 				5B9EF0FE19DEEE1000E8D9F1 /* Images.xcassets */,
 				5B174DDF1A60717000A00505 /* FirstBuildAssets.xcassets */,
 				5B88581A1A7308DF00F22325 /* Animations.xcassets */,
-				51A13CDA1B4DAD4700BA3CB7 /* OpenType */,
 				5BC364761A2CF9EF00D03B9C /* splashvideo.m4v */,
 				5BBC7A761A65BD7200A79080 /* splashvideo.mp4 */,
 				5BC3647A1A2E25A800D03B9C /* splashvideo.mov */,
@@ -860,7 +860,7 @@
 				5BF9483119EC15F900CB8BCF /* Main.storyboard in Resources */,
 				5B174DE01A60717000A00505 /* FirstBuildAssets.xcassets in Resources */,
 				5BCBB9D41B02991B00B8E043 /* FSTParagon.storyboard in Resources */,
-				51A13CDB1B4DAD4700BA3CB7 /* OpenType in Resources */,
+				514760431B5D42C000C47E41 /* OpenType in Resources */,
 				5B9EF10219DEEE1000E8D9F1 /* LaunchScreen.xib in Resources */,
 				5B99DFC71AB1F2E400247034 /* ParagonEngineering.storyboard in Resources */,
 				5B9EF0FF19DEEE1000E8D9F1 /* Images.xcassets in Resources */,
