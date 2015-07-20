@@ -14,6 +14,8 @@
 NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
 NSString * const FSTCookModeChangedNotification             = @"FSTCookModeChangedNotification";
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
+NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
+
 
 //app info service
 NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
@@ -141,7 +143,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
     {
-        //not implemented
+        [self handleBatteryLevel:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus])
     {
@@ -166,6 +168,12 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 }
 
 #pragma mark - Data Assignment Handlers
+
+-(void)handleBatteryLevel: (CBCharacteristic*)characteristic
+{
+    self.batteryLevel = [NSNumber numberWithInt:32];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
+}
 
 -(void)handleElapsedTime: (CBCharacteristic*)characteristic
 {
