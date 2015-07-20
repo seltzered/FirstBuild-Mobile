@@ -98,6 +98,12 @@
                                             <constraint firstAttribute="height" constant="150" id="byd-GO-Sjl"/>
                                             <constraint firstAttribute="width" constant="240" id="puU-Wo-qqU"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="byd-GO-Sjl"/>
+                                                <exclude reference="puU-Wo-qqU"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="cell_paragon_product_logo_grey" translatesAutoresizingMaskIntoConstraints="NO" id="d7h-G2-ZJw" userLabel="Paragon Image View">
                                         <rect key="frame" x="213" y="188" width="175" height="48"/>
@@ -105,6 +111,9 @@
                                             <constraint firstAttribute="height" constant="48" id="5x7-eZ-M4g"/>
                                             <constraint firstAttribute="width" constant="175" id="WSQ-L8-4Ws"/>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="313" y="188" width="175" height="48"/>
+                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m33-Ka-D9M">
                                         <rect key="frame" x="210" y="259" width="180" height="46"/>
@@ -114,15 +123,20 @@
                                         <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                            <rect key="frame" x="310" y="259" width="180" height="46"/>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="VEE-9S-kLt" firstAttribute="centerX" secondItem="d7h-G2-ZJw" secondAttribute="centerX" id="FcY-Aa-Jrv"/>
                                     <constraint firstItem="d7h-G2-ZJw" firstAttribute="centerX" secondItem="m33-Ka-D9M" secondAttribute="centerX" constant="0.5" id="LR8-UP-a2M"/>
+                                    <constraint firstItem="VEE-9S-kLt" firstAttribute="width" secondItem="zhI-dz-qQa" secondAttribute="width" multiplier="0.35" id="Lvd-O6-oJ6"/>
                                     <constraint firstItem="d7h-G2-ZJw" firstAttribute="top" secondItem="VEE-9S-kLt" secondAttribute="bottom" constant="15" id="TAp-7b-wRF"/>
                                     <constraint firstAttribute="centerX" secondItem="VEE-9S-kLt" secondAttribute="centerX" id="X7r-Es-OaP"/>
                                     <constraint firstItem="m33-Ka-D9M" firstAttribute="top" secondItem="d7h-G2-ZJw" secondAttribute="bottom" constant="30" id="iyO-mM-pxg"/>
+                                    <constraint firstItem="VEE-9S-kLt" firstAttribute="height" secondItem="zhI-dz-qQa" secondAttribute="height" multiplier="0.35" id="qcV-nO-8dx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -204,7 +218,7 @@
                         <viewControllerLayoutGuide type="bottom" id="meY-Y3-Ecx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="O3O-kA-Sqn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5xU-zI-tT1">
@@ -213,6 +227,15 @@
                                     <constraint firstAttribute="height" constant="150" id="Eju-Ci-492"/>
                                     <constraint firstAttribute="width" constant="240" id="unN-J6-SLB"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Eju-Ci-492"/>
+                                        <exclude reference="unN-J6-SLB"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="260" y="50" width="280" height="175"/>
+                                </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_paragon_product_logo_grey" translatesAutoresizingMaskIntoConstraints="NO" id="x2q-V0-MIB" userLabel="Paragon Image View">
                                 <rect key="frame" x="213" y="188" width="175" height="48"/>
@@ -220,6 +243,9 @@
                                     <constraint firstAttribute="height" constant="48" id="li2-5x-roY"/>
                                     <constraint firstAttribute="width" constant="175" id="rcu-Us-eAm"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="312" y="345" width="175" height="48"/>
+                                </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yba-98-Hpr">
                                 <rect key="frame" x="210" y="259" width="180" height="46"/>
@@ -229,14 +255,19 @@
                                 <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="309" y="423" width="180" height="40"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="x2q-V0-MIB" firstAttribute="centerX" secondItem="Yba-98-Hpr" secondAttribute="centerX" constant="0.5" id="1OW-Yj-qMv"/>
+                            <constraint firstItem="5xU-zI-tT1" firstAttribute="height" secondItem="O3O-kA-Sqn" secondAttribute="height" multiplier="0.35" id="DqC-KH-1hW"/>
                             <constraint firstItem="Yba-98-Hpr" firstAttribute="top" secondItem="x2q-V0-MIB" secondAttribute="bottom" constant="30" id="IwL-PN-TvY"/>
                             <constraint firstItem="5xU-zI-tT1" firstAttribute="top" secondItem="oZk-PI-AjH" secondAttribute="bottom" constant="30" id="NmK-SR-dCB"/>
                             <constraint firstItem="5xU-zI-tT1" firstAttribute="centerX" secondItem="x2q-V0-MIB" secondAttribute="centerX" id="WUN-gx-YSY"/>
+                            <constraint firstItem="5xU-zI-tT1" firstAttribute="width" secondItem="O3O-kA-Sqn" secondAttribute="width" multiplier="0.35" id="d9c-Ae-nAr"/>
                             <constraint firstAttribute="centerX" secondItem="5xU-zI-tT1" secondAttribute="centerX" id="gd5-iH-jly"/>
                             <constraint firstItem="x2q-V0-MIB" firstAttribute="top" secondItem="5xU-zI-tT1" secondAttribute="bottom" constant="15" id="oLV-UB-B1O"/>
                         </constraints>
@@ -261,34 +292,47 @@
                         <viewControllerLayoutGuide type="bottom" id="CaB-7N-f5b"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1Z0-s4-ODb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Got it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-96-25a">
-                                <rect key="frame" x="240" y="268" width="120" height="38"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Got it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="811-96-25a">
+                                <rect key="frame" x="240" y="268" width="120" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="PKk-ti-OKD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="29"/>
-                                <color key="textColor" red="0.91764705879999997" green="0.27450980390000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="37"/>
+                                <color key="textColor" red="0.91764705882352937" green="0.27450980392156865" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="340" y="370" width="120" height="43.5"/>
+                                </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We found your Paragon." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgf-16-8Eg">
-                                <rect key="frame" x="167" y="314" width="267" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We found your Paragon." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgf-16-8Eg">
+                                <rect key="frame" x="167" y="324" width="267" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="267" id="S4F-fv-5wp"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="267" y="428.5" width="267" height="24"/>
+                                </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-paragon-with-pot" translatesAutoresizingMaskIntoConstraints="NO" id="jXL-gM-MKG">
-                                <rect key="frame" x="160.5" y="65" width="280" height="195"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon-paragon-with-pot" translatesAutoresizingMaskIntoConstraints="NO" id="jXL-gM-MKG">
+                                <rect key="frame" x="160" y="65" width="280" height="195"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="195" id="4BU-Xd-3a9"/>
-                                    <constraint firstAttribute="width" constant="280" id="dML-tM-cIw"/>
+                                    <constraint firstAttribute="height" constant="195" id="4BU-Xd-3a9">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="290"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="280" id="dML-tM-cIw">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="360"/>
+                                    </constraint>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="220" y="65" width="360" height="290"/>
+                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -297,8 +341,12 @@
                             <constraint firstItem="jXL-gM-MKG" firstAttribute="centerX" secondItem="811-96-25a" secondAttribute="centerX" constant="0.5" id="P97-y9-UTf"/>
                             <constraint firstItem="jXL-gM-MKG" firstAttribute="top" secondItem="Bd6-dc-0X2" secondAttribute="bottom" constant="45" id="Rip-7O-ZIu"/>
                             <constraint firstAttribute="centerX" secondItem="jXL-gM-MKG" secondAttribute="centerX" constant="-0.5" id="U8a-UD-Kla"/>
-                            <constraint firstItem="811-96-25a" firstAttribute="top" secondItem="jXL-gM-MKG" secondAttribute="bottom" constant="8" id="bWL-eM-Xz7"/>
-                            <constraint firstItem="Jgf-16-8Eg" firstAttribute="top" secondItem="811-96-25a" secondAttribute="bottom" constant="8" id="wvE-px-0BN"/>
+                            <constraint firstItem="811-96-25a" firstAttribute="top" secondItem="jXL-gM-MKG" secondAttribute="bottom" constant="8" id="bWL-eM-Xz7">
+                                <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                            </constraint>
+                            <constraint firstItem="Jgf-16-8Eg" firstAttribute="top" secondItem="811-96-25a" secondAttribute="bottom" constant="8" id="wvE-px-0BN">
+                                <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                            </constraint>
                         </constraints>
                     </view>
                     <connections>
@@ -318,43 +366,60 @@
                         <viewControllerLayoutGuide type="bottom" id="81I-wS-gcY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cmw-5R-V5F">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-warning-error" translatesAutoresizingMaskIntoConstraints="NO" id="xWB-9l-m7I">
-                                <rect key="frame" x="160.5" y="65" width="280" height="195"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon-warning-error" translatesAutoresizingMaskIntoConstraints="NO" id="xWB-9l-m7I">
+                                <rect key="frame" x="160" y="65" width="280" height="195"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="195" id="0uQ-le-YTR"/>
                                     <constraint firstAttribute="width" constant="280" id="ERT-2y-jZg"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="260" y="65" width="280" height="195"/>
+                                </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBV-yq-1wA">
-                                <rect key="frame" x="200" y="268" width="200" height="38"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We were unable to connect to Paragon Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9j-Bz-GTD">
+                                <rect key="frame" x="147" y="324" width="307" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="dQh-8E-tfs"/>
+                                    <constraint firstAttribute="width" constant="307" id="N30-Th-VsE">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="350"/>
+                                    </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="29"/>
-                                <color key="textColor" red="0.91764705879999997" green="0.27450980390000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We were unable to connect to Paragon Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9j-Bz-GTD">
-                                <rect key="frame" x="147" y="314" width="307" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="307" id="N30-Th-VsE"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="225" y="333.5" width="350" height="48"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBV-yq-1wA">
+                                <rect key="frame" x="200" y="268" width="200" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="dQh-8E-tfs">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="250"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="37"/>
+                                <color key="textColor" red="0.91764705879999997" green="0.27450980390000002" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="274" y="275" width="250" height="43.5"/>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xWB-9l-m7I" firstAttribute="centerX" secondItem="iBV-yq-1wA" secondAttribute="centerX" constant="0.5" id="2Uc-pT-YbQ"/>
                             <constraint firstItem="B9j-Bz-GTD" firstAttribute="centerX" secondItem="iBV-yq-1wA" secondAttribute="centerX" constant="0.5" id="3Xd-Po-ceV"/>
-                            <constraint firstItem="B9j-Bz-GTD" firstAttribute="top" secondItem="iBV-yq-1wA" secondAttribute="bottom" constant="8" id="F9k-Vo-yoV"/>
+                            <constraint firstItem="B9j-Bz-GTD" firstAttribute="top" secondItem="iBV-yq-1wA" secondAttribute="bottom" constant="8" id="F9k-Vo-yoV">
+                                <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="xWB-9l-m7I" secondAttribute="centerX" constant="-0.5" id="Wgb-5o-IUj"/>
                             <constraint firstItem="xWB-9l-m7I" firstAttribute="top" secondItem="gUF-Tg-tWN" secondAttribute="bottom" constant="45" id="eKi-nw-U9P"/>
-                            <constraint firstItem="iBV-yq-1wA" firstAttribute="top" secondItem="xWB-9l-m7I" secondAttribute="bottom" constant="8" id="ncN-te-3LS"/>
+                            <constraint firstItem="iBV-yq-1wA" firstAttribute="top" secondItem="xWB-9l-m7I" secondAttribute="bottom" constant="8" id="ncN-te-3LS">
+                                <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                            </constraint>
                         </constraints>
                     </view>
                 </viewController>
@@ -371,20 +436,27 @@
                         <viewControllerLayoutGuide type="bottom" id="qBa-aM-Jvp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleAspectFill" id="dJT-tH-wQ2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-my-name-is-paragon" translatesAutoresizingMaskIntoConstraints="NO" id="xQH-GA-oha">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon-my-name-is-paragon" translatesAutoresizingMaskIntoConstraints="NO" id="xQH-GA-oha">
                                 <rect key="frame" x="160" y="65" width="280" height="195"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="195" id="BED-cm-V96"/>
-                                    <constraint firstAttribute="width" constant="280" id="H5y-Ay-XmX"/>
+                                    <constraint firstAttribute="height" constant="195" id="BED-cm-V96">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="280"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="280" id="H5y-Ay-XmX">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="350"/>
+                                    </constraint>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="225" y="65" width="350" height="280"/>
+                                </variation>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1PR-dU-q4K" userLabel="BottomView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1PR-dU-q4K" userLabel="BottomView">
                                 <rect key="frame" x="21" y="297" width="558" height="288"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Your Paragon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxq-Pf-VNN">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name Your Paragon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxq-Pf-VNN">
                                         <rect key="frame" x="189" y="8" width="180.5" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="XPq-X3-F6e"/>
@@ -392,26 +464,38 @@
                                         <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="263" y="8" width="233.5" height="34"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AN2-Hs-vdh">
-                                        <rect key="frame" x="28" y="33" width="502" height="21"/>
+                                        <rect key="frame" x="0.0" y="54.5" width="558" height="19.5"/>
                                         <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="113" width="758" height="17.5"/>
+                                        </variation>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q7b-iF-peN">
-                                        <rect key="frame" x="70" y="62" width="419" height="29"/>
+                                        <rect key="frame" x="112" y="91.5" width="335" height="29"/>
                                         <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="19"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="152" y="150" width="455" height="27"/>
+                                        </variation>
                                     </textField>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ga-aH-8Nj" userLabel="continueButtonHolderView">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2ga-aH-8Nj" userLabel="continueButtonHolderView">
                                         <rect key="frame" x="56" y="203" width="446" height="65"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yym-Ou-ham">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yym-Ou-ham">
                                                 <rect key="frame" x="0.0" y="16" width="446" height="34"/>
                                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="18" width="606" height="30.5"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.70980392160000005" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
@@ -428,6 +512,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="76" y="318" width="606" height="65"/>
+                                        </variation>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="azY-co-nTp" appends="YES" id="cRG-8U-Kkh"/>
                                         </connections>
@@ -435,17 +522,27 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="bxq-Pf-VNN" secondAttribute="centerX" constant="-0.5" id="61Y-2U-gJt"/>
-                                    <constraint firstItem="AN2-Hs-vdh" firstAttribute="top" secondItem="bxq-Pf-VNN" secondAttribute="bottom" constant="-9" id="6KI-6V-jh8"/>
-                                    <constraint firstAttribute="width" secondItem="Q7b-iF-peN" secondAttribute="width" multiplier="4:3" id="AVE-DQ-iy3"/>
+                                    <constraint firstAttribute="width" secondItem="Q7b-iF-peN" secondAttribute="width" multiplier="5:3" id="AVE-DQ-iy3"/>
                                     <constraint firstAttribute="centerX" secondItem="Yym-Ou-ham" secondAttribute="centerX" id="Ajx-if-SaI"/>
                                     <constraint firstAttribute="centerX" secondItem="Q7b-iF-peN" secondAttribute="centerX" constant="-0.5" id="H7Q-di-xfZ"/>
                                     <constraint firstItem="2ga-aH-8Nj" firstAttribute="width" secondItem="1PR-dU-q4K" secondAttribute="width" multiplier="4:5" id="Hbw-51-55p"/>
+                                    <constraint firstAttribute="width" secondItem="AN2-Hs-vdh" secondAttribute="width" id="Jd4-HA-0ka"/>
                                     <constraint firstItem="bxq-Pf-VNN" firstAttribute="top" secondItem="1PR-dU-q4K" secondAttribute="top" constant="8" id="OQr-cb-6kl"/>
+                                    <constraint firstAttribute="centerY" secondItem="bxq-Pf-VNN" secondAttribute="centerY" constant="119" id="PQP-oN-fUD"/>
                                     <constraint firstItem="Q7b-iF-peN" firstAttribute="top" secondItem="AN2-Hs-vdh" secondAttribute="bottom" constant="8" id="U48-ct-pbD"/>
-                                    <constraint firstItem="bxq-Pf-VNN" firstAttribute="centerX" secondItem="AN2-Hs-vdh" secondAttribute="centerX" id="cPx-ai-X3X"/>
-                                    <constraint firstAttribute="width" secondItem="AN2-Hs-vdh" secondAttribute="width" multiplier="10:9" id="qKZ-Fx-mIu"/>
+                                    <constraint firstAttribute="centerX" secondItem="AN2-Hs-vdh" secondAttribute="centerX" id="cV9-vn-MvO"/>
+                                    <constraint firstAttribute="centerY" secondItem="AN2-Hs-vdh" secondAttribute="centerY" constant="80" id="jBc-Kl-HYO"/>
                                     <constraint firstAttribute="bottom" secondItem="2ga-aH-8Nj" secondAttribute="bottom" constant="20" id="rgw-yY-maz"/>
+                                    <constraint firstAttribute="centerY" secondItem="Q7b-iF-peN" secondAttribute="centerY" constant="38" id="txp-pe-H2y"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="U48-ct-pbD"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="21" y="382" width="758" height="403"/>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -481,6 +578,6 @@
         <image name="icon-warning-error" width="600" height="581"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="umZ-Kd-yCu"/>
+        <segue reference="Pfx-d9-XFO"/>
     </inferredMetricsTieBreakers>
 </document>

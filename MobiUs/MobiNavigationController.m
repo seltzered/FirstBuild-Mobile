@@ -22,6 +22,9 @@ CGFloat _midY = 0;
     _midY = CGRectGetMidY(self.navigationBar.frame);
     
     [self setHeaderImageNamed:@"logo_1b_orange_no_firstbuild" withFrameRect:CGRectMake(0, 0, 44, 26)];
+    
+    [self.navigationBar setBarTintColor:[UIColor whiteColor]];
+    
 }
 
 
@@ -37,7 +40,7 @@ CGFloat _midY = 0;
     CGPoint superCenter = CGPointMake(_midX, _midY);
     [self.logoView setCenter:superCenter];
     [self.navigationBar addSubview:self.logoView];
-    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0x00B5CC)];
+    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xFF2B00)];//00B5CC)];//white over red for new skin
 }
 
 - (void)didReceiveMemoryWarning {

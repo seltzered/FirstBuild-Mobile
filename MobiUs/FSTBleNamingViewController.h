@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface FSTBleNamingViewController : UIViewController
+@interface FSTBleNamingViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *paragonNameField;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, strong) CBPeripheral* peripheral;

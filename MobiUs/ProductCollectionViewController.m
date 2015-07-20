@@ -378,7 +378,7 @@ NSIndexPath *_indexPathForDeletion;
 
 #pragma mark - Gestures
 
-- (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer
+- (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer // for table might use commitEditingStlye instead
 {
     CGPoint tapLocation = [gestureRecognizer locationInView:self.collectionView];
     _indexPathForDeletion = [self.collectionView indexPathForItemAtPoint:tapLocation];
@@ -400,7 +400,7 @@ NSIndexPath *_indexPathForDeletion;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"selected button index = %ld", buttonIndex);
-    if (buttonIndex == 1)
+    if (buttonIndex == 1) // yes button
     {
         NSLog(@"delete");
         FSTParagon * deletedItem = self.products[_indexPathForDeletion.item];

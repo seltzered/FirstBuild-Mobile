@@ -15,6 +15,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTCircleProgressLayer.h"
 
 @interface FSTCircleProgressView : UIControl
 
@@ -22,9 +23,16 @@
 
 @property (nonatomic) NSTimeInterval timeLimit;
 
+@property (nonatomic) CGFloat currentTemp; // set the current temperature in preheating
+
 //@property (nonatomic, retain) NSString *status;
+@property (nonatomic) ProgressState layerState;
 
 @property (assign, nonatomic, readonly) double percent;
+
+@property (nonatomic) CGFloat startingTemp;
+
+@property (nonatomic) CGFloat targetTemp;
 
 @end
 
