@@ -59,7 +59,7 @@ NSObject* _cookModeChangedObserver;
     [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
-    _timeElapsedChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification //???
+    _timeElapsedChangedObserver = [center addObserverForName:FSTElapsedTimeChangedNotification
                                                       object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
