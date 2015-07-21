@@ -382,12 +382,23 @@ NSIndexPath *_indexPathForDeletion;
 
 -(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) { //trying to delete row
-        DLog(@"deleting item at location %ld", (long)_indexPathForDeletion.item);
-        UIAlertView *deleteAlert = [[UIAlertView alloc]
+        DLog(@"deleting item at location %ld", (long)indexPath.item); // what was _indexPathForDeletion?
+        /*UIAlertView *deleteAlert = [[UIAlertView alloc]
                                     initWithTitle:@"Delete?"
                                     message:@"Are you sure you want to delete this device?"
                                     delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
-        [deleteAlert show];
+        [deleteAlert show];*/
+        NSLog(@"delete");
+        FSTParagon * deletedItem = self.products[indexPath.item];
+        [self.products removeObjectAtIndex:indexPath.item];
+        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
+        [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
+        [self.tableView reloadData];
+        
+        if (self.products.count==0)
+        {
+            [self.delegate itemCountChanged:0];
+        }
         // use alert delete for now, but remove that extra step
 
     }
@@ -413,7 +424,7 @@ NSIndexPath *_indexPathForDeletion;
 #pragma mark - <UIAlertViewDelegate>
 
 //TODO assumes delete alertview
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+/*- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSLog(@"selected button index = %ld", buttonIndex);
     if (buttonIndex == 1) // yes button
@@ -430,7 +441,7 @@ NSIndexPath *_indexPathForDeletion;
             [self.delegate itemCountChanged:0];
         }
     }
-}
+}*/
 
 #pragma mark - BONEYARD
 
