@@ -1,5 +1,5 @@
 //
-//  ProductCollectionViewCell.h
+//  ProductTableViewCell.h
 //  MobiUs
 //
 //  Created by Myles Caley on 10/7/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProductCollectionViewCell : UICollectionViewCell
+@interface ProductTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UIView *mainView;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowButton;

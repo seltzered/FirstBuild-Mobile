@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
-#import "ProductCollectionViewCell.h"
+#import "ProductTableViewCell.h"
 
-@implementation ProductCollectionViewCell
+@implementation ProductTableViewCell
 
 @end

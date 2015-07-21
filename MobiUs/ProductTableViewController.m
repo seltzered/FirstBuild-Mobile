@@ -1,13 +1,13 @@
 //
-//  ProductCollectionViewController.m
+//  ProductTableViewController.m
 //  MobiUs
 //
 //  Created by Myles Caley on 10/7/14.
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
-#import "ProductCollectionViewController.h"
-#import "ProductCollectionViewCell.h"
+#import "ProductTableViewController.h"
+#import "ProductTableViewCell.h"
 #import <SWRevealViewController.h>
 #import <RBStoryboardLink.h>
 #import "FirebaseShared.h"
@@ -19,11 +19,11 @@
 #import "FSTBleCentralManager.h"
 #import "FSTCookingViewController.h"
 
-@interface ProductCollectionViewController ()
+@interface ProductTableViewController ()
 
 @end
 
-@implementation ProductCollectionViewController
+@implementation ProductTableViewController
 
 #pragma mark - Private
 
@@ -48,7 +48,7 @@ NSIndexPath *_indexPathForDeletion;
     //get all the saved BLE peripherals
     [self configureBleDevices];
     
-    self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
 
 -(void)dealloc
@@ -58,12 +58,6 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceRenamedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceDisconnectedObserver];
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    //[self.collectionView reloadData]; //added by John
-    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,7 +126,7 @@ NSIndexPath *_indexPathForDeletion;
                     DLog(@"discovering services for peripheral %@", bleProduct.peripheral.identifier);
                     [bleProduct.peripheral discoverServices:nil];
                     bleProduct.online = YES;
-                    [weakSelf.collectionView reloadData];
+                    [weakSelf.tableView reloadData];
                 }
             }
         }
@@ -155,7 +149,7 @@ NSIndexPath *_indexPathForDeletion;
         product.friendlyName = [latestDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
         [self.products addObject:(FSTParagon*)product];
         [self.delegate itemCountChanged:self.products.count];
-        [weakSelf.collectionView reloadData];
+        [weakSelf.tableView reloadData];
     }];
     
     //notify us of any BLE devices that were renamed
@@ -178,7 +172,7 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     //grab it from the saved list
                     bleProduct.friendlyName = [latestDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
-                    [weakSelf.collectionView reloadData];
+                    [weakSelf.tableView reloadData];
                     break;
                 }
             }
@@ -204,7 +198,7 @@ NSIndexPath *_indexPathForDeletion;
                     //since it is still in our list lets reconnect
                     bleDevice.online = NO;
                     [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:bleDevice.peripheral.identifier];
-                    [weakSelf.collectionView reloadData];
+                    [weakSelf.tableView reloadData];
                 }
             }
         }
@@ -245,31 +239,32 @@ NSIndexPath *_indexPathForDeletion;
     }
 }
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark <UITableViewDataSource>
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.products.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FSTProduct * product = self.products[indexPath.row];
-    ProductCollectionViewCell *productCell;
+    ProductTableViewCell *productCell;
     
     if ([product isKindOfClass:[FSTChillHub class]])
     {
-        productCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCell" forIndexPath:indexPath];
     }
     else if ([product isKindOfClass:[FSTParagon class]])
     {
         
-        productCell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifierParagon forIndexPath:indexPath];
-        productCell.friendlyName.text = product.friendlyName;
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellParagon" forIndexPath:indexPath];
+        productCell.friendlyName.text = product.friendlyName; //Taken out since those properties were not connected
+        
         //TODO we need observers on the cookmode for each paragon in order to set the status
 //        NSString* statusLabel;
 //        
@@ -318,9 +313,9 @@ NSIndexPath *_indexPathForDeletion;
     return productCell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+#pragma mark <UITableViewDelegate>
 
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FSTProduct * product = self.products[indexPath.row];
     NSLog(@"selected %@", product.identifier);
@@ -361,27 +356,48 @@ NSIndexPath *_indexPathForDeletion;
     }
 }
 
--(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    return 200.0; // edit hight of table view cell
+}
+/*-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self.tableView.tableViewLayout invalidateLayout];
 }
 
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize) tableView:(UITableView *)tableView layout:(UITableViewLayout *)tableViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake([[UIScreen mainScreen] bounds].size.width, 150);
 }
 
-- (UIEdgeInsets) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+- (UIEdgeInsets) tableView:(UITableView *)tableView layout:(UITableViewLayout *)tableViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
+*/
+// replaces editing gesture
+-(BOOL)tableView: (UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return true; // can delete all
+}
 
+-(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) { //trying to delete row
+        DLog(@"deleting item at location %ld", (long)_indexPathForDeletion.item);
+        UIAlertView *deleteAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Delete?"
+                                    message:@"Are you sure you want to delete this device?"
+                                    delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        [deleteAlert show];
+        // use alert delete for now, but remove that extra step
+
+    }
+}
 #pragma mark - Gestures
-
-- (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer // for table might use commitEditingStlye instead
+/*- (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer // for table might use commitEditingStlye instead
 {
-    CGPoint tapLocation = [gestureRecognizer locationInView:self.collectionView];
-    _indexPathForDeletion = [self.collectionView indexPathForItemAtPoint:tapLocation];
+    (
+    CGPoint tapLocation = [gestureRecognizer locationInView:self.tableView];
+    _indexPathForDeletion = [self.tableView indexPathForItemAtPoint:tapLocation];
 
     if(gestureRecognizer.state == UIGestureRecognizerStateEnded && _indexPathForDeletion)
     {
@@ -393,7 +409,7 @@ NSIndexPath *_indexPathForDeletion;
         [deleteAlert show];
     }
 }
-
+*/ // replace with a
 #pragma mark - <UIAlertViewDelegate>
 
 //TODO assumes delete alertview
@@ -407,7 +423,7 @@ NSIndexPath *_indexPathForDeletion;
         [self.products removeObjectAtIndex:_indexPathForDeletion.item];
         [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
         [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
-        [self.collectionView reloadData];
+        [self.tableView reloadData];
         
         if (self.products.count==0)
         {
