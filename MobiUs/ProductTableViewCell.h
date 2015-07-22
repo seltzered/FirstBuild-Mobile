@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductBatteryView.h"
 
 @interface ProductTableViewCell : UITableViewCell
 
@@ -16,5 +17,8 @@
 @property (strong, nonatomic) IBOutlet UIView *disabledView;
 @property (strong, nonatomic) IBOutlet UILabel *friendlyName;
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *batteryLabel;
+@property (weak, nonatomic) IBOutlet ProductBatteryView *batteryView;
+
 
 @end

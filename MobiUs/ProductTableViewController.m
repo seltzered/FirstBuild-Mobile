@@ -34,6 +34,7 @@ NSObject* _deviceConnectedObserver;
 NSObject* _newDeviceBoundObserver;
 NSObject* _deviceRenamedObserver;
 NSObject* _deviceDisconnectedObserver;
+NSObject* _deviceBatteryChangedObserver;
 
 NSIndexPath *_indexPathForDeletion;
 
@@ -58,6 +59,7 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceRenamedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceDisconnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceBatteryChangedObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -203,6 +205,29 @@ NSIndexPath *_indexPathForDeletion;
             }
         }
     }];
+    
+    _deviceBatteryChangedObserver = [center addObserverForName:FSTBatteryLevelChangedNotification
+                                                        object:nil
+                                                         queue:nil
+                                                    usingBlock:^(NSNotification *notification)
+    {
+        
+        FSTProduct* noteProduct = (FSTProduct*)notification.object;
+        
+        for (FSTProduct* product in self.products) // shouldn't all products have a battery level
+        {
+            if ([product isKindOfClass:[FSTParagon class]])
+            {
+                FSTParagon* paragon = (FSTParagon*)product;
+                if (paragon == noteProduct) 
+                {
+                    [weakSelf.tableView reloadData];
+                    
+                }
+            }
+        }
+    }];
+    
 
     
 }
@@ -263,7 +288,13 @@ NSIndexPath *_indexPathForDeletion;
     {
         
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellParagon" forIndexPath:indexPath];
-        productCell.friendlyName.text = product.friendlyName; //Taken out since those properties were not connected
+        productCell.friendlyName.text = product.friendlyName;
+        
+        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[((FSTParagon*)product).batteryLevel integerValue]];
+        
+        productCell.batteryView.batteryLevel = [((FSTParagon*)product).batteryLevel doubleValue]/100;
+        [productCell.batteryView setNeedsDisplay]; // redraw
+        //Taken out since those properties were not connected
         
         //TODO we need observers on the cookmode for each paragon in order to set the status
 //        NSString* statusLabel;
@@ -295,6 +326,7 @@ NSIndexPath *_indexPathForDeletion;
 //                break;
 //        }
 //        productCell.statusLabel.text = statusLabel;
+        
     }
     
     if (product.online)
@@ -380,14 +412,15 @@ NSIndexPath *_indexPathForDeletion;
     return true; // can delete all
 }
 
--(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) { //trying to delete row
-        DLog(@"deleting item at location %ld", (long)indexPath.item); // what was _indexPathForDeletion?
-        /*UIAlertView *deleteAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Delete?"
-                                    message:@"Are you sure you want to delete this device?"
-                                    delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
-        [deleteAlert show];*/
+-(NSArray*)tableView: (UITableView*)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
+        
+           NSLog(@"Editing\n");
+    }];
+    editAction.backgroundColor = [UIColor grayColor];
+    
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
+        //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         NSLog(@"delete");
         FSTParagon * deletedItem = self.products[indexPath.item];
         [self.products removeObjectAtIndex:indexPath.item];
@@ -399,9 +432,12 @@ NSIndexPath *_indexPathForDeletion;
         {
             [self.delegate itemCountChanged:0];
         }
-        // use alert delete for now, but remove that extra step
+    }];
+    return @[editAction, deleteAction];
+}
 
-    }
+-(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ // intentionally empty
 }
 #pragma mark - Gestures
 /*- (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer // for table might use commitEditingStlye instead

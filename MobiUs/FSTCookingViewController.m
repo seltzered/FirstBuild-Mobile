@@ -64,10 +64,7 @@ NSObject* _cookModeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-        weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue]; // good way to test the circle is changing this value to visualize some proportion
-       //current temp, and set ticks in preheating stage*/
-        //[weakSelf stateChanged:kCooking]; // hard coding
-        //[weakSelf stateChanged:kSitting]; // for testing
+        weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
        [weakSelf makeAndSetTimeRemainingLabel];
 
     }];
@@ -94,7 +91,6 @@ NSObject* _cookModeChangedObserver;
     
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
     
-        /********TESTING******/
     self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
     self.circleProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
     // set the temperature ranges
