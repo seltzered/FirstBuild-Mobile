@@ -7,7 +7,7 @@
 //
 
 #import "FSTReadyToPreheatViewController.h"
-#import "FSTPreheatingViewController.h"
+#import "FSTCookingViewController.h"
 
 @interface FSTReadyToPreheatViewController ()
 
@@ -67,9 +67,9 @@ NSObject* _cookModeChangedObserver;
 {
     [self removeObservers];
 
-    if ([segue.destinationViewController isKindOfClass:[FSTPreheatingViewController class]])
+    if ([segue.destinationViewController isKindOfClass:[FSTCookingViewController class]])
     {
-        ((FSTPreheatingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        ((FSTCookingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
     
 }
