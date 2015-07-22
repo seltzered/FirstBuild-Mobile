@@ -64,10 +64,7 @@ NSObject* _cookModeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-        weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue]; // good way to test the circle is changing this value to visualize some proportion
-       //current temp, and set ticks in preheating stage*/
-        //[weakSelf stateChanged:kCooking]; // hard coding
-        //[weakSelf stateChanged:kSitting]; // for testing
+        weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
        [weakSelf makeAndSetTimeRemainingLabel];
 
     }];
@@ -96,7 +93,6 @@ NSObject* _cookModeChangedObserver;
     
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
     
-        /********TESTING******/
     self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
     self.circleProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
     // set the temperature ranges
@@ -199,42 +195,49 @@ NSObject* _cookModeChangedObserver;
     NSDate* timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
 
     // change label settings for each case
-    self.currentLabel.hidden = false;
-    self.currentOverheadLabel.hidden = false;
-    self.targetLabel.hidden = false; // the default for each case
-    self.targetOverheadLabel.hidden = false;
+    self.topCircleLabel = false;
+    self.boldOverheadLabel.hidden = false;
+    self.boldLabel.hidden = false; // the default for each case
     self.instructionImage.hidden = true; // default not visible
+    NSMutableAttributedString* topString = [[NSMutableAttributedString alloc] initWithString:@"Target: "]; // for preheating case
+    [topString appendAttributedString:targetTempString];
     
     switch (_state) {
 
         case kPreheating: // need to change text above number labels as well
-            [self.currentOverheadLabel setText:@"Current:"];
-            [self.currentLabel setAttributedText:currentTempString];
-            [self.targetOverheadLabel setText:@"Target:"];
-            [self.targetLabel setAttributedText:targetTempString];
+            [self.cookingStatusLabel setText:@"PREHEATING"];
+            [self.topCircleLabel setAttributedText:topString]; // target label before target temperature
+            //[self.currentLabel setAttributedText:currentTempString];
+            [self.boldOverheadLabel setText:@"Current:"];
+            [self.boldLabel setAttributedText:currentTempString];
             break;
         case kReady:
-            self.currentOverheadLabel.hidden = true;
-            self.currentLabel.hidden = true;
-            self.targetOverheadLabel.hidden = true;
-            self.targetLabel.hidden = true; // image view should be active
+            [self.cookingModeLabel setText:@"READY TO COOK"];
+            self.topCircleLabel.hidden = true;
+            self.boldLabel.hidden = true;
+            self.boldOverheadLabel.hidden = true;
             self.instructionImage.hidden = false;
             break;
         case kCooking:
-            [self.currentOverheadLabel setText:@"Time Remaining:"];
-            [self.currentLabel setAttributedText:hourString];
+            [self.cookingStatusLabel setText:@"COOKING"];
+            [self.topCircleLabel setAttributedText:currentTempString];
             [dateFormatter setDateFormat:@"hh:mm a"];
-            [self.targetOverheadLabel setText:@"Food Will Be Done By:"];
-            self.targetLabel.text = [dateFormatter stringFromDate:timeComplete];
+            [self.boldOverheadLabel setText:@"Food Will Be Done By:"];
+            self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
             break;
         case kSitting: // still need the maximum time to set the targetLabel, and the labels should change
+            [self.cookingStatusLabel setText:@"DONE"];
+            [self.topCircleLabel setAttributedText:currentTempString];
+            [self.boldOverheadLabel setText:@"Take Food Out"];
+            [self.boldLabel setText:@"NOW"];
+            // set the instruction image as well with taking out png
             break;
         default:
             break;
     }
     
-    [self.targetLabel.superview bringSubviewToFront:self.targetLabel];
-    [self.currentLabel.superview bringSubviewToFront:self.currentLabel]; // pull labels before the circle // could change layers instead of hiding labels
+    [self.topCircleLabel.superview bringSubviewToFront:self.topCircleLabel];
+    [self.boldLabel.superview bringSubviewToFront:self.boldLabel]; // pull labels before the circle // could change layers instead of hiding labels
     
 }
 
