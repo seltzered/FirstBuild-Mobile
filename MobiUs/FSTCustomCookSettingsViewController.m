@@ -64,9 +64,13 @@ VariableSelection _selection;
     [self.currentParagon.currentCookingMethod createCookingSession]; // initialize the customized method
     [self.currentParagon.currentCookingMethod addStageToCookingSession];
     
+}
+
+- (void) viewWillAppear:(BOOL)animated { //want to make the segue faster
+    
     self.timeButtonHolder.layer.borderWidth = self.temperatureButtonHolder.layer.borderWidth;
     self.timeButtonHolder.layer.borderColor = self.temperatureButtonHolder.layer.borderColor;
-     // give them the same stroke (this is a bit rough, but I could not find the stroke in storyboard
+    // give them the same stroke (this is a bit rough, but I could not find the stroke in storyboard
     [self updateLabels]; // set them to current selection (decided by preset hour, minute, temp index
 }
 

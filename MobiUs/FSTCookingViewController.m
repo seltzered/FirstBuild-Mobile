@@ -72,24 +72,24 @@ NSObject* _cookModeChangedObserver;
                                                    object:weakSelf.currentParagon
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
-                                {
-                                    if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING)
-                                    {
-                                        // ready to transition to cooking
-                                        weakSelf.progressState = kCooking;
-                                    }
-                                }];
+    {
+        if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && weakSelf.progressState == kPreheating)
+        {
+            // ready to transition to cooking
+            weakSelf.progressState = kReady;
+        }
+    }];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
                                                       object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
-                                   {
-                                       NSNumber* actualTemperature = _cookingStage.actualTemperature;
-                                       weakSelf.circleProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
-                                       [self makeAndSetTimeRemainingLabel];
-                                   }];
-    
+   {
+       NSNumber* actualTemperature = _cookingStage.actualTemperature;
+       weakSelf.circleProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
+       [self makeAndSetTimeRemainingLabel];
+   }];
+
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
     
     self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
@@ -110,7 +110,8 @@ NSObject* _cookModeChangedObserver;
 }
 
 //-(void)stateChanged:(ProgressState)state { //might include old state variable, or just use seperate methods for each case,
--(void)setProgressState:(ProgressState)state {
+-(void)setProgressState:(ProgressState)state { // might just make a setter here
+    _progressState = state; // wasn't actually setting the value
     switch (state) {
         case kPreheating:
         case kReady:
@@ -123,6 +124,7 @@ NSObject* _cookModeChangedObserver;
     }
     
     [self updateStageBarForState:state];
+    [self makeAndSetTimeRemainingLabel];
     self.circleProgressView.layerState = state; // set state of whole child view
 }
 
@@ -167,10 +169,10 @@ NSObject* _cookModeChangedObserver;
     
     // temperature labels (target temperature already at top with cooking mode
     double currentTemperature = [_cookingStage.actualTemperature doubleValue];
-    NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.2f %@", currentTemperature, @"\u00b0 F"] attributes: bigFontDict]; // with degrees fareinheit appended
+    NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
     
     double targetTemperature = [_cookingStage.targetTemperature doubleValue];
-    NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.2f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
+    NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
     
     double timeRemaining = [_cookingStage.cookTimeRequested doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
     int hour = timeRemaining / 60;
@@ -193,10 +195,11 @@ NSObject* _cookModeChangedObserver;
     NSDate* timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
 
     // change label settings for each case
-    self.topCircleLabel = false;
+    self.topCircleLabel.hidden = false;
     self.boldOverheadLabel.hidden = false;
     self.boldLabel.hidden = false; // the default for each case
-    self.instructionImage.hidden = true; // default not visible
+    self.instructionImage.hidden = true;
+    self.continueButton.hidden = true;// default not visible
     NSMutableAttributedString* topString = [[NSMutableAttributedString alloc] initWithString:@"Target: "]; // for preheating case
     [topString appendAttributedString:targetTempString];
     
@@ -210,11 +213,12 @@ NSObject* _cookModeChangedObserver;
             [self.boldLabel setAttributedText:currentTempString];
             break;
         case kReady:
-            [self.cookingModeLabel setText:@"READY TO COOK"];
+            [self.cookingStatusLabel setText:@"READY TO COOK"];
             self.topCircleLabel.hidden = true;
             self.boldLabel.hidden = true;
             self.boldOverheadLabel.hidden = true;
             self.instructionImage.hidden = false;
+            self.continueButton.hidden = false;
             break;
         case kCooking:
             [self.cookingStatusLabel setText:@"COOKING"];
@@ -234,7 +238,7 @@ NSObject* _cookModeChangedObserver;
             break;
     }
     
-    [self.topCircleLabel.superview bringSubviewToFront:self.topCircleLabel];
+    //[self.topCircleLabel.superview bringSubviewToFront:self.topCircleLabel];
     [self.boldLabel.superview bringSubviewToFront:self.boldLabel]; // pull labels before the circle // could change layers instead of hiding labels
     
 }
@@ -248,6 +252,7 @@ NSObject* _cookModeChangedObserver;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver]; // forgot this?
 }
 
 - (void)dealloc
@@ -256,7 +261,13 @@ NSObject* _cookModeChangedObserver;
 }
 
 
-- (IBAction)completeButtonTap:(id)sender
+- (IBAction)continueButtonTap:(id)sender {
+    
+    self.progressState = kCooking; // why doesn't this call setProgressState
+    //[self updateStageBarForState:_progressState]; // need to make this more regular
+}
+
+/*- (IBAction)completeButtonTap:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
                                 initWithTitle:@"Return to Main Menu"
@@ -267,7 +278,7 @@ NSObject* _cookModeChangedObserver;
     [alert show];
 
 }
-
+*/
 #pragma mark - <UIAlertViewDelegate>
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

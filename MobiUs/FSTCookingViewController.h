@@ -17,9 +17,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
 @property (strong, nonatomic) IBOutlet FSTCircleProgressView *circleProgressView;
 @property (nonatomic,retain) FSTParagon* currentParagon;
-@property (weak, nonatomic) IBOutlet UILabel *topCircleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *boldOverheadLabel;
+@property (strong, nonatomic) IBOutlet UILabel *topCircleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *boldOverheadLabel;
 @property (strong, nonatomic) IBOutlet UILabel *boldLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cookingModeLabel;
+@property (weak, nonatomic) IBOutlet UIView *continueButton;
 @property (nonatomic) ProgressState progressState;
 @end
