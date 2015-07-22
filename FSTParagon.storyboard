@@ -15,8 +15,10 @@
         <mutableArray key="FSEmeric-Regular.otf">
             <string>FSEmeric</string>
         </mutableArray>
+        <mutableArray key="FSEmeric-SemiBold.otf">
+            <string>FSEmeric-SemiBold</string>
+        </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
-            <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
@@ -49,7 +51,6 @@
             <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
-            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
@@ -1242,27 +1243,18 @@
                                                 <color key="textColor" red="0.55686274509803924" green="0.53725490196078429" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SnE-Rp-4OJ" userLabel="timeRemainingLabel">
-                                                <rect key="frame" x="-118" y="122" width="600" height="60"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="0N5-fo-UPm"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="50"/>
-                                                <color key="textColor" red="0.7843137255" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food will be done at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-xE-spK">
-                                                <rect key="frame" x="120" y="191" width="123" height="22"/>
+                                                <rect key="frame" x="120" y="151.5" width="123" height="22"/>
                                                 <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
                                                 <color key="textColor" red="0.7843137255" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L2-mW-QwO" userLabel="doneAtLabel">
-                                                <rect key="frame" x="-118" y="213" width="600" height="20"/>
+                                                <rect key="frame" x="-118" y="173.5" width="600" height="45"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="5tv-RW-Gsz"/>
+                                                    <constraint firstAttribute="height" constant="45" id="5tv-RW-Gsz"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                                 <color key="textColor" red="0.72941176470588232" green="0.023529411764705882" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1274,17 +1266,15 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="SnE-Rp-4OJ" secondAttribute="centerX" constant="0.5" id="2r4-tA-s9w"/>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="centerY" secondItem="XU8-ec-Qi2" secondAttribute="centerY" id="9t2-g2-YXf"/>
                                             <constraint firstAttribute="centerX" secondItem="T4q-xE-spK" secondAttribute="centerX" constant="0.5" id="A3F-jE-VqS"/>
                                             <constraint firstAttribute="centerX" secondItem="T4q-Qf-cjt" secondAttribute="centerX" constant="0.5" id="GP3-Sg-fJF"/>
-                                            <constraint firstAttribute="centerY" secondItem="SnE-Rp-4OJ" secondAttribute="bottom" id="QCp-IE-Q9w"/>
                                             <constraint firstAttribute="width" secondItem="ONX-nm-WVn" secondAttribute="height" multiplier="1:1" id="blU-Q2-8yI"/>
                                             <constraint firstAttribute="centerY" secondItem="T4q-Qf-cjt" secondAttribute="centerY" constant="62" id="fD2-X0-1Oh"/>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="centerX" secondItem="XU8-ec-Qi2" secondAttribute="centerX" id="iJf-ez-afc"/>
                                             <constraint firstAttribute="centerX" secondItem="6L2-mW-QwO" secondAttribute="centerX" constant="0.5" id="m1J-pZ-6SB"/>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="height" secondItem="XU8-ec-Qi2" secondAttribute="height" id="qb2-hs-qWZ"/>
-                                            <constraint firstAttribute="centerY" secondItem="T4q-xE-spK" secondAttribute="centerY" constant="-20" id="qhp-0T-t5b"/>
+                                            <constraint firstAttribute="centerY" secondItem="T4q-xE-spK" secondAttribute="centerY" constant="20" id="qhp-0T-t5b"/>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="width" secondItem="XU8-ec-Qi2" secondAttribute="width" id="vgP-Qh-khC"/>
                                             <constraint firstItem="T4q-xE-spK" firstAttribute="bottom" secondItem="6L2-mW-QwO" secondAttribute="top" id="z6r-fj-kzM"/>
                                         </constraints>
@@ -1300,7 +1290,6 @@
                                     <constraint firstItem="ONX-nm-WVn" firstAttribute="height" secondItem="Eho-uD-hb8" secondAttribute="height" id="44C-3L-JHy"/>
                                     <constraint firstAttribute="centerX" secondItem="ONX-nm-WVn" secondAttribute="centerX" id="7Jf-Hj-O51"/>
                                     <constraint firstAttribute="centerX" secondItem="CQM-0V-d6X" secondAttribute="centerX" id="81E-rY-gsH"/>
-                                    <constraint firstAttribute="width" secondItem="SnE-Rp-4OJ" secondAttribute="width" id="CFo-oU-1ON"/>
                                     <constraint firstAttribute="centerY" secondItem="CQM-0V-d6X" secondAttribute="centerY" constant="-0.5" id="IX0-8M-FqW"/>
                                     <constraint firstItem="6L2-mW-QwO" firstAttribute="width" secondItem="Eho-uD-hb8" secondAttribute="width" id="r7j-5c-r6B"/>
                                 </constraints>
@@ -1342,16 +1331,16 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="boldLabel" destination="6L2-mW-QwO" id="uV9-X0-3LH"/>
+                        <outlet property="boldOverheadLabel" destination="T4q-xE-spK" id="OOY-AB-zQ2"/>
                         <outlet property="circleProgressView" destination="ONX-nm-WVn" id="UFM-Oh-TJB"/>
                         <outlet property="cookingModeLabel" destination="we0-iW-tbm" id="5va-1m-c8Q"/>
-                        <outlet property="currentLabel" destination="SnE-Rp-4OJ" id="zMQ-8E-rhA"/>
-                        <outlet property="currentOverheadLabel" destination="T4q-Qf-cjt" id="XRC-V3-bCq"/>
+                        <outlet property="cookingStatusLabel" destination="aMu-Ed-3Sd" id="1Ss-wr-BTz"/>
                         <outlet property="instructionImage" destination="CQM-0V-d6X" id="9dD-f3-GaH"/>
                         <outlet property="stageBar" destination="Csz-4M-yY7" id="Nvk-MW-TQo"/>
                         <outlet property="stageCircle" destination="WdJ-OF-WAj" id="Hsn-fZ-OTd"/>
                         <outlet property="stageCirclePlace" destination="aQL-fk-qAn" id="KP1-cy-jJh"/>
-                        <outlet property="targetLabel" destination="6L2-mW-QwO" id="pYv-Np-jWZ"/>
-                        <outlet property="targetOverheadLabel" destination="T4q-xE-spK" id="bDn-ho-zRy"/>
+                        <outlet property="topCircleLabel" destination="T4q-Qf-cjt" id="TzO-Zj-nGs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sm7-qE-Bch" userLabel="First Responder" sceneMemberID="firstResponder"/>

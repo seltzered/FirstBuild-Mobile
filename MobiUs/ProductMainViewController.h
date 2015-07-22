@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <SWRevealViewController.h>
 
-#import "ProductCollectionViewController.h"
+#import "ProductTableViewController.h"
 #import "FSTParagonDisconnectedLabel.h"
 
-@interface ProductMainViewController : UIViewController <ProductCollectionViewDelegate, FSTParagonDisconnectedLabelDelegate>
+@interface ProductMainViewController : UIViewController <ProductTableViewDelegate, FSTParagonDisconnectedLabelDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *noProductsView;
-@property (strong, nonatomic) IBOutlet UIView *productsCollectionView;
+@property (strong, nonatomic) IBOutlet UIView *productsCollectionView; // refers to the table view
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 @property (strong, nonatomic) IBOutlet UIImageView *teardropImage;
 

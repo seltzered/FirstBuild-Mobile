@@ -106,9 +106,9 @@ FSTParagonDisconnectedLabel* _warningLabel;
     // intercept the segue to the embedded container controller so we can be a delegate
     // and listen for changes in the data to determine what to do in the main screen
     NSString * segueName = segue.identifier;
-    if ([segueName isEqualToString: @"segueCollectionView"]) {
-        ProductCollectionViewController * productsCollection = (ProductCollectionViewController *) [segue destinationViewController];
-        productsCollection.delegate = self;
+    if ([segueName isEqualToString: @"segueTable"]) { // embed segue
+        ProductTableViewController * productsTable = (ProductTableViewController *) [segue destinationViewController];
+        productsTable.delegate = self;
     }
 }
 

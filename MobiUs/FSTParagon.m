@@ -191,7 +191,9 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
-        uint16_t raw = OSReadBigInt16(bytes, 0);
+        //TODO: TEMP HACK -- need to figure out endianness
+        //uint16_t raw = OSReadBigInt16(bytes, 0);
+        uint16_t raw = bytes[0];
         currentStage.cookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
         NSLog(@"FSTCharacteristicElapsedTime %@", currentStage.cookTimeElapsed );
@@ -368,13 +370,13 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
-            [self.peripheral readValueForCharacteristic:characteristic];
+            
             [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
         }
         
         if (characteristic.properties & CBCharacteristicPropertyRead)
         {
-            //[self.peripheral readValueForCharacteristic:characteristic];
+            [self.peripheral readValueForCharacteristic:characteristic];
             NSLog(@"        CAN READ");
         }
         

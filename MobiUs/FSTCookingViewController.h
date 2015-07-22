@@ -13,13 +13,13 @@
 
 @interface FSTCookingViewController : UIViewController <UIAlertViewDelegate>
 
-
+@property (weak, nonatomic) IBOutlet UILabel *cookingStatusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
 @property (strong, nonatomic) IBOutlet FSTCircleProgressView *circleProgressView;
 @property (nonatomic,retain) FSTParagon* currentParagon;
-@property (weak, nonatomic) IBOutlet UILabel *currentOverheadLabel;
-@property (weak, nonatomic) IBOutlet UILabel *targetOverheadLabel;
-@property (strong, nonatomic) IBOutlet UILabel *currentLabel;
-@property (strong, nonatomic) IBOutlet UILabel *targetLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topCircleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *boldOverheadLabel;
+@property (strong, nonatomic) IBOutlet UILabel *boldLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cookingModeLabel;
+@property (nonatomic) ProgressState progressState;
 @end
