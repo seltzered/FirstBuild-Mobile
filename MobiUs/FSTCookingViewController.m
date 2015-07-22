@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet FSTStageCircleView *stageCircle;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stageCirclePlace;
 
-@property (nonatomic) ProgressState state;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;
@@ -77,7 +76,7 @@ NSObject* _cookModeChangedObserver;
                                     if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING)
                                     {
                                         // ready to transition to cooking
-                                        weakSelf.state = kCooking;
+                                        weakSelf.progressState = kCooking;
                                     }
                                 }];
     
@@ -107,12 +106,11 @@ NSObject* _cookModeChangedObserver;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    [self updateStageBarForState:_state]; // set top bar to current global state
+    [self updateStageBarForState:self.progressState]; // set top bar to current global state
 }
 
 //-(void)stateChanged:(ProgressState)state { //might include old state variable, or just use seperate methods for each case,
--(void)setState:(ProgressState)state {
-    _state = state;
+-(void)setProgressState:(ProgressState)state {
     switch (state) {
         case kPreheating:
         case kReady:
@@ -202,7 +200,7 @@ NSObject* _cookModeChangedObserver;
     NSMutableAttributedString* topString = [[NSMutableAttributedString alloc] initWithString:@"Target: "]; // for preheating case
     [topString appendAttributedString:targetTempString];
     
-    switch (_state) {
+    switch (self.progressState) {
 
         case kPreheating: // need to change text above number labels as well
             [self.cookingStatusLabel setText:@"PREHEATING"];
