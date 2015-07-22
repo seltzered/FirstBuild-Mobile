@@ -131,10 +131,10 @@ NSIndexPath *_indexPathForDeletion;
                     
                     //TODO:: HACK. Service discovery is slow, we need to find the actual service we are looking for
                     //here which is going to be by product type. Hardcoded for the paragon service.
-                    NSUUID* uuid = [[NSUUID alloc]initWithUUIDString:@"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F"];
-                    NSArray* services = [[NSArray alloc] initWithObjects:uuid, nil];
+                    //NSUUID* uuid = [[NSUUID alloc]initWithUUIDString:@"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F"];
+                    //NSArray* services = [[NSArray alloc] initWithObjects:uuid, nil];
                     
-                    [bleProduct.peripheral discoverServices:services];
+                    [bleProduct.peripheral discoverServices:nil];
                     bleProduct.online = YES;
                     [weakSelf.tableView reloadData];
                 }

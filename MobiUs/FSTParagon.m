@@ -370,7 +370,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
-            
+            [self.peripheral readValueForCharacteristic:characteristic];
             [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
         }
         
