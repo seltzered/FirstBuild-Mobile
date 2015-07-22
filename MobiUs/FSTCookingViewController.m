@@ -75,8 +75,9 @@ NSObject* _cookModeChangedObserver;
                                                usingBlock:^(NSNotification *notification)
                                 {
                                     if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING)
-                                    { // ready to transition to cooking
-                                    weakSelf.state = kCooking;
+                                    {
+                                        // ready to transition to cooking
+                                        weakSelf.state = kCooking;
                                     }
                                 }];
     
@@ -87,6 +88,7 @@ NSObject* _cookModeChangedObserver;
                                    {
                                        NSNumber* actualTemperature = _cookingStage.actualTemperature;
                                        weakSelf.circleProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
+                                       [self makeAndSetTimeRemainingLabel];
                                    }];
     
     [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
