@@ -13,6 +13,7 @@
 #import "MenuViewController.h"
 #import <Firebase/Firebase.h>
 #import <SWRevealViewController.h>
+#import "MobiNavigationController.h"
 
 @interface ProductMainViewController ()
 
@@ -86,6 +87,13 @@ FSTParagonDisconnectedLabel* _warningLabel;
      
     }];
     
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
+    [navigation setHeaderText:@"MY PRODUCTS" withFrameRect:CGRectMake(0, 0, 160, 40)]; // a bit larger for this text
+    [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
 }
 
 -(void) dealloc

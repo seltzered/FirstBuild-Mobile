@@ -17,9 +17,9 @@
     UIBezierPath* path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(xstart, ystart)];
     [path addLineToPoint:CGPointMake(xstart+rect.size.width, ystart)];
-    CGFloat dash[] = {3, 6}; // length, gaps
-    [path setLineDash:dash count: 2 phase:9]; // phase might be zero
-    
+    //CGFloat dash[] = {3, 6}; // length, gaps
+    //[path setLineDash:dash count: 2 phase:9]; // phase might be zero
+    // new skin has a straight line  in the view
     UIColor* strokeColor = UIColorFromRGB(0xE40039); // reddish?
     [strokeColor setStroke];
     [path stroke];

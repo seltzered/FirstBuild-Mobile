@@ -19,6 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *statusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *batteryLabel;
 @property (weak, nonatomic) IBOutlet ProductBatteryView *batteryView;
-
+@property (weak, nonatomic) IBOutlet UILabel *paragonStatusLabel;
 
 @end

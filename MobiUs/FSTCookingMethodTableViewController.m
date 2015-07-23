@@ -52,17 +52,17 @@
      // eventually, the cells will control the subcategories, so the tables load new data depending on the current selection. Perhaps there is some animation to fill in a tableview, and I could reset the table with the selection as the first member (the pointed header could be the selected background view)
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath]; // changed from UITableViewCell,only animation overloaded on this version
     
-    cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.row]).name;
-    cell.textLabel.textColor = UIColorFromRGB(0xFF0105); // set to red color
+    cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.row]).name; // this is all caps, set back to normal text
+    cell.textLabel.textColor = [UIColor blackColor];//UIColorFromRGB(0xFF0105); // set to red color
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    cell.textLabel.font = [UIFont fontWithName:@"PTSans-NarrowBold" size:22];
+    cell.textLabel.font = [UIFont fontWithName:@"FSEmeric-Light" size:22];
     
     FSTDashedLine *lineView = [[FSTDashedLine alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
     lineView.backgroundColor = [UIColor clearColor];
     [cell.contentView addSubview:lineView];
     
     UIView *view = [[UIView alloc]initWithFrame:cell.frame]; // background filling in the whole background
-    view.backgroundColor = UIColorFromRGB(0xFF0105); // same color as text
+    view.backgroundColor = UIColorFromRGB(0xF0663A);// UIColorFromRGB(0xFF0105); // same color as text
     [cell setSelectedBackgroundView:view];
     cell.textLabel.highlightedTextColor = [UIColor whiteColor];
     return cell; // al this will work in the tableviewcontroller initialization

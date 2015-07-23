@@ -13,6 +13,4 @@
 @interface FSTCookingMethodSubSelectionViewController : UIViewController<FSTCookingMethodTableViewControllerDelegate>
 
 @property (nonatomic,retain) FSTParagon* currentParagon;
-@property (strong, nonatomic) IBOutlet UILabel *headerLabel;
-
 @end

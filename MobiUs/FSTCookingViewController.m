@@ -18,6 +18,7 @@
 #import "Session.h"
 #import "FSTStageBarView.h"
 #import "FSTStageCircleView.h"
+#import "MobiNavigationController.h"
 
 @interface FSTCookingViewController ()
 
@@ -74,7 +75,7 @@ NSObject* _cookModeChangedObserver;
                                                usingBlock:^(NSNotification *notification)
     {
         if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && weakSelf.progressState == kPreheating)
-        {
+        { // the cooktop has finished preheating to begin heating, and the progress bar was in its preheating state. Ensures that the ready to cook appears once in a cycle
             // ready to transition to cooking
             weakSelf.progressState = kReady;
         }
@@ -103,6 +104,11 @@ NSObject* _cookModeChangedObserver;
     [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
 #endif
 
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+    [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

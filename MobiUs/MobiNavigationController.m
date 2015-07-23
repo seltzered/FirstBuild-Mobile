@@ -34,13 +34,41 @@ CGFloat _midY = 0;
     {
         [self.logoView removeFromSuperview];
     }
+    if (self.logoLabel)
+    {
+        [self.logoLabel removeFromSuperview];
+    }
     
     self.logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     [self.logoView setFrame:frame];
     CGPoint superCenter = CGPointMake(_midX, _midY);
     [self.logoView setCenter:superCenter];
     [self.navigationBar addSubview:self.logoView];
-    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xFF2B00)];//00B5CC)];//white over red for new skin
+}
+
+-(void)setHeaderText:(NSString*) text withFrameRect: (CGRect)frame
+{
+    if (self.logoView)
+    {
+        [self.logoView removeFromSuperview];
+    }
+    if (self.logoLabel)
+    {
+        [self.logoLabel removeFromSuperview];
+    }
+    
+    UIFont *headerFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:25.0];
+    NSDictionary *headerFontDict = [NSDictionary dictionaryWithObject: headerFont forKey:NSFontAttributeName];
+    
+    
+    self.logoLabel = [[UILabel alloc] initWithFrame:frame];
+    self.logoLabel.attributedText = [[NSAttributedString alloc] initWithString:text attributes:headerFontDict];
+    CGPoint superCenter = CGPointMake(_midX, _midY);
+    [self.logoLabel setCenter:superCenter];
+    self.logoLabel.textColor = UIColorFromRGB(0xF0663A);
+    self.logoLabel.textAlignment = NSTextAlignmentCenter;
+    [self.navigationBar addSubview:self.logoLabel];
+    
 }
 
 - (void)didReceiveMemoryWarning {

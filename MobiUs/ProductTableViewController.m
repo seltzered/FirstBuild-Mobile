@@ -292,15 +292,34 @@ NSIndexPath *_indexPathForDeletion;
     else if ([product isKindOfClass:[FSTParagon class]])
     {
         
+        FSTParagon* paragon = (FSTParagon*)product; // cast it to check the cooking status
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellParagon" forIndexPath:indexPath];
         productCell.friendlyName.text = product.friendlyName;
         
-        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[((FSTParagon*)product).batteryLevel integerValue]];
+        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[paragon.batteryLevel integerValue]];
         
-        productCell.batteryView.batteryLevel = [((FSTParagon*)product).batteryLevel doubleValue]/100;
+        productCell.batteryView.batteryLevel = [paragon.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
         //Taken out since those properties were not connected
         
+        // check paragon cook modes to update status label
+        if (paragon.currentCookMode == kPARAGON_PREHEATING)
+        {
+            [productCell.statusLabel setText:@"Preheating"];
+        }
+        else if(paragon.currentCookMode == kPARAGON_HEATING)
+        {
+            [productCell.statusLabel setText:@"Cooking"];
+        }
+        else if(paragon.currentCookMode == kPARAGON_HEATING_WITH_TIME)
+        {
+            [productCell.statusLabel setText:@"Cooking"]; // might need more states
+        }
+        else
+        {
+            [productCell.statusLabel setText:@""];
+        }
+
         //TODO we need observers on the cookmode for each paragon in order to set the status
 //        NSString* statusLabel;
 //        
@@ -346,6 +365,7 @@ NSIndexPath *_indexPathForDeletion;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
     }
+    
     
     return productCell;
 }
@@ -394,7 +414,7 @@ NSIndexPath *_indexPathForDeletion;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 200.0; // edit hight of table view cell
+    return 120.0; // edit hight of table view cell
 }
 /*-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {

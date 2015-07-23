@@ -9,11 +9,9 @@
 #import "FSTBeefSettingsViewController.h"
 #import "FSTBeefSousVideCookingMethod.h"
 #import "FSTReadyToPreheatViewController.h"
+#import "MobiNavigationController.h"
 
 @interface FSTBeefSettingsViewController ()
-
-@property (strong, nonatomic) IBOutlet UIView *thicknessSelectionView;
-@property (strong, nonatomic) IBOutlet UIView *meatView;
 
 @end
 
@@ -63,20 +61,15 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self.currentParagon.currentCookingMethod addStageToCookingSession];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+    [controller setHeaderText:@"SETTINGS" withFrameRect:CGRectMake(0, 0, 120, 30)];
+    
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
-    
-    //how big can the thickness selection view grow
-    _maxHeight = self.thicknessSelectionView.frame.size.height;
-    
-    //where does the actual view for the meat start
-    _meatHeightOffset = self.meatView.frame.origin.y;
-    
-    //set the bounds to which the entire set of things in the thickness view can move
-    //need to restrict the bottom by subtracting the height (y origin of meat portion of view)
-    //that way the meat view doesnt go out of the southern bounds
-    _yBoundsTop = self.thicknessSelectionView.frame.origin.y;
-    _yBoundsBottom = (_yBoundsTop + _maxHeight) - _meatHeightOffset;
     
     //set up or data objects
     _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];

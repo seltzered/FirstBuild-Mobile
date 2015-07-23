@@ -11,12 +11,15 @@
 #import "FSTSousVideCookingMethods.h"
 #import "FSTBeefSousVideCookingMethod.h"
 #import "FSTBeefSettingsViewController.h"
+#import "MobiNavigationController.h"
 
 @interface FSTCookingMethodSubSelectionViewController ()
 
 @end
 
 @implementation FSTCookingMethodSubSelectionViewController
+
+NSString* headerText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,9 +28,16 @@
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
-    self.headerLabel.text = self.currentParagon.currentCookingMethod.name; //stringByAppendingString:@"?"];
+    headerText = self.currentParagon.currentCookingMethod.name; // grabs the current cooking method (sous vide most likely) upon entering
+
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    
+    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+    [controller setHeaderText:headerText withFrameRect:CGRectMake(0, 0, 120, 30)];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
