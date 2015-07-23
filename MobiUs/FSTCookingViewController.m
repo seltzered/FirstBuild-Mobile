@@ -73,10 +73,13 @@ NSObject* _cookModeChangedObserver;
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
+        //if we are currently on the progress state of the view and we receive
+        //a notification that the cooking mode has switched to heating then
+        //transistion to the ready to cook progress state
         if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && weakSelf.progressState == kPreheating)
         {
             // ready to transition to cooking
-            weakSelf.progressState = kReady;
+            weakSelf.progressState = kReadyToCook;
         }
     }];
     
@@ -114,7 +117,7 @@ NSObject* _cookModeChangedObserver;
     _progressState = state; // wasn't actually setting the value
     switch (state) {
         case kPreheating:
-        case kReady:
+        case kReadyToCook:
         case kCooking:
         case kSitting: // something with labels, probably the transition phases, also set the initial values like starting/target temps
             break;
@@ -137,7 +140,7 @@ NSObject* _cookModeChangedObserver;
             new_x = start_x; // beginning of bar
             break;
         // need a ready to cook stage for second point
-        case kReady:
+        case kReadyToCook:
             new_x = start_x + self.stageBar.lineWidth/3;
             break;
         case kCooking:
@@ -212,7 +215,7 @@ NSObject* _cookModeChangedObserver;
             [self.boldOverheadLabel setText:@"Current:"];
             [self.boldLabel setAttributedText:currentTempString];
             break;
-        case kReady:
+        case kReadyToCook:
             [self.cookingStatusLabel setText:@"READY TO COOK"];
             self.topCircleLabel.hidden = true;
             self.boldLabel.hidden = true;

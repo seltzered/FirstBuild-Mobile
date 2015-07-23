@@ -20,12 +20,13 @@
 
 @interface FSTCookingProgressLayer : CAShapeLayer
 
+//states for the different views of the cooking progress screens
 typedef enum {
     kPreheating = 0,
-    kReady, // ready to cook
+    kReadyToCook,
     kCooking,
     kSitting
-} ProgressState; // enum to define the progressLayer's states
+} ProgressState;
 
 @property (nonatomic) NSTimeInterval elapsedTime;
 @property (nonatomic) NSTimeInterval timeLimit;
