@@ -31,8 +31,8 @@
 		5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */; };
 		5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */; };
 		5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */; };
-		5B7338BA1B0F9856004C931E /* FSTCircleProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338B91B0F9856004C931E /* FSTCircleProgressLayer.m */; };
-		5B7338BD1B0F9A7E004C931E /* FSTCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BC1B0F9A7E004C931E /* FSTCircleProgressView.m */; };
+		5B7338BA1B0F9856004C931E /* FSTCookingProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */; };
+		5B7338BD1B0F9A7E004C931E /* FSTCookingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */; };
 		5B7338C01B0F9CEA004C931E /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BF1B0F9CEA004C931E /* Session.m */; };
 		5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FB5531A4373C900553797 /* WifiCommissioningConnectingViewController.m */; };
 		5B7FB5581A43C6DF00553797 /* ChillHubDevicesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FB5571A43C6DF00553797 /* ChillHubDevicesTableViewController.m */; };
@@ -159,10 +159,10 @@
 		5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonCookingStage.m; sourceTree = "<group>"; };
 		5B4486CB1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiCommissioningNetworkTableViewCell.h; sourceTree = "<group>"; };
 		5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiCommissioningNetworkTableViewCell.m; sourceTree = "<group>"; };
-		5B7338B81B0F9856004C931E /* FSTCircleProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCircleProgressLayer.h; sourceTree = "<group>"; };
-		5B7338B91B0F9856004C931E /* FSTCircleProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCircleProgressLayer.m; sourceTree = "<group>"; };
-		5B7338BB1B0F9A7E004C931E /* FSTCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCircleProgressView.h; sourceTree = "<group>"; };
-		5B7338BC1B0F9A7E004C931E /* FSTCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCircleProgressView.m; sourceTree = "<group>"; };
+		5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingProgressLayer.h; sourceTree = "<group>"; };
+		5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingProgressLayer.m; sourceTree = "<group>"; };
+		5B7338BB1B0F9A7E004C931E /* FSTCookingProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingProgressView.h; sourceTree = "<group>"; };
+		5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingProgressView.m; sourceTree = "<group>"; };
 		5B7338BE1B0F9CEA004C931E /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		5B7338BF1B0F9CEA004C931E /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		5B7FB5521A4373C900553797 /* WifiCommissioningConnectingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiCommissioningConnectingViewController.h; sourceTree = "<group>"; };
@@ -494,10 +494,10 @@
 				51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */,
 				51F8EF3E1B55961400F40882 /* FSTStageBarView.h */,
 				51F8EF3F1B55961400F40882 /* FSTStageBarView.m */,
-				5B7338B81B0F9856004C931E /* FSTCircleProgressLayer.h */,
-				5B7338B91B0F9856004C931E /* FSTCircleProgressLayer.m */,
-				5B7338BB1B0F9A7E004C931E /* FSTCircleProgressView.h */,
-				5B7338BC1B0F9A7E004C931E /* FSTCircleProgressView.m */,
+				5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */,
+				5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */,
+				5B7338BB1B0F9A7E004C931E /* FSTCookingProgressView.h */,
+				5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */,
 				5BE2A7281B17BD3F00EFA91A /* FSTGradientLensView.h */,
 				5BE2A7291B17BD3F00EFA91A /* FSTGradientLensView.m */,
 				5BE2A72B1B18AB2300EFA91A /* FSTArrowEndedLine.h */,
@@ -941,7 +941,7 @@
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
 				517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */,
 				5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */,
-				5B7338BD1B0F9A7E004C931E /* FSTCircleProgressView.m in Sources */,
+				5B7338BD1B0F9A7E004C931E /* FSTCookingProgressView.m in Sources */,
 				5BC364811A2F63C200D03B9C /* FSTDeviceAuth.m in Sources */,
 				5BF9482F19EC15E300CB8BCF /* MenuViewController.m in Sources */,
 				5BCBBA011B03CA5200B8E043 /* FSTCookingMethods.m in Sources */,
@@ -994,7 +994,7 @@
 				5B8C108A1A39EC2A00F481E6 /* ProductAddViewController.m in Sources */,
 				517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */,
 				5B174DD81A5DE1DE00A00505 /* MilkGallonStand.m in Sources */,
-				5B7338BA1B0F9856004C931E /* FSTCircleProgressLayer.m in Sources */,
+				5B7338BA1B0F9856004C931E /* FSTCookingProgressLayer.m in Sources */,
 				6743AE1F19E30E46000D9CF3 /* MobiNavigationController.m in Sources */,
 				5BC3649A1A32624F00D03B9C /* FSTChillHubDevice.m in Sources */,
 				5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */,

@@ -1,5 +1,5 @@
 //
-//  FSTCircleProgressLayer.m
+//  FSTCookingProgressLayer.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/22/15.
@@ -14,8 +14,8 @@
 //  Copyright (c) 2014 Mobistart. All rights reserved.
 //
 
-#import "FSTCircleProgressLayer.h"
-@interface FSTCircleProgressLayer ()
+#import "FSTCookingProgressLayer.h"
+@interface FSTCookingProgressLayer ()
 
 @property (assign, nonatomic) double initialProgress;
 @property (nonatomic, strong) CAShapeLayer *bottomLayer;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation FSTCircleProgressLayer
+@implementation FSTCookingProgressLayer
 
 @synthesize percent = _percent;
 
@@ -193,7 +193,7 @@
             }
             self.sittingLayer.strokeEnd = 0.0F;
             break;
-        case kReady:
+        case kReadyToCook:
             [self drawCompleteTicks];// preheating complete
             self.progressLayer.strokeEnd = 0.0F;
             self.sittingLayer.strokeEnd = 0.0F;
@@ -226,7 +226,7 @@
         case kPreheating:
             _percent = [self calculatePercentWithTemp:_currentTemp];
             break;
-        case kReady: // precent not really used here, could be taken as complete, 100%, after preheating
+        case kReadyToCook: // precent not really used here, could be taken as complete, 100%, after preheating
         case kCooking:
         case kSitting:
             _percent = [self calculatePercent:_elapsedTime toTime:_timeLimit];

@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSTCircleProgressView.h"
-#import "FSTCircleProgressLayer.h"
+#import "FSTCookingProgressView.h"
+#import "FSTCookingProgressLayer.h"
 #import "FSTParagon.h"
 
 @interface FSTCookingViewController : UIViewController <UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *cookingStatusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
-@property (strong, nonatomic) IBOutlet FSTCircleProgressView *circleProgressView;
+@property (strong, nonatomic) IBOutlet FSTCookingProgressView *cookingProgressView;
 @property (nonatomic,retain) FSTParagon* currentParagon;
 @property (strong, nonatomic) IBOutlet UILabel *topCircleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *boldOverheadLabel;

@@ -6,6 +6,45 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
+
+
+//        HIERARCHY
+//        +------------------------------------+
+//        | FSTCookingViewController           |
+//        |  +-------------------------------+ |
+//        |  | FSTCookingProgressView        | |
+//        |  | +---------------------------+ | |
+//        |  | | FSTCookingProgressLayer   | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | +---------------------------+ | |
+//        |  +-------------------------------+ |
+//        +------------------------------------+
+//
+//        There are multiple states for the view
+//                                                                      
+//        VIEW STATES
+//        +-------------------------------------------------------+
+//        |                                                       |
+//        |  +--------+  +---------+ +----------+  +-----------+  |
+//        |  |preheat |  |ready    | |cooking   |  |done       |  |
+//        |  |        |  |         | |          |  |           |  |
+//        |  +--------+  +---------+ +----------+  +-----------+  |
+//        |                                                       |
+//        +-------------------------------------------------------+
+//
+//
+//        BURNER STATE
+//        +-------------------------------------------------------+
+//        | PREHEAT     | SOUSVIDE                                |
+//        +-------------------------------------------------------+
+//                                                                      
+//                                                                      
+
 //
 //  ProgressViewController.m
 //  CircularProgressControl
@@ -40,14 +79,9 @@ NSObject* _timeElapsedChangedObserver;
 NSObject* _cookModeChangedObserver;
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //__block ProgressState state = kPreheating; // should load a different layer in these states
-    // this okay?
-    //[self stateChanged:kPreheating];
-    
+
     self.navigationItem.hidesBackButton = true;
     
     __weak typeof(self) weakSelf = self;
@@ -64,7 +98,7 @@ NSObject* _cookModeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-        weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
+        weakSelf.cookingProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
        [weakSelf makeAndSetTimeRemainingLabel];
 
     }];
@@ -74,10 +108,21 @@ NSObject* _cookModeChangedObserver;
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
+        //if we are currently on the progress state of the view and we receive
+        //a notification that the cooking mode has switched to heating then
+        //transistion to the ready to cook progress state
         if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && weakSelf.progressState == kPreheating)
         { // the cooktop has finished preheating to begin heating, and the progress bar was in its preheating state. Ensures that the ready to cook appears once in a cycle
             // ready to transition to cooking
-            weakSelf.progressState = kReady;
+            weakSelf.progressState = kReadyToCook;
+        }
+        else if (weakSelf.currentParagon.currentCookMode == kPARAGON_OFF)
+        {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else
+        {
+            DLog(@"cook mode changed, nothing to do");
         }
     }];
     
@@ -87,17 +132,17 @@ NSObject* _cookModeChangedObserver;
                                                   usingBlock:^(NSNotification *notification)
    {
        NSNumber* actualTemperature = _cookingStage.actualTemperature;
-       weakSelf.circleProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
+       weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue];
        [self makeAndSetTimeRemainingLabel];
    }];
 
-    [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
+    // needs to reposition behind lettering
+    [self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView];
     
-    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
-    self.circleProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
-    // set the temperature ranges
-    self.circleProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
-    self.circleProgressView.startingTemp = 72; // was hard coded in preheating
+    self.cookingProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
+    self.cookingProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
+    self.cookingProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
+    self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
     [self makeAndSetTimeRemainingLabel];
     
 #ifdef SIMULATE_PARAGON
@@ -118,20 +163,10 @@ NSObject* _cookModeChangedObserver;
 //-(void)stateChanged:(ProgressState)state { //might include old state variable, or just use seperate methods for each case,
 -(void)setProgressState:(ProgressState)state { // might just make a setter here
     _progressState = state; // wasn't actually setting the value
-    switch (state) {
-        case kPreheating:
-        case kReady:
-        case kCooking:
-        case kSitting: // something with labels, probably the transition phases, also set the initial values like starting/target temps
-            break;
-        default:
-            NSLog(@"NO STATE SELECTED\n");
-            break;
-    }
     
     [self updateStageBarForState:state];
     [self makeAndSetTimeRemainingLabel];
-    self.circleProgressView.layerState = state; // set state of whole child view
+    self.cookingProgressView.layerState = state; // set state of whole child view
 }
 
 -(void)updateStageBarForState:(ProgressState)state {
@@ -142,8 +177,7 @@ NSObject* _cookModeChangedObserver;
         case kPreheating:
             new_x = start_x; // beginning of bar
             break;
-        // need a ready to cook stage for second point
-        case kReady:
+        case kReadyToCook:
             new_x = start_x + self.stageBar.lineWidth/3;
             break;
         case kCooking:
@@ -214,11 +248,10 @@ NSObject* _cookModeChangedObserver;
         case kPreheating: // need to change text above number labels as well
             [self.cookingStatusLabel setText:@"PREHEATING"];
             [self.topCircleLabel setAttributedText:topString]; // target label before target temperature
-            //[self.currentLabel setAttributedText:currentTempString];
             [self.boldOverheadLabel setText:@"Current:"];
             [self.boldLabel setAttributedText:currentTempString];
             break;
-        case kReady:
+        case kReadyToCook:
             [self.cookingStatusLabel setText:@"READY TO COOK"];
             self.topCircleLabel.hidden = true;
             self.boldLabel.hidden = true;
@@ -233,7 +266,8 @@ NSObject* _cookModeChangedObserver;
             [self.boldOverheadLabel setText:@"Food Will Be Done By:"];
             self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
             break;
-        case kSitting: // still need the maximum time to set the targetLabel, and the labels should change
+        case kSitting:
+            //TODO still need the maximum time to set the targetLabel, and the labels should change
             [self.cookingStatusLabel setText:@"DONE"];
             [self.topCircleLabel setAttributedText:currentTempString];
             [self.boldOverheadLabel setText:@"Take Food Out"];

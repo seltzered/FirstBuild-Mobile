@@ -1,5 +1,5 @@
 //
-//  FSTCircleProgressView.h
+//  FSTCookingProgressLayer.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/22/15.
@@ -7,35 +7,38 @@
 //
 
 //
-//  CircleProgressView.h
+//  CircleShapeLayer.h
 //  CircularProgressControl
 //
 //  Created by Carlos Eduardo Arantes Ferreira on 22/11/14.
 //  Copyright (c) 2014 Mobistart. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import <UIKit/UIKit.h>
-#import "FSTCircleProgressLayer.h"
+#import <Foundation/Foundation.h>
 
-@interface FSTCircleProgressView : UIControl
+@interface FSTCookingProgressLayer : CAShapeLayer
+
+//states for the different views of the cooking progress screens
+typedef enum {
+    kPreheating = 0,
+    kReadyToCook,
+    kCooking,
+    kSitting
+} ProgressState;
 
 @property (nonatomic) NSTimeInterval elapsedTime;
-
 @property (nonatomic) NSTimeInterval timeLimit;
-
-@property (nonatomic) CGFloat currentTemp; // set the current temperature in preheating
-
-//@property (nonatomic, retain) NSString *status;
-@property (nonatomic) ProgressState layerState;
-
+@property (nonatomic) CGFloat currentTemp;
 @property (assign, nonatomic, readonly) double percent;
-
-@property (nonatomic) CGFloat startingTemp;
-
+@property (nonatomic) UIColor *progressColor;
+@property (nonatomic) ProgressState layerState;
 @property (nonatomic) CGFloat targetTemp;
-
+@property (nonatomic) CGFloat startingTemp;
 @end
 
 // Copyright belongs to original author
 // http://code4app.net (en) http://code4app.com (cn)
 // From the most professional code share website: Code4App.net
+
