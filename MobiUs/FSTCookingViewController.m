@@ -115,6 +115,10 @@ NSObject* _cookModeChangedObserver;
             // ready to transition to cooking
             weakSelf.progressState = kReadyToCook;
         }
+        else if (weakSelf.currentParagon.currentCookMode == kPARAGON_OFF)
+        {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }
     }];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
