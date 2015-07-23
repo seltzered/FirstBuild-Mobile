@@ -119,6 +119,10 @@ NSObject* _cookModeChangedObserver;
         {
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }
+        else
+        {
+            DLog(@"cook mode changed, nothing to do");
+        }
     }];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -127,15 +131,15 @@ NSObject* _cookModeChangedObserver;
                                                   usingBlock:^(NSNotification *notification)
    {
        NSNumber* actualTemperature = _cookingStage.actualTemperature;
-       weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
+       weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue];
        [self makeAndSetTimeRemainingLabel];
    }];
 
-    [self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView]; // needs to reposition behind lettering
+    // needs to reposition behind lettering
+    [self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView];
     
     self.cookingProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
     self.cookingProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
-    // set the temperature ranges
     self.cookingProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
     self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
     [self makeAndSetTimeRemainingLabel];
@@ -167,7 +171,6 @@ NSObject* _cookModeChangedObserver;
         case kPreheating:
             new_x = start_x; // beginning of bar
             break;
-        // need a ready to cook stage for second point
         case kReadyToCook:
             new_x = start_x + self.stageBar.lineWidth/3;
             break;
@@ -239,7 +242,6 @@ NSObject* _cookModeChangedObserver;
         case kPreheating: // need to change text above number labels as well
             [self.cookingStatusLabel setText:@"PREHEATING"];
             [self.topCircleLabel setAttributedText:topString]; // target label before target temperature
-            //[self.currentLabel setAttributedText:currentTempString];
             [self.boldOverheadLabel setText:@"Current:"];
             [self.boldLabel setAttributedText:currentTempString];
             break;
@@ -258,7 +260,8 @@ NSObject* _cookModeChangedObserver;
             [self.boldOverheadLabel setText:@"Food Will Be Done By:"];
             self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
             break;
-        case kSitting: // still need the maximum time to set the targetLabel, and the labels should change
+        case kSitting:
+            //TODO still need the maximum time to set the targetLabel, and the labels should change
             [self.cookingStatusLabel setText:@"DONE"];
             [self.topCircleLabel setAttributedText:currentTempString];
             [self.boldOverheadLabel setText:@"Take Food Out"];
