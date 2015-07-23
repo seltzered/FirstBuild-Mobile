@@ -6,6 +6,45 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
+
+
+//        HIERARCHY
+//        +------------------------------------+
+//        | FSTCookingViewController           |
+//        |  +-------------------------------+ |
+//        |  | FSTCookingProgressView        | |
+//        |  | +---------------------------+ | |
+//        |  | | FSTCookingProgressLayer   | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | |                           | | |
+//        |  | +---------------------------+ | |
+//        |  +-------------------------------+ |
+//        +------------------------------------+
+//
+//        There are multiple states for the view
+//                                                                      
+//        VIEW STATES
+//        +-------------------------------------------------------+
+//        |                                                       |
+//        |  +--------+  +---------+ +----------+  +-----------+  |
+//        |  |preheat |  |ready    | |cooking   |  |done       |  |
+//        |  |        |  |         | |          |  |           |  |
+//        |  +--------+  +---------+ +----------+  +-----------+  |
+//        |                                                       |
+//        +-------------------------------------------------------+
+//
+//
+//        BURNER STATE
+//        +-------------------------------------------------------+
+//        | PREHEAT     | SOUSVIDE                                |
+//        +-------------------------------------------------------+
+//                                                                      
+//                                                                      
+
 //
 //  ProgressViewController.m
 //  CircularProgressControl
@@ -39,14 +78,9 @@ NSObject* _timeElapsedChangedObserver;
 NSObject* _cookModeChangedObserver;
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //__block ProgressState state = kPreheating; // should load a different layer in these states
-    // this okay?
-    //[self stateChanged:kPreheating];
-    
+
     self.navigationItem.hidesBackButton = true;
     
     __weak typeof(self) weakSelf = self;
@@ -115,16 +149,6 @@ NSObject* _cookModeChangedObserver;
 //-(void)stateChanged:(ProgressState)state { //might include old state variable, or just use seperate methods for each case,
 -(void)setProgressState:(ProgressState)state { // might just make a setter here
     _progressState = state; // wasn't actually setting the value
-    switch (state) {
-        case kPreheating:
-        case kReadyToCook:
-        case kCooking:
-        case kSitting: // something with labels, probably the transition phases, also set the initial values like starting/target temps
-            break;
-        default:
-            NSLog(@"NO STATE SELECTED\n");
-            break;
-    }
     
     [self updateStageBarForState:state];
     [self makeAndSetTimeRemainingLabel];
