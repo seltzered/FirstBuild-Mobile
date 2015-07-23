@@ -63,7 +63,7 @@ NSObject* _cookModeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-        weakSelf.circleProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
+        weakSelf.cookingProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
        [weakSelf makeAndSetTimeRemainingLabel];
 
     }];
@@ -86,17 +86,17 @@ NSObject* _cookModeChangedObserver;
                                                   usingBlock:^(NSNotification *notification)
    {
        NSNumber* actualTemperature = _cookingStage.actualTemperature;
-       weakSelf.circleProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
+       weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue]; // set the current temp of the paragon
        [self makeAndSetTimeRemainingLabel];
    }];
 
-    [self.circleProgressView.superview sendSubviewToBack:self.circleProgressView]; // needs to reposition behind lettering
+    [self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView]; // needs to reposition behind lettering
     
-    self.circleProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
-    self.circleProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
+    self.cookingProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
+    self.cookingProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
     // set the temperature ranges
-    self.circleProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
-    self.circleProgressView.startingTemp = 72; // was hard coded in preheating
+    self.cookingProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
+    self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
     [self makeAndSetTimeRemainingLabel];
     
 #ifdef SIMULATE_PARAGON
@@ -125,7 +125,7 @@ NSObject* _cookModeChangedObserver;
     
     [self updateStageBarForState:state];
     [self makeAndSetTimeRemainingLabel];
-    self.circleProgressView.layerState = state; // set state of whole child view
+    self.cookingProgressView.layerState = state; // set state of whole child view
 }
 
 -(void)updateStageBarForState:(ProgressState)state {
