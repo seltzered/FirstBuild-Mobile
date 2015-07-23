@@ -15,7 +15,7 @@ NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTempera
 NSString * const FSTCookModeChangedNotification             = @"FSTCookModeChangedNotification";
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
-
+NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
 
 //app info service
 NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
@@ -422,7 +422,16 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    //TODO confirmation of write before moving on
+    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
+    {
+        if (error)
+        {
+            //TODO what do we do if error writing characteristic?
+            DLog(@"error writing the cooktime characteristic %@", error);
+            return;
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
+    }
 }
 
 #pragma mark - Simulations
