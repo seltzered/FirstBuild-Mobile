@@ -77,7 +77,7 @@ FSTParagonCookingStage* _cookingStage;
 NSObject* _temperatureChangedObserver;
 NSObject* _timeElapsedChangedObserver;
 NSObject* _cookModeChangedObserver;
-
+NSObject* _cookingTimeWriteConfirmationObserver;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,6 +101,14 @@ NSObject* _cookModeChangedObserver;
         weakSelf.cookingProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
        [weakSelf makeAndSetTimeRemainingLabel];
 
+    }];
+    
+    _cookingTimeWriteConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
+                                                   object:weakSelf.currentParagon
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+    {
+        weakSelf.progressState = kCooking;
     }];
     
     _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
@@ -163,6 +171,8 @@ NSObject* _cookModeChangedObserver;
 //-(void)stateChanged:(ProgressState)state { //might include old state variable, or just use seperate methods for each case,
 -(void)setProgressState:(ProgressState)state { // might just make a setter here
     _progressState = state; // wasn't actually setting the value
+    
+    self.continueButton.userInteractionEnabled = YES;
     
     [self updateStageBarForState:state];
     [self makeAndSetTimeRemainingLabel];
@@ -292,7 +302,9 @@ NSObject* _cookModeChangedObserver;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver]; // forgot this?
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookingTimeWriteConfirmationObserver];
+    
 }
 
 - (void)dealloc
@@ -300,25 +312,11 @@ NSObject* _cookModeChangedObserver;
     [self removeObservers];
 }
 
-
 - (IBAction)continueButtonTap:(id)sender {
-    
-    self.progressState = kCooking; // why doesn't this call setProgressState
-    //[self updateStageBarForState:_progressState]; // need to make this more regular
+    self.continueButton.userInteractionEnabled = NO;
+    [self.currentParagon setCookingTime:_cookingStage.cookTimeRequested];
 }
 
-/*- (IBAction)completeButtonTap:(id)sender
-{
-    UIAlertView *alert = [[UIAlertView alloc]
-                                initWithTitle:@"Return to Main Menu"
-                                message:@"Please turn off the burner on your unit to start a new session."
-                                delegate:self cancelButtonTitle:@"" otherButtonTitles:@"OK", nil];
-    
-    alert.cancelButtonIndex = -1;
-    [alert show];
-
-}
-*/
 #pragma mark - <UIAlertViewDelegate>
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
