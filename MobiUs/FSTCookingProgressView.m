@@ -1,5 +1,5 @@
 //
-//  FSTCircleProgressView.m
+//  FSTCookingProgressView.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/22/15.
@@ -14,17 +14,17 @@
 //  Copyright (c) 2014 Mobistart. All rights reserved.
 //
 
-#import "FSTCircleProgressView.h"
-#import "FSTCircleProgressLayer.h"
+#import "FSTCookingProgressView.h"
+#import "FSTCookingProgressLayer.h"
 
-@interface FSTCircleProgressView()
+@interface FSTCookingProgressView()
 
-@property (nonatomic, strong) FSTCircleProgressLayer *progressLayer;
+@property (nonatomic, strong) FSTCookingProgressLayer *progressLayer;
 //@property (strong, nonatomic) UILabel *progressLabel;
 
 @end
 
-@implementation FSTCircleProgressView
+@implementation FSTCookingProgressView
 
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -114,7 +114,7 @@
     self.clipsToBounds = false;
     
     //add Progress layer
-    self.progressLayer = [[FSTCircleProgressLayer alloc] init];
+    self.progressLayer = [[FSTCookingProgressLayer alloc] init];
     self.progressLayer.frame = self.bounds;
     self.progressLayer.backgroundColor = [UIColor clearColor].CGColor;
     [self.layer addSublayer:self.progressLayer];     

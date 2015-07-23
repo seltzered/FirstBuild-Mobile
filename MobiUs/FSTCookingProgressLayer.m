@@ -1,5 +1,5 @@
 //
-//  FSTCircleProgressLayer.m
+//  FSTCookingProgressLayer.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/22/15.
@@ -14,8 +14,8 @@
 //  Copyright (c) 2014 Mobistart. All rights reserved.
 //
 
-#import "FSTCircleProgressLayer.h"
-@interface FSTCircleProgressLayer ()
+#import "FSTCookingProgressLayer.h"
+@interface FSTCookingProgressLayer ()
 
 @property (assign, nonatomic) double initialProgress;
 @property (nonatomic, strong) CAShapeLayer *bottomLayer;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation FSTCircleProgressLayer
+@implementation FSTCookingProgressLayer
 
 @synthesize percent = _percent;
 

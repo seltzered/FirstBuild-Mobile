@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1249,7 +1249,7 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-nm-WVn" userLabel="circleProgressView" customClass="FSTCircleProgressView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-nm-WVn" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="114.5" y="0.0" width="370" height="370"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME REMAINING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-Qf-cjt" userLabel="TIME REMAINING">
@@ -1592,8 +1592,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="zDx-fk-p2D"/>
                                 <exclude reference="ckK-Mg-bGC"/>
+                                <exclude reference="zDx-fk-p2D"/>
                                 <exclude reference="oQv-w6-utr"/>
                                 <exclude reference="pTP-ov-Rqu"/>
                                 <exclude reference="iCD-Mz-Iaf"/>
@@ -1603,8 +1603,8 @@
                             <mask key="constraints">
                                 <exclude reference="BFM-cC-K5Z"/>
                                 <exclude reference="Z4w-BU-Wta"/>
-                                <include reference="zDx-fk-p2D"/>
                                 <include reference="ckK-Mg-bGC"/>
+                                <include reference="zDx-fk-p2D"/>
                                 <include reference="oQv-w6-utr"/>
                                 <exclude reference="pTP-ov-Rqu"/>
                                 <include reference="iCD-Mz-Iaf"/>

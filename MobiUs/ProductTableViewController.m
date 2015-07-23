@@ -19,7 +19,7 @@
 #import "FSTBleCentralManager.h"
 #import "FSTCookingViewController.h"
 
-#import "FSTCircleProgressLayer.h" //TODO: TEMP
+#import "FSTCookingProgressLayer.h" //TODO: TEMP
 
 @interface ProductTableViewController ()
 
