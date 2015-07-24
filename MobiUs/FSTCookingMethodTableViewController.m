@@ -62,7 +62,7 @@
     [cell.contentView addSubview:lineView];
     
     UIView *view = [[UIView alloc]initWithFrame:cell.frame]; // background filling in the whole background
-    view.backgroundColor = UIColorFromRGB(0xF0663A);// UIColorFromRGB(0xFF0105); // same color as text
+    view.backgroundColor = UIColorFromRGB(0xF0663A);// UIColorFromRGB(0xFF0105); // orange highlight color
     [cell setSelectedBackgroundView:view];
     cell.textLabel.highlightedTextColor = [UIColor whiteColor];
     return cell; // al this will work in the tableviewcontroller initialization

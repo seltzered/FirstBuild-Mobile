@@ -36,7 +36,7 @@ FSTCookingMethods* _methods;
 -(void)viewWillAppear:(BOOL)animated {
     
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
-    [navigation setHeaderImageNamed:@"PNG_logo_paragon_white" withFrameRect:CGRectMake(0, 0, 120, 30)];
+    [navigation setHeaderImageNamed:@"Paragon_Logo_Red" withFrameRect:CGRectMake(0, 0, 120, 30)];
     [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
 }
 

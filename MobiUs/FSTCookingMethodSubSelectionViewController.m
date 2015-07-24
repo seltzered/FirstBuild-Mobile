@@ -28,7 +28,7 @@ NSString* headerText;
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
-    headerText = self.currentParagon.currentCookingMethod.name; // grabs the current cooking method (sous vide most likely) upon entering
+    headerText = [self.currentParagon.currentCookingMethod.name uppercaseString]; // grabs the current cooking method (sous vide most likely) upon loading
 
 }
 

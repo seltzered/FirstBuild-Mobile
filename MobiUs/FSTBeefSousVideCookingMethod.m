@@ -15,7 +15,7 @@
     self = [super init];
     if (self)
     {
-        self.name = @"BEEF";
+        self.name = @"Beef";
         
         self.donenesses = @[@133,
                             @134.5,
