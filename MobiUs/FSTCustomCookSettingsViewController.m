@@ -32,6 +32,7 @@
     
     NSMutableAttributedString* temperatureString;
 }
+
 typedef enum variableSelections {
     TIME,
     TEMPERATURE
@@ -145,7 +146,7 @@ VariableSelection _selection;
 }
          
 - (void) updateLabels {
-    UIFont* labelsFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:43.0];
+    UIFont* labelsFont = [UIFont fontWithName:@"FSEmeric-Thin" size:43.0];
     NSDictionary* labelFontDictionary = [NSDictionary dictionaryWithObject:labelsFont forKey:NSFontAttributeName];
     hourString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[0][hourIndex] attributes:labelFontDictionary];
     minuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minuteIndex] attributes:labelFontDictionary];

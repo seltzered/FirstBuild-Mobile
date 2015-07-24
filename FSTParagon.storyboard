@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -21,11 +21,11 @@
         </mutableArray>
         <mutableArray key="FSEmeric-SemiBold.otf">
             <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
@@ -1007,8 +1007,8 @@
                                 <rect key="frame" x="30" y="520" width="540" height="65"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygc-uL-GpJ">
-                                        <rect key="frame" x="-48" y="15" width="636" height="34"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                        <rect key="frame" x="-48" y="16" width="636" height="32.5"/>
+                                        <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="26"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1034,10 +1034,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fP0-PX-tzh" userLabel="temperatureButtonWrapperView">
                                 <rect key="frame" x="303" y="105" width="279" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kk-fa-8Ev">
-                                        <rect key="frame" x="81" y="8" width="117" height="34"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kk-fa-8Ev">
+                                        <rect key="frame" x="0.0" y="9" width="279" height="32.5"/>
                                         <gestureRecognizers/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                        <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                         <color key="textColor" red="0.082352941176470587" green="0.65490196078431373" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1048,6 +1048,7 @@
                                     <constraint firstAttribute="centerX" secondItem="0kk-fa-8Ev" secondAttribute="centerX" id="2Kf-xA-KCV"/>
                                     <constraint firstAttribute="height" constant="50" id="FJM-QO-JaQ"/>
                                     <constraint firstAttribute="centerY" secondItem="0kk-fa-8Ev" secondAttribute="centerY" id="Toi-sS-sV0"/>
+                                    <constraint firstAttribute="width" secondItem="0kk-fa-8Ev" secondAttribute="width" id="dz8-WR-quJ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1068,11 +1069,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMj-UR-ghE" userLabel="timeButtonHolderView">
                                 <rect key="frame" x="18" y="105" width="279.5" height="50"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8c5-nv-rBI">
-                                        <rect key="frame" x="116" y="8" width="47" height="34"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8c5-nv-rBI">
+                                        <rect key="frame" x="0.0" y="9" width="279.5" height="32.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="2" id="23B-5l-bQY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="23B-5l-bQY"/>
+                                            </mask>
+                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.70980392156862748" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1080,6 +1089,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="26d-f2-ok7"/>
                                     <constraint firstAttribute="centerY" secondItem="8c5-nv-rBI" secondAttribute="centerY" id="3zZ-Pk-4YB"/>
+                                    <constraint firstItem="8c5-nv-rBI" firstAttribute="width" secondItem="hMj-UR-ghE" secondAttribute="width" id="8WW-OA-Q4D"/>
                                     <constraint firstAttribute="centerX" secondItem="8c5-nv-rBI" secondAttribute="centerX" id="k0T-9h-kM8"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -1097,7 +1107,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1HR:25MIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-d5-wZd" userLabel="TimeLabel">
                                         <rect key="frame" x="4" y="0.0" width="279.5" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="0.08235294118" green="0.65490196079999996" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1492,8 +1502,8 @@
         <image name="placefood_in" width="849" height="1277"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zTN-hz-fZw"/>
         <segue reference="CmD-W5-dtV"/>
         <segue reference="kaM-gB-8PG"/>
-        <segue reference="Oqm-D3-BPL"/>
     </inferredMetricsTieBreakers>
 </document>
