@@ -20,6 +20,8 @@
 		51F8EF401B55961400F40882 /* FSTStageBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF3F1B55961400F40882 /* FSTStageBarView.m */; };
 		51F8EF431B559F8A00F40882 /* FSTStageCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */; };
 		51FAEFEC1B62722500A7DCF9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFEB1B62722500A7DCF9 /* Images.xcassets */; };
+		51FAEFEF1B62B85F00A7DCF9 /* ProductGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FAEFEE1B62B85F00A7DCF9 /* ProductGradientView.m */; };
+		51FAEFF21B62DD8100A7DCF9 /* FSTLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FAEFF11B62DD8100A7DCF9 /* FSTLine.m */; };
 		5B0583691B1562C3003782E2 /* UIDashedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0583681B1562C3003782E2 /* UIDashedLineView.m */; };
 		5B05836C1B15F4DE003782E2 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */; };
 		5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B174DD41A5DB94700A00505 /* SCSiriWaveformView.m */; };
@@ -139,6 +141,10 @@
 		51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStageCircleView.h; sourceTree = "<group>"; };
 		51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStageCircleView.m; sourceTree = "<group>"; };
 		51FAEFEB1B62722500A7DCF9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		51FAEFED1B62B85F00A7DCF9 /* ProductGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductGradientView.h; sourceTree = "<group>"; };
+		51FAEFEE1B62B85F00A7DCF9 /* ProductGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductGradientView.m; sourceTree = "<group>"; };
+		51FAEFF01B62DD8100A7DCF9 /* FSTLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTLine.h; sourceTree = "<group>"; };
+		51FAEFF11B62DD8100A7DCF9 /* FSTLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTLine.m; sourceTree = "<group>"; };
 		5B0583671B1562C3003782E2 /* UIDashedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDashedLineView.h; sourceTree = "<group>"; };
 		5B0583681B1562C3003782E2 /* UIDashedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDashedLineView.m; sourceTree = "<group>"; };
 		5B05836A1B15F4DE003782E2 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -385,6 +391,8 @@
 				5BF9483019EC15F900CB8BCF /* Main.storyboard */,
 				511A71601B5ED7C10015E4B5 /* ProductBatteryView.h */,
 				511A71611B5ED7C10015E4B5 /* ProductBatteryView.m */,
+				51FAEFED1B62B85F00A7DCF9 /* ProductGradientView.h */,
+				51FAEFEE1B62B85F00A7DCF9 /* ProductGradientView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -504,6 +512,8 @@
 				5BE2A72C1B18AB2300EFA91A /* FSTArrowEndedLine.m */,
 				51DD77831B4AFA1D0024052A /* FSTDashedLine.h */,
 				51DD77841B4AFA1D0024052A /* FSTDashedLine.m */,
+				51FAEFF01B62DD8100A7DCF9 /* FSTLine.h */,
+				51FAEFF11B62DD8100A7DCF9 /* FSTLine.m */,
 				51A13CDC1B4DAF8600BA3CB7 /* FSTThinArrowView.h */,
 				51A13CDD1B4DAF8600BA3CB7 /* FSTThinArrowView.m */,
 				5BE2A72E1B18E19C00EFA91A /* FSTLineGridView.h */,
@@ -918,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BC3648A1A2FAC1A00D03B9C /* FSTMilkyWeigh.m in Sources */,
+				51FAEFF21B62DD8100A7DCF9 /* FSTLine.m in Sources */,
 				5BC3648D1A3112EE00D03B9C /* FSTBackgroundLayer.m in Sources */,
 				5BA3A97D1B38B46500E51C51 /* FSTBleConnectingViewController.m in Sources */,
 				5BA3A96E1B345DAF00E51C51 /* FSTBleCentralManager.m in Sources */,
@@ -996,6 +1007,7 @@
 				5B174DD81A5DE1DE00A00505 /* MilkGallonStand.m in Sources */,
 				5B7338BA1B0F9856004C931E /* FSTCookingProgressLayer.m in Sources */,
 				6743AE1F19E30E46000D9CF3 /* MobiNavigationController.m in Sources */,
+				51FAEFEF1B62B85F00A7DCF9 /* ProductGradientView.m in Sources */,
 				5BC3649A1A32624F00D03B9C /* FSTChillHubDevice.m in Sources */,
 				5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */,
 				5B99DFC51AB1EB2D00247034 /* FSTParagon.m in Sources */,

@@ -114,9 +114,9 @@
                                 <rect key="frame" x="304" y="533" width="300" height="66.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Time_Temp" translatesAutoresizingMaskIntoConstraints="NO" id="OuJ-pe-uv6">
-                                        <rect key="frame" x="73" y="23" width="33" height="33"/>
+                                        <rect key="frame" x="70.5" y="23" width="38" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="OuJ-pe-uv6" secondAttribute="height" multiplier="1:1" id="MqQ-cW-JZQ"/>
+                                            <constraint firstAttribute="width" secondItem="OuJ-pe-uv6" secondAttribute="height" multiplier="54:47" id="MqQ-cW-JZQ"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-3R-9EM">
@@ -179,9 +179,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="MPs-U0-mpI">
-                                        <rect key="frame" x="76" y="24" width="33" height="33"/>
+                                        <rect key="frame" x="73.5" y="24" width="38" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="MPs-U0-mpI" secondAttribute="height" multiplier="1:1" id="Jj0-H6-2zh"/>
+                                            <constraint firstAttribute="width" secondItem="MPs-U0-mpI" secondAttribute="height" multiplier="54:47" id="Jj0-H6-2zh"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -499,9 +499,9 @@
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="6xv-hR-cYl">
-                                        <rect key="frame" x="86.5" y="19" width="37.5" height="37.5"/>
+                                        <rect key="frame" x="83.5" y="19" width="43.5" height="37.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="6xv-hR-cYl" secondAttribute="height" multiplier="1:1" id="Zje-LE-KTH"/>
+                                            <constraint firstAttribute="width" secondItem="6xv-hR-cYl" secondAttribute="height" multiplier="54:47" id="Zje-LE-KTH"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1680,6 +1680,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="608" height="513.5"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="9A6-tP-Qs8" customClass="FSTLine">
+                            <rect key="frame" x="0.0" y="0.0" width="608" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="l0y-jM-v2O">
                             <rect key="frame" x="0.0" y="87" width="608" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1889,16 +1894,16 @@
                                 <rect key="frame" x="-4" y="20" width="608" height="513.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="v8P-8o-YpD" kind="embed" id="oKh-5x-GzK"/>
+                                    <segue destination="v8P-8o-YpD" kind="embed" id="kaM-gB-8PG"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uT2-s3-jjA" userLabel="customViewWrapper">
                                 <rect key="frame" x="304" y="533" width="300" height="66.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Time_Temp" translatesAutoresizingMaskIntoConstraints="NO" id="AdC-fO-nrV">
-                                        <rect key="frame" x="73" y="16" width="33" height="33"/>
+                                        <rect key="frame" x="70.5" y="16" width="38" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="AdC-fO-nrV" secondAttribute="height" multiplier="1:1" id="m6q-Oi-5JA"/>
+                                            <constraint firstAttribute="width" secondItem="AdC-fO-nrV" secondAttribute="height" multiplier="54:47" id="m6q-Oi-5JA"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF8-83-p8Y">
@@ -1961,9 +1966,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="SIC-89-Q6s">
-                                        <rect key="frame" x="76" y="17" width="33" height="33"/>
+                                        <rect key="frame" x="73.5" y="17" width="38" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="SIC-89-Q6s" secondAttribute="height" multiplier="1:1" id="guU-o6-YV3"/>
+                                            <constraint firstAttribute="width" secondItem="SIC-89-Q6s" secondAttribute="height" multiplier="54:47" id="guU-o6-YV3"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -2041,12 +2046,13 @@
                     </view>
                     <connections>
                         <segue destination="uv6-e3-ONs" kind="show" identifier="segueBeefSettings" id="R23-Df-nUw"/>
+                        <segue destination="tSd-Ug-HyZ" kind="show" identifier="customSegue" id="ETw-Ro-4Or"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQK-fJ-TBa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="a7S-JN-9rn">
                     <connections>
-                        <action selector="customTap:" destination="pN4-mP-ZJw" id="a9l-V9-TVR"/>
+                        <action selector="customTap:" destination="pN4-mP-ZJw" id="HJT-qe-7Aq"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2066,7 +2072,8 @@
         <image name="placefood_in" width="849" height="1277"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oKh-5x-GzK"/>
+        <segue reference="ETw-Ro-4Or"/>
+        <segue reference="kaM-gB-8PG"/>
         <segue reference="Oqm-D3-BPL"/>
         <segue reference="4Ck-Rj-PWC"/>
     </inferredMetricsTieBreakers>

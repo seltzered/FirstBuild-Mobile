@@ -71,6 +71,10 @@ NSString* headerText;
     }
 }
 
+- (IBAction)customTap:(id)sender {
+    [self performSegueWithIdentifier:@"customSegue" sender:self];
+}
+
 /*-(void) viewWillAppear:(BOOL)animated
 {
     self.headerLabel.text = [self.currentParagon.currentCookingMethod.name stringByAppendingString:@"?"];

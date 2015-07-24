@@ -18,10 +18,14 @@
 #import "FSTCookingMethodViewController.h"
 #import "FSTBleCentralManager.h"
 #import "FSTCookingViewController.h"
+#import "ProductGradientView.h" // to control up or down gradient
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
 @interface ProductTableViewController ()
+
+@property (weak, nonatomic) IBOutlet ProductGradientView *topGradient;
+@property (weak, nonatomic) IBOutlet ProductGradientView *bottomGradient;
 
 @end
 
@@ -52,6 +56,8 @@ NSIndexPath *_indexPathForDeletion;
     [self configureBleDevices];
     
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.topGradient.up = true;
+    self.bottomGradient.up = false;
 }
 
 -(void)dealloc

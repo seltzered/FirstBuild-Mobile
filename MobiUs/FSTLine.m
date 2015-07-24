@@ -1,25 +1,24 @@
 //
-//  FSTDashedLine.m
+//  FSTLine.m
 //  FirstBuild
 //
-//  Created by John Nolan on 7/6/15.
+//  Created by John Nolan on 7/24/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTDashedLine.h"
+#import "FSTLine.h"
 
-@implementation FSTDashedLine
+@implementation FSTLine
 
-
+// new class for grey lines
 - (void)drawRect:(CGRect)rect {
     CGFloat ystart = rect.size.height/2;
     CGFloat xstart = 0;
     UIBezierPath* path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(xstart, ystart)];
     [path addLineToPoint:CGPointMake(xstart+rect.size.width, ystart)];
-    CGFloat dash[] = {3, 6}; // length, gaps
-    [path setLineDash:dash count: 2 phase:9]; // phase might be zero
-    UIColor* strokeColor = UIColorFromRGB(0xE40039); // reddish?
+    
+    UIColor* strokeColor = [UIColor grayColor]; // might add an alpha
     [strokeColor setStroke];
     [path stroke];
 }

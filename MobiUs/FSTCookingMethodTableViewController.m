@@ -7,7 +7,7 @@
 //
 
 #import "FSTCookingMethodTableViewController.h"
-#import "FSTDashedLine.h"
+#import "FSTLine.h"
 
 @interface FSTCookingMethodTableViewController ()
 
@@ -57,11 +57,11 @@
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.font = [UIFont fontWithName:@"FSEmeric-Light" size:22];
     
-    FSTDashedLine *lineView = [[FSTDashedLine alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
+    FSTLine *lineView = [[FSTLine alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
     lineView.backgroundColor = [UIColor clearColor];
-    [cell.contentView addSubview:lineView];
+    [cell.contentView addSubview:lineView]; // a line at the bottom of the cell
     
-    UIView *view = [[UIView alloc]initWithFrame:cell.frame]; // background filling in the whole background
+    UIView *view = [[UIView alloc]initWithFrame:cell.frame]; // highlight filling in the whole background
     view.backgroundColor = UIColorFromRGB(0xF0663A);// UIColorFromRGB(0xFF0105); // orange highlight color
     [cell setSelectedBackgroundView:view];
     cell.textLabel.highlightedTextColor = [UIColor whiteColor];
@@ -74,16 +74,16 @@
     return indexPath;
 }
 */
-- (void)tableView:(UITableView*)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+/*- (void)tableView:(UITableView*)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone]; // this does select it twice, but it looks fine. I would prefer to set animation to true from the beginning! perhaps custom tableView?
 
-}
+}*/ // put in to activate animation
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     FSTCookingMethod* method = self.methods.cookingMethods[indexPath.row];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // this
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // this
         tableView.userInteractionEnabled = YES;
         [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES]; // clear selection property not making a difference // this might be a problem if the selection changes
         [self.delegate cookingMethodSelected:method]; // perform segue after a delay to show animation
