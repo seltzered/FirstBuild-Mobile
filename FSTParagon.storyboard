@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -36,27 +36,8 @@
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
-            <string>PTSans-Narrow</string>
-            <string>PTSans-Narrow</string>
-            <string>PTSans-Narrow</string>
-            <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
             <string>PTSans-Narrow</string>
@@ -593,7 +574,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1452" y="1051"/>
+            <point key="canvasLocation" x="1408" y="328"/>
         </scene>
         <!--ReadyToPreheatViewController-->
         <scene sceneID="G4l-Oz-JZ4">
@@ -741,422 +722,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1793" y="370"/>
-        </scene>
-        <!--Preheating View Controller-->
-        <scene sceneID="eDw-Od-aXw">
-            <objects>
-                <viewController storyboardIdentifier="FSTPreheatingViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Yg1-bw-06J" customClass="FSTPreheatingViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="bP5-Lf-gXK"/>
-                        <viewControllerLayoutGuide type="bottom" id="mHj-Rc-fkS"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lIF-GZ-kSf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREHEATING TO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVu-Hg-F9d">
-                                <rect key="frame" x="0.0" y="30" width="600" height="26"/>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="20"/>
-                                <color key="textColor" red="0.35294117650000001" green="0.35686274509999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VvA-nT-Zsb" userLabel="targetTemperatureLabel">
-                                <rect key="frame" x="0.0" y="56" width="600" height="54.5"/>
-                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="42"/>
-                                <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press STOP on Paragon to cancel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-sM-5Bw">
-                                <rect key="frame" x="0.0" y="111" width="600" height="26"/>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="20"/>
-                                <color key="textColor" red="0.35294117650000001" green="0.35686274509999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RyY-Xg-zwD" userLabel="topOrangeBarView">
-                                <rect key="frame" x="0.0" y="150" width="600" height="5"/>
-                                <color key="backgroundColor" red="0.83137254901960789" green="0.20000000000000001" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="5" id="hC3-AT-Eiz"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uLT-aM-Hha" userLabel="backgroundView" customClass="FSTLineGridView">
-                                <rect key="frame" x="16" y="155" width="568" height="354.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fZg-2G-EBk" userLabel="temperatureScroller">
-                                <rect key="frame" x="0.0" y="360" width="600" height="150"/>
-                                <subviews>
-                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9or-bJ-rAO" userLabel="temperatureScrollerBackground">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
-                                        <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-ZG-oY7" userLabel="topOrangeBarView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="5"/>
-                                        <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="5" id="Aej-do-pUj"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCf-tF-mVY" userLabel="temperatureBox">
-                                        <rect key="frame" x="180" y="0.0" width="240" height="70"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBG-NO-lfF">
-                                                <rect key="frame" x="0.0" y="0.0" width="240" height="23.5"/>
-                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="18"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khW-jb-3y2" userLabel="currentTemperatureLabel">
-                                                <rect key="frame" x="0.0" y="23" width="240" height="50.5"/>
-                                                <gestureRecognizers/>
-                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="39"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="aBG-NO-lfF" secondAttribute="width" id="2WB-s9-0an"/>
-                                            <constraint firstItem="khW-jb-3y2" firstAttribute="top" secondItem="aBG-NO-lfF" secondAttribute="bottom" id="HQ0-WP-IVU"/>
-                                            <constraint firstAttribute="centerX" secondItem="aBG-NO-lfF" secondAttribute="centerX" id="NZL-N4-6yO"/>
-                                            <constraint firstItem="khW-jb-3y2" firstAttribute="width" secondItem="VCf-tF-mVY" secondAttribute="width" id="a1w-Yo-dju"/>
-                                            <constraint firstItem="aBG-NO-lfF" firstAttribute="top" secondItem="VCf-tF-mVY" secondAttribute="top" id="ts7-S5-Ga7"/>
-                                            <constraint firstAttribute="centerX" secondItem="khW-jb-3y2" secondAttribute="centerX" id="yyA-Fa-Hkc"/>
-                                            <constraint firstAttribute="height" constant="70" id="z4V-T0-ZjW"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="gcP-ZG-oY7" secondAttribute="width" id="0WV-wJ-sk1"/>
-                                    <constraint firstAttribute="centerX" secondItem="gcP-ZG-oY7" secondAttribute="centerX" id="Bkf-Vl-NYk"/>
-                                    <constraint firstAttribute="height" constant="150" id="VVy-jU-Inw"/>
-                                    <constraint firstItem="9or-bJ-rAO" firstAttribute="leading" secondItem="fZg-2G-EBk" secondAttribute="leading" id="cBu-HD-m1b"/>
-                                    <constraint firstItem="VCf-tF-mVY" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="top" id="cNT-VE-L2y"/>
-                                    <constraint firstItem="VCf-tF-mVY" firstAttribute="width" secondItem="fZg-2G-EBk" secondAttribute="width" multiplier="0.4" id="e54-uP-wxO"/>
-                                    <constraint firstAttribute="bottom" secondItem="9or-bJ-rAO" secondAttribute="bottom" id="g2m-ao-gwq"/>
-                                    <constraint firstAttribute="centerX" secondItem="VCf-tF-mVY" secondAttribute="centerX" id="i70-uP-vgD"/>
-                                    <constraint firstAttribute="trailing" secondItem="9or-bJ-rAO" secondAttribute="trailing" id="pdL-Mj-7BF"/>
-                                    <constraint firstItem="9or-bJ-rAO" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="top" id="tT2-Eq-dGL"/>
-                                    <constraint firstItem="gcP-ZG-oY7" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="top" id="ztK-GT-bUO"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1F3-4d-maq" userLabel="buttonWrapperView">
-                                <rect key="frame" x="30" y="520" width="540" height="65"/>
-                                <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyH-yn-3L5">
-                                        <rect key="frame" x="0.0" y="16" width="540" height="34"/>
-                                        <gestureRecognizers/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
-                                        <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="RyH-yn-3L5" secondAttribute="width" id="7L1-Pu-FDR"/>
-                                    <constraint firstAttribute="centerX" secondItem="RyH-yn-3L5" secondAttribute="centerX" id="Nzk-wV-FY1"/>
-                                    <constraint firstAttribute="centerY" secondItem="RyH-yn-3L5" secondAttribute="centerY" constant="-0.5" id="rrz-E7-oMh"/>
-                                    <constraint firstAttribute="height" constant="65" id="vLz-7p-Bqc"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
-                                        <color key="value" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <real key="value" value="1.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Md1-7H-vrL" appends="YES" id="kmh-5l-Aae"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="1F3-4d-maq" firstAttribute="top" secondItem="fZg-2G-EBk" secondAttribute="bottom" constant="10" id="27r-kI-6Hc"/>
-                            <constraint firstItem="uLT-aM-Hha" firstAttribute="top" secondItem="RyY-Xg-zwD" secondAttribute="bottom" id="3JT-rZ-Vdp"/>
-                            <constraint firstAttribute="width" secondItem="ay4-sM-5Bw" secondAttribute="width" id="501-1M-XfA"/>
-                            <constraint firstAttribute="centerX" secondItem="1F3-4d-maq" secondAttribute="centerX" id="5Hg-5G-0nY"/>
-                            <constraint firstItem="ay4-sM-5Bw" firstAttribute="top" secondItem="VvA-nT-Zsb" secondAttribute="bottom" id="5Ke-Q0-tJO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uLT-aM-Hha" secondAttribute="trailing" id="AwN-z6-fwV"/>
-                            <constraint firstAttribute="centerX" secondItem="RyY-Xg-zwD" secondAttribute="centerX" id="B5u-Hg-rrc"/>
-                            <constraint firstAttribute="centerX" secondItem="ay4-sM-5Bw" secondAttribute="centerX" id="D80-Xh-Q7N"/>
-                            <constraint firstItem="mHj-Rc-fkS" firstAttribute="top" secondItem="1F3-4d-maq" secondAttribute="bottom" constant="15" id="I72-t4-hUd"/>
-                            <constraint firstItem="RyY-Xg-zwD" firstAttribute="top" secondItem="ay4-sM-5Bw" secondAttribute="bottom" constant="13" id="Key-x7-Biq"/>
-                            <constraint firstItem="eVu-Hg-F9d" firstAttribute="top" secondItem="bP5-Lf-gXK" secondAttribute="bottom" constant="10" id="Xbt-ap-9BM"/>
-                            <constraint firstItem="uLT-aM-Hha" firstAttribute="leading" secondItem="lIF-GZ-kSf" secondAttribute="leadingMargin" id="XzB-w9-31T"/>
-                            <constraint firstAttribute="centerX" secondItem="VvA-nT-Zsb" secondAttribute="centerX" id="Ybk-hh-vb1"/>
-                            <constraint firstAttribute="width" secondItem="RyY-Xg-zwD" secondAttribute="width" id="fln-9u-OLQ"/>
-                            <constraint firstItem="fZg-2G-EBk" firstAttribute="bottom" secondItem="uLT-aM-Hha" secondAttribute="bottom" id="iaa-DA-Ewi"/>
-                            <constraint firstAttribute="centerX" secondItem="eVu-Hg-F9d" secondAttribute="centerX" id="nS2-qP-xsL"/>
-                            <constraint firstAttribute="width" secondItem="fZg-2G-EBk" secondAttribute="width" id="rfk-Nj-iB2"/>
-                            <constraint firstItem="VvA-nT-Zsb" firstAttribute="top" secondItem="eVu-Hg-F9d" secondAttribute="bottom" id="sIL-WA-Kbm"/>
-                            <constraint firstAttribute="width" secondItem="eVu-Hg-F9d" secondAttribute="width" id="soZ-dd-hMR"/>
-                            <constraint firstItem="1F3-4d-maq" firstAttribute="width" secondItem="lIF-GZ-kSf" secondAttribute="width" multiplier="0.9" id="wCI-jj-9fN"/>
-                            <constraint firstAttribute="width" secondItem="VvA-nT-Zsb" secondAttribute="width" id="yyC-XJ-WTi"/>
-                            <constraint firstAttribute="centerX" secondItem="fZg-2G-EBk" secondAttribute="centerX" id="zys-Ou-Oow"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="buttonWrapperView" destination="1F3-4d-maq" id="Fbg-oV-uZD"/>
-                        <outlet property="currentTemperatureLabel" destination="khW-jb-3y2" id="JhV-nY-7Nd"/>
-                        <outlet property="scrollerBackgroundView" destination="9or-bJ-rAO" id="Zlg-xM-a4p"/>
-                        <outlet property="scrollerViewDistanceFromClosestUIElementConstraint" destination="27r-kI-6Hc" id="1nw-1T-gM2"/>
-                        <outlet property="targetTemperatureLabel" destination="VvA-nT-Zsb" id="ahB-Nq-si5"/>
-                        <outlet property="temperatureBox" destination="VCf-tF-mVY" id="OUf-qp-taT"/>
-                        <outlet property="temperatureScrollerHeightConstraint" destination="VVy-jU-Inw" id="raO-AE-H46"/>
-                        <outlet property="temperatureScrollerView" destination="fZg-2G-EBk" id="2PF-rM-oud"/>
-                        <outlet property="topOrangeBarView" destination="RyY-Xg-zwD" id="jgd-yG-iNH"/>
-                        <segue destination="74k-pv-pbn" kind="show" identifier="segueReadyToCook" id="k37-hw-9fL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aA4-IY-sso" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Md1-7H-vrL">
-                    <connections>
-                        <action selector="cancelTap:" destination="Yg1-bw-06J" id="RXe-Ra-JX1"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="2545" y="978"/>
-        </scene>
-        <!--Ready To Cook View Controller-->
-        <scene sceneID="QAf-2c-JNw">
-            <objects>
-                <viewController storyboardIdentifier="FSTReadyToCookViewControllerOLD" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zGa-nc-t4X" customClass="FSTReadyToCookViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5e7-Fh-D9p"/>
-                        <viewControllerLayoutGuide type="bottom" id="des-kT-A8c"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="c63-FH-8tU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="READY TO COOK!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nf4-MS-h0q">
-                                <rect key="frame" x="0.0" y="25" width="600" height="52"/>
-                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
-                                <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
-                                </variation>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpm-M2-LR6" userLabel="timeAndTemperatureView">
-                                <rect key="frame" x="0.0" y="87" width="600" height="25"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOb-OY-pSa" userLabel="tempLabel">
-                                        <rect key="frame" x="0.0" y="13" width="600" height="0.0"/>
-                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
-                                        <color key="textColor" red="0.42745098039215684" green="0.43137254901960786" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                            <rect key="frame" x="0.0" y="13" width="800" height="0.0"/>
-                                        </variation>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="ZOb-OY-pSa" secondAttribute="centerY" id="SV8-lb-b6G"/>
-                                    <constraint firstAttribute="centerX" secondItem="ZOb-OY-pSa" secondAttribute="centerX" id="SYE-i0-nHz"/>
-                                    <constraint firstAttribute="width" secondItem="ZOb-OY-pSa" secondAttribute="width" id="hdt-wS-KWl"/>
-                                    <constraint firstAttribute="height" constant="25" id="niv-CP-6dn"/>
-                                </constraints>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="87" width="800" height="25"/>
-                                </variation>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o14-6r-nV0" userLabel="cookingLabel">
-                                <rect key="frame" x="0.0" y="117" width="600" height="0.0"/>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
-                                <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="117" width="800" height="0.0"/>
-                                </variation>
-                            </label>
-                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="59z-Gi-JK3" userLabel="midView">
-                                <rect key="frame" x="0.0" y="127" width="600" height="393"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9z-Hp-a29" userLabel="CURRENT TEMP">
-                                        <rect key="frame" x="0.0" y="10" width="600" height="26"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                            <rect key="frame" x="0.0" y="10" width="800" height="26"/>
-                                        </variation>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqS-TY-zcl" userLabel="actualTemperatureLabel">
-                                        <rect key="frame" x="0.0" y="41" width="600" height="52"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                            <rect key="frame" x="0.0" y="41" width="800" height="52"/>
-                                        </variation>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="paragonReadyToCook" translatesAutoresizingMaskIntoConstraints="NO" id="tAk-8Y-mBK">
-                                        <rect key="frame" x="216" y="103" width="168" height="205"/>
-                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="316" y="103" width="168" height="405"/>
-                                        </variation>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submerge your vaccuum-sealed bag of food in the pot of water." textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumScaleFactor="0.80000000000000027" translatesAutoresizingMaskIntoConstraints="NO" id="mwR-GY-3g1" userLabel="SUBMERGE LABEL">
-                                        <rect key="frame" x="45" y="318" width="510" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Ol1-3t-ILl"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="60" y="518" width="680" height="50"/>
-                                        </variation>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.78431372549019607" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="L9z-Hp-a29" firstAttribute="top" secondItem="59z-Gi-JK3" secondAttribute="top" constant="10" id="298-9Z-qMa"/>
-                                    <constraint firstAttribute="centerX" secondItem="tAk-8Y-mBK" secondAttribute="centerX" id="ACo-q1-fwl"/>
-                                    <constraint firstItem="PqS-TY-zcl" firstAttribute="width" secondItem="59z-Gi-JK3" secondAttribute="width" id="D59-Ar-kQJ"/>
-                                    <constraint firstItem="mwR-GY-3g1" firstAttribute="width" secondItem="59z-Gi-JK3" secondAttribute="width" multiplier="0.85" id="Dno-WZ-Y7V"/>
-                                    <constraint firstItem="PqS-TY-zcl" firstAttribute="top" secondItem="L9z-Hp-a29" secondAttribute="bottom" constant="5" id="bHT-XI-BJ4"/>
-                                    <constraint firstAttribute="centerX" secondItem="PqS-TY-zcl" secondAttribute="centerX" id="cPV-tZ-E08"/>
-                                    <constraint firstAttribute="centerX" secondItem="mwR-GY-3g1" secondAttribute="centerX" id="f0i-85-edA"/>
-                                    <constraint firstAttribute="bottom" secondItem="mwR-GY-3g1" secondAttribute="bottom" constant="25" id="kLr-Sy-T6K"/>
-                                    <constraint firstItem="tAk-8Y-mBK" firstAttribute="top" secondItem="PqS-TY-zcl" secondAttribute="bottom" constant="10" id="kRC-Mu-yMj"/>
-                                    <constraint firstItem="L9z-Hp-a29" firstAttribute="width" secondItem="59z-Gi-JK3" secondAttribute="width" id="ktL-On-ho1"/>
-                                    <constraint firstItem="mwR-GY-3g1" firstAttribute="top" secondItem="tAk-8Y-mBK" secondAttribute="bottom" constant="10" id="rYV-ym-fmm"/>
-                                    <constraint firstAttribute="centerX" secondItem="L9z-Hp-a29" secondAttribute="centerX" id="s0Z-wy-vbY"/>
-                                </constraints>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="127" width="800" height="593"/>
-                                </variation>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VC-59-Gr7" userLabel="buttonsWrapperView">
-                                <rect key="frame" x="0.0" y="535" width="600" height="50"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUV-e9-RbN" userLabel="continueButtonWrapperView">
-                                        <rect key="frame" x="333" y="1" width="252" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Timer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eL-J7-O1s">
-                                                <rect key="frame" x="74" y="8" width="104.5" height="34"/>
-                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="centerY" secondItem="6eL-J7-O1s" secondAttribute="centerY" id="bmV-fT-3qC"/>
-                                            <constraint firstAttribute="centerX" secondItem="6eL-J7-O1s" secondAttribute="centerX" id="u4M-as-EIX"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="bmW-xS-W9C" appends="YES" id="KpH-e3-upO"/>
-                                        </connections>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1w-gJ-U7A" userLabel="cancelButtonWrapperView">
-                                        <rect key="frame" x="15" y="0.0" width="252" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9P1-A2-3Kw">
-                                                <rect key="frame" x="96" y="8" width="60.5" height="34"/>
-                                                <gestureRecognizers/>
-                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
-                                                <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="centerX" secondItem="9P1-A2-3Kw" secondAttribute="centerX" id="5Bl-au-PQg"/>
-                                            <constraint firstAttribute="centerY" secondItem="9P1-A2-3Kw" secondAttribute="centerY" id="8ZX-c0-xpJ"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
-                                                <color key="value" red="0.68235294117647061" green="0.10588235294117647" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <real key="value" value="1.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="7yx-g5-1dB" appends="YES" id="wRf-ET-cTd"/>
-                                        </connections>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="bUV-e9-RbN" secondAttribute="centerY" constant="-1" id="1dM-Bq-n0G"/>
-                                    <constraint firstAttribute="centerY" secondItem="U1w-gJ-U7A" secondAttribute="centerY" id="2FZ-jB-xh6"/>
-                                    <constraint firstItem="U1w-gJ-U7A" firstAttribute="leading" secondItem="3VC-59-Gr7" secondAttribute="leading" constant="15" id="98g-xB-yqA"/>
-                                    <constraint firstItem="bUV-e9-RbN" firstAttribute="height" secondItem="3VC-59-Gr7" secondAttribute="height" id="Ny7-mb-IRA"/>
-                                    <constraint firstAttribute="trailing" secondItem="bUV-e9-RbN" secondAttribute="trailing" constant="15" id="PCX-JQ-KhP"/>
-                                    <constraint firstItem="U1w-gJ-U7A" firstAttribute="width" secondItem="3VC-59-Gr7" secondAttribute="width" multiplier="0.42" id="PH8-jF-Tck"/>
-                                    <constraint firstAttribute="height" constant="50" id="X3w-1w-vkH"/>
-                                    <constraint firstItem="bUV-e9-RbN" firstAttribute="width" secondItem="3VC-59-Gr7" secondAttribute="width" multiplier="0.42" id="lZj-HX-PCs"/>
-                                    <constraint firstItem="U1w-gJ-U7A" firstAttribute="height" secondItem="3VC-59-Gr7" secondAttribute="height" id="w6e-6g-5XM"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="3VC-59-Gr7" firstAttribute="top" secondItem="59z-Gi-JK3" secondAttribute="bottom" constant="15" id="0f3-US-i4e"/>
-                            <constraint firstAttribute="width" secondItem="xpm-M2-LR6" secondAttribute="width" id="2fv-cg-6Tk"/>
-                            <constraint firstItem="nf4-MS-h0q" firstAttribute="top" secondItem="5e7-Fh-D9p" secondAttribute="bottom" constant="5" id="D2D-dc-GdQ"/>
-                            <constraint firstAttribute="width" secondItem="3VC-59-Gr7" secondAttribute="width" id="Op2-a5-1dM"/>
-                            <constraint firstAttribute="centerX" secondItem="59z-Gi-JK3" secondAttribute="centerX" id="VaQ-Ew-H6e"/>
-                            <constraint firstAttribute="centerX" secondItem="o14-6r-nV0" secondAttribute="centerX" id="VcD-7Z-Kgb"/>
-                            <constraint firstItem="des-kT-A8c" firstAttribute="top" secondItem="3VC-59-Gr7" secondAttribute="bottom" constant="15" id="Y5X-z7-Iy8"/>
-                            <constraint firstAttribute="centerX" secondItem="xpm-M2-LR6" secondAttribute="centerX" id="ZWa-dQ-ye4"/>
-                            <constraint firstItem="o14-6r-nV0" firstAttribute="width" secondItem="c63-FH-8tU" secondAttribute="width" id="fQO-C9-q6b"/>
-                            <constraint firstAttribute="centerX" secondItem="nf4-MS-h0q" secondAttribute="centerX" id="oVa-EH-c9B"/>
-                            <constraint firstAttribute="width" secondItem="nf4-MS-h0q" secondAttribute="width" id="pjE-Zp-Tex"/>
-                            <constraint firstItem="59z-Gi-JK3" firstAttribute="top" secondItem="o14-6r-nV0" secondAttribute="bottom" constant="10" id="rpD-NX-jKP"/>
-                            <constraint firstAttribute="centerX" secondItem="3VC-59-Gr7" secondAttribute="centerX" id="uWQ-RH-1QC"/>
-                            <constraint firstItem="o14-6r-nV0" firstAttribute="top" secondItem="xpm-M2-LR6" secondAttribute="bottom" constant="5" id="vh9-cF-Hdp"/>
-                            <constraint firstItem="59z-Gi-JK3" firstAttribute="width" secondItem="c63-FH-8tU" secondAttribute="width" id="xLQ-Bb-Ll4"/>
-                            <constraint firstItem="xpm-M2-LR6" firstAttribute="top" secondItem="nf4-MS-h0q" secondAttribute="bottom" constant="10" id="yBS-Kj-ciK"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="actualTemperatureLabel" destination="PqS-TY-zcl" id="EIR-Sf-afG"/>
-                        <outlet property="bottomLabel" destination="mwR-GY-3g1" id="swh-7z-utg"/>
-                        <outlet property="cookingLabel" destination="o14-6r-nV0" id="0qY-uW-JJE"/>
-                        <outlet property="tempLabel" destination="ZOb-OY-pSa" id="8qE-mL-ZIE"/>
-                        <segue destination="ktp-73-2Pg" kind="show" identifier="segueCooking" id="0pB-2U-wDL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tnS-CR-y0g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="bmW-xS-W9C" userLabel="tapContinueButtonGesture">
-                    <connections>
-                        <action selector="continueButtonTap:" destination="zGa-nc-t4X" id="pXH-0s-3bS"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="7yx-g5-1dB" userLabel="tapCancelButtonGesture">
-                    <connections>
-                        <action selector="cancelButtonTap:" destination="zGa-nc-t4X" id="Tml-qp-ZM1"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="2881" y="-482"/>
+            <point key="canvasLocation" x="1408" y="1207"/>
         </scene>
         <!--Cooking View Controller-->
         <scene sceneID="UhG-mx-UMt">
@@ -1399,7 +965,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4051" y="370"/>
+            <point key="canvasLocation" x="2363" y="1207"/>
         </scene>
         <!--Custom Cook Settings View Controller-->
         <scene sceneID="gJg-qu-UJ0">
@@ -1670,7 +1236,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="266" y="1207"/>
+            <point key="canvasLocation" x="326" y="1207"/>
         </scene>
         <!--Cooking Method Table View Controller-->
         <scene sceneID="9V9-m9-PON">
@@ -1705,152 +1271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K5D-Ld-FCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="945" y="-473.25"/>
-        </scene>
-        <!--Ready To Cook View Controller-->
-        <scene sceneID="glX-tJ-YwZ">
-            <objects>
-                <viewController storyboardIdentifier="FSTReadyToCookViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="74k-pv-pbn" customClass="FSTReadyToCookViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WZM-fZ-E7O"/>
-                        <viewControllerLayoutGuide type="bottom" id="Lbf-UK-yr3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RqH-sX-qYz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW COOKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgO-S3-ZYI">
-                                <rect key="frame" x="0.0" y="25" width="600" height="52"/>
-                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
-                                <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="25" width="800" height="52"/>
-                                </variation>
-                            </label>
-                            <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="jTg-Hf-Hpy" userLabel="midView">
-                                <rect key="frame" x="0.0" y="87" width="600" height="433"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CURRENT TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oas-zI-5bb" userLabel="CURRENT TEMP">
-                                        <rect key="frame" x="0.0" y="10" width="600" height="26"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                            <rect key="frame" x="0.0" y="10" width="800" height="26"/>
-                                        </variation>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfI-ei-5qy" userLabel="actualTemperatureLabel">
-                                        <rect key="frame" x="0.0" y="41" width="600" height="52"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="40"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                            <rect key="frame" x="0.0" y="41" width="800" height="52"/>
-                                        </variation>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="paragonReadyToCook" translatesAutoresizingMaskIntoConstraints="NO" id="tYs-Cs-gku">
-                                        <rect key="frame" x="216" y="103" width="168" height="245"/>
-                                        <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="316" y="103" width="168" height="445"/>
-                                        </variation>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="2" minimumScaleFactor="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="kP9-pO-t5J" userLabel="SUBMERGE LABEL">
-                                        <rect key="frame" x="45" y="358" width="510" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="db8-ep-7JS"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="Oas-zI-5bb" secondAttribute="centerX" id="4xQ-Lu-R35"/>
-                                    <constraint firstItem="kP9-pO-t5J" firstAttribute="width" secondItem="jTg-Hf-Hpy" secondAttribute="width" multiplier="0.85" id="7H6-uj-7rH"/>
-                                    <constraint firstItem="UfI-ei-5qy" firstAttribute="top" secondItem="Oas-zI-5bb" secondAttribute="bottom" constant="5" id="BBr-Ko-egr"/>
-                                    <constraint firstItem="UfI-ei-5qy" firstAttribute="width" secondItem="jTg-Hf-Hpy" secondAttribute="width" id="KaC-G0-mXu"/>
-                                    <constraint firstItem="tYs-Cs-gku" firstAttribute="top" secondItem="UfI-ei-5qy" secondAttribute="bottom" constant="10" id="NJz-uL-YKA"/>
-                                    <constraint firstItem="Oas-zI-5bb" firstAttribute="top" secondItem="jTg-Hf-Hpy" secondAttribute="top" constant="10" id="Ts2-PC-H8C"/>
-                                    <constraint firstAttribute="centerX" secondItem="kP9-pO-t5J" secondAttribute="centerX" id="aEw-Tk-s2M"/>
-                                    <constraint firstItem="kP9-pO-t5J" firstAttribute="top" secondItem="tYs-Cs-gku" secondAttribute="bottom" constant="10" id="coz-3m-gBj"/>
-                                    <constraint firstAttribute="bottom" secondItem="kP9-pO-t5J" secondAttribute="bottom" constant="25" id="duX-lA-wSo"/>
-                                    <constraint firstAttribute="centerX" secondItem="UfI-ei-5qy" secondAttribute="centerX" id="geE-pc-f3L"/>
-                                    <constraint firstItem="Oas-zI-5bb" firstAttribute="width" secondItem="jTg-Hf-Hpy" secondAttribute="width" id="puV-xl-Ksa"/>
-                                    <constraint firstAttribute="centerX" secondItem="tYs-Cs-gku" secondAttribute="centerX" id="zw5-6H-Lok"/>
-                                </constraints>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="87" width="800" height="633"/>
-                                </variation>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icR-JW-6aU" userLabel="buttonsWrapperView">
-                                <rect key="frame" x="0.0" y="535" width="600" height="50"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F1m-3h-8RC" userLabel="continueButtonWrapperView">
-                                        <rect key="frame" x="15" y="0.0" width="570" height="50"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAIN MENU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nza-L3-IpI">
-                                                <rect key="frame" x="229" y="8" width="112" height="34"/>
-                                                <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.11372549830000001" green="0.70980393890000004" blue="0.79215693470000004" alpha="1" colorSpace="deviceRGB"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="centerY" secondItem="Nza-L3-IpI" secondAttribute="centerY" id="1pd-tA-6UY"/>
-                                            <constraint firstAttribute="centerX" secondItem="Nza-L3-IpI" secondAttribute="centerX" id="Ytr-7I-Qmr"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="pQm-Rh-1rN" appends="YES" id="ZWi-qc-sUb"/>
-                                        </connections>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="27h-3h-eI6"/>
-                                    <constraint firstItem="F1m-3h-8RC" firstAttribute="height" secondItem="icR-JW-6aU" secondAttribute="height" id="4yn-lU-Wyg"/>
-                                    <constraint firstItem="F1m-3h-8RC" firstAttribute="width" secondItem="icR-JW-6aU" secondAttribute="width" multiplier="0.95" id="EPq-nr-Fz1"/>
-                                    <constraint firstAttribute="centerY" secondItem="F1m-3h-8RC" secondAttribute="centerY" id="IN8-RP-463"/>
-                                    <constraint firstAttribute="centerX" secondItem="F1m-3h-8RC" secondAttribute="centerX" id="e9N-Eq-DS7"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="jTg-Hf-Hpy" firstAttribute="top" secondItem="pgO-S3-ZYI" secondAttribute="bottom" constant="10" id="4Gi-8D-cip"/>
-                            <constraint firstAttribute="width" secondItem="icR-JW-6aU" secondAttribute="width" id="87r-jQ-DFM"/>
-                            <constraint firstItem="pgO-S3-ZYI" firstAttribute="top" secondItem="WZM-fZ-E7O" secondAttribute="bottom" constant="5" id="9Wx-By-0XE"/>
-                            <constraint firstAttribute="centerX" secondItem="pgO-S3-ZYI" secondAttribute="centerX" id="GPL-HK-gKs"/>
-                            <constraint firstItem="Lbf-UK-yr3" firstAttribute="top" secondItem="icR-JW-6aU" secondAttribute="bottom" constant="15" id="NKF-Bp-wGP"/>
-                            <constraint firstAttribute="width" secondItem="pgO-S3-ZYI" secondAttribute="width" id="NfD-Po-3Wd"/>
-                            <constraint firstAttribute="centerX" secondItem="icR-JW-6aU" secondAttribute="centerX" id="ca4-9A-Rx1"/>
-                            <constraint firstItem="jTg-Hf-Hpy" firstAttribute="width" secondItem="RqH-sX-qYz" secondAttribute="width" id="qW2-AV-5Qv"/>
-                            <constraint firstItem="icR-JW-6aU" firstAttribute="top" secondItem="jTg-Hf-Hpy" secondAttribute="bottom" constant="15" id="w1s-dG-bLH"/>
-                            <constraint firstAttribute="centerX" secondItem="jTg-Hf-Hpy" secondAttribute="centerX" id="wKA-di-VGt"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="actualTemperatureLabel" destination="UfI-ei-5qy" id="s3L-Pf-wCv"/>
-                        <outlet property="bottomLabel" destination="kP9-pO-t5J" id="Hp1-sh-CGP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="khH-dd-OVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="pQm-Rh-1rN" userLabel="tapContinueButtonGesture">
-                    <connections>
-                        <action selector="continueButtonTap:" destination="74k-pv-pbn" id="rdL-an-YRB"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="2809" y="1846"/>
+            <point key="canvasLocation" x="1057" y="-625.25"/>
         </scene>
         <!--CookingMethodViewController-->
         <scene sceneID="fdf-rD-TM5">
@@ -1947,8 +1368,8 @@
                                     <mask key="constraints">
                                         <exclude reference="zed-pE-teo"/>
                                         <exclude reference="8xb-PV-Czz"/>
-                                        <exclude reference="yT6-1n-V9W"/>
                                         <exclude reference="V98-hl-Ly2"/>
+                                        <exclude reference="yT6-1n-V9W"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -2039,8 +1460,8 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="3mX-UR-Xkh"/>
-                                <exclude reference="OqT-wh-XKJ"/>
                                 <exclude reference="LlV-78-nDu"/>
+                                <exclude reference="OqT-wh-XKJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -2066,15 +1487,13 @@
         <image name="Time_Temp" width="54" height="47"/>
         <image name="White_bg_with_dots" width="640" height="1136"/>
         <image name="paragonBackgroundBeef@1x" width="523" height="667"/>
-        <image name="paragonReadyToCook" width="168" height="253"/>
         <image name="paragonReadyToPreheat" width="640" height="374"/>
         <image name="paragonSousVideBackground@1x" width="580" height="667"/>
         <image name="placefood_in" width="849" height="1277"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ETw-Ro-4Or"/>
+        <segue reference="CmD-W5-dtV"/>
         <segue reference="kaM-gB-8PG"/>
         <segue reference="Oqm-D3-BPL"/>
-        <segue reference="4Ck-Rj-PWC"/>
     </inferredMetricsTieBreakers>
 </document>

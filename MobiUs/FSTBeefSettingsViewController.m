@@ -19,38 +19,14 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 @implementation FSTBeefSettingsViewController
 {
-    //starting height of the view for the thickness pan gesture
-    CGFloat _startingHeight;
-    
-    //starting origin of the view for the thickness pan gesture
-    CGFloat _startingOrigin;
-    
-    //max height the thickness view can go
-    CGFloat _maxHeight;
-    
-    //where does the meat view actually start.
-    CGFloat _meatHeightOffset;
-    
-    //bounding of the thickness view top
-    CGFloat _yBoundsTop;
-    
-    //bounding of the thickness view bottom
-    CGFloat _yBoundsBottom;
-    
     //data values for corresponding view relationships
     NSNumber* _currentThickness;
     NSNumber* _currentTemperature;
     FSTBeefSousVideCookingMethod* _beefCookingMethod;
-    
-    //where is the selector view positioned for the selector pan gesture
-    CGFloat _startingSelectorXOrigin;
-    
+
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
-    
-    //array of the X origins for the donesness views; storyboard defines these
-    //ensure the doneness objects in the corresponding model object line up
-    NSMutableArray* _temperatureXOrigins;
+
 }
 
 - (void)viewDidLoad {
@@ -70,23 +46,12 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
     //set up or data objects
     _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
     _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
     _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
     [self updateLabels];
-    
-    //loop through all of the subviews of the different temperatures and add their X origin to
-    //an array of locations to be later used for a loop
-    /*_temperatureXOrigins = [[NSMutableArray alloc]init];
-    for (uint8_t i=0; i< self.donenessSelectionsView.subviews.count; i++)
-    {
-        NSNumber* originX = [[NSNumber alloc] initWithFloat:((UIView*)(self.donenessSelectionsView.subviews[i])).frame.origin.x];
-        DLog(@"originX %@", originX);
-        [_temperatureXOrigins insertObject:originX atIndex:i];
-    }*/
 }
 
 - (void)updateLabels
@@ -120,22 +85,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [hourString appendAttributedString:temperatureLabel];
 
     [self.beefSettingsLabel setAttributedText:hourString];
-    
-    // thickness label
-    /*NSArray* labelDetails = (NSArray*)([_beefCookingMethod.thicknessLabels objectForKey:_currentThickness]);
-    
-    self.wholeNumberLabel.text = (NSString*)labelDetails[0];
-    self.numeratorLabel.text = (NSString*)labelDetails[1];
-    self.denominatorLabel.text = (NSString*)labelDetails[2];
-    
-    if (((NSString*)labelDetails[1]).length==0)
-    {
-        self.fractionView.hidden = YES;
-    }
-    else
-    {
-        self.fractionView.hidden = NO;
-    }*/
     
     NSMutableAttributedString* thicknessString = [[NSMutableAttributedString alloc] initWithString:[_currentThickness stringValue] attributes:labelFontDict];
     NSMutableAttributedString* thicknessStringTag = [[NSMutableAttributedString alloc] initWithString:@"\" Thickness" attributes:labelFontDict];
@@ -174,6 +123,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
+
 - (IBAction)donenessSlid:(id)sender {
     
     UISlider* slider = sender;
@@ -184,50 +134,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self updateLabels];
 }
 
-/*- (IBAction)selectorPanGesture:(id)sender {
-   
-    UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
-    UIView* v = gesture.view;
-    CGFloat xTranslation = [gesture translationInView:self.donenessSelectionsView].x;
-    CGFloat newXOrigin = _startingSelectorXOrigin + xTranslation;
-    
-    if (gesture.state == UIGestureRecognizerStateBegan)
-    {
-        _startingSelectorXOrigin = v.frame.origin.x;
-    }
-    else
-    {
-        CGRect frame = v.frame;
-        frame.origin.x = newXOrigin;
-        [v setFrame:frame];
-
-        float shortestDistance=MAXFLOAT;
-        uint8_t shortestDistanceIndex=0;
-        
-        for (uint8_t i=0; i < _temperatureXOrigins.count; i++)
-        {
-            float distance = fabs(newXOrigin - [_temperatureXOrigins[i] floatValue]) ;
-            if (distance < shortestDistance)
-            {
-                shortestDistance = distance;
-                shortestDistanceIndex = i;
-            }
-        }
-
-        _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[shortestDistanceIndex] doubleValue]];
-        _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
-        
-        if (gesture.state == UIGestureRecognizerStateEnded)
-        {
-            CGRect finalFrame = v.frame;
-            finalFrame.origin.x = [_temperatureXOrigins[shortestDistanceIndex] floatValue];
-            [v setFrame:finalFrame];
-        }
-        [self updateLabels];
-    }
-    
-}*/
-
 - (IBAction)thicknessSlid:(id)sender {
     // used the thicknessSlider
     UISlider* slider = sender; // get the slider
@@ -235,35 +141,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
     [self updateLabels];
 }
-
-/*- (IBAction)thicknessPanGesture:(id)sender {
-    UIPanGestureRecognizer* gesture = (UIPanGestureRecognizer*)sender;
-    
-    CGFloat yTranslation =[gesture translationInView:gesture.view.superview].y;
-    CGFloat newOrigin = _startingOrigin + yTranslation;
-    CGFloat newHeight = _startingHeight - yTranslation;
-    
-    if (gesture.state == UIGestureRecognizerStateBegan)
-    {
-        _startingHeight = self.thicknessSelectionView.frame.size.height;
-        _startingOrigin = self.thicknessSelectionView.frame.origin.y;
-    }
-    else if (newOrigin > _yBoundsTop && newOrigin < _yBoundsBottom)
-    {
-        CGRect frame = self.thicknessSelectionView.frame;
-        frame.origin.y = newOrigin;
-        frame.size.height = newHeight;
-        
-        _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithActualViewHeight:frame.size.height]];
-        _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
-        
-        self.beefSizeVerticalConstraint.constant =  newOrigin - (self.timeTemperatureView.frame.origin.y + self.timeTemperatureView.frame.size.height);
-        [self.thicknessSelectionView needsUpdateConstraints];
-        [self.thicknessSelectionView setFrame:frame];
-        [self updateLabels];
-    }
-    
-}*/
 
 - (double) meatThicknessWithSliderValue: (CGFloat)value
 {
