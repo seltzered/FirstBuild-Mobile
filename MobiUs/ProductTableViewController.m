@@ -422,22 +422,7 @@ NSIndexPath *_indexPathForDeletion;
 {
     return 120.0; // edit hight of table view cell
 }
-/*-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [self.tableView.tableViewLayout invalidateLayout];
-}
 
-- (CGSize) tableView:(UITableView *)tableView layout:(UITableViewLayout *)tableViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake([[UIScreen mainScreen] bounds].size.width, 150);
-}
-
-- (UIEdgeInsets) tableView:(UITableView *)tableView layout:(UITableViewLayout *)tableViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
-*/
-// replaces editing gesture
 -(BOOL)tableView: (UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return true; // can delete all
 }
@@ -469,45 +454,6 @@ NSIndexPath *_indexPathForDeletion;
 -(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
  // intentionally empty
 }
-#pragma mark - Gestures
-/*- (IBAction)swipeLeft:(UIGestureRecognizer*)gestureRecognizer // for table might use commitEditingStlye instead
-{
-    (
-    CGPoint tapLocation = [gestureRecognizer locationInView:self.tableView];
-    _indexPathForDeletion = [self.tableView indexPathForItemAtPoint:tapLocation];
-
-    if(gestureRecognizer.state == UIGestureRecognizerStateEnded && _indexPathForDeletion)
-    {
-        DLog(@"deleting item at location %ld", (long)_indexPathForDeletion.item);
-        UIAlertView *deleteAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Delete?"
-                                    message:@"Are you sure you want to delete this device?"
-                                    delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
-        [deleteAlert show];
-    }
-}
-*/ // replace with a
-#pragma mark - <UIAlertViewDelegate>
-
-//TODO assumes delete alertview
-/*- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSLog(@"selected button index = %ld", buttonIndex);
-    if (buttonIndex == 1) // yes button
-    {
-        NSLog(@"delete");
-        FSTParagon * deletedItem = self.products[_indexPathForDeletion.item];
-        [self.products removeObjectAtIndex:_indexPathForDeletion.item];
-        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
-        [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
-        [self.tableView reloadData];
-        
-        if (self.products.count==0)
-        {
-            [self.delegate itemCountChanged:0];
-        }
-    }
-}*/
 
 #pragma mark - BONEYARD
 

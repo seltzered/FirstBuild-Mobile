@@ -10,7 +10,7 @@
 #import "FirebaseShared.h"
 #import "FSTBleCentralManager.h"
 #import "FSTParagonDisconnectedLabel.h"
-#import "MenuViewController.h"
+#import "FSTParagonMenuViewController.h"
 #import <Firebase/Firebase.h>
 #import <SWRevealViewController.h>
 #import "MobiNavigationController.h"
@@ -44,13 +44,14 @@ FSTParagonDisconnectedLabel* _warningLabel;
                                                usingBlock:^(NSNotification *notification)
     {
         NSString* item = (NSString*)notification.object;
-        if([item isEqual:FSTMenuItemAddNewProduct])
-        {
-            [weakSelf performSegueWithIdentifier:@"segueAddNewProduct" sender:self];
-        }
+        //TODO -- add new product is not part of the menu anymore
+//        if([item isEqual:FSTMenuItemAddNewProduct])
+//        {
+//            [weakSelf performSegueWithIdentifier:@"segueAddNewProduct" sender:self];
+//        }
         if([item isEqual:FSTMenuItemHome])
         {
-            [self.navigationController popToRootViewControllerAnimated:NO];
+            [weakSelf.navigationController popToRootViewControllerAnimated:NO];
         }
     }];
     

@@ -12,6 +12,7 @@
 #import "FSTCookingMethods.h"
 #import "FSTCookingMethodSubSelectionViewController.h"
 #import "MobiNavigationController.h"
+#import "FSTRevealViewController.h"
 
 @interface FSTCookingMethodViewController ()
 
@@ -71,5 +72,9 @@ FSTCookingMethods* _methods;
     [self performSegueWithIdentifier:@"segueCustom" sender:self];
 
 }
+- (IBAction)menuToggleTapped:(id)sender {
+    [self.revealViewController rightRevealToggle:self.product];
+}
+
 
 @end
