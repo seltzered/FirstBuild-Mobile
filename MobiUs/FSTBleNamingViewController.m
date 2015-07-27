@@ -23,22 +23,18 @@
     [super viewDidLoad];
     
     [self.paragonNameField setDelegate:self];
-    // Do any additional setup after loading the view.
-    //[self.paragonNameField addTarget:self action:@selector(beganEditingText) forControlEvents:UIControlEventEditingDidBegin];
-   // [self.paragonNameField addTarget:self action:@selector(didEnterText) forControlEvents:UIControlEventEditingDidEnd]; // for hitting the enter button
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterText) name:UIKeyboardWillHideNotification object:nil]; // do the same when keyboard hidden on ipad
+
     [self.bottomView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
     [self.bottomView.layer setBorderWidth:2.5F];
     
     self.navigationItem.hidesBackButton = YES;
     
-    //[self.paragonNameField becomeFirstResponder]; // focus on it? (should happen during editor might call resignFirstResponder on self later.
 }
 
 -(void)viewDidAppear:(BOOL)animated {
 
 }
-//-(void)viewDidAppear:(BOOL)animated
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -50,7 +46,7 @@
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
-//-(void)beganEditingText {
+
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     //set view above keyboard
     
@@ -66,7 +62,7 @@
         
     return YES;
 }
-//-(void)didEnterText {
+
 -(void)textFieldDidEndEditing:(UITextField*)textField {
     
     [UIView animateWithDuration:0.2

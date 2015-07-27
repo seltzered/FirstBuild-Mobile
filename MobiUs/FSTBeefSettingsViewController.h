@@ -15,6 +15,7 @@
 @property (nonatomic,retain) FSTParagon* currentParagon;
 
 @property (strong, nonatomic) IBOutlet UILabel *beefSettingsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tempSettingsLabel;
 @property (weak, nonatomic) IBOutlet UISlider *donenessSlider;
 @property (weak, nonatomic) IBOutlet UILabel *donenessLabel;
 @property (weak, nonatomic) IBOutlet UISlider *thicknessSlider;

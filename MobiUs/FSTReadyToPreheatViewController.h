@@ -12,7 +12,6 @@
 @interface FSTReadyToPreheatViewController : UIViewController
 
 @property (nonatomic,retain) FSTParagon* currentParagon;
-@property (strong, nonatomic) IBOutlet UILabel *temperatureLabel;
 
 
 @end
