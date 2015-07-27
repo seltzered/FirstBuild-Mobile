@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -7,8 +7,21 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="FSEmeric-Regular.otf">
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+        </mutableArray>
+        <mutableArray key="FSEmeric-Thin.otf">
+            <string>FSEmeric-Thin</string>
+        </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
-            <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
@@ -20,7 +33,6 @@
             <string>PTSans-Narrow</string>
         </mutableArray>
         <mutableArray key="fontawesome-webfont.ttf">
-            <string>FontAwesome</string>
             <string>FontAwesome</string>
             <string>FontAwesome</string>
             <string>FontAwesome</string>
@@ -64,7 +76,7 @@
                         <view key="tableFooterView" contentMode="scaleToFill" id="nk3-IU-PEG">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="0.44313728810000003" green="0.43921571970000001" blue="0.45098042490000001" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="home" id="aei-i2-A6q">
@@ -73,34 +85,97 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="aei-i2-A6q" id="Y4r-VH-wKH">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Home" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARm-9e-Aha">
-                                            <rect key="frame" x="136" y="9.5" width="56.5" height="24.5"/>
-                                            <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="21"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_left_arrow_gray" translatesAutoresizingMaskIntoConstraints="NO" id="5lv-qG-aPO">
-                                            <rect key="frame" x="63" y="13" width="25" height="18"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="18" id="HnS-S0-mxH"/>
-                                                <constraint firstAttribute="width" constant="25" id="Nl4-gr-Q2n"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsU-Wc-69Q">
-                                            <rect key="frame" x="98" y="8.5" width="26.5" height="27"/>
-                                            <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="23"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Products" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARm-9e-Aha">
+                                            <rect key="frame" x="244.5" y="9" width="111.5" height="25"/>
+                                            <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.4431372549" green="0.43921568630000002" blue="0.45098039220000002" alpha="1" colorSpace="deviceRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="5lv-qG-aPO" secondAttribute="centerY" id="QBY-Cb-wot"/>
-                                        <constraint firstItem="rsU-Wc-69Q" firstAttribute="leading" secondItem="Y4r-VH-wKH" secondAttribute="leadingMargin" constant="90" id="URj-re-Fd9"/>
-                                        <constraint firstAttribute="centerY" secondItem="rsU-Wc-69Q" secondAttribute="centerY" id="beV-eH-JNx"/>
-                                        <constraint firstItem="ARm-9e-Aha" firstAttribute="leading" secondItem="rsU-Wc-69Q" secondAttribute="trailing" constant="12" id="dyA-EF-0wX"/>
                                         <constraint firstAttribute="centerY" secondItem="ARm-9e-Aha" secondAttribute="centerY" id="o3i-vg-2UB"/>
-                                        <constraint firstItem="5lv-qG-aPO" firstAttribute="leading" secondItem="Y4r-VH-wKH" secondAttribute="leadingMargin" constant="55" id="vs1-FX-JxT"/>
+                                        <constraint firstAttribute="centerX" secondItem="ARm-9e-Aha" secondAttribute="centerX" id="riA-0I-F5w"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings" id="xf9-Ir-X7m" userLabel="Settings">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xf9-Ir-X7m" id="Pdu-in-8hL">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bF6-vk-C0z">
+                                            <rect key="frame" x="263.5" y="9" width="73.5" height="25"/>
+                                            <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="bF6-vk-C0z" secondAttribute="centerY" id="Xf2-1W-I0u"/>
+                                        <constraint firstAttribute="centerX" secondItem="bF6-vk-C0z" secondAttribute="centerX" id="mqT-tr-ci0"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="help" id="LWz-ve-HWy" userLabel="Help">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LWz-ve-HWy" id="0Af-PJ-BXF">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQU-HX-HIZ">
+                                            <rect key="frame" x="279.5" y="10" width="41.5" height="23.5"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="CQU-HX-HIZ" secondAttribute="centerY" id="kLC-ra-eVh"/>
+                                        <constraint firstAttribute="centerX" secondItem="CQU-HX-HIZ" secondAttribute="centerX" id="oJR-xb-CLf"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="feedback" id="uEz-cR-sb0" userLabel="Feedback">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uEz-cR-sb0" id="J47-Dr-wnD">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yC3-B1-e1H">
+                                            <rect key="frame" x="257" y="9" width="86" height="25"/>
+                                            <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="centerX" secondItem="yC3-B1-e1H" secondAttribute="centerX" id="XRb-34-z2Y"/>
+                                        <constraint firstAttribute="centerY" secondItem="yC3-B1-e1H" secondAttribute="centerY" id="u5b-7H-DQt"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="about" id="t4M-qW-Z8I" userLabel="About">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t4M-qW-Z8I" id="ajb-9V-c4u">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBF-B3-tlY">
+                                            <rect key="frame" x="272.5" y="9.5" width="55" height="25"/>
+                                            <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="tBF-B3-tlY" secondAttribute="centerY" id="3Z2-CN-puT"/>
+                                        <constraint firstAttribute="centerX" secondItem="tBF-B3-tlY" secondAttribute="centerX" id="PPQ-qp-EmT"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -111,10 +186,140 @@
                             <outlet property="delegate" destination="RBl-RV-zfF" id="MMl-a5-vxQ"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="jxM-yW-mVF" kind="show" identifier="menuSettingsSegue" id="unc-Nk-Vvz"/>
+                        <segue destination="b2j-4h-WKL" kind="show" identifier="menuAboutSegue" id="joZ-R1-lme"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xm0-Rp-QOA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1389" y="129"/>
+            <point key="canvasLocation" x="-1425" y="87"/>
+        </scene>
+        <!--Paragon Menu About View Controller-->
+        <scene sceneID="sf6-TY-LW3">
+            <objects>
+                <viewController id="b2j-4h-WKL" customClass="FSTParagonMenuAboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7cT-qR-mnl"/>
+                        <viewControllerLayoutGuide type="bottom" id="HLG-s5-Tfj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BAr-jh-9mO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Edy-ly-kTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-663" y="137"/>
+        </scene>
+        <!--Paragon Menu Settings View Controller-->
+        <scene sceneID="isi-4y-1q5">
+            <objects>
+                <viewController id="jxM-yW-mVF" customClass="FSTParagonMenuSettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="99R-ai-RXA"/>
+                        <viewControllerLayoutGuide type="bottom" id="4NK-jD-L8F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Bx-o8-M4v">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZ2-tB-t1k">
+                                <rect key="frame" x="26" y="63" width="103" height="22.5"/>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ur2-VY-dgM" userLabel="unitsSwitch">
+                                <rect key="frame" x="275" y="223" width="51" height="31"/>
+                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="thumbTintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="unitSwitched:" destination="jxM-yW-mVF" eventType="valueChanged" id="JLk-vd-U4B"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-XB-BfX" userLabel="tempSwitch">
+                                <rect key="frame" x="275" y="110" width="51" height="31"/>
+                                <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="thumbTintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="tempSwitched:" destination="jxM-yW-mVF" eventType="valueChanged" id="XJj-Sk-s9R"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlE-Fk-2ja">
+                                <rect key="frame" x="26" y="175" width="42" height="22.5"/>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paragon Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulO-Am-b2I">
+                                <rect key="frame" x="26" y="288" width="126" height="22.5"/>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="18"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-nU-ear">
+                                <rect key="frame" x="46" y="325" width="40.5" height="19"/>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ufG-1W-VhY">
+                                <rect key="frame" x="46" y="349" width="508" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="bKm-Rg-0tc"/>
+                                </constraints>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serial Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bE5-vW-7oL">
+                                <rect key="frame" x="46" y="399" width="95" height="19"/>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG2V3459382" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLM-9s-Hp5">
+                                <rect key="frame" x="61" y="423" width="93.5" height="17.5"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="14"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bE5-vW-7oL" firstAttribute="top" secondItem="nT2-nU-ear" secondAttribute="bottom" constant="55" id="6Qa-UC-eNg"/>
+                            <constraint firstAttribute="centerX" secondItem="ufG-1W-VhY" secondAttribute="centerX" id="8LV-CY-7Lu"/>
+                            <constraint firstItem="IlE-Fk-2ja" firstAttribute="top" secondItem="PZ2-tB-t1k" secondAttribute="bottom" constant="90" id="8yH-ar-gbE"/>
+                            <constraint firstItem="lLM-9s-Hp5" firstAttribute="leading" secondItem="bE5-vW-7oL" secondAttribute="leading" constant="15" id="DLi-hF-fUv"/>
+                            <constraint firstItem="PZ2-tB-t1k" firstAttribute="top" secondItem="99R-ai-RXA" secondAttribute="bottom" constant="43" id="GjU-1T-QXA"/>
+                            <constraint firstItem="nT2-nU-ear" firstAttribute="leading" secondItem="ufG-1W-VhY" secondAttribute="leading" id="IZi-Rd-gu3"/>
+                            <constraint firstItem="bE5-vW-7oL" firstAttribute="leading" secondItem="nT2-nU-ear" secondAttribute="leading" id="Iqg-Mh-rCm"/>
+                            <constraint firstItem="lLM-9s-Hp5" firstAttribute="top" secondItem="bE5-vW-7oL" secondAttribute="bottom" constant="5" id="QMh-TQ-gNz"/>
+                            <constraint firstAttribute="centerX" secondItem="0fG-XB-BfX" secondAttribute="centerX" id="S4Z-kN-cvy"/>
+                            <constraint firstItem="PZ2-tB-t1k" firstAttribute="leading" secondItem="4Bx-o8-M4v" secondAttribute="leadingMargin" constant="10" id="SYq-CT-vbd"/>
+                            <constraint firstItem="PZ2-tB-t1k" firstAttribute="leading" secondItem="IlE-Fk-2ja" secondAttribute="leading" id="SlC-H3-8hV"/>
+                            <constraint firstItem="0fG-XB-BfX" firstAttribute="top" secondItem="PZ2-tB-t1k" secondAttribute="bottom" constant="25" id="Wb3-Rt-KUV"/>
+                            <constraint firstItem="ulO-Am-b2I" firstAttribute="leading" secondItem="nT2-nU-ear" secondAttribute="leading" constant="-20" id="bjo-bX-Yg6"/>
+                            <constraint firstItem="0fG-XB-BfX" firstAttribute="centerX" secondItem="ur2-VY-dgM" secondAttribute="centerX" id="dbo-CD-0vs"/>
+                            <constraint firstItem="ur2-VY-dgM" firstAttribute="top" secondItem="IlE-Fk-2ja" secondAttribute="bottom" constant="25" id="hrX-7o-2zi"/>
+                            <constraint firstItem="nT2-nU-ear" firstAttribute="top" secondItem="ulO-Am-b2I" secondAttribute="bottom" constant="15" id="j7h-5T-Twe"/>
+                            <constraint firstItem="ulO-Am-b2I" firstAttribute="leading" secondItem="IlE-Fk-2ja" secondAttribute="leading" id="jPq-IT-K6F"/>
+                            <constraint firstItem="ulO-Am-b2I" firstAttribute="top" secondItem="IlE-Fk-2ja" secondAttribute="bottom" constant="90" id="liT-Ac-yM6"/>
+                            <constraint firstItem="ufG-1W-VhY" firstAttribute="top" secondItem="nT2-nU-ear" secondAttribute="bottom" constant="5" id="q38-sh-riI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="paragonNameField" destination="ufG-1W-VhY" id="Amq-Qw-bB5"/>
+                        <outlet property="serialNumberLabel" destination="lLM-9s-Hp5" id="aoa-I1-vgI"/>
+                        <outlet property="temperatureSwitch" destination="0fG-XB-BfX" id="73s-u8-WdH"/>
+                        <outlet property="unitSwitch" destination="ur2-VY-dgM" id="RF8-Wo-lVQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XYw-uq-Gxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-741" y="-657"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="enf-Dr-59R">
@@ -514,14 +719,14 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="friendlyName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OK-eT-oej" userLabel="friendlyname">
-                                                    <rect key="frame" x="22" y="20" width="118.5" height="23.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friendlyName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0OK-eT-oej" userLabel="friendlyname">
+                                                    <rect key="frame" x="22" y="20" width="93" height="26"/>
                                                     <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="20"/>
                                                     <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Cooking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihu-pk-gFP" userLabel="status">
-                                                    <rect key="frame" x="524" y="-12" width="60" height="19"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cooking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihu-pk-gFP" userLabel="status">
+                                                    <rect key="frame" x="538" y="-14" width="46" height="21"/>
                                                     <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="16"/>
                                                     <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -882,7 +1087,6 @@
         <image name="Paragon_Logo_Red" width="778" height="197"/>
         <image name="Paragon_Mark_Red" width="341" height="340"/>
         <image name="White_bg_with_dots" width="640" height="1136"/>
-        <image name="btn_left_arrow_gray" width="40" height="67"/>
         <image name="btn_plus_bare" width="344" height="344"/>
         <image name="cell_chillhub_product" width="1217" height="463"/>
         <image name="icon_chevron_blue_right" width="28" height="47"/>

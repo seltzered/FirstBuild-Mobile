@@ -15,6 +15,8 @@
 		518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */; };
 		51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */; };
 		51DD77851B4AFA1D0024052A /* FSTDashedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DD77841B4AFA1D0024052A /* FSTDashedLine.m */; };
+		51DFCAE11B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */; };
+		51DFCAE41B66B7D500E48084 /* FSTParagonMenuAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */; };
 		51F8EF401B55961400F40882 /* FSTStageBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF3F1B55961400F40882 /* FSTStageBarView.m */; };
 		51F8EF431B559F8A00F40882 /* FSTStageCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */; };
 		51FAEFEC1B62722500A7DCF9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFEB1B62722500A7DCF9 /* Images.xcassets */; };
@@ -128,6 +130,10 @@
 		51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPointedHeaderView.m; sourceTree = "<group>"; };
 		51DD77831B4AFA1D0024052A /* FSTDashedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTDashedLine.h; sourceTree = "<group>"; };
 		51DD77841B4AFA1D0024052A /* FSTDashedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTDashedLine.m; sourceTree = "<group>"; };
+		51DFCADF1B66B6E700E48084 /* FSTParagonMenuSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonMenuSettingsViewController.h; sourceTree = "<group>"; };
+		51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonMenuSettingsViewController.m; sourceTree = "<group>"; };
+		51DFCAE21B66B7D500E48084 /* FSTParagonMenuAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonMenuAboutViewController.h; sourceTree = "<group>"; };
+		51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonMenuAboutViewController.m; sourceTree = "<group>"; };
 		51F8EF3E1B55961400F40882 /* FSTStageBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStageBarView.h; sourceTree = "<group>"; };
 		51F8EF3F1B55961400F40882 /* FSTStageBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStageBarView.m; sourceTree = "<group>"; };
 		51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStageCircleView.h; sourceTree = "<group>"; };
@@ -507,6 +513,10 @@
 				5BCBB9F41B0386CE00B8E043 /* FSTCookingMethodTableViewController.m */,
 				5B9EF11D19DEFEF000E8D9F1 /* FSTParagonMenuViewController.h */,
 				5BF9482E19EC15E300CB8BCF /* FSTParagonMenuViewController.m */,
+				51DFCADF1B66B6E700E48084 /* FSTParagonMenuSettingsViewController.h */,
+				51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */,
+				51DFCAE21B66B7D500E48084 /* FSTParagonMenuAboutViewController.h */,
+				51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -943,6 +953,7 @@
 				5BCBB9D71B02A1A100B8E043 /* FSTCookingMethodViewController.m in Sources */,
 				5B99E0871A1AA744005FB881 /* FSTNetwork.m in Sources */,
 				5BC5A1C219EF5E79009C93B1 /* FBTAuthenticationViewController.m in Sources */,
+				51DFCAE41B66B7D500E48084 /* FSTParagonMenuAboutViewController.m in Sources */,
 				5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */,
 				5BCBB9EC1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m in Sources */,
 				5B99E0811A1A5D10005FB881 /* WifiCommissioningViewController.m in Sources */,
@@ -963,6 +974,7 @@
 				5BCBB9DD1B02A22B00B8E043 /* FSTBeefSettingsViewController.m in Sources */,
 				5B9EF0F419DEEE1000E8D9F1 /* main.m in Sources */,
 				5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */,
+				51DFCAE11B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m in Sources */,
 				5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */,
 				5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */,
 				5B8C108A1A39EC2A00F481E6 /* ProductAddViewController.m in Sources */,

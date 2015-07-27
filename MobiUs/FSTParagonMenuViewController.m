@@ -15,11 +15,17 @@
 
 #import "FSTParagonMenuViewController.h"
 #import "FSTRevealViewController.h"
+#import "FSTParagonMenuSettingsViewController.h"
+#import "FSTParagonMenuAboutViewController.h"
 
 @implementation FSTParagonMenuViewController
 
 typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     kHome,
+    kSettings,
+    kHelp,
+    kFeedback,
+    kAbout
 
 };
 
@@ -46,7 +52,18 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
         case kHome:
             CellIdentifier = @"home";
             break;
-            
+        case kSettings:
+            CellIdentifier = @"settings";
+            break;
+        case kHelp:
+            CellIdentifier = @"help";
+            break;
+        case kFeedback:
+            CellIdentifier = @"feedback";
+            break;
+        case kAbout:
+            CellIdentifier = @"about";
+            break;
         default:
             break;
     }
@@ -59,14 +76,30 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [self.revealViewController rightRevealToggle:self];
+    [self.revealViewController rightRevealToggle:self]; // should this happen every time?
     if (indexPath.row == kHome)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTMenuItemSelectedNotification object:FSTMenuItemHome];
+    } else if (indexPath.row == kSettings) {
+        [self performSegueWithIdentifier:@"menuSettingsSegue" sender:self];
+    } else if (indexPath.row == kHelp) {
+        // open the firstbuild help website in browser
+    } else if (indexPath.row == kFeedback) {
+        // open new email to firstbuild
+    } else if (indexPath.row == kAbout) {
+        [self performSegueWithIdentifier:@"menuAboutSegue" sender:self];
     }
     
 }
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UIViewController* vc = segue.destinationViewController; // store vc to be cast in these statements
+    if ([segue.identifier isEqualToString:@"menuSettingsSegue"]) {
+        ((FSTParagonMenuSettingsViewController*)vc).currentParagon = self.currentParagon;
+    } else if([segue.identifier isEqualToString:@"menuAboutSegue"]) {
+        // set paragon (not yet a member)
+    }
+}
 #pragma mark - BONEYARD
 
 //TODO move the logout stuff out of here and put as a handler in the login section
