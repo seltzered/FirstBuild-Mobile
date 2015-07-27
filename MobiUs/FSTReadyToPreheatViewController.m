@@ -57,8 +57,8 @@ NSObject* _cookModeChangedObserver;
 {
 
     //self.currentParagon.delegate = self;
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
-    self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
+    //FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
+   // self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
     
     //begin 
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
@@ -85,9 +85,9 @@ NSObject* _cookModeChangedObserver;
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)cancelLabelClick:(id)sender {
+/*- (IBAction)cancelLabelClick:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
-}
+}*/
 
 
 @end

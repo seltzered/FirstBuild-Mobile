@@ -71,7 +71,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H : " attributes: labelFontDict];
     NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[minute stringValue] attributes: boldFontDict];
     NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: labelFontDict];
-    NSMutableAttributedString *separator = [[NSMutableAttributedString alloc] initWithString:@"  |  " attributes: boldFontDict];
+    //NSMutableAttributedString *separator = [[NSMutableAttributedString alloc] initWithString:@"  |  " attributes: boldFontDict];
     NSMutableAttributedString *temperature = [[NSMutableAttributedString alloc] initWithString:[_currentTemperature stringValue] attributes: boldFontDict];
     NSMutableAttributedString *degreeString = [[NSMutableAttributedString alloc] initWithString:@"\u00b0" attributes:boldFontDict];
     NSMutableAttributedString *temperatureLabel = [[NSMutableAttributedString alloc] initWithString:@" F" attributes: boldFontDict];
@@ -79,15 +79,17 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [hourString appendAttributedString:hourLabel];
     [hourString appendAttributedString:minuteString];
     [hourString appendAttributedString:minuteLabel];
-    [hourString appendAttributedString:separator];
-    [hourString appendAttributedString:temperature];
-    [hourString appendAttributedString:degreeString];
-    [hourString appendAttributedString:temperatureLabel];
-
+    //[hourString appendAttributedString:separator];
+    [temperature appendAttributedString:degreeString];
+    [temperature appendAttributedString:temperatureLabel];
+    
+    // two seperate labels now
+    
     [self.beefSettingsLabel setAttributedText:hourString];
+    [self.tempSettingsLabel setAttributedText:temperature];
     
     NSMutableAttributedString* thicknessString = [[NSMutableAttributedString alloc] initWithString:[_currentThickness stringValue] attributes:labelFontDict];
-    NSMutableAttributedString* thicknessStringTag = [[NSMutableAttributedString alloc] initWithString:@"\" Thickness" attributes:labelFontDict];
+    NSMutableAttributedString* thicknessStringTag = [[NSMutableAttributedString alloc] initWithString:@"\"" attributes:labelFontDict];
     [thicknessString appendAttributedString:thicknessStringTag];
     // number then '" Thickness'
     
