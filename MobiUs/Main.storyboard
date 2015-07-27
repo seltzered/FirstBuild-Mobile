@@ -17,8 +17,12 @@
             <string>FSEmeric</string>
             <string>FSEmeric</string>
             <string>FSEmeric</string>
+            <string>FSEmeric</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Thin.otf">
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
             <string>FSEmeric-Thin</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
@@ -206,12 +210,48 @@
                     <view key="view" contentMode="scaleToFill" id="BAr-jh-9mO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i84-4K-x9g">
+                                <rect key="frame" x="16" y="70" width="65" height="25"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Term of Services" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnp-C8-rpd">
+                                <rect key="frame" x="16" y="120" width="144.5" height="25"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Source Licenses" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8if-Qc-F4r">
+                                <rect key="frame" x="16" y="170" width="192" height="25"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-fN-FdH">
+                                <rect key="frame" x="556.5" y="69" width="27.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gcP-fN-FdH" firstAttribute="centerY" secondItem="i84-4K-x9g" secondAttribute="centerY" constant="-2" id="7Gh-XA-s9t"/>
+                            <constraint firstItem="8if-Qc-F4r" firstAttribute="top" secondItem="Qnp-C8-rpd" secondAttribute="bottom" constant="25" id="7oD-zt-cHK"/>
+                            <constraint firstItem="i84-4K-x9g" firstAttribute="leading" secondItem="Qnp-C8-rpd" secondAttribute="leading" id="Dcl-6J-vuH"/>
+                            <constraint firstItem="i84-4K-x9g" firstAttribute="leading" secondItem="BAr-jh-9mO" secondAttribute="leadingMargin" id="X6a-El-Sdj"/>
+                            <constraint firstItem="Qnp-C8-rpd" firstAttribute="top" secondItem="i84-4K-x9g" secondAttribute="bottom" constant="25" id="fvk-1Y-dJM"/>
+                            <constraint firstItem="i84-4K-x9g" firstAttribute="top" secondItem="7cT-qR-mnl" secondAttribute="bottom" constant="50" id="oDG-TK-v0K"/>
+                            <constraint firstItem="8if-Qc-F4r" firstAttribute="leading" secondItem="Qnp-C8-rpd" secondAttribute="leading" id="u9I-SD-L9Z"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gcP-fN-FdH" secondAttribute="trailing" id="xbj-oY-4an"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Edy-ly-kTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-663" y="137"/>
+            <point key="canvasLocation" x="-663" y="-14"/>
         </scene>
         <!--Paragon Menu Settings View Controller-->
         <scene sceneID="isi-4y-1q5">
