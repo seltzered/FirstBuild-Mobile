@@ -171,6 +171,11 @@ VariableSelection _selection;
     [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self]; // name of segue from custom view to ready to preheat
 }
 
+- (void)dealloc
+{
+    DLog(@"dealloc");
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

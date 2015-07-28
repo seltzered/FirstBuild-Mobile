@@ -65,10 +65,9 @@
 
 @property (weak, nonatomic) IBOutlet FSTStageCircleView *stageCircle;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stageCirclePlace;
-
-
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;
+
 @end
 
 @implementation FSTCookingViewController
@@ -87,7 +86,7 @@ NSObject* _cookingTimeWriteConfirmationObserver;
     __weak typeof(self) weakSelf = self;
 
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
-
+    
     NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@ at %@%@", _cookingStage.cookingLabel, [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
     self.cookingModeLabel.text = cookingModelLabelText;
     [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
@@ -141,7 +140,7 @@ NSObject* _cookingTimeWriteConfirmationObserver;
    {
        NSNumber* actualTemperature = _cookingStage.actualTemperature;
        weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue];
-       [self makeAndSetTimeRemainingLabel];
+       [weakSelf makeAndSetTimeRemainingLabel];
    }];
 
     // needs to reposition behind lettering

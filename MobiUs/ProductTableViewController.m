@@ -392,21 +392,23 @@ NSIndexPath *_indexPathForDeletion;
         if ([product isKindOfClass:[FSTParagon class]])
         {
             FSTParagon* paragon = (FSTParagon*)product;
-            FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil] instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
-            vc.currentParagon = paragon;
             
             if (paragon.currentCookMode == kPARAGON_PREHEATING)
             {
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
+                vc.currentParagon = paragon;
                 vc.progressState = kPreheating;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else if(paragon.currentCookMode == kPARAGON_HEATING)
             {
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
                 vc.progressState = kCooking;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else if(paragon.currentCookMode == kPARAGON_HEATING_WITH_TIME)
             {
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
                 vc.progressState = kCooking;
                 [self.navigationController pushViewController:vc animated:YES];
             }
