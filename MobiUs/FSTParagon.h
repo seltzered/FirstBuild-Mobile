@@ -31,12 +31,4 @@ extern NSString * const FSTCookTimeSetNotification ;
 -(void)startHeatingWithTemperature: (NSNumber*)targetTemperature;
 -(void)setCookingTime: (NSNumber*)cookingTime;
 
-#ifdef SIMULATE_PARAGON
-- (void)startSimulateHeating;
-- (void)startSimulatePowerOn;
-- (void)setSimulatorHeatingUpdateInterval: (NSTimeInterval)interval;
-- (void)setSimulatorHeatingTemperatureIncrement: (uint8_t)increment;
-- (void)startSimulatingTimeWithTemperatureRegulating;
-#endif
-
 @end

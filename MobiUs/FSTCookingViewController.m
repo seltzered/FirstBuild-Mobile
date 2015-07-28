@@ -151,11 +151,6 @@ NSObject* _cookingTimeWriteConfirmationObserver;
     self.cookingProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
     self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
     [self makeAndSetTimeRemainingLabel];
-    
-#ifdef SIMULATE_PARAGON
-    [self.currentParagon startSimulatingTimeWithTemperatureRegulating];
-#endif
-
 }
 
 -(void)viewWillAppear:(BOOL)animated {
