@@ -12,6 +12,7 @@
 #import "FSTBeefSousVideCookingMethod.h"
 #import "FSTBeefSettingsViewController.h"
 #import "MobiNavigationController.h"
+#import "FSTCustomCookSettingsViewController.h"
 
 @interface FSTCookingMethodSubSelectionViewController ()
 
@@ -61,14 +62,15 @@ NSString* headerText;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //todo: need to investigate...this is called twice once on initial load
-    //where the sender is an FSTCookingMethodTableViewController and then the proper one when
-    //it is segue'ing into another view. this is called before viewDidLoad as well.
     if ([sender isKindOfClass:[FSTCookingMethod class]] && [segue.destinationViewController isKindOfClass:[FSTBeefSettingsViewController class]])
     {
         self.currentParagon.currentCookingMethod = (FSTCookingMethod*)sender;
         ((FSTBeefSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    } else if ([segue.destinationViewController isKindOfClass:[FSTCustomCookSettingsViewController class]]) {
+        ((FSTCustomCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        self.currentParagon.currentCookingMethod = (FSTCookingMethod*) [[FSTSousVideCookingMethod alloc] init];
     }
+    
 }
 
 - (IBAction)customTap:(id)sender {

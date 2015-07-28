@@ -37,6 +37,11 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self.currentParagon.currentCookingMethod addStageToCookingSession];
 }
 
+- (void)dealloc
+{
+    DLog(@"dealloc");
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
