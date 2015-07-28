@@ -49,7 +49,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
 
     return self;
-    
 }
 
 -(void)dealloc
@@ -85,11 +84,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
-}
-
--(void)readCharacteristicsTimerTimeout:(NSTimer *)timer
-{
-   // [self.peripheral readValueForCharacteristic:[self.characteristics objectForKey:FSTCharacteristicCurrentTemperature]];
 }
 
 -(void)assignValueToPropertyFromCharacteristic: (CBCharacteristic*)characteristic
@@ -146,7 +140,6 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleElapsedTime: (CBCharacteristic*)characteristic
 {
-    
     if (characteristic.value.length != 2)
     {
         DLog(@"handleElapsedTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
@@ -238,7 +231,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     [self setCookModeFromBurners];
     
-   }
+}
 
 -(void)setCookModeFromBurners
 {
@@ -296,7 +289,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         currentStage.cookTimeRequestedActual = [[NSNumber alloc] initWithDouble:raw];
         NSLog(@"FSTCharacteristicCookTime %@", currentStage.cookTimeRequestedActual );
     }
-    //not implemented
 }
 
 -(void)handleCurrentTemperature: (CBCharacteristic*)characteristic
@@ -359,10 +351,6 @@ __weak NSTimer* _readCharacteristicsTimer;
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     DLog("discovered services for peripheral %@", peripheral.identifier);
-    //read timer disabled for now.
-//    __weak typeof(self) weakSelf = self;
-//    _readCharacteristicsTimer = [NSTimer timerWithTimeInterval:15.0 target:weakSelf selector:@selector(readCharacteristicsTimerTimeout:) userInfo:nil repeats:YES];
-//    [[NSRunLoop currentRunLoop] addTimer:_readCharacteristicsTimer forMode:NSRunLoopCommonModes];
     NSArray * services;
     services = [self.peripheral services];
     for (CBService *service in services)
