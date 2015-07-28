@@ -20,11 +20,11 @@
 }
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    UIBezierPath* circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2) radius:self.frame.size.width/3 startAngle:0 endAngle:2*M_PI clockwise:false];
+    UIBezierPath* circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width/2, self.frame.size.height/2) radius:2*self.frame.size.width/5 startAngle:0 endAngle:2*M_PI clockwise:false];
     
     CGContextSaveGState(context);
     circlePath.lineWidth = 2.0;
-    [[UIColor redColor] setStroke];
+    [UIColorFromRGB(0xF0663A) setStroke];
     [circlePath stroke];
     self.backgroundColor = [UIColor clearColor];
     CGContextRestoreGState(context);

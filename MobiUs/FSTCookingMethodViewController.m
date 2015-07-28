@@ -38,7 +38,7 @@ FSTCookingMethods* _methods;
     
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
     [navigation setHeaderImageNamed:@"Paragon_Logo_Red" withFrameRect:CGRectMake(0, 0, 120, 30)];
-    [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
+    [navigation.navigationBar setBarTintColor:[UIColor blackColor]];
 }
 
 - (void)didReceiveMemoryWarning {
