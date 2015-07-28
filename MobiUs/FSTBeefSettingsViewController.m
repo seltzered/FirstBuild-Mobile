@@ -35,24 +35,21 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     //create a new cooking session and a single stage cook
     [self.currentParagon.currentCookingMethod createCookingSession];
     [self.currentParagon.currentCookingMethod addStageToCookingSession];
+    
+    //set up or data objects
+    _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
+    _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
+    _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
+    _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
     [controller setHeaderText:@"SETTINGS" withFrameRect:CGRectMake(0, 0, 120, 30)];
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    //set up or data objects
-    _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
-    _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
-    _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
-    _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
     [self updateLabels];
 }
+
 
 - (void)updateLabels
 {
