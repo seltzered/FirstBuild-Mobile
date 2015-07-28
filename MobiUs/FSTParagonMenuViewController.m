@@ -42,7 +42,7 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -76,9 +76,9 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [self.revealViewController rightRevealToggle:self]; // should this happen every time?
     if (indexPath.row == kHome)
     {
+        [self.revealViewController rightRevealToggle:self]; // should this happen every time?
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTMenuItemSelectedNotification object:FSTMenuItemHome];
     } else if (indexPath.row == kSettings) {
         [self performSegueWithIdentifier:@"menuSettingsSegue" sender:self];

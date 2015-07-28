@@ -30,14 +30,16 @@
 }
 #pragma mark - IBActions
 - (IBAction)tempSwitched:(id)sender {
-    // perhaps sender will work rather thanhave switch properties
+    // perhaps sender will work rather than have switch properties in .h
     if ([sender isKindOfClass:[UISwitch class]]) {
         NSLog(@"Switched Temp");
     }
 }
          
 - (IBAction)unitSwitched:(id)sender {
-    
+    if ([sender isKindOfClass:[UISwitch class]]) {
+        NSLog(@"Switched Units");
+    }
 }
 #pragma mark - textField delegate
 - (void) textFieldDidEndEditing:(UITextField *)textField {
