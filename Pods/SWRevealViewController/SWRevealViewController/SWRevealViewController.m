@@ -143,7 +143,7 @@ static CGFloat scaledValue( CGFloat v1, CGFloat min2, CGFloat max2, CGFloat min1
 {
     if ( _rightView == nil )
     {
-        _rightView = [[UIView alloc] initWithFrame:self.bounds];
+        _rightView = [[UIView alloc] initWithFrame:self.bounds]; // I want the width to resize, could the resizing flag help?
         _rightView.autoresizingMask = /*UIViewAutoresizingFlexibleWidth|*/UIViewAutoresizingFlexibleHeight;
         [self insertSubview:_rightView belowSubview:_frontView];
     }

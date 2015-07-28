@@ -32,8 +32,9 @@
     if ([sender isKindOfClass:[FSTParagon class]])
     {
         vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"paragonMenu"];
-        ((FSTParagonMenuViewController*)vc).currentParagon = sender;
+       // ((FSTParagonMenuViewController*)vc).currentParagon = sender;
     }
+    
     
     if (vc)
     {
@@ -42,7 +43,9 @@
     
     [super rightRevealToggle:sender];
     
+    [self.rightViewController.view setFrame:CGRectMake(self.rightViewRevealOverdraw, 0, self.view.frame.size.width - self.rightViewRevealOverdraw, self.view.frame.size.height)]; // set frame of right menu to remove the portion covered by the center. 
 }
+
 
 
 @end
