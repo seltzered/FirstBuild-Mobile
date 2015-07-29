@@ -13,14 +13,16 @@
 
 - (void)drawRect:(CGRect)rect { // battery view
     // outer container of battery
-    CGFloat inset = 2.0; // also height of tip
-    CGFloat liquid_inset = 4.0; // inset on liquid
-    CGFloat tip_width = 8.0;
+    
+    // should all be proportional to rectangle
+    CGFloat tip_width = self.frame.size.width/3;
+    CGFloat liquid_inset = tip_width/3;
+    CGFloat inset = tip_width/4; // inset from superview rect. also half the height of the tip
     
     UIView *container = [[UIView alloc] initWithFrame: CGRectMake(inset, inset, rect.size.width - inset*2, rect.size.height - inset*2)];
     container.backgroundColor = [UIColor whiteColor];
     container.layer.borderColor = [UIColor blackColor].CGColor;
-    container.layer.borderWidth = 1.5;
+    container.layer.borderWidth = liquid_inset/2;
     container.layer.cornerRadius = MIN(rect.size.height, rect.size.width)/7; // proportional to height
     
     [self addSubview:container];

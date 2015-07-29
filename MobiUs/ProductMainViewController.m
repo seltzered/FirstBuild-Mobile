@@ -94,7 +94,7 @@ FSTParagonDisconnectedLabel* _warningLabel;
     
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
     [navigation setHeaderText:@"MY PRODUCTS" withFrameRect:CGRectMake(0, 0, 160, 40)]; // a bit larger for this text
-    [navigation.navigationBar setBarTintColor:UIColorFromRGB(0x313234)];
+    [navigation.navigationBar setBarTintColor:[UIColor blackColor]];
 }
 
 -(void) dealloc

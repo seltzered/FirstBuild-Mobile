@@ -94,13 +94,13 @@
                                 <rect key="frame" x="304" y="476" width="300" height="59.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Time_Temp" translatesAutoresizingMaskIntoConstraints="NO" id="OuJ-pe-uv6">
-                                        <rect key="frame" x="73" y="22" width="34" height="29.5"/>
+                                        <rect key="frame" x="73" y="15" width="34" height="29.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="OuJ-pe-uv6" secondAttribute="height" multiplier="54:47" id="MqQ-cW-JZQ"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-3R-9EM">
-                                        <rect key="frame" x="0.0" y="7" width="300" height="59.5"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-3R-9EM">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="59.5"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="22"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -116,7 +116,7 @@
                                     <constraint firstItem="OuJ-pe-uv6" firstAttribute="centerY" secondItem="yCE-3R-9EM" secondAttribute="centerY" id="Rpa-bX-1iD"/>
                                     <constraint firstItem="yCE-3R-9EM" firstAttribute="height" secondItem="6mS-z3-yYn" secondAttribute="height" id="XTn-gH-mDt"/>
                                     <constraint firstItem="yCE-3R-9EM" firstAttribute="leading" secondItem="OuJ-pe-uv6" secondAttribute="trailing" constant="-80" id="dvW-wr-q3F"/>
-                                    <constraint firstAttribute="centerY" secondItem="yCE-3R-9EM" secondAttribute="centerY" constant="-7.5" id="gIh-XR-lFA"/>
+                                    <constraint firstAttribute="centerY" secondItem="yCE-3R-9EM" secondAttribute="centerY" id="gIh-XR-lFA"/>
                                     <constraint firstItem="OuJ-pe-uv6" firstAttribute="centerX" secondItem="yCE-3R-9EM" secondAttribute="centerX" constant="-60" id="o5a-oA-exn"/>
                                     <constraint firstAttribute="centerX" secondItem="yCE-3R-9EM" secondAttribute="centerX" id="rcX-jI-wyw"/>
                                     <constraint firstItem="OuJ-pe-uv6" firstAttribute="leading" secondItem="6mS-z3-yYn" secondAttribute="leading" constant="30" id="sl4-WZ-IkV"/>
@@ -151,15 +151,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejm-6D-PrH" userLabel="recipesViewWrapper">
                                 <rect key="frame" x="-4" y="476" width="306" height="59.5"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="        MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xY1-5O-9Pf">
-                                        <rect key="frame" x="0.0" y="7" width="306" height="59.5"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="             MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xY1-5O-9Pf">
+                                        <rect key="frame" x="0.0" y="0.0" width="306" height="59.5"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="22"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="MPs-U0-mpI">
-                                        <rect key="frame" x="76" y="22" width="34" height="29.5"/>
+                                        <rect key="frame" x="76" y="15" width="34" height="29.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="MPs-U0-mpI" secondAttribute="height" multiplier="54:47" id="Jj0-H6-2zh"/>
                                         </constraints>
@@ -169,7 +169,7 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xY1-5O-9Pf" secondAttribute="width" id="H2n-Tu-h1I"/>
-                                    <constraint firstAttribute="centerY" secondItem="xY1-5O-9Pf" secondAttribute="centerY" constant="-7.5" id="Kcz-Dr-Wiy"/>
+                                    <constraint firstAttribute="centerY" secondItem="xY1-5O-9Pf" secondAttribute="centerY" id="Kcz-Dr-Wiy"/>
                                     <constraint firstAttribute="centerX" secondItem="xY1-5O-9Pf" secondAttribute="centerX" id="Vnk-N1-QXf"/>
                                     <constraint firstAttribute="height" secondItem="xY1-5O-9Pf" secondAttribute="height" id="c0a-Ho-S2w"/>
                                     <constraint firstItem="MPs-U0-mpI" firstAttribute="centerX" secondItem="xY1-5O-9Pf" secondAttribute="centerX" constant="-60" id="ehq-v0-lcS"/>
@@ -304,9 +304,6 @@
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="18"/>
                                 <color key="textColor" red="1" green="0.0028989642" blue="0.02123694613" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="355" y="261" width="89" height="27.5"/>
-                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0mW-He-K8h" userLabel="Temp">
                                 <rect key="frame" x="487" y="17" width="37" height="19"/>
@@ -317,9 +314,6 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="FXS-CE-dWM">
                                 <rect key="frame" x="28" y="174" width="544" height="31"/>
                                 <color key="minimumTrackTintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="38" y="308" width="724" height="31"/>
-                                </variation>
                                 <connections>
                                     <action selector="thicknessSlid:" destination="uv6-e3-ONs" eventType="valueChanged" id="pgj-ql-n3R"/>
                                 </connections>
@@ -424,6 +418,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hf3-CO-dNB" userLabel="continueButtonHolderView">
                                 <rect key="frame" x="304" y="469" width="300" height="67"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Continue_Large" translatesAutoresizingMaskIntoConstraints="NO" id="Ug7-29-a59">
+                                        <rect key="frame" x="73" y="17" width="33.5" height="33.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ug7-29-a59" secondAttribute="height" multiplier="1:1" id="bVf-r8-pCm"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="        CONTINUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mk1-mw-9Db">
                                         <rect key="frame" x="0.0" y="20" width="300" height="27.5"/>
                                         <constraints>
@@ -438,17 +438,13 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Continue_Large" translatesAutoresizingMaskIntoConstraints="NO" id="Ug7-29-a59">
-                                        <rect key="frame" x="73" y="17" width="33.5" height="33.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Ug7-29-a59" secondAttribute="height" multiplier="1:1" id="bVf-r8-pCm"/>
-                                        </constraints>
-                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.40000000000000002" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="Mk1-mw-9Db" firstAttribute="centerX" secondItem="Ug7-29-a59" secondAttribute="centerX" constant="60" id="4rs-Ce-21M"/>
+                                    <constraint firstItem="Mk1-mw-9Db" firstAttribute="centerX" secondItem="Ug7-29-a59" secondAttribute="centerX" constant="60" id="4rs-Ce-21M">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                    </constraint>
                                     <constraint firstAttribute="height" constant="109" id="5vh-UM-xcN"/>
                                     <constraint firstAttribute="centerY" secondItem="Mk1-mw-9Db" secondAttribute="centerY" id="JZK-oS-2RG"/>
                                     <constraint firstItem="Mk1-mw-9Db" firstAttribute="centerY" secondItem="Ug7-29-a59" secondAttribute="centerY" constant="-0.25" id="WUv-82-nvs"/>
@@ -515,7 +511,9 @@
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="109" id="9nl-zC-NMP"/>
-                                    <constraint firstItem="Zgl-W1-Ztp" firstAttribute="centerX" secondItem="6xv-hR-cYl" secondAttribute="centerX" constant="45" id="CPn-Kl-U3k"/>
+                                    <constraint firstItem="Zgl-W1-Ztp" firstAttribute="centerX" secondItem="6xv-hR-cYl" secondAttribute="centerX" constant="45" id="CPn-Kl-U3k">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" secondItem="6xv-hR-cYl" secondAttribute="width" id="KzV-7T-s6N"/>
                                     <constraint firstAttribute="width" secondItem="Zgl-W1-Ztp" secondAttribute="width" id="NR9-8f-w10"/>
                                     <constraint firstItem="Zgl-W1-Ztp" firstAttribute="centerY" secondItem="6xv-hR-cYl" secondAttribute="centerY" constant="-0.25" id="O4t-kB-CVn"/>
@@ -567,11 +565,13 @@
                             <constraint firstItem="0mW-He-K8h" firstAttribute="centerX" secondItem="d0j-nW-Vhc" secondAttribute="centerX" id="LEI-5d-zdh"/>
                             <constraint firstItem="YgN-4d-MPn" firstAttribute="top" secondItem="H1x-Xe-AQR" secondAttribute="bottom" constant="1" id="QgW-Wn-hKW"/>
                             <constraint firstItem="hf3-CO-dNB" firstAttribute="trailing" secondItem="QCZ-p8-khY" secondAttribute="trailingMargin" constant="20" id="Smu-60-XfQ">
-                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                             </constraint>
                             <constraint firstItem="YgN-4d-MPn" firstAttribute="leading" secondItem="QCZ-p8-khY" secondAttribute="leadingMargin" constant="60" id="U38-8A-f8d"/>
                             <constraint firstAttribute="centerY" secondItem="o6O-af-Pg4" secondAttribute="centerY" constant="125.25" id="VWC-aX-IoI"/>
-                            <constraint firstItem="cSA-d8-4TK" firstAttribute="leading" secondItem="QCZ-p8-khY" secondAttribute="leadingMargin" constant="-16" id="VnR-XK-04G"/>
+                            <constraint firstItem="cSA-d8-4TK" firstAttribute="leading" secondItem="QCZ-p8-khY" secondAttribute="leadingMargin" constant="-16" id="VnR-XK-04G">
+                                <variation key="heightClass=regular-widthClass=regular" constant="-20"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="MTt-fw-xrd" secondAttribute="centerX" id="WLx-c3-mMi"/>
                             <constraint firstAttribute="centerY" secondItem="MTt-fw-xrd" secondAttribute="centerY" constant="175" id="WqE-2n-vvt"/>
                             <constraint firstItem="CLU-Da-v9T" firstAttribute="top" secondItem="hf3-CO-dNB" secondAttribute="bottom" id="Zlj-qt-WFp"/>
@@ -1220,9 +1220,9 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
+                                <include reference="ckK-Mg-bGC"/>
                                 <exclude reference="BFM-cC-K5Z"/>
                                 <exclude reference="Z4w-BU-Wta"/>
-                                <include reference="ckK-Mg-bGC"/>
                                 <include reference="zDx-fk-p2D"/>
                                 <include reference="iCD-Mz-Iaf"/>
                                 <include reference="oQv-w6-utr"/>
@@ -1350,7 +1350,7 @@
                                             <constraint firstAttribute="width" secondItem="AdC-fO-nrV" secondAttribute="height" multiplier="54:47" id="m6q-Oi-5JA"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF8-83-p8Y">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF8-83-p8Y">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="59.5"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="22"/>
@@ -1367,7 +1367,9 @@
                                     <constraint firstItem="AF8-83-p8Y" firstAttribute="height" secondItem="uT2-s3-jjA" secondAttribute="height" id="Mbl-5j-sHC"/>
                                     <constraint firstItem="AdC-fO-nrV" firstAttribute="centerY" secondItem="AF8-83-p8Y" secondAttribute="centerY" id="Pbh-dO-8zt"/>
                                     <constraint firstItem="AdC-fO-nrV" firstAttribute="leading" secondItem="uT2-s3-jjA" secondAttribute="leading" constant="30" id="V98-hl-Ly2"/>
-                                    <constraint firstItem="AdC-fO-nrV" firstAttribute="centerX" secondItem="AF8-83-p8Y" secondAttribute="centerX" constant="-60" id="Yfv-n6-38c"/>
+                                    <constraint firstItem="AdC-fO-nrV" firstAttribute="centerX" secondItem="AF8-83-p8Y" secondAttribute="centerX" constant="-60" id="Yfv-n6-38c">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-70"/>
+                                    </constraint>
                                     <constraint firstAttribute="centerY" secondItem="AF8-83-p8Y" secondAttribute="centerY" id="bIr-Jk-fy1"/>
                                     <constraint firstAttribute="width" secondItem="AF8-83-p8Y" secondAttribute="width" id="oD0-3A-Mwx"/>
                                     <constraint firstItem="AdC-fO-nrV" firstAttribute="height" secondItem="AF8-83-p8Y" secondAttribute="height" multiplier="2" id="yT6-1n-V9W"/>
@@ -1402,7 +1404,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BM-eY-7Ey" userLabel="recipesViewWrapper">
                                 <rect key="frame" x="-4" y="476" width="306" height="59.5"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="        MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEy-Sl-2fP">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="           MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEy-Sl-2fP">
                                         <rect key="frame" x="0.0" y="0.0" width="306" height="59.5"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="22"/>
@@ -1425,9 +1427,11 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="125"/>
                                     </constraint>
                                     <constraint firstAttribute="width" secondItem="WEy-Sl-2fP" secondAttribute="width" id="dfT-YS-bvC"/>
-                                    <constraint firstItem="SIC-89-Q6s" firstAttribute="centerX" secondItem="WEy-Sl-2fP" secondAttribute="centerX" constant="-60" id="mOf-Y3-7wx"/>
+                                    <constraint firstItem="SIC-89-Q6s" firstAttribute="centerX" secondItem="WEy-Sl-2fP" secondAttribute="centerX" constant="-60" id="mOf-Y3-7wx">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-70"/>
+                                    </constraint>
                                     <constraint firstAttribute="centerY" secondItem="WEy-Sl-2fP" secondAttribute="centerY" id="quD-Kx-UB1"/>
-                                    <constraint firstItem="SIC-89-Q6s" firstAttribute="centerY" secondItem="WEy-Sl-2fP" secondAttribute="centerY" constant="0.25" id="xUK-dN-Pg6"/>
+                                    <constraint firstItem="SIC-89-Q6s" firstAttribute="centerY" secondItem="WEy-Sl-2fP" secondAttribute="centerY" id="xUK-dN-Pg6"/>
                                     <constraint firstItem="SIC-89-Q6s" firstAttribute="height" secondItem="WEy-Sl-2fP" secondAttribute="height" multiplier="0.5" id="z4U-Ce-4Qo"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -1516,8 +1520,8 @@
         <image name="reveal-icon" width="22" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CmD-W5-dtV"/>
-        <segue reference="etR-Tg-xJz"/>
+        <segue reference="ETw-Ro-4Or"/>
+        <segue reference="kaM-gB-8PG"/>
         <segue reference="Oqm-D3-BPL"/>
     </inferredMetricsTieBreakers>
 </document>

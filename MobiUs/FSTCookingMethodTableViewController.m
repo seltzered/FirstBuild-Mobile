@@ -89,8 +89,7 @@
         [self.delegate cookingMethodSelected:method]; // perform segue after a delay to show animation
 
     });
-    tableView.userInteractionEnabled = NO;
-    //
+    //tableView.userInteractionEnabled = NO;// leftover from animation
 }
 
 

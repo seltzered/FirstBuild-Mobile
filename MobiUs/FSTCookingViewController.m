@@ -201,6 +201,7 @@ NSObject* _cookingTimeWriteConfirmationObserver;
     }
     self.stageCirclePlace.constant = new_x - self.stageCircle.frame.size.width/2; // update constraint, centered. Animate block here?
 }
+
 - (void)makeAndSetTimeRemainingLabel
 {
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);

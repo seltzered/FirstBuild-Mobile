@@ -429,7 +429,7 @@ NSIndexPath *_indexPathForDeletion;
     return true; // can delete all
 }
 
--(NSArray*)tableView: (UITableView*)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+/*-(NSArray*)tableView: (UITableView*)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
         
            NSLog(@"Editing\n");
@@ -451,10 +451,24 @@ NSIndexPath *_indexPathForDeletion;
         }
     }];
     return @[editAction, deleteAction];
-}
+}*/
 
 -(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- // intentionally empty
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSLog(@"delete");
+        FSTParagon * deletedItem = self.products[indexPath.item];
+        [self.products removeObjectAtIndex:indexPath.item];
+        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
+        [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
+        [self.tableView reloadData];
+        
+        if (self.products.count==0)
+        {
+            [self.delegate itemCountChanged:0];
+        }
+    }
+    // was empty
+
 }
 
 #pragma mark - BONEYARD
