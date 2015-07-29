@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTCookingProgressLayer.h"
 
 @interface FSTStageBarView : UIView
 
-@property (nonatomic) CGFloat lineWidth;
+@property (nonatomic)  ProgressState circleState; 
 
 @end

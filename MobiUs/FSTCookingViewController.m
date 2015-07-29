@@ -173,30 +173,15 @@ NSObject* _cookingTimeWriteConfirmationObserver;
     self.cookingProgressView.layerState = state; // set state of whole child view
 }
 
--(void)updateStageBarForState:(ProgressState)state {
-    CGFloat new_x = 0; // change x position of stageCircle
-    CGFloat mid_x = self.stageBar.frame.size.width/2;
-    CGFloat start_x = mid_x - self.stageBar.lineWidth/2; //start of bar
-    switch (state) {
-        case kPreheating:
-            new_x = start_x; // beginning of bar
-            break;
-        case kReadyToCook:
-            new_x = start_x + self.stageBar.lineWidth/3;
-            break;
-        case kCooking:
-            new_x = start_x + 2*self.stageBar.lineWidth/3;
-            break;
-        case kSitting:
-            new_x = start_x + self.stageBar.lineWidth;
-            break;
-        default:
-            NSLog(@"NO STATE FOR STAGE BAR\n");
-            break;
-    }
-    self.stageCirclePlace.constant = new_x - self.stageCircle.frame.size.width/2; // update constraint, centered. Animate block here?
+-(void)updateStageBarForState:(ProgressState)state { // this could be scrapped soon
+    [self.stageBar setCircleState:state];
 }
 
+/*- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self.stageBar drawRect:CGRectMake(0, 0, size.width, size.height)];
+    [self updateStageBarForState:self.progressState];
+} // trying to update lineWidth on rotation
+*/
 - (void)makeAndSetTimeRemainingLabel
 {
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);

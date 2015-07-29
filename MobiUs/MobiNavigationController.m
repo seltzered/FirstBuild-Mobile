@@ -80,7 +80,11 @@ CGFloat _midY = 0;
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     CGPoint superCenter = CGPointMake(size.width/2, self.navigationBar.frame.size.height/2);
+    _midX = superCenter.x;
+    _midY = superCenter.y;
+    // update midx and midy for future reference in scene transition.
     [self.logoView setCenter:superCenter];
+    [self.logoLabel setCenter:superCenter];
 }
 
 @end
