@@ -153,9 +153,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
-        //TODO: TEMP HACK -- need to figure out endianness
-        //uint16_t raw = OSReadBigInt16(bytes, 0);
-        uint16_t raw = bytes[0];
+        uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.cookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
         NSLog(@"FSTCharacteristicElapsedTime %@", currentStage.cookTimeElapsed );
