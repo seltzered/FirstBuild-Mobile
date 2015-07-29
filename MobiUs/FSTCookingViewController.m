@@ -77,6 +77,7 @@ NSObject* _temperatureChangedObserver;
 NSObject* _timeElapsedChangedObserver;
 NSObject* _cookModeChangedObserver;
 NSObject* _cookingTimeWriteConfirmationObserver;
+NSObject* _targetTemperatureChangedObserver;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -87,8 +88,6 @@ NSObject* _cookingTimeWriteConfirmationObserver;
 
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     
-    NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@ at %@%@", _cookingStage.cookingLabel, [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
-    self.cookingModeLabel.text = cookingModelLabelText;
     [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
@@ -141,6 +140,17 @@ NSObject* _cookingTimeWriteConfirmationObserver;
        NSNumber* actualTemperature = _cookingStage.actualTemperature;
        weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue];
        [weakSelf makeAndSetTimeRemainingLabel];
+   }];
+    
+    _targetTemperatureChangedObserver = [center addObserverForName:FSTTargetTemperatureChangedNotification
+                                                      object:weakSelf.currentParagon
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+   {
+       NSNumber* targetTemperature = _cookingStage.targetTemperature;
+       weakSelf.cookingProgressView.targetTemp = [targetTemperature doubleValue];
+       NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@%@", [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
+       self.cookingModeLabel.text = cookingModelLabelText;
    }];
 
     // needs to reposition behind lettering
@@ -284,7 +294,7 @@ NSObject* _cookingTimeWriteConfirmationObserver;
     [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookingTimeWriteConfirmationObserver];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:_targetTemperatureChangedObserver];
 }
 
 - (void)dealloc

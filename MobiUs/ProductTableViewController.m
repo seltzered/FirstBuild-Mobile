@@ -436,12 +436,14 @@ NSIndexPath *_indexPathForDeletion;
             else if(paragon.currentCookMode == kPARAGON_HEATING)
             {
                 FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
+                vc.currentParagon = paragon;
                 vc.progressState = kCooking;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else if(paragon.currentCookMode == kPARAGON_HEATING_WITH_TIME)
             {
                 FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
+                vc.currentParagon = paragon;
                 vc.progressState = kCooking;
                 [self.navigationController pushViewController:vc animated:YES];
             }

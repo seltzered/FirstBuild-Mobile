@@ -12,6 +12,7 @@
 
 //notifications
 NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
+NSString * const FSTTargetTemperatureChangedNotification    = @"FSTTargetTemperatureChangedNotification";
 NSString * const FSTCookModeChangedNotification             = @"FSTCookModeChangedNotification";
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
@@ -265,6 +266,8 @@ __weak NSTimer* _readCharacteristicsTimer;
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
+        currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
         NSLog(@"FSTCharacteristicTargetTemperature: ble %d, actual %@", raw, currentStage.targetTemperature );
     }
 }
