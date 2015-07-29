@@ -230,26 +230,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i84-4K-x9g">
-                                <rect key="frame" x="16" y="114" width="65" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i84-4K-x9g">
+                                <rect key="frame" x="24" y="50" width="65" height="25"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Term of Services" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnp-C8-rpd">
-                                <rect key="frame" x="16" y="164" width="144.5" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Term of Services" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qnp-C8-rpd">
+                                <rect key="frame" x="24" y="100" width="144.5" height="25"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Open Source Licenses" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8if-Qc-F4r">
-                                <rect key="frame" x="16" y="214" width="192" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Source Licenses" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8if-Qc-F4r">
+                                <rect key="frame" x="24" y="150" width="192" height="25"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-fN-FdH">
-                                <rect key="frame" x="556" y="113" width="27.5" height="23.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-fN-FdH">
+                                <rect key="frame" x="556.5" y="49" width="27.5" height="23.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -260,7 +260,7 @@
                             <constraint firstItem="gcP-fN-FdH" firstAttribute="centerY" secondItem="i84-4K-x9g" secondAttribute="centerY" constant="-2" id="7Gh-XA-s9t"/>
                             <constraint firstItem="8if-Qc-F4r" firstAttribute="top" secondItem="Qnp-C8-rpd" secondAttribute="bottom" constant="25" id="7oD-zt-cHK"/>
                             <constraint firstItem="i84-4K-x9g" firstAttribute="leading" secondItem="Qnp-C8-rpd" secondAttribute="leading" id="Dcl-6J-vuH"/>
-                            <constraint firstItem="i84-4K-x9g" firstAttribute="leading" secondItem="BAr-jh-9mO" secondAttribute="leadingMargin" id="X6a-El-Sdj"/>
+                            <constraint firstItem="i84-4K-x9g" firstAttribute="leading" secondItem="BAr-jh-9mO" secondAttribute="leadingMargin" constant="8" id="X6a-El-Sdj"/>
                             <constraint firstItem="Qnp-C8-rpd" firstAttribute="top" secondItem="i84-4K-x9g" secondAttribute="bottom" constant="25" id="fvk-1Y-dJM"/>
                             <constraint firstItem="i84-4K-x9g" firstAttribute="top" secondItem="7cT-qR-mnl" secondAttribute="bottom" constant="50" id="oDG-TK-v0K"/>
                             <constraint firstItem="8if-Qc-F4r" firstAttribute="leading" secondItem="Qnp-C8-rpd" secondAttribute="leading" id="u9I-SD-L9Z"/>
@@ -284,40 +284,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZ2-tB-t1k">
-                                <rect key="frame" x="26" y="107" width="103" height="22.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZ2-tB-t1k">
+                                <rect key="frame" x="26" y="43" width="103" height="22.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ur2-VY-dgM" userLabel="unitsSwitch">
-                                <rect key="frame" x="275" y="267" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ur2-VY-dgM" userLabel="unitsSwitch">
+                                <rect key="frame" x="275" y="203" width="51" height="31"/>
                                 <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="thumbTintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="unitSwitched:" destination="jxM-yW-mVF" eventType="valueChanged" id="JLk-vd-U4B"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Units" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlE-Fk-2ja">
-                                <rect key="frame" x="26" y="219" width="42" height="22.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Units" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IlE-Fk-2ja">
+                                <rect key="frame" x="26" y="155" width="42" height="22.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Paragon Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulO-Am-b2I">
-                                <rect key="frame" x="26" y="332" width="126" height="22.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paragon Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulO-Am-b2I">
+                                <rect key="frame" x="26" y="268" width="126" height="22.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-nU-ear">
-                                <rect key="frame" x="46" y="369" width="40.5" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT2-nU-ear">
+                                <rect key="frame" x="46" y="305" width="40.5" height="19"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ufG-1W-VhY">
-                                <rect key="frame" x="46" y="393" width="508" height="25"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ufG-1W-VhY">
+                                <rect key="frame" x="46" y="329" width="508" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="bKm-Rg-0tc"/>
                                 </constraints>
@@ -325,20 +325,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Serial Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bE5-vW-7oL">
-                                <rect key="frame" x="46" y="443" width="95" height="19"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serial Number" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bE5-vW-7oL">
+                                <rect key="frame" x="46" y="379" width="95" height="19"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PG2V3459382" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLM-9s-Hp5">
-                                <rect key="frame" x="61" y="467" width="93.5" height="17.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PG2V3459382" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLM-9s-Hp5">
+                                <rect key="frame" x="61" y="403" width="93.5" height="17.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="14"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-XB-BfX" userLabel="tempSwitch">
-                                <rect key="frame" x="275" y="154" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fG-XB-BfX" userLabel="tempSwitch">
+                                <rect key="frame" x="275" y="90.5" width="51" height="31"/>
                                 <color key="onTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="thumbTintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -764,7 +764,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNF-Wi-ubE" userLabel="battery" customClass="ProductBatteryView">
-                                                    <rect key="frame" x="546" y="7" width="38" height="76.5"/>
+                                                    <rect key="frame" x="546" y="38.5" width="6.5" height="13.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="SNF-Wi-ubE" secondAttribute="height" multiplier="1:2" id="FjV-wn-uva"/>
@@ -783,7 +783,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cooking" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihu-pk-gFP" userLabel="status">
-                                                    <rect key="frame" x="538" y="-14" width="46" height="21"/>
+                                                    <rect key="frame" x="506.5" y="2.5" width="46" height="21"/>
                                                     <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="16"/>
                                                     <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -853,18 +853,19 @@
                                                 <constraint firstItem="Ihu-pk-gFP" firstAttribute="leading" secondItem="0OK-eT-oej" secondAttribute="trailing" constant="30" id="H2J-i1-4se"/>
                                                 <constraint firstAttribute="trailing" secondItem="2dZ-Pe-XMe" secondAttribute="trailing" constant="40" id="KDo-qv-ObB"/>
                                                 <constraint firstAttribute="centerX" secondItem="Eej-Lt-xYW" secondAttribute="centerX" id="M1z-bR-uIM"/>
-                                                <constraint firstItem="SNF-Wi-ubE" firstAttribute="centerY" secondItem="2dZ-Pe-XMe" secondAttribute="centerY" constant="1.5" id="NAR-QK-JWQ"/>
+                                                <constraint firstItem="SNF-Wi-ubE" firstAttribute="centerY" secondItem="2dZ-Pe-XMe" secondAttribute="centerY" constant="2" id="NAR-QK-JWQ"/>
                                                 <constraint firstAttribute="centerY" secondItem="Imx-17-50E" secondAttribute="centerY" id="NNK-Ok-4bH"/>
                                                 <constraint firstItem="SNF-Wi-ubE" firstAttribute="height" secondItem="2dZ-Pe-XMe" secondAttribute="height" id="R8Z-Fm-st6"/>
                                                 <constraint firstItem="SNF-Wi-ubE" firstAttribute="width" secondItem="irz-r8-3Z6" secondAttribute="width" multiplier="0.065" id="StV-bn-y5e"/>
                                                 <constraint firstItem="xya-zr-p04" firstAttribute="leading" secondItem="irz-r8-3Z6" secondAttribute="leading" id="WLD-qP-P0k"/>
                                                 <constraint firstItem="xya-zr-p04" firstAttribute="trailing" secondItem="Bux-WE-LyN" secondAttribute="leading" constant="-6" id="aC8-pM-aSX"/>
+                                                <constraint firstAttribute="height" secondItem="SNF-Wi-ubE" secondAttribute="height" multiplier="2" id="gQb-c6-z0u"/>
                                                 <constraint firstAttribute="centerY" secondItem="2dZ-Pe-XMe" secondAttribute="centerY" constant="-30" id="hAK-hk-rCG"/>
                                                 <constraint firstItem="Jc2-BW-tOx" firstAttribute="top" secondItem="irz-r8-3Z6" secondAttribute="top" constant="1" id="lMY-ZT-iE7"/>
                                                 <constraint firstItem="SNF-Wi-ubE" firstAttribute="width" secondItem="2dZ-Pe-XMe" secondAttribute="width" id="nfj-tn-1aw"/>
                                                 <constraint firstItem="0OK-eT-oej" firstAttribute="centerY" secondItem="Ihu-pk-gFP" secondAttribute="centerY" id="pk7-aj-ssv"/>
                                                 <constraint firstItem="0OK-eT-oej" firstAttribute="top" secondItem="Bux-WE-LyN" secondAttribute="bottom" constant="10" id="qs1-0B-041"/>
-                                                <constraint firstItem="Ihu-pk-gFP" firstAttribute="bottom" secondItem="SNF-Wi-ubE" secondAttribute="top" id="uCA-7q-pqp"/>
+                                                <constraint firstItem="Ihu-pk-gFP" firstAttribute="bottom" secondItem="SNF-Wi-ubE" secondAttribute="top" constant="-15" id="uCA-7q-pqp"/>
                                                 <constraint firstAttribute="bottom" secondItem="Eej-Lt-xYW" secondAttribute="bottom" constant="5" id="vWa-Rh-OYl"/>
                                                 <constraint firstItem="Eej-Lt-xYW" firstAttribute="top" secondItem="Jc2-BW-tOx" secondAttribute="bottom" constant="5" id="zaN-gZ-iTk"/>
                                             </constraints>
@@ -874,15 +875,16 @@
                                                     <exclude reference="Jc2-BW-tOx"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="6dW-V7-RnN"/>
                                                     <exclude reference="3Ah-nU-Le0"/>
                                                     <exclude reference="vWa-Rh-OYl"/>
                                                     <exclude reference="zaN-gZ-iTk"/>
                                                     <exclude reference="0Z8-fw-bKU"/>
                                                     <exclude reference="pk7-aj-ssv"/>
                                                     <exclude reference="H2J-i1-4se"/>
-                                                    <exclude reference="6dW-V7-RnN"/>
                                                     <exclude reference="1Uf-GD-erw"/>
                                                     <exclude reference="R8Z-Fm-st6"/>
+                                                    <exclude reference="StV-bn-y5e"/>
                                                     <exclude reference="nfj-tn-1aw"/>
                                                 </mask>
                                             </variation>
@@ -1152,6 +1154,6 @@
         <image name="teardrop" width="33" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VJe-HR-x9M"/>
+        <segue reference="vWQ-Kt-73W"/>
     </inferredMetricsTieBreakers>
 </document>

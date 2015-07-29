@@ -43,7 +43,15 @@
     
     [super rightRevealToggle:sender];
     
-    [self.rightViewController.view setFrame:CGRectMake(self.rightViewRevealOverdraw, 0, self.view.frame.size.width - self.rightViewRevealOverdraw, self.view.frame.size.height)]; // set frame of right menu to remove the portion covered by the center. 
+    [self.rightViewController.view setFrame:CGRectMake(self.rightViewRevealOverdraw, 0, self.view.frame.size.width - self.rightViewRevealOverdraw, self.view.frame.size.height)]; // set frame of right menu to remove the portion covered by the center.
+    UIView* centerView = ((UINavigationController*) self.frontViewController).topViewController.view; // disable this center view in the front navigation controller
+    if (self.frontViewPosition >= FrontViewPositionLeft) {// has already toggled
+        centerView.userInteractionEnabled = true; // reenable view controller
+        ((UINavigationController*)self.frontViewController).interactivePopGestureRecognizer.enabled = true; // keep things consistent I suppose
+    } else{ // about to toggle the first time
+        centerView.userInteractionEnabled = false;
+        ((UINavigationController*)self.frontViewController).interactivePopGestureRecognizer.enabled = false; // keep users from sliding back
+    }
 }
 
 
