@@ -36,35 +36,6 @@ NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-5
 
 __weak NSTimer* _readCharacteristicsTimer;
 
-#ifdef SIMULATE_PARAGON
-
-//heating state
-double _heatingUpdateFrequency = 200;
-NSTimeInterval _heatingLastUpdate = 0;
-uint8_t _heatingIncrement = 0;
-uint16_t _actualTemperatureSimulation = 72;
-
-//power on state
-double _waitingForPowerOnNotificationFrequency = 2000;
-NSTimeInterval _waitingForPowerOnNotificationLastUpdate = 0;
-
-//regulating temperature for set time state
-double _timeRegulateFrequency = 1000;
-NSTimeInterval _timeRegulateLastUpdate = 0;
-NSTimeInterval _elapsedTime = 0;
-
-//state machine
-typedef enum {
-    kPARAGON_SIMULATOR_STATE_OFF = 0,
-    kPARAGON_SIMULATOR_POWER_ON,
-    kPARAGON_SIMULATOR_STATE_HEATING,
-    kPARAGON_SIMULATOR_STATE_TIME_REGULATE
-} PARAGON_SIMULATOR_STATE;
-
-uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
-
-#endif
-
 - (id)init
 {
     self = [super init];
@@ -76,11 +47,8 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         [self.currentCookingMethod addStageToCookingSession];
         self.burners = [NSArray arrayWithObjects:[FSTBurner new], [FSTBurner new],[FSTBurner new],[FSTBurner new],[FSTBurner new], nil];
     }
-#ifdef SIMULATE_PARAGON
-    [self startParagonSimulator];
-#endif
+
     return self;
-    
 }
 
 -(void)dealloc
@@ -116,11 +84,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     {
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
-}
-
--(void)readCharacteristicsTimerTimeout:(NSTimer *)timer
-{
-   // [self.peripheral readValueForCharacteristic:[self.characteristics objectForKey:FSTCharacteristicCurrentTemperature]];
 }
 
 -(void)assignValueToPropertyFromCharacteristic: (CBCharacteristic*)characteristic
@@ -177,7 +140,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 
 -(void)handleElapsedTime: (CBCharacteristic*)characteristic
 {
-    
     if (characteristic.value.length != 2)
     {
         DLog(@"handleElapsedTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
@@ -269,7 +231,7 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
     
     [self setCookModeFromBurners];
     
-   }
+}
 
 -(void)setCookModeFromBurners
 {
@@ -327,7 +289,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         currentStage.cookTimeRequestedActual = [[NSNumber alloc] initWithDouble:raw];
         NSLog(@"FSTCharacteristicCookTime %@", currentStage.cookTimeRequestedActual );
     }
-    //not implemented
 }
 
 -(void)handleCurrentTemperature: (CBCharacteristic*)characteristic
@@ -390,10 +351,6 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
     DLog("discovered services for peripheral %@", peripheral.identifier);
-    //read timer disabled for now.
-//    __weak typeof(self) weakSelf = self;
-//    _readCharacteristicsTimer = [NSTimer timerWithTimeInterval:15.0 target:weakSelf selector:@selector(readCharacteristicsTimerTimeout:) userInfo:nil repeats:YES];
-//    [[NSRunLoop currentRunLoop] addTimer:_readCharacteristicsTimer forMode:NSRunLoopCommonModes];
     NSArray * services;
     services = [self.peripheral services];
     for (CBService *service in services)
@@ -433,111 +390,5 @@ uint8_t _currentSimulationState = kPARAGON_SIMULATOR_STATE_OFF;
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
     }
 }
-
-#pragma mark - Simulations
-
-#ifdef SIMULATE_PARAGON
-
-- (void) startParagonSimulator
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20)), dispatch_get_main_queue(), ^{
-        [self paragonSimulatorTick];
-    });
-}
-
-- (void)setSimulatorHeatingUpdateInterval: (NSTimeInterval)interval
-{
-    _heatingUpdateFrequency = interval;
-}
-
-- (void)setSimulatorHeatingTemperatureIncrement: (uint8_t)increment
-{
-    _heatingIncrement = increment;
-}
-
-- (void)startSimulatePowerOn
-{
-    _currentSimulationState = kPARAGON_SIMULATOR_POWER_ON;
-    _waitingForPowerOnNotificationLastUpdate = [NSDate timeIntervalSinceReferenceDate]*1000 +_waitingForPowerOnNotificationFrequency;
-}
-
-- (void)startSimulateHeating
-{
-    _currentSimulationState = kPARAGON_SIMULATOR_STATE_HEATING;
-}
-
-- (void)startSimulatingTimeWithTemperatureRegulating
-{
-    _elapsedTime = 0;
-    _currentSimulationState = kPARAGON_SIMULATOR_STATE_TIME_REGULATE;
-
-}
-
-- (void)paragonSimulatorTick
-{
-    NSTimeInterval elapsed = [NSDate timeIntervalSinceReferenceDate]*1000;
-    
-    switch (_currentSimulationState)
-    {
-        case kPARAGON_SIMULATOR_POWER_ON:
-            if (elapsed - _waitingForPowerOnNotificationLastUpdate > _waitingForPowerOnNotificationFrequency)
-            {
-                [self simulatePowerOn];
-                _waitingForPowerOnNotificationLastUpdate = [NSDate timeIntervalSinceReferenceDate]*1000;
-            }
-            break;
-            
-        case kPARAGON_SIMULATOR_STATE_HEATING:
-            if (elapsed - _heatingLastUpdate > _heatingUpdateFrequency)
-            {
-                [self simulateHeatingTick];
-                _heatingLastUpdate = [NSDate timeIntervalSinceReferenceDate]*1000;
-            }
-            break;
-            
-        case kPARAGON_SIMULATOR_STATE_TIME_REGULATE:
-            if (elapsed - _timeRegulateLastUpdate > _timeRegulateFrequency)
-            {
-                [self simulateRegulateCookingTick];
-                _timeRegulateLastUpdate = [NSDate timeIntervalSinceReferenceDate]*1000;
-            }
-            break;
-    }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20)), dispatch_get_main_queue(), ^{
-        [self paragonSimulatorTick];
-    });
-}
-
-- (void)simulateHeatingTick
-{
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentCookingMethod.session.paragonCookingStages[0];
-    _actualTemperatureSimulation = _actualTemperatureSimulation + _heatingIncrement;
-    stage.actualTemperature = [NSNumber numberWithInt:_actualTemperatureSimulation];
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
-}
-
-- (void)simulatePowerOn
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
-
-}
-
-- (void)simulateRegulateCookingTick
-{
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentCookingMethod.session.paragonCookingStages[0];
-    _actualTemperatureSimulation = [stage.targetTemperature floatValue] + randomFloat(-2, 2);
-    stage.actualTemperature = [NSNumber numberWithInt:_actualTemperatureSimulation];
-    _elapsedTime = _elapsedTime + (1/60.0f);
-    stage.cookTimeElapsed = [NSNumber numberWithDouble:_elapsedTime];
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
-
-}
-
-float randomFloat(float Min, float Max){
-    return ((arc4random()%RAND_MAX)/(RAND_MAX*1.0))*(Max-Min)+Min;
-}
-
-#endif
 
 @end
