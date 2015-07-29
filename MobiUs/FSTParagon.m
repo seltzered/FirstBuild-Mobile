@@ -164,7 +164,6 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleBurnerStatus: (CBCharacteristic*)characteristic
 {
-
     if (characteristic.value.length != self.burners.count)
     {
         DLog(@"handleBurnerStatus length of %lu not what was expected, %lu", (unsigned long)characteristic.value.length, (unsigned long)self.burners.count);
@@ -247,8 +246,9 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
+    [self notifyDeviceReady];
+    
     NSLog(@"FSTCharacteristicBurnerStatus %d", self.currentCookMode );
-
 }
 
 -(void)handleTargetTemperature: (CBCharacteristic*)characteristic

@@ -11,6 +11,7 @@
 #import "FSTBleCentralManager.h"
 #import "FSTParagonDisconnectedLabel.h"
 #import "FSTParagonMenuViewController.h"
+#import "FSTBleProduct.h"
 #import <Firebase/Firebase.h>
 #import <SWRevealViewController.h>
 #import "MobiNavigationController.h"
@@ -23,7 +24,7 @@
 
 NSObject* _menuItemSelectedObserver;
 NSObject* _bleDeviceDisconnectedObserver;
-NSObject* _bleDeviceConnectedObserver;
+NSObject* _bleDeviceReadyObserver;
 
 NSMutableArray* _offlineDevices;
 
@@ -55,7 +56,7 @@ FSTParagonDisconnectedLabel* _warningLabel;
         }
     }];
     
-    _bleDeviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
+    _bleDeviceReadyObserver = [center addObserverForName:FSTDeviceReadyNotification
                                                    object:nil
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
@@ -101,7 +102,7 @@ FSTParagonDisconnectedLabel* _warningLabel;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_menuItemSelectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceDisconnectedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceConnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceReadyObserver];
 
 }
 

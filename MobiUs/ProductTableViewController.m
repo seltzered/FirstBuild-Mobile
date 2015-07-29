@@ -18,6 +18,7 @@
 #import "FSTCookingMethodViewController.h"
 #import "FSTBleCentralManager.h"
 #import "FSTCookingViewController.h"
+#import "FSTBleProduct.h"
 #import "ProductGradientView.h" // to control up or down gradient
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
@@ -36,11 +37,12 @@
 static NSString * const reuseIdentifier = @"ProductCell";
 static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 NSObject* _connectedToBleObserver;
-NSObject* _deviceConnectedObserver;
+NSObject* _deviceReadyObserver;
 NSObject* _newDeviceBoundObserver;
 NSObject* _deviceRenamedObserver;
 NSObject* _deviceDisconnectedObserver;
 NSObject* _deviceBatteryChangedObserver;
+NSObject* _deviceConnectedObserver;
 
 NSIndexPath *_indexPathForDeletion;
 
@@ -63,11 +65,13 @@ NSIndexPath *_indexPathForDeletion;
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_connectedToBleObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceReadyObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_newDeviceBoundObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceRenamedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceDisconnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceBatteryChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,6 +119,39 @@ NSIndexPath *_indexPathForDeletion;
     //we may get messages here about devices that are connected that are not saved yet (commissioning)
     //in that case we listen to FSTBleCentralManagerNewDeviceBound
     _deviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
+                                               object:nil
+                                                queue:nil
+                                           usingBlock:^(NSNotification *notification)
+    {
+        CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
+        
+        //search through attached products and mark online anything we already have stored
+        for (FSTProduct* product in weakSelf.products)
+        {
+            if ([product isKindOfClass:[FSTBleProduct class]])
+            {
+                FSTBleProduct* bleProduct = (FSTBleProduct*)product;
+                
+                //need to compare the strings and not the actual object since they are not the same
+                if ([[bleProduct.savedUuid UUIDString] isEqualToString:[peripheral.identifier UUIDString]])
+                {
+                    bleProduct.peripheral = peripheral;
+                    bleProduct.peripheral.delegate = bleProduct;
+                    
+                    DLog(@"discovering services for peripheral %@", peripheral.identifier);
+                    [peripheral discoverServices:nil];
+                    
+                    //TODO:: HACK. Service discovery is slow, we need to find the actual service we are looking for
+                    //here which is going to be by product type. Hardcoded for the paragon service.
+                    //NSUUID* uuid = [[NSUUID alloc]initWithUUIDString:@"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F"];
+                    //NSArray* services = [[NSArray alloc] initWithObjects:uuid, nil];
+                }
+            }
+        }
+    }];
+    
+
+    _deviceReadyObserver = [center addObserverForName:FSTDeviceReadyNotification
                                                    object:nil
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
@@ -133,14 +170,6 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     bleProduct.peripheral = peripheral;
                     bleProduct.peripheral.delegate = bleProduct;
-                    DLog(@"discovering services for peripheral %@", bleProduct.peripheral.identifier);
-                    
-                    //TODO:: HACK. Service discovery is slow, we need to find the actual service we are looking for
-                    //here which is going to be by product type. Hardcoded for the paragon service.
-                    //NSUUID* uuid = [[NSUUID alloc]initWithUUIDString:@"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F"];
-                    //NSArray* services = [[NSArray alloc] initWithObjects:uuid, nil];
-                    
-                    [bleProduct.peripheral discoverServices:nil];
                     bleProduct.online = YES;
                     [weakSelf.tableView reloadData];
                 }
@@ -321,9 +350,13 @@ NSIndexPath *_indexPathForDeletion;
         {
             [productCell.statusLabel setText:@"Cooking"]; // might need more states
         }
+        else if(paragon.currentCookMode == kPARAGON_OFF)
+        {
+            [productCell.statusLabel setText:@"Off"]; // might need more states
+        }
         else
         {
-            [productCell.statusLabel setText:@""];
+            [productCell.statusLabel setText:@"!"];
         }
 
         //TODO we need observers on the cookmode for each paragon in order to set the status

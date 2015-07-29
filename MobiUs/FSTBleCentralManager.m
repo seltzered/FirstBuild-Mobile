@@ -139,7 +139,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 }
 
 -(void) deleteSavedPeripheralWithUUIDString: (NSString*) uuidString {
-    NSMutableDictionary* savedPeripherals = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"]]; // get rid of the uuid keyed device
+    NSMutableDictionary* savedPeripherals = [NSMutableDictionary dictionaryWithDictionary:[self getSavedPeripherals]]; // get rid of the uuid keyed device
     [savedPeripherals removeObjectForKey:uuidString];
     [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedPeripherals] forKey:@"ble-devices"];
     
@@ -251,14 +251,14 @@ CBPeripheralManager * _peripheralManager; //temporary
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
     
-    /*UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    activeController.view.frame = CGRectOffset(activeController.view.frame, 0, activeController.view.frame.size.height/9);
-    FSTParagonDisconnectedLabel* warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, 0, activeController.view.frame.size.width, activeController.view.frame.size.height/9)];
-    warningLabel.delegate = [activeController.navigationController.viewControllers firstObject]; // set delegate to main home screen
-    [activeController.view addSubview:warningLabel];//add label to take in space that view slid out
-    [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made*/
-    // do all this in Product Main
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceDisconnected object:peripheral];
+    if ([[self getSavedPeripherals] objectForKey:[peripheral.identifier UUIDString]])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceDisconnected object:peripheral];
+    }
+    else
+    {
+        DLog(@"disconnected device does not exist in saved devices, probably just removed manually");
+    }
     
 }
 

@@ -11,8 +11,12 @@
 
 @interface FSTBleProduct : FSTProduct <CBPeripheralDelegate>
 
+extern NSString * const FSTDeviceReadyNotification;
+
 @property (strong,nonatomic) CBPeripheral* peripheral;
 @property (strong,nonatomic) NSUUID* savedUuid;
 @property (strong,nonatomic) NSMutableDictionary* characteristics;
+
+- (void) notifyDeviceReady;
 
 @end

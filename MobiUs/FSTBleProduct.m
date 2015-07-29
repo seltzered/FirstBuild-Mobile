@@ -10,6 +10,8 @@
 
 @implementation FSTBleProduct
 
+NSString * const FSTDeviceReadyNotification                 = @"FSTDeviceReadyNotification";
+
 - (instancetype)init
 {
     self = [super init];
@@ -17,6 +19,11 @@
         self.characteristics = [[NSMutableDictionary alloc]init];
     }
     return self;
+}
+
+- (void) notifyDeviceReady
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceReadyNotification  object:self.peripheral];
 }
 
 @end
