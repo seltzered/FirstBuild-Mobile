@@ -15,8 +15,7 @@ typedef enum {
     kPARAGON_OFF = 0,
     kPARAGON_SOUS_VIDE_ENABLED,
     kPARAGON_PREHEATING,
-    kPARAGON_HEATING,
-    kPARAGON_HEATING_WITH_TIME
+    kPARAGON_HEATING
 } ParagonCookMode;
 
 @property (atomic) ParagonCookMode cookMode;

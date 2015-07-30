@@ -346,10 +346,6 @@ NSIndexPath *_indexPathForDeletion;
         {
             [productCell.statusLabel setText:@"Cooking"];
         }
-        else if(paragon.currentCookMode == kPARAGON_HEATING_WITH_TIME)
-        {
-            [productCell.statusLabel setText:@"Cooking"]; // might need more states
-        }
         else if(paragon.currentCookMode == kPARAGON_OFF)
         {
             [productCell.statusLabel setText:@"Off"]; // might need more states
@@ -434,13 +430,6 @@ NSIndexPath *_indexPathForDeletion;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             else if(paragon.currentCookMode == kPARAGON_HEATING)
-            {
-                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
-                vc.currentParagon = paragon;
-                vc.progressState = kCooking;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            else if(paragon.currentCookMode == kPARAGON_HEATING_WITH_TIME)
             {
                 FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
                 vc.currentParagon = paragon;

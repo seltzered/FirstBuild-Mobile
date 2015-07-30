@@ -165,7 +165,7 @@ VariableSelection _selection;
     convert.numberStyle = NSNumberFormatterDecimalStyle;
     stage.targetTemperature = [convert numberFromString:pickerTemperatureData[tempIndex]];
     double cookingMinutes = ([(NSNumber*)[convert numberFromString:pickerTimeData[0][hourIndex]] integerValue] * 60) + ([(NSNumber*)[convert numberFromString:[pickerTimeData[1][minuteIndex] substringFromIndex:1]] integerValue]);
-    stage.cookTimeRequested = [NSNumber numberWithDouble:cookingMinutes];
+    stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
     stage.cookingLabel = @"Custom Profile";
     //stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self]; // name of segue from custom view to ready to preheat
