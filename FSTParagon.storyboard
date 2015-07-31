@@ -12,6 +12,9 @@
             <string>FSEmeric-ExtraLight</string>
             <string>FSEmeric-ExtraLight</string>
         </mutableArray>
+        <mutableArray key="FSEmeric-Light.otf">
+            <string>FSEmeric-Light</string>
+        </mutableArray>
         <mutableArray key="FSEmeric-Regular.otf">
             <string>FSEmeric</string>
             <string>FSEmeric</string>
@@ -703,6 +706,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="mY9-a4-NWo">
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="hTT-vP-l3u">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="menuToggleTapped:" destination="uv6-e3-ONs" id="06K-so-FBG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="beefSettingsLabel" destination="YgN-4d-MPn" id="94d-9f-IwK"/>
                         <outlet property="donenessLabel" destination="RgO-Zx-EbY" id="OQl-qF-EFl"/>
@@ -781,6 +792,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="Gc0-ki-S6a">
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="TXT-1W-SW2">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="menuToggleTapped:" destination="rkF-e7-Olw" id="Hzz-QO-VqB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="ktp-73-2Pg" kind="show" identifier="seguePreheating" id="4Ck-Rj-PWC"/>
                     </connections>
@@ -878,8 +897,8 @@
                                     <constraint firstAttribute="centerY" secondItem="x66-n4-Uku" secondAttribute="centerY" id="Ni8-oh-NYr"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Csz-4M-yY7" userLabel="stageBarView" customClass="FSTStageBarView">
-                                <rect key="frame" x="85" y="5" width="429" height="33.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csz-4M-yY7" userLabel="stageBarView" customClass="FSTStageBarView">
+                                <rect key="frame" x="90" y="5" width="420" height="32.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="450" id="cga-tx-SUK"/>
@@ -923,6 +942,12 @@
                                             </mask>
                                         </variation>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMZ-Ky-8Ov" userLabel="Italics Caption">
+                                        <rect key="frame" x="129" y="320" width="341" height="22"/>
+                                        <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-nm-WVn" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="130" y="0.0" width="341" height="341"/>
                                         <subviews>
@@ -956,6 +981,13 @@
                                                     <rect key="frame" x="-145" y="245.5" width="800" height="45"/>
                                                 </variation>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xt-Cq-Ukg">
+                                                <rect key="frame" x="111" y="129" width="117" height="1"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="NPy-an-phe"/>
+                                                </constraints>
+                                            </view>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XU8-ec-Qi2">
                                                 <rect key="frame" x="129" y="109" width="105" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -965,12 +997,15 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="centerY" secondItem="XU8-ec-Qi2" secondAttribute="centerY" id="9t2-g2-YXf"/>
+                                            <constraint firstItem="6xt-Cq-Ukg" firstAttribute="top" secondItem="T4q-Qf-cjt" secondAttribute="bottom" constant="10" id="9xt-av-GCe"/>
                                             <constraint firstAttribute="centerX" secondItem="T4q-xE-spK" secondAttribute="centerX" constant="0.5" id="A3F-jE-VqS"/>
                                             <constraint firstAttribute="centerX" secondItem="T4q-Qf-cjt" secondAttribute="centerX" constant="0.5" id="GP3-Sg-fJF"/>
+                                            <constraint firstItem="T4q-Qf-cjt" firstAttribute="centerX" secondItem="6xt-Cq-Ukg" secondAttribute="centerX" id="Vps-02-sho"/>
                                             <constraint firstAttribute="width" secondItem="ONX-nm-WVn" secondAttribute="height" multiplier="1:1" id="blU-Q2-8yI"/>
                                             <constraint firstAttribute="centerY" secondItem="T4q-Qf-cjt" secondAttribute="centerY" constant="62" id="fD2-X0-1Oh"/>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="centerX" secondItem="XU8-ec-Qi2" secondAttribute="centerX" id="iJf-ez-afc"/>
                                             <constraint firstAttribute="centerX" secondItem="6L2-mW-QwO" secondAttribute="centerX" constant="0.5" id="m1J-pZ-6SB"/>
+                                            <constraint firstItem="T4q-Qf-cjt" firstAttribute="width" secondItem="6xt-Cq-Ukg" secondAttribute="width" multiplier="1.2" id="o7h-0H-7Su"/>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="height" secondItem="XU8-ec-Qi2" secondAttribute="height" id="qb2-hs-qWZ"/>
                                             <constraint firstAttribute="centerY" secondItem="T4q-xE-spK" secondAttribute="centerY" constant="20" id="qhp-0T-t5b"/>
                                             <constraint firstItem="T4q-Qf-cjt" firstAttribute="width" secondItem="XU8-ec-Qi2" secondAttribute="width" id="vgP-Qh-khC"/>
@@ -986,11 +1021,14 @@
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="ONX-nm-WVn" secondAttribute="centerY" id="09I-73-szQ"/>
                                     <constraint firstItem="ONX-nm-WVn" firstAttribute="height" secondItem="Eho-uD-hb8" secondAttribute="height" id="44C-3L-JHy"/>
+                                    <constraint firstItem="GMZ-Ky-8Ov" firstAttribute="top" secondItem="ONX-nm-WVn" secondAttribute="bottom" constant="-21" id="59n-zs-HYd"/>
                                     <constraint firstAttribute="centerX" secondItem="ONX-nm-WVn" secondAttribute="centerX" id="7Jf-Hj-O51"/>
                                     <constraint firstAttribute="centerX" secondItem="CQM-0V-d6X" secondAttribute="centerX" id="81E-rY-gsH"/>
+                                    <constraint firstItem="GMZ-Ky-8Ov" firstAttribute="width" secondItem="ONX-nm-WVn" secondAttribute="width" id="BnR-bT-RZo"/>
                                     <constraint firstAttribute="centerY" secondItem="CQM-0V-d6X" secondAttribute="centerY" id="IX0-8M-FqW"/>
                                     <constraint firstItem="CQM-0V-d6X" firstAttribute="width" secondItem="ONX-nm-WVn" secondAttribute="width" multiplier="0.5" id="Xfs-Hz-zdi"/>
                                     <constraint firstItem="6L2-mW-QwO" firstAttribute="width" secondItem="Eho-uD-hb8" secondAttribute="width" id="r7j-5c-r6B"/>
+                                    <constraint firstAttribute="centerX" secondItem="GMZ-Ky-8Ov" secondAttribute="centerX" id="xhZ-8L-yx0"/>
                                     <constraint firstItem="CQM-0V-d6X" firstAttribute="height" secondItem="ONX-nm-WVn" secondAttribute="height" multiplier="0.5" id="ybd-hz-zML"/>
                                 </constraints>
                             </view>
@@ -1037,6 +1075,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="qmN-m1-Ck5">
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="Thp-ZI-H2F">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="menuToggleTapped:" destination="ktp-73-2Pg" id="hJ6-u3-luQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="boldLabel" destination="6L2-mW-QwO" id="uV9-X0-3LH"/>
                         <outlet property="boldOverheadLabel" destination="T4q-xE-spK" id="OOY-AB-zQ2"/>
@@ -1044,6 +1090,7 @@
                         <outlet property="cookingModeLabel" destination="we0-iW-tbm" id="5va-1m-c8Q"/>
                         <outlet property="cookingProgressView" destination="ONX-nm-WVn" id="wSc-xY-gN5"/>
                         <outlet property="cookingStatusLabel" destination="aMu-Ed-3Sd" id="1Ss-wr-BTz"/>
+                        <outlet property="dividingLine" destination="6xt-Cq-Ukg" id="xtv-XX-HlZ"/>
                         <outlet property="instructionImage" destination="CQM-0V-d6X" id="9dD-f3-GaH"/>
                         <outlet property="stageBar" destination="Csz-4M-yY7" id="Nvk-MW-TQo"/>
                         <outlet property="topCircleLabel" destination="T4q-Qf-cjt" id="TNX-hI-AaZ"/>
@@ -1457,6 +1504,7 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.7843137255" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="AF8-83-p8Y" firstAttribute="leading" secondItem="AdC-fO-nrV" secondAttribute="trailing" constant="-80" id="8xb-PV-Czz"/>
@@ -1530,6 +1578,7 @@
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.7843137255" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="SIC-89-Q6s" firstAttribute="height" secondItem="9BM-eY-7Ey" secondAttribute="height" multiplier="0.6" id="4v3-4B-Eic"/>
@@ -1608,6 +1657,14 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="DQb-ET-YXb">
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="jqO-Xp-KWi">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="menuToggleTapped:" destination="pN4-mP-ZJw" id="ghc-bs-hN5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="uv6-e3-ONs" kind="show" identifier="segueBeefSettings" id="R23-Df-nUw"/>
                         <segue destination="tSd-Ug-HyZ" kind="show" identifier="customSegue" id="ETw-Ro-4Or"/>

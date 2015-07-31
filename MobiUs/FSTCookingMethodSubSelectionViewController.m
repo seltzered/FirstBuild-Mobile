@@ -13,7 +13,7 @@
 #import "FSTBeefSettingsViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTCustomCookSettingsViewController.h"
-
+#import "FSTRevealViewController.h"
 @interface FSTCookingMethodSubSelectionViewController ()
 
 @end
@@ -75,6 +75,9 @@ NSString* headerText;
 
 - (IBAction)customTap:(id)sender {
     [self performSegueWithIdentifier:@"customSegue" sender:self];
+}
+- (IBAction)menuToggleTapped:(id)sender {
+    [self.revealViewController rightRevealToggle:self.currentParagon]; // the other says product, which is inconsistent
 }
 
 /*-(void) viewWillAppear:(BOOL)animated

@@ -58,13 +58,12 @@
 #import "FSTStageBarView.h"
 #import "FSTStageCircleView.h"
 #import "MobiNavigationController.h"
+#import "FSTRevealViewController.h"
 
 @interface FSTCookingViewController ()
 
 @property (weak, nonatomic) IBOutlet FSTStageBarView *stageBar;
 
-@property (weak, nonatomic) IBOutlet FSTStageCircleView *stageCircle;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stageCirclePlace;
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;
 
@@ -237,6 +236,7 @@ NSObject* _targetTemperatureChangedObserver;
     self.boldLabel.hidden = false; // the default for each case
     self.instructionImage.hidden = true;
     self.continueButton.hidden = true;// default not visible
+    self.dividingLine.hidden = false;
     NSMutableAttributedString* topString = [[NSMutableAttributedString alloc] initWithString:@"Target: "]; // for preheating case
     [topString appendAttributedString:targetTempString];
     
@@ -259,6 +259,7 @@ NSObject* _targetTemperatureChangedObserver;
             self.boldOverheadLabel.hidden = true;
             self.instructionImage.hidden = false;
             self.continueButton.hidden = false;
+            self.dividingLine.hidden = true;
             break;
         case kCooking:
             timeRemaining = [_cookingStage.cookTimeMinimumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
@@ -273,7 +274,7 @@ NSObject* _targetTemperatureChangedObserver;
             self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
             break;
         case kSitting:
-            timeRemaining = [_cookingStage.cookTimeMaximumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+            timeRemaining = [_cookingStage.cookTimeMaximumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue]; // We could also calculate this in the notifications
             hour = timeRemaining / 60;
             minutes = fmod(timeRemaining, 60.0);
             timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
@@ -290,7 +291,8 @@ NSObject* _targetTemperatureChangedObserver;
             [self.topCircleLabel setAttributedText:currentTempString];
             [self.boldOverheadLabel setText:@"TAKE FOOD OUT"];
             [self.boldLabel setText:@"NOW"];
-            //TODO set the instruction image as well with taking out png
+            //TODO set the instruction image as well with taking out png, also hide some other views, set bottom label
+            self.dividingLine.hidden = true;
             break;
         default:
             break;
@@ -335,6 +337,9 @@ NSObject* _targetTemperatureChangedObserver;
 - (IBAction)continueButtonTap:(id)sender {
     self.continueButton.userInteractionEnabled = NO;
     [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
+}
+- (IBAction)menuToggleTapped:(id)sender {
+    [self.revealViewController rightRevealToggle:self.currentParagon];
 }
 
 #pragma mark - <UIAlertViewDelegate>

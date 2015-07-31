@@ -9,6 +9,7 @@
 #import "FSTReadyToPreheatViewController.h"
 #import "FSTCookingViewController.h"
 #import "MobiNavigationController.h"
+#import "FSTRevealViewController.h"
 
 @interface FSTReadyToPreheatViewController ()
 
@@ -80,6 +81,10 @@ NSObject* _cookModeChangedObserver;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)menuToggleTapped:(id)sender {
+    [self.revealViewController rightRevealToggle:self.currentParagon];
 }
 
 /*- (IBAction)cancelLabelClick:(id)sender {

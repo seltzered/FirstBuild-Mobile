@@ -22,5 +22,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *boldLabel;
 @property (strong, nonatomic) IBOutlet UILabel *cookingModeLabel;
 @property (weak, nonatomic) IBOutlet UIView *continueButton;
+@property (weak, nonatomic) IBOutlet UIView *dividingLine;
 @property (nonatomic) ProgressState progressState;
 @end

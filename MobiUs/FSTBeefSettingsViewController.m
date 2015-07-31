@@ -10,6 +10,7 @@
 #import "FSTBeefSousVideCookingMethod.h"
 #import "FSTReadyToPreheatViewController.h"
 #import "MobiNavigationController.h"
+#import "FSTRevealViewController.h"
 
 @interface FSTBeefSettingsViewController ()
 
@@ -152,6 +153,9 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
         return [thickness doubleValue];
     }
     return 0;
+}
+- (IBAction)menuToggleTapped:(id)sender {
+    [self.revealViewController rightRevealToggle:self.currentParagon];
 }
 
 @end
