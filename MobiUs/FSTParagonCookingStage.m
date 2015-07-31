@@ -16,8 +16,10 @@
     if (self) {
         _targetTemperature = [NSNumber numberWithInt:0];
         _actualTemperature = [NSNumber numberWithInt:0];
-        _cookTimeRequested = [NSNumber numberWithInt:0];
-        _cookTimeRequestedActual = [NSNumber numberWithInt:0];
+        _cookTimeMinimum = [NSNumber numberWithInt:0];
+        _cookTimeMaximum = [NSNumber numberWithInt:0];
+        _cookTimeMinimumActual = [NSNumber numberWithInt:0];
+        _cookTimeMaximumActual = [NSNumber numberWithInt:0];
         _cookTimeElapsed = [NSNumber numberWithInt:0];
         _cookingLabel = @"";
     }

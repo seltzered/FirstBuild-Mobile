@@ -21,8 +21,6 @@ extern NSString * const FSTBatteryLevelChangedNotification;
 extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
 
-
-
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 @property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
@@ -31,6 +29,6 @@ extern NSString * const FSTTargetTemperatureChangedNotification ;
 @property (nonatomic, strong) NSNumber* batteryLevel;
 
 -(void)startHeatingWithTemperature: (NSNumber*)targetTemperature;
--(void)setCookingTime: (NSNumber*)cookingTime;
+- (void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingMinimumTime goingToMaximumTime: (NSNumber*)cookingTimeMaximum;
 
 @end

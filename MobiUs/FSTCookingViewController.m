@@ -72,7 +72,7 @@
 
 @implementation FSTCookingViewController
 
-FSTParagonCookingStage* _cookingStage;
+__weak FSTParagonCookingStage* _cookingStage;
 NSObject* _temperatureChangedObserver;
 NSObject* _timeElapsedChangedObserver;
 NSObject* _cookModeChangedObserver;
@@ -97,7 +97,7 @@ NSObject* _targetTemperatureChangedObserver;
                                                   usingBlock:^(NSNotification *notification)
     {
         weakSelf.cookingProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
-       [weakSelf makeAndSetTimeRemainingLabel];
+       [weakSelf updateLabels];
 
     }];
     
@@ -114,21 +114,33 @@ NSObject* _targetTemperatureChangedObserver;
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
-        //if we are currently on the progress state of the view and we receive
-        //a notification that the cooking mode has switched to heating then
-        //transistion to the ready to cook progress state
         if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && weakSelf.progressState == kPreheating)
-        { // the cooktop has finished preheating to begin heating, and the progress bar was in its preheating state. Ensures that the ready to cook appears once in a cycle
+        {
+            //if we are currently on the progress state of the view and we receive
+            //a notification that the cooking mode has switched to heating then
+            //transistion to the ready to cook progress state
+            // the cooktop has finished preheating to begin heating, and the progress bar was in its preheating state. Ensures that the ready to cook appears once in a cycle
             // ready to transition to cooking
             weakSelf.progressState = kReadyToCook;
         }
         else if (weakSelf.currentParagon.currentCookMode == kPARAGON_OFF)
         {
+            //burner was shutoff transition back to the products screen
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_cookingStage.cookTimeElapsed doubleValue] >= [_cookingStage.cookTimeMaximumActual doubleValue] )
+        {
+            //the elapsed time has surpassed the maximum time, we need to move to the final screen
+            weakSelf.progressState = kDone;
+        }
+        else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_cookingStage.cookTimeElapsed doubleValue] > [_cookingStage.cookTimeMinimumActual doubleValue] )
+        {
+            //the elapsed time is greater the minimum time (..and less than max) so we are in the sitting stage, waiting to reach the maximum time
+            weakSelf.progressState = kSitting;
         }
         else
         {
-            DLog(@"cook mode changed, nothing to do");
+            DLog(@"cook mode (burner) changed, nothing to do");
         }
     }];
     
@@ -139,7 +151,7 @@ NSObject* _targetTemperatureChangedObserver;
    {
        NSNumber* actualTemperature = _cookingStage.actualTemperature;
        weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue];
-       [weakSelf makeAndSetTimeRemainingLabel];
+       [weakSelf updateLabels];
    }];
     
     _targetTemperatureChangedObserver = [center addObserverForName:FSTTargetTemperatureChangedNotification
@@ -156,11 +168,11 @@ NSObject* _targetTemperatureChangedObserver;
     // needs to reposition behind lettering
     [self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView];
     
-    self.cookingProgressView.timeLimit = [_cookingStage.cookTimeRequested doubleValue]; // set the value for reference with time elapsed
+    self.cookingProgressView.timeLimit = [_cookingStage.cookTimeMinimum doubleValue]; // set the value for reference with time elapsed
     self.cookingProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
     self.cookingProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
     self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
-    [self makeAndSetTimeRemainingLabel];
+    [self updateLabels];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -179,7 +191,7 @@ NSObject* _targetTemperatureChangedObserver;
     self.continueButton.userInteractionEnabled = YES;
     
     [self updateStageBarForState:state];
-    [self makeAndSetTimeRemainingLabel];
+    [self updateLabels];
     self.cookingProgressView.layerState = state; // set state of whole child view
 }
 
@@ -192,7 +204,7 @@ NSObject* _targetTemperatureChangedObserver;
     [self updateStageBarForState:self.progressState];
 } // trying to update lineWidth on rotation
 */
-- (void)makeAndSetTimeRemainingLabel
+- (void)updateLabels
 {
     _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     
@@ -214,25 +226,10 @@ NSObject* _targetTemperatureChangedObserver;
     double targetTemperature = [_cookingStage.targetTemperature doubleValue];
     NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
     
-    double timeRemaining = [_cookingStage.cookTimeRequested doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
-    int hour = timeRemaining / 60;
-    int minutes = fmod(timeRemaining, 60.0);
-    
-    // create the time count down label (only shown during cooking or sitting states)
-    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
-    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
-    NSMutableAttributedString *colonLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: medFontDict];
-    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",minutes]  attributes: bigFontDict];
-    NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: smallFontDict];
-    
-    [hourString appendAttributedString:hourLabel];
-    [hourString appendAttributedString:colonLabel];
-    [hourString appendAttributedString:minuteString];
-    [hourString appendAttributedString:minuteLabel];
     
     //time to complete label
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSDate* timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+    NSDate* timeComplete;
 
     // change label settings for each case
     self.topCircleLabel.hidden = false;
@@ -242,6 +239,10 @@ NSObject* _targetTemperatureChangedObserver;
     self.continueButton.hidden = true;// default not visible
     NSMutableAttributedString* topString = [[NSMutableAttributedString alloc] initWithString:@"Target: "]; // for preheating case
     [topString appendAttributedString:targetTempString];
+    
+    double timeRemaining;
+    int hour;
+    int minutes;
     
     switch (self.progressState) {
 
@@ -260,23 +261,52 @@ NSObject* _targetTemperatureChangedObserver;
             self.continueButton.hidden = false;
             break;
         case kCooking:
+            timeRemaining = [_cookingStage.cookTimeMinimumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+            hour = timeRemaining / 60;
+            minutes = fmod(timeRemaining, 60.0);
+            timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
             [self.cookingStatusLabel setText:@"COOKING"];
             [self.topCircleLabel setAttributedText:currentTempString];
             [dateFormatter setDateFormat:@"hh:mm a"];
-            [self.boldOverheadLabel setText:@"Food Will Be Done By:"];
+            //TODO - update middle label, no bottom label
+            [self.boldOverheadLabel setText:@"Food will be ready at"];
             self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
             break;
         case kSitting:
-            //TODO still need the maximum time to set the targetLabel, and the labels should change
+            timeRemaining = [_cookingStage.cookTimeMaximumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+            hour = timeRemaining / 60;
+            minutes = fmod(timeRemaining, 60.0);
+            timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
             [self.cookingStatusLabel setText:@"DONE"];
             [self.topCircleLabel setAttributedText:currentTempString];
-            [self.boldOverheadLabel setText:@"Take Food Out"];
+            [self.boldOverheadLabel setText:@"Food can stay in until "];
+            self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
+        case kDone:
+            timeRemaining = [_cookingStage.cookTimeMaximumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+            hour = timeRemaining / 60;
+            minutes = fmod(timeRemaining, 60.0);
+            timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+            [self.cookingStatusLabel setText:@"DONE"];
+            [self.topCircleLabel setAttributedText:currentTempString];
+            [self.boldOverheadLabel setText:@"TAKE FOOD OUT"];
             [self.boldLabel setText:@"NOW"];
-            // set the instruction image as well with taking out png
+            //TODO set the instruction image as well with taking out png
             break;
         default:
             break;
     }
+    
+    // create the time count down label (only shown during cooking or sitting states)
+    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
+    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
+    NSMutableAttributedString *colonLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: medFontDict];
+    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",minutes]  attributes: bigFontDict];
+    NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: smallFontDict];
+    
+    [hourString appendAttributedString:hourLabel];
+    [hourString appendAttributedString:colonLabel];
+    [hourString appendAttributedString:minuteString];
+    [hourString appendAttributedString:minuteLabel];
     
     //[self.topCircleLabel.superview bringSubviewToFront:self.topCircleLabel];
     [self.boldLabel.superview bringSubviewToFront:self.boldLabel]; // pull labels before the circle // could change layers instead of hiding labels
@@ -304,7 +334,7 @@ NSObject* _targetTemperatureChangedObserver;
 
 - (IBAction)continueButtonTap:(id)sender {
     self.continueButton.userInteractionEnabled = NO;
-    [self.currentParagon setCookingTime:_cookingStage.cookTimeRequested];
+    [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
 }
 
 #pragma mark - <UIAlertViewDelegate>

@@ -73,17 +73,26 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
 }
 
--(void)setCookingTime: (NSNumber*)cookingTime
+-(void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingMinimumTime goingToMaximumTime: (NSNumber*)cookingTimeMaximum
 {
-    Byte bytes[2] ;
-    OSWriteBigInt16(bytes, 0, [cookingTime unsignedIntegerValue]);
-    NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
+    Byte bytes[8] = {0x00};
+    OSWriteBigInt16(bytes, 0, [cookingMinimumTime unsignedIntegerValue]);
+    OSWriteBigInt16(bytes, 2, [cookingTimeMaximum unsignedIntegerValue]);
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
     
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
     
-    if (characteristic)
+    
+    //TODO - once we actually have max time then remove this calculation
+    cookingTimeMaximum = [NSNumber numberWithInt:[cookingMinimumTime intValue] + 3*60];
+    
+    if (characteristic && cookingMinimumTime && cookingTimeMaximum && [cookingMinimumTime intValue] > 0 && [cookingTimeMaximum intValue] > 0)
     {
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+    else
+    {
+        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
     }
 }
 
@@ -214,14 +223,7 @@ __weak NSTimer* _readCharacteristicsTimer;
             }
             else
             {
-                if ([currentStage.cookTimeRequestedActual integerValue] > 0)
-                {
-                    currentBurner.cookMode = kPARAGON_HEATING_WITH_TIME;
-                }
-                else
-                {
-                    currentBurner.cookMode = kPARAGON_HEATING;
-                }
+                currentBurner.cookMode = kPARAGON_HEATING;
             }
         }
         NSLog(@"burner %d cookMode %d", burner, currentBurner.cookMode);
@@ -274,9 +276,9 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleCookTime: (CBCharacteristic*)characteristic
 {
-    if (characteristic.value.length != 2)
+    if (characteristic.value.length != 8)
     {
-        DLog(@"handleCookTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
+        DLog(@"handleCookTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 8);
         return;
     }
     
@@ -285,10 +287,14 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
-        [data getBytes:bytes length:characteristic.value.length];
-        uint16_t raw = OSReadBigInt16(bytes, 0);
-        currentStage.cookTimeRequestedActual = [[NSNumber alloc] initWithDouble:raw];
-        NSLog(@"FSTCharacteristicCookTime %@", currentStage.cookTimeRequestedActual );
+        [data getBytes:bytes length:8];
+        
+        uint16_t minimumTime = OSReadBigInt16(bytes, 0);
+        uint16_t maximumTime = OSReadBigInt16(bytes, 2);
+        currentStage.cookTimeMinimumActual = [[NSNumber alloc] initWithDouble:minimumTime];
+        currentStage.cookTimeMaximumActual = [[NSNumber alloc] initWithDouble:maximumTime];
+
+        NSLog(@"FSTCharacteristicCookTime min [desired %@, max desired %@],  [min actual: %@, max actual: %@]", currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeMinimumActual, currentStage.cookTimeMaximumActual);
     }
 }
 
