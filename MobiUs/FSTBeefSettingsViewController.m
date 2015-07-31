@@ -36,7 +36,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self.currentParagon.currentCookingMethod createCookingSession];
     [self.currentParagon.currentCookingMethod addStageToCookingSession];
     
-    //set up or data objects
+    //set up for data objects
     _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
     _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
@@ -55,10 +55,10 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 {
    
     //temperature label
-    UIFont *boldFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:22.0];
+    UIFont *boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:24.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
     
-    UIFont *labelFont = [UIFont fontWithName:@"PT Sans Narrow" size:18.0];
+    UIFont *labelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:21.0];
     NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
     
     NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
@@ -93,8 +93,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self.thicknessLabel setAttributedText:thicknessString];
     
     // label above doneness slider
-    [self.donenessLabel setAttributedText:[[NSAttributedString alloc] initWithString:[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]]];
-    NSLog(@" %@\n", self.donenessLabel);
+    [self.donenessLabel setAttributedText:[[NSAttributedString alloc] initWithString:[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature] attributes:labelFontDict]];
 }
 
 - (void)didReceiveMemoryWarning {

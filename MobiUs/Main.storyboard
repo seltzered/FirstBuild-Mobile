@@ -88,13 +88,13 @@
         <scene sceneID="9e0-dr-U2g">
             <objects>
                 <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="RBl-RV-zfF" customClass="FSTParagonMenuViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xjW-t2-umO">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="xjW-t2-umO">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.4431372549" green="0.43921568630000002" blue="0.45098039220000002" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="sectionIndexBackgroundColor" red="0.4431372549" green="0.43921568630000002" blue="0.45098039220000002" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="sectionIndexTrackingBackgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="nk3-IU-PEG">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -128,7 +128,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bF6-vk-C0z">
-                                            <rect key="frame" x="262.5" y="9" width="73.5" height="25"/>
+                                            <rect key="frame" x="262" y="9" width="73.5" height="25"/>
                                             <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -613,15 +613,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="hZr-8C-QOx" customClass="ProductGradientView">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="25"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="MVE-Y9-zXg">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="ClK-Ky-UB3" customClass="ProductGradientView">
-                            <rect key="frame" x="0.0" y="135" width="600" height="25"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="PUw-sV-vj1">
+                            <rect key="frame" x="0.0" y="111" width="600" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="44" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductCell" id="QPG-BF-A1H" userLabel="ProductCell" customClass="ProductTableViewCell">
@@ -787,6 +787,9 @@
                                                     <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="16"/>
                                                     <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="14"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dZ-Pe-XMe">
                                                     <rect key="frame" x="498" y="31" width="46" height="25.5"/>
@@ -875,13 +878,13 @@
                                                     <exclude reference="Jc2-BW-tOx"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="6dW-V7-RnN"/>
                                                     <exclude reference="3Ah-nU-Le0"/>
                                                     <exclude reference="vWa-Rh-OYl"/>
                                                     <exclude reference="zaN-gZ-iTk"/>
                                                     <exclude reference="0Z8-fw-bKU"/>
                                                     <exclude reference="pk7-aj-ssv"/>
                                                     <exclude reference="H2J-i1-4se"/>
+                                                    <exclude reference="6dW-V7-RnN"/>
                                                     <exclude reference="1Uf-GD-erw"/>
                                                     <exclude reference="R8Z-Fm-st6"/>
                                                     <exclude reference="StV-bn-y5e"/>
@@ -927,10 +930,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="bottomGradient" destination="ClK-Ky-UB3" id="VP2-zj-PWf"/>
                         <outlet property="productTable" destination="g8o-UE-XJL" id="fe7-pD-0G5"/>
                         <outlet property="swipeLeftGesture" destination="lSQ-Zh-t8X" id="EIX-G3-yZD"/>
-                        <outlet property="topGradient" destination="hZr-8C-QOx" id="a5Z-aP-WZ8"/>
                         <segue destination="sZO-RU-ozf" kind="show" identifier="segueChillHub" id="ZHf-8p-Egt"/>
                         <segue destination="lhL-8p-Ygk" kind="show" identifier="segueParagon" id="CLf-Iv-xe2"/>
                         <segue destination="dJA-hw-Leo" kind="show" identifier="segueAddProduct" id="vWQ-Kt-73W"/>
@@ -1154,6 +1155,6 @@
         <image name="teardrop" width="33" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vWQ-Kt-73W"/>
+        <segue reference="VJe-HR-x9M"/>
     </inferredMetricsTieBreakers>
 </document>

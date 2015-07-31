@@ -13,6 +13,8 @@
 		517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */; };
 		517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */; };
 		518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */; };
+		5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5194A9451B6A9EC80033BA26 /* FSTLabel.m */; };
+		5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5194A9481B6BA9D40033BA26 /* UILabelEx.m */; };
 		51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */; };
 		51DD77851B4AFA1D0024052A /* FSTDashedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DD77841B4AFA1D0024052A /* FSTDashedLine.m */; };
 		51DFCAE11B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */; };
@@ -126,6 +128,10 @@
 		517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleErrorViewController.m; sourceTree = "<group>"; };
 		518EDF811B41C46100B443EA /* PushSegueNoAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushSegueNoAnimation.h; sourceTree = "<group>"; };
 		518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSegueNoAnimation.m; sourceTree = "<group>"; };
+		5194A9441B6A9EC80033BA26 /* FSTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTLabel.h; sourceTree = "<group>"; };
+		5194A9451B6A9EC80033BA26 /* FSTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTLabel.m; sourceTree = "<group>"; };
+		5194A9471B6BA9D40033BA26 /* UILabelEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabelEx.h; sourceTree = "<group>"; };
+		5194A9481B6BA9D40033BA26 /* UILabelEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabelEx.m; sourceTree = "<group>"; };
 		51A13CD51B4D6CFC00BA3CB7 /* FSTPointedHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPointedHeaderView.h; sourceTree = "<group>"; };
 		51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPointedHeaderView.m; sourceTree = "<group>"; };
 		51DD77831B4AFA1D0024052A /* FSTDashedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTDashedLine.h; sourceTree = "<group>"; };
@@ -484,6 +490,8 @@
 				5BCBB9D31B02991B00B8E043 /* FSTParagon.storyboard */,
 				51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */,
 				51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */,
+				5194A9441B6A9EC80033BA26 /* FSTLabel.h */,
+				5194A9451B6A9EC80033BA26 /* FSTLabel.m */,
 				51F8EF3E1B55961400F40882 /* FSTStageBarView.h */,
 				51F8EF3F1B55961400F40882 /* FSTStageBarView.m */,
 				5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */,
@@ -687,6 +695,8 @@
 				51FAEFF11B62DD8100A7DCF9 /* FSTLine.m */,
 				51DD77831B4AFA1D0024052A /* FSTDashedLine.h */,
 				51DD77841B4AFA1D0024052A /* FSTDashedLine.m */,
+				5194A9471B6BA9D40033BA26 /* UILabelEx.h */,
+				5194A9481B6BA9D40033BA26 /* UILabelEx.m */,
 				51A13CD51B4D6CFC00BA3CB7 /* FSTPointedHeaderView.h */,
 				51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */,
 				5BC3648B1A3112EE00D03B9C /* FSTBackgroundLayer.h */,
@@ -918,6 +928,8 @@
 				5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */,
 				5BA3A97A1B34760700E51C51 /* FSTBleCommissioningTableViewController.m in Sources */,
 				5BCBB9FE1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m in Sources */,
+				5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */,
+				5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */,
 				5BC3647E1A2F637800D03B9C /* FSTDevice.m in Sources */,
 				5BC364971A3260E200D03B9C /* FSTChillHub.m in Sources */,
 				5B3E180B1A41CC76004F1FA0 /* ProductMainViewController.m in Sources */,

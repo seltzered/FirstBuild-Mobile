@@ -15,18 +15,12 @@
 
 @implementation FSTBleNamingViewController
 
-{
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.paragonNameField setDelegate:self];
 
-    [self.bottomView.layer setBorderColor:[UIColor lightGrayColor].CGColor];
-    [self.bottomView.layer setBorderWidth:2.5F];
-    
     self.navigationItem.hidesBackButton = YES;
     
 }

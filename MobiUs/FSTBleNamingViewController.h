@@ -11,7 +11,6 @@
 
 @interface FSTBleNamingViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *paragonNameField;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, strong) CBPeripheral* peripheral;
 
 @end
