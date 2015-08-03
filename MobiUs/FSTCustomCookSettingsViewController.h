@@ -13,19 +13,25 @@
 
 @property (nonatomic,retain) FSTParagon* currentParagon;
 
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *minPickerHeight; // height of min time picker
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *maxPickerHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tempPickerHeight;
+
+@property (weak, nonatomic) IBOutlet UILabel *minTimeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *maxTimeLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
 
-@property (weak, nonatomic) IBOutlet UIPickerView *picker;
+@property (weak, nonatomic) IBOutlet UIPickerView *minPicker;
 
-@property (weak, nonatomic) IBOutlet UIView *timeButtonHolder;
+@property (weak, nonatomic) IBOutlet UIPickerView *maxPicker;
 
-@property (weak, nonatomic) IBOutlet UIView *temperatureButtonHolder;
+@property (weak, nonatomic) IBOutlet UIPickerView *tempPicker;
 
-@property (weak, nonatomic) IBOutlet UILabel *timeButtonLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *temperatureButtonLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *temperatureButtonLabel;
 
 -(void)updateLabels;
 
