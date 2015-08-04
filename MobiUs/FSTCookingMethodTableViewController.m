@@ -25,6 +25,11 @@
     
 }
 
+-(void)dealloc
+{
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     self.methods = [self.delegate dataRequestedFromChild];
@@ -68,19 +73,9 @@
     return cell; // al this will work in the tableviewcontroller initialization
 }
 
-/*- (NSIndexPath *)tableView:(FSTCookingMethodTableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // seems to already be selected before this
-    
-    return indexPath;
-}
-*/
-/*- (void)tableView:(UITableView*)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone]; // this does select it twice, but it looks fine. I would prefer to set animation to true from the beginning! perhaps custom tableView?
-
-}*/ // put in to activate animation
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    self.tableView.userInteractionEnabled = NO;
     
     FSTCookingMethod* method = self.methods.cookingMethods[indexPath.row];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // this
@@ -89,7 +84,6 @@
         [self.delegate cookingMethodSelected:method]; // perform segue after a delay to show animation
 
     });
-    //tableView.userInteractionEnabled = NO;// leftover from animation
 }
 
 

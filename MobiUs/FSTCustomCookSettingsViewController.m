@@ -53,7 +53,10 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    //create a new cooking session
+    self.currentParagon.toBeCookingMethod = (FSTCookingMethod*) [[FSTSousVideCookingMethod alloc] init];
+
     pickerTemperatureData = [[NSMutableArray alloc]init];
     
     for (NSInteger i = 90; i <= 220; i+=5) {
@@ -77,6 +80,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     maxHourActual = maxHourIndex;
     maxMinuteActual = maxMinuteIndex; // no difference between them (probably unnecessary)
     tempIndex = 0;
+
     // set them in every picker
     [self.minPicker selectRow:minHourIndex inComponent:0 animated:NO];
     [self.minPicker selectRow:minMinuteIndex inComponent:1 animated:NO];
@@ -313,7 +317,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 }
 
 - (IBAction)continueTapGesture:(id)sender {
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]); // THIS IS STILL nil (session onward)
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]); // THIS IS STILL nil (session onward)
     NSNumberFormatter* convert = [[NSNumberFormatter alloc] init];
     convert.numberStyle = NSNumberFormatterDecimalStyle;
     stage.targetTemperature = [convert numberFromString:pickerTemperatureData[tempIndex]];
@@ -338,12 +342,11 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
-        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
         [self.currentParagon startHeatingWithTemperature:stage.targetTemperature];
         
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
-
 }
 
 

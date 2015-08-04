@@ -33,9 +33,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    //create a new cooking session and a single stage cook
-    [self.currentParagon.currentCookingMethod createCookingSession];
-    [self.currentParagon.currentCookingMethod addStageToCookingSession];
     
     //set up for data objects
     _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
@@ -54,7 +51,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 - (void)updateLabels
 {
-   
     //temperature label
     UIFont *boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:24.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
@@ -103,7 +99,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 }
 
 - (IBAction)continueTapGesture:(id)sender {
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     stage.targetTemperature = _currentTemperature;
     double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
@@ -115,8 +111,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 {    
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
-        //TODO HACK 
-        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
         [self.currentParagon startHeatingWithTemperature:stage.targetTemperature];
 
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;

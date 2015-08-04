@@ -71,21 +71,27 @@
 
 @implementation FSTCookingViewController
 
-__weak FSTParagonCookingStage* _cookingStage;
+//FSTParagonCookingStage* _cookingStage;
 NSObject* _temperatureChangedObserver;
 NSObject* _timeElapsedChangedObserver;
 NSObject* _cookModeChangedObserver;
 NSObject* _cookingTimeWriteConfirmationObserver;
+NSObject* _elapsedTimeWriteConfirmationObserver;
 NSObject* _targetTemperatureChangedObserver;
+
+BOOL gotWriteResponseForCookTime;
+BOOL gotWriteResponseForElapsedTime;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.navigationItem.hidesBackButton = true;
+    self.navigationItem.hidesBackButton = YES;
+    gotWriteResponseForCookTime = NO;
+    gotWriteResponseForElapsedTime = NO;
     
     __weak typeof(self) weakSelf = self;
-
-    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     
     [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -95,15 +101,32 @@ NSObject* _targetTemperatureChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-        weakSelf.cookingProgressView.elapsedTime = [_cookingStage.cookTimeElapsed doubleValue];
+        weakSelf.cookingProgressView.elapsedTime = [_currentCookingStage.cookTimeElapsed doubleValue];
        [weakSelf updateLabels];
-
     }];
     
     _cookingTimeWriteConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
                                                    object:weakSelf.currentParagon
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
+    {
+        gotWriteResponseForCookTime = YES;
+        [self checkReadyToTransitionToCooking];
+    }];
+    
+    _elapsedTimeWriteConfirmationObserver = [center addObserverForName:FSTElapsedTimeSetNotification
+                                                                object:weakSelf.currentParagon
+                                                                 queue:nil
+                                                            usingBlock:^(NSNotification *notification)
+     {
+         gotWriteResponseForElapsedTime = YES;
+         [self checkReadyToTransitionToCooking];
+     }];
+    
+    _cookingTimeWriteConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
+                                                                object:weakSelf.currentParagon
+                                                                 queue:nil
+                                                            usingBlock:^(NSNotification *notification)
     {
         weakSelf.progressState = kCooking;
     }];
@@ -127,12 +150,12 @@ NSObject* _targetTemperatureChangedObserver;
             //burner was shutoff transition back to the products screen
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }
-        else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_cookingStage.cookTimeElapsed doubleValue] >= [_cookingStage.cookTimeMaximumActual doubleValue] )
+        else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] >= [_currentCookingStage.cookTimeMaximum doubleValue] )
         {
             //the elapsed time has surpassed the maximum time, we need to move to the final screen
             weakSelf.progressState = kDone;
         }
-        else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_cookingStage.cookTimeElapsed doubleValue] > [_cookingStage.cookTimeMinimumActual doubleValue] )
+        else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] > [_currentCookingStage.cookTimeMinimum doubleValue] )
         {
             //the elapsed time is greater the minimum time (..and less than max) so we are in the sitting stage, waiting to reach the maximum time
             weakSelf.progressState = kSitting;
@@ -148,7 +171,7 @@ NSObject* _targetTemperatureChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
    {
-       NSNumber* actualTemperature = _cookingStage.actualTemperature;
+       NSNumber* actualTemperature = _currentCookingStage.actualTemperature;
        weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue];
        [weakSelf updateLabels];
    }];
@@ -158,20 +181,28 @@ NSObject* _targetTemperatureChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
    {
-       NSNumber* targetTemperature = _cookingStage.targetTemperature;
+       NSNumber* targetTemperature = _currentCookingStage.targetTemperature;
        weakSelf.cookingProgressView.targetTemp = [targetTemperature doubleValue];
-       NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@%@", [_cookingStage.targetTemperature stringValue], @"\u00b0 F"];
+       NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@%@", [_currentCookingStage.targetTemperature stringValue], @"\u00b0 F"];
        self.cookingModeLabel.text = cookingModelLabelText;
    }];
 
     // needs to reposition behind lettering
     [self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView];
     
-    self.cookingProgressView.timeLimit = [_cookingStage.cookTimeMinimum doubleValue]; // set the value for reference with time elapsed
+    self.cookingProgressView.timeLimit = [_currentCookingStage.cookTimeMinimum doubleValue]; // set the value for reference with time elapsed
     self.cookingProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
-    self.cookingProgressView.targetTemp =[_cookingStage.targetTemperature doubleValue];
+    self.cookingProgressView.targetTemp =[_currentCookingStage.targetTemperature doubleValue];
     self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
     [self updateLabels];
+}
+
+-(void)checkReadyToTransitionToCooking
+{
+    if (gotWriteResponseForElapsedTime && gotWriteResponseForCookTime)
+    {
+        self.progressState = kCooking;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -205,7 +236,7 @@ NSObject* _targetTemperatureChangedObserver;
 */
 - (void)updateLabels
 {
-    _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+    FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     
     // create every label first
     //Fonts
@@ -219,10 +250,10 @@ NSObject* _targetTemperatureChangedObserver;
     NSDictionary *smallFontDict = [NSDictionary dictionaryWithObject: smallFont forKey:NSFontAttributeName];
     
     // temperature labels (target temperature already at top with cooking mode
-    double currentTemperature = [_cookingStage.actualTemperature doubleValue];
+    double currentTemperature = [_currentCookingStage.actualTemperature doubleValue];
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
     
-    double targetTemperature = [_cookingStage.targetTemperature doubleValue];
+    double targetTemperature = [_currentCookingStage.targetTemperature doubleValue];
     NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
     
     
@@ -262,7 +293,7 @@ NSObject* _targetTemperatureChangedObserver;
             self.dividingLine.hidden = true;
             break;
         case kCooking:
-            timeRemaining = [_cookingStage.cookTimeMinimumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+            timeRemaining = [_currentCookingStage.cookTimeMinimum doubleValue] - [_currentCookingStage.cookTimeElapsed doubleValue];
             hour = timeRemaining / 60;
             minutes = fmod(timeRemaining, 60.0);
             timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
@@ -274,7 +305,7 @@ NSObject* _targetTemperatureChangedObserver;
             self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
             break;
         case kSitting:
-            timeRemaining = [_cookingStage.cookTimeMaximumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue]; // We could also calculate this in the notifications
+            timeRemaining = [_currentCookingStage.cookTimeMaximum doubleValue] - [_currentCookingStage.cookTimeElapsed doubleValue]; // We could also calculate this in the notifications
             hour = timeRemaining / 60;
             minutes = fmod(timeRemaining, 60.0);
             timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
@@ -283,7 +314,7 @@ NSObject* _targetTemperatureChangedObserver;
             [self.boldOverheadLabel setText:@"Food can stay in until "];
             self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
         case kDone:
-            timeRemaining = [_cookingStage.cookTimeMaximumActual doubleValue] - [_cookingStage.cookTimeElapsed doubleValue];
+            timeRemaining = [_currentCookingStage.cookTimeMaximum doubleValue] - [_currentCookingStage.cookTimeElapsed doubleValue];
             hour = timeRemaining / 60;
             minutes = fmod(timeRemaining, 60.0);
             timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
@@ -326,6 +357,7 @@ NSObject* _targetTemperatureChangedObserver;
     [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookingTimeWriteConfirmationObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_elapsedTimeWriteConfirmationObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_targetTemperatureChangedObserver];
 }
 
@@ -336,6 +368,7 @@ NSObject* _targetTemperatureChangedObserver;
 
 - (IBAction)continueButtonTap:(id)sender {
     self.continueButton.userInteractionEnabled = NO;
+    FSTParagonCookingStage* _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
 }
 - (IBAction)menuToggleTapped:(id)sender {
@@ -349,7 +382,3 @@ NSObject* _targetTemperatureChangedObserver;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end
-
-// Copyright belongs to original author
-// http://code4app.net (en) http://code4app.com (cn)
-// From the most professional code share website: Code4App.net
