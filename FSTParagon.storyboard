@@ -1229,6 +1229,7 @@
                                             <constraint firstAttribute="height" constant="216" id="4YU-po-Era">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="500"/>
                                             </constraint>
+                                            <constraint firstAttribute="height" constant="90" id="8R1-TV-q9h"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1251,6 +1252,11 @@
                                     <constraint firstAttribute="centerX" secondItem="XOP-ZX-Zoa" secondAttribute="centerX" id="Lgp-mE-vnS"/>
                                     <constraint firstAttribute="centerY" secondItem="XOP-ZX-Zoa" secondAttribute="centerY" id="ja3-hy-0ck"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Fn7-QY-Fbj"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMj-UR-ghE" userLabel="minTimeButtonWrapperView">
                                 <rect key="frame" x="135" y="56.5" width="446.5" height="50"/>
@@ -1297,6 +1303,9 @@
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfG-Bm-eDB">
                                         <rect key="frame" x="0.0" y="-80" width="446" height="162"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="G3w-Nb-uKV"/>
+                                        </constraints>
                                     </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1307,6 +1316,11 @@
                                     <constraint firstItem="nfG-Bm-eDB" firstAttribute="width" secondItem="TIZ-6f-3A0" secondAttribute="width" id="VLW-tz-fkK"/>
                                     <constraint firstAttribute="centerY" secondItem="nfG-Bm-eDB" secondAttribute="centerY" id="lD7-tp-YO2"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4VQ-rY-R2M"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqq-7G-9ah" userLabel="temperatureButtonWrapperView">
                                 <rect key="frame" x="136" y="198.5" width="446" height="50"/>
@@ -1345,6 +1359,9 @@
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMe-5Q-KNr">
                                         <rect key="frame" x="0.0" y="-80" width="446" height="162"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="QcT-vc-8me"/>
+                                        </constraints>
                                     </pickerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1356,6 +1373,11 @@
                                     <constraint firstAttribute="centerY" secondItem="KMe-5Q-KNr" secondAttribute="centerY" id="m0Z-e7-2UR"/>
                                     <constraint firstAttribute="centerX" secondItem="KMe-5Q-KNr" secondAttribute="centerX" id="wXD-hm-gDF"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Qe-S5-rGv"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

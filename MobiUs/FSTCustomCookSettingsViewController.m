@@ -45,7 +45,7 @@ typedef enum variableSelections {
 
 VariableSelection _selection;
 
-CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current selection
+CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current selection (equal to the constant picker height
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -138,12 +138,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     // should animate if the selection
     self.minPickerHeight.constant = 0;
     self.maxPickerHeight.constant = 0;
-    self.tempPickerHeight.constant = 0; // careful to reset the constatns, not the pointers to the constraints
-    if (_selection != NONE) { // if something was opened ( would be set to none after clicking on the button that was already selected)
-        /*[UIView animateWithDuration:1.0 animations:^(void) {
-            [self.view layoutIfNeeded];//[self updateViewConstraints]; // should tell the view to update heights to zero when something moves
-        }];*/
-    }
+    self.tempPickerHeight.constant = 0; // careful to reset the constants, not the pointers to the constraints
+    // changes layout in a subsequent animation
 }
 
 #pragma -mark IBActions
@@ -158,7 +154,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     } else {
         _selection = NONE;
     }// if it was MIN_TIME it should close, then change to NONE
-    [UIView animateWithDuration:1.0 animations:^(void) {
+    [UIView animateWithDuration:0.7 animations:^(void) {
         [self.view layoutIfNeeded];//[self updateViewConstraints]; // should tell the view to update heights to zero when something moves
     }]; // animate reset and new height or just reset
 
@@ -173,7 +169,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     } else {
         _selection = NONE;
     }
-    [UIView animateWithDuration: 1.0 animations:^(void) {
+    [UIView animateWithDuration: 0.7 animations:^(void) {
         [self.view layoutIfNeeded];
         //[self updateViewConstraints]; // should tell the view to update heights to zero when something moves
     }];
@@ -190,7 +186,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     } else {
         _selection = NONE;
     }
-    [UIView animateWithDuration:1.0 animations:^(void) {
+    [UIView animateWithDuration:0.7 animations:^(void) {
         [self.view layoutIfNeeded];
         //[self updateViewConstraints]; // should tell the view to update heights to zero when something moves
     }];
@@ -208,7 +204,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
     NSMutableAttributedString* temperatureString;
     
-    UIFont* labelsFont = [UIFont fontWithName:@"FSEmeric-Thin" size:43.0];
+    UIFont* labelsFont = [UIFont fontWithName:@"FSEmeric-Thin" size:32.0];
     NSDictionary* labelFontDictionary = [NSDictionary dictionaryWithObject:labelsFont forKey:NSFontAttributeName];
     
     // set all strings according to the picker data
