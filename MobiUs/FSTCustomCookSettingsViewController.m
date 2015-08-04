@@ -172,7 +172,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
             maxHourIndex = maxHourActual - minHourIndex; // subtract to offset to get its index on the picker scale
             [self reloadData];
             [self.maxPicker selectRow:maxHourIndex inComponent:0 animated:NO]; // hour might need to update according to the changed range
-            if (minMinuteIndex > maxMinuteActual) { // cases where the minute range went down below the current selection (label needs to update)
+            if ((maxHourActual == minHourIndex) && (minMinuteIndex > maxMinuteActual)) { // cases where the minute range went down below the current selection (label needs to update) (but only when the hours are equal so the range must change)
                 minMinuteIndex = maxMinuteActual;
                 [pickerView selectRow:minMinuteIndex inComponent:1 animated:NO];
             }
