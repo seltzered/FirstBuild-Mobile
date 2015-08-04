@@ -34,6 +34,16 @@ FSTCookingMethods* _methods;
     
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    
+}
+
+- (void)dealloc
+{
+    DLog(@"dealloc");
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;

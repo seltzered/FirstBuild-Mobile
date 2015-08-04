@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -679,11 +679,11 @@
                                 <exclude reference="onF-qa-0Cv"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="bOW-7A-BEU"/>
                                 <exclude reference="WqE-2n-vvt"/>
                                 <exclude reference="aFs-0q-KPi"/>
                                 <exclude reference="g0H-6V-azS"/>
                                 <exclude reference="oBR-Me-Poq"/>
-                                <exclude reference="bOW-7A-BEU"/>
                                 <exclude reference="U38-8A-f8d"/>
                                 <exclude reference="bga-d6-Aa4"/>
                                 <exclude reference="G9X-4w-9QT"/>
@@ -699,8 +699,8 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
-                                <include reference="aFs-0q-KPi"/>
                                 <exclude reference="8cC-Ey-YyE"/>
+                                <include reference="aFs-0q-KPi"/>
                                 <exclude reference="yZE-hg-3u7"/>
                             </mask>
                         </variation>
@@ -1432,9 +1432,9 @@
                                 <exclude reference="Z4w-BU-Wta"/>
                                 <exclude reference="EzH-cI-hpK"/>
                                 <exclude reference="ma0-P6-HxA"/>
-                                <exclude reference="Zzu-OQ-ftD"/>
                                 <exclude reference="2M0-yk-bnb"/>
                                 <exclude reference="cK2-MA-kS2"/>
+                                <exclude reference="Zzu-OQ-ftD"/>
                                 <exclude reference="fJb-DY-JJf"/>
                                 <exclude reference="j6i-aY-aar"/>
                                 <exclude reference="efO-M9-WgZ"/>
@@ -1633,12 +1633,12 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="zed-pE-teo"/>
-                                        <exclude reference="8xb-PV-Czz"/>
-                                        <exclude reference="Mbl-5j-sHC"/>
-                                        <exclude reference="oD0-3A-Mwx"/>
                                         <exclude reference="Lz5-FZ-Ht5"/>
                                         <exclude reference="V98-hl-Ly2"/>
                                         <exclude reference="yT6-1n-V9W"/>
+                                        <exclude reference="8xb-PV-Czz"/>
+                                        <exclude reference="Mbl-5j-sHC"/>
+                                        <exclude reference="oD0-3A-Mwx"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -1786,8 +1786,8 @@
         <image name="reveal-icon" width="22" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="etR-Tg-xJz"/>
+        <segue reference="CmD-W5-dtV"/>
         <segue reference="zTN-hz-fZw"/>
-        <segue reference="ETw-Ro-4Or"/>
-        <segue reference="kaM-gB-8PG"/>
     </inferredMetricsTieBreakers>
 </document>

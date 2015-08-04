@@ -33,6 +33,11 @@ NSString* headerText;
 
 }
 
+- (void)dealloc
+{
+    DLog(@"dealloc");
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
