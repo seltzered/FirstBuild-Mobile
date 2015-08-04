@@ -47,14 +47,11 @@ FSTCookingMethods* _methods;
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{    
-    if ([segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]])
+{
+    if ([sender isKindOfClass:[FSTCookingMethod class]])
     {
-        ((FSTCookingMethodSubSelectionViewController*)segue.destinationViewController).currentParagon = self.product;
-        self.product.currentCookingMethod = (FSTCookingMethod*)sender;
-    } else if ([segue.destinationViewController isKindOfClass:[FSTCustomCookSettingsViewController class]]) {
-        ((FSTCustomCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product; // set paragon to selected product
-        self.product.currentCookingMethod = (FSTCookingMethod*) [[FSTSousVideCookingMethod alloc] init];//_methods.cookingMethods[0];////need to set this to something, just generic cooking method object hopefully. It crashes at the preheat screen
+        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
+        self.product.toBeCookingMethod = (FSTCookingMethod*)sender;
     }
 }
 
@@ -69,7 +66,7 @@ FSTCookingMethods* _methods;
 }
 
 - (IBAction)customTap:(id)sender {
-    [self performSegueWithIdentifier:@"segueCustom" sender:self];
+    [self performSegueWithIdentifier:@"segueCustom" sender:nil];
 
 }
 - (IBAction)menuToggleTapped:(id)sender {

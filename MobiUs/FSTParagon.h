@@ -20,10 +20,14 @@ extern NSString * const FSTElapsedTimeChangedNotification;
 extern NSString * const FSTBatteryLevelChangedNotification;
 extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
+extern NSString * const FSTElapsedTimeSetNotification;
+
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 @property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
+@property (nonatomic, strong) FSTCookingMethod* toBeCookingMethod;
+
 @property (atomic) ParagonCookMode currentCookMode;
 @property (nonatomic, strong) NSArray* burners;
 @property (nonatomic, strong) NSNumber* batteryLevel;

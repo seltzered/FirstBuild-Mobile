@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTParagon.h"
+#import "FSTCookSettingsViewController.h"
 
-@interface FSTCustomCookSettingsViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
-
-@property (nonatomic,retain) FSTParagon* currentParagon;
+@interface FSTCustomCookSettingsViewController : FSTCookSettingsViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 

@@ -29,7 +29,7 @@ NSString* headerText;
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
-    headerText = [self.currentParagon.currentCookingMethod.name uppercaseString]; // grabs the current cooking method (sous vide most likely) upon loading
+    headerText = [self.currentParagon.toBeCookingMethod.name uppercaseString]; // grabs the current cooking method (sous vide most likely) upon loading
 
 }
 
@@ -45,7 +45,7 @@ NSString* headerText;
 
 - (FSTCookingMethods*) dataRequestedFromChild
 {
-    if ([self.currentParagon.currentCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
+    if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
     {
         return (FSTCookingMethods*)[[FSTSousVideCookingMethods alloc]init];
     }
@@ -62,28 +62,19 @@ NSString* headerText;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([sender isKindOfClass:[FSTCookingMethod class]] && [segue.destinationViewController isKindOfClass:[FSTBeefSettingsViewController class]])
-    {
-        self.currentParagon.currentCookingMethod = (FSTCookingMethod*)sender;
-        ((FSTBeefSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
-    } else if ([segue.destinationViewController isKindOfClass:[FSTCustomCookSettingsViewController class]]) {
-        ((FSTCustomCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
-        self.currentParagon.currentCookingMethod = (FSTCookingMethod*) [[FSTSousVideCookingMethod alloc] init];
-    }
     
+    if ([sender isKindOfClass:[FSTCookingMethod class]])
+    {
+        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        self.currentParagon.toBeCookingMethod = (FSTCookingMethod*)sender;
+    }
 }
 
 - (IBAction)customTap:(id)sender {
-    [self performSegueWithIdentifier:@"customSegue" sender:self];
+    [self performSegueWithIdentifier:@"customSegue" sender:nil];
 }
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon]; // the other says product, which is inconsistent
 }
-
-/*-(void) viewWillAppear:(BOOL)animated
-{
-    self.headerLabel.text = [self.currentParagon.currentCookingMethod.name stringByAppendingString:@"?"];
-}*/ // view did load so this only happens when adding on two the stack
-
 
 @end

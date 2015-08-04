@@ -71,7 +71,6 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceDisconnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceBatteryChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -296,6 +295,10 @@ NSIndexPath *_indexPathForDeletion;
             FSTCookingMethodViewController *vc = (FSTCookingMethodViewController*)destination.scene;
             vc.product = sender;
         }
+        else
+        {
+            DLog(@"seguing to nowhere...");
+        }
     }
     else if ([sender isKindOfClass:[FSTChillHub class]])
     {
@@ -354,38 +357,6 @@ NSIndexPath *_indexPathForDeletion;
         {
             [productCell.statusLabel setText:@"!"];
         }
-
-        //TODO we need observers on the cookmode for each paragon in order to set the status
-//        NSString* statusLabel;
-//        
-//        switch (((FSTParagon*)product).currentCookMode)
-//        {
-//            case kPARAGON_HEATING:
-//                statusLabel = @"Cooking";
-//                break;
-//                
-//            case kPARAGON_HEATING_WITH_TIME:
-//                statusLabel = @"Cooking";
-//                break;
-//                
-//            case kPARAGON_OFF:
-//                statusLabel = @"Idle";
-//                break;
-//                
-//            case kPARAGON_SOUS_VIDE_ENABLED:
-//                statusLabel = @"Idle";
-//                break;
-//                
-//            case kPARAGON_PREHEATING:
-//                statusLabel = @"Preheat";
-//                break;
-//                
-//            default:
-//                statusLabel = @"Idle";
-//                break;
-//        }
-//        productCell.statusLabel.text = statusLabel;
-        
     }
     
     if (product.online)
@@ -422,6 +393,8 @@ NSIndexPath *_indexPathForDeletion;
         {
             FSTParagon* paragon = (FSTParagon*)product;
             
+            //jump to the appropriate state in the cooking view controller, no segue performed
+            //if opening cooking view controller, only if segue'ing to the cooking settings controller
             if (paragon.currentCookMode == kPARAGON_PREHEATING)
             {
                 FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];

@@ -41,7 +41,6 @@ NSObject* _cookModeChangedObserver;
            [weakSelf performSegueWithIdentifier:@"seguePreheating" sender:weakSelf];
        }
    }];
-
 }
 
 -(void)removeObservers
@@ -57,14 +56,8 @@ NSObject* _cookModeChangedObserver;
 - (void)viewWillAppear:(BOOL)animated
 {
 
-    //self.currentParagon.delegate = self;
-    //FSTParagonCookingStage* stage = (FSTParagonCookingStage*)self.currentParagon.currentCookingMethod.session.paragonCookingStages[0];
-   // self.temperatureLabel.text = [[stage.targetTemperature stringValue] stringByAppendingString:@"\u00b0"];
-    
-    //begin 
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
     [controller setHeaderText:@"GET READY" withFrameRect:CGRectMake(0, 0, 120, 30)];
-
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -86,10 +79,5 @@ NSObject* _cookModeChangedObserver;
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon];
 }
-
-/*- (IBAction)cancelLabelClick:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}*/
-
 
 @end

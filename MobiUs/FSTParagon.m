@@ -17,6 +17,7 @@ NSString * const FSTCookModeChangedNotification             = @"FSTCookModeChang
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
 NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
+NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
 
 //app info service
 NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
@@ -35,6 +36,8 @@ NSString * const FSTCharacteristicElapsedTime           = @"998142D1-658E-33E2-D
 NSString * const FSTCharacteristicCookTime              = @"C4510188-9062-4D28-97EF-4FB32FFE1AC5"; //read,write
 NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"; //read,notify
 
+//TODO put sizes for the characteristics here and remove magic numbers below
+
 __weak NSTimer* _readCharacteristicsTimer;
 
 - (id)init
@@ -43,9 +46,18 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     if (self)
     {
+        //setup the current cooking method and session, which is the actual
+        //state of the cooking as reported by the cooktop
         self.currentCookingMethod = [[FSTCookingMethod alloc]init];
         [self.currentCookingMethod createCookingSession];
         [self.currentCookingMethod addStageToCookingSession];
+        
+        //setup the to-be cooking method, which is the settings for the building
+        //out of a new method and session
+        self.toBeCookingMethod = [[FSTCookingMethod alloc]init];
+        [self.toBeCookingMethod createCookingSession];
+        [self.toBeCookingMethod addStageToCookingSession];
+        
         self.burners = [NSArray arrayWithObjects:[FSTBurner new], [FSTBurner new],[FSTBurner new],[FSTBurner new],[FSTBurner new], nil];
     }
 
@@ -75,25 +87,38 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingMinimumTime goingToMaximumTime: (NSNumber*)cookingTimeMaximum
 {
-    Byte bytes[8] = {0x00};
-    OSWriteBigInt16(bytes, 0, [cookingMinimumTime unsignedIntegerValue]);
-    OSWriteBigInt16(bytes, 2, [cookingTimeMaximum unsignedIntegerValue]);
-    NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
     
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
-    
     
     //TODO - once we actually have max time then remove this calculation
     cookingTimeMaximum = [NSNumber numberWithInt:[cookingMinimumTime intValue] + 3*60];
     
     if (characteristic && cookingMinimumTime && cookingTimeMaximum && [cookingMinimumTime intValue] > 0 && [cookingTimeMaximum intValue] > 0)
     {
+        Byte bytes[8] = {0x00};
+        OSWriteBigInt16(bytes, 0, [cookingMinimumTime unsignedIntegerValue]);
+        OSWriteBigInt16(bytes, 2, [cookingTimeMaximum unsignedIntegerValue]);
+        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
     else
     {
         DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
     }
+    
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
+    
+    if (characteristic)
+    {
+        Byte bytes[2] = {0x00,0x00};
+        NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+    else
+    {
+        DLog(@"could not set elapsed time to 0 on BLE device, characteristic is empty");
+    }
+    
 }
 
 -(void)assignValueToPropertyFromCharacteristic: (CBCharacteristic*)characteristic
@@ -144,8 +169,20 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleBatteryLevel: (CBCharacteristic*)characteristic
 {
-    self.batteryLevel = [NSNumber numberWithInt:32];
+    if (characteristic.value.length != 1)
+    {
+        DLog(@"handleBatteryLevel length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
+    }
+    
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    self.batteryLevel = [NSNumber numberWithUnsignedInt:bytes[0]];
+    
+    NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
+
 }
 
 -(void)handleElapsedTime: (CBCharacteristic*)characteristic
@@ -177,7 +214,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         DLog(@"handleBurnerStatus length of %lu not what was expected, %lu", (unsigned long)characteristic.value.length, (unsigned long)self.burners.count);
         return;
     }
-    FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    //outFSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
     
     //There are 5 burner statuses and and 5 bytes. Each byte is a status
     //the statuses are:
@@ -283,6 +320,8 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     
     FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+
     if (currentStage)
     {
         NSData *data = characteristic.value;
@@ -291,10 +330,10 @@ __weak NSTimer* _readCharacteristicsTimer;
         
         uint16_t minimumTime = OSReadBigInt16(bytes, 0);
         uint16_t maximumTime = OSReadBigInt16(bytes, 2);
-        currentStage.cookTimeMinimumActual = [[NSNumber alloc] initWithDouble:minimumTime];
-        currentStage.cookTimeMaximumActual = [[NSNumber alloc] initWithDouble:maximumTime];
+        currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
+        currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
 
-        NSLog(@"FSTCharacteristicCookTime min [desired %@, max desired %@],  [min actual: %@, max actual: %@]", currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeMinimumActual, currentStage.cookTimeMaximumActual);
+        NSLog(@"FSTCharacteristicCookTime [min desired %@, max desired %@],  [min actual: %@, max actual: %@]", toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
     }
 }
 
@@ -394,7 +433,19 @@ __weak NSTimer* _readCharacteristicsTimer;
             DLog(@"error writing the cooktime characteristic %@", error);
             return;
         }
+        DLog(@"successfully wrote FSTCharacteristicCookTime");
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
+    {
+        if (error)
+        {
+            //TODO what do we do if error writing characteristic?
+            DLog(@"error writing the elapsed time characteristic %@", error);
+            return;
+        }
+        DLog(@"successfully wrote FSTCharacteristicElapsedTime");
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
     }
 }
 
