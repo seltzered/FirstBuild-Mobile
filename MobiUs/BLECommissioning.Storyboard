@@ -18,8 +18,6 @@
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
-            <string>PTSans-Narrow</string>
-            <string>PTSans-Narrow</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -119,16 +117,19 @@
                                             </constraint>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="m33-Ka-D9M">
-                                        <rect key="frame" x="209" y="393" width="180" height="44"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="m33-Ka-D9M" customClass="FSTRegularLabel">
+                                        <rect key="frame" x="174" y="393" width="250" height="41"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="180" id="sya-dN-a8X">
+                                            <constraint firstAttribute="width" constant="250" id="sya-dN-a8X">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="225"/>
                                             </constraint>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        </variation>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="tzj-Hj-uBd">
                                         <rect key="frame" x="0.0" y="535" width="600" height="65"/>
@@ -271,18 +272,18 @@
                                     </constraint>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yba-98-Hpr">
-                                <rect key="frame" x="210" y="413" width="180" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yba-98-Hpr" customClass="FSTRegularLabel">
+                                <rect key="frame" x="174.5" y="413" width="250" height="41"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="mcL-kZ-g0F">
+                                    <constraint firstAttribute="width" constant="250" id="mcL-kZ-g0F">
                                         <variation key="heightClass=regular-widthClass=regular" constant="225"/>
                                     </constraint>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 </variation>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="Wd0-mp-Ld7">
@@ -549,8 +550,8 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
-                                        <include reference="aTI-2i-eNL"/>
                                         <exclude reference="59c-Yf-OZy"/>
+                                        <include reference="aTI-2i-eNL"/>
                                     </mask>
                                 </variation>
                             </label>
