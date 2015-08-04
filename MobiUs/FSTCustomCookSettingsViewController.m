@@ -28,10 +28,14 @@
     // store the last row accessed in time hour column, minimum time picker
     NSInteger minMinuteIndex;
     
-    NSInteger maxHourIndex;
+    NSInteger maxHourIndex; // index on its own respective picker, with a mutable start point
     
     NSInteger maxMinuteIndex;
     
+    // need to know the hour and minute index on the minute data scale
+    NSInteger maxHourActual;
+    
+    NSInteger maxMinuteActual;
     
 }
 
@@ -67,9 +71,11 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     self.tempPicker.delegate = self;
     _selection = NONE; // set the initial states
     minHourIndex = 0;
-    minMinuteIndex = 1; // initial selections
-    maxHourIndex = 0;
-    maxMinuteIndex = 1;
+    minMinuteIndex = 1; // initial selections (minimum values
+    maxHourIndex = ((NSArray*)pickerTimeData[0]).count - 1;
+    maxMinuteIndex = ((NSArray*)pickerTimeData[1]).count - 1; // maximum values in max
+    maxHourActual = maxHourIndex;
+    maxMinuteActual = maxMinuteIndex; // no difference between them (probably unnecessary)
     tempIndex = 0;
     // set them in every picker
     [self.minPicker selectRow:minHourIndex inComponent:0 animated:NO];
@@ -105,35 +111,115 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (NSInteger) pickerView:(UIPickerView *) pickerView numberOfRowsInComponent:(NSInteger)component {
     
-    if (pickerView == self.minPicker || pickerView == self.maxPicker){
-        return ((NSArray*)pickerTimeData[component]).count; // eventually, this will return the maxHourIndex for the minPicker when the component is 0, and the maxMinute Index if the minTime index is equal to the current MaxTimeIndex (the data must reload when this happens)
-    } else {
-        return pickerTemperatureData.count;
+    if (pickerView == self.minPicker){
+        if (component == 0) {
+            return maxHourActual + 1;//((NSArray*)pickerTimeData[component]).count; // eventually, this will return the maxHourIndex for the minPicker when the component is 0, and the maxMinute Index if the minTime index is equal to the current MaxTimeIndex (the data must reload when this happens)
+        } else if (component == 1) {
+            if (minHourIndex == maxHourActual) {
+                return maxMinuteActual + 1; // also causes a problem, maxMinuteActual does not update when the max wheel has selected
+            } else {
+                return ((NSArray*)pickerTimeData[component]).count;
+            }
+        }
+    } // end the minTimePicker condition
+    else if (pickerView == self.maxPicker) {
+        if (component == 0) {
+            return ((NSArray*)pickerTimeData[component]).count - minHourIndex; // list only extends from current minimum index to the end
+        } else if (component == 1) {
+            if (minHourIndex == maxHourActual) { // if the hours are equal, ensure that users pick a greater minute index (so the max minutes will extend from min minute selection to the end)
+                return ((NSArray*)pickerTimeData[component]).count - minMinuteIndex;
+            } else {
+                return ((NSArray*)pickerTimeData[component]).count; // otherwise give them every minute
+            }
+        }
     }
+    else {
+        return pickerTemperatureData.count;
+    } // end the tempPicker else statement
+    return 0; // default, don't load data (should not ever reach this
 }
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if (pickerView == self.minPicker|| pickerView == self.maxPicker) {
-        return (NSString*)pickerTimeData[component][row];// will eventually offset max time data with minIndices
-    } else {
+    if (pickerView == self.minPicker) {
+        return (NSString*)pickerTimeData[component][row];// offset max time data with minIndices
+    }
+    else if (pickerView == self.maxPicker) {
+        if (component == 0) {
+            return (NSString*)pickerTimeData[component][row + minHourIndex];
+        } else { // assuming only two components for now
+            if (minHourIndex == maxHourActual) { // minutes must be greater or equal to the minPicker
+                return (NSString*)pickerTimeData[component][row + minMinuteIndex];
+            } else {
+                return (NSString*)pickerTimeData[component][row];
+            }
+        }
+    }
+    else {
         return (NSString*)pickerTemperatureData[row];//[[NSMutableAttributedString alloc] initWithString: pickerTemperatureData[row]attributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x00B5CC)}];
     }
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     // set labels now that value had settled
+    [self reloadData];
     if (pickerView == self.minPicker) {
-        minHourIndex = [self.minPicker selectedRowInComponent:0];
-        minMinuteIndex = [self.minPicker selectedRowInComponent:1];
+        if (component == 0) {
+            minHourIndex = row;
+            maxHourIndex = maxHourActual - minHourIndex; // subtract to offset to get its index on the picker scale
+            [self reloadData];
+            [self.maxPicker selectRow:maxHourIndex inComponent:0 animated:NO]; // hour might need to update according to the changed range
+            if (minMinuteIndex > maxMinuteActual) { // cases where the minute range went down below the current selection (label needs to update)
+                minMinuteIndex = maxMinuteActual;
+                [pickerView selectRow:minMinuteIndex inComponent:1 animated:NO];
+            }
+        } else if (component == 1) {
+            minMinuteIndex = row;
+        // need to reset the max index in case its minimum value changed (actual index stays the same.
+            // if statement was here
+        }
+        if (maxHourActual == minHourIndex) {// difference comes down to minutes
+            maxMinuteIndex = maxMinuteActual - minMinuteIndex;
+            // reset the maxMinute to its new range
+            [self reloadData]; // make sure it has the correct new range, or else it might go outside
+            [self.maxPicker selectRow:maxMinuteIndex inComponent:1 animated:NO];
+        } // should always rese thes
     } else if (pickerView == self.maxPicker) {
-        maxHourIndex = [self.maxPicker selectedRowInComponent:0];
-        maxMinuteIndex = [self.maxPicker selectedRowInComponent:1];
+        if (component == 0) { // selected an hour
+            maxHourIndex = row;
+            // get the current selections
+            maxHourActual = minHourIndex + maxHourIndex; // record the max Hour index with its starting offset
+            if (maxHourActual == minHourIndex) { // hours lined up
+                if (maxMinuteActual >= minMinuteIndex) {
+                    maxMinuteIndex = maxMinuteActual - minMinuteIndex;
+                } else { // dangerous exception
+                    maxMinuteIndex = 0; // default to the first entry
+                    maxMinuteActual = minMinuteIndex; // at the start of its range
+                }
+            } else {
+                maxMinuteIndex = maxMinuteActual; // need to reset the selection to the current reading
+            }
+            [self reloadData];
+            [pickerView selectRow:maxMinuteIndex inComponent:1 animated:NO]; // update the selection in the minutes
+        } else if (component == 1) { // selected a minute, track changes to the actual max minute index for reference when changing the hour
+            maxMinuteIndex = row;
+            if (maxHourActual == minHourIndex) { // the size should change in this case
+                maxMinuteActual = minMinuteIndex + maxMinuteIndex; // this can some times be above four since the size of the minutes do not reset fast enough
+            } else {
+                maxMinuteActual = maxMinuteIndex; // default, set it on its normal scale
+            }
+        }
     } else if (pickerView == self.tempPicker) {
         tempIndex = [self.tempPicker selectedRowInComponent:0];
     }
+    [self reloadData];
     [self updateLabels]; // indices needed for writing the labels from picker data
 }
 
+- (void)reloadData {
+    [self.minPicker reloadAllComponents];
+    [self.maxPicker reloadAllComponents];
+    [self.tempPicker reloadAllComponents];
+}
 - (void)resetPickerHeights { // might want to save the current indices as well, but it should remain the same
     // should animate if the selection
     self.minPickerHeight.constant = 0;
@@ -210,8 +296,9 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     // set all strings according to the picker data
     minHourString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[0][minHourIndex] attributes:labelFontDictionary];
     minMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minMinuteIndex] attributes:labelFontDictionary];
-    maxHourString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[0][maxHourIndex] attributes:labelFontDictionary];
-    maxMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][maxMinuteIndex] attributes:labelFontDictionary];
+    maxHourString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[0][maxHourActual] attributes:labelFontDictionary];
+    // nit to offset this according to the minMinute selection (I might set these strings in the selection block)
+    maxMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][maxMinuteActual] attributes:labelFontDictionary];
     temperatureString = [[NSMutableAttributedString alloc] initWithString:pickerTemperatureData[tempIndex] attributes:labelFontDictionary];
     
     NSMutableAttributedString* farenheitString = [[NSMutableAttributedString alloc]initWithString:@"\u00b0 F" attributes:labelFontDictionary];
@@ -232,7 +319,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.targetTemperature = [convert numberFromString:pickerTemperatureData[tempIndex]];
     // time calculations
     double minCookingMinutes = ([(NSNumber*)[convert numberFromString:pickerTimeData[0][minHourIndex]] integerValue] * 60) + ([(NSNumber*)[convert numberFromString:[pickerTimeData[1][minMinuteIndex] substringFromIndex:1]] integerValue]);
-    double maxCookingMinutes = ([(NSNumber*)[convert numberFromString:pickerTimeData[0][maxHourIndex]] integerValue] * 60) + ([(NSNumber*)[convert numberFromString:[pickerTimeData[1][maxMinuteIndex] substringFromIndex:1]] integerValue]);
+    double maxCookingMinutes = ([(NSNumber*)[convert numberFromString:pickerTimeData[0][maxHourActual]] integerValue] * 60) + ([(NSNumber*)[convert numberFromString:[pickerTimeData[1][maxMinuteActual] substringFromIndex:1]] integerValue]);
     stage.cookTimeMinimum = [NSNumber numberWithDouble:minCookingMinutes];
     stage.cookTimeMaximum = [NSNumber numberWithDouble:maxCookingMinutes];
     stage.cookingLabel = @"Custom Profile";
