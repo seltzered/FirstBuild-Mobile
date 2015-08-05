@@ -60,7 +60,10 @@ FSTCookingMethods* _methods;
         self.product.toBeCookingMethod = (FSTCookingMethod*)sender;
     }
     
-    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]])
+    if  (
+            [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
+            [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]]
+        )
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
     }
