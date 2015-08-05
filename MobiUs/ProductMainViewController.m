@@ -24,7 +24,7 @@
 
 NSObject* _menuItemSelectedObserver;
 NSObject* _bleDeviceDisconnectedObserver;
-NSObject* _bleDeviceReadyObserver;
+NSObject* _bleDeviceConnectedObserver;
 
 NSMutableArray* _offlineDevices;
 
@@ -56,7 +56,7 @@ FSTParagonDisconnectedLabel* _warningLabel;
         }
     }];
     
-    _bleDeviceReadyObserver = [center addObserverForName:FSTDeviceReadyNotification
+    _bleDeviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
                                                    object:nil
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
@@ -80,8 +80,7 @@ FSTParagonDisconnectedLabel* _warningLabel;
         CBPeripheral* peripheral = (CBPeripheral*)notification.object;
 
         [_offlineDevices addObject:peripheral];
-        UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];//[self.navigationController topViewController];//
-        //activeController.view.frame = CGRectOffset(activeController.view.frame, 0, activeController.view.frame.size.height/9); // need to figure out how to move sub view controller
+        UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];//
         _warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, activeController.view.frame.size.height/9, activeController.view.frame.size.width, activeController.view.frame.size.height/9)];
         _warningLabel.delegate = self; // set delegate to main home screen
         [activeController.view addSubview:_warningLabel];//addSubview:warningLabel];//add label to take in space that view slid out
@@ -102,8 +101,7 @@ FSTParagonDisconnectedLabel* _warningLabel;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_menuItemSelectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceDisconnectedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceReadyObserver];
-
+    [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceConnectedObserver];
 }
 
 - (void)didReceiveMemoryWarning {

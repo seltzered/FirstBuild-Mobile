@@ -141,10 +141,6 @@ NSIndexPath *_indexPathForDeletion;
                     DLog(@"discovering services for peripheral %@", peripheral.identifier);
                     [peripheral discoverServices:nil];
                     [weakSelf.tableView reloadData];
-                    //TODO:: HACK. Service discovery is slow, we need to find the actual service we are looking for
-                    //here which is going to be by product type. Hardcoded for the paragon service.
-                    //NSUUID* uuid = [[NSUUID alloc]initWithUUIDString:@"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F"];
-                    //NSArray* services = [[NSArray alloc] initWithObjects:uuid, nil];
                 }
             }
         }
