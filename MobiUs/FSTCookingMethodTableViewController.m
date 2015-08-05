@@ -84,7 +84,7 @@
     
     // clear selection property not making a difference // this might be a problem if the selection changes
     [weakSelf.tableView deselectRowAtIndexPath:weakSelf.tableView.indexPathForSelectedRow animated:YES];
-    [weakSelf.delegate cookingMethodSelected:method]; 
+    [weakSelf.delegate cookingMethodSelected:method];
 }
 
 

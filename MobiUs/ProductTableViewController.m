@@ -292,6 +292,7 @@ NSIndexPath *_indexPathForDeletion;
     {
         if ([destination.scene isKindOfClass:[FSTCookingMethodViewController class]])
         {
+            
             FSTCookingMethodViewController *vc = (FSTCookingMethodViewController*)destination.scene;
             vc.product = sender;
         }

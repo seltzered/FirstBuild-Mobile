@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *cookingStatusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
 @property (strong, nonatomic) IBOutlet FSTCookingProgressView *cookingProgressView;
-@property (nonatomic,retain) FSTParagon* currentParagon;
+@property (nonatomic,weak) FSTParagon* currentParagon;
 @property (strong, nonatomic) IBOutlet UILabel *topCircleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *boldOverheadLabel;
 @property (strong, nonatomic) IBOutlet UILabel *boldLabel;

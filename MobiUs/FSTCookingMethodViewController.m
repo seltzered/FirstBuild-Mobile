@@ -34,11 +34,6 @@ FSTCookingMethods* _methods;
     
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-}
-
 - (void)dealloc
 {
     DLog(@"dealloc");

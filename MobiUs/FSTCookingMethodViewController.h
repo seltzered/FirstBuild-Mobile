@@ -12,6 +12,7 @@
 #import "FSTParagon.h"
 
 @interface FSTCookingMethodViewController : UIViewController <FSTCookingMethodTableViewControllerDelegate>
-@property (strong, nonatomic) FSTParagon* product;
+
+@property (weak, nonatomic) FSTParagon* product;
 
 @end

@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ProductAddWrapperViewController : UIViewController
-
-
 @property (strong, nonatomic) IBOutlet UILabel *lblHeader;
 @end

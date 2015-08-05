@@ -11,5 +11,5 @@
 
 @interface FSTBleFoundViewController : UIViewController
 
-@property (nonatomic, strong) CBPeripheral* peripheral;
+@property (nonatomic, weak) CBPeripheral* peripheral;
 @end
