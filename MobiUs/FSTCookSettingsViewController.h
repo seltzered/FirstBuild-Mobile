@@ -11,6 +11,6 @@
 
 @interface FSTCookSettingsViewController : UIViewController
 
-@property (nonatomic,retain) FSTParagon* currentParagon;
+@property (nonatomic,weak) FSTParagon* currentParagon;
 
 @end

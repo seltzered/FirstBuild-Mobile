@@ -32,6 +32,12 @@ FSTCookingMethods* _methods;
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
     
+    
+}
+
+- (void)dealloc
+{
+    DLog(@"dealloc");
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -48,11 +54,20 @@ FSTCookingMethods* _methods;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+   
     if ([sender isKindOfClass:[FSTCookingMethod class]])
     {
-        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
         self.product.toBeCookingMethod = (FSTCookingMethod*)sender;
     }
+    
+    if  (
+            [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
+            [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]]
+        )
+    {
+        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
+    }
+
 }
 
 - (FSTCookingMethods*) dataRequestedFromChild

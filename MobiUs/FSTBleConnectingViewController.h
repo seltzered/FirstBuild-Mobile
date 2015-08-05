@@ -11,7 +11,7 @@
 
 @interface FSTBleConnectingViewController : UIViewController <CBPeripheralDelegate>
 
-@property (nonatomic, strong) CBPeripheral* peripheral;
+@property (nonatomic, weak) CBPeripheral* peripheral;
 @property (nonatomic, strong) NSString* friendlyName;
 @property (weak, nonatomic) IBOutlet UIImageView *searchingIcon;
 

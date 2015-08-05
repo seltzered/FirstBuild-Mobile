@@ -17,5 +17,6 @@
 @property (strong, nonatomic) NSString* friendlyName;
 @property (strong, nonatomic) Firebase* firebaseRef;
 @property (atomic) BOOL online;
+@property (atomic) BOOL loading;
 
 @end

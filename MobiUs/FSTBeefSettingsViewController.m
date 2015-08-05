@@ -27,6 +27,8 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
+    
+    NSObject* _temperatureSetObserver;
 
 }
 
@@ -46,6 +48,30 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
     [controller setHeaderText:@"SETTINGS" withFrameRect:CGRectMake(0, 0, 120, 30)];
     [self updateLabels];
+    
+    self.continueTapGestureRecognizer.enabled = YES;
+
+    //setup the observer so we know when the temperature wrote
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    __weak typeof(self) weakSelf = self;
+    
+    _temperatureSetObserver = [center addObserverForName:FSTTargetTemperatureSetNotification
+                                                  object:weakSelf.currentParagon
+                                                   queue:nil
+                                              usingBlock:^(NSNotification *notification)
+   {
+       [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+   }];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [self removeObservers];
+}
+
+- (void)removeObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureSetObserver];
 }
 
 
@@ -99,12 +125,17 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 }
 
 - (IBAction)continueTapGesture:(id)sender {
+    
+    self.continueTapGestureRecognizer.enabled = NO;
+    
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     stage.targetTemperature = _currentTemperature;
     double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
-    [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+    
+    [self.currentParagon startHeatingWithTemperature:stage.targetTemperature];
+    
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

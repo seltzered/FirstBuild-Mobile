@@ -16,21 +16,13 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *maxPickerHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tempPickerHeight;
-
 @property (weak, nonatomic) IBOutlet UILabel *minTimeLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *maxTimeLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *temperatureLabel;
-
 @property (weak, nonatomic) IBOutlet UIPickerView *minPicker;
-
 @property (weak, nonatomic) IBOutlet UIPickerView *maxPicker;
-
 @property (weak, nonatomic) IBOutlet UIPickerView *tempPicker;
-
-
-//@property (weak, nonatomic) IBOutlet UILabel *temperatureButtonLabel;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *continueTapGesturerRecognizer;
 
 -(void)updateLabels;
 

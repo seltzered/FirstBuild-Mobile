@@ -12,5 +12,5 @@
 
 @interface FSTCookingMethodSubSelectionViewController : UIViewController<FSTCookingMethodTableViewControllerDelegate>
 
-@property (nonatomic,retain) FSTParagon* currentParagon;
+@property (nonatomic,weak) FSTParagon* currentParagon;
 @end

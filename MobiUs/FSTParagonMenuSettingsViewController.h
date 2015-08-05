@@ -12,6 +12,6 @@
 @interface FSTParagonMenuSettingsViewController : UIViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *serialNumberLabel;
 @property (weak, nonatomic) IBOutlet UITextField *paragonNameField;
-@property (strong, nonatomic) FSTParagon* currentParagon;
+@property (weak, nonatomic) FSTParagon* currentParagon;
 
 @end

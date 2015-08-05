@@ -136,14 +136,11 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     bleProduct.peripheral = peripheral;
                     bleProduct.peripheral.delegate = bleProduct;
-                    
+                    bleProduct.online = YES;
+                    bleProduct.loading = YES;
                     DLog(@"discovering services for peripheral %@", peripheral.identifier);
                     [peripheral discoverServices:nil];
-                    
-                    //TODO:: HACK. Service discovery is slow, we need to find the actual service we are looking for
-                    //here which is going to be by product type. Hardcoded for the paragon service.
-                    //NSUUID* uuid = [[NSUUID alloc]initWithUUIDString:@"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F"];
-                    //NSArray* services = [[NSArray alloc] initWithObjects:uuid, nil];
+                    [weakSelf.tableView reloadData];
                 }
             }
         }
@@ -169,7 +166,7 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     bleProduct.peripheral = peripheral;
                     bleProduct.peripheral.delegate = bleProduct;
-                    bleProduct.online = YES;
+                    bleProduct.loading = NO;
                     [weakSelf.tableView reloadData];
                 }
             }
@@ -241,6 +238,7 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     //since it is still in our list lets reconnect
                     bleDevice.online = NO;
+                    bleDevice.loading = NO;
                     [[FSTBleCentralManager sharedInstance] connectToSavedPeripheralWithUUID:bleDevice.peripheral.identifier];
                     [weakSelf.tableView reloadData];
                 }
@@ -359,15 +357,27 @@ NSIndexPath *_indexPathForDeletion;
         }
     }
     
+    
     if (product.online)
     {
+        if (product.loading)
+        {
+            productCell.offlineLabel.text = @"loading...";
+            productCell.disabledView.hidden = NO;
+            productCell.arrowButton.hidden = YES;
+        }
+        else
+        {
+            productCell.disabledView.hidden = YES;
+            productCell.arrowButton.hidden = NO;
+        }
         //productCell.userInteractionEnabled = YES;
-        productCell.disabledView.hidden = YES;
-        productCell.arrowButton.hidden = NO;
+       
     }
     else
     {
         //productCell.userInteractionEnabled = NO;
+        productCell.offlineLabel.text = @"offline";
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
     }

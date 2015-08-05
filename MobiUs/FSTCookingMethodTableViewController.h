@@ -20,6 +20,6 @@
 
 @interface FSTCookingMethodTableViewController : UITableViewController
 
-@property (strong, nonatomic) id<FSTCookingMethodTableViewControllerDelegate>delegate;
+@property (weak, nonatomic) id<FSTCookingMethodTableViewControllerDelegate>delegate;
 
 @end

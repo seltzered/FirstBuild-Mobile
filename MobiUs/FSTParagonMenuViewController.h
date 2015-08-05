@@ -21,6 +21,6 @@ extern NSString * const FSTMenuItemHome ;
 
 @interface FSTParagonMenuViewController : UITableViewController
 
-@property (strong, nonatomic) FSTParagon* currentParagon;
+@property (weak, nonatomic) FSTParagon* currentParagon;
 
 @end

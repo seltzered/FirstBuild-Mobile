@@ -18,6 +18,8 @@ NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeCh
 NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
 NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
 NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
+NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
+
 
 //app info service
 NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
@@ -35,6 +37,18 @@ NSString * const FSTCharacteristicTargetTemperature     = @"71B1A100-E3AE-46FF-B
 NSString * const FSTCharacteristicElapsedTime           = @"998142D1-658E-33E2-DFC0-32091E2354EC"; //read,notify
 NSString * const FSTCharacteristicCookTime              = @"C4510188-9062-4D28-97EF-4FB32FFE1AC5"; //read,write
 NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"; //read,notify
+
+struct
+{
+    unsigned FSTCharacteristicProbeConnectionState: 1;
+    unsigned FSTCharacteristicBatteryLevel: 1;
+    unsigned FSTCharacteristicBurnerStatus: 1;
+    unsigned FSTCharacteristicCurrentTemperature: 1;
+    unsigned FSTCharacteristicElapsedTime:1;
+    unsigned FSTCharacteristicTargetTemperature:1;
+    unsigned FSTCharacteristicCookTime:1;
+    unsigned free: 25;
+} characteristicStatusFlags;
 
 //TODO put sizes for the characteristics here and remove magic numbers below
 
@@ -137,31 +151,51 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState])
     {
+        characteristicStatusFlags.FSTCharacteristicProbeConnectionState = 1;
         //not implemented
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
     {
+        characteristicStatusFlags.FSTCharacteristicBatteryLevel = 1;
         [self handleBatteryLevel:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus])
     {
+        characteristicStatusFlags.FSTCharacteristicBurnerStatus = 1;
         [self handleBurnerStatus:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
     {
+        characteristicStatusFlags.FSTCharacteristicElapsedTime = 1;
         [self handleElapsedTime:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
     {
+        characteristicStatusFlags.FSTCharacteristicTargetTemperature = 1;
         [self handleTargetTemperature:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
     {
+        characteristicStatusFlags.FSTCharacteristicCookTime = 1;
         [self handleCookTime:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
     {
+        characteristicStatusFlags.FSTCharacteristicCurrentTemperature = 1;
         [self handleCurrentTemperature:characteristic];
+    }
+    
+    if (
+            characteristicStatusFlags.FSTCharacteristicProbeConnectionState == 1 &&
+            characteristicStatusFlags.FSTCharacteristicBatteryLevel == 1 &&
+            characteristicStatusFlags.FSTCharacteristicBurnerStatus == 1 &&
+            characteristicStatusFlags.FSTCharacteristicCurrentTemperature == 1 &&
+            characteristicStatusFlags.FSTCharacteristicElapsedTime == 1 &&
+            characteristicStatusFlags.FSTCharacteristicTargetTemperature == 1 &&
+            characteristicStatusFlags.FSTCharacteristicCookTime == 1
+        )
+    {
+        [self notifyDeviceReady];
     }
 }
 
@@ -284,7 +318,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
-    [self notifyDeviceReady];
     
     NSLog(@"FSTCharacteristicBurnerStatus %d", self.currentCookMode );
 }
@@ -307,7 +340,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
-        NSLog(@"FSTCharacteristicTargetTemperature: ble %d, actual %@", raw, currentStage.targetTemperature );
+        NSLog(@"FSTCharacteristicTargetTemperature: %@", currentStage.targetTemperature );
     }
 }
 
@@ -362,6 +395,15 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
+    
+    characteristicStatusFlags.FSTCharacteristicProbeConnectionState = 0;
+    characteristicStatusFlags.FSTCharacteristicBatteryLevel = 0;
+    characteristicStatusFlags.FSTCharacteristicBurnerStatus = 0;
+    characteristicStatusFlags.FSTCharacteristicCurrentTemperature = 0;
+    characteristicStatusFlags.FSTCharacteristicElapsedTime = 0;
+    characteristicStatusFlags.FSTCharacteristicTargetTemperature = 0;
+    characteristicStatusFlags.FSTCharacteristicCookTime = 0;
+    
     NSLog(@"=======================================================================");
     NSLog(@"SERVICE %@", [service.UUID UUIDString]);
         
@@ -377,13 +419,27 @@ __weak NSTimer* _readCharacteristicsTimer;
         
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
-            [self.peripheral readValueForCharacteristic:characteristic];
-            [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            if  (
+                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel] ||
+                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus] ||
+                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentTemperature] ||
+                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime] ||
+                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState] ||
+                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature]
+                )
+            {
+                [self.peripheral readValueForCharacteristic:characteristic];
+                [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            }
+            
         }
         
         if (characteristic.properties & CBCharacteristicPropertyRead)
         {
-            [self.peripheral readValueForCharacteristic:characteristic];
+            if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
+            {
+                [self.peripheral readValueForCharacteristic:characteristic];
+            }
             NSLog(@"        CAN READ");
         }
         
@@ -446,6 +502,17 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
         DLog(@"successfully wrote FSTCharacteristicElapsedTime");
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
+    {
+        if (error)
+        {
+            //TODO what do we do if error writing characteristic?
+            DLog(@"error writing the target temperature characteristic %@", error);
+            return;
+        }
+        DLog(@"successfully wrote FSTCharacteristicTargetTemperature");
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureSetNotification object:self];
     }
 }
 

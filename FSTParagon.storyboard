@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -711,6 +711,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="beefSettingsLabel" destination="YgN-4d-MPn" id="94d-9f-IwK"/>
+                        <outlet property="continueTapGestureRecognizer" destination="k1J-uU-avW" id="hI2-2e-DGU"/>
                         <outlet property="donenessLabel" destination="RgO-Zx-EbY" id="OQl-qF-EFl"/>
                         <outlet property="donenessSlider" destination="S37-kd-9SD" id="1en-Ab-myp"/>
                         <outlet property="tempSettingsLabel" destination="d0j-nW-Vhc" id="7in-NU-428"/>
@@ -1460,6 +1461,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="continueTapGesturerRecognizer" destination="2f2-Gw-Vi2" id="AYo-7t-jTp"/>
                         <outlet property="maxPicker" destination="nfG-Bm-eDB" id="EyA-OC-WOn"/>
                         <outlet property="maxPickerHeight" destination="GaG-Pq-zW4" id="GMu-FQ-2Aj"/>
                         <outlet property="maxTimeLabel" destination="0kk-fa-8Ev" id="oGH-Tk-GfC"/>
@@ -1798,5 +1800,7 @@
         <segue reference="etR-Tg-xJz"/>
         <segue reference="CmD-W5-dtV"/>
         <segue reference="zTN-hz-fZw"/>
+        <segue reference="CmD-W5-dtV"/>
+        <segue reference="etR-Tg-xJz"/>
     </inferredMetricsTieBreakers>
 </document>

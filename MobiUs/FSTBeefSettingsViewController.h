@@ -13,11 +13,12 @@
 
 @interface FSTBeefSettingsViewController : FSTCookSettingsViewController
 
-@property (strong, nonatomic) IBOutlet UILabel *beefSettingsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *beefSettingsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tempSettingsLabel;
 @property (weak, nonatomic) IBOutlet UISlider *donenessSlider;
 @property (weak, nonatomic) IBOutlet UILabel *donenessLabel;
 @property (weak, nonatomic) IBOutlet UISlider *thicknessSlider;
 @property (weak, nonatomic) IBOutlet UILabel *thicknessLabel;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *continueTapGestureRecognizer;
 
 @end

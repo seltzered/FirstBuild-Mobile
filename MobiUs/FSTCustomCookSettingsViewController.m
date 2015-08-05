@@ -37,6 +37,8 @@
     
     NSInteger maxMinuteActual;
     
+    NSObject *_temperatureSetObserver;
+    
 }
 
 typedef enum variableSelections {
@@ -56,6 +58,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
     //create a new cooking session
     self.currentParagon.toBeCookingMethod = (FSTCookingMethod*) [[FSTSousVideCookingMethod alloc] init];
+    [self.currentParagon.toBeCookingMethod createCookingSession]; 
+    [self.currentParagon.toBeCookingMethod addStageToCookingSession];
 
     pickerTemperatureData = [[NSMutableArray alloc]init];
     
@@ -87,16 +91,37 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     [self.maxPicker selectRow:maxHourIndex inComponent:0 animated:NO];
     [self.maxPicker selectRow:maxMinuteIndex inComponent:1 animated:NO];
     [self.tempPicker selectRow:tempIndex inComponent:0 animated:NO];
-
-    [self.currentParagon.currentCookingMethod createCookingSession]; // initialize the customized method
-    [self.currentParagon.currentCookingMethod addStageToCookingSession];
     
+}
+
+- (void)removeObservers
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureSetObserver];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [self removeObservers];
 }
 
 - (void) viewWillAppear:(BOOL)animated { //want to make the segue faster
     
     [self resetPickerHeights];
     [self updateLabels]; // set them to current selection (decided by preset hour, minute, temp index
+    
+    self.continueTapGesturerRecognizer.enabled = YES;
+    
+    //setup the observer so we know when the temperature wrote
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    __weak typeof(self) weakSelf = self;
+    
+    _temperatureSetObserver = [center addObserverForName:FSTTargetTemperatureSetNotification
+                                                  object:weakSelf.currentParagon
+                                                   queue:nil
+                                              usingBlock:^(NSNotification *notification)
+   {
+       [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self];
+   }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -250,7 +275,6 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 }
 
-
 - (IBAction)maxTimeTapGesture:(id)sender {
     [self resetPickerHeights];
     if (_selection != MAX_TIME) { // only needs to run when a change should be made
@@ -317,7 +341,12 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 }
 
 - (IBAction)continueTapGesture:(id)sender {
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]); // THIS IS STILL nil (session onward)
+    
+    //TODO progress indicator?
+    //TODO grey out the button?
+    self.continueTapGesturerRecognizer.enabled = NO;
+    
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]); 
     NSNumberFormatter* convert = [[NSNumberFormatter alloc] init];
     convert.numberStyle = NSNumberFormatterDecimalStyle;
     stage.targetTemperature = [convert numberFromString:pickerTemperatureData[tempIndex]];
@@ -328,7 +357,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.cookTimeMaximum = [NSNumber numberWithDouble:maxCookingMinutes];
     stage.cookingLabel = @"Custom Profile";
     //stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
-    [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self]; // name of segue from custom view to ready to preheat
+    
+    [self.currentParagon startHeatingWithTemperature:stage.targetTemperature];
 }
 
 - (void)dealloc
@@ -343,7 +373,6 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
         FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
-        [self.currentParagon startHeatingWithTemperature:stage.targetTemperature];
         
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }

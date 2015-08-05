@@ -33,6 +33,11 @@ NSString* headerText;
 
 }
 
+- (void)dealloc
+{
+    DLog(@"dealloc");
+}
+
 -(void)viewWillAppear:(BOOL)animated {
     
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
@@ -62,11 +67,18 @@ NSString* headerText;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    //if we are going to anything other than the custom settings view controller
+    //then we need to set the cooking method. the custom settings will initialize the cooking method on its own
     if ([sender isKindOfClass:[FSTCookingMethod class]])
     {
-        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
         self.currentParagon.toBeCookingMethod = (FSTCookingMethod*)sender;
+        [self.currentParagon.toBeCookingMethod createCookingSession];
+        [self.currentParagon.toBeCookingMethod addStageToCookingSession];
+    }
+    
+    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]])
+    {
+        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
 
