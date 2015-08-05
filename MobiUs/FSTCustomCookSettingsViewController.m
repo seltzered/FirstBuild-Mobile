@@ -372,7 +372,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
-        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
+        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]); // does this need to be set in the paragon?
         
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }

@@ -794,6 +794,9 @@
                                                 <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eej-Lt-xYW" userLabel="disabledView">
                                                     <rect key="frame" x="0.0" y="0.0" width="584" height="26.5"/>
                                                     <subviews>
+                                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ieL-yn-cEe">
+                                                            <rect key="frame" x="117" y="13" width="350" height="2"/>
+                                                        </progressView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="f8J-K0-GbQ">
                                                             <rect key="frame" x="0.0" y="0.0" width="584" height="26.5"/>
                                                             <fontDescription key="fontDescription" name="FSEmeric-BoldItalic" family="FS Emeric" pointSize="24"/>
@@ -803,11 +806,14 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="centerY" secondItem="ieL-yn-cEe" secondAttribute="centerY" id="1gw-bD-MRP"/>
                                                         <constraint firstAttribute="width" id="L2E-tV-Ngl"/>
+                                                        <constraint firstAttribute="centerX" secondItem="ieL-yn-cEe" secondAttribute="centerX" id="V8F-tf-vYF"/>
                                                         <constraint firstAttribute="centerX" secondItem="f8J-K0-GbQ" secondAttribute="centerX" id="X8c-df-cZY"/>
                                                         <constraint firstAttribute="height" secondItem="f8J-K0-GbQ" secondAttribute="height" id="bkv-Ps-k2C"/>
                                                         <constraint firstAttribute="width" secondItem="f8J-K0-GbQ" secondAttribute="width" id="gtG-v0-efc"/>
                                                         <constraint firstAttribute="centerY" secondItem="f8J-K0-GbQ" secondAttribute="centerY" id="hTb-nE-y6m"/>
+                                                        <constraint firstItem="ieL-yn-cEe" firstAttribute="width" secondItem="Eej-Lt-xYW" secondAttribute="width" multiplier="0.6" id="mrS-u9-Cid"/>
                                                         <constraint firstAttribute="height" id="oZC-hs-5w8"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -906,6 +912,7 @@
                                     <outlet property="batteryView" destination="SNF-Wi-ubE" id="j4V-l1-mDJ"/>
                                     <outlet property="disabledView" destination="Eej-Lt-xYW" id="kxy-be-iGi"/>
                                     <outlet property="friendlyName" destination="0OK-eT-oej" id="YsL-pE-Nb6"/>
+                                    <outlet property="loadingProgressView" destination="ieL-yn-cEe" id="gw2-jC-Ycb"/>
                                     <outlet property="mainView" destination="irz-r8-3Z6" id="QAR-XH-L3M"/>
                                     <outlet property="offlineLabel" destination="f8J-K0-GbQ" id="O1E-Bn-IXm"/>
                                     <outlet property="paragonStatusLabel" destination="Ihu-pk-gFP" id="Jr4-Le-fQb"/>
@@ -1059,7 +1066,7 @@
                                                 <constraint firstAttribute="height" constant="21" id="djV-HG-SbX"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="26"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

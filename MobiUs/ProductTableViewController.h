@@ -22,4 +22,5 @@
 @property (strong, nonatomic) NSMutableArray *products;
 @property (strong, nonatomic) IBOutlet UISwipeGestureRecognizer *swipeLeftGesture;
 
+
 @end
