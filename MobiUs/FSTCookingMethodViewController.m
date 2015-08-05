@@ -53,11 +53,18 @@ FSTCookingMethods* _methods;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    //if we are going to anything other than the custom settings view controller
+    //then we need to set the cooking method. the custom settings will initialize the cooking method on its own
     if ([sender isKindOfClass:[FSTCookingMethod class]])
     {
-        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
         self.product.toBeCookingMethod = (FSTCookingMethod*)sender;
     }
+    
+    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]])
+    {
+        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
+    }
+
 }
 
 - (FSTCookingMethods*) dataRequestedFromChild
