@@ -8,10 +8,6 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="FSEmeric-ExtraLight.otf">
-            <string>FSEmeric-ExtraLight</string>
-            <string>FSEmeric-ExtraLight</string>
-        </mutableArray>
         <mutableArray key="FSEmeric-Light.otf">
             <string>FSEmeric-Light</string>
         </mutableArray>
@@ -100,14 +96,14 @@
                                             <constraint firstAttribute="width" secondItem="OuJ-pe-uv6" secondAttribute="height" multiplier="54:47" id="MqQ-cW-JZQ"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-3R-9EM">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-3R-9EM" customClass="FSTLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="59.5"/>
                                         <gestureRecognizers/>
-                                        <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="19"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         </variation>
                                     </label>
                                 </subviews>
@@ -161,14 +157,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejm-6D-PrH" userLabel="recipesViewWrapper">
                                 <rect key="frame" x="-4" y="476" width="306" height="59.5"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="             MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xY1-5O-9Pf">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="             MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xY1-5O-9Pf" customClass="FSTLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="306" height="59.5"/>
                                         <gestureRecognizers/>
-                                        <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="19"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
-                                            <fontDescription key="fontDescription" name="FSEmeric-ExtraLight" family="FS Emeric" pointSize="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="MPs-U0-mpI">
@@ -1799,8 +1795,8 @@
         <image name="reveal-icon" width="22" height="17"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="etR-Tg-xJz"/>
+        <segue reference="CmD-W5-dtV"/>
         <segue reference="zTN-hz-fZw"/>
-        <segue reference="ETw-Ro-4Or"/>
-        <segue reference="kaM-gB-8PG"/>
     </inferredMetricsTieBreakers>
 </document>
