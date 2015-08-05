@@ -18,6 +18,8 @@ NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeCh
 NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
 NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
 NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
+NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
+
 
 //app info service
 NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
@@ -307,7 +309,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
-        NSLog(@"FSTCharacteristicTargetTemperature: ble %d, actual %@", raw, currentStage.targetTemperature );
+        NSLog(@"FSTCharacteristicTargetTemperature: %@", currentStage.targetTemperature );
     }
 }
 
@@ -446,6 +448,17 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
         DLog(@"successfully wrote FSTCharacteristicElapsedTime");
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
+    {
+        if (error)
+        {
+            //TODO what do we do if error writing characteristic?
+            DLog(@"error writing the target temperature characteristic %@", error);
+            return;
+        }
+        DLog(@"successfully wrote FSTCharacteristicTargetTemperature");
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureSetNotification object:self];
     }
 }
 

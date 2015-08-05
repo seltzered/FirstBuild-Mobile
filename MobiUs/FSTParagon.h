@@ -21,6 +21,8 @@ extern NSString * const FSTBatteryLevelChangedNotification;
 extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
 extern NSString * const FSTElapsedTimeSetNotification;
+extern NSString * const FSTTargetTemperatureSetNotification;
+
 
 
 @property (nonatomic, strong) NSString* serialNumber;

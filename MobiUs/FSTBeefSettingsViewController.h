@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *donenessLabel;
 @property (weak, nonatomic) IBOutlet UISlider *thicknessSlider;
 @property (weak, nonatomic) IBOutlet UILabel *thicknessLabel;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *continueTapGestureRecognizer;
 
 @end

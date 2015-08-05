@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *minPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *maxPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *tempPicker;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *continueTapGesturerRecognizer;
 
 -(void)updateLabels;
 

@@ -32,6 +32,7 @@ FSTCookingMethods* _methods;
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
     
+    
 }
 
 - (void)dealloc
@@ -53,8 +54,7 @@ FSTCookingMethods* _methods;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //if we are going to anything other than the custom settings view controller
-    //then we need to set the cooking method. the custom settings will initialize the cooking method on its own
+   
     if ([sender isKindOfClass:[FSTCookingMethod class]])
     {
         self.product.toBeCookingMethod = (FSTCookingMethod*)sender;

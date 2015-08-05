@@ -72,6 +72,8 @@ NSString* headerText;
     if ([sender isKindOfClass:[FSTCookingMethod class]])
     {
         self.currentParagon.toBeCookingMethod = (FSTCookingMethod*)sender;
+        [self.currentParagon.toBeCookingMethod createCookingSession];
+        [self.currentParagon.toBeCookingMethod addStageToCookingSession];
     }
     
     if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]])
