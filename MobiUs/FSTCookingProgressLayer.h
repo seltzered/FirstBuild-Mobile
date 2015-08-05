@@ -24,9 +24,10 @@
 typedef enum {
     kPreheating = 0,
     kReadyToCook,
-    kCooking,
-    kSitting,
-    kDone
+    kReachingMinimumTime,
+    kReachingMaximumTime,
+    kPostMaximumTime,
+    kCookingWithNoMinimumTime
 } ProgressState;
 
 @property (nonatomic) NSTimeInterval elapsedTime;

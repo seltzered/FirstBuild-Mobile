@@ -55,10 +55,13 @@ CGFloat point1, point2, point3, point4;
         case kReadyToCook:
             new_x = start_x + self.lineWidth/3;
             break;
-        case kCooking:
+        case kReachingMinimumTime:
             new_x = start_x + 2*self.lineWidth/3;
             break;
-        case kSitting:
+        case kReachingMaximumTime:
+            new_x = start_x + self.lineWidth;
+            break;
+        case kPostMaximumTime:
             new_x = start_x + self.lineWidth;
             break;
         default:
@@ -72,6 +75,7 @@ CGFloat point1, point2, point3, point4;
     _circleState = circleState;
     [self updateCircle];
 }
+
 - (void)drawRect:(CGRect)rect {
     // replaced self.frame with rect
     CGFloat x_start = rect.size.width/10; // the starting x coordinate (starts at beginning
@@ -110,6 +114,5 @@ CGFloat point1, point2, point3, point4;
     
     //[self updateCircle]; // set circle position after drawing. layoutSubviews might take care of this
 }
-
 
 @end

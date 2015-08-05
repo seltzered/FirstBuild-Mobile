@@ -198,12 +198,12 @@
             self.progressLayer.strokeEnd = 0.0F;
             self.sittingLayer.strokeEnd = 0.0F;
             break;
-        case kCooking:
+        case kReachingMinimumTime:
             [self drawCompleteTicks];
             self.progressLayer.strokeEnd = self.percent;
             self.sittingLayer.strokeEnd = 0.0F;
             break;
-        case kSitting: // later
+        case kReachingMaximumTime: // later
             [self drawCompleteTicks];
             self.progressLayer.strokeEnd = 1.0F; // complete
             self.sittingLayer.strokeEnd = self.percent; // based on time range
@@ -227,8 +227,8 @@
             _percent = [self calculatePercentWithTemp:_currentTemp];
             break;
         case kReadyToCook: // precent not really used here, could be taken as complete, 100%, after preheating
-        case kCooking:
-        case kSitting:
+        case kReachingMinimumTime:
+        case kReachingMaximumTime:
             _percent = [self calculatePercent:_elapsedTime toTime:_timeLimit];
             // time Limit and elapsed time need to be reset when transitioning to sitting
             break;
