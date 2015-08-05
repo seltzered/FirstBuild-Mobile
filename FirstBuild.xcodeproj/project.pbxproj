@@ -16,6 +16,7 @@
 		5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5194A9451B6A9EC80033BA26 /* FSTLabel.m */; };
 		5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5194A9481B6BA9D40033BA26 /* UILabelEx.m */; };
 		51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */; };
+		51A9D02B1B72492E000AE293 /* FSTBleCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */; };
 		51DB93CB1B70EDE3005B31CC /* FSEmeric-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51DB93C81B70EDE3005B31CC /* FSEmeric-BoldItalic.otf */; };
 		51DB93CC1B70EDE3005B31CC /* FSEmeric-Core.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51DB93C91B70EDE3005B31CC /* FSEmeric-Core.otf */; };
 		51DB93CD1B70EDE3005B31CC /* FSEmeric-CoreItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51DB93CA1B70EDE3005B31CC /* FSEmeric-CoreItalic.otf */; };
@@ -139,6 +140,8 @@
 		5194A9481B6BA9D40033BA26 /* UILabelEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabelEx.m; sourceTree = "<group>"; };
 		51A13CD51B4D6CFC00BA3CB7 /* FSTPointedHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPointedHeaderView.h; sourceTree = "<group>"; };
 		51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPointedHeaderView.m; sourceTree = "<group>"; };
+		51A9D0291B72492E000AE293 /* FSTBleCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleCharacteristic.h; sourceTree = "<group>"; };
+		51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleCharacteristic.m; sourceTree = "<group>"; };
 		51DB93C81B70EDE3005B31CC /* FSEmeric-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FSEmeric-BoldItalic.otf"; sourceTree = "<group>"; };
 		51DB93C91B70EDE3005B31CC /* FSEmeric-Core.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FSEmeric-Core.otf"; sourceTree = "<group>"; };
 		51DB93CA1B70EDE3005B31CC /* FSEmeric-CoreItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FSEmeric-CoreItalic.otf"; sourceTree = "<group>"; };
@@ -757,6 +760,8 @@
 				5BD467CC1A35ED54009BAC36 /* FirebaseShared.m */,
 				5BA3A9851B3C95FF00E51C51 /* FSTBleProduct.h */,
 				5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */,
+				51A9D0291B72492E000AE293 /* FSTBleCharacteristic.h */,
+				51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -1022,6 +1027,7 @@
 				5BC3649A1A32624F00D03B9C /* FSTChillHubDevice.m in Sources */,
 				5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */,
 				5B99DFC51AB1EB2D00247034 /* FSTParagon.m in Sources */,
+				51A9D02B1B72492E000AE293 /* FSTBleCharacteristic.m in Sources */,
 				5BF9482B19EC15A000CB8BCF /* ChillHubViewController.m in Sources */,
 				51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */,
 				5BCBB9F51B0386CE00B8E043 /* FSTCookingMethodTableViewController.m in Sources */,

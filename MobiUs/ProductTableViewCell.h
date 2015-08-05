@@ -20,5 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *batteryLabel;
 @property (weak, nonatomic) IBOutlet ProductBatteryView *batteryView;
 @property (weak, nonatomic) IBOutlet UILabel *paragonStatusLabel;
+@property (weak, nonatomic) IBOutlet UIProgressView *loadingProgressView;
 
 @end

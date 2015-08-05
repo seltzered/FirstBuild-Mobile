@@ -33,6 +33,7 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 @property (atomic) ParagonCookMode currentCookMode;
 @property (nonatomic, strong) NSArray* burners;
 @property (nonatomic, strong) NSNumber* batteryLevel;
+@property (nonatomic, strong) NSNumber* loadingProgress; // a percentage that tells how many characteristics loaded
 
 -(void)startHeatingWithTemperature: (NSNumber*)targetTemperature;
 - (void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingMinimumTime goingToMaximumTime: (NSNumber*)cookingTimeMaximum;

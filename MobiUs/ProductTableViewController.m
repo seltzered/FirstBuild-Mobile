@@ -25,9 +25,6 @@
 
 @interface ProductTableViewController ()
 
-@property (weak, nonatomic) IBOutlet ProductGradientView *topGradient;
-@property (weak, nonatomic) IBOutlet ProductGradientView *bottomGradient;
-
 @end
 
 @implementation ProductTableViewController
@@ -58,8 +55,6 @@ NSIndexPath *_indexPathForDeletion;
     [self configureBleDevices];
     
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.topGradient.up = true;
-    self.bottomGradient.up = false;
 }
 
 -(void)dealloc
@@ -166,7 +161,17 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     bleProduct.peripheral = peripheral;
                     bleProduct.peripheral.delegate = bleProduct;
-                    bleProduct.loading = NO;
+                    if ([bleProduct isKindOfClass: [FSTParagon class]
+                        ]) {
+                        FSTParagon* paragon = (FSTParagon*)bleProduct;
+                        if ([paragon.loadingProgress isEqualToNumber:[NSNumber numberWithInt:1]]) { // will this be accurate enough
+                            paragon.loading = NO;
+                        } else {
+                            paragon.loading = YES; // might put this logic into a new notification
+                        }
+                    } else { // don't pay attention to its progress
+                        bleProduct.loading = NO;
+                    }
                     [weakSelf.tableView reloadData];
                 }
             }
@@ -362,7 +367,9 @@ NSIndexPath *_indexPathForDeletion;
     {
         if (product.loading)
         {
-            productCell.offlineLabel.text = @"loading...";
+            productCell.offlineLabel.hidden = YES;//.text = @"loading...";
+            productCell.loadingProgressView.hidden = NO;
+            productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue]; // set the progress bar based on the number of loading characteristics
             productCell.disabledView.hidden = NO;
             productCell.arrowButton.hidden = YES;
         }
@@ -370,6 +377,7 @@ NSIndexPath *_indexPathForDeletion;
         {
             productCell.disabledView.hidden = YES;
             productCell.arrowButton.hidden = NO;
+            productCell.loadingProgressView.hidden = YES;
         }
         //productCell.userInteractionEnabled = YES;
        
@@ -380,6 +388,7 @@ NSIndexPath *_indexPathForDeletion;
         productCell.offlineLabel.text = @"offline";
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
+        productCell.loadingProgressView.hidden = YES;
     }
     
     
