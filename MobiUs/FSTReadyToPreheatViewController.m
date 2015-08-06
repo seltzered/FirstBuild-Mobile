@@ -32,11 +32,11 @@ NSObject* _cookModeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
    {
-       if(weakSelf.currentParagon.burnerMode == kPARAGON_PREHEATING)
+       if(weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_PREHEATING)
        {
            [weakSelf performSegueWithIdentifier:@"seguePreheating" sender:weakSelf];
        }
-       else if(weakSelf.currentParagon.burnerMode == kPARAGON_HEATING)
+       else if(weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_HEATING)
        {
            [weakSelf performSegueWithIdentifier:@"seguePreheating" sender:weakSelf];
        }

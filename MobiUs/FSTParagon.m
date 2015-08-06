@@ -22,7 +22,6 @@ NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeCh
 NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
 NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
 
-
 //app info service
 NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
 NSString * const FSTCharacteristicAppInfo               = @"318DB1F5-67F1-119B-6A41-1EECA0C744CE"; //read
@@ -42,20 +41,9 @@ NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-5
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
 
-/*struct
-{
-    unsigned FSTCharacteristicProbeConnectionState: 1;
-    unsigned FSTCharacteristicBatteryLevel: 1;
-    unsigned FSTCharacteristicBurnerStatus: 1;
-    unsigned FSTCharacteristicCurrentTemperature: 1;
-    unsigned FSTCharacteristicElapsedTime:1;
-    unsigned FSTCharacteristicTargetTemperature:1;
-    unsigned FSTCharacteristicCookTime:1;
-    unsigned free: 25;
-} characteristicStatusFlags;
 
-NSInteger const statusFlagsTotal = 7;*/
 //TODO put sizes for the characteristics here and remove magic numbers below
+
 
 __weak NSTimer* _readCharacteristicsTimer;
 
@@ -100,6 +88,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)startHeatingWithTemperature: (NSNumber*)targetTemperature
 {
+    
     Byte bytes[2] ;
     OSWriteBigInt16(bytes, 0, [targetTemperature doubleValue]*100);
     NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
@@ -211,14 +200,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     for (NSString* characteristic in requiredEnum) {
         requiredCount += [(NSNumber*)[requiredCharacteristics objectForKey:characteristic] integerValue];
     }
-    // previous if statement
-    /*characteristicStatusFlags.FSTCharacteristicProbeConnectionState == 1 &&
-     characteristicStatusFlags.FSTCharacteristicBatteryLevel == 1 &&
-     characteristicStatusFlags.FSTCharacteristicBurnerStatus == 1 &&
-     characteristicStatusFlags.FSTCharacteristicCurrentTemperature == 1 &&
-     characteristicStatusFlags.FSTCharacteristicElapsedTime == 1 &&
-     characteristicStatusFlags.FSTCharacteristicTargetTemperature == 1 &&
-     characteristicStatusFlags.FSTCharacteristicCookTime == 1*/
     
     if ( requiredCount == [requiredCharacteristics count]) // found all required characteristics
     {
@@ -232,6 +213,10 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     //TODO *hack* need to add a second notification to determine when progress updated
     [self notifyDeviceReady];
+    
+    [self determineCookMode];
+    
+    
 } // end assignToProperty
 
 #pragma mark - Data Assignment Handlers
@@ -325,22 +310,16 @@ __weak NSTimer* _readCharacteristicsTimer;
         {
             if((bytes[burner] & BURNER_PREHEAT_MASK) == BURNER_PREHEAT_MASK)
             {
-                currentBurner.burnerMode = kPARAGON_PREHEATING;
+                currentBurner.burnerMode = kPARAGON_PRECISION_PREHEATING;
             }
             else
             {
-                currentBurner.burnerMode = kPARAGON_HEATING;
+                currentBurner.burnerMode = kPARAGON_PRECISION_HEATING;
             }
         }
         NSLog(@"burner %d cookMode %d", burner, currentBurner.burnerMode);
     }
     
-    [self setCookModeFromBurners];
-    
-}
-
--(void)setCookModeFromBurners
-{
     for (FSTBurner* burner in self.burners) {
         if (burner.burnerMode != kPARAGON_OFF )
         {
@@ -353,8 +332,62 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
-    
     NSLog(@"FSTCharacteristicBurnerStatus %d", self.burnerMode );
+    
+
+}
+
+
+-(void)determineCookMode
+{
+    FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    ParagonCookMode currentCookMode = self.cookMode;
+    
+    if (self.burnerMode == kPARAGON_OFF)
+    {
+        self.cookMode = FSTParagonCookingStateOff;
+    }
+    else if (self.burnerMode == kPARAGON_PRECISION_PREHEATING)
+    {
+        //in precision cooking mode and preheating
+        self.cookMode = FSTParagonCookingStatePrecisionCookingPreheating;
+    }
+    else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
+    {
+        if (currentCookMode == FSTParagonCookingStatePrecisionCookingPreheating)
+        {
+            //since we are currently in preheating mode and the burner indicates
+            //that we reached we reached our preheating goal
+            self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
+        }
+        else if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue])
+        {
+            //elapsed time is greater than the maximum time
+            self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
+        }
+        else if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMinimum doubleValue] )
+        {
+            //elapsed time is greater than the minimum time, but less than or equal to the max time
+            self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMaxTime;
+        }
+        else if([currentStage.cookTimeElapsed doubleValue] < [currentStage.cookTimeMinimum doubleValue])
+        {
+            //elapsed time is less than the minimum time
+            self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMinTime;
+        }
+        else
+        {
+            DLog(@"UNABLE TO DETERMINE COOK MODE");
+        }
+    }
+    
+    //only notify if we have changed cook modes
+    if (self.cookMode != currentCookMode)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookingModeChangedNotification object:self];
+    }
+    
+
 }
 
 -(void)handleTargetTemperature: (CBCharacteristic*)characteristic
@@ -430,14 +463,6 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    
-    /*characteristicStatusFlags.FSTCharacteristicProbeConnectionState = 0;
-    characteristicStatusFlags.FSTCharacteristicBatteryLevel = 0;
-    characteristicStatusFlags.FSTCharacteristicBurnerStatus = 0;
-    characteristicStatusFlags.FSTCharacteristicCurrentTemperature = 0;
-    characteristicStatusFlags.FSTCharacteristicElapsedTime = 0;
-    characteristicStatusFlags.FSTCharacteristicTargetTemperature = 0;
-    characteristicStatusFlags.FSTCharacteristicCookTime = 0;*/
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicProbeConnectionState];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBatteryLevel];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBurnerStatus];

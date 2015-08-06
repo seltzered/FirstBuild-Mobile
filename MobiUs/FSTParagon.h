@@ -15,10 +15,18 @@
 @interface FSTParagon : FSTBleProduct 
 
 typedef enum {
-    FSTParagonCookingStatePrecisionCookingReachingMinTime = 0,
+    
+    //off
+    FSTParagonCookingStateOff,
+    
+    //precision cooking
+    FSTParagonCookingStatePrecisionCookingPreheating,
+    FSTParagonCookingStatePrecisionCookingPreheatingReached,
+    FSTParagonCookingStatePrecisionCookingReachingMinTime,
     FSTParagonCookingStatePrecisionCookingReachingMaxTime,
     FSTParagonCookingStatePrecisionCookingPastMaxTime,
-    FSTParagonCookingStateOff,
+    
+    //direct cooking
     FSTParagonCookingDirectCooking,
     FSTParagonCookingDirectCookingWithTime
 } ParagonCookMode;
