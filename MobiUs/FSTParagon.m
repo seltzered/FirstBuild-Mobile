@@ -17,7 +17,6 @@ NSString * const FSTBurnerModeChangedNotification           = @"FSTBurnerModeCha
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
 NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
-NSString * const FSTCookTimeChangedNotification             = @"FSTCookTimeChangedNotification";
 NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
 NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
 NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
@@ -101,18 +100,24 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
 }
 
--(void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingMinimumTime goingToMaximumTime: (NSNumber*)cookingTimeMaximum
+-(void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingTimeMinimum goingToMaximumTime: (NSNumber*)cookingTimeMaximum
 {
     
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
     
-    //TODO - once we actually have max time then remove this calculation
-    cookingTimeMaximum = [NSNumber numberWithInt:[cookingMinimumTime intValue] + 3*60];
+    ////////////
+    //TODO HACK
+    ////////////
+    cookingTimeMinimum = [NSNumber numberWithInt:2];
+    cookingTimeMaximum = [NSNumber numberWithInt:4];
     
-    if (characteristic && cookingMinimumTime && cookingTimeMaximum && [cookingMinimumTime intValue] > 0 && [cookingTimeMaximum intValue] > 0)
+    //TODO - once we actually have max time then remove this calculation
+    //cookingTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
+
+    if (characteristic && cookingTimeMinimum && cookingTimeMaximum && [cookingTimeMinimum intValue] > 0 && [cookingTimeMaximum intValue] > 0)
     {
         Byte bytes[8] = {0x00};
-        OSWriteBigInt16(bytes, 0, [cookingMinimumTime unsignedIntegerValue]);
+        OSWriteBigInt16(bytes, 0, [cookingTimeMinimum unsignedIntegerValue]);
         OSWriteBigInt16(bytes, 2, [cookingTimeMaximum unsignedIntegerValue]);
         NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
@@ -215,6 +220,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     [self notifyDeviceReady];
     
     [self determineCookMode];
+    [self logParagon];
     
     
 } // end assignToProperty
@@ -234,7 +240,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     [data getBytes:bytes length:characteristic.value.length];
     self.batteryLevel = [NSNumber numberWithUnsignedInt:bytes[0]];
     
-    NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
+    //NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
 
 }
@@ -243,7 +249,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 {
     if (characteristic.value.length != 2)
     {
-        DLog(@"handleElapsedTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
+        //DLog(@"handleElapsedTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
         return;
     }
     
@@ -257,7 +263,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.cookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
-        NSLog(@"FSTCharacteristicElapsedTime %@", currentStage.cookTimeElapsed );
+        //NSLog(@"FSTCharacteristicElapsedTime %@", currentStage.cookTimeElapsed );
     }
 }
 
@@ -317,7 +323,7 @@ __weak NSTimer* _readCharacteristicsTimer;
                 currentBurner.burnerMode = kPARAGON_PRECISION_HEATING;
             }
         }
-        NSLog(@"burner %d cookMode %d", burner, currentBurner.burnerMode);
+        //NSLog(@"burner %d cookMode %d", burner, currentBurner.burnerMode);
     }
     
     for (FSTBurner* burner in self.burners) {
@@ -332,7 +338,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
-    NSLog(@"FSTCharacteristicBurnerStatus %d", self.burnerMode );
+    //NSLog(@"FSTCharacteristicBurnerStatus %d", self.burnerMode );
     
 
 }
@@ -408,7 +414,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
-        NSLog(@"FSTCharacteristicTargetTemperature: %@", currentStage.targetTemperature );
+        //NSLog(@"FSTCharacteristicTargetTemperature: %@", currentStage.targetTemperature );
     }
 }
 
@@ -421,7 +427,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     
     FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
-    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
 
     if (currentStage)
     {
@@ -434,7 +439,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
         currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
 
-        NSLog(@"FSTCharacteristicCookTime [min desired %@, max desired %@],  [min actual: %@, max actual: %@]", toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
+        //NSLog(@"FSTCharacteristicCookTime [min desired %@, max desired %@],  [min actual: %@, max actual: %@]", toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
     }
 }
 
@@ -455,7 +460,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
-        NSLog(@"FSTCharacteristicCurrentTemperature %@", currentStage.actualTemperature );
+        //NSLog(@"FSTCharacteristicCurrentTemperature %@", currentStage.actualTemperature );
     }
 }
 
@@ -529,7 +534,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSLog(@"characteristic %@ changed value %@", characteristic.UUID, characteristic.value);
+    //NSLog(@"characteristic %@ changed value %@", characteristic.UUID, characteristic.value);
     [self assignValueToPropertyFromCharacteristic:characteristic];
 }
 
@@ -556,6 +561,15 @@ __weak NSTimer* _readCharacteristicsTimer;
             return;
         }
         DLog(@"successfully wrote FSTCharacteristicCookTime");
+        
+        //we successfully wrote the cooking time so go ahead and set the current cooking times to the
+        //to be cooking times. since we don't get notifications when it is published
+        FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+        FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+        
+        currentStage.cookTimeMaximum = toBeStage.cookTimeMaximum;
+        currentStage.cookTimeMinimum = toBeStage.cookTimeMinimum;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
@@ -581,5 +595,17 @@ __weak NSTimer* _readCharacteristicsTimer;
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureSetNotification object:self];
     }
 }
+
+#ifdef DEBUG
+-(void)logParagon
+{
+    FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+    NSLog(@"------PARAGON-------");
+    NSLog(@"bmode %d, cmode %d, curtmp %@", self.burnerMode, self.cookMode, currentStage.actualTemperature);
+    NSLog(@"\tACTUAL: tartmp %@, mint %@, maxt %@, elapt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeElapsed);
+    NSLog(@"\t  TOBE: tartmp %@, mint %@, maxt %@, elapt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, toBeStage.cookTimeElapsed);
+}
+#endif
 
 @end

@@ -41,7 +41,6 @@ extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
 extern NSString * const FSTElapsedTimeSetNotification;
 extern NSString * const FSTTargetTemperatureSetNotification;
-extern NSString * const FSTCookTimeChangedNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
@@ -55,6 +54,6 @@ extern NSString * const FSTCookTimeChangedNotification;
 @property (nonatomic, strong) NSNumber* loadingProgress; // a percentage that tells how many characteristics loaded
 
 -(void)startHeatingWithTemperature: (NSNumber*)targetTemperature;
-- (void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingMinimumTime goingToMaximumTime: (NSNumber*)cookingTimeMaximum;
+- (void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingTimeMinimum goingToMaximumTime: (NSNumber*)cookingTimeMaximum;
 
 @end
