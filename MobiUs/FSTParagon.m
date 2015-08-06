@@ -105,12 +105,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
     
-    ////////////
-    //TODO HACK
-    ////////////
-    cookingTimeMinimum = [NSNumber numberWithInt:2];
-    cookingTimeMaximum = [NSNumber numberWithInt:4];
-    
+
     //TODO - once we actually have max time then remove this calculation
     //cookingTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
 
@@ -206,10 +201,20 @@ __weak NSTimer* _readCharacteristicsTimer;
         requiredCount += [(NSNumber*)[requiredCharacteristics objectForKey:characteristic] integerValue];
     }
     
-    if ( requiredCount == [requiredCharacteristics count]) // found all required characteristics
+    if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
     {
-        //TODO test subscriptions here after reads have completed
+        self.initialCharacteristicValuesRead = YES;
+
         [self notifyDeviceReady]; // logic contained in notification center
+        for (NSString* requiredCharacteristic in requiredCharacteristics)
+        {
+            CBCharacteristic* c =[self.characteristics objectForKey:requiredCharacteristic];
+            if (c.properties & CBCharacteristicPropertyNotify)
+            {
+                [self.peripheral setNotifyValue:YES forCharacteristic:c ];
+            }
+            
+        }
     }
     // calculate fraction
     double progressCount = [[NSNumber numberWithInt:(int)requiredCount] doubleValue];
@@ -300,7 +305,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
     
-    NSLog(@"================ BURNER STATUS CHANGED ====================");
+    //NSLog(@"================ BURNER STATUS CHANGED ====================");
     
     //loop through burners
     for (uint8_t burner = 0; burner < self.burners.count; burner++)
@@ -339,7 +344,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
     //NSLog(@"FSTCharacteristicBurnerStatus %d", self.burnerMode );
-    
 
 }
 
@@ -392,7 +396,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookingModeChangedNotification object:self];
     }
-    
 
 }
 
@@ -468,6 +471,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
+    self.initialCharacteristicValuesRead = NO;
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicProbeConnectionState];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBatteryLevel];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBurnerStatus];
@@ -500,7 +504,7 @@ __weak NSTimer* _readCharacteristicsTimer;
                 )
             {
                 [self.peripheral readValueForCharacteristic:characteristic];
-                [self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+                //[self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
             }
             
         }

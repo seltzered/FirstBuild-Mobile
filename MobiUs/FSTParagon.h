@@ -17,14 +17,14 @@
 typedef enum {
     
     //off
-    FSTParagonCookingStateOff,
+    FSTParagonCookingStateOff = 0,
     
     //precision cooking
-    FSTParagonCookingStatePrecisionCookingPreheating,
-    FSTParagonCookingStatePrecisionCookingPreheatingReached,
-    FSTParagonCookingStatePrecisionCookingReachingMinTime,
-    FSTParagonCookingStatePrecisionCookingReachingMaxTime,
-    FSTParagonCookingStatePrecisionCookingPastMaxTime,
+    FSTParagonCookingStatePrecisionCookingPreheating = 1,
+    FSTParagonCookingStatePrecisionCookingPreheatingReached = 2,
+    FSTParagonCookingStatePrecisionCookingReachingMinTime = 3,
+    FSTParagonCookingStatePrecisionCookingReachingMaxTime = 4,
+    FSTParagonCookingStatePrecisionCookingPastMaxTime = 5,
     
     //direct cooking
     FSTParagonCookingDirectCooking,

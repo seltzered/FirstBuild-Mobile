@@ -16,6 +16,7 @@ NSString * const FSTDeviceReadyNotification                 = @"FSTDeviceReadyNo
 {
     self = [super init];
     if (self) {
+        self.initialCharacteristicValuesRead = NO;
         self.characteristics = [[NSMutableDictionary alloc]init];
     }
     return self;
@@ -23,6 +24,7 @@ NSString * const FSTDeviceReadyNotification                 = @"FSTDeviceReadyNo
 
 - (void) notifyDeviceReady
 {
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceReadyNotification  object:self.peripheral];
 }
 

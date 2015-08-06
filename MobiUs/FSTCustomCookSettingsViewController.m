@@ -125,6 +125,10 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
        /////////////////////////////////
        //TODO TEMP!!!
        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
+
+       stage.cookTimeMinimum = [NSNumber numberWithInt:2];
+       stage.cookTimeMaximum = [NSNumber numberWithInt:4];
+
        [self.currentParagon setCookingTimesStartingWithMinimumTime:stage.cookTimeMinimum goingToMaximumTime:stage.cookTimeMaximum];
        /////////////////////////////////
        
