@@ -13,10 +13,12 @@
 //notifications
 NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
 NSString * const FSTTargetTemperatureChangedNotification    = @"FSTTargetTemperatureChangedNotification";
-NSString * const FSTCookModeChangedNotification             = @"FSTCookModeChangedNotification";
+NSString * const FSTBurnerModeChangedNotification           = @"FSTBurnerModeChangedNotification";
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelChangedNotification";
 NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
+NSString * const FSTCookTimeChangedNotification             = @"FSTCookTimeChangedNotification";
+NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
 NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
 NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
 
@@ -218,14 +220,17 @@ __weak NSTimer* _readCharacteristicsTimer;
      characteristicStatusFlags.FSTCharacteristicTargetTemperature == 1 &&
      characteristicStatusFlags.FSTCharacteristicCookTime == 1*/
     
-    //if ( requiredCount == [requiredCharacteristics count]) // found all required characteristics
-    //{
-    //[self notifyDeviceReady]; // logic contained in notification center
-    //}
+    if ( requiredCount == [requiredCharacteristics count]) // found all required characteristics
+    {
+        //TODO test subscriptions here after reads have completed
+        [self notifyDeviceReady]; // logic contained in notification center
+    }
     // calculate fraction
     double progressCount = [[NSNumber numberWithInt:(int)requiredCount] doubleValue];
     double progressTotal = [[NSNumber numberWithInt:(int)[requiredCharacteristics count]] doubleValue];
     self.loadingProgress = [NSNumber numberWithDouble: progressCount/progressTotal];
+    
+    //TODO *hack* need to add a second notification to determine when progress updated
     [self notifyDeviceReady];
 } // end assignToProperty
 
@@ -314,20 +319,20 @@ __weak NSTimer* _readCharacteristicsTimer;
         //figure out what mode the burner is
         if ((bytes[burner] & SOUS_VIDE_ON_OR_OFF_MASK) != SOUS_VIDE_ON_OR_OFF_MASK)
         {
-            currentBurner.cookMode = kPARAGON_OFF;
+            currentBurner.burnerMode = kPARAGON_OFF;
         }
         else
         {
             if((bytes[burner] & BURNER_PREHEAT_MASK) == BURNER_PREHEAT_MASK)
             {
-                currentBurner.cookMode = kPARAGON_PREHEATING;
+                currentBurner.burnerMode = kPARAGON_PREHEATING;
             }
             else
             {
-                currentBurner.cookMode = kPARAGON_HEATING;
+                currentBurner.burnerMode = kPARAGON_HEATING;
             }
         }
-        NSLog(@"burner %d cookMode %d", burner, currentBurner.cookMode);
+        NSLog(@"burner %d cookMode %d", burner, currentBurner.burnerMode);
     }
     
     [self setCookModeFromBurners];
@@ -337,19 +342,19 @@ __weak NSTimer* _readCharacteristicsTimer;
 -(void)setCookModeFromBurners
 {
     for (FSTBurner* burner in self.burners) {
-        if (burner.cookMode != kPARAGON_OFF )
+        if (burner.burnerMode != kPARAGON_OFF )
         {
-            self.currentCookMode = burner.cookMode;
+            self.burnerMode = burner.burnerMode;
             break;
         }
         else
         {
-            self.currentCookMode = kPARAGON_OFF;
+            self.burnerMode = kPARAGON_OFF;
         }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookModeChangedNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
     
-    NSLog(@"FSTCharacteristicBurnerStatus %d", self.currentCookMode );
+    NSLog(@"FSTCharacteristicBurnerStatus %d", self.burnerMode );
 }
 
 -(void)handleTargetTemperature: (CBCharacteristic*)characteristic

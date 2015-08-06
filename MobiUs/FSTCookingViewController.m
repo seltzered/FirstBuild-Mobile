@@ -133,7 +133,7 @@ BOOL gotWriteResponseForElapsedTime;
         weakSelf.progressState = kReachingMinimumTime;
     }];
     
-    _cookModeChangedObserver = [center addObserverForName:FSTCookModeChangedNotification
+    _cookModeChangedObserver = [center addObserverForName:FSTBurnerModeChangedNotification
                                                    object:weakSelf.currentParagon
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
@@ -177,7 +177,7 @@ BOOL gotWriteResponseForElapsedTime;
     __weak typeof(self) weakSelf = self;
     __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
 
-    if(weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && weakSelf.progressState == kPreheating)
+    if(weakSelf.currentParagon.burnerMode == kPARAGON_HEATING && weakSelf.progressState == kPreheating)
     {
         //if we are currently on the progress state of the view and we receive
         //a notification that the cooking mode has switched to heating then
@@ -186,22 +186,22 @@ BOOL gotWriteResponseForElapsedTime;
         // ready to transition to cooking
         weakSelf.progressState = kReadyToCook;
     }
-    else if (weakSelf.currentParagon.currentCookMode == kPARAGON_OFF)
+    else if (weakSelf.currentParagon.burnerMode == kPARAGON_OFF)
     {
         //burner was shutoff transition back to the products screen
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     }
-    else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] > [_currentCookingStage.cookTimeMaximum doubleValue] )
+    else if( weakSelf.currentParagon.burnerMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] > [_currentCookingStage.cookTimeMaximum doubleValue] )
     {
         //the elapsed time has surpassed the maximum time, we need to move to the final screen
         weakSelf.progressState = kPostMaximumTime;
     }
-    else if( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] > [_currentCookingStage.cookTimeMinimum doubleValue] )
+    else if( weakSelf.currentParagon.burnerMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] > [_currentCookingStage.cookTimeMinimum doubleValue] )
     {
         //the elapsed time is greater the minimum time (..and less than max) so we are in the sitting stage, waiting to reach the maximum time
         weakSelf.progressState = kReachingMaximumTime;
     }
-    else if ( weakSelf.currentParagon.currentCookMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] < [_currentCookingStage.cookTimeMinimum doubleValue])
+    else if ( weakSelf.currentParagon.burnerMode == kPARAGON_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] < [_currentCookingStage.cookTimeMinimum doubleValue])
     {
         weakSelf.progressState = kReachingMinimumTime;
     }
@@ -216,7 +216,24 @@ BOOL gotWriteResponseForElapsedTime;
 {
     if (gotWriteResponseForElapsedTime && gotWriteResponseForCookTime)
     {
-        self.progressState = kReachingMinimumTime;
+        FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+        FSTParagonCookingStage* _toBeCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+        
+        _currentCookingStage.cookTimeMaximum = _toBeCookingStage.cookTimeMaximum;
+        _currentCookingStage.cookTimeMinimum = _toBeCookingStage.cookTimeMinimum;
+        
+//        __weak NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+//        __weak typeof(self) weakSelf = self;
+//
+//        NSObject * _cookingTimeReadConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
+//                                                                    object:weakSelf.currentParagon
+//                                                                     queue:nil
+//                                                                usingBlock:^(NSNotification *notification)
+//         {
+//             weakSelf.progressState = kReachingMinimumTime;
+//             [center removeObserver:_cookingTimeReadConfirmationObserver];
+//         }];
+        //self.progressState = kReachingMinimumTime;
     }
 }
 

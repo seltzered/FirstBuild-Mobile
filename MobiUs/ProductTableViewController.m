@@ -344,15 +344,15 @@ NSIndexPath *_indexPathForDeletion;
         //Taken out since those properties were not connected
         
         // check paragon cook modes to update status label
-        if (paragon.currentCookMode == kPARAGON_PREHEATING)
+        if (paragon.burnerMode == kPARAGON_PREHEATING)
         {
             [productCell.statusLabel setText:@"Preheating"];
         }
-        else if(paragon.currentCookMode == kPARAGON_HEATING)
+        else if(paragon.burnerMode == kPARAGON_HEATING)
         {
             [productCell.statusLabel setText:@"Cooking"];
         }
-        else if(paragon.currentCookMode == kPARAGON_OFF)
+        else if(paragon.burnerMode == kPARAGON_OFF)
         {
             [productCell.statusLabel setText:@"Off"]; // might need more states
         }
@@ -411,29 +411,18 @@ NSIndexPath *_indexPathForDeletion;
         if ([product isKindOfClass:[FSTParagon class]])
         {
             FSTParagon* paragon = (FSTParagon*)product;
-            FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
-            vc.currentParagon = paragon;
-            [self.navigationController pushViewController:vc animated:YES];
-            //jump to the appropriate state in the cooking view controller, no segue performed
-            //if opening cooking view controller, only if segue'ing to the cooking settings controller
-//            if (paragon.currentCookMode == kPARAGON_PREHEATING)
-//            {
-//                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
-//                vc.currentParagon = paragon;
-//                vc.progressState = kPreheating;
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//            else if(paragon.currentCookMode == kPARAGON_HEATING)
-//            {
-//                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
-//                vc.currentParagon = paragon;
-////                vc.progressState = kCooking;
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//            else
-//            {
-//                [self performSegueWithIdentifier:@"segueParagon" sender:product];
-//            }
+            
+            //if we are heating or pre-heating then jump to the cooking view controller
+            if (paragon.burnerMode == kPARAGON_PREHEATING || paragon.burnerMode == kPARAGON_HEATING)
+            {
+                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
+                vc.currentParagon = paragon;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else
+            {
+                [self performSegueWithIdentifier:@"segueParagon" sender:product];
+            }
         }
     }
 }
