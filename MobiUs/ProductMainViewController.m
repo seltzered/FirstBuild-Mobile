@@ -130,19 +130,21 @@ FSTParagonDisconnectedLabel* _warningLabel;
     {
         [self hideProducts:YES];
         [self hideNoProducts:NO];
-        
+        //self.teardropImage.transform = CGAffineTransformMakeScale(0.1, 0.1); // start it very small in storyboard, and with now translation
+        self.teardropImage.alpha = 1.0;
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:1.5];
         [UIView setAnimationDelay:1];
         [UIView setAnimationRepeatCount:HUGE_VAL];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         [UIView setAnimationBeginsFromCurrentState:YES];
         
         // The transform matrix
-        CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 80);
-        CGAffineTransform transform2 = CGAffineTransformMakeScale(.7,.7);
+        CGAffineTransform transform = CGAffineTransformMakeTranslation(0, 35); // was 80
+        CGAffineTransform transform2 = CGAffineTransformMakeScale(4.0,4.0); //grow from small size, was .7 .7
         CGAffineTransform final = CGAffineTransformConcat(transform, transform2);
         self.teardropImage.transform = final;
+        self.teardropImage.alpha = 0.0; // fade out at end
         
         // Commit the changes
         [UIView commitAnimations];
