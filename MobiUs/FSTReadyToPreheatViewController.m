@@ -27,18 +27,14 @@ NSObject* _cookModeChangedObserver;
     
     __weak typeof(self) weakSelf = self;
     
-    _cookModeChangedObserver = [center addObserverForName:FSTBurnerModeChangedNotification
+    _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
                                                       object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
    {
-       if(weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_PREHEATING)
+       if(weakSelf.currentParagon.cookMode != FSTParagonCookingStateOff)
        {
-           [weakSelf performSegueWithIdentifier:@"seguePreheating" sender:weakSelf];
-       }
-       else if(weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_HEATING)
-       {
-           [weakSelf performSegueWithIdentifier:@"seguePreheating" sender:weakSelf];
+           [weakSelf performSegueWithIdentifier:@"segueCooking" sender:weakSelf];
        }
    }];
 }
