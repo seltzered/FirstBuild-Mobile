@@ -17,15 +17,7 @@
 #import "FSTCookingProgressLayer.h"
 @interface FSTCookingProgressLayer ()
 
-@property (assign, nonatomic) double initialProgress;
-@property (nonatomic, strong) CAShapeLayer *bottomLayer;
-@property (nonatomic, strong) CAShapeLayer *progressLayer;
-@property (nonatomic, strong) CAShapeLayer *sittingLayer;
-//@property (nonatomic, strong) CAShapeLayer *progressLayerEnd;
-@property (nonatomic, strong) CAShapeLayer *textBackground;
-@property (nonatomic, strong) CAShapeLayer *temperatureTicks;
-@property (nonatomic, strong) CAShapeLayer *temperatureBack; // gray lines behind the ticks
-@property (nonatomic, strong) NSMutableDictionary* markLayers; // holds all the tick marks // layers with angles as keys
+@property (assign, nonatomic) double initialProgress; // point to start the animation
 
 @end
 
@@ -170,40 +162,18 @@
     [self drawPathsForPercent]; // takes current temp to calculate percent
 }
 
--(void)setLayerState:(ProgressState)layerState {
-    _layerState = layerState; // called when state changes
-    [self drawPathsForPercent];
-}
 
 -(void)drawPathsForPercent { // also takes state into account
-    CGFloat empty_tick_width = self.progressLayer.lineWidth/15;
-    CGFloat full_tick_width = empty_tick_width*2; // define tick widths here
-    switch (_layerState) {
-        case kPreheating:
-            self.progressLayer.strokeEnd = 0.0f; // not even started yet
-            for (id key in self.markLayers) {
-                if (fmod(([key doubleValue] + M_PI/2), 2*M_PI) <= self.percent*2*M_PI) { // 0 to 1 needs to go on a 3 PI/2 to 7pi/2 range, add pi/2 and clamp it to 0 through 2pi
-                    // might increase line width as well
-                    ((CAShapeLayer*)[self.markLayers objectForKey:key]).strokeColor = UIColorFromRGB(0xF0663A).CGColor; // place holder, color tick marks firstbuild orange as a progress indicator
-                    ((CAShapeLayer*)[self.markLayers objectForKey:key]).lineWidth = full_tick_width;
-                } else {
-                    ((CAShapeLayer*)[self.markLayers objectForKey:key]).strokeColor = [UIColor grayColor].CGColor;
-                    ((CAShapeLayer*)[self.markLayers objectForKey:key]).lineWidth = empty_tick_width;
-                }
-            }
-            self.sittingLayer.strokeEnd = 0.0F;
-            break;
-        case kReadyToCook:
-            [self drawCompleteTicks];// preheating complete
-            self.progressLayer.strokeEnd = 0.0F;
-            self.sittingLayer.strokeEnd = 0.0F;
-            break;
-        case kReachingMinimumTime:
+       // case kReadyToCook:
+    [self drawCompleteTicks];// preheating complete
+    self.progressLayer.strokeEnd = 0.0F;
+    self.sittingLayer.strokeEnd = 0.0F;
+        //case kReachingMinimumTime:
             [self drawCompleteTicks];
             self.progressLayer.strokeEnd = self.percent;
             self.sittingLayer.strokeEnd = 0.0F;
             break;
-        case kReachingMaximumTime: // later
+        //case kReachingMaximumTime: // later
             [self drawCompleteTicks];
             self.progressLayer.strokeEnd = 1.0F; // complete
             self.sittingLayer.strokeEnd = self.percent; // based on time range
@@ -222,10 +192,7 @@
 
 - (double)percent {
     // change the way it calculates percent for different progress bars, and perhaps add layers that derive from CricleProgressLayer
-    switch (_layerState) {
-        case kPreheating:
-            _percent = [self calculatePercentWithTemp:_currentTemp];
-            break;
+ 
         case kReadyToCook: // precent not really used here, could be taken as complete, 100%, after preheating
         case kReachingMinimumTime:
         case kReachingMaximumTime:
