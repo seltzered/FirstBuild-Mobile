@@ -96,7 +96,6 @@ BOOL gotWriteResponseForElapsedTime;
     [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
-    [self determineAndSetViewStage];
     
     _timeElapsedChangedObserver = [center addObserverForName:FSTElapsedTimeChangedNotification
                                                       object:weakSelf.currentParagon
@@ -138,7 +137,7 @@ BOOL gotWriteResponseForElapsedTime;
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
-        [self determineAndSetViewStage];
+        
     }];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -171,46 +170,6 @@ BOOL gotWriteResponseForElapsedTime;
     self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
     [self updateLabels];
 }
-
--(void) determineAndSetViewStage
-{
-    __weak typeof(self) weakSelf = self;
-    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
-
-    if(weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_HEATING && weakSelf.progressState == kPreheating)
-    {
-        //if we are currently on the progress state of the view and we receive
-        //a notification that the cooking mode has switched to heating then
-        //transistion to the ready to cook progress state
-        // the cooktop has finished preheating to begin heating, and the progress bar was in its preheating state. Ensures that the ready to cook appears once in a cycle
-        // ready to transition to cooking
-        weakSelf.progressState = kReadyToCook;
-    }
-    else if (weakSelf.currentParagon.burnerMode == kPARAGON_OFF)
-    {
-        //burner was shutoff transition back to the products screen
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-    }
-    else if( weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] > [_currentCookingStage.cookTimeMaximum doubleValue] )
-    {
-        //the elapsed time has surpassed the maximum time, we need to move to the final screen
-        weakSelf.progressState = kPostMaximumTime;
-    }
-    else if( weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] > [_currentCookingStage.cookTimeMinimum doubleValue] )
-    {
-        //the elapsed time is greater the minimum time (..and less than max) so we are in the sitting stage, waiting to reach the maximum time
-        weakSelf.progressState = kReachingMaximumTime;
-    }
-    else if ( weakSelf.currentParagon.burnerMode == kPARAGON_PRECISION_HEATING && [_currentCookingStage.cookTimeElapsed doubleValue] < [_currentCookingStage.cookTimeMinimum doubleValue])
-    {
-        weakSelf.progressState = kReachingMinimumTime;
-    }
-    else
-    {
-        DLog(@"cook mode (burner) changed, nothing to do");
-    }
-}
-
 
 -(void)checkReadyToTransitionToCooking
 {
