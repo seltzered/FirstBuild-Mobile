@@ -14,23 +14,34 @@
 
 @interface FSTParagon : FSTBleProduct 
 
+typedef enum {
+    FSTParagonCookingStatePrecisionCookingReachingMinTime = 0,
+    FSTParagonCookingStatePrecisionCookingReachingMaxTime,
+    FSTParagonCookingStatePrecisionCookingPastMaxTime,
+    FSTParagonCookingStateOff,
+    FSTParagonCookingDirectCooking,
+    FSTParagonCookingDirectCookingWithTime
+} ParagonCookMode;
+
 extern NSString * const FSTActualTemperatureChangedNotification;
-extern NSString * const FSTCookModeChangedNotification;
+extern NSString * const FSTBurnerModeChangedNotification;
+extern NSString * const FSTCookingModeChangedNotification;
+
 extern NSString * const FSTElapsedTimeChangedNotification;
 extern NSString * const FSTBatteryLevelChangedNotification;
 extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
 extern NSString * const FSTElapsedTimeSetNotification;
 extern NSString * const FSTTargetTemperatureSetNotification;
-
-
+extern NSString * const FSTCookTimeChangedNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 @property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
 @property (nonatomic, strong) FSTCookingMethod* toBeCookingMethod;
 
-@property (atomic) ParagonCookMode currentCookMode;
+@property (atomic) ParagonBurnerMode burnerMode;
+@property (atomic) ParagonCookMode cookMode;
 @property (nonatomic, strong) NSArray* burners;
 @property (nonatomic, strong) NSNumber* batteryLevel;
 @property (nonatomic, strong) NSNumber* loadingProgress; // a percentage that tells how many characteristics loaded

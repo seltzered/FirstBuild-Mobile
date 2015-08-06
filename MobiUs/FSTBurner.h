@@ -16,8 +16,8 @@ typedef enum {
     kPARAGON_SOUS_VIDE_ENABLED,
     kPARAGON_PREHEATING,
     kPARAGON_HEATING
-} ParagonCookMode;
+} ParagonBurnerMode;
 
-@property (atomic) ParagonCookMode cookMode;
+@property (atomic) ParagonBurnerMode burnerMode;
 
 @end
