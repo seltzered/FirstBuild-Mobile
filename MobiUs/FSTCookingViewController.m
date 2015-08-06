@@ -171,7 +171,6 @@ BOOL gotWriteResponseForElapsedTime;
     [self updateLabels];
 }
 
-
 -(void)checkReadyToTransitionToCooking
 {
     if (gotWriteResponseForElapsedTime && gotWriteResponseForCookTime)
