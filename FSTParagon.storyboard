@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1008,11 +1008,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="pWN-9D-hSQ" kind="custom" identifier="preheatingStateSegue" customClass="EmptySegue" id="PW2-pw-U47"/>
-                        <segue destination="3PT-gC-osQ" kind="custom" identifier="preheatingReachedStateSegue" customClass="EmptySegue" id="TeX-19-Z61"/>
-                        <segue destination="p4E-RR-Uq4" kind="custom" identifier="reachingMinStateSegue" customClass="EmptySegue" id="jbX-cR-nOD"/>
-                        <segue destination="bvW-hb-GWg" kind="custom" identifier="reachingMaxStateSegue" customClass="EmptySegue" id="Qzq-pg-rOh"/>
-                        <segue destination="iLe-6c-Sij" kind="custom" identifier="pastMaxStateSegue" customClass="EmptySegue" id="w88-4i-60b"/>
+                        <segue destination="pWN-9D-hSQ" kind="custom" identifier="preheatingStateSegue" id="PW2-pw-U47"/>
+                        <segue destination="3PT-gC-osQ" kind="custom" identifier="preheatingReachedStateSegue" id="TeX-19-Z61"/>
+                        <segue destination="p4E-RR-Uq4" kind="custom" identifier="reachingMinStateSegue" id="jbX-cR-nOD"/>
+                        <segue destination="bvW-hb-GWg" kind="custom" identifier="reachingMaxStateSegue" id="Qzq-pg-rOh"/>
+                        <segue destination="iLe-6c-Sij" kind="custom" identifier="pastMaxStateSegue" id="w88-4i-60b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b1-hP-T1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1179,7 +1179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mr-Ty-pnw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3520" y="869"/>
+            <point key="canvasLocation" x="3824" y="877"/>
         </scene>
         <!--Custom Cook Settings View Controller-->
         <scene sceneID="gJg-qu-UJ0">
@@ -2022,7 +2022,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEN-Wt-2c4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3548" y="1535"/>
+            <point key="canvasLocation" x="4160" y="1611"/>
         </scene>
         <!--Precision Cooking State Reaching Min Time View Controller-->
         <scene sceneID="3H1-2u-Tc3">
@@ -2184,7 +2184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jki-Oc-RfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3307" y="2307"/>
+            <point key="canvasLocation" x="3963" y="2339"/>
         </scene>
         <!--Precision Cooking State Reaching Max Time View Controller-->
         <scene sceneID="iVC-P2-HBB">
@@ -2346,7 +2346,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBw-tK-gs0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2775" y="2810"/>
+            <point key="canvasLocation" x="3255" y="2678"/>
         </scene>
         <!--Precision Cooking State Reaching Max Time View Controller-->
         <scene sceneID="9ie-bN-eLo">
@@ -2384,8 +2384,8 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="WyY-7e-v5u"/>
                                                 <exclude reference="HBp-9C-ruO"/>
+                                                <exclude reference="WyY-7e-v5u"/>
                                             </mask>
                                         </variation>
                                     </imageView>
@@ -2508,7 +2508,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u9w-el-mW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2149" y="2810"/>
+            <point key="canvasLocation" x="2601" y="2942"/>
         </scene>
     </scenes>
     <resources>
