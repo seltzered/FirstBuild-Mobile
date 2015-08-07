@@ -38,14 +38,14 @@
         [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:segue.destinationViewController];
     } else { // add the new child
         [self addChildViewController:segue.destinationViewController];
-        ((UIViewController*)segue.destinationViewController).view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        ((UIViewController*)segue.destinationViewController).view.frame = self.view.frame;//CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         [self.view addSubview:((UIViewController*)segue.destinationViewController).view]; // why only do this once?
         [segue.destinationViewController didMoveToParentViewController:self];
     }
 }
 
 -(void)swapFromViewController: (UIViewController*)fromController toViewController: (UIViewController*)toController {
-    toController.view.frame = CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height);
+    toController.view.frame = self.view.frame;//CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height); // problem with the subviews offset incorrectly
     
     [fromController willMoveToParentViewController:nil]; // needed before removing
     [self addChildViewController:toController];

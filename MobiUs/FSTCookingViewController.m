@@ -141,11 +141,12 @@ BOOL gotWriteResponseForElapsedTime;
     {
         // do we just employ a switch case with transitions? Also where to set the TargetTime?
         NSString* stateIdentifier;
-        self.continueButton.hidden = true; // default, unavailable
+        //self.continueButton.hidden = true; // default unavailable
         
         switch (self.currentParagon.cookMode) {
             case FSTParagonCookingStatePrecisionCookingPreheating:
                 stateIdentifier = @"preheatingStateSegue";
+                self.continueButton.hidden = true;
                 break;
             case FSTParagonCookingStatePrecisionCookingPreheatingReached:
                 stateIdentifier = @"preheatingReachedStateSegue";
@@ -153,14 +154,18 @@ BOOL gotWriteResponseForElapsedTime;
                 break;
             case FSTParagonCookingStatePrecisionCookingReachingMinTime:
                 stateIdentifier = @"reachingMinStateSegue";
+                self.continueButton.hidden = true; // why does this take so long?
                 break; // do I need this, or only segue from the continue button
             case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
                 stateIdentifier = @"reachingMaxStateSegue";
+                self.continueButton.hidden = false;
                 break; // TODO: done state
             case FSTParagonCookingStatePrecisionCookingPastMaxTime:
                 stateIdentifier = @"pastMaxStateSegue";
+                self.continueButton.hidden = false;
+                break;
             default:
-                stateIdentifier = @"preheatingStateSegue"; // same default as before
+                stateIdentifier = @"preheatingStateSegue"; // just go to first state for now
                 break;
         }
         
@@ -367,10 +372,11 @@ BOOL gotWriteResponseForElapsedTime;
 }
 
 - (IBAction)continueButtonTap:(id)sender {
-    self.continueButton.userInteractionEnabled = NO;
+    //self.continueButton.userInteractionEnabled = NO; // no dispatch anymore
     FSTParagonCookingStage* _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
     [self.stateContainer segueToStateWithIdentifier:@"reachingMinStateSegue" sender:self];
+    self.continueButton.hidden = true;
     // does this change the cooking stage?
     // TODO: hid continue outside of preheating reached.
 }
