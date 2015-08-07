@@ -56,7 +56,7 @@ NSObject* _cookModeChangedObserver;
     [controller setHeaderText:@"GET READY" withFrameRect:CGRectMake(0, 0, 120, 30)];
     
     //TODO HACK
-    [self performSegueWithIdentifier:@"segueCooking" sender:self];
+    //[self performSegueWithIdentifier:@"segueCooking" sender:self];
     
 }
 

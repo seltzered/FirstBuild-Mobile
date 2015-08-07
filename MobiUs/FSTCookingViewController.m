@@ -389,11 +389,12 @@ BOOL gotWriteResponseForElapsedTime;
 #pragma mark - segue
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"containerSegue"]) {
-//        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
-//        //[containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
-//        self.stateContainer = containerVC;
-//    }
+    // replaced this after it was commented out, segue also moved back to container
+   if ([segue.identifier isEqualToString:@"containerSegue"]) {
+       FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
+       [containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
+       self.stateContainer = containerVC;
+   }
 }
 
 #pragma mark - <UIAlertViewDelegate>

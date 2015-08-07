@@ -41,11 +41,10 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-//    if (self.progressLayer) {
-//       
-//         self.progressLayer.frame = self.bounds;
-//         [self setupViews];
-//    }
+    if (self.progressLayer) {
+        self.progressLayer.frame = self.bounds;
+        //[self setupViews];
+    }
 //    
 //    [self.progressLabel sizeToFit];
 //    self.progressLabel.center = CGPointMake(self.center.x - self.frame.origin.x, self.center.y- self.frame.origin.y);
@@ -126,10 +125,9 @@
         [self.progressLayer setupLayer];
         
         //self.progressLayer.frame = CGRectMake(0, 0, 100, 100);
-        self.progressLayer.backgroundColor = [UIColor blueColor].CGColor;
+        self.progressLayer.backgroundColor = [UIColor clearColor].CGColor;
         [self.layer insertSublayer:self.progressLayer atIndex:0];
-        self.progressLayer.position = self.layer.position;
-        self.progressLayer.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        self.progressLayer.frame = self.bounds;
         [self.progressLayer setNeedsDisplay];
         NSLog(@"DEMON BABY height %f, width %f, %f, %f", self.progressLayer.frame.size.height, self.progressLayer.frame.size.width , self.progressLayer.frame.origin.x, self.progressLayer.frame.origin.y);
 
