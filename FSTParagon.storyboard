@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1002,7 +1002,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipi-z6-M0x">
                                 <rect key="frame" x="230" y="267" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -1054,16 +1054,16 @@
                                 <rect key="frame" x="90" y="0.0" width="420" height="357"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMZ-Ky-8Ov" userLabel="Italics Caption">
-                                        <rect key="frame" x="0.0" y="367" width="420" height="22"/>
+                                        <rect key="frame" x="125.5" y="325.5" width="169" height="21.5"/>
                                         <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ONX-nm-WVn" userLabel="circleProgressView" customClass="FSTCookingProgressView">
-                                        <rect key="frame" x="0.0" y="-32" width="420" height="420"/>
+                                        <rect key="frame" x="105" y="73" width="210" height="210"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME REMAINING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-Qf-cjt" userLabel="TIME REMAINING">
-                                                <rect key="frame" x="140" y="137" width="140" height="21.5"/>
+                                                <rect key="frame" x="35" y="32" width="140" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.55686274509803924" green="0.53725490196078429" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1072,7 +1072,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food will be done at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-xE-spK">
-                                                <rect key="frame" x="133" y="179" width="155" height="21.5"/>
+                                                <rect key="frame" x="28" y="74" width="155" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1081,7 +1081,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L2-mW-QwO" userLabel="doneAtLabel">
-                                                <rect key="frame" x="0.0" y="201" width="420" height="45"/>
+                                                <rect key="frame" x="-105" y="96" width="420" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="5tv-RW-Gsz"/>
                                                 </constraints>
@@ -1093,7 +1093,7 @@
                                                 </variation>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6xt-Cq-Ukg">
-                                                <rect key="frame" x="151" y="169" width="117" height="1"/>
+                                                <rect key="frame" x="46" y="64" width="117" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="NPy-an-phe"/>
@@ -1135,11 +1135,18 @@
                                     <constraint firstAttribute="centerY" secondItem="ONX-nm-WVn" secondAttribute="centerY" id="09I-73-szQ"/>
                                     <constraint firstItem="GMZ-Ky-8Ov" firstAttribute="top" secondItem="ONX-nm-WVn" secondAttribute="bottom" constant="-21" id="59n-zs-HYd"/>
                                     <constraint firstAttribute="centerX" secondItem="ONX-nm-WVn" secondAttribute="centerX" id="7Jf-Hj-O51"/>
+                                    <constraint firstAttribute="bottom" secondItem="GMZ-Ky-8Ov" secondAttribute="bottom" constant="10" id="9sN-N0-gh0"/>
                                     <constraint firstItem="GMZ-Ky-8Ov" firstAttribute="width" secondItem="ONX-nm-WVn" secondAttribute="width" id="BnR-bT-RZo"/>
-                                    <constraint firstItem="ONX-nm-WVn" firstAttribute="width" secondItem="Eho-uD-hb8" secondAttribute="width" id="h1R-sk-YTj"/>
+                                    <constraint firstItem="ONX-nm-WVn" firstAttribute="width" secondItem="Eho-uD-hb8" secondAttribute="width" multiplier="0.5" id="h1R-sk-YTj"/>
                                     <constraint firstItem="6L2-mW-QwO" firstAttribute="width" secondItem="Eho-uD-hb8" secondAttribute="width" id="r7j-5c-r6B"/>
                                     <constraint firstAttribute="centerX" secondItem="GMZ-Ky-8Ov" secondAttribute="centerX" id="xhZ-8L-yx0"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="59n-zs-HYd"/>
+                                        <exclude reference="BnR-bT-RZo"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREHEATING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMu-Ed-3Sd" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="0.0" y="15" width="600" height="45"/>

@@ -120,15 +120,19 @@
     
     if (!self.progressLayer) {
         NSLog(@"SELF height %f, width %f, %f, %f", self.frame.size.height, self.frame.size.width , self.frame.origin.x, self.frame.origin.y);
-       
+        NSLog(@"PARENT height %f, width %f, %f, %f", self.superview.frame.size.height, self.superview.frame.size.width , self.superview.frame.origin.x, self.superview.frame.origin.y);
         self.progressLayer = [[layerClass alloc] init];
-        self.progressLayer.frame = self.frame;
+        //CGPointMake(self.layer.bounds.size.width/4, self.layer.bounds.size.height/4);//self.layer.anchorPoint;
         [self.progressLayer setupLayer];
         
         //self.progressLayer.frame = CGRectMake(0, 0, 100, 100);
         self.progressLayer.backgroundColor = [UIColor blueColor].CGColor;
+        [self.layer insertSublayer:self.progressLayer atIndex:0];
+        self.progressLayer.position = self.layer.position;
+        self.progressLayer.bounds = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        [self.progressLayer setNeedsDisplay];
         NSLog(@"DEMON BABY height %f, width %f, %f, %f", self.progressLayer.frame.size.height, self.progressLayer.frame.size.width , self.progressLayer.frame.origin.x, self.progressLayer.frame.origin.y);
-        [self.layer addSublayer:self.progressLayer];
+
     } else {
         NSLog(@"Cooking Progress Layer already set.\n");
     }
