@@ -134,7 +134,7 @@ BOOL gotWriteResponseForElapsedTime;
         //weakSelf.progressState = kReachingMinimumTime;
     }];*/ // repeated here?
     
-    _cookModeChangedObserver = [center addObserverForName:FSTBurnerModeChangedNotification
+    _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
                                                    object:weakSelf.currentParagon
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
