@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -1001,11 +1001,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="pWN-9D-hSQ" kind="custom" identifier="preheatingStateSegue" id="PW2-pw-U47"/>
-                        <segue destination="3PT-gC-osQ" kind="custom" identifier="preheatingReachedStateSegue" id="TeX-19-Z61"/>
-                        <segue destination="p4E-RR-Uq4" kind="custom" identifier="reachingMinStateSegue" id="jbX-cR-nOD"/>
-                        <segue destination="bvW-hb-GWg" kind="custom" identifier="reachingMaxStateSegue" id="Qzq-pg-rOh"/>
-                        <segue destination="iLe-6c-Sij" kind="custom" identifier="pastMaxStateSegue" id="w88-4i-60b"/>
+                        <segue destination="pWN-9D-hSQ" kind="custom" identifier="preheatingStateSegue" customClass="FSTCookingViewSegue" id="PW2-pw-U47"/>
+                        <segue destination="3PT-gC-osQ" kind="custom" identifier="preheatingReachedStateSegue" customClass="FSTCookingViewSegue" id="TeX-19-Z61"/>
+                        <segue destination="p4E-RR-Uq4" kind="custom" identifier="reachingMinStateSegue" customClass="FSTCookingViewSegue" id="jbX-cR-nOD"/>
+                        <segue destination="bvW-hb-GWg" kind="custom" identifier="reachingMaxStateSegue" customClass="FSTCookingViewSegue" id="Qzq-pg-rOh"/>
+                        <segue destination="iLe-6c-Sij" kind="custom" identifier="pastMaxStateSegue" customClass="FSTCookingViewSegue" id="w88-4i-60b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b1-hP-T1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
