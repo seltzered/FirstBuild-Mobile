@@ -48,7 +48,7 @@ CGFloat point1, point2, point3, point4;
     CGFloat new_x = 0; // change x position of stageCircle
     CGFloat mid_x = self.bounds.size.width/2;
     CGFloat start_x = mid_x - self.lineWidth/2; //start of bar (line is slightly inset)
-    switch (self.circleState) {
+    /*switch (self.circleState) {
         case kPreheating:
             new_x = start_x; // beginning of bar
             break;
@@ -67,14 +67,14 @@ CGFloat point1, point2, point3, point4;
         default:
             NSLog(@"NO STATE FOR STAGE BAR\n");
             break;
-    }
+    }*/ // need to integrate with new states, or commit animations at every transition
     CGFloat new_w = self.bounds.size.height; // the circle is always 1 to 1 and fills the height
     [self.circleMarker setFrame:CGRectMake(new_x - new_w/2, 0, new_w, new_w)]; // set new circle frame with width and x value.
 }
-- (void)setCircleState:(ProgressState)circleState { // state changed externally
+/*- (void)setCircleState:(ProgressState)circleState { // state changed externally
     _circleState = circleState;
     [self updateCircle];
-}
+}*/
 
 - (void)drawRect:(CGRect)rect {
     // replaced self.frame with rect

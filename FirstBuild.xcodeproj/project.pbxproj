@@ -17,9 +17,17 @@
 		5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5194A9481B6BA9D40033BA26 /* UILabelEx.m */; };
 		51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */; };
 		51A9D02B1B72492E000AE293 /* FSTBleCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */; };
-		51A9D02E1B73ABD3000AE293 /* FSTCookingProgressStatePreheatingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D02D1B73ABD3000AE293 /* FSTCookingProgressStatePreheatingLayer.m */; };
-		51A9D0311B73B14B000AE293 /* FSTPrecisionCookingProgressStateReachingMinTimeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D0301B73B14B000AE293 /* FSTPrecisionCookingProgressStateReachingMinTimeLayer.m */; };
+		51A9D02E1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D02D1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m */; };
+		51A9D0311B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D0301B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m */; };
 		51A9D0341B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D0331B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m */; };
+		51A9D0371B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D0361B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m */; };
+		51A9D03D1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D03C1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m */; };
+		51A9D0401B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D03F1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m */; };
+		51A9D0431B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D0421B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m */; };
+		51A9D0461B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D0451B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m */; };
+		51A9D0491B73E11B000AE293 /* FSTCookingStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D0481B73E11B000AE293 /* FSTCookingStateViewController.m */; };
+		51A9D04C1B73FFDC000AE293 /* FSTContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */; };
+		51A9D04F1B744349000AE293 /* EmptySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A9D04E1B744349000AE293 /* EmptySegue.m */; };
 		51DB93CB1B70EDE3005B31CC /* FSEmeric-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51DB93C81B70EDE3005B31CC /* FSEmeric-BoldItalic.otf */; };
 		51DB93CC1B70EDE3005B31CC /* FSEmeric-Core.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51DB93C91B70EDE3005B31CC /* FSEmeric-Core.otf */; };
 		51DB93CD1B70EDE3005B31CC /* FSEmeric-CoreItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51DB93CA1B70EDE3005B31CC /* FSEmeric-CoreItalic.otf */; };
@@ -145,12 +153,28 @@
 		51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPointedHeaderView.m; sourceTree = "<group>"; };
 		51A9D0291B72492E000AE293 /* FSTBleCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleCharacteristic.h; sourceTree = "<group>"; };
 		51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleCharacteristic.m; sourceTree = "<group>"; };
-		51A9D02C1B73ABD3000AE293 /* FSTCookingProgressStatePreheatingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingProgressStatePreheatingLayer.h; sourceTree = "<group>"; };
-		51A9D02D1B73ABD3000AE293 /* FSTCookingProgressStatePreheatingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingProgressStatePreheatingLayer.m; sourceTree = "<group>"; };
-		51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingProgressStateReachingMinTimeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingProgressStateReachingMinTimeLayer.h; sourceTree = "<group>"; };
-		51A9D0301B73B14B000AE293 /* FSTPrecisionCookingProgressStateReachingMinTimeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingProgressStateReachingMinTimeLayer.m; sourceTree = "<group>"; };
+		51A9D02C1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingStatePreheatingLayer.h; sourceTree = "<group>"; };
+		51A9D02D1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingStatePreheatingLayer.m; sourceTree = "<group>"; };
+		51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingStateReachingMinTimeLayer.h; sourceTree = "<group>"; };
+		51A9D0301B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingStateReachingMinTimeLayer.m; sourceTree = "<group>"; };
 		51A9D0321B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingStatePreheatingReachedLayer.h; sourceTree = "<group>"; };
 		51A9D0331B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingStatePreheatingReachedLayer.m; sourceTree = "<group>"; };
+		51A9D0351B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingStateReachingMaxTimeLayer.h; sourceTree = "<group>"; };
+		51A9D0361B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingStateReachingMaxTimeLayer.m; sourceTree = "<group>"; };
+		51A9D03B1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingStatePreheatingReachedViewController.h; sourceTree = "<group>"; };
+		51A9D03C1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingStatePreheatingReachedViewController.m; sourceTree = "<group>"; };
+		51A9D03E1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingStatePreheatingViewController.h; sourceTree = "<group>"; };
+		51A9D03F1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingStatePreheatingViewController.m; sourceTree = "<group>"; };
+		51A9D0411B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingStateReachingMinTimeViewController.h; sourceTree = "<group>"; };
+		51A9D0421B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingStateReachingMinTimeViewController.m; sourceTree = "<group>"; };
+		51A9D0441B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingStateReachingMaxTimeViewController.h; sourceTree = "<group>"; };
+		51A9D0451B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingStateReachingMaxTimeViewController.m; sourceTree = "<group>"; };
+		51A9D0471B73E11B000AE293 /* FSTCookingStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingStateViewController.h; sourceTree = "<group>"; };
+		51A9D0481B73E11B000AE293 /* FSTCookingStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingStateViewController.m; sourceTree = "<group>"; };
+		51A9D04A1B73FFDC000AE293 /* FSTContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTContainerViewController.h; sourceTree = "<group>"; };
+		51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTContainerViewController.m; sourceTree = "<group>"; };
+		51A9D04D1B744349000AE293 /* EmptySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptySegue.h; sourceTree = "<group>"; };
+		51A9D04E1B744349000AE293 /* EmptySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptySegue.m; sourceTree = "<group>"; };
 		51DB93C81B70EDE3005B31CC /* FSEmeric-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FSEmeric-BoldItalic.otf"; sourceTree = "<group>"; };
 		51DB93C91B70EDE3005B31CC /* FSEmeric-Core.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FSEmeric-Core.otf"; sourceTree = "<group>"; };
 		51DB93CA1B70EDE3005B31CC /* FSEmeric-CoreItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FSEmeric-CoreItalic.otf"; sourceTree = "<group>"; };
@@ -512,6 +536,8 @@
 			isa = PBXGroup;
 			children = (
 				5BCBB9D31B02991B00B8E043 /* FSTParagon.storyboard */,
+				51A9D04D1B744349000AE293 /* EmptySegue.h */,
+				51A9D04E1B744349000AE293 /* EmptySegue.m */,
 				51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */,
 				51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */,
 				5194A9441B6A9EC80033BA26 /* FSTLabel.h */,
@@ -522,12 +548,14 @@
 				51F8EF3F1B55961400F40882 /* FSTStageBarView.m */,
 				5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */,
 				5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */,
-				51A9D02C1B73ABD3000AE293 /* FSTCookingProgressStatePreheatingLayer.h */,
-				51A9D02D1B73ABD3000AE293 /* FSTCookingProgressStatePreheatingLayer.m */,
-				51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingProgressStateReachingMinTimeLayer.h */,
-				51A9D0301B73B14B000AE293 /* FSTPrecisionCookingProgressStateReachingMinTimeLayer.m */,
+				51A9D02C1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.h */,
+				51A9D02D1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m */,
 				51A9D0321B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.h */,
 				51A9D0331B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m */,
+				51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.h */,
+				51A9D0301B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m */,
+				51A9D0351B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.h */,
+				51A9D0361B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m */,
 				5B7338BB1B0F9A7E004C931E /* FSTCookingProgressView.h */,
 				5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */,
 			);
@@ -547,6 +575,18 @@
 				5BCBB9DF1B02A24100B8E043 /* FSTReadyToPreheatViewController.m */,
 				5BCBB9E71B02A51700B8E043 /* FSTCookingViewController.h */,
 				5BCBB9E81B02A51700B8E043 /* FSTCookingViewController.m */,
+				51A9D0471B73E11B000AE293 /* FSTCookingStateViewController.h */,
+				51A9D0481B73E11B000AE293 /* FSTCookingStateViewController.m */,
+				51A9D03E1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.h */,
+				51A9D03F1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m */,
+				51A9D03B1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.h */,
+				51A9D03C1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m */,
+				51A9D0411B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.h */,
+				51A9D0421B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m */,
+				51A9D0441B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.h */,
+				51A9D0451B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m */,
+				51A9D04A1B73FFDC000AE293 /* FSTContainerViewController.h */,
+				51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */,
 				5BCBB9EA1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.h */,
 				5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */,
 				5BCBB9F31B0386CE00B8E043 /* FSTCookingMethodTableViewController.h */,
@@ -971,6 +1011,8 @@
 				5BA3A97A1B34760700E51C51 /* FSTBleCommissioningTableViewController.m in Sources */,
 				5BCBB9FE1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m in Sources */,
 				5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */,
+				51A9D0461B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m in Sources */,
+				51A9D04F1B744349000AE293 /* EmptySegue.m in Sources */,
 				5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */,
 				5BC3647E1A2F637800D03B9C /* FSTDevice.m in Sources */,
 				5BC364971A3260E200D03B9C /* FSTChillHub.m in Sources */,
@@ -980,6 +1022,7 @@
 				5B174DDB1A5F40C500A00505 /* ProductAddWrapperViewController.m in Sources */,
 				5B99E0841A1AA63F005FB881 /* WifiCommissioningNetworkListViewController.m in Sources */,
 				5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */,
+				51A9D0431B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m in Sources */,
 				51DD77851B4AFA1D0024052A /* FSTDashedLine.m in Sources */,
 				5BCBB9E01B02A24100B8E043 /* FSTReadyToPreheatViewController.m in Sources */,
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
@@ -1003,17 +1046,20 @@
 				5B9925E61AE824BC00B337CB /* LedgeViewController.m in Sources */,
 				5B05836C1B15F4DE003782E2 /* CALayer+XibConfiguration.m in Sources */,
 				5BCBB9E91B02A51700B8E043 /* FSTCookingViewController.m in Sources */,
-				51A9D0311B73B14B000AE293 /* FSTPrecisionCookingProgressStateReachingMinTimeLayer.m in Sources */,
+				51A9D0311B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m in Sources */,
 				5BC5A1D019EF6638009C93B1 /* Constants.m in Sources */,
 				5B7FB5581A43C6DF00553797 /* ChillHubDevicesTableViewController.m in Sources */,
 				5BCBB9D71B02A1A100B8E043 /* FSTCookingMethodViewController.m in Sources */,
 				5B99E0871A1AA744005FB881 /* FSTNetwork.m in Sources */,
 				5BC5A1C219EF5E79009C93B1 /* FBTAuthenticationViewController.m in Sources */,
 				51DFCAE41B66B7D500E48084 /* FSTParagonMenuAboutViewController.m in Sources */,
-				51A9D02E1B73ABD3000AE293 /* FSTCookingProgressStatePreheatingLayer.m in Sources */,
+				51A9D0401B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m in Sources */,
+				51A9D02E1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m in Sources */,
+				51A9D04C1B73FFDC000AE293 /* FSTContainerViewController.m in Sources */,
 				5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */,
 				5BE687851B71019B00C7FDC5 /* FSTCookSettingsViewController.m in Sources */,
 				5BCBB9EC1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m in Sources */,
+				51A9D0491B73E11B000AE293 /* FSTCookingStateViewController.m in Sources */,
 				5B99E0811A1A5D10005FB881 /* WifiCommissioningViewController.m in Sources */,
 				5BBFAD0219E4965500E42575 /* ProductTableViewCell.m in Sources */,
 				51A9D0341B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m in Sources */,
@@ -1025,6 +1071,7 @@
 				51F8EF431B559F8A00F40882 /* FSTStageCircleView.m in Sources */,
 				5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */,
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
+				51A9D0371B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m in Sources */,
 				5B9A6F501B50173F00BDD727 /* FSTBurner.m in Sources */,
 				5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */,
 				5BBB0B9A19F1DE8C001D5DF1 /* ScaleViewController.m in Sources */,
@@ -1038,6 +1085,7 @@
 				5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */,
 				5B8C108A1A39EC2A00F481E6 /* ProductAddViewController.m in Sources */,
 				517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */,
+				51A9D03D1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m in Sources */,
 				5B174DD81A5DE1DE00A00505 /* MilkGallonStand.m in Sources */,
 				5B7338BA1B0F9856004C931E /* FSTCookingProgressLayer.m in Sources */,
 				6743AE1F19E30E46000D9CF3 /* MobiNavigationController.m in Sources */,

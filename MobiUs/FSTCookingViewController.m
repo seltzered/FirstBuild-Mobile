@@ -59,6 +59,8 @@
 #import "FSTStageCircleView.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
+#import "FSTCookingStateViewController.h"
+#import "FSTContainerViewController.h"
 
 @interface FSTCookingViewController ()
 
@@ -93,7 +95,6 @@ BOOL gotWriteResponseForElapsedTime;
     __weak typeof(self) weakSelf = self;
     __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     
-    [self.cookingModeLabel.superview bringSubviewToFront:self.cookingModeLabel]; // setting all labels to front
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     
@@ -102,7 +103,7 @@ BOOL gotWriteResponseForElapsedTime;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-        weakSelf.cookingProgressView.elapsedTime = [_currentCookingStage.cookTimeElapsed doubleValue];
+        [weakSelf.delegate elapsedTimeChanged:[_currentCookingStage.cookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
        [weakSelf updateLabels];
     }];
     
@@ -124,20 +125,40 @@ BOOL gotWriteResponseForElapsedTime;
          [self checkReadyToTransitionToCooking];
      }];
     
-    _cookingTimeWriteConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
+    /*_cookingTimeWriteConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
                                                                 object:weakSelf.currentParagon
                                                                  queue:nil
                                                             usingBlock:^(NSNotification *notification)
     {
-        weakSelf.progressState = kReachingMinimumTime;
-    }];
+        //weakSelf.progressState = kReachingMinimumTime;
+    }];*/ // repeated here?
     
     _cookModeChangedObserver = [center addObserverForName:FSTBurnerModeChangedNotification
                                                    object:weakSelf.currentParagon
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
-        
+        // do we just employ a switch case with transitions? Also where to set the TargetTime?
+        NSString* stateIdentifier;
+        switch (self.currentParagon.cookMode) {
+            case FSTParagonCookingStatePrecisionCookingPreheating:
+                stateIdentifier = @"preheatingStateSegue";
+                break;
+            case FSTParagonCookingStatePrecisionCookingPreheatingReached:
+                stateIdentifier = @"preheatingReachedStateSegue";
+                self.continueButton.hidden = false; // this should be hidden otherwise. What happens after it is pressed?
+                break;
+            case FSTParagonCookingStatePrecisionCookingReachingMinTime:
+                stateIdentifier = @"reachingMinStateSegue";
+                break;
+            case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
+                stateIdentifier = @"reachingMaxStateSegue";
+                break; // TODO: done state
+            default:
+                stateIdentifier = @"preheatingStateSegue"; // same default as before
+                break;
+        }
+        [self.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self];
     }];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -146,8 +167,9 @@ BOOL gotWriteResponseForElapsedTime;
                                                   usingBlock:^(NSNotification *notification)
    {
        NSNumber* actualTemperature = _currentCookingStage.actualTemperature;
-       weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue];
-       [weakSelf updateLabels];
+       //weakSelf.cookingProgressView.currentTemp = [actualTemperature doubleValue]; // will set the view controller member rather than the view
+       [weakSelf.delegate currentTemperatureChanged:[actualTemperature doubleValue]];
+       //[weakSelf updateLabels];
    }];
     
     _targetTemperatureChangedObserver = [center addObserverForName:FSTTargetTemperatureChangedNotification
@@ -156,19 +178,20 @@ BOOL gotWriteResponseForElapsedTime;
                                                   usingBlock:^(NSNotification *notification)
    {
        NSNumber* targetTemperature = _currentCookingStage.targetTemperature;
-       weakSelf.cookingProgressView.targetTemp = [targetTemperature doubleValue];
-       NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@%@", [_currentCookingStage.targetTemperature stringValue], @"\u00b0 F"];
-       self.cookingModeLabel.text = cookingModelLabelText;
+       //weakSelf.cookingProgressView.targetTemp = [targetTemperature doubleValue];
+       [weakSelf.delegate targetTemperatureChanged:[targetTemperature doubleValue]];
+       //NSString *cookingModelLabelText = [NSString stringWithFormat:@"%@%@", [_currentCookingStage.targetTemperature stringValue], @"\u00b0 F"];
+       //self.cookingModeLabel.text = cookingModelLabelText;
    }];
 
     // needs to reposition behind lettering
-    [self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView];
+    //[self.cookingProgressView.superview sendSubviewToBack:self.cookingProgressView];
     
-    self.cookingProgressView.timeLimit = [_currentCookingStage.cookTimeMinimum doubleValue]; // set the value for reference with time elapsed
+    /*self.cookingProgressView.timeLimit = [_currentCookingStage.cookTimeMinimum doubleValue]; // set the value for reference with time elapsed
     self.cookingProgressView.elapsedTime = 0;  // elapsed time increments with cookingStage I suppose
     self.cookingProgressView.targetTemp =[_currentCookingStage.targetTemperature doubleValue];
     self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
-    [self updateLabels];
+    [self updateLabels];*/
 }
 
 -(void)checkReadyToTransitionToCooking
@@ -202,11 +225,11 @@ BOOL gotWriteResponseForElapsedTime;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    [self updateStageBarForState:self.progressState]; // set top bar to current global state
+    //[self updateStageBarForState:self.progressState]; // set top bar to current global state
 }
 
 //-(void)stateChanged:(ProgressState)state { //might include old state variable, or just use seperate methods for each case,
--(void)setProgressState:(ProgressState)state { // might just make a setter here
+/*-(void)setProgressState:(ProgressState)state { // might just make a setter here
     _progressState = state; // wasn't actually setting the value
     
     self.continueButton.userInteractionEnabled = YES;
@@ -219,7 +242,7 @@ BOOL gotWriteResponseForElapsedTime;
 -(void)updateStageBarForState:(ProgressState)state { // this could be scrapped soon
     [self.stageBar setCircleState:state];
 }
-
+*/
 /*- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [self.stageBar drawRect:CGRectMake(0, 0, size.width, size.height)];
     [self updateStageBarForState:self.progressState];
@@ -227,7 +250,7 @@ BOOL gotWriteResponseForElapsedTime;
 */
 - (void)updateLabels
 {
-    FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
+    /*FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     
     // create every label first
     //Fonts
@@ -251,9 +274,9 @@ BOOL gotWriteResponseForElapsedTime;
     //time to complete label
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate* timeComplete;
-
+*/
     // change label settings for each case
-    self.topCircleLabel.hidden = false;
+    /*self.topCircleLabel.hidden = false;
     self.boldOverheadLabel.hidden = false;
     self.boldLabel.hidden = false; // the default for each case
     self.instructionImage.hidden = true;
@@ -264,9 +287,9 @@ BOOL gotWriteResponseForElapsedTime;
     
     double timeRemaining;
     int hour;
-    int minutes;
+    int minutes;*/
     
-    switch (self.progressState) {
+    /*switch (self.progressState) {
 
         case kPreheating: // need to change text above number labels as well
             [self.cookingStatusLabel setText:@"PREHEATING"];
@@ -318,10 +341,10 @@ BOOL gotWriteResponseForElapsedTime;
             break;
         default:
             break;
-    }
+    }*/
     
     // create the time count down label (only shown during cooking or sitting states)
-    NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
+   /* NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",hour]  attributes: bigFontDict];
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H" attributes: smallFontDict];
     NSMutableAttributedString *colonLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: medFontDict];
     NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d",minutes]  attributes: bigFontDict];
@@ -333,10 +356,10 @@ BOOL gotWriteResponseForElapsedTime;
     [hourString appendAttributedString:minuteLabel];
     
     //[self.topCircleLabel.superview bringSubviewToFront:self.topCircleLabel];
-    [self.boldLabel.superview bringSubviewToFront:self.boldLabel]; // pull labels before the circle // could change layers instead of hiding labels
-    
+    //[self.boldLabel.superview bringSubviewToFront:self.boldLabel]; // pull labels before the circle // could change layers instead of hiding labels
+    */
 }
-
+//TODO: ALL the labels in the storyboard
 -(void)updateLabelsForPreheating {
     
 }
@@ -365,9 +388,21 @@ BOOL gotWriteResponseForElapsedTime;
     self.continueButton.userInteractionEnabled = NO;
     FSTParagonCookingStage* _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
+    // does this change the cooking stage?
+    // TODO: hid continue outside of preheating reached.
 }
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon];
+}
+
+#pragma mark - segue
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"containerSegue"]) {
+        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
+        [containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
+        self.stateContainer = containerVC;
+    }
 }
 
 #pragma mark - <UIAlertViewDelegate>
@@ -376,4 +411,6 @@ BOOL gotWriteResponseForElapsedTime;
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+
 @end

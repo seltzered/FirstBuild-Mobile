@@ -11,6 +11,6 @@
 
 @interface FSTStageBarView : UIView
 
-@property (nonatomic)  ProgressState circleState; 
+//@property (nonatomic)  ProgressState circleState;
 
 @end

@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTPrecisionCookingProgressStateReachingMinTimeLayer.h"
+#import "FSTPrecisionCookingStateReachingMinTimeLayer.h"
 
-@implementation FSTPrecisionCookingProgressStateReachingMinTimeLayer
+@implementation FSTPrecisionCookingStateReachingMinTimeLayer
 
 -(void) drawPathsForPercent {
 [self drawCompleteTicks];// preheating complete
-self.progressLayer.strokeEnd = 0.0F;
+self.progressLayer.strokeEnd = self.percent;
 self.sittingLayer.strokeEnd = 0.0F;
 }
+// percent set from containing view controller
+
 @end

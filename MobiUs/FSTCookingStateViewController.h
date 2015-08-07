@@ -1,0 +1,33 @@
+//
+//  FSTCookingStateViewController.h
+//  FirstBuild
+//
+//  Created by John Nolan on 8/6/15.
+//  Copyright (c) 2015 FirstBuild. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "FSTCookingProgressView.h"
+#import "FSTCookingViewController.h"
+
+@interface FSTCookingStateViewController : UIViewController<FSTCookingViewControllerDelegate>
+
+@property (nonatomic, weak, readwrite) IBOutlet FSTCookingProgressView* progressView;
+
+@property (nonatomic) NSTimeInterval elapsedTime;
+
+@property (nonatomic) NSTimeInterval targetTime;
+
+@property (nonatomic) CGFloat currentTemp;
+
+@property (nonatomic) CGFloat targetTemp;
+
+@property (nonatomic) CGFloat startingTemp; // beginning of the range
+
+-(void)updatePercent; // implementation changes for each subclass
+
+-(double)calculatePercent:(NSTimeInterval)fromTime toTime:(NSTimeInterval)endTime;
+
+-(double)calculatePercentWithTemp:(CGFloat)temp; // give subclasses access to these functions
+
+@end

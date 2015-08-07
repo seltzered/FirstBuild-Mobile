@@ -19,8 +19,6 @@
 
 @interface FSTCookingProgressView()
 
-@property (nonatomic, strong) FSTCookingProgressLayer *progressLayer;
-//@property (strong, nonatomic) UILabel *progressLabel;
 
 @end
 
@@ -43,7 +41,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.progressLayer.frame = self.bounds;
+    if (self.progressLayer) {
+        self.progressLayer.frame = self.bounds;
+    }
     
 //    [self.progressLabel sizeToFit];
 //    self.progressLabel.center = CGPointMake(self.center.x - self.frame.origin.x, self.center.y- self.frame.origin.y);
@@ -67,7 +67,7 @@
 //    
 //    return _progressLabel;
 //}
-
+/*
 - (double)percent {
     return self.progressLayer.percent;
 }
@@ -105,7 +105,7 @@
     _currentTemp = currentTemp;
     self.progressLayer.currentTemp = currentTemp;
     
-}
+}*/
 #pragma mark - Private Methods
 
 - (void)setupViews {
@@ -114,10 +114,14 @@
     self.clipsToBounds = false;
     
     //add Progress layer
-    self.progressLayer = [[FSTCookingProgressLayer alloc] init];
-    self.progressLayer.frame = self.bounds;
-    self.progressLayer.backgroundColor = [UIColor clearColor].CGColor;
-    [self.layer addSublayer:self.progressLayer];     
+    //self.progressLayer = [[FSTCookingProgressLayer alloc] init]; this should be set by the view controller
+    if (self.progressLayer) {
+        self.progressLayer.frame = self.bounds;
+        self.progressLayer.backgroundColor = [UIColor clearColor].CGColor;
+        [self.layer addSublayer:self.progressLayer];
+    } else {
+        NSLog(@"Cooking Progress Layer not set.\n");
+    }
 }
 
 /*- (void)setTintColor:(UIColor *)tintColor {

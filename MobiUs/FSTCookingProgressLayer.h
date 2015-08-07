@@ -22,13 +22,8 @@
 
 //states for the different views of the cooking progress screens
 
-@property (nonatomic) NSTimeInterval elapsedTime;
-@property (nonatomic) NSTimeInterval timeLimit;
-@property (nonatomic) CGFloat currentTemp;
-@property (assign, nonatomic, readonly) double percent;
+@property (nonatomic) CGFloat percent; // calculated by view controllers
 @property (nonatomic) UIColor *progressColor;
-@property (nonatomic) CGFloat targetTemp;
-@property (nonatomic) CGFloat startingTemp;
 @property (nonatomic, strong) CAShapeLayer *bottomLayer;
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
 @property (nonatomic, strong) CAShapeLayer *sittingLayer;
@@ -36,9 +31,7 @@
 @property (nonatomic, strong) NSMutableDictionary* markLayers; // holds all the tick marks // layers with angles as keys
 
 - (void) drawPathsForPercent; // fill in paths based upon the 
-- (double) percent;
-- (double) calculatePercentWithTemp:(CGFloat)temp;
-- (double) calculatePercent:(NSTimeInterval)fromTime toTime: (NSTimeInterval) endTime;
+- (void) drawCompleteTicks;
 @end
 
 // Copyright belongs to original author

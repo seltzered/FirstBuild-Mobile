@@ -26,6 +26,7 @@
 @synthesize percent = _percent;
 
 
+#pragma mark - Setting Up Layer
 
 - (instancetype)init {
     if ((self = [super init]))
@@ -141,7 +142,7 @@
 
 
 
-- (void)setElapsedTime:(NSTimeInterval)elapsedTime {
+/*- (void)setElapsedTime:(NSTimeInterval)elapsedTime {
     _initialProgress = [self calculatePercent:_elapsedTime toTime:_timeLimit];
     _elapsedTime = elapsedTime;
     
@@ -160,25 +161,23 @@
 -(void)setCurrentTemp:(CGFloat)currentTemp {
     _currentTemp = currentTemp;
     [self drawPathsForPercent]; // takes current temp to calculate percent
+}*/
+
+#pragma mark - Depicting Progress
+
+-(void)setPercent:(CGFloat)percent { // a setter that updates the layer's progress
+    [self drawPathsForPercent];
 }
 
-
--(void)drawPathsForPercent { // also takes state into account
+-(void)drawPathsForPercent { // should override this for each subclass
        // case kReadyToCook:
-    [self drawCompleteTicks];// preheating complete
+    /*[self drawCompleteTicks];// preheating complete
     self.progressLayer.strokeEnd = 0.0F;
-    self.sittingLayer.strokeEnd = 0.0F;
+    self.sittingLayer.strokeEnd = 0.0F;*/
         //case kReachingMinimumTime:
-            [self drawCompleteTicks];
-            self.progressLayer.strokeEnd = self.percent;
-            self.sittingLayer.strokeEnd = 0.0F;
-            break;
+      
         //case kReachingMaximumTime: // later
-            [self drawCompleteTicks];
-            self.progressLayer.strokeEnd = 1.0F; // complete
-            self.sittingLayer.strokeEnd = self.percent; // based on time range
-            break;
-    }
+
 }
 
 -(void)drawCompleteTicks {
@@ -190,50 +189,8 @@
     } // all orange for completeness // better put this in a function,
 }
 
-- (double)percent {
-    // change the way it calculates percent for different progress bars, and perhaps add layers that derive from CricleProgressLayer
- 
-        case kReadyToCook: // precent not really used here, could be taken as complete, 100%, after preheating
-        case kReachingMinimumTime:
-        case kReachingMaximumTime:
-            _percent = [self calculatePercent:_elapsedTime toTime:_timeLimit];
-            // time Limit and elapsed time need to be reset when transitioning to sitting
-            break;
-    }
-    return _percent;
-}
-
 - (void)setProgressColor:(UIColor *)progressColor { // perhaps get rid of this
     //self.progressLayer.strokeColor = progressColor.CGColor;
-}
-
-- (double)calculatePercent:(NSTimeInterval)fromTime toTime:(NSTimeInterval)toTime {
-    
-    if ((toTime > 0) && (fromTime > 0)) {
-        
-        CGFloat progress = 0;
-        
-        progress = fromTime / toTime;
-        
-        if ((progress * 100) > 100) {
-            progress = 1.0f;
-        }
-                
-        return progress;
-    }
-    else
-        return 0.0f;
-}
-
--(double)calculatePercentWithTemp:(CGFloat)temp {
-    CGFloat progress = 0; // defaults to this
-    if (temp > _startingTemp) {
-        progress = (temp - _startingTemp)/(_targetTemp - _startingTemp);
-        if ((progress * 100) > 100) {
-            progress = 1.0f; // complete
-        }
-    }
-    return progress;
 }
 
 - (void)startAnimation {

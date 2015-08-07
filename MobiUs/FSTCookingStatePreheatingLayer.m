@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTCookingProgressStatePreheatingLayer.h"
+#import "FSTCookingStatePreheatingLayer.h"
 
-@implementation FSTCookingProgressStatePreheatingLayer
+@implementation FSTCookingStatePreheatingLayer
 
 -(void) drawPathsForPercent {
     CGFloat empty_tick_width = self.progressLayer.lineWidth/15;
@@ -29,7 +29,4 @@
     self.sittingLayer.strokeEnd = 0.0F;
 }
 
--(double)percent {
-    return [self calculatePercentWithTemp:self.currentTemp];
-}
 @end
