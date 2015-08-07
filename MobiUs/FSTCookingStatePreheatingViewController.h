@@ -11,6 +11,7 @@
 #import "FSTCookingStateViewController.h"
 
 @interface FSTCookingStatePreheatingViewController :FSTCookingStateViewController
+@property (strong, nonatomic) IBOutlet FSTCookingProgressView *circleProgressView;
 
 
 

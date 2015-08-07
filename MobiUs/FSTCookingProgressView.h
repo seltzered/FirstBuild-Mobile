@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) FSTCookingProgressLayer *progressLayer;
 
+- (void)setupViewsWithLayerClass: (Class) layerClass ;
 
 
 @end

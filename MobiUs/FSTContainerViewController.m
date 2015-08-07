@@ -47,6 +47,8 @@
 -(void)swapFromViewController: (UIViewController*)fromController toViewController: (UIViewController*)toController {
     toController.view.frame = self.view.frame;//CGRectMake(0.0, 0.0, self.view.frame.size.width, self.view.frame.size.height); // problem with the subviews offset incorrectly
     
+    NSLog(@"height %f, width %f", self.view.frame.size.height, self.view.frame.size.width);
+    
     [fromController willMoveToParentViewController:nil]; // needed before removing
     [self addChildViewController:toController];
     [self transitionFromViewController:fromController toViewController:toController duration:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:nil completion:^(BOOL finished) {

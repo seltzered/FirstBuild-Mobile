@@ -10,6 +10,15 @@
 
 @implementation FSTCookingStatePreheatingLayer
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        //
+    }
+    return self;
+}
+
 -(void) drawPathsForPercent {
     CGFloat empty_tick_width = self.progressLayer.lineWidth/15;
     CGFloat full_tick_width = empty_tick_width*2; // define tick widths here

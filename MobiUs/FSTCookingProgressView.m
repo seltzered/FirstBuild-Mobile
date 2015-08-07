@@ -29,22 +29,24 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupViews];
+       // [self setupViews];
     }
     return self;
 }
 
 - (void)awakeFromNib {
-    [self setupViews];
+   // [self setupViews];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (self.progressLayer) {
-        self.progressLayer.frame = self.bounds;
-    }
-    
+//    if (self.progressLayer) {
+//       
+//         self.progressLayer.frame = self.bounds;
+//         [self setupViews];
+//    }
+//    
 //    [self.progressLabel sizeToFit];
 //    self.progressLabel.center = CGPointMake(self.center.x - self.frame.origin.x, self.center.y- self.frame.origin.y);
 }
@@ -108,19 +110,27 @@
 }*/
 #pragma mark - Private Methods
 
-- (void)setupViews {
+- (void)setupViewsWithLayerClass: (Class) layerClass {
     
-    self.backgroundColor = [UIColor clearColor];
-    self.clipsToBounds = false;
+    //self.backgroundColor = [UIColor clearColor];
+    //self.clipsToBounds = false;
     
     //add Progress layer
     //self.progressLayer = [[FSTCookingProgressLayer alloc] init]; this should be set by the view controller
-    if (self.progressLayer) {
-        self.progressLayer.frame = self.bounds;
-        self.progressLayer.backgroundColor = [UIColor clearColor].CGColor;
+    
+    if (!self.progressLayer) {
+        NSLog(@"SELF height %f, width %f, %f, %f", self.frame.size.height, self.frame.size.width , self.frame.origin.x, self.frame.origin.y);
+       
+        self.progressLayer = [[layerClass alloc] init];
+        self.progressLayer.frame = self.frame;
+        [self.progressLayer setupLayer];
+        
+        //self.progressLayer.frame = CGRectMake(0, 0, 100, 100);
+        self.progressLayer.backgroundColor = [UIColor blueColor].CGColor;
+        NSLog(@"DEMON BABY height %f, width %f, %f, %f", self.progressLayer.frame.size.height, self.progressLayer.frame.size.width , self.progressLayer.frame.origin.x, self.progressLayer.frame.origin.y);
         [self.layer addSublayer:self.progressLayer];
     } else {
-        NSLog(@"Cooking Progress Layer not set.\n");
+        NSLog(@"Cooking Progress Layer already set.\n");
     }
 }
 

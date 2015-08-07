@@ -32,6 +32,7 @@
 
 - (void) drawPathsForPercent; // fill in paths based upon the 
 - (void) drawCompleteTicks;
+- (void)setupLayer ;
 @end
 
 // Copyright belongs to original author

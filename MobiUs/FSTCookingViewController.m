@@ -143,33 +143,33 @@ BOOL gotWriteResponseForElapsedTime;
         NSString* stateIdentifier;
         //self.continueButton.hidden = true; // default unavailable
         
-        switch (self.currentParagon.cookMode) {
+        switch (weakSelf.currentParagon.cookMode) {
             case FSTParagonCookingStatePrecisionCookingPreheating:
                 stateIdentifier = @"preheatingStateSegue";
-                self.continueButton.hidden = true;
+                weakSelf.continueButton.hidden = true;
                 break;
             case FSTParagonCookingStatePrecisionCookingPreheatingReached:
                 stateIdentifier = @"preheatingReachedStateSegue";
-                self.continueButton.hidden = false; // this should be hidden otherwise. What happens after it is pressed?
+                weakSelf.continueButton.hidden = false; // this should be hidden otherwise. What happens after it is pressed?
                 break;
             case FSTParagonCookingStatePrecisionCookingReachingMinTime:
                 stateIdentifier = @"reachingMinStateSegue";
-                self.continueButton.hidden = true; // why does this take so long?
+                weakSelf.continueButton.hidden = true; // why does this take so long?
                 break; // do I need this, or only segue from the continue button
             case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
                 stateIdentifier = @"reachingMaxStateSegue";
-                self.continueButton.hidden = false;
+                weakSelf.continueButton.hidden = false;
                 break; // TODO: done state
             case FSTParagonCookingStatePrecisionCookingPastMaxTime:
                 stateIdentifier = @"pastMaxStateSegue";
-                self.continueButton.hidden = false;
+                weakSelf.continueButton.hidden = false;
                 break;
             default:
                 stateIdentifier = @"preheatingStateSegue"; // just go to first state for now
                 break;
         }
         
-        [self.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self];
+        [weakSelf.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self];
     }];
     
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
@@ -203,6 +203,7 @@ BOOL gotWriteResponseForElapsedTime;
     self.cookingProgressView.targetTemp =[_currentCookingStage.targetTemperature doubleValue];
     self.cookingProgressView.startingTemp = 72; // was hard coded in preheating
     [self updateLabels];*/
+    [self.stateContainer segueToStateWithIdentifier:@"preheatingStateSegue" sender:self];
 }
 
 
@@ -388,11 +389,11 @@ BOOL gotWriteResponseForElapsedTime;
 #pragma mark - segue
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"containerSegue"]) {
-        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
-        [containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
-        self.stateContainer = containerVC;
-    }
+//    if ([segue.identifier isEqualToString:@"containerSegue"]) {
+//        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
+//        //[containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
+//        self.stateContainer = containerVC;
+//    }
 }
 
 #pragma mark - <UIAlertViewDelegate>

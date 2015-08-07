@@ -28,10 +28,12 @@
 
 #pragma mark - Setting Up Layer
 
+
+
 - (instancetype)init {
     if ((self = [super init]))
     {
-        [self setupLayer];
+        //[self setupLayer];
     }
     
     return self;

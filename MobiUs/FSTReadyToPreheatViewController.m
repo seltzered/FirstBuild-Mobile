@@ -54,6 +54,10 @@ NSObject* _cookModeChangedObserver;
 
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
     [controller setHeaderText:@"GET READY" withFrameRect:CGRectMake(0, 0, 120, 30)];
+    
+    //TODO HACK
+    [self performSegueWithIdentifier:@"segueCooking" sender:self];
+    
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
