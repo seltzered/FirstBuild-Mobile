@@ -23,8 +23,8 @@
 
 @interface FSTCookingViewController : UIViewController <UIAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *cookingStatusLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
+//@property (weak, nonatomic) IBOutlet UILabel *cookingStatusLabel; // now fixed
+//@property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
 @property (nonatomic) id<FSTCookingViewControllerDelegate> delegate;
 @property (nonatomic, weak) FSTContainerViewController* stateContainer; // is there a better way to trigger these segues reliably?
 @property (nonatomic,weak) FSTParagon* currentParagon;

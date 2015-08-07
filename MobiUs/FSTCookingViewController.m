@@ -91,6 +91,7 @@ BOOL gotWriteResponseForElapsedTime;
     self.navigationItem.hidesBackButton = YES;
     gotWriteResponseForCookTime = NO;
     gotWriteResponseForElapsedTime = NO;
+    self.continueButton.hidden = true;
     
     __weak typeof(self) weakSelf = self;
     __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
@@ -104,7 +105,7 @@ BOOL gotWriteResponseForElapsedTime;
                                                   usingBlock:^(NSNotification *notification)
     {
         [weakSelf.delegate elapsedTimeChanged:[_currentCookingStage.cookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
-       [weakSelf updateLabels];
+        [weakSelf updateLabels];
     }];
     
     _cookingTimeWriteConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
@@ -113,7 +114,7 @@ BOOL gotWriteResponseForElapsedTime;
                                                usingBlock:^(NSNotification *notification)
     {
         gotWriteResponseForCookTime = YES;
-        [self checkReadyToTransitionToCooking];
+        //[self checkReadyToTransitionToCooking];
     }];
     
     _elapsedTimeWriteConfirmationObserver = [center addObserverForName:FSTElapsedTimeSetNotification
@@ -122,7 +123,7 @@ BOOL gotWriteResponseForElapsedTime;
                                                             usingBlock:^(NSNotification *notification)
      {
          gotWriteResponseForElapsedTime = YES;
-         [self checkReadyToTransitionToCooking];
+         //[self checkReadyToTransitionToCooking];
      }];
     
     /*_cookingTimeWriteConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
@@ -140,6 +141,8 @@ BOOL gotWriteResponseForElapsedTime;
     {
         // do we just employ a switch case with transitions? Also where to set the TargetTime?
         NSString* stateIdentifier;
+        self.continueButton.hidden = true; // default, unavailable
+        
         switch (self.currentParagon.cookMode) {
             case FSTParagonCookingStatePrecisionCookingPreheating:
                 stateIdentifier = @"preheatingStateSegue";
@@ -150,14 +153,17 @@ BOOL gotWriteResponseForElapsedTime;
                 break;
             case FSTParagonCookingStatePrecisionCookingReachingMinTime:
                 stateIdentifier = @"reachingMinStateSegue";
-                break;
+                break; // do I need this, or only segue from the continue button
             case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
                 stateIdentifier = @"reachingMaxStateSegue";
                 break; // TODO: done state
+            case FSTParagonCookingStatePrecisionCookingPastMaxTime:
+                stateIdentifier = @"pastMaxStateSegue";
             default:
                 stateIdentifier = @"preheatingStateSegue"; // same default as before
                 break;
         }
+        
         [self.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self];
     }];
     
@@ -194,30 +200,6 @@ BOOL gotWriteResponseForElapsedTime;
     [self updateLabels];*/
 }
 
--(void)checkReadyToTransitionToCooking
-{
-    if (gotWriteResponseForElapsedTime && gotWriteResponseForCookTime)
-    {
-        FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
-        FSTParagonCookingStage* _toBeCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
-        
-        _currentCookingStage.cookTimeMaximum = _toBeCookingStage.cookTimeMaximum;
-        _currentCookingStage.cookTimeMinimum = _toBeCookingStage.cookTimeMinimum;
-        
-//        __weak NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-//        __weak typeof(self) weakSelf = self;
-//
-//        NSObject * _cookingTimeReadConfirmationObserver = [center addObserverForName:FSTCookTimeSetNotification
-//                                                                    object:weakSelf.currentParagon
-//                                                                     queue:nil
-//                                                                usingBlock:^(NSNotification *notification)
-//         {
-//             weakSelf.progressState = kReachingMinimumTime;
-//             [center removeObserver:_cookingTimeReadConfirmationObserver];
-//         }];
-        //self.progressState = kReachingMinimumTime;
-    }
-}
 
 -(void)viewWillAppear:(BOOL)animated {
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
@@ -388,9 +370,11 @@ BOOL gotWriteResponseForElapsedTime;
     self.continueButton.userInteractionEnabled = NO;
     FSTParagonCookingStage* _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
+    [self.stateContainer segueToStateWithIdentifier:@"reachingMinStateSegue" sender:self];
     // does this change the cooking stage?
     // TODO: hid continue outside of preheating reached.
 }
+     
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon];
 }

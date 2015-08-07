@@ -13,6 +13,7 @@
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
+            <string>FSEmeric-Light</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Regular.otf">
             <string>FSEmeric</string>
@@ -22,6 +23,11 @@
             <string>FSEmeric</string>
         </mutableArray>
         <mutableArray key="FSEmeric-SemiBold.otf">
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
@@ -973,7 +979,6 @@
                         <outlet property="boldOverheadLabel" destination="T4q-xE-spK" id="OOY-AB-zQ2"/>
                         <outlet property="continueButton" destination="bKQ-z6-QqS" id="yrt-Zg-B7p"/>
                         <outlet property="cookingModeLabel" destination="we0-iW-tbm" id="5va-1m-c8Q"/>
-                        <outlet property="cookingStatusLabel" destination="aMu-Ed-3Sd" id="1Ss-wr-BTz"/>
                         <outlet property="dividingLine" destination="6xt-Cq-Ukg" id="xtv-XX-HlZ"/>
                         <outlet property="instructionImage" destination="CQM-0V-d6X" id="9dD-f3-GaH"/>
                         <outlet property="stageBar" destination="Csz-4M-yY7" id="Nvk-MW-TQo"/>
@@ -1007,6 +1012,7 @@
                         <segue destination="3PT-gC-osQ" kind="custom" identifier="preheatingReachedStateSegue" customClass="EmptySegue" id="TeX-19-Z61"/>
                         <segue destination="p4E-RR-Uq4" kind="custom" identifier="reachingMinStateSegue" customClass="EmptySegue" id="jbX-cR-nOD"/>
                         <segue destination="bvW-hb-GWg" kind="custom" identifier="reachingMaxStateSegue" customClass="EmptySegue" id="Qzq-pg-rOh"/>
+                        <segue destination="iLe-6c-Sij" kind="custom" identifier="pastMaxStateSegue" customClass="EmptySegue" id="w88-4i-60b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b1-hP-T1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1145,7 +1151,7 @@
                                     <constraint firstItem="CQM-0V-d6X" firstAttribute="height" secondItem="ONX-nm-WVn" secondAttribute="height" multiplier="0.5" id="ybd-hz-zML"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STAGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMu-Ed-3Sd" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PREHEATING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMu-Ed-3Sd" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="0.0" y="35" width="600" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="skp-Qn-4Zm"/>
@@ -1988,7 +1994,7 @@
                                     <constraint firstAttribute="centerY" secondItem="lEc-cm-Gep" secondAttribute="centerY" id="uYl-GQ-TZr"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STAGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbA-uj-678" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="READY TO COOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbA-uj-678" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="0.0" y="35" width="600" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="Tme-S3-RBl"/>
@@ -2150,7 +2156,7 @@
                                     <constraint firstItem="pQ9-Sk-byG" firstAttribute="width" secondItem="Qcs-bY-das" secondAttribute="width" multiplier="0.5" id="yee-b5-q68"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STAGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6OI-EO-bj2" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="COOKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6OI-EO-bj2" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="0.0" y="35" width="600" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="AtV-cM-itM"/>
@@ -2216,8 +2222,8 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="TUu-AG-llM"/>
                                                 <exclude reference="2ZW-0d-kcQ"/>
+                                                <exclude reference="TUu-AG-llM"/>
                                             </mask>
                                         </variation>
                                     </imageView>
@@ -2312,7 +2318,7 @@
                                     <constraint firstItem="FHu-nG-4DG" firstAttribute="width" secondItem="She-bs-AbO" secondAttribute="width" multiplier="0.5" id="l6i-Zj-vp0"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="STAGE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGV-TM-GLA" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGV-TM-GLA" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="0.0" y="35" width="600" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="FjA-c1-uoV"/>
@@ -2340,7 +2346,169 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBw-tK-gs0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2815" y="2868"/>
+            <point key="canvasLocation" x="2775" y="2810"/>
+        </scene>
+        <!--Precision Cooking State Reaching Max Time View Controller-->
+        <scene sceneID="9ie-bN-eLo">
+            <objects>
+                <viewController id="iLe-6c-Sij" customClass="FSTPrecisionCookingStateReachingMaxTimeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aRP-Dv-Hh2"/>
+                        <viewControllerLayoutGuide type="bottom" id="pOk-JZ-2Nx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ayh-C7-kjs">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7G-Dn-Xk3" userLabel="cookingModeLabel">
+                                <rect key="frame" x="0.0" y="90" width="600" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="VNo-NE-RX3"/>
+                                    <constraint firstAttribute="height" constant="25" id="hGq-Bq-Rmw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="24"/>
+                                </variation>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOF-1R-jpO" userLabel="progressView" customClass="FST">
+                                <rect key="frame" x="60" y="95.5" width="480" height="409"/>
+                                <subviews>
+                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placefood_in" translatesAutoresizingMaskIntoConstraints="NO" id="0Hp-GD-Hhz">
+                                        <rect key="frame" x="138" y="103" width="204.5" height="204.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="270" id="HBp-9C-ruO"/>
+                                            <constraint firstAttribute="width" constant="270" id="WyY-7e-v5u"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="WyY-7e-v5u"/>
+                                                <exclude reference="HBp-9C-ruO"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43C-Ek-9Lt" userLabel="Italics Caption">
+                                        <rect key="frame" x="35" y="388" width="409" height="21.5"/>
+                                        <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wB8-6F-Yp9" userLabel="circleProgressView" customClass="FSTCookingProgressView">
+                                        <rect key="frame" x="36" y="0.0" width="409" height="409"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME REMAINING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDa-lU-y5U" userLabel="TIME REMAINING">
+                                                <rect key="frame" x="134" y="132" width="140" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
+                                                <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="186" y="184" width="138.5" height="20"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food will be done at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIk-UY-dpn">
+                                                <rect key="frame" x="126" y="174" width="155" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
+                                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="177" y="226" width="155" height="20"/>
+                                                </variation>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aol-01-erf" userLabel="doneAtLabel">
+                                                <rect key="frame" x="-36" y="195" width="480" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="IUO-pO-rL3"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
+                                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="-145" y="245.5" width="800" height="45"/>
+                                                </variation>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-ay-rTB">
+                                                <rect key="frame" x="145" y="163" width="117" height="1"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="oYD-3c-qHy"/>
+                                                </constraints>
+                                            </view>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-Gp-zw9">
+                                                <rect key="frame" x="129" y="109" width="105" height="22"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="lDa-lU-y5U" secondAttribute="centerX" constant="0.5" id="2KD-au-dMa"/>
+                                            <constraint firstItem="lDa-lU-y5U" firstAttribute="centerY" secondItem="nfC-Gp-zw9" secondAttribute="centerY" id="5RO-q2-fjC"/>
+                                            <constraint firstAttribute="centerY" secondItem="DIk-UY-dpn" secondAttribute="centerY" constant="20" id="6rO-T6-1bu"/>
+                                            <constraint firstItem="lDa-lU-y5U" firstAttribute="width" secondItem="qRU-ay-rTB" secondAttribute="width" multiplier="1.2" id="O7L-IV-HhP"/>
+                                            <constraint firstAttribute="width" secondItem="wB8-6F-Yp9" secondAttribute="height" multiplier="1:1" id="ZHu-1X-Sz3"/>
+                                            <constraint firstAttribute="centerX" secondItem="DIk-UY-dpn" secondAttribute="centerX" constant="0.5" id="a9s-98-iKr"/>
+                                            <constraint firstAttribute="centerY" secondItem="lDa-lU-y5U" secondAttribute="centerY" constant="62" id="aeE-oj-4rq"/>
+                                            <constraint firstItem="lDa-lU-y5U" firstAttribute="centerX" secondItem="nfC-Gp-zw9" secondAttribute="centerX" id="f7U-ok-Hj6"/>
+                                            <constraint firstItem="lDa-lU-y5U" firstAttribute="height" secondItem="nfC-Gp-zw9" secondAttribute="height" id="hYP-07-9mf"/>
+                                            <constraint firstItem="qRU-ay-rTB" firstAttribute="top" secondItem="lDa-lU-y5U" secondAttribute="bottom" constant="10" id="jnW-gc-ZaY"/>
+                                            <constraint firstItem="DIk-UY-dpn" firstAttribute="bottom" secondItem="Aol-01-erf" secondAttribute="top" id="lde-6Z-Hv5"/>
+                                            <constraint firstItem="lDa-lU-y5U" firstAttribute="width" secondItem="nfC-Gp-zw9" secondAttribute="width" id="mTG-2u-NC6"/>
+                                            <constraint firstAttribute="centerX" secondItem="Aol-01-erf" secondAttribute="centerX" constant="0.5" id="odZ-oU-BH7"/>
+                                            <constraint firstItem="lDa-lU-y5U" firstAttribute="centerX" secondItem="qRU-ay-rTB" secondAttribute="centerX" id="yuE-06-aFK"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="nfC-Gp-zw9"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Aol-01-erf" firstAttribute="width" secondItem="tOF-1R-jpO" secondAttribute="width" id="2ud-Kb-UpK"/>
+                                    <constraint firstAttribute="centerX" secondItem="43C-Ek-9Lt" secondAttribute="centerX" id="6J6-c3-Mp9"/>
+                                    <constraint firstItem="43C-Ek-9Lt" firstAttribute="top" secondItem="wB8-6F-Yp9" secondAttribute="bottom" constant="-21" id="94x-Th-PS4"/>
+                                    <constraint firstAttribute="centerY" secondItem="wB8-6F-Yp9" secondAttribute="centerY" id="Afc-MJ-8Lb"/>
+                                    <constraint firstItem="wB8-6F-Yp9" firstAttribute="height" secondItem="tOF-1R-jpO" secondAttribute="height" id="E8g-6Z-gvo"/>
+                                    <constraint firstItem="0Hp-GD-Hhz" firstAttribute="height" secondItem="wB8-6F-Yp9" secondAttribute="height" multiplier="0.5" id="IQV-7K-ewc"/>
+                                    <constraint firstAttribute="width" secondItem="tOF-1R-jpO" secondAttribute="height" multiplier="400:341" id="NeN-gy-9ti"/>
+                                    <constraint firstAttribute="centerY" secondItem="0Hp-GD-Hhz" secondAttribute="centerY" id="Zhh-Iw-CUN"/>
+                                    <constraint firstItem="43C-Ek-9Lt" firstAttribute="width" secondItem="wB8-6F-Yp9" secondAttribute="width" id="pok-fM-tS9"/>
+                                    <constraint firstAttribute="centerX" secondItem="0Hp-GD-Hhz" secondAttribute="centerX" id="rfA-fb-ab2"/>
+                                    <constraint firstAttribute="centerX" secondItem="wB8-6F-Yp9" secondAttribute="centerX" id="x9W-f0-RiA"/>
+                                    <constraint firstItem="0Hp-GD-Hhz" firstAttribute="width" secondItem="wB8-6F-Yp9" secondAttribute="width" multiplier="0.5" id="ytP-Zx-mKK"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z6-pv-5gN" userLabel="cookingStatusLabel">
+                                <rect key="frame" x="0.0" y="35" width="600" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="Ed9-5E-Y6E"/>
+                                    <constraint firstAttribute="height" constant="45" id="kbc-6z-NYI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="30"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="R7G-Dn-Xk3" secondAttribute="centerX" id="0HI-oJ-ey8"/>
+                            <constraint firstItem="R7G-Dn-Xk3" firstAttribute="top" secondItem="aRP-Dv-Hh2" secondAttribute="bottom" constant="70" id="NTE-OJ-Psm"/>
+                            <constraint firstItem="tOF-1R-jpO" firstAttribute="width" secondItem="ayh-C7-kjs" secondAttribute="width" multiplier="0.8" id="aSN-L2-vF1"/>
+                            <constraint firstAttribute="centerX" secondItem="8Z6-pv-5gN" secondAttribute="centerX" id="fCq-xb-bbc"/>
+                            <constraint firstAttribute="centerY" secondItem="tOF-1R-jpO" secondAttribute="centerY" id="kbE-tO-gnf"/>
+                            <constraint firstItem="8Z6-pv-5gN" firstAttribute="top" secondItem="aRP-Dv-Hh2" secondAttribute="bottom" constant="15" id="lTe-Gm-6xI"/>
+                            <constraint firstAttribute="centerX" secondItem="tOF-1R-jpO" secondAttribute="centerX" id="w3J-kH-9Kn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="progressView" destination="wB8-6F-Yp9" id="1ic-kH-c5r"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u9w-el-mW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2149" y="2810"/>
         </scene>
     </scenes>
     <resources>
