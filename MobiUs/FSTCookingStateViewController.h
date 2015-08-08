@@ -30,4 +30,6 @@
 
 -(double)calculatePercentWithTemp:(CGFloat)temp; // give subclasses access to these functions
 
+-(void) updateLabels;
+
 @end

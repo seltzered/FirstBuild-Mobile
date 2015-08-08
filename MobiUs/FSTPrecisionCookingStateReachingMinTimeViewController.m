@@ -11,6 +11,10 @@
 
 @interface FSTPrecisionCookingStateReachingMinTimeViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *currentTempLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
+
 @end
 
 @implementation FSTPrecisionCookingStateReachingMinTimeViewController
@@ -40,5 +44,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void) updateLabels {
+    [super updateLabels];
+    
+    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Regular" size:22.0];
+    NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
+    
+    UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:40.0];
+    NSDictionary* bigFontDict = [NSDictionary dictionaryWithObject:bigFont forKey:NSFontAttributeName];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate* timeComplete;
+    
+    double currentTemperature = self.currentTemp;
+    NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
+    
+    double timeRemaining = self.targetTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
+    //int hour = timeRemaining / 60;
+    //int minutes = fmod(timeRemaining, 60.0);
+    
+    timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+    [self.currentTempLabel setAttributedText:currentTempString];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    self.endTimeLabel.text = [dateFormatter stringFromDate:timeComplete];
+}
+
 
 @end

@@ -10,6 +10,8 @@
 #import "FSTPrecisionCookingStateReachingMaxTimeLayer.h"
 
 @interface FSTPrecisionCookingStateReachingMaxTimeViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *currentTempLabel;
+@property (weak, nonatomic) IBOutlet UILabel *italicTimeLabel;
 
 @end
 
@@ -29,6 +31,39 @@
 - (void)updatePercent {
     [super updatePercent];
     self.progressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetTime];
+}
+
+-(void) updateLabels {
+    [super updateLabels];
+    
+    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Regular" size:22.0];
+    NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
+    
+    UIFont* boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:24.0];
+    NSDictionary* boldFontDict = [NSDictionary dictionaryWithObject:boldFont forKey:NSFontAttributeName];
+    
+    UIFont* italicFont = [UIFont fontWithName:@"FSEmeric-CoreItalic" size:24.0];
+    NSDictionary* italicFontDict = [NSDictionary dictionaryWithObject:italicFont forKey:NSFontAttributeName];
+    
+    NSMutableAttributedString* maxTimeNotice = [[NSMutableAttributedString alloc] initWithString:@"Food can stay in until" attributes:italicFontDict]; // string reporting the date food should be taken out
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate* timeComplete;
+    
+    double timeRemaining = self.targetTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
+    //int hour = timeRemaining / 60;
+    //int minutes = fmod(timeRemaining, 60.0);
+    
+    timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    [maxTimeNotice appendAttributedString:[[NSAttributedString alloc] initWithString: [dateFormatter stringFromDate:timeComplete] attributes:boldFontDict]];
+    
+    [self.italicTimeLabel setAttributedText:maxTimeNotice];
+    
+    double currentTemperature = self.currentTemp;
+    NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
+    [self.currentTempLabel setAttributedText:currentTempString];
+    
 }
 
 /*

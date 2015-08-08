@@ -11,6 +11,11 @@
 
 @interface FSTCookingStatePreheatingViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *targetLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *currentLabel;
+
+
 @end
 
 @implementation FSTCookingStatePreheatingViewController
@@ -44,6 +49,29 @@
 -(void) updatePercent {
     [super updatePercent];
     self.progressView.progressLayer.percent = [self calculatePercentWithTemp:self.currentTemp];
+}
+
+-(void) updateLabels {
+    [super updateLabels];
+    
+    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Regular" size:22.0];
+    NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
+    
+    UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:44.0];
+    NSDictionary* bigFontDict = [NSDictionary dictionaryWithObject:bigFont forKey:NSFontAttributeName];
+    
+    
+    double currentTemperature = self.currentTemp;
+    NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: bigFontDict]; // with degrees fareinheit appended
+    
+    double targetTemperature = self.targetTemp;
+    NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Target: %0.0f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
+    
+    [self.targetLabel setAttributedText:targetTempString];
+    [self.currentLabel setAttributedText:currentTempString];
+
+    
+
 }
 
 @end

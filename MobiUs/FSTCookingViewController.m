@@ -252,16 +252,9 @@ BOOL gotWriteResponseForElapsedTime;
     NSDictionary *smallFontDict = [NSDictionary dictionaryWithObject: smallFont forKey:NSFontAttributeName];
     
     // temperature labels (target temperature already at top with cooking mode
-    double currentTemperature = [_currentCookingStage.actualTemperature doubleValue];
-    NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
-    
-    double targetTemperature = [_currentCookingStage.targetTemperature doubleValue];
-    NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
-    
-    
+        
     //time to complete label
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSDate* timeComplete;
+
 */
     // change label settings for each case
     /*self.topCircleLabel.hidden = false;
@@ -295,16 +288,7 @@ BOOL gotWriteResponseForElapsedTime;
             self.dividingLine.hidden = true;
             break;
         case kReachingMinimumTime:
-            timeRemaining = [_currentCookingStage.cookTimeMinimum doubleValue] - [_currentCookingStage.cookTimeElapsed doubleValue];
-            hour = timeRemaining / 60;
-            minutes = fmod(timeRemaining, 60.0);
-            timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
-            [self.cookingStatusLabel setText:@"COOKING"];
-            [self.topCircleLabel setAttributedText:currentTempString];
-            [dateFormatter setDateFormat:@"hh:mm a"];
-            //TODO - update middle label, no bottom label
-            [self.boldOverheadLabel setText:@"Food will be ready at"];
-            self.boldLabel.text = [dateFormatter stringFromDate:timeComplete];
+         
             break;
         case kReachingMaximumTime:
             timeRemaining = [_currentCookingStage.cookTimeMaximum doubleValue] - [_currentCookingStage.cookTimeElapsed doubleValue]; // We could also calculate this in the notifications

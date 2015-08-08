@@ -30,6 +30,10 @@
 -(void) updatePercent { // hopefully when called wihthin the base class the sub classes should override it
 }
 
+-(void) updateLabels {
+    
+}
+
 - (double)calculatePercent:(NSTimeInterval)fromTime toTime:(NSTimeInterval)toTime {
     
     if ((toTime > 0) && (fromTime > 0)) {
@@ -65,21 +69,25 @@
 -(void)targetTemperatureChanged:(CGFloat)targetTemperature {
     self.targetTemp = targetTemperature;
     [self updatePercent]; // write new value and update layer, happens for every variable
+    [self updateLabels]; // same for the labels
 }
 
 -(void)currentTemperatureChanged:(CGFloat)currentTemperature {
     self.currentTemp = currentTemperature;
     [self updatePercent];
+    [self updateLabels];
 }
 
 -(void)targetTimeChanged:(NSTimeInterval)targetTime {
     self.targetTime = targetTime;
     [self updatePercent];
+    [self updateLabels];
 }
 
 -(void)elapsedTimeChanged:(NSTimeInterval)elapsedTime {
     self.elapsedTime = elapsedTime;
     [self updatePercent];
+    [self updateLabels];
 }
 
 /*
