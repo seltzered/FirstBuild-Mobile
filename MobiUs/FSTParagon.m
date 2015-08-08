@@ -274,6 +274,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleBurnerStatus: (CBCharacteristic*)characteristic
 {
+    // TODO: - add direct cook detection
     if (characteristic.value.length != self.burners.count)
     {
         DLog(@"handleBurnerStatus length of %lu not what was expected, %lu", (unsigned long)characteristic.value.length, (unsigned long)self.burners.count);
@@ -350,6 +351,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)determineCookMode
 {
+    //TODO: add direct cook
     FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
     ParagonCookMode currentCookMode = self.cookMode;
     
@@ -556,6 +558,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
+    //TODO: create set handlers and take this out of here
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
     {
         if (error)
@@ -573,6 +576,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         
         currentStage.cookTimeMaximum = toBeStage.cookTimeMaximum;
         currentStage.cookTimeMinimum = toBeStage.cookTimeMinimum;
+        [self determineCookMode];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
     }
@@ -584,7 +588,9 @@ __weak NSTimer* _readCharacteristicsTimer;
             DLog(@"error writing the elapsed time characteristic %@", error);
             return;
         }
+        
         DLog(@"successfully wrote FSTCharacteristicElapsedTime");
+        [self determineCookMode];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
