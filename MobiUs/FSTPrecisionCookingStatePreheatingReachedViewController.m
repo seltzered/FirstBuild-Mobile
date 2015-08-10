@@ -17,9 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.progressView.progressLayer = [[FSTPrecisionCookingStatePreheatingReachedLayer alloc] init];
-    // Do any additional setup after loading the view.
 }
+
+-(void) viewWillLayoutSubviews {
+    [self.progressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePreheatingReachedLayer class]];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

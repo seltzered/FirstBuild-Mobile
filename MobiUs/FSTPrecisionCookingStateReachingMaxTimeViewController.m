@@ -19,8 +19,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.progressView.progressLayer = [[FSTPrecisionCookingStateReachingMaxTimeLayer alloc] init];
-    // Do any additional setup after loading the view.
+}
+
+- (void) viewWillLayoutSubviews {
+    [self.progressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMaxTimeLayer class]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +38,7 @@
 -(void) updateLabels {
     [super updateLabels];
     
-    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Regular" size:22.0];
+    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
     
     UIFont* boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:24.0];

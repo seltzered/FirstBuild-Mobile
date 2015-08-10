@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -15,6 +15,7 @@
             <string>FSEmeric-CoreItalic</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Light.otf">
+            <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
@@ -46,9 +47,6 @@
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
-        </mutableArray>
-        <mutableArray key="FSEmeric-Thin.otf">
-            <string>FSEmeric-Thin</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
             <string>PTSans-NarrowBold</string>
@@ -1886,7 +1884,7 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placefood_in" translatesAutoresizingMaskIntoConstraints="NO" id="Bsa-Vf-0pl">
+                                    <imageView hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placefood_in" translatesAutoresizingMaskIntoConstraints="NO" id="Bsa-Vf-0pl">
                                         <rect key="frame" x="150" y="150" width="300" height="300"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Bsa-Vf-0pl" secondAttribute="height" multiplier="1:1" id="16m-uh-1Cl"/>
@@ -1979,20 +1977,20 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qcs-bY-das" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME REMAINING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2l-CB-t8D" userLabel="TIME REMAINING">
-                                                <rect key="frame" x="230" y="249" width="140" height="21.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2l-CB-t8D" userLabel="TIME REMAINING">
+                                                <rect key="frame" x="277" y="249" width="46.5" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food will be ready at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhy-I1-hje">
-                                                <rect key="frame" x="192" y="285" width="215" height="30"/>
-                                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="24"/>
+                                                <rect key="frame" x="190" y="285" width="219" height="30"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="24"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCu-dj-duB" userLabel="doneAtLabel">
-                                                <rect key="frame" x="0.0" y="315.5" width="600" height="45"/>
+                                                <rect key="frame" x="0.0" y="315" width="600" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="hYx-qe-iYI"/>
                                                 </constraints>
@@ -2001,7 +1999,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDz-qy-srl">
-                                                <rect key="frame" x="241" y="281" width="117" height="1"/>
+                                                <rect key="frame" x="280" y="281" width="39" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Khc-mF-nSV"/>
@@ -2095,7 +2093,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jki-Oc-RfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3963" y="2339"/>
+            <point key="canvasLocation" x="3919" y="2413"/>
         </scene>
         <!--Precision Cooking State Reaching Max Time View Controller-->
         <scene sceneID="iVC-P2-HBB">
@@ -2116,7 +2114,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140   F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhD-jy-UPK" userLabel="TIME REMAINING">
-                                                <rect key="frame" x="272.5" y="249" width="55" height="21.5"/>
+                                                <rect key="frame" x="272" y="249" width="55" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2127,17 +2125,17 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7h-Qo-CTt" userLabel="doneAtLabel">
-                                                <rect key="frame" x="-1" y="315.5" width="600" height="45"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="READY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7h-Qo-CTt" userLabel="doneAtLabel">
+                                                <rect key="frame" x="-1" y="315" width="600" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="29y-Vz-9bG"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="40"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nS-om-esx">
-                                                <rect key="frame" x="276.5" y="281" width="46" height="1"/>
+                                                <rect key="frame" x="276" y="281" width="46" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="aJf-u9-9aE"/>
@@ -2261,7 +2259,7 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wB8-6F-Yp9" userLabel="circleProgressView" customClass="FSTCookingProgressView">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wB8-6F-Yp9" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nfC-Gp-zw9">

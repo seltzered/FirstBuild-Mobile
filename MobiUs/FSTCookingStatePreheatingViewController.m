@@ -30,7 +30,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSLog(@"%f, %f", self.progressView.frame.size.height, self.progressView.frame.size.width);
+    NSLog(@"%f, %f", self.circleProgressView.frame.size.height, self.circleProgressView.frame.size.width);
     
 
     //self.progressView.progressLayer = [[FSTCookingStatePreheatingLayer alloc] init];
@@ -48,13 +48,13 @@
 
 -(void) updatePercent {
     [super updatePercent];
-    self.progressView.progressLayer.percent = [self calculatePercentWithTemp:self.currentTemp];
+    self.circleProgressView.progressLayer.percent = [self calculatePercentWithTemp:self.currentTemp];
 }
 
 -(void) updateLabels {
     [super updateLabels];
     
-    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Regular" size:22.0];
+    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0]; // temporary, need to figure out the regular font
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
     
     UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:44.0];

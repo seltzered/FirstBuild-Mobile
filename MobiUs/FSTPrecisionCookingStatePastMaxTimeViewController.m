@@ -21,6 +21,10 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillLayoutSubviews {
+    [self.progressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePastMaxTimeLayer class]];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
