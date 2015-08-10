@@ -18,15 +18,14 @@
     [super viewDidLoad];
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    [self.view addSubview:self.progressView]; // I want this to add on after it has been set in the subclass's view did load
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 -(void) updatePercent { // hopefully when called wihthin the base class the sub classes should override it
 }
 

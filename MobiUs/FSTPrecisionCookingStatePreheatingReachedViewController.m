@@ -23,7 +23,6 @@
     [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePreheatingReachedLayer class]];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

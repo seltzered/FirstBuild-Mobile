@@ -22,23 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //[self.progressView layoutSubviews];
-    // Do any additional setup after loading the view.
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    NSLog(@"%f, %f", self.circleProgressView.frame.size.height, self.circleProgressView.frame.size.width);
-    
-
-    //self.progressView.progressLayer = [[FSTCookingStatePreheatingLayer alloc] init];
 }
 
 -(void)viewWillLayoutSubviews
 {
-    [self.circleProgressView setupViewsWithLayerClass:[FSTCookingStatePreheatingLayer class]];
+     [self.circleProgressView setupViewsWithLayerClass:[FSTCookingStatePreheatingLayer class]];
 }
 
 - (void)didReceiveMemoryWarning {
