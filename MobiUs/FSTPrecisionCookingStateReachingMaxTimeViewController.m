@@ -22,7 +22,7 @@
 }
 
 - (void) viewWillLayoutSubviews {
-    [self.progressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMaxTimeLayer class]];
+    [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMaxTimeLayer class]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +32,7 @@
 
 - (void)updatePercent {
     [super updatePercent];
-    self.progressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetTime];
+    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetTime];
 }
 
 -(void) updateLabels {

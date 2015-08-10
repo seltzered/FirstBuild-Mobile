@@ -24,10 +24,12 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+/*- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.view addSubview:self.circleProgressView]; 
     NSLog(@"COOKING: %f, %f", self.circleProgressView.frame.size.height, self.circleProgressView.frame.size.width);
-}
+} */ // no need when the subview is already in the storyboard
+
 - (void)viewWillLayoutSubviews {
     [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMinTimeLayer class]];
 }

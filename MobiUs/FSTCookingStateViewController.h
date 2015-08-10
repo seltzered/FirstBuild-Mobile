@@ -12,8 +12,6 @@
 
 @interface FSTCookingStateViewController : UIViewController<FSTCookingViewControllerDelegate>
 
-@property (nonatomic, weak, readwrite) IBOutlet FSTCookingProgressView* progressView;
-
 @property (nonatomic) NSTimeInterval elapsedTime;
 
 @property (nonatomic) NSTimeInterval targetTime;

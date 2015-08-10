@@ -17,12 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.progressView.progressLayer = [[FSTPrecisionCookingStatePastMaxTimeLayer alloc] init];
+    self.circleProgressView.progressLayer = [[FSTPrecisionCookingStatePastMaxTimeLayer alloc] init];
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillLayoutSubviews {
-    [self.progressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePastMaxTimeLayer class]];
+    [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePastMaxTimeLayer class]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +32,7 @@
 
 -(void)updatePercent {
     [super updatePercent];
-    self.progressView.progressLayer.percent = 1.0F; // could just call drawPaths for percent here
+    self.circleProgressView.progressLayer.percent = 1.0F; // could just call drawPaths for percent here
 }
 
 /*

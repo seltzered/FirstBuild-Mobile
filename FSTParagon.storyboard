@@ -1865,6 +1865,20 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rG4-mk-dCn" userLabel="progressView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placefood_in" translatesAutoresizingMaskIntoConstraints="NO" id="Bsa-Vf-0pl">
+                                        <rect key="frame" x="150" y="150" width="300" height="300"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Bsa-Vf-0pl" secondAttribute="height" multiplier="1:1" id="16m-uh-1Cl"/>
+                                            <constraint firstAttribute="height" constant="270" id="Y66-cy-5IN"/>
+                                            <constraint firstAttribute="width" constant="270" id="mP4-1w-180"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Y66-cy-5IN"/>
+                                                <exclude reference="mP4-1w-180"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lEc-cm-Gep" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
@@ -1884,20 +1898,6 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placefood_in" translatesAutoresizingMaskIntoConstraints="NO" id="Bsa-Vf-0pl">
-                                        <rect key="frame" x="150" y="150" width="300" height="300"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Bsa-Vf-0pl" secondAttribute="height" multiplier="1:1" id="16m-uh-1Cl"/>
-                                            <constraint firstAttribute="height" constant="270" id="Y66-cy-5IN"/>
-                                            <constraint firstAttribute="width" constant="270" id="mP4-1w-180"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Y66-cy-5IN"/>
-                                                <exclude reference="mP4-1w-180"/>
-                                            </mask>
-                                        </variation>
-                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="rG4-mk-dCn" secondAttribute="height" multiplier="400:341" id="18Q-hh-lt3"/>
@@ -1953,7 +1953,6 @@
                     </view>
                     <connections>
                         <outlet property="circleProgressView" destination="lEc-cm-Gep" id="oHA-SW-aFb"/>
-                        <outlet property="progressView" destination="lEc-cm-Gep" id="Tgj-XG-zJc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEN-Wt-2c4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2090,7 +2089,6 @@
                         <outlet property="circleProgressView" destination="Qcs-bY-das" id="McG-nW-cys"/>
                         <outlet property="currentTempLabel" destination="z2l-CB-t8D" id="YLZ-0y-V3T"/>
                         <outlet property="endTimeLabel" destination="DCu-dj-duB" id="SSm-Va-g70"/>
-                        <outlet property="progressView" destination="Qcs-bY-das" id="4HR-YK-c8t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jki-Oc-RfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2223,19 +2221,19 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="circleProgressView" destination="She-bs-AbO" id="WaE-oV-eNr"/>
                         <outlet property="currentTempLabel" destination="MhD-jy-UPK" id="9jr-9b-P8E"/>
                         <outlet property="italicTimeLabel" destination="L9n-tW-qYt" id="x2S-b2-4WL"/>
-                        <outlet property="progressView" destination="She-bs-AbO" id="G7N-Za-rmb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBw-tK-gs0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3255" y="2678"/>
         </scene>
-        <!--Precision Cooking State Reaching Max Time View Controller-->
+        <!--Precision Cooking State Past Max Time View Controller-->
         <scene sceneID="9ie-bN-eLo">
             <objects>
-                <viewController id="iLe-6c-Sij" customClass="FSTPrecisionCookingStateReachingMaxTimeViewController" sceneMemberID="viewController">
+                <viewController id="iLe-6c-Sij" customClass="FSTPrecisionCookingStatePastMaxTimeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aRP-Dv-Hh2"/>
                         <viewControllerLayoutGuide type="bottom" id="pOk-JZ-2Nx"/>
@@ -2351,7 +2349,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="progressView" destination="wB8-6F-Yp9" id="1ic-kH-c5r"/>
+                        <outlet property="circleProgressView" destination="wB8-6F-Yp9" id="Pix-5D-ydC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u9w-el-mW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
