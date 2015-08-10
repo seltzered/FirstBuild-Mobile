@@ -85,11 +85,12 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 #pragma mark - Interactions
 
--(void)startHeatingWithTemperature: (NSNumber*)targetTemperature
+-(void)startHeating
 {
-    
+    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+
     Byte bytes[2] ;
-    OSWriteBigInt16(bytes, 0, [targetTemperature doubleValue]*100);
+    OSWriteBigInt16(bytes, 0, [toBeStage.targetTemperature doubleValue]*100);
     NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
 
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicTargetTemperature];
@@ -100,20 +101,19 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
 }
 
--(void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingTimeMinimum goingToMaximumTime: (NSNumber*)cookingTimeMaximum
+-(void)setCookingTimes
 {
-    
+    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
     
-
-    //TODO - once we actually have max time then remove this calculation
+    //TODO: - once we actually have max time then remove this calculation
     //cookingTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
 
-    if (characteristic && cookingTimeMinimum && cookingTimeMaximum)
+    if (characteristic && toBeStage.cookTimeMinimum && toBeStage.cookTimeMaximum)
     {
         Byte bytes[8] = {0x00};
-        OSWriteBigInt16(bytes, 0, [cookingTimeMinimum unsignedIntegerValue]);
-        OSWriteBigInt16(bytes, 2, [cookingTimeMaximum unsignedIntegerValue]);
+        OSWriteBigInt16(bytes, 0, [toBeStage.cookTimeMinimum unsignedIntegerValue]);
+        OSWriteBigInt16(bytes, 2, [toBeStage.cookTimeMaximum unsignedIntegerValue]);
         NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
@@ -280,7 +280,8 @@ __weak NSTimer* _readCharacteristicsTimer;
         DLog(@"handleBurnerStatus length of %lu not what was expected, %lu", (unsigned long)characteristic.value.length, (unsigned long)self.burners.count);
         return;
     }
-    //outFSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    
+    FSTParagonCookingStage* toBeStage = self.currentCookingMethod.session.paragonCookingStages[0];
     
     //There are 5 burner statuses and and 5 bytes. Each byte is a status
     //the statuses are:
@@ -346,7 +347,9 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO: need to make sure this fix is actually ok...reset the cooktime when we see the paragon is off
     if (self.burnerMode == kPARAGON_OFF)
     {
-        [self setCookingTimesStartingWithMinimumTime:[NSNumber numberWithInt:0] goingToMaximumTime:[NSNumber numberWithInt:0]];
+        toBeStage.cookTimeMinimum = 0;
+        toBeStage.cookTimeMaximum = 0;
+        [self setCookingTimes];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
@@ -567,7 +570,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         if (error)
         {
-            //TODO what do we do if error writing characteristic?
+            //TODO: what do we do if error writing characteristic?
             DLog(@"error writing the cooktime characteristic %@", error);
             return;
         }
@@ -588,11 +591,10 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         if (error)
         {
-            //TODO what do we do if error writing characteristic?
+            //TODO: what do we do if error writing characteristic?
             DLog(@"error writing the elapsed time characteristic %@", error);
             return;
         }
-        
         DLog(@"successfully wrote FSTCharacteristicElapsedTime");
         [self determineCookMode];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
@@ -601,7 +603,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         if (error)
         {
-            //TODO what do we do if error writing characteristic?
+            //TODO: what do we do if error writing characteristic?
             DLog(@"error writing the target temperature characteristic %@", error);
             return;
         }

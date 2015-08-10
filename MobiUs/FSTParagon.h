@@ -53,7 +53,7 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 @property (nonatomic, strong) NSNumber* batteryLevel;
 @property (nonatomic, strong) NSNumber* loadingProgress; // a percentage that tells how many characteristics loaded
 
--(void)startHeatingWithTemperature: (NSNumber*)targetTemperature;
-- (void)setCookingTimesStartingWithMinimumTime: (NSNumber*)cookingTimeMinimum goingToMaximumTime: (NSNumber*)cookingTimeMaximum;
+- (void)startHeating;
+- (void)setCookingTimes;
 
 @end

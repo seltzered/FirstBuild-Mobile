@@ -169,7 +169,7 @@ NSObject* _targetTemperatureChangedObserver;
     _cookingStage.cookTimeMaximum = [NSNumber numberWithInt:4];
     //END TODO
     
-    [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
+    [self.currentParagon setCookingTimes];
     
     //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode
     self.continueButton.userInteractionEnabled = NO;
