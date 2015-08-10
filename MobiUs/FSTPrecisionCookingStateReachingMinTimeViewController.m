@@ -48,7 +48,7 @@
 -(void) updateLabels {
     [super updateLabels];
     
-    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Regular" size:22.0];
+    UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
     
     UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:40.0];

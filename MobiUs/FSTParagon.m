@@ -109,7 +109,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO - once we actually have max time then remove this calculation
     //cookingTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
 
-    if (characteristic && cookingTimeMinimum && cookingTimeMaximum && [cookingTimeMinimum intValue] > 0 && [cookingTimeMaximum intValue] > 0)
+    if (characteristic && cookingTimeMinimum && cookingTimeMaximum)
     {
         Byte bytes[8] = {0x00};
         OSWriteBigInt16(bytes, 0, [cookingTimeMinimum unsignedIntegerValue]);
@@ -306,9 +306,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
     
-    //NSLog(@"================ BURNER STATUS CHANGED ====================");
-    
-    //loop through burners
+    //loop through all burners (GE Cooktop)
     for (uint8_t burner = 0; burner < self.burners.count; burner++)
     {
         FSTBurner * currentBurner = (FSTBurner*)self.burners[burner];
@@ -329,9 +327,10 @@ __weak NSTimer* _readCharacteristicsTimer;
                 currentBurner.burnerMode = kPARAGON_PRECISION_HEATING;
             }
         }
-        //NSLog(@"burner %d cookMode %d", burner, currentBurner.burnerMode);
     }
     
+    //now go through each of the burners and see if we can find one that is not off
+    //in order to set the overall burner mode (self.burnerMode)
     for (FSTBurner* burner in self.burners) {
         if (burner.burnerMode != kPARAGON_OFF )
         {
@@ -343,9 +342,14 @@ __weak NSTimer* _readCharacteristicsTimer;
             self.burnerMode = kPARAGON_OFF;
         }
     }
+    
+    //TODO: need to make sure this fix is actually ok...reset the cooktime when we see the paragon is off
+    if (self.burnerMode == kPARAGON_OFF)
+    {
+        [self setCookingTimesStartingWithMinimumTime:[NSNumber numberWithInt:0] goingToMaximumTime:[NSNumber numberWithInt:0]];
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
-    //NSLog(@"FSTCharacteristicBurnerStatus %d", self.burnerMode );
-
 }
 
 

@@ -12,7 +12,8 @@
 
 //paragon cook mode
 typedef enum {
-    kPARAGON_OFF = 0,
+    kPARAGON_UNINITIALIZED,
+    kPARAGON_OFF,
     kPARAGON_PRECISION_PREHEATING,
     kPARAGON_PRECISION_HEATING
 } ParagonBurnerMode;

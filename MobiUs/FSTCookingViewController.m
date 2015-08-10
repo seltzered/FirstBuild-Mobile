@@ -35,7 +35,7 @@ NSObject* _targetTemperatureChangedObserver;
     [super viewDidLoad];
 
     self.navigationItem.hidesBackButton = YES;
-    self.continueButton.hidden = true;
+    self.continueButton.hidden = YES;
     
     [self transitionToCurrentCookMode];
     [self setupEventHandlers];
@@ -113,6 +113,10 @@ NSObject* _targetTemperatureChangedObserver;
             stateIdentifier = @"pastMaxStateSegue";
             weakSelf.continueButton.hidden = YES;
             break;
+        case FSTParagonCookingStateOff:
+            stateIdentifier = nil;
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            break;
         default:
             stateIdentifier = nil;
             break;
@@ -124,7 +128,7 @@ NSObject* _targetTemperatureChangedObserver;
     }
     else
     {
-        DLog(@"unknown state in cook mode");
+        DLog(@"unknown state in cook mode, or paragon was shut off");
     }
     
 }
@@ -159,6 +163,12 @@ NSObject* _targetTemperatureChangedObserver;
     //then dispatch the corresponding state, which the cookModeChangeObserver will
     //pickup and transition to the correct embeded view
     FSTParagonCookingStage* _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
+    
+    //TODO: HACK TESTING
+    _cookingStage.cookTimeMinimum = [NSNumber numberWithInt:2];
+    _cookingStage.cookTimeMaximum = [NSNumber numberWithInt:4];
+    //END TODO
+    
     [self.currentParagon setCookingTimesStartingWithMinimumTime:_cookingStage.cookTimeMinimum goingToMaximumTime:_cookingStage.cookTimeMaximum];
     
     //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode

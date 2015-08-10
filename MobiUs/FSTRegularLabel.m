@@ -12,7 +12,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.font = [UIFont fontWithName: @"FSEmeric-Regular" size: self.font.pointSize];//@"FSEmeric-Thin" size:self.font.pointSize];
+    self.font = [UIFont fontWithName: @"FSEmeric-Thin" size: self.font.pointSize];//@"FSEmeric-Thin" size:self.font.pointSize];
 }
 
 
