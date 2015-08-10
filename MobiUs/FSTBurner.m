@@ -10,4 +10,12 @@
 
 @implementation FSTBurner
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.burnerMode = kPARAGON_UNINITIALIZED;
+    }
+    return self;
+}
 @end
