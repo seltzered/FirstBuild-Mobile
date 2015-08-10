@@ -105,24 +105,11 @@ __weak NSTimer* _readCharacteristicsTimer;
 -(void)setCookingTimes
 {
     FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+    CBCharacteristic* characteristic;
     
     //TODO: - once we actually have max time then remove this calculation
     //cookingTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
 
-    if (characteristic && toBeStage.cookTimeMinimum && toBeStage.cookTimeMaximum)
-    {
-        Byte bytes[8] = {0x00};
-        OSWriteBigInt16(bytes, 0, [toBeStage.cookTimeMinimum unsignedIntegerValue]);
-        OSWriteBigInt16(bytes, 2, [toBeStage.cookTimeMaximum unsignedIntegerValue]);
-        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }
-    else
-    {
-        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
-    }
-    
     characteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
     
     if (characteristic)
@@ -134,6 +121,21 @@ __weak NSTimer* _readCharacteristicsTimer;
     else
     {
         DLog(@"could not set elapsed time to 0 on BLE device, characteristic is empty");
+    }
+    
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+    
+    if (characteristic && toBeStage.cookTimeMinimum && toBeStage.cookTimeMaximum)
+    {
+        Byte bytes[8] = {0x00};
+        OSWriteBigInt16(bytes, 0, [toBeStage.cookTimeMinimum unsignedIntegerValue]);
+        OSWriteBigInt16(bytes, 2, [toBeStage.cookTimeMaximum unsignedIntegerValue]);
+        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+    else
+    {
+        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
     }
     
 }
@@ -225,7 +227,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO *hack* need to add a second notification to determine when progress updated
     [self notifyDeviceReady];
     
-    [self determineCookMode];
+    
     [self logParagon];
     
     
@@ -282,7 +284,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         return;
     }
     
-    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+    //FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
     
     //There are 5 burner statuses and and 5 bytes. Each byte is a status
     //the statuses are:
@@ -349,6 +351,19 @@ __weak NSTimer* _readCharacteristicsTimer;
     //we detect the burner has been turned off
     if (self.burnerMode == kPARAGON_OFF)
     {
+        CBCharacteristic* elapsedTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
+        
+        if (elapsedTimeCharacteristic)
+        {
+            Byte bytes[2] = {0x00,0x00};
+            NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+            [self.peripheral writeValue:data forCharacteristic:elapsedTimeCharacteristic type:CBCharacteristicWriteWithResponse];
+        }
+        else
+        {
+            DLog(@"could not set elapsed time to 0 on BLE device, characteristic is empty");
+        }
+        
         CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
 
         if (cookTimeCharacteristic)
@@ -357,11 +372,13 @@ __weak NSTimer* _readCharacteristicsTimer;
             OSWriteBigInt16(bytes, 0, 0);
             OSWriteBigInt16(bytes, 2, 0);
             NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
-            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+            [self.peripheral writeValue:data forCharacteristic:cookTimeCharacteristic type:CBCharacteristicWriteWithResponse];
         }
+       
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
+    [self determineCookMode];
 }
 
 
@@ -369,6 +386,8 @@ __weak NSTimer* _readCharacteristicsTimer;
 {
     //TODO: add direct cook
     FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+    
     ParagonCookMode currentCookMode = self.cookMode;
     
     if (self.burnerMode == kPARAGON_OFF)
@@ -382,26 +401,37 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
     {
-        if (currentCookMode == FSTParagonCookingStatePrecisionCookingPreheating || [currentStage.cookTimeMinimum doubleValue] == 0)
+        if (currentCookMode == FSTParagonCookingStatePrecisionCookingPreheating)
         {
             //since we are currently in preheating mode and the burner indicates
             //that we reached we reached our preheating goal
             self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
         }
-        else if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue])
+        else if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the maximum time
             self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
         }
-        else if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMinimum doubleValue] )
+        else if ([currentStage.cookTimeElapsed doubleValue] >= [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the minimum time, but less than or equal to the max time
+            //and the requested cookTime is not 0
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMaxTime;
         }
-        else if([currentStage.cookTimeElapsed doubleValue] < [currentStage.cookTimeMinimum doubleValue])
+        else if([currentStage.cookTimeElapsed doubleValue] < [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is less than the minimum time
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMinTime;
+        }
+        else if ([toBeStage.cookTimeMinimum doubleValue] > 0)
+        {
+            self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
+        }
+        else if([currentStage.cookTimeMinimum doubleValue] == 0)
+        {
+            //cook time not set
+            DLog(@"PRECISION COOKING WITH NO COOK TIME SET");
+            self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
         }
         else
         {
@@ -459,6 +489,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
         currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
     }
+    [self determineCookMode];
 }
 
 -(void)handleCurrentTemperature: (CBCharacteristic*)characteristic
