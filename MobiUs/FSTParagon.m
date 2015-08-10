@@ -101,6 +101,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
 }
 
+//TODO: create write handlers to the characteristics and call them from here
 -(void)setCookingTimes
 {
     FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
@@ -281,7 +282,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         return;
     }
     
-    FSTParagonCookingStage* toBeStage = self.currentCookingMethod.session.paragonCookingStages[0];
+    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
     
     //There are 5 burner statuses and and 5 bytes. Each byte is a status
     //the statuses are:
@@ -344,12 +345,20 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     
-    //TODO: need to make sure this fix is actually ok...reset the cooktime when we see the paragon is off
+    //TODO: kind of hacky, but force the min and max cook time to 0 when
+    //we detect the burner has been turned off
     if (self.burnerMode == kPARAGON_OFF)
     {
-        toBeStage.cookTimeMinimum = 0;
-        toBeStage.cookTimeMaximum = 0;
-        [self setCookingTimes];
+        CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+
+        if (cookTimeCharacteristic)
+        {
+            Byte bytes[8] = {0x00};
+            OSWriteBigInt16(bytes, 0, 0);
+            OSWriteBigInt16(bytes, 2, 0);
+            NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
+            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        }
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
@@ -373,7 +382,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
     {
-        if (currentCookMode == FSTParagonCookingStatePrecisionCookingPreheating)
+        if (currentCookMode == FSTParagonCookingStatePrecisionCookingPreheating || [currentStage.cookTimeMinimum doubleValue] == 0)
         {
             //since we are currently in preheating mode and the burner indicates
             //that we reached we reached our preheating goal
@@ -426,7 +435,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
-        //NSLog(@"FSTCharacteristicTargetTemperature: %@", currentStage.targetTemperature );
     }
 }
 
@@ -450,8 +458,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t maximumTime = OSReadBigInt16(bytes, 2);
         currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
         currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
-
-        //NSLog(@"FSTCharacteristicCookTime [min desired %@, max desired %@],  [min actual: %@, max actual: %@]", toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
     }
 }
 
@@ -576,14 +582,9 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
         DLog(@"successfully wrote FSTCharacteristicCookTime");
         
-        //we successfully wrote the cooking time so go ahead and set the current cooking times to the
-        //to be cooking times. since we don't get notifications when it is published
-        FSTParagonCookingStage* currentStage = self.currentCookingMethod.session.paragonCookingStages[0];
-        FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
-        
-        currentStage.cookTimeMaximum = toBeStage.cookTimeMaximum;
-        currentStage.cookTimeMinimum = toBeStage.cookTimeMinimum;
-        [self determineCookMode];
+        //now read back the characteristic since there is no notification
+        CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+        [self.peripheral readValueForCharacteristic:cookTimeCharacteristic];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
     }
