@@ -24,8 +24,12 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"COOKING: %f, %f", self.circleProgressView.frame.size.height, self.circleProgressView.frame.size.width);
+}
 - (void)viewWillLayoutSubviews {
-    [self.progressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMinTimeLayer class]];
+    [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMinTimeLayer class]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,7 +39,7 @@
 
 - (void) updatePercent {
     [super updatePercent];
-    self.progressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetTime];
+    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetTime];
 }
 
 /*

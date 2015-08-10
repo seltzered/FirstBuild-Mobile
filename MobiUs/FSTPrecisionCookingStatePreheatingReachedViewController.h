@@ -11,4 +11,6 @@
 
 @interface FSTPrecisionCookingStatePreheatingReachedViewController : FSTCookingStateViewController
 
+@property (weak, nonatomic) IBOutlet FSTCookingProgressView *circleProgressView;
+
 @end

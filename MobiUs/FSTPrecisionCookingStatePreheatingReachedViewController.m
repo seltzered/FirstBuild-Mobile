@@ -20,7 +20,7 @@
 }
 
 -(void) viewWillLayoutSubviews {
-    [self.progressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePreheatingReachedLayer class]];
+    [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePreheatingReachedLayer class]];
 }
 
 
@@ -31,7 +31,7 @@
 
 - (void) updatePercent {
     [super updatePercent];
-    self.progressView.progressLayer.percent = 1.0F; // percent insignificant
+    self.circleProgressView.progressLayer.percent = 1.0F; // percent insignificant
 }
 
 /*

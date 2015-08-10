@@ -10,5 +10,6 @@
 #import "FSTCookingStateViewController.h"
 
 @interface FSTPrecisionCookingStateReachingMinTimeViewController : FSTCookingStateViewController
+@property (weak, nonatomic) IBOutlet FSTCookingProgressView *circleProgressView;
 
 @end
