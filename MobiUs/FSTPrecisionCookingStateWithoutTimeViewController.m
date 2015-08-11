@@ -37,7 +37,7 @@
     UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:41.0];
     NSMutableDictionary* bigFontDict = [NSMutableDictionary dictionaryWithObject:bigFont forKey:NSFontAttributeName];
     
-    NSMutableAttributedString* temperatureString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%f%@", self.currentTemp, @"\u00b0 F"] attributes:bigFontDict];
+    NSMutableAttributedString* temperatureString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.1f%@", self.currentTemp, @"\u00b0 F"] attributes:bigFontDict];
     
     [self.currentTempLabel setAttributedText:temperatureString];
 }
