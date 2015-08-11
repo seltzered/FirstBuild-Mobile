@@ -100,10 +100,14 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO: - once we actually have max time then remove this calculation
     //toBeStage.cookTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
     
-    //note, must reset elapsed time to 0 before writing the cooktime
+    //must reset elapsed time to 0 before writing the cooktime
     [self writeElapsedTime];
     [self writeCookTimesWithMinimumCooktime:toBeStage.cookTimeMinimum havingMaximumCooktime:toBeStage.cookTimeMaximum];
-
+    
+    //erase the tobe cooktimes now that they are set
+    toBeStage.cookTimeMinimum = [NSNumber numberWithInt:0];
+    toBeStage.cookTimeMinimum = [NSNumber numberWithInt:0];
+    toBeStage.targetTemperature = [NSNumber numberWithInt:0];
 }
 
 #pragma mark - Write Handlers
@@ -461,17 +465,17 @@ __weak NSTimer* _readCharacteristicsTimer;
         else if ([currentStage.cookTimeElapsed doubleValue] >= [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the minimum time, but less than or equal to the max time
-            //and the requested cookTime is not 0
+            //and the cookTime is set
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMaxTime;
         }
         else if([currentStage.cookTimeElapsed doubleValue] < [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
-            //elapsed time is less than the minimum time
+            //elapsed time is less than the minimum time and the cook time is set
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMinTime;
         }
         else if ([toBeStage.cookTimeMinimum doubleValue] > 0)
         {
-            //if we have a desired cooktime
+            //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
             self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
         }
         else if([currentStage.cookTimeMinimum doubleValue] == 0)
@@ -626,7 +630,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     NSLog(@"------PARAGON-------");
     NSLog(@"bmode %d, cmode %d, curtmp %@", self.burnerMode, self.cookMode, currentStage.actualTemperature);
     NSLog(@"\tACTUAL: tartmp %@, mint %@, maxt %@, elapt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeElapsed);
-    NSLog(@"\t  TOBE: tartmp %@, mint %@, maxt %@, elapt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, toBeStage.cookTimeElapsed);
+    NSLog(@"\t  TOBE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, toBeStage.cookTimeElapsed);
 }
 #endif
 
