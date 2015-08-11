@@ -481,8 +481,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         else if([currentStage.cookTimeMinimum doubleValue] == 0)
         {
             //cook time not set
-            DLog(@"PRECISION COOKING WITH NO COOK TIME SET");
-            self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
+            self.cookMode = FSTParagonCookingStatePrecisionCookingWithoutTime;
         }
         else
         {
