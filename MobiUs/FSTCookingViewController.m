@@ -128,6 +128,11 @@ NSObject* _cookTimeChangedObserver;
             weakSelf.continueButton.hidden = YES;
             weakSelf.stageBar.hidden = NO;
             break;
+        case FSTParagonCookingStatePrecisionCookingWithoutTime:
+            stateIdentifier = @"withoutTimeStateSegue";
+            weakSelf.continueButton.hidden = YES;
+            weakSelf.stageBar.hidden = YES;
+            break;
         case FSTParagonCookingStateOff:
             stateIdentifier = nil;
             weakSelf.stageBar.hidden = YES;

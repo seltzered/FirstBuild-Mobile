@@ -10,10 +10,8 @@
     <customFonts key="customFonts">
         <mutableArray key="FSEmeric-BoldItalic.otf">
             <string>FSEmeric-BoldItalic</string>
-            <string>FSEmeric-BoldItalic</string>
         </mutableArray>
         <mutableArray key="FSEmeric-CoreItalic.otf">
-            <string>FSEmeric-CoreItalic</string>
             <string>FSEmeric-CoreItalic</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Light.otf">
@@ -2366,12 +2364,6 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-DO-fpc">
-                                                <rect key="frame" x="354" y="542" width="43.5" height="22.5"/>
-                                                <fontDescription key="fontDescription" name="FSEmeric-BoldItalic" family="FS Emeric" pointSize="18"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="L57-KY-fZU" secondAttribute="height" multiplier="1:1" id="5yy-5P-40V"/>
@@ -2383,7 +2375,7 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LC0-Y9-yJd">
-                                        <rect key="frame" x="252" y="289.5" width="96" height="20.5"/>
+                                        <rect key="frame" x="252" y="289" width="96" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2405,8 +2397,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLe-jg-TaL" userLabel="cookingStatusLabel">
-                                <rect key="frame" x="258" y="5" width="84.5" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COOKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLe-jg-TaL" userLabel="cookingStatusLabel">
+                                <rect key="frame" x="231" y="5" width="138" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="GNZ-TY-4X6"/>
                                     <constraint firstAttribute="width" constant="600" id="RI4-eJ-O5k"/>
@@ -2420,24 +2412,14 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE FOOD OUT    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ttp-11-8aJ" userLabel="Italics Caption">
-                                <rect key="frame" x="205" y="542" width="149" height="22.5"/>
-                                <fontDescription key="fontDescription" name="FSEmeric-CoreItalic" family="FS Emeric" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="pAC-5m-r4X" secondAttribute="centerY" id="0S6-0a-iCI"/>
                             <constraint firstAttribute="centerX" secondItem="FLe-jg-TaL" secondAttribute="centerX" id="4h1-sR-SdM"/>
-                            <constraint firstItem="gPc-DO-fpc" firstAttribute="centerY" secondItem="Ttp-11-8aJ" secondAttribute="centerY" id="9Zd-tG-fFt"/>
-                            <constraint firstAttribute="centerX" secondItem="Ttp-11-8aJ" secondAttribute="centerX" constant="20" id="9bk-cQ-gss"/>
                             <constraint firstItem="pAC-5m-r4X" firstAttribute="width" secondItem="cfX-4u-cVl" secondAttribute="width" id="BP4-9m-pOD"/>
                             <constraint firstItem="pAC-5m-r4X" firstAttribute="height" secondItem="cfX-4u-cVl" secondAttribute="height" id="CHQ-dq-2Q9"/>
-                            <constraint firstItem="gPc-DO-fpc" firstAttribute="leading" secondItem="Ttp-11-8aJ" secondAttribute="trailing" id="XCK-Pj-LMh"/>
                             <constraint firstItem="FLe-jg-TaL" firstAttribute="top" secondItem="d1Z-yR-NdR" secondAttribute="bottom" constant="5" id="acH-G3-eSl"/>
-                            <constraint firstItem="BJB-VU-MyC" firstAttribute="top" secondItem="Ttp-11-8aJ" secondAttribute="bottom" constant="35" id="hmp-WK-5Cv"/>
                             <constraint firstAttribute="centerX" secondItem="pAC-5m-r4X" secondAttribute="centerX" id="quu-b5-EVM"/>
                             <constraint firstAttribute="height" secondItem="pAC-5m-r4X" secondAttribute="height" multiplier="0.7" id="vSr-iE-5Y6"/>
                             <constraint firstItem="pAC-5m-r4X" firstAttribute="width" secondItem="cfX-4u-cVl" secondAttribute="width" multiplier="0.7" id="wKW-zR-RWi"/>
