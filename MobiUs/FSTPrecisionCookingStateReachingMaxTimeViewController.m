@@ -33,6 +33,7 @@
 - (void)updatePercent {
     [super updatePercent];
     self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMaxTime];
+    //[self.circleProgressView.progressLayer drawPathsForPercent];
 }
 
 -(void) updateLabels {
@@ -41,13 +42,13 @@
     UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
     
-    UIFont* boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:24.0];
+    UIFont* boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:21.0];
     NSDictionary* boldFontDict = [NSDictionary dictionaryWithObject:boldFont forKey:NSFontAttributeName];
     
-    UIFont* italicFont = [UIFont fontWithName:@"FSEmeric-CoreItalic" size:24.0];
+    UIFont* italicFont = [UIFont fontWithName:@"FSEmeric-CoreItalic" size:21.0];
     NSDictionary* italicFontDict = [NSDictionary dictionaryWithObject:italicFont forKey:NSFontAttributeName];
     
-    NSMutableAttributedString* maxTimeNotice = [[NSMutableAttributedString alloc] initWithString:@"Food can stay in until" attributes:italicFontDict]; // string reporting the date food should be taken out
+    NSMutableAttributedString* maxTimeNotice = [[NSMutableAttributedString alloc] initWithString:@"Food can stay in until " attributes:italicFontDict]; // string reporting the date food should be taken out
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate* timeComplete;

@@ -37,6 +37,7 @@
 -(void) updatePercent {
     [super updatePercent];
     self.circleProgressView.progressLayer.percent = [self calculatePercentWithTemp:self.currentTemp];
+    //[self.circleProgressView.progressLayer drawPathsForPercent]; // already called in percent setter
 }
 
 -(void) updateLabels {
