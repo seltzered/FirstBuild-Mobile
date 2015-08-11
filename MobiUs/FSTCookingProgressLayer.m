@@ -40,8 +40,8 @@
 }
 
 - (void)layoutSublayers { // need to specify the paths here. Why happen twice?
-    CGFloat progress_width = self.frame.size.height/13; // all other widths and lengths based on this
-    CGFloat sitting_width = 2*progress_width/3;
+    CGFloat progress_width = self.frame.size.height/16; // all other widths and lengths based on this
+    CGFloat sitting_width = 2*progress_width/5;
     // only has actual size here
     
     self.path = [self drawPathWithArcCenter];
@@ -73,7 +73,7 @@
         ((CAShapeLayer*)[self.markLayers objectForKey:key]).path = ninetyMark.CGPath;
         //CGPathAddPath(mutableTicks, nil, ninetyMark.CGPath);
     } // need a mutable copy
-    NSArray* dashes = [NSArray arrayWithObjects:@(25),@(7), nil]; // for sitting dashed line
+    NSArray* dashes = [NSArray arrayWithObjects:@(18),@(5), nil]; // for sitting dashed line
     self.sittingLayer.lineDashPattern = dashes; // 
    // self.temperatureTicks.path = mutableTicks; // change the current path to that mutable copy
     
