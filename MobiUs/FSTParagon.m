@@ -46,6 +46,8 @@ NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with bo
 
 __weak NSTimer* _readCharacteristicsTimer;
 
+#pragma mark - Allocation
+
 - (id)init
 {
     self = [super init];
@@ -83,34 +85,103 @@ __weak NSTimer* _readCharacteristicsTimer;
     [_readCharacteristicsTimer invalidate];
 }
 
-#pragma mark - Interactions
+#pragma mark - External Interface Selectors
 
 -(void)startHeating
 {
     FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+    [self writeTargetTemperature:toBeStage.targetTemperature];
+}
+
+-(void)setCookingTimes
+{
+    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
+    
+    //TODO: - once we actually have max time then remove this calculation
+    //toBeStage.cookTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
+    
+    //note, must reset elapsed time to 0 before writing the cooktime
+    [self writeElapsedTime];
+    [self writeCookTimesWithMinimumCooktime:toBeStage.cookTimeMinimum havingMaximumCooktime:toBeStage.cookTimeMaximum];
+
+}
+
+#pragma mark - Write Handlers
+
+-(void)writeHandler: (CBCharacteristic*)characteristic
+{
+    [super writeHandler:characteristic];
+    
+    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
+    {
+        DLog(@"successfully wrote FSTCharacteristicCookTime");
+        [self handleCooktimeWritten];
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
+    {
+        [self handleElapsedTimeWritten];
+        DLog(@"successfully wrote FSTCharacteristicElapsedTime");
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
+    {
+        DLog(@"successfully wrote FSTCharacteristicTargetTemperature");
+        [self handleTargetTemperatureWritten];
+    }
+}
+
+-(void)writeTargetTemperature: (NSNumber*)targetTemperature
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicTargetTemperature];
 
     Byte bytes[2] ;
-    OSWriteBigInt16(bytes, 0, [toBeStage.targetTemperature doubleValue]*100);
+    OSWriteBigInt16(bytes, 0, [targetTemperature doubleValue]*100);
     NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
-
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicTargetTemperature];
     
     if (characteristic)
     {
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
+    else
+    {
+        DLog(@"characteristic nil for writing target temperature");
+    }
 }
 
-//TODO: create write handlers to the characteristics and call them from here
--(void)setCookingTimes
+-(void)handleTargetTemperatureWritten
 {
-    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
-    CBCharacteristic* characteristic;
-    
-    //TODO: - once we actually have max time then remove this calculation
-    //cookingTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureSetNotification object:self];
+}
 
-    characteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
+-(void)writeCookTimesWithMinimumCooktime: (NSNumber*)minimumCooktime havingMaximumCooktime: (NSNumber*)maximumCooktime
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+    
+    if (characteristic && minimumCooktime && maximumCooktime)
+    {
+        Byte bytes[8] = {0x00};
+        OSWriteBigInt16(bytes, 0, [minimumCooktime unsignedIntegerValue]);
+        OSWriteBigInt16(bytes, 2, [maximumCooktime unsignedIntegerValue]);
+        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+    else
+    {
+        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
+    }
+}
+
+-(void)handleCooktimeWritten
+{
+    //read back the characteristic since there is no notification
+    CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+    [self.peripheral readValueForCharacteristic:cookTimeCharacteristic];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
+}
+
+-(void)writeElapsedTime
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
     
     if (characteristic)
     {
@@ -122,26 +193,20 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         DLog(@"could not set elapsed time to 0 on BLE device, characteristic is empty");
     }
-    
-    characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
-    
-    if (characteristic && toBeStage.cookTimeMinimum && toBeStage.cookTimeMaximum)
-    {
-        Byte bytes[8] = {0x00};
-        OSWriteBigInt16(bytes, 0, [toBeStage.cookTimeMinimum unsignedIntegerValue]);
-        OSWriteBigInt16(bytes, 2, [toBeStage.cookTimeMaximum unsignedIntegerValue]);
-        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }
-    else
-    {
-        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
-    }
-    
 }
 
--(void)assignValueToPropertyFromCharacteristic: (CBCharacteristic*)characteristic
+-(void)handleElapsedTimeWritten
 {
+    [self determineCookMode];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
+}
+
+#pragma mark - Read Handlers
+
+-(void)readHandler: (CBCharacteristic*)characteristic
+{
+    [super readHandler:characteristic];
+    
     if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeFirmwareInfo])
     {
         //not implemented
@@ -207,7 +272,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
     {
         self.initialCharacteristicValuesRead = YES;
-
+        
         [self notifyDeviceReady]; // logic contained in notification center
         for (NSString* requiredCharacteristic in requiredCharacteristics)
         {
@@ -219,6 +284,7 @@ __weak NSTimer* _readCharacteristicsTimer;
             
         }
     }
+    
     // calculate fraction
     double progressCount = [[NSNumber numberWithInt:(int)requiredCount] doubleValue];
     double progressTotal = [[NSNumber numberWithInt:(int)[requiredCharacteristics count]] doubleValue];
@@ -226,14 +292,21 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     //TODO *hack* need to add a second notification to determine when progress updated
     [self notifyDeviceReady];
-    
-    
-    [self logParagon];
+  
+#ifdef DEBUG
+    if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+    {
+        printf(".");
+        
+    }
+    else
+    {
+        [self logParagon];
+    }
+#endif 
     
     
 } // end assignToProperty
-
-#pragma mark - Data Assignment Handlers
 
 -(void)handleBatteryLevel: (CBCharacteristic*)characteristic
 {
@@ -347,34 +420,12 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     
-    //TODO: kind of hacky, but force the min and max cook time to 0 when
+    //kind of hacky, but force the min and max cook time to 0 when
     //we detect the burner has been turned off
     if (self.burnerMode == kPARAGON_OFF)
     {
-        CBCharacteristic* elapsedTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
-        
-        if (elapsedTimeCharacteristic)
-        {
-            Byte bytes[2] = {0x00,0x00};
-            NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-            [self.peripheral writeValue:data forCharacteristic:elapsedTimeCharacteristic type:CBCharacteristicWriteWithResponse];
-        }
-        else
-        {
-            DLog(@"could not set elapsed time to 0 on BLE device, characteristic is empty");
-        }
-        
-        CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
-
-        if (cookTimeCharacteristic)
-        {
-            Byte bytes[8] = {0x00};
-            OSWriteBigInt16(bytes, 0, 0);
-            OSWriteBigInt16(bytes, 2, 0);
-            NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
-            [self.peripheral writeValue:data forCharacteristic:cookTimeCharacteristic type:CBCharacteristicWriteWithResponse];
-        }
-       
+        [self writeElapsedTime];
+        [self writeCookTimesWithMinimumCooktime:[NSNumber numberWithInt:0] havingMaximumCooktime:[NSNumber numberWithInt:0]];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
@@ -425,6 +476,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
         else if ([toBeStage.cookTimeMinimum doubleValue] > 0)
         {
+            //if we have a desired cooktime
             self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
         }
         else if([currentStage.cookTimeMinimum doubleValue] == 0)
@@ -509,14 +561,15 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
-        //NSLog(@"FSTCharacteristicCurrentTemperature %@", currentStage.actualTemperature );
     }
 }
 
-#pragma mark - <CBPeripheralDelegate>
+#pragma mark - Characteristic Discovery Handler
 
--(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
+-(void)handleDiscoverCharacteristics: (NSArray*)characteristics
 {
+    [super handleDiscoverCharacteristics:characteristics];
+    
     self.initialCharacteristicValuesRead = NO;
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicProbeConnectionState];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBatteryLevel];
@@ -526,13 +579,13 @@ __weak NSTimer* _readCharacteristicsTimer;
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicTargetTemperature];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCookTime];
     NSLog(@"=======================================================================");
-    NSLog(@"SERVICE %@", [service.UUID UUIDString]);
-        
-    for (CBCharacteristic *characteristic in service.characteristics)
+    //NSLog(@"SERVICE %@", [service.UUID UUIDString]);
+    
+    for (CBCharacteristic *characteristic in characteristics)
     {
         [self.characteristics setObject:characteristic forKey:[characteristic.UUID UUIDString]];
         NSLog(@"    CHARACTERISTIC %@", [characteristic.UUID UUIDString]);
-
+        
         if (characteristic.properties & CBCharacteristicPropertyWrite)
         {
             NSLog(@"        CAN WRITE");
@@ -541,18 +594,16 @@ __weak NSTimer* _readCharacteristicsTimer;
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
             if  (
-                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel] ||
-                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus] ||
-                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentTemperature] ||
-                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime] ||
-                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState] ||
-                    [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature]
-                )
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerStatus] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentTemperature] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature]
+                 )
             {
                 [self.peripheral readValueForCharacteristic:characteristic];
-                //[self.peripheral setNotifyValue:YES forCharacteristic:characteristic];
             }
-            
         }
         
         if (characteristic.properties & CBCharacteristicPropertyRead)
@@ -568,79 +619,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         {
             NSLog(@"        CAN WRITE WITHOUT RESPONSE");
         }
-    }
-}
-
--(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
-{
-    DLog("discovered services for peripheral %@", peripheral.identifier);
-    NSArray * services;
-    services = [self.peripheral services];
-    for (CBService *service in services)
-    {
-        [self.peripheral discoverCharacteristics:nil forService:service];
-    }
-}
-
--(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    //NSLog(@"characteristic %@ changed value %@", characteristic.UUID, characteristic.value);
-    [self assignValueToPropertyFromCharacteristic:characteristic];
-}
-
--(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    if (error)
-    {
-        NSLog(@"characteristic %@ notification failed %@", characteristic.UUID, error);
-        return;
-    }
-    
-    NSLog(@"characteristic %@ , notifying: %s", characteristic.UUID, characteristic.isNotifying ? "true" : "false");
-   
-}
-
--(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    //TODO: create set handlers and take this out of here
-    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookTime])
-    {
-        if (error)
-        {
-            //TODO: what do we do if error writing characteristic?
-            DLog(@"error writing the cooktime characteristic %@", error);
-            return;
-        }
-        DLog(@"successfully wrote FSTCharacteristicCookTime");
-        
-        //now read back the characteristic since there is no notification
-        CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
-        [self.peripheral readValueForCharacteristic:cookTimeCharacteristic];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicElapsedTime])
-    {
-        if (error)
-        {
-            //TODO: what do we do if error writing characteristic?
-            DLog(@"error writing the elapsed time characteristic %@", error);
-            return;
-        }
-        DLog(@"successfully wrote FSTCharacteristicElapsedTime");
-        [self determineCookMode];
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
-    }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTargetTemperature])
-    {
-        if (error)
-        {
-            //TODO: what do we do if error writing characteristic?
-            DLog(@"error writing the target temperature characteristic %@", error);
-            return;
-        }
-        DLog(@"successfully wrote FSTCharacteristicTargetTemperature");
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureSetNotification object:self];
     }
 }
 

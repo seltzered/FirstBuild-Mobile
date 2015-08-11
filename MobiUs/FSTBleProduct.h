@@ -19,5 +19,9 @@ extern NSString * const FSTDeviceReadyNotification;
 @property (atomic) BOOL initialCharacteristicValuesRead;
 
 - (void) notifyDeviceReady;
+- (void) writeHandler: (CBCharacteristic*)characteristic;
+- (void) readHandler: (CBCharacteristic*)characteristic;
+- (void) handleDiscoverCharacteristics: (NSArray*)characteristics;
+
 
 @end
