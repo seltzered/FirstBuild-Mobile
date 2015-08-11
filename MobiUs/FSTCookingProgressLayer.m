@@ -51,8 +51,7 @@
     
     self.progressLayer.lineWidth = progress_width;
     self.bottomLayer.lineWidth = progress_width/7;
-    self.sittingLayer.lineWidth = 3*progress_width/4;
-    self.progressLayer.lineWidth = sitting_width;
+    self.sittingLayer.lineWidth = sitting_width;
     //self.progressLayerEnd.path = [self drawPathWithArcCenter];
     CGFloat line_length = self.progressLayer.lineWidth/2; // for the short lines
    for (id key in self.markLayers) {
