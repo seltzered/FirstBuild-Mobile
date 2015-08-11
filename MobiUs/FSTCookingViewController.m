@@ -49,7 +49,7 @@ NSObject* _cookTimeChangedObserver;
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
-    
+    //time elapsed
     _timeElapsedChangedObserver = [center addObserverForName:FSTElapsedTimeChangedNotification
                                                       object:weakSelf.currentParagon
                                                        queue:nil
@@ -58,19 +58,22 @@ NSObject* _cookTimeChangedObserver;
        [weakSelf.delegate elapsedTimeChanged:[_currentCookingStage.cookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
     }];
     
-    _cookTimeChangedObserver = [center addObserverForName:FSTCookTimeSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification) {
-            [weakSelf.delegate targetTimeChanged:[_currentCookingStage.cookTimeMinimum doubleValue] withMax:[_currentCookingStage.cookTimeMaximum doubleValue]];
+    //cook time
+    _cookTimeChangedObserver = [center addObserverForName:FSTCookTimeSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
+    {
+        [weakSelf.delegate targetTimeChanged:[_currentCookingStage.cookTimeMinimum doubleValue] withMax:[_currentCookingStage.cookTimeMaximum doubleValue]];
     }];
     
+    //cook mode
     _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
                                                    object:weakSelf.currentParagon
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
     {
-        [self transitionToCurrentCookMode];
+        [weakSelf transitionToCurrentCookMode];
     }];
     
-    
+    //current temperature
     _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
                                                       object:weakSelf.currentParagon
                                                        queue:nil
@@ -80,6 +83,8 @@ NSObject* _cookTimeChangedObserver;
        [weakSelf.delegate currentTemperatureChanged:[actualTemperature doubleValue]];
     }];
     
+    
+    //target temperature
     _targetTemperatureChangedObserver = [center addObserverForName:FSTTargetTemperatureChangedNotification
                                                             object:weakSelf.currentParagon
                                                              queue:nil
@@ -162,6 +167,7 @@ NSObject* _cookTimeChangedObserver;
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookTimeChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_targetTemperatureChangedObserver];
 }
 
@@ -197,10 +203,11 @@ NSObject* _cookTimeChangedObserver;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // replaced this after it was commented out, segue also moved back to container
-   if ([segue.identifier isEqualToString:@"containerSegue"]) {
+   if ([segue.identifier isEqualToString:@"containerSegue"])
+   {
        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
        containerVC.paragon = self.currentParagon;
-       [containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
+       //[containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
        self.stateContainer = containerVC;
    }
 }
