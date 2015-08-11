@@ -536,7 +536,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
         currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
         [self determineCookMode];
-
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookingModeChangedNotification object:self];
     }
 }
 
