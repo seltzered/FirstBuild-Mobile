@@ -138,7 +138,7 @@ NSObject* _cookTimeChangedObserver;
     
     if (stateIdentifier)
     {
-        [weakSelf.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self];
+        [weakSelf.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self.currentParagon];
     }
     else
     {
@@ -199,6 +199,7 @@ NSObject* _cookTimeChangedObserver;
     // replaced this after it was commented out, segue also moved back to container
    if ([segue.identifier isEqualToString:@"containerSegue"]) {
        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
+       containerVC.paragon = self.currentParagon;
        [containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
        self.stateContainer = containerVC;
    }

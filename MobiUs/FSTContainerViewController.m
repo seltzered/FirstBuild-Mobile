@@ -28,11 +28,12 @@
 }
 
 - (void)segueToStateWithIdentifier:(NSString *)identifier sender:(id)sender {
-    [self performSegueWithIdentifier:identifier sender:self];
+    [self performSegueWithIdentifier:identifier sender:sender];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     ((FSTCookingViewController*)self.parentViewController).delegate = segue.destinationViewController; // set the current delegate to this parent, allowing for communications around this view controller
+
     if (self.childViewControllers.count > 0) {
         
         [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:segue.destinationViewController];
@@ -42,6 +43,15 @@
         [self.view addSubview:((UIViewController*)segue.destinationViewController).view]; // why only do this once?
         [segue.destinationViewController didMoveToParentViewController:self];
     }
+    
+    if ([segue.destinationViewController isKindOfClass:[FSTCookingStateViewController class]]) {
+        FSTParagonCookingStage* stage = self.paragon.currentCookingMethod.session.paragonCookingStages[0];
+        ((FSTCookingStateViewController*)segue.destinationViewController).targetMinTime = [stage.cookTimeMinimum doubleValue];
+        ((FSTCookingStateViewController*)segue.destinationViewController).targetMaxTime = [stage.cookTimeMaximum doubleValue];
+        ((FSTCookingStateViewController*)segue.destinationViewController).targetTemp = [stage.targetTemperature doubleValue];
+        
+    }
+    
 }
 
 -(void)swapFromViewController: (UIViewController*)fromController toViewController: (UIViewController*)toController {

@@ -76,7 +76,7 @@
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
     [self.currentTempLabel setAttributedText:currentTempString];
     [dateFormatter setDateFormat:@"hh:mm a"];
-    self.endTimeLabel.text = [dateFormatter stringFromDate:timeComplete];
+    [self.endTimeLabel setText:[dateFormatter stringFromDate:timeComplete]];
 }
 
 
