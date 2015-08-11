@@ -31,6 +31,7 @@
 - (void) updatePercent {
     [super updatePercent];
     self.circleProgressView.progressLayer.percent = 1.0F; // percent insignificant
+    //[self.circleProgressView.progressLayer drawPathsForPercent];
 }
 
 /*

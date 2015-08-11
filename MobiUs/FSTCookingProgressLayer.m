@@ -168,6 +168,7 @@
 #pragma mark - Depicting Progress
 
 -(void)setPercent:(CGFloat)percent { // a setter that updates the layer's progress
+    _percent = percent; // need to set in this scope
     [self drawPathsForPercent];
 }
 

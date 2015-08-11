@@ -42,6 +42,7 @@
 - (void) updatePercent {
     [super updatePercent];
     self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMinTime];
+    //[self.circleProgressView.progressLayer drawPathsForPercent]; must be drawing since it changes
 }
 
 /*
