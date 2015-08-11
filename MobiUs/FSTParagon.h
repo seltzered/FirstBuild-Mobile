@@ -25,7 +25,7 @@ typedef enum {
     FSTParagonCookingStatePrecisionCookingReachingMinTime = 3,
     FSTParagonCookingStatePrecisionCookingReachingMaxTime = 4,
     FSTParagonCookingStatePrecisionCookingPastMaxTime = 5,
-    
+    FSTParagonCookingStatePrecisionCookingWithoutTime = 6,
     //direct cooking
     FSTParagonCookingDirectCooking,
     FSTParagonCookingDirectCookingWithTime
