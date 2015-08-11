@@ -19,8 +19,6 @@
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
-            <string>FSEmeric-Light</string>
-            <string>FSEmeric-Light</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Regular.otf">
             <string>FSEmeric</string>
@@ -1137,16 +1135,9 @@
                                     <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="24"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMZ-Ky-8Ov" userLabel="Italics Caption">
-                                <rect key="frame" x="215" y="543" width="169" height="21.5"/>
-                                <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Eho-uD-hb8" firstAttribute="height" secondItem="5hI-VW-2lv" secondAttribute="height" id="1cP-h5-t8f"/>
-                            <constraint firstItem="PEN-DM-b8U" firstAttribute="top" secondItem="GMZ-Ky-8Ov" secondAttribute="bottom" constant="35" id="5Sq-rg-NQH"/>
                             <constraint firstAttribute="centerX" secondItem="aMu-Ed-3Sd" secondAttribute="centerX" id="7yL-Cr-JeH"/>
                             <constraint firstAttribute="centerX" secondItem="Eho-uD-hb8" secondAttribute="centerX" id="ESz-nH-Y1s"/>
                             <constraint firstItem="we0-iW-tbm" firstAttribute="top" secondItem="K6k-Et-GaN" secondAttribute="bottom" constant="55" id="PpI-OQ-zw0"/>
@@ -1154,7 +1145,6 @@
                             <constraint firstAttribute="centerY" secondItem="Eho-uD-hb8" secondAttribute="centerY" id="XFN-OG-Zfc"/>
                             <constraint firstItem="we0-iW-tbm" firstAttribute="width" secondItem="5hI-VW-2lv" secondAttribute="width" id="fwt-CR-XiK"/>
                             <constraint firstAttribute="centerX" secondItem="we0-iW-tbm" secondAttribute="centerX" id="nt4-WK-n7a"/>
-                            <constraint firstAttribute="centerX" secondItem="GMZ-Ky-8Ov" secondAttribute="centerX" constant="0.5" id="u3s-8Y-6IA"/>
                             <constraint firstItem="Eho-uD-hb8" firstAttribute="width" secondItem="5hI-VW-2lv" secondAttribute="width" id="yf0-B3-Y1f"/>
                             <constraint firstItem="aMu-Ed-3Sd" firstAttribute="top" secondItem="K6k-Et-GaN" secondAttribute="bottom" constant="5" id="zXm-ZK-NcS"/>
                         </constraints>
@@ -2065,12 +2055,6 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAT-xO-FZZ" userLabel="Italics Caption">
-                                <rect key="frame" x="215" y="543" width="169" height="21.5"/>
-                                <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2080,8 +2064,6 @@
                             <constraint firstAttribute="centerX" secondItem="D50-Lk-9g7" secondAttribute="centerX" id="VKb-QY-1yS"/>
                             <constraint firstAttribute="centerY" secondItem="D50-Lk-9g7" secondAttribute="centerY" id="gqx-v5-1y2"/>
                             <constraint firstItem="D50-Lk-9g7" firstAttribute="width" secondItem="XyD-me-nRb" secondAttribute="width" id="heN-z7-Dhx"/>
-                            <constraint firstAttribute="centerX" secondItem="dAT-xO-FZZ" secondAttribute="centerX" id="p9T-CT-YPo"/>
-                            <constraint firstItem="1xL-lx-8Ll" firstAttribute="top" secondItem="dAT-xO-FZZ" secondAttribute="bottom" constant="35" id="uER-VE-zKQ"/>
                             <constraint firstAttribute="centerX" secondItem="6OI-EO-bj2" secondAttribute="centerX" id="vDC-nS-mwz"/>
                         </constraints>
                     </view>
@@ -2186,8 +2168,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9n-tW-qYt" userLabel="Italics Caption">
-                                <rect key="frame" x="215" y="543" width="169" height="21.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food can stay until" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9n-tW-qYt" userLabel="Italics Caption">
+                                <rect key="frame" x="229" y="543" width="141" height="21.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
