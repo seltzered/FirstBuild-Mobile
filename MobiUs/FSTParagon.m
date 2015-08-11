@@ -197,7 +197,8 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleElapsedTimeWritten
 {
-    [self determineCookMode];
+    CBCharacteristic* elapsedTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
+    [self.peripheral readValueForCharacteristic:elapsedTimeCharacteristic];
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
 }
 
@@ -303,7 +304,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         [self logParagon];
     }
-#endif 
+#endif
     
     
 } // end assignToProperty
@@ -343,8 +344,8 @@ __weak NSTimer* _readCharacteristicsTimer;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
         currentStage.cookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
+        [self determineCookMode];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
-        //NSLog(@"FSTCharacteristicElapsedTime %@", currentStage.cookTimeElapsed );
     }
 }
 
@@ -452,13 +453,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
     {
-        if (currentCookMode == FSTParagonCookingStatePrecisionCookingPreheating)
-        {
-            //since we are currently in preheating mode and the burner indicates
-            //that we reached we reached our preheating goal
-            self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
-        }
-        else if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
+        if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the maximum time
             self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
@@ -540,8 +535,9 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t maximumTime = OSReadBigInt16(bytes, 2);
         currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
         currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
+        [self determineCookMode];
+
     }
-    [self determineCookMode];
 }
 
 -(void)handleCurrentTemperature: (CBCharacteristic*)characteristic
