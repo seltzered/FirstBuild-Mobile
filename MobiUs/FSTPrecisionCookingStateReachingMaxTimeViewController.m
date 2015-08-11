@@ -53,7 +53,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate* timeComplete;
     
-    double timeRemaining = self.targetMaxTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
+    double timeRemaining = self.targetMaxTime - self.elapsedTime - self.targetMinTime; // starting from the min time requirement, the progress towards the max time.
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
     
