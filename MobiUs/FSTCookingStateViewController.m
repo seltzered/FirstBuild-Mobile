@@ -77,8 +77,9 @@
     [self updateLabels];
 }
 
--(void)targetTimeChanged:(NSTimeInterval)targetTime {
-    self.targetTime = targetTime;
+-(void)targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval) maxTime  {
+    self.targetMinTime = minTime;
+    self.targetMaxTime = maxTime;
     [self updatePercent];
     [self updateLabels];
 }

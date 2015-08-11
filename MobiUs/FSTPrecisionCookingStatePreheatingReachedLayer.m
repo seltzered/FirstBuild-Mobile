@@ -10,6 +10,11 @@
 
 @implementation FSTPrecisionCookingStatePreheatingReachedLayer
 
+-(void) layoutSublayers {
+    [super layoutSublayers];
+    [self drawPathsForPercent];
+    
+}
 -(void) drawPathsForPercent {
     [self drawCompleteTicks];// preheating complete
     self.progressLayer.strokeEnd = 0.0F;

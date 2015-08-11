@@ -14,11 +14,16 @@
 {
     self = [super init];
     if (self) {
-        //
+        // remove?
     }
     return self;
 }
 
+-(void) layoutSublayers {
+    [super layoutSublayers]; // establish all paths and their shape then lower the stroke
+    self.progressLayer.strokeEnd = 0.0F;
+    self.sittingLayer.strokeEnd = 0.0F;
+}
 -(void) drawPathsForPercent {
     CGFloat empty_tick_width = self.progressLayer.lineWidth/15;
     CGFloat full_tick_width = empty_tick_width*2; // define tick widths here

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTCookingProgressLayer.h"
+#import "FSTParagon.h"
 
 @interface FSTStageBarView : UIView
 
-//@property (nonatomic)  ProgressState circleState;
+@property (nonatomic)  ParagonCookMode circleState;
 
 @end

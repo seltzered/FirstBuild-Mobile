@@ -30,6 +30,7 @@ NSObject* _temperatureChangedObserver;
 NSObject* _timeElapsedChangedObserver;
 NSObject* _cookModeChangedObserver;
 NSObject* _targetTemperatureChangedObserver;
+NSObject* _cookTimeChangedObserver;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,6 +56,10 @@ NSObject* _targetTemperatureChangedObserver;
                                                   usingBlock:^(NSNotification *notification)
     {
        [weakSelf.delegate elapsedTimeChanged:[_currentCookingStage.cookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
+    }];
+    
+    _cookTimeChangedObserver = [center addObserverForName:FSTCookTimeSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification) {
+            [weakSelf.delegate targetTimeChanged:[_currentCookingStage.cookTimeMinimum doubleValue] withMax:[_currentCookingStage.cookTimeMaximum doubleValue]];
     }];
     
     _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
@@ -95,32 +100,41 @@ NSObject* _targetTemperatureChangedObserver;
         case FSTParagonCookingStatePrecisionCookingPreheating:
             stateIdentifier = @"preheatingStateSegue";
             weakSelf.continueButton.hidden = YES;
+            weakSelf.stageBar.hidden = NO;
             break;
         case FSTParagonCookingStatePrecisionCookingPreheatingReached:
             stateIdentifier = @"preheatingReachedStateSegue";
             self.continueButton.userInteractionEnabled = YES;
             weakSelf.continueButton.hidden = NO; // this should be hidden otherwise. What happens after it is pressed?
+            weakSelf.stageBar.hidden = NO;
             break;
         case FSTParagonCookingStatePrecisionCookingReachingMinTime:
             stateIdentifier = @"reachingMinStateSegue";
             weakSelf.continueButton.hidden = YES;
+            weakSelf.stageBar.hidden = NO;
             break;
         case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
             stateIdentifier = @"reachingMaxStateSegue";
             weakSelf.continueButton.hidden = YES;
+            weakSelf.stageBar.hidden = NO;
             break;
         case FSTParagonCookingStatePrecisionCookingPastMaxTime:
             stateIdentifier = @"pastMaxStateSegue";
             weakSelf.continueButton.hidden = YES;
+            weakSelf.stageBar.hidden = NO;
             break;
         case FSTParagonCookingStateOff:
             stateIdentifier = nil;
+            weakSelf.stageBar.hidden = YES;
             [self.navigationController popToRootViewControllerAnimated:NO];
             break;
         default:
+            weakSelf.stageBar.hidden = YES;
             stateIdentifier = nil;
             break;
     }
+    
+    weakSelf.stageBar.circleState = weakSelf.currentParagon.cookMode;
     
     if (stateIdentifier)
     {

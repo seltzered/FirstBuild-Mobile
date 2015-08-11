@@ -32,7 +32,7 @@
 
 - (void)updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetTime];
+    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMaxTime];
 }
 
 -(void) updateLabels {
@@ -52,7 +52,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate* timeComplete;
     
-    double timeRemaining = self.targetTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
+    double timeRemaining = self.targetMaxTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
     

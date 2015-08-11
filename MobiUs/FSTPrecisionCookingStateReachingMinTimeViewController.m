@@ -41,7 +41,7 @@
 
 - (void) updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetTime];
+    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMinTime];
 }
 
 /*
@@ -69,7 +69,7 @@
     double currentTemperature = self.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
     
-    double timeRemaining = self.targetTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
+    double timeRemaining = self.targetMinTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
     

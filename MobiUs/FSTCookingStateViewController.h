@@ -14,7 +14,9 @@
 
 @property (nonatomic) NSTimeInterval elapsedTime;
 
-@property (nonatomic) NSTimeInterval targetTime;
+@property (nonatomic) NSTimeInterval targetMinTime;
+
+@property (nonatomic) NSTimeInterval targetMaxTime;
 
 @property (nonatomic) CGFloat currentTemp;
 

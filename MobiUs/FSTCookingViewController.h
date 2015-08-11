@@ -16,8 +16,8 @@
 
 -(void) currentTemperatureChanged:(CGFloat)currentTemperature;
 -(void) targetTemperatureChanged:(CGFloat)targetTemperature;
--(void) elapsedTimeChanged:(NSTimeInterval)elapsedTime; // perhaps min and max times seperately might be useful (that way min and max time changing would only affect related classes)
--(void) targetTimeChanged:(NSTimeInterval)targetTime;
+-(void) elapsedTimeChanged:(NSTimeInterval)elapsedTime; 
+-(void) targetTimeChanged:(NSTimeInterval)minTime withMax: (NSTimeInterval) maxTime;
 
 @end
 
