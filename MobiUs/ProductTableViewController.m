@@ -343,6 +343,7 @@ NSIndexPath *_indexPathForDeletion;
         [productCell.batteryView setNeedsDisplay]; // redraw
         //Taken out since those properties were not connected
         
+        //TODO: use cookmode not burner mode
         // check paragon cook modes to update status label
         if (paragon.burnerMode == kPARAGON_PRECISION_PREHEATING)
         {
@@ -378,13 +379,12 @@ NSIndexPath *_indexPathForDeletion;
             productCell.disabledView.hidden = YES;
             productCell.arrowButton.hidden = NO;
             productCell.loadingProgressView.hidden = YES;
+            productCell.userInteractionEnabled = YES;
         }
-        //productCell.userInteractionEnabled = YES;
-       
     }
     else
     {
-        //productCell.userInteractionEnabled = NO;
+        productCell.userInteractionEnabled = NO;
         productCell.offlineLabel.text = @"offline";
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
