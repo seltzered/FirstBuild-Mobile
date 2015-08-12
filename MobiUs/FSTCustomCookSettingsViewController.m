@@ -75,7 +75,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
         [timeRow1 addObject:[NSString stringWithFormat:@"%i", ih]];
     }
     
-    for (int im = 1; im < 60; im++) { // temporarily starts at one, should keep 0:00 off limits in code
+    for (int im = 0; im < 60; im++) { // temporarily starts at one, should keep 0:00 off limits in code
         [timeRow2 addObject:[NSString stringWithFormat:@":%02i", im]];
     }
     
@@ -156,10 +156,16 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
         if (component == 0) {
                 return maxHourActual + 1; // includes everything throught the max hour selection
         } else if (component == 1) {
+            //NSInteger count;
             if (minHourIndex == maxHourActual) {
-                return maxMinuteActual + 1; // also causes a problem, maxMinuteActual does not update when the max wheel has selected
+                return maxMinuteActual + 1;
             } else {
-                return ((NSArray*)pickerTimeData[component]).count;
+                if (minHourIndex == 0) {
+                    return ((NSArray*)pickerTimeData[component]).count - 1;
+                    //return count - 1; // case where the minute 0 is excluded. always will be one less // problem was max minute actual is already one less than it seems in the 0 hour case
+                } else {
+                    return ((NSArray*)pickerTimeData[component]).count;
+                }
             }
         }
     } // end the minTimePicker condition
@@ -167,10 +173,16 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
         if (component == 0) {
             return ((NSArray*)pickerTimeData[component]).count - minHourIndex; // list only extends from current minimum index to the end
         } else if (component == 1) {
+            NSInteger count;
             if (minHourIndex == maxHourActual) { // if the hours are equal, ensure that users pick a greater minute index (so the max minutes will extend from min minute selection to the end)
-                return ((NSArray*)pickerTimeData[component]).count - minMinuteIndex;
+                count = ((NSArray*)pickerTimeData[component]).count - minMinuteIndex;
             } else {
-                return ((NSArray*)pickerTimeData[component]).count; // otherwise give them every minute
+                count = ((NSArray*)pickerTimeData[component]).count; // otherwise give them every minute
+            }
+            if (maxHourActual == 0) {
+                return count - 1;
+            } else {
+                return count;
             }
         }
     }
@@ -182,20 +194,31 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (pickerView == self.minPicker) {
-        //if (minHourIndex == 0 &&) {
-            return (NSString*)pickerTimeData[component][row];// offset max time data with minIndices
-    }
+        if (minHourIndex == 0 && component == 1) { // minutes in this exception
+                return (NSString*)pickerTimeData[component][row + 1]; // offset for the hidden 1 minute value
+        } else {
+            return (NSString*)pickerTimeData[component][row];// offset max time data with minIndice, this stays constant
+        }
+    } // end min picker case
     else if (pickerView == self.maxPicker) {
         if (component == 0) {
             return (NSString*)pickerTimeData[component][row + minHourIndex];
         } else { // assuming only two components for now
-            if (minHourIndex == maxHourActual) { // minutes must be greater or equal to the minPicker
-                return (NSString*)pickerTimeData[component][row + minMinuteIndex];
-            } else {
-                return (NSString*)pickerTimeData[component][row];
-            }
-        }
-    }
+                if (minHourIndex == maxHourActual) { // minutes must be greater or equal to the minPicker
+                    if (maxHourActual == 0) {// should hide zero minute
+                        return (NSString*)pickerTimeData[component][row + minMinuteIndex + 1]; // size should be one less
+                    } else {
+                        return (NSString*)pickerTimeData[component][row + minMinuteIndex];
+                    }
+                } else {
+                    if (maxHourActual == 0) { // probably cannot ever happen since min Hour is held below max Hour, so they would have to be equal
+                        return (NSString*)pickerTimeData[component][row + 1]; // offset by one to avoid showing the zero
+                    } else {
+                        return (NSString*)pickerTimeData[component][row];
+                    }
+                } // min hour different case
+        } // end component 1 case
+    } // end max picker case
     else {
         return (NSString*)pickerTemperatureData[row];//[[NSMutableAttributedString alloc] initWithString: pickerTemperatureData[row]attributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x00B5CC)}];
     }
@@ -208,6 +231,9 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
         if (component == 0) {
             minHourIndex = row;
             maxHourIndex = maxHourActual - minHourIndex; // subtract to offset to get its index on the picker scale
+            if (minHourIndex == 0 && minMinuteIndex >= ((NSMutableArray*)pickerTimeData[1]).count) { // past index for mintues
+                    minMinuteIndex--; // set it back down if it is one too high // ideally this shifts down or up if there is a transition between 0 and other rows (but be careful of shooting too low or high the other way)
+            }
             [self reloadData];
             [self.maxPicker selectRow:maxHourIndex inComponent:0 animated:NO]; // hour might need to update according to the changed range
             if ((maxHourActual == minHourIndex) && (minMinuteIndex > maxMinuteActual)) { // cases where the minute range went down below the current selection (label needs to update) (but only when the hours are equal so the range must change)
@@ -239,6 +265,10 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
                 }
             } else {
                 maxMinuteIndex = maxMinuteActual; // need to reset the selection to the current reading
+            }
+            if (maxHourActual == 0 && maxMinuteActual >= ((NSMutableArray*)pickerTimeData[1]).count - 1) { // needs to fall below the 1 through 59 index (runs 0 to 58)
+                    maxMinuteIndex--;
+                    maxMinuteActual--;
             }
             [self reloadData];
             [pickerView selectRow:maxMinuteIndex inComponent:1 animated:NO]; // update the selection in the minutes
@@ -336,10 +366,18 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
     // set all strings according to the picker data
     minHourString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[0][minHourIndex] attributes:labelFontDictionary];
-    minMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minMinuteIndex] attributes:labelFontDictionary];
+    if (minHourIndex == 0) { // minute offset case
+        minMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minMinuteIndex + 1] attributes:labelFontDictionary];
+    } else {
+        minMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minMinuteIndex] attributes:labelFontDictionary];
+    }
     maxHourString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[0][maxHourActual] attributes:labelFontDictionary];
     // nit to offset this according to the minMinute selection (I might set these strings in the selection block)
-    maxMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][maxMinuteActual] attributes:labelFontDictionary];
+    if (maxHourActual == 0) {
+        maxMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][maxMinuteActual + 1] attributes:labelFontDictionary];
+    } else {
+        maxMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][maxMinuteActual] attributes:labelFontDictionary];
+    }
     temperatureString = [[NSMutableAttributedString alloc] initWithString:pickerTemperatureData[tempIndex] attributes:labelFontDictionary];
     
     NSMutableAttributedString* farenheitString = [[NSMutableAttributedString alloc]initWithString:@"\u00b0 F" attributes:labelFontDictionary];
