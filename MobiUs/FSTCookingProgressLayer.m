@@ -73,6 +73,14 @@
         ((CAShapeLayer*)[self.markLayers objectForKey:key]).path = ninetyMark.CGPath;
         //CGPathAddPath(mutableTicks, nil, ninetyMark.CGPath);
     } // need a mutable copy
+    
+    UIBezierPath* startLinePath = [UIBezierPath bezierPath];
+    CGFloat startLength = 25;
+    
+    [startLinePath moveToPoint:CGPointMake(self.frame.size.width/2, self.frame.size.width/2 + self.frame.size.width/3 - startLength/2)]; // size relative to width
+    [startLinePath addLineToPoint:CGPointMake(self.frame.size.width/2, self.frame.size.width/2 + self.frame.size.width/3 + startLength/2)];
+    self.startLineLayer.path = startLinePath.CGPath;
+    self.startLineLayer.lineWidth = progress_width/7;
     NSArray* dashes = [NSArray arrayWithObjects:@(18),@(5), nil]; // for sitting dashed line
     self.sittingLayer.lineDashPattern = dashes; // 
    // self.temperatureTicks.path = mutableTicks; // change the current path to that mutable copy
@@ -123,9 +131,11 @@
         [self insertSublayer:newMark below:self.bottomLayer];//below:self]; // not working
         [self.markLayers setObject:newMark forKey:@(i)];
     }
-
+    self.startLineLayer = [CAShapeLayer layer];
+    self.startLineLayer.strokeColor = [UIColor lightGrayColor].CGColor; // starting line at top of circle
     [self addSublayer:self.progressLayer];
     [self insertSublayer:self.sittingLayer above:self.progressLayer];
+    [self insertSublayer:self.startLineLayer above:self.progressLayer];
     //[self addSublayer:_progressLayerEnd];
     //[self insertSublayer:self.textBackground above:self];
 
@@ -173,13 +183,6 @@
 }
 
 -(void)drawPathsForPercent { // should override this for each subclass
-       // case kReadyToCook:
-    /*[self drawCompleteTicks];// preheating complete
-    self.progressLayer.strokeEnd = 0.0F;
-    self.sittingLayer.strokeEnd = 0.0F;*/
-        //case kReachingMinimumTime:
-      
-        //case kReachingMaximumTime: // later
 
 }
 
@@ -191,11 +194,11 @@
         }
     } // all orange for completeness // better put this in a function,
 }
-
+/*
 - (void)setProgressColor:(UIColor *)progressColor { // perhaps get rid of this
     //self.progressLayer.strokeColor = progressColor.CGColor;
 }
-
+*/
 - (void)startAnimation {
     
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];

@@ -50,7 +50,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = UIColorFromRGB(0x00B5CC);
+    cell.backgroundColor = [UIColor whiteColor];//UIColorFromRGB(0x00B5CC);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,7 +74,7 @@
 }
 
 - (IBAction)revealToggle:(id)sender {
-         [self.revealViewController revealToggle:sender];
+    [self.revealViewController revealToggle:sender];
 }
 
 @end

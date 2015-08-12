@@ -581,7 +581,14 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="CWo-Xf-Hwj"/>
+                    <navigationItem key="navigationItem" id="CWo-Xf-Hwj">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="E47-m6-agp">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="addButtonClick:" destination="Uf1-wD-krg" id="AlU-bx-JBV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="loadingIndicator" destination="wtl-TS-6Zk" id="A1c-fM-4AO"/>
                         <outlet property="noProductsView" destination="2x5-UL-K7c" id="z7j-xS-SrB"/>
@@ -1053,13 +1060,14 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chillhub" id="9hq-ln-vqf">
+                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chillhub" id="9hq-ln-vqf">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9hq-ln-vqf" id="ye9-Rr-jFT">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_plus_bare" translatesAutoresizingMaskIntoConstraints="NO" id="HdR-AC-umU">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="HdR-AC-umU">
                                             <rect key="frame" x="-8" y="0.0" width="46" height="43"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="46" id="wwX-Ee-mre"/>
                                             </constraints>
@@ -1084,6 +1092,7 @@
                                         <constraint firstAttribute="centerY" secondItem="sOY-Ay-6O7" secondAttribute="centerY" id="beF-Np-GVe"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="cXR-UM-Ibc" kind="show" id="cPM-Uq-Uiz"/>
                                 </connections>
@@ -1093,8 +1102,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bR3-Vu-UYR" id="5BP-5i-T2q">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn_plus_bare" translatesAutoresizingMaskIntoConstraints="NO" id="beG-lO-DgU">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="beG-lO-DgU">
                                             <rect key="frame" x="-8" y="0.0" width="46" height="43"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="46" id="391-OB-KxV"/>
                                             </constraints>
@@ -1118,6 +1128,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="ImR-S6-nbe" secondAttribute="trailing" constant="32" id="xh6-Nz-Mzb"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="r3e-eo-PJC" kind="show" id="bxg-md-bOe"/>
                                 </connections>
@@ -1164,10 +1175,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Heart_Plussign_Large" width="59" height="51"/>
         <image name="Paragon_Logo_Red" width="778" height="197"/>
         <image name="Paragon_Mark_Red" width="341" height="340"/>
         <image name="White_bg_with_dots" width="640" height="1136"/>
-        <image name="btn_plus_bare" width="344" height="344"/>
         <image name="cell_chillhub_product" width="1217" height="463"/>
         <image name="icon_chevron_blue_right" width="28" height="47"/>
         <image name="reveal-icon" width="22" height="17"/>

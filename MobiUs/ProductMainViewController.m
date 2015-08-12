@@ -95,6 +95,7 @@ FSTParagonDisconnectedLabel* _warningLabel;
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
     [navigation setHeaderText:@"MY PRODUCTS" withFrameRect:CGRectMake(0, 0, 160, 40)]; // a bit larger for this text
     [navigation.navigationBar setBarTintColor:[UIColor blackColor]];
+    //self.addButton.width = 2;
 }
 
 -(void) dealloc
@@ -122,6 +123,10 @@ FSTParagonDisconnectedLabel* _warningLabel;
 
 - (IBAction)revealButtonClick:(id)sender {
     [self.revealViewController rightRevealToggle:sender];
+}
+
+- (IBAction)addButtonClick:(id)sender {
+    [self performSegueWithIdentifier:@"segueAddNewProduct" sender:self];
 }
 
 - (void) itemCountChanged: (NSUInteger)count
