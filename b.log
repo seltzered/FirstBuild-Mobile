@@ -1,0 +1,404 @@
+2015-08-05 18:47:38.733 FirstBuild[2084:456471] I restkit:RKLog.m:49 RestKit logging initialized...
+2015-08-05 18:47:38.967 FirstBuild[2084:456471] -[AppDelegate application:didFinishLaunchingWithOptions:] [Line 34] (
+    "PTSans-Narrow",
+    "PTSans-NarrowBold"
+)
+2015-08-05 18:47:39.179 FirstBuild[2084:456471] -[FSTBleCentralManager peripheralManagerDidUpdateState:] [Line 292] peripheralManagerDidUpdateState : <CBPeripheralManager: 0x1702b7f40>
+2015-08-05 18:47:39.186 FirstBuild[2084:456471] -[FSTBleCentralManager centralManagerDidUpdateState:] [Line 233] central powered on
+2015-08-05 18:47:39.187 FirstBuild[2084:456471] -[FSTBleCentralManager connectToSavedPeripheralWithUUID:] [Line 71] connecting to ... 94C4D5D3-E8FC-7D32-FA15-C95471F3DAD0
+2015-08-05 18:47:40.387 FirstBuild[2084:456471] -[FSTBleCentralManager centralManager:didConnectPeripheral:] [Line 247] peripheral connected... 94C4D5D3-E8FC-7D32-FA15-C95471F3DAD0
+2015-08-05 18:47:40.388 FirstBuild[2084:456471] __49-[ProductTableViewController configureBleDevices]_block_invoke62 [Line 136] discovering services for peripheral <__NSConcreteUUID 0x170227520> 94C4D5D3-E8FC-7D32-FA15-C95471F3DAD0
+2015-08-05 18:47:40.561 FirstBuild[2084:456471] -[FSTParagon peripheral:didDiscoverServices:] [Line 496] discovered services for peripheral <__NSConcreteUUID 0x170227520> 94C4D5D3-E8FC-7D32-FA15-C95471F3DAD0
+2015-08-05 18:47:40.566 FirstBuild[2084:456471] =======================================================================
+2015-08-05 18:47:40.567 FirstBuild[2084:456471] SERVICE 180A
+2015-08-05 18:47:40.567 FirstBuild[2084:456471]     CHARACTERISTIC 2A29
+2015-08-05 18:47:40.568 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.568 FirstBuild[2084:456471]     CHARACTERISTIC 2A27
+2015-08-05 18:47:40.569 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.570 FirstBuild[2084:456471] =======================================================================
+2015-08-05 18:47:40.570 FirstBuild[2084:456471] SERVICE 05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F
+2015-08-05 18:47:40.571 FirstBuild[2084:456471]     CHARACTERISTIC E7CDDD9D-DCAC-4D70-A0E1-D3B6DFEB5E4C
+2015-08-05 18:47:40.571 FirstBuild[2084:456471]         CAN WRITE
+2015-08-05 18:47:40.572 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.573 FirstBuild[2084:456471]     CHARACTERISTIC A1B9F907-D440-4278-97FE-0FBB4AEE93FD
+2015-08-05 18:47:40.574 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.575 FirstBuild[2084:456471]     CHARACTERISTIC 71B1A100-E3AE-46FF-BB0A-E37D0BA79496
+2015-08-05 18:47:40.577 FirstBuild[2084:456471]         CAN WRITE
+2015-08-05 18:47:40.578 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.579 FirstBuild[2084:456471]     CHARACTERISTIC 998142D1-658E-33E2-DFC0-32091E2354EC
+2015-08-05 18:47:40.579 FirstBuild[2084:456471]         CAN WRITE
+2015-08-05 18:47:40.580 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.581 FirstBuild[2084:456471]     CHARACTERISTIC C4510188-9062-4D28-97EF-4FB32FFE1AC5
+2015-08-05 18:47:40.581 FirstBuild[2084:456471]         CAN WRITE
+2015-08-05 18:47:40.582 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.582 FirstBuild[2084:456471]     CHARACTERISTIC 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0
+2015-08-05 18:47:40.583 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.585 FirstBuild[2084:456471]     CHARACTERISTIC A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7
+2015-08-05 18:47:40.586 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.586 FirstBuild[2084:456471]     CHARACTERISTIC 6B402ECC-3DDA-8BB4-9E42-F121D7E1CF69
+2015-08-05 18:47:40.587 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.587 FirstBuild[2084:456471]     CHARACTERISTIC 83D33E5C-68EA-4158-8655-1A2AC0313FF6
+2015-08-05 18:47:40.587 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.588 FirstBuild[2084:456471]     CHARACTERISTIC 5BCBF6B1-DE80-94B6-0F4B-99FB984707B6
+2015-08-05 18:47:40.588 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.589 FirstBuild[2084:456471] =======================================================================
+2015-08-05 18:47:40.589 FirstBuild[2084:456471] SERVICE E936877A-8DD0-FAA7-B648-F46ACDA1F27B
+2015-08-05 18:47:40.590 FirstBuild[2084:456471]     CHARACTERISTIC 318DB1F5-67F1-119B-6A41-1EECA0C744CE
+2015-08-05 18:47:40.590 FirstBuild[2084:456471]         CAN READ
+2015-08-05 18:47:40.620 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c000 00>
+2015-08-05 18:47:40.621 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:47:40.621 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:47:40.622 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:47:40.622 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:47:40.622 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:47:40.622 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:47:40.623 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:47:40.679 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD , notifying: true
+2015-08-05 18:47:40.741 FirstBuild[2084:456471] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <396c>
+2015-08-05 18:47:40.742 FirstBuild[2084:456471] FSTCharacteristicTargetTemperature: 147
+2015-08-05 18:47:40.799 FirstBuild[2084:456471] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 , notifying: true
+2015-08-05 18:47:40.959 FirstBuild[2084:456471] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0003>
+2015-08-05 18:47:40.960 FirstBuild[2084:456471] FSTCharacteristicElapsedTime 3
+2015-08-05 18:47:41.456 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <396f>
+2015-08-05 18:47:41.457 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:47:42.453 FirstBuild[2084:456471] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC , notifying: true
+2015-08-05 18:47:42.953 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:47:42.954 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:47:43.453 FirstBuild[2084:456471] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <004b00ff 00000000>
+2015-08-05 18:47:43.454 FirstBuild[2084:456471] FSTCharacteristicCookTime [min desired 0, max desired 0],  [min actual: 75, max actual: 255]
+2015-08-05 18:47:43.455 FirstBuild[2084:456471] characteristic A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7 changed value <1e>
+2015-08-05 18:47:43.456 FirstBuild[2084:456471] FSTCharacteristicBatteryLevel: 30
+2015-08-05 18:47:43.950 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3944>
+2015-08-05 18:47:43.951 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:47:44.450 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3944>
+2015-08-05 18:47:44.451 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:47:44.947 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:47:44.949 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:47:45.446 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 , notifying: true
+2015-08-05 18:47:45.447 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c300 00>
+2015-08-05 18:47:45.448 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:47:45.448 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:47:45.448 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:47:45.449 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:47:45.449 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:47:45.450 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:47:45.450 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:47:45.945 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <390d>
+2015-08-05 18:47:45.946 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:47:46.445 FirstBuild[2084:456471] characteristic A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7 changed value <1e>
+2015-08-05 18:47:46.446 FirstBuild[2084:456471] FSTCharacteristicBatteryLevel: 30
+2015-08-05 18:47:46.447 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38f1>
+2015-08-05 18:47:46.448 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:47.441 FirstBuild[2084:456471] characteristic A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7 , notifying: true
+2015-08-05 18:47:47.442 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c600 00>
+2015-08-05 18:47:47.443 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:47:47.443 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:47:47.443 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:47:47.444 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:47:47.444 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:47:47.445 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:47:47.445 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:47:47.939 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38e7>
+2015-08-05 18:47:47.940 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:48.440 FirstBuild[2084:456471] characteristic 6B402ECC-3DDA-8BB4-9E42-F121D7E1CF69 changed value <02>
+2015-08-05 18:47:48.442 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c600 00>
+2015-08-05 18:47:48.443 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:47:48.443 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:47:48.444 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:47:48.444 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:47:48.445 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:47:48.445 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:47:48.446 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:47:48.447 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38dd>
+2015-08-05 18:47:48.448 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:48.938 FirstBuild[2084:456471] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <396c>
+2015-08-05 18:47:48.939 FirstBuild[2084:456471] FSTCharacteristicTargetTemperature: 147
+2015-08-05 18:47:49.436 FirstBuild[2084:456471] characteristic 6B402ECC-3DDA-8BB4-9E42-F121D7E1CF69 , notifying: true
+2015-08-05 18:47:49.935 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38dd>
+2015-08-05 18:47:49.936 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:50.932 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38dd>
+2015-08-05 18:47:50.934 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:51.930 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38dd>
+2015-08-05 18:47:51.931 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:52.928 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38dd>
+2015-08-05 18:47:52.929 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:53.925 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38dd>
+2015-08-05 18:47:53.926 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:54.923 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38dd>
+2015-08-05 18:47:54.924 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:55.421 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38e7>
+2015-08-05 18:47:55.422 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:56.916 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <38f1>
+2015-08-05 18:47:56.917 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 145
+2015-08-05 18:47:57.414 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c500 00>
+2015-08-05 18:47:57.415 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:47:57.415 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:47:57.416 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:47:57.416 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:47:57.416 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:47:57.417 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:47:57.417 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:47:57.912 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <390d>
+2015-08-05 18:47:57.914 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:47:58.910 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:47:58.911 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:47:59.409 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c300 00>
+2015-08-05 18:47:59.410 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:47:59.410 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:47:59.411 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:47:59.411 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:47:59.411 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:47:59.412 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:47:59.412 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:47:59.907 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3944>
+2015-08-05 18:47:59.909 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:00.905 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3964>
+2015-08-05 18:48:00.906 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:01.403 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c000 00>
+2015-08-05 18:48:01.403 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:01.404 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:01.404 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:01.404 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:01.404 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:01.404 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:01.404 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:01.902 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3964>
+2015-08-05 18:48:01.902 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:02.400 FirstBuild[2084:456471] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0004>
+2015-08-05 18:48:02.401 FirstBuild[2084:456471] FSTCharacteristicElapsedTime 4
+2015-08-05 18:48:02.900 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <397a>
+2015-08-05 18:48:02.901 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:03.898 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <397a>
+2015-08-05 18:48:03.900 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:04.895 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <397a>
+2015-08-05 18:48:04.897 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:05.892 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <397a>
+2015-08-05 18:48:05.892 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:06.890 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3985>
+2015-08-05 18:48:06.890 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:07.888 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3985>
+2015-08-05 18:48:07.889 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:08.885 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3985>
+2015-08-05 18:48:08.887 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:09.882 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3985>
+2015-08-05 18:48:09.883 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:10.881 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3985>
+2015-08-05 18:48:10.882 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:11.877 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3985>
+2015-08-05 18:48:11.878 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:12.876 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3985>
+2015-08-05 18:48:12.877 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:13.872 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <397a>
+2015-08-05 18:48:13.873 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 147
+2015-08-05 18:48:14.870 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3964>
+2015-08-05 18:48:14.870 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:15.868 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:15.869 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:16.865 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <394e>
+2015-08-05 18:48:16.865 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:17.364 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c100 00>
+2015-08-05 18:48:17.364 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:17.364 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:17.364 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:17.364 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:17.365 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:17.365 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:17.365 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:17.863 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3944>
+2015-08-05 18:48:17.863 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:19.359 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3939>
+2015-08-05 18:48:19.361 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:19.362 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c100 00>
+2015-08-05 18:48:19.363 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:19.364 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:19.364 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:19.364 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:19.365 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:19.365 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:19.366 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:19.367 FirstBuild[2084:456471] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <396c>
+2015-08-05 18:48:19.367 FirstBuild[2084:456471] FSTCharacteristicTargetTemperature: 147
+2015-08-05 18:48:19.858 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:19.858 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:20.856 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:20.857 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:21.354 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c300 00>
+2015-08-05 18:48:21.355 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:21.355 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:21.355 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:21.355 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:21.355 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:21.356 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:21.356 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:21.853 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:21.854 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:22.850 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:22.851 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:23.849 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:23.850 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:24.845 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:24.846 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:25.843 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:25.844 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:26.841 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:26.843 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:27.838 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:27.839 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:28.836 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:28.836 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:29.834 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:29.835 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:30.831 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:30.832 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:31.828 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:31.829 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:32.826 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:32.827 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:33.824 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3939>
+2015-08-05 18:48:33.825 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:34.821 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3939>
+2015-08-05 18:48:34.823 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:35.319 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c200 00>
+2015-08-05 18:48:35.320 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:35.320 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:35.320 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:35.320 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:35.320 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:35.320 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:35.321 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:35.818 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3939>
+2015-08-05 18:48:35.819 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:36.816 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3939>
+2015-08-05 18:48:36.816 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:37.814 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3944>
+2015-08-05 18:48:37.816 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:38.811 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <394e>
+2015-08-05 18:48:38.811 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:39.310 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c100 00>
+2015-08-05 18:48:39.311 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:39.311 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:39.311 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:39.312 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:39.312 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:39.312 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:39.312 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:39.809 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <394e>
+2015-08-05 18:48:39.810 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:40.806 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <394e>
+2015-08-05 18:48:40.807 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:41.804 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:41.806 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:42.801 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:42.802 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:43.300 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c000 00>
+2015-08-05 18:48:43.300 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:43.300 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:43.300 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:43.301 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:43.301 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:43.301 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:43.301 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:43.798 FirstBuild[2084:456471] characteristic A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7 changed value <1f>
+2015-08-05 18:48:43.799 FirstBuild[2084:456471] FSTCharacteristicBatteryLevel: 31
+2015-08-05 18:48:43.799 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:43.800 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:44.797 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:44.797 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:45.794 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:45.794 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:46.791 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:46.792 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:47.789 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:47.790 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:48.288 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c000 00>
+2015-08-05 18:48:48.288 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:48.288 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:48.289 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:48.289 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:48.289 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:48.289 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:48.289 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:48.786 FirstBuild[2084:456471] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <396c>
+2015-08-05 18:48:48.787 FirstBuild[2084:456471] FSTCharacteristicTargetTemperature: 147
+2015-08-05 18:48:48.788 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:48.789 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:49.784 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3959>
+2015-08-05 18:48:49.784 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:50.782 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <394e>
+2015-08-05 18:48:50.783 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:51.280 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c100 00>
+2015-08-05 18:48:51.281 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:51.281 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:51.281 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:51.281 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:51.282 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:51.282 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:51.282 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:51.779 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3944>
+2015-08-05 18:48:51.779 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:52.777 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3944>
+2015-08-05 18:48:52.777 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:53.275 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c200 00>
+2015-08-05 18:48:53.276 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:53.276 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:53.276 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:53.276 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:53.276 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:53.276 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:53.277 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:53.774 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:53.775 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:54.772 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:54.772 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:55.270 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c300 00>
+2015-08-05 18:48:55.271 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:48:55.271 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:48:55.271 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:48:55.271 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:48:55.271 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:48:55.271 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:48:55.271 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:48:55.769 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:55.769 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:56.767 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <392e>
+2015-08-05 18:48:56.768 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:57.765 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:57.765 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:58.762 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:58.762 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:48:59.759 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:48:59.760 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:00.757 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3923>
+2015-08-05 18:49:00.757 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:01.754 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:01.755 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:02.253 FirstBuild[2084:456471] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0005>
+2015-08-05 18:49:02.253 FirstBuild[2084:456471] FSTCharacteristicElapsedTime 5
+2015-08-05 18:49:02.752 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:02.753 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:03.749 FirstBuild[2084:456471] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <0000c400 00>
+2015-08-05 18:49:03.750 FirstBuild[2084:456471] ================ BURNER STATUS CHANGED ====================
+2015-08-05 18:49:03.750 FirstBuild[2084:456471] burner 0 cookMode 0
+2015-08-05 18:49:03.750 FirstBuild[2084:456471] burner 1 cookMode 0
+2015-08-05 18:49:03.750 FirstBuild[2084:456471] burner 2 cookMode 3
+2015-08-05 18:49:03.750 FirstBuild[2084:456471] burner 3 cookMode 0
+2015-08-05 18:49:03.751 FirstBuild[2084:456471] burner 4 cookMode 0
+2015-08-05 18:49:03.751 FirstBuild[2084:456471] FSTCharacteristicBurnerStatus 3
+2015-08-05 18:49:03.751 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:03.752 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:04.747 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:04.748 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:05.745 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:05.746 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:06.743 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:06.743 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:07.740 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:07.740 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:08.738 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:08.739 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:09.735 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:09.735 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+2015-08-05 18:49:10.340 FirstBuild[2084:456471] selected (null)
+2015-08-05 18:49:10.732 FirstBuild[2084:456471] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3918>
+2015-08-05 18:49:10.735 FirstBuild[2084:456471] FSTCharacteristicCurrentTemperature 146
+
