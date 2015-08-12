@@ -18,6 +18,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define FBSDK_CANOPENURL_FACEBOOK @"fbauth2"
+#define FBSDK_CANOPENURL_MESSENGER @"fb-messenger-api"
+
 typedef NS_ENUM(int32_t, FBSDKUIKitVersion)
 {
   FBSDKUIKitVersion_6_0 = 0x0944,
@@ -60,6 +63,13 @@ typedef NS_ENUM(int32_t, FBSDKUIKitVersion)
  @param object The object to add to the array.
  */
 + (void)array:(NSMutableArray *)array addObject:(id)object;
+
+/*!
+ @abstract Returns bundle for returning localized strings
+ @discussion We assume a convention of a bundle named FBSDKStrings.bundle, otherwise we
+  return the main bundle.
+*/
++ (NSBundle *)bundleForStrings;
 
 /*!
  @abstract Converts simple value types to the string equivelant for serializing to a request query or body.
@@ -274,6 +284,12 @@ setJSONStringForObject:(id)object
  @abstract returns true if the url scheme is registered in the CFBundleURLTypes
  */
 + (BOOL)isRegisteredURLScheme:(NSString *)urlScheme;
+
+#pragma mark - FB Apps Installed
+
++ (BOOL)isFacebookAppInstalled;
++ (BOOL)isMessengerAppInstalled;
++ (void)checkRegisteredCanOpenURLScheme:(NSString *)urlScheme;
 
 #define FBSDKConditionalLog(condition, loggingBehavior, desc, ...) \
 { \

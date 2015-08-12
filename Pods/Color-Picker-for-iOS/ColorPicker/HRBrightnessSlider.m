@@ -36,9 +36,8 @@
     CAGradientLayer *_sliderLayer;
     NSNumber *_brightness;
     UIColor *_color;
-    NSNumber *_brightnessLowerLimit;
 
-    BOOL _needsToUpdateColor;
+    NSNumber *_brightnessLowerLimit;
 
     CGRect _controlFrame;
     CGRect _renderingFrame;
@@ -89,7 +88,6 @@
     _brightnessCursor = [[HRBrightnessCursor alloc] init];
     [self addSubview:_brightnessCursor];
 
-    _needsToUpdateColor = NO;
     self.backgroundColor = [UIColor clearColor];
 }
 
@@ -107,16 +105,13 @@
 }
 
 - (UIColor *)color {
-    if (_needsToUpdateColor) {
-        HRHSVColor hsvColor;
-        HSVColorFromUIColor(_color, &hsvColor);
-        hsvColor.v = _brightness.floatValue;
-        _color = [[UIColor alloc] initWithHue:hsvColor.h
-                                   saturation:hsvColor.s
-                                   brightness:hsvColor.v
-                                        alpha:1];
-    }
-    return _color;
+    HRHSVColor hsvColor;
+    HSVColorFromUIColor(_color, &hsvColor);
+    hsvColor.v = _brightness.floatValue;
+    return [[UIColor alloc] initWithHue:hsvColor.h
+                             saturation:hsvColor.s
+                             brightness:hsvColor.v
+                                  alpha:1];
 }
 
 - (void)setColor:(UIColor *)color {
@@ -125,7 +120,6 @@
     CGFloat brightness;
     [_color getHue:NULL saturation:NULL brightness:&brightness alpha:NULL];
     _brightness = @(brightness);
-    _needsToUpdateColor = YES;
 
     [self updateCursor];
 
@@ -146,7 +140,6 @@
 - (void)setBrightnessLowerLimit:(NSNumber *)brightnessLowerLimit {
     _brightnessLowerLimit = brightnessLowerLimit;
     [self updateCursor];
-    self.color = _color;
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)sender {

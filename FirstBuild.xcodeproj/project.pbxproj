@@ -131,11 +131,11 @@
 		5BFC3F871B66764B00A616D4 /* FSTRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC3F861B66764B00A616D4 /* FSTRevealViewController.m */; };
 		6743AE1F19E30E46000D9CF3 /* MobiNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6743AE1E19E30E46000D9CF3 /* MobiNavigationController.m */; };
 		67926FF919EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67926FF819EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf */; };
-		F260351313DF1394D6FCA9DD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B446C5B84ADBDC6A8F7CC7 /* libPods.a */; };
+		99EF3DC41F5C03279158245A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D09D3E714F461A55F66EB58 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		18B446C5B84ADBDC6A8F7CC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D09D3E714F461A55F66EB58 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		511A71601B5ED7C10015E4B5 /* ProductBatteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductBatteryView.h; sourceTree = "<group>"; };
 		511A71611B5ED7C10015E4B5 /* ProductBatteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductBatteryView.m; sourceTree = "<group>"; };
 		515340E71B3C31C60035DEBA /* FSTBleNamingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleNamingViewController.h; sourceTree = "<group>"; };
@@ -379,7 +379,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F260351313DF1394D6FCA9DD /* libPods.a in Frameworks */,
+				99EF3DC41F5C03279158245A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -889,7 +889,7 @@
 		CBE251472FAFD71676539304 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				18B446C5B84ADBDC6A8F7CC7 /* libPods.a */,
+				1D09D3E714F461A55F66EB58 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1216,6 +1216,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

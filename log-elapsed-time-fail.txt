@@ -1,0 +1,1025 @@
+2015-07-01 11:33:06.486 FirstBuild[2762:725836] I restkit:RKLog.m:49 RestKit logging initialized...
+2015-07-01 11:33:06.679 FirstBuild[2762:725836] -[AppDelegate application:didFinishLaunchingWithOptions:] [Line 34] (
+    "PTSans-Narrow",
+    "PTSans-NarrowBold"
+)
+2015-07-01 11:33:06.804 FirstBuild[2762:725836] -[FSTBleCentralManager peripheralManagerDidUpdateState:] [Line 287] peripheralManagerDidUpdateState : <CBPeripheralManager: 0x1700b1220>
+2015-07-01 11:33:06.930 FirstBuild[2762:725836] -[FSTBleCentralManager centralManagerDidUpdateState:] [Line 226] central powered on
+2015-07-01 11:33:09.644 FirstBuild[2762:725836] -[FSTBleCentralManager stopScanning] [Line 179] stop scanning...
+2015-07-01 11:33:09.653 FirstBuild[2762:725836] -[FSTBleCentralManager scanForDevicesWithServiceUUIDString:] [Line 159] scanning...
+2015-07-01 11:33:10.015 FirstBuild[2762:725836] __48-[FSTBleCommissioningViewController viewDidLoad]_block_invoke [Line 49] found a peripheral and was notified in ble commissioning 1CB6AB86-866A-42F6-DB44-A50E6174DE29
+2015-07-01 11:33:10.017 FirstBuild[2762:725836] __48-[FSTBleCommissioningViewController viewDidLoad]_block_invoke [Line 62] peripheral doesn't exist adding to table
+2015-07-01 11:33:10.024 FirstBuild[2762:725836] -[FSTBleCentralManager stopScanning] [Line 179] stop scanning...
+2015-07-01 11:33:14.245 FirstBuild[2762:725836] -[FSTBleCentralManager centralManager:didConnectPeripheral:] [Line 240] peripheral connected... 1CB6AB86-866A-42F6-DB44-A50E6174DE29
+2015-07-01 11:33:14.389 FirstBuild[2762:725836] -[FSTBleConnectingViewController peripheral:didDiscoverServices:] [Line 71] found device service
+2015-07-01 11:33:14.393 FirstBuild[2762:725836] Discovered characteristic <CBCharacteristic: 0x174288ca0, UUID = Manufacturer Name String, properties = 0x2, value = <47452041 70706c69 616e6365 73>, notifying = NO>
+2015-07-01 11:33:14.394 FirstBuild[2762:725836] Discovered characteristic <CBCharacteristic: 0x1742866d0, UUID = Hardware Revision String, properties = 0x2, value = <312e30>, notifying = NO>
+2015-07-01 11:33:14.456 FirstBuild[2762:725836] -[FSTBleCentralManager savePeripheral:havingUUIDString:withName:] [Line 110] device doesn't exist
+2015-07-01 11:33:14.496 FirstBuild[2762:725836] -[FSTParagon peripheral:didDiscoverServices:] [Line 260] discovered services for peripheral <__NSConcreteUUID 0x17003cf80> 1CB6AB86-866A-42F6-DB44-A50E6174DE29
+2015-07-01 11:33:14.502 FirstBuild[2762:725836] =======================================================================
+2015-07-01 11:33:14.502 FirstBuild[2762:725836] SERVICE 180A
+2015-07-01 11:33:14.502 FirstBuild[2762:725836]     CHARACTERISTIC 2A29
+2015-07-01 11:33:14.502 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.503 FirstBuild[2762:725836]     CHARACTERISTIC 2A27
+2015-07-01 11:33:14.503 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.503 FirstBuild[2762:725836] =======================================================================
+2015-07-01 11:33:14.504 FirstBuild[2762:725836] SERVICE 05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F
+2015-07-01 11:33:14.504 FirstBuild[2762:725836]     CHARACTERISTIC E7CDDD9D-DCAC-4D70-A0E1-D3B6DFEB5E4C
+2015-07-01 11:33:14.505 FirstBuild[2762:725836]         CAN WRITE
+2015-07-01 11:33:14.505 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.505 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.505 FirstBuild[2762:725836]     CHARACTERISTIC A1B9F907-D440-4278-97FE-0FBB4AEE93FD
+2015-07-01 11:33:14.505 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.506 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.506 FirstBuild[2762:725836]     CHARACTERISTIC 71B1A100-E3AE-46FF-BB0A-E37D0BA79496
+2015-07-01 11:33:14.506 FirstBuild[2762:725836]         CAN WRITE
+2015-07-01 11:33:14.507 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.508 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.508 FirstBuild[2762:725836]     CHARACTERISTIC 998142D1-658E-33E2-DFC0-32091E2354EC
+2015-07-01 11:33:14.508 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.509 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.509 FirstBuild[2762:725836]     CHARACTERISTIC C4510188-9062-4D28-97EF-4FB32FFE1AC5
+2015-07-01 11:33:14.509 FirstBuild[2762:725836]         CAN WRITE
+2015-07-01 11:33:14.510 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.510 FirstBuild[2762:725836]     CHARACTERISTIC 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0
+2015-07-01 11:33:14.510 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.510 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.511 FirstBuild[2762:725836]     CHARACTERISTIC A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7
+2015-07-01 11:33:14.511 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.513 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.513 FirstBuild[2762:725836]     CHARACTERISTIC 6B402ECC-3DDA-8BB4-9E42-F121D7E1CF69
+2015-07-01 11:33:14.513 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.513 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.514 FirstBuild[2762:725836]     CHARACTERISTIC 83D33E5C-68EA-4158-8655-1A2AC0313FF6
+2015-07-01 11:33:14.514 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.514 FirstBuild[2762:725836]     CHARACTERISTIC 5BCBF6B1-DE80-94B6-0F4B-99FB984707B6
+2015-07-01 11:33:14.514 FirstBuild[2762:725836]         CAN NOTIFY
+2015-07-01 11:33:14.515 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.536 FirstBuild[2762:725836] =======================================================================
+2015-07-01 11:33:14.536 FirstBuild[2762:725836] SERVICE 0DB95663-C52E-2FAC-2040-C276B2B63090
+2015-07-01 11:33:14.537 FirstBuild[2762:725836] =======================================================================
+2015-07-01 11:33:14.537 FirstBuild[2762:725836] SERVICE E936877A-8DD0-FAA7-B648-F46ACDA1F27B
+2015-07-01 11:33:14.537 FirstBuild[2762:725836]     CHARACTERISTIC 318DB1F5-67F1-119B-6A41-1EECA0C744CE
+2015-07-01 11:33:14.537 FirstBuild[2762:725836]         CAN READ
+2015-07-01 11:33:14.596 FirstBuild[2762:725836] characteristic Manufacturer Name String changed value <47452041 70706c69 616e6365 73>
+2015-07-01 11:33:14.656 FirstBuild[2762:725836] characteristic Hardware Revision String changed value <312e30>
+2015-07-01 11:33:15.061 FirstBuild[2762:725836] characteristic E7CDDD9D-DCAC-4D70-A0E1-D3B6DFEB5E4C changed value <00000000 0000>
+2015-07-01 11:33:16.057 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00810000 00>
+2015-07-01 11:33:16.057 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:33:17.056 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:18.056 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:19.052 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:33:19.429 FirstBuild[2762:725836] selected (null)
+2015-07-01 11:33:20.050 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <30cb>
+2015-07-01 11:33:21.046 FirstBuild[2762:725836] characteristic A74C3FB9-6E13-B4B9-CD47-465AAD76FCE7 changed value <64>
+2015-07-01 11:33:22.030 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 0
+2015-07-01 11:33:22.031 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 22
+2015-07-01 11:33:22.031 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 43.5
+2015-07-01 11:33:22.031 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 65.5
+2015-07-01 11:33:22.031 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 87.5
+2015-07-01 11:33:22.031 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 109.5
+2015-07-01 11:33:22.032 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 131
+2015-07-01 11:33:22.032 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 153
+2015-07-01 11:33:22.032 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 175
+2015-07-01 11:33:22.032 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 197
+2015-07-01 11:33:22.033 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 218.5
+2015-07-01 11:33:22.033 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 240.5
+2015-07-01 11:33:22.033 FirstBuild[2762:725836] -[FSTBeefSettingsViewController viewDidAppear:] [Line 94] originX 262.5
+2015-07-01 11:33:22.042 FirstBuild[2762:725836] characteristic 6B402ECC-3DDA-8BB4-9E42-F121D7E1CF69 changed value <02>
+2015-07-01 11:33:23.042 FirstBuild[2762:725836] characteristic 83D33E5C-68EA-4158-8655-1A2AC0313FF6 changed value <01550100 0000a302 1b7a7320>
+2015-07-01 11:33:24.040 FirstBuild[2762:725836] characteristic 5BCBF6B1-DE80-94B6-0F4B-99FB984707B6 changed value <00>
+2015-07-01 11:33:25.036 FirstBuild[2762:725836] characteristic 318DB1F5-67F1-119B-6A41-1EECA0C744CE changed value <05500100 0000>
+2015-07-01 11:33:26.034 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <30c2>
+2015-07-01 11:33:26.035 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:33:27.032 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:27.033 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature (null)
+2015-07-01 11:33:28.029 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:28.030 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:33:29.026 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00810000 00>
+2015-07-01 11:33:29.027 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:33:30.024 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:33:31.022 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <30c2>
+2015-07-01 11:33:31.023 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:33:32.019 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:32.020 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:33:33.017 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:33.018 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:33:34.014 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00810000 00>
+2015-07-01 11:33:34.015 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:33:35.013 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:33:36.010 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <30c2>
+2015-07-01 11:33:36.011 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:33:37.007 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:37.008 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:33:38.005 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:38.006 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:33:39.002 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00810000 00>
+2015-07-01 11:33:39.003 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:33:40.000 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:33:40.997 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <30c2>
+2015-07-01 11:33:40.999 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:33:41.995 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:41.996 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:33:42.993 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:42.994 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:33:43.990 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00810000 00>
+2015-07-01 11:33:43.991 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:33:44.988 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:33:45.986 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <30c2>
+2015-07-01 11:33:45.987 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:33:47.481 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:47.482 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:33:48.479 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:48.480 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:33:49.477 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 00>
+2015-07-01 11:33:49.478 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:33:50.474 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:33:51.970 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <30c2>
+2015-07-01 11:33:51.972 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:33:52.969 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:52.970 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:33:53.966 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:53.967 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:33:54.963 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 00>
+2015-07-01 11:33:54.964 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:33:55.961 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:33:57.956 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3089>
+2015-07-01 11:33:57.958 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:33:58.953 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:33:58.954 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:33:59.951 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:33:59.952 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:00.948 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 60>
+2015-07-01 11:34:00.961 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 1
+2015-07-01 11:34:01.946 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:02.944 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3071>
+2015-07-01 11:34:02.948 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:34:03.941 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:34:03.943 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:04.938 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:04.940 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:05.936 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 73>
+2015-07-01 11:34:05.937 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:07.432 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:08.431 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3028>
+2015-07-01 11:34:08.434 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 123
+2015-07-01 11:34:09.428 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <37dc>
+2015-07-01 11:34:09.430 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:10.426 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:10.427 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:11.423 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 73>
+2015-07-01 11:34:11.424 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:12.422 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:14.417 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2fcf>
+2015-07-01 11:34:14.421 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 122
+2015-07-01 11:34:15.413 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:15.414 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:16.411 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:16.412 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:17.408 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 73>
+2015-07-01 11:34:17.409 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:18.406 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:19.404 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2f97>
+2015-07-01 11:34:19.407 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 121
+2015-07-01 11:34:20.402 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:20.403 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:21.398 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:21.399 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:22.396 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 73>
+2015-07-01 11:34:22.397 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:23.393 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:24.390 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2f66>
+2015-07-01 11:34:24.392 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 121
+2015-07-01 11:34:25.389 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:25.390 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:26.387 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:26.388 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:27.383 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 73>
+2015-07-01 11:34:27.384 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:28.381 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:29.378 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2f3d>
+2015-07-01 11:34:29.382 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 120
+2015-07-01 11:34:30.376 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:30.377 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:31.374 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:31.376 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:32.372 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 00>
+2015-07-01 11:34:32.374 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:33.369 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:34.366 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2f14>
+2015-07-01 11:34:34.368 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 120
+2015-07-01 11:34:35.364 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:35.365 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:36.362 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:36.363 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:37.359 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 00>
+2015-07-01 11:34:37.361 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:38.356 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:39.354 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2ef4>
+2015-07-01 11:34:39.355 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 120
+2015-07-01 11:34:40.352 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:40.353 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:41.349 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:41.350 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:42.347 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 00>
+2015-07-01 11:34:42.348 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:43.344 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:44.342 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2edb>
+2015-07-01 11:34:44.348 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 119
+2015-07-01 11:34:45.339 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:45.340 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:46.337 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:46.338 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:47.335 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 00>
+2015-07-01 11:34:47.336 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:48.333 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:49.329 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2e09>
+2015-07-01 11:34:49.333 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 117
+2015-07-01 11:34:50.327 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:50.328 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:51.325 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:51.326 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:52.322 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 00>
+2015-07-01 11:34:52.323 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:34:53.320 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:54.318 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2c99>
+2015-07-01 11:34:54.321 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 114
+2015-07-01 11:34:55.315 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:34:55.316 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:34:56.312 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:34:56.313 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:34:57.310 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 60>
+2015-07-01 11:34:57.311 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 1
+2015-07-01 11:34:58.307 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:34:59.305 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2cb0>
+2015-07-01 11:34:59.307 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 114
+2015-07-01 11:35:00.306 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:00.307 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:01.300 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:01.301 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:02.298 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 f3>
+2015-07-01 11:35:02.299 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 2
+2015-07-01 11:35:03.295 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:04.293 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2cb0>
+2015-07-01 11:35:04.294 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 114
+2015-07-01 11:35:05.291 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:05.292 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:06.288 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:06.289 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:07.286 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 f3>
+2015-07-01 11:35:07.287 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 2
+2015-07-01 11:35:08.283 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:09.280 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2de8>
+2015-07-01 11:35:09.284 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 117
+2015-07-01 11:35:10.280 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:10.281 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:11.278 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:11.279 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:12.274 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 f3>
+2015-07-01 11:35:12.275 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 2
+2015-07-01 11:35:13.270 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:14.269 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <2f86>
+2015-07-01 11:35:14.272 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 121
+2015-07-01 11:35:15.266 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:15.267 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:16.264 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:16.265 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:17.262 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 f3>
+2015-07-01 11:35:17.263 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 2
+2015-07-01 11:35:18.258 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:19.256 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3089>
+2015-07-01 11:35:19.260 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 124
+2015-07-01 11:35:20.254 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:20.256 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:21.249 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:21.250 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:22.250 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 f2>
+2015-07-01 11:35:22.251 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 2
+2015-07-01 11:35:23.244 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:24.242 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <31ca>
+2015-07-01 11:35:24.246 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 127
+2015-07-01 11:35:25.238 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:25.240 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:26.237 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:26.240 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:27.235 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 f0>
+2015-07-01 11:35:27.236 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 2
+2015-07-01 11:35:28.235 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:29.232 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3368>
+2015-07-01 11:35:29.236 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 131
+2015-07-01 11:35:30.226 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:30.227 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:31.224 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:31.225 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:32.222 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 e4>
+2015-07-01 11:35:32.223 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:35:33.223 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:34.217 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3543>
+2015-07-01 11:35:34.221 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 136
+2015-07-01 11:35:35.214 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:35.215 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:36.212 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:36.213 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:37.209 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:35:37.221 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:35:38.205 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:39.204 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <35bf>
+2015-07-01 11:35:39.206 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 137
+2015-07-01 11:35:40.202 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:40.203 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:41.200 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:41.202 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:42.198 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:35:42.199 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:35:43.195 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:44.691 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <358f>
+2015-07-01 11:35:44.693 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 137
+2015-07-01 11:35:45.688 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:45.690 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:46.686 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:46.687 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:47.686 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:35:47.687 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:35:48.679 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:49.677 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <355f>
+2015-07-01 11:35:49.683 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 136
+2015-07-01 11:35:50.678 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:50.679 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:51.674 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:51.676 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:52.673 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:35:52.674 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:35:53.669 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:35:54.671 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3539>
+2015-07-01 11:35:54.676 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 136
+2015-07-01 11:35:55.666 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:35:55.667 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:35:56.662 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:35:56.663 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:35:57.659 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:35:57.660 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:35:58.657 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <0000>
+2015-07-01 11:36:00.654 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <351c>
+2015-07-01 11:36:00.658 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 135
+2015-07-01 11:36:01.650 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:01.651 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:02.647 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:02.649 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:03.645 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:03.646 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:04.642 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:05.641 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <350a>
+2015-07-01 11:36:05.646 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 135
+2015-07-01 11:36:06.637 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:06.638 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:07.636 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:07.637 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:08.633 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:08.634 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:09.631 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:10.628 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34ef>
+2015-07-01 11:36:10.632 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 135
+2015-07-01 11:36:11.628 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:11.629 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:12.623 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:12.624 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:13.621 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:13.622 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:14.619 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:15.616 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34d4>
+2015-07-01 11:36:15.620 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 135
+2015-07-01 11:36:16.614 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:16.615 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:17.611 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:17.612 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:18.609 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:18.610 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:19.605 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:20.604 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34a7>
+2015-07-01 11:36:20.608 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:36:21.600 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:21.601 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:22.599 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:22.601 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:23.596 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:23.597 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:24.594 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:25.591 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3482>
+2015-07-01 11:36:25.595 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:36:26.588 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:26.590 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:27.586 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:27.588 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:28.585 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:28.586 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:29.581 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:30.580 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3470>
+2015-07-01 11:36:30.584 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:36:31.576 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:31.577 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:32.574 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0100>
+2015-07-01 11:36:32.575 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 256
+2015-07-01 11:36:33.572 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:33.573 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:34.570 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:35.566 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <345e>
+2015-07-01 11:36:35.575 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:36:36.564 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:36.565 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:37.562 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0100>
+2015-07-01 11:36:37.564 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 256
+2015-07-01 11:36:38.559 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:38.560 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:39.557 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:40.555 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3439>
+2015-07-01 11:36:40.559 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:36:41.552 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:41.553 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:42.549 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:42.550 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:43.547 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:36:43.548 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:44.545 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:45.542 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3430>
+2015-07-01 11:36:45.550 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:36:46.540 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:46.541 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:47.536 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:47.538 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:48.535 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:36:48.536 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:49.532 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:50.530 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3430>
+2015-07-01 11:36:50.535 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:36:51.529 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:51.530 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:52.525 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:52.526 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:53.522 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:36:53.523 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:54.520 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:36:55.517 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3442>
+2015-07-01 11:36:55.521 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:36:56.515 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:36:56.516 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:36:57.512 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:36:57.513 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:36:58.511 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:36:58.512 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:36:59.507 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:00.505 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3470>
+2015-07-01 11:37:00.509 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:37:01.503 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:01.504 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:02.501 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:02.503 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:03.498 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:03.500 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:04.495 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:05.493 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3470>
+2015-07-01 11:37:05.499 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:37:06.491 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:06.492 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:07.488 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:07.490 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:08.485 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:08.487 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:09.484 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:10.480 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3470>
+2015-07-01 11:37:10.484 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:37:11.478 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:11.480 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:12.476 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:12.477 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:13.473 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:13.474 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:14.470 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:15.468 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <344b>
+2015-07-01 11:37:15.472 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:37:16.466 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:16.467 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:17.463 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:17.465 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:18.461 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:18.462 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:19.459 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:20.461 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3430>
+2015-07-01 11:37:20.465 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:37:21.454 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:21.456 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:22.451 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:22.452 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:23.449 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:37:23.451 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:24.447 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:25.444 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <340c>
+2015-07-01 11:37:25.449 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:37:26.441 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:26.443 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:27.439 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:27.441 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:28.436 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:37:28.438 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:29.434 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:30.432 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <340c>
+2015-07-01 11:37:30.436 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:37:31.431 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:31.433 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:32.426 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:32.427 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:33.425 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:37:33.426 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:34.422 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:35.421 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <344b>
+2015-07-01 11:37:35.425 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:37:36.417 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:36.419 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:37.415 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:37.416 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:38.412 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:38.414 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:39.411 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:40.407 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3495>
+2015-07-01 11:37:40.412 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:37:41.405 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:41.407 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:42.402 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:42.403 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:43.400 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:43.401 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:44.397 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:45.395 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3495>
+2015-07-01 11:37:45.400 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:37:46.392 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:46.393 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:47.390 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:47.392 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:48.387 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:48.388 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:49.883 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:50.882 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3479>
+2015-07-01 11:37:50.886 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:37:51.879 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:51.880 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:52.877 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:52.878 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:54.373 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:54.374 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:37:55.370 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:37:56.368 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <345e>
+2015-07-01 11:37:56.373 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:37:57.365 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:37:57.367 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:37:58.363 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:37:58.365 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:37:59.360 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:37:59.361 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:00.358 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:01.355 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3430>
+2015-07-01 11:38:01.359 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:38:02.353 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:02.355 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:03.351 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:03.352 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:04.349 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:38:04.350 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:05.346 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:06.343 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:38:06.348 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:38:07.340 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:07.341 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:08.336 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:08.337 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:09.333 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:38:09.335 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:10.330 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:11.328 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:38:11.332 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:38:12.325 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:12.327 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:13.822 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:13.823 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:14.820 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:38:14.821 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:15.817 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:16.814 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3455>
+2015-07-01 11:38:16.819 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:38:17.812 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:17.813 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:18.810 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:18.811 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:19.807 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:38:19.808 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:20.805 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:21.805 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34b9>
+2015-07-01 11:38:21.809 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:38:22.800 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:22.801 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:23.797 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:23.798 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:24.795 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:38:24.796 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:25.792 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:26.790 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34c2>
+2015-07-01 11:38:26.795 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 135
+2015-07-01 11:38:27.787 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:27.789 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:28.785 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:28.787 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:29.783 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:38:29.784 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:30.780 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:31.779 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34b9>
+2015-07-01 11:38:31.783 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:38:32.775 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:32.777 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:33.773 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:33.775 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:34.770 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:38:34.773 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:35.768 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:36.766 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <349e>
+2015-07-01 11:38:36.771 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:38:37.764 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:37.765 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:38.762 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:38.763 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:39.758 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:38:39.759 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:40.756 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:41.753 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3482>
+2015-07-01 11:38:41.757 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:38:42.751 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:42.752 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:43.749 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:43.750 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:44.746 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:38:44.747 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:45.743 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:46.741 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3455>
+2015-07-01 11:38:46.745 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:38:47.739 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:47.740 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:48.737 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:48.738 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:49.735 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 41>
+2015-07-01 11:38:49.736 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 0
+2015-07-01 11:38:50.731 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:51.728 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3427>
+2015-07-01 11:38:51.733 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:38:52.726 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:52.727 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:53.724 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:53.725 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:54.722 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:38:54.723 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:38:55.720 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:38:56.716 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:38:56.720 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:38:57.714 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:38:57.715 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:38:58.712 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:38:58.713 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:38:59.710 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:38:59.711 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:00.707 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:01.706 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:39:01.710 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:39:02.701 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:02.703 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:03.700 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:03.701 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:04.697 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:39:04.698 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:05.695 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:06.692 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3430>
+2015-07-01 11:39:06.697 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:39:07.690 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:07.691 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:08.687 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:08.688 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:09.685 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c1>
+2015-07-01 11:39:09.686 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:10.682 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:11.680 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3467>
+2015-07-01 11:39:11.684 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:39:12.677 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:12.678 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:14.173 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:14.175 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:15.171 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:39:15.172 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:16.168 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:17.166 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <349e>
+2015-07-01 11:39:17.170 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:39:18.163 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:18.164 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:19.161 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:19.162 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:20.159 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:39:20.160 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:21.156 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:22.154 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <349e>
+2015-07-01 11:39:22.158 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:39:23.152 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:23.153 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:24.149 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:24.150 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:25.146 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:39:25.147 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:26.144 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:27.141 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <349e>
+2015-07-01 11:39:27.146 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:39:28.140 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:28.141 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:29.137 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:29.138 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:30.134 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:39:30.136 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:31.131 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:32.130 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <349e>
+2015-07-01 11:39:32.134 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:39:33.626 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:33.627 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:34.623 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:34.625 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:35.621 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:39:35.622 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:36.618 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:37.616 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3470>
+2015-07-01 11:39:37.621 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:39:38.613 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:38.614 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:39.612 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:39.613 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:40.608 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:39:40.609 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:41.606 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:42.604 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <344b>
+2015-07-01 11:39:42.608 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:39:43.601 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:43.603 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:44.599 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:44.600 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:45.597 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:39:45.598 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:46.594 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:47.592 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:39:47.596 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:39:48.589 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:48.590 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:49.587 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:49.588 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:50.584 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:39:50.586 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:51.584 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:52.579 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <340c>
+2015-07-01 11:39:52.583 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:39:53.577 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:53.578 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:39:54.574 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:39:54.576 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:39:55.571 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:39:55.572 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:39:56.570 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:39:57.567 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <340c>
+2015-07-01 11:39:57.571 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:39:59.063 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:39:59.065 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:00.061 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:00.062 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:01.059 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c1>
+2015-07-01 11:40:01.060 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:02.056 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:03.054 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3470>
+2015-07-01 11:40:03.059 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:04.051 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:04.052 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:05.049 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:05.050 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:06.048 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:06.049 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:07.045 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:08.042 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34b9>
+2015-07-01 11:40:08.047 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:09.038 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:09.039 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:10.535 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:10.536 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:11.533 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:11.534 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:12.531 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:13.528 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34b9>
+2015-07-01 11:40:13.533 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:14.526 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:14.527 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:15.522 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:15.524 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:16.521 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:16.522 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:17.518 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:18.516 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34b9>
+2015-07-01 11:40:18.520 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:19.513 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:19.515 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:20.510 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:20.511 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:21.508 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:21.509 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:22.506 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:23.503 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34b9>
+2015-07-01 11:40:23.507 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:24.501 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:24.502 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:25.498 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:25.499 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:26.496 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:26.497 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:27.493 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:28.491 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34b0>
+2015-07-01 11:40:28.495 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:29.489 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:29.490 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:30.486 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:30.487 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:31.485 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:31.486 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:32.481 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:33.479 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3482>
+2015-07-01 11:40:33.483 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:34.476 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:34.477 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:35.475 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:35.476 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:36.472 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:36.473 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:37.470 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:38.466 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3470>
+2015-07-01 11:40:38.471 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:39.464 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:39.465 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:40.461 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:40.462 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:41.460 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:41.461 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:42.456 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:43.454 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <345e>
+2015-07-01 11:40:43.458 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:40:44.452 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:44.453 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:45.449 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:45.450 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:46.447 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:46.448 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:47.444 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:48.941 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <344b>
+2015-07-01 11:40:48.946 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:40:49.938 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:49.939 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:50.936 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:50.938 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:51.933 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:40:51.934 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:52.931 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:53.927 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3427>
+2015-07-01 11:40:53.931 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:40:54.926 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:54.927 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:40:55.920 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:40:55.921 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:40:56.918 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:40:56.919 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:40:57.915 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:40:58.913 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:40:58.918 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:40:59.910 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:40:59.911 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:00.907 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:00.909 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:01.906 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:41:01.907 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:02.903 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:03.902 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:41:03.906 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:41:04.898 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:04.899 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:05.896 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:05.898 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:06.893 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c1>
+2015-07-01 11:41:06.894 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:07.891 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:08.888 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3467>
+2015-07-01 11:41:08.892 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:41:09.886 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:09.887 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:10.883 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:10.884 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:11.880 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:41:11.882 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:12.879 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:13.876 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34a7>
+2015-07-01 11:41:13.880 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:41:14.874 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:14.875 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:15.871 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:15.873 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:16.868 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:41:16.869 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:17.866 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:18.864 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <34a7>
+2015-07-01 11:41:18.869 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:41:19.861 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:19.862 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:20.860 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:20.861 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:21.857 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:41:21.859 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:22.856 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:23.852 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <348c>
+2015-07-01 11:41:23.856 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:41:24.849 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:24.850 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:25.846 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:25.847 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:26.845 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:41:26.846 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:27.842 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:28.839 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3479>
+2015-07-01 11:41:28.843 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:41:29.837 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:29.838 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:30.834 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:30.836 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:31.832 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:41:31.833 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:32.830 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:33.827 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3442>
+2015-07-01 11:41:33.832 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:41:34.824 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:34.825 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:35.822 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:35.824 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:36.819 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:41:36.820 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:37.818 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:38.815 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3427>
+2015-07-01 11:41:38.820 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:41:39.814 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:39.815 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:40.810 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:40.811 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:41.808 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:41:41.809 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:42.805 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:43.804 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <341e>
+2015-07-01 11:41:43.808 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:41:44.800 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:44.802 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:45.798 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:45.799 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:46.795 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c3>
+2015-07-01 11:41:46.796 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:47.793 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:48.790 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3430>
+2015-07-01 11:41:48.795 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:41:49.787 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:49.789 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:50.785 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:50.786 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:51.783 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c2>
+2015-07-01 11:41:51.784 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:52.781 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:53.778 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3442>
+2015-07-01 11:41:53.782 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 133
+2015-07-01 11:41:54.776 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:54.777 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:41:55.773 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:41:55.774 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:41:56.771 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:41:56.772 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:41:57.768 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:41:58.766 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3482>
+2015-07-01 11:41:58.771 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:41:59.764 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:41:59.765 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:42:00.762 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:42:00.763 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:42:01.758 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:42:01.759 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:42:02.756 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:42:03.754 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3482>
+2015-07-01 11:42:03.758 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:42:04.752 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:42:04.753 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:42:05.749 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:42:05.751 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+2015-07-01 11:42:06.746 FirstBuild[2762:725836] characteristic A1B9F907-D440-4278-97FE-0FBB4AEE93FD changed value <00000000 c0>
+2015-07-01 11:42:06.747 FirstBuild[2762:725836] FSTCharacteristicBurnerStatus 3
+2015-07-01 11:42:07.744 FirstBuild[2762:725836] characteristic C4510188-9062-4D28-97EF-4FB32FFE1AC5 changed value <00bb>
+2015-07-01 11:42:08.741 FirstBuild[2762:725836] characteristic 8F080B1C-7C3B-FBB9-584A-F0AFD57028F0 changed value <3482>
+2015-07-01 11:42:08.745 FirstBuild[2762:725836] FSTCharacteristicCurrentTemperature 134
+2015-07-01 11:42:09.739 FirstBuild[2762:725836] characteristic 71B1A100-E3AE-46FF-BB0A-E37D0BA79496 changed value <3458>
+2015-07-01 11:42:09.740 FirstBuild[2762:725836] FSTCharacteristicTargetTemperature 134.5
+2015-07-01 11:42:10.737 FirstBuild[2762:725836] characteristic 998142D1-658E-33E2-DFC0-32091E2354EC changed value <0000>
+2015-07-01 11:42:10.738 FirstBuild[2762:725836] FSTCharacteristicElapsedTime 0
+
