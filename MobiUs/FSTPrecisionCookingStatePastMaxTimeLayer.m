@@ -10,9 +10,17 @@
 
 @implementation FSTPrecisionCookingStatePastMaxTimeLayer
 
+- (void)layoutSublayers {
+    [super layoutSublayers];
+    [self drawCompleteTicks];
+    self.progressLayer.strokeEnd = 1.0F;
+    self.sittingLayer.strokeEnd = 1.0F;
+}
+
 -(void)drawPathsForPercent {
     [self drawCompleteTicks];
     self.progressLayer.strokeEnd = 1.0F;
     self.sittingLayer.strokeEnd = 1.0F;
+    // might as well just be empty
 }
 @end

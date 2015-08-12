@@ -16,6 +16,7 @@
     self.progressLayer.strokeEnd = 1.0F;
     self.sittingLayer.strokeEnd = 0.0F;
 }
+
 - (void)drawPathsForPercent {
     [self drawCompleteTicks];
     self.progressLayer.strokeEnd = 1.0F; // complete

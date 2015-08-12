@@ -90,6 +90,12 @@
     [self updateLabels];
 }
 
+-(void)burnerLevelChanged:(CGFloat)burnerLevel {
+    self.burnerLevel = burnerLevel;
+    [self updatePercent];
+    [self updateLabels];
+}
+
 /*
 #pragma mark - Navigation
 

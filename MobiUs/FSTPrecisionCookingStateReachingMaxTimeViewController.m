@@ -32,8 +32,7 @@
 
 - (void)updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMaxTime];
-    //[self.circleProgressView.progressLayer drawPathsForPercent];
+    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMaxTime] - [self calculatePercent:self.targetMinTime toTime:self.targetMaxTime]; // get overall progress to max time and subtract the portion taken up by min time
 }
 
 -(void) updateLabels {
@@ -53,7 +52,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate* timeComplete;
     
-    double timeRemaining = self.targetMaxTime - self.elapsedTime - self.targetMinTime; // starting from the min time requirement, the progress towards the max time.
+    double timeRemaining = self.targetMaxTime - self.elapsedTime; // starting from the min time requirement, the progress towards the max time.
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
     

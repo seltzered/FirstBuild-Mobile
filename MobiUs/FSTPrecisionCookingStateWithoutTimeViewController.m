@@ -30,7 +30,7 @@
 
 - (void) updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = 1.0F;
+    self.circleProgressView.progressLayer.percent = self.burnerLevel;
 }
 
 - (void) updateLabels {
