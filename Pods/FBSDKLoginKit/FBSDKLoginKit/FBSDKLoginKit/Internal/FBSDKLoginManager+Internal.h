@@ -33,7 +33,7 @@
 
 @interface FBSDKLoginManager ()
 
-- (void)completeAuthentication:(FBSDKLoginCompletionParameters *)parameters;
+- (void)completeAuthentication:(FBSDKLoginCompletionParameters *)parameters expectChallenge:(BOOL)expectChallenge;
 
 // available to internal types to trigger login without checking read/publish mixtures.
 - (void)logInWithPermissions:(NSSet *)permissions handler:(FBSDKLoginManagerRequestTokenHandler)handler;
@@ -48,14 +48,16 @@
 - (void)setHandler:(FBSDKLoginManagerRequestTokenHandler)handler;
 // for testing only
 - (void)setRequestedPermissions:(NSSet *)requestedPermissions;
+// for testing only
+- (NSString *)loadExpectedChallenge;
 
 @end
 
 // the category is made available for testing only
 @interface FBSDKLoginManager (Native) <FBSDKURLOpening>
 
-- (BOOL)performNativeLogInWithParameters:(NSDictionary *)loginParams error:(NSError **)error;
-- (BOOL)performBrowserLogInWithParameters:(NSDictionary *)loginParams error:(NSError **)error;
+- (void)performNativeLogInWithParameters:(NSDictionary *)loginParams handler:(void(^)(BOOL, NSError*))handler;
+- (void)performBrowserLogInWithParameters:(NSDictionary *)loginParams handler:(void(^)(BOOL, NSError*))handler;
 
 @end
 
@@ -73,6 +75,6 @@
 // the category is made available for testing only
 @interface FBSDKLoginManager (WebDialog) <FBSDKWebDialogDelegate>
 
-- (BOOL)performWebLogInWithParameters:(NSDictionary *)loginParams;
+- (void)performWebLogInWithParameters:(NSDictionary *)loginParams handler:(void(^)(BOOL, NSError*))handler;
 
 @end
