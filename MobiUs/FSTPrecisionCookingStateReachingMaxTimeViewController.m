@@ -32,7 +32,8 @@
 
 - (void)updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMaxTime] - [self calculatePercent:self.targetMinTime toTime:self.targetMaxTime]; // get overall progress to max time and subtract the portion taken up by min time
+    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime - self.targetMinTime toTime:self.targetMaxTime - self.targetMinTime];
+    //subtract the time already elapsed and find what remains in this stage
 }
 
 -(void) updateLabels {

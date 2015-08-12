@@ -32,7 +32,7 @@
     if ([sender isKindOfClass:[FSTParagon class]])
     {
         vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"paragonMenu"];
-       // ((FSTParagonMenuViewController*)vc).currentParagon = sender;
+        ((FSTParagonMenuViewController*)[((UINavigationController*)vc).childViewControllers objectAtIndex:0]).currentParagon = sender;
     }
     
     

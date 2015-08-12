@@ -40,6 +40,7 @@
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+#pragma mark - TextFieldDelegate
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     //set view above keyboard

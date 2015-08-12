@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.paragonNameField.delegate = self;
+    [self.paragonNameField setDelegate:self];
     // perform actions when editing ends
 }
 //TODO: two switches with seperate actions (IBAactions might be best, rather than delegates)
@@ -41,10 +41,45 @@
         NSLog(@"Switched Units");
     }
 }
+
 #pragma mark - textField delegate
-- (void) textFieldDidEndEditing:(UITextField *)textField {
-    self.currentParagon.friendlyName = textField.text;
+ // copied from bluetooth commissioning
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    //set view above keyboard
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^(void){
+                         self.view.frame = CGRectOffset(self.view.superview.frame, 0, -4*self.view.frame.size.height/9);
+                         self.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, (self.view.frame.size.width/self.paragonNameField.frame.size.width)*.9, (self.view.frame.size.width/self.paragonNameField.frame.size.width)*.9);
+                     }
+                     completion:nil];
+    
+    
+    return YES;
 }
+
+-(void)textFieldDidEndEditing:(UITextField*)textField {
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^(void){
+                         self.view.transform = CGAffineTransformIdentity;
+                         self.view.frame = [self.view superview].frame; // sets back to outside frame
+                     }
+                     completion:nil];
+    // set view back down // problem with the rotation
+    self.currentParagon.friendlyName = textField.text;
+    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder]; // will invoke end editing for return key
+    return YES;
+}
+
 
 /*
 #pragma mark - Navigation
