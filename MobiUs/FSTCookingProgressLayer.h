@@ -27,6 +27,7 @@
 @property (nonatomic, strong) CAShapeLayer *bottomLayer;
 @property (nonatomic, strong) CAShapeLayer *progressLayer;
 @property (nonatomic, strong) CAShapeLayer *sittingLayer;
+@property (nonatomic, strong) CAShapeLayer *startLineLayer;
 //@property (nonatomic, strong) CAShapeLayer *progressLayerEnd;
 @property (nonatomic, strong) NSMutableDictionary* markLayers; // holds all the tick marks // layers with angles as keys
 

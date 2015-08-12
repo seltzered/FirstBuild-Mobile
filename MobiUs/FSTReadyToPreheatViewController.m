@@ -37,6 +37,8 @@ NSObject* _cookModeChangedObserver;
            [weakSelf performSegueWithIdentifier:@"segueCooking" sender:weakSelf];
        }
    }];
+    self.navigationItem.hidesBackButton = YES;
+    // remove the back button
 }
 
 -(void)removeObservers

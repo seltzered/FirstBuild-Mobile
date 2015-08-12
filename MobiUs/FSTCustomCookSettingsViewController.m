@@ -18,9 +18,9 @@
 {
     NSMutableArray *pickerTemperatureData; // append to this with for loop
     // holds values for temperature picker
-    NSArray *pickerTimeData; // fixed for now
+    NSMutableArray *pickerTimeData; // fixed for now
     // for cook time picker
-    NSArray *pickerViews;
+    //NSArray *pickerViews;
     // keep track of all slide out views
     NSInteger tempIndex;
     // store the last row accssed in temperature
@@ -63,12 +63,24 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
     pickerTemperatureData = [[NSMutableArray alloc]init];
     
-    for (NSInteger i = 90; i <= 220; i+=5) {
+    for (NSInteger i = 90; i <= 220; i+=1) {
         [pickerTemperatureData addObject:[NSString stringWithFormat:@"%.01f", (float)i]];
     }
     //pickerTemperatureData = @[@"140.0", @"145.0", @"150.0"]; // initialize with for loop later
         
-    pickerTimeData = @[@[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"], @[@":00", @":15", @":30", @":45"]]; // hour and minutes
+    pickerTimeData = [[NSMutableArray alloc] init];//@[@[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"], @[@":00", @":15", @":30", @":45"]]; // hour and minutes
+    NSMutableArray* timeRow1 = [[NSMutableArray alloc] init];
+    NSMutableArray* timeRow2 = [[NSMutableArray alloc] init];
+    for (int ih = 0; ih < 10; ih++) {
+        [timeRow1 addObject:[NSString stringWithFormat:@"%i", ih]];
+    }
+    
+    for (int im = 1; im < 60; im++) { // temporarily starts at one, should keep 0:00 off limits in code
+        [timeRow2 addObject:[NSString stringWithFormat:@":%02i", im]];
+    }
+    
+    [pickerTimeData addObject:timeRow1];
+    [pickerTimeData addObject:timeRow2];
    
     self.minPicker.dataSource = self;
     self.minPicker.delegate = self; // pickers all use this view controller as a delegate, and the pickerview address lets us determine which picker member triggered the callback
@@ -142,7 +154,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
     if (pickerView == self.minPicker){
         if (component == 0) {
-            return maxHourActual + 1;//((NSArray*)pickerTimeData[component]).count; // eventually, this will return the maxHourIndex for the minPicker when the component is 0, and the maxMinute Index if the minTime index is equal to the current MaxTimeIndex (the data must reload when this happens)
+                return maxHourActual + 1; // includes everything throught the max hour selection
         } else if (component == 1) {
             if (minHourIndex == maxHourActual) {
                 return maxMinuteActual + 1; // also causes a problem, maxMinuteActual does not update when the max wheel has selected
@@ -170,7 +182,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (pickerView == self.minPicker) {
-        return (NSString*)pickerTimeData[component][row];// offset max time data with minIndices
+        //if (minHourIndex == 0 &&) {
+            return (NSString*)pickerTimeData[component][row];// offset max time data with minIndices
     }
     else if (pickerView == self.maxPicker) {
         if (component == 0) {
