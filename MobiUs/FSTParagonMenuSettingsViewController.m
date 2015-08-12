@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.paragonNameField setDelegate:self];
+    [self.paragonNameField setText:self.currentParagon.friendlyName]; // show users the unchanged name
     // perform actions when editing ends
 }
 //TODO: two switches with seperate actions (IBAactions might be best, rather than delegates)

@@ -172,7 +172,7 @@ NSIndexPath *_indexPathForDeletion;
                     } else { // don't pay attention to its progress
                         bleProduct.loading = NO;
                     }
-                    [weakSelf.tableView reloadData];
+                    [weakSelf.tableView reloadData]; // this calls pretty often with the *hack* on paragon, might cause the problem with the delete key 
                 }
             }
         }

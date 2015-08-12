@@ -189,10 +189,10 @@ NSObject* _cookTimeChangedObserver;
     //pickup and transition to the correct embeded view
     FSTParagonCookingStage* _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     
-    //TODO: HACK TESTING
+   /* //TODO: HACK TESTING
     _cookingStage.cookTimeMinimum = [NSNumber numberWithInt:2];
     _cookingStage.cookTimeMaximum = [NSNumber numberWithInt:4];
-    //END TODO
+    //END TODO*/
     
     [self.currentParagon setCookingTimes];
     
