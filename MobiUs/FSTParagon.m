@@ -105,9 +105,10 @@ __weak NSTimer* _readCharacteristicsTimer;
     [self writeCookTimesWithMinimumCooktime:toBeStage.cookTimeMinimum havingMaximumCooktime:toBeStage.cookTimeMaximum];
     
     //erase the tobe cooktimes now that they are set
-    toBeStage.cookTimeMinimum = [NSNumber numberWithInt:0];
-    toBeStage.cookTimeMinimum = [NSNumber numberWithInt:0];
-    toBeStage.targetTemperature = [NSNumber numberWithInt:0];
+    //TODO: - this needs attention using a workaround now. we need to reset the cooktime here
+    //but the determine state logic keys throws it to precision cooking without time because
+    //tobe cooktime is 0 and the actual cook time is not yet written.
+    toBeStage.cookTimeMaximum = [NSNumber numberWithInt:-1];
 }
 
 #pragma mark - Write Handlers
@@ -478,8 +479,9 @@ __weak NSTimer* _readCharacteristicsTimer;
             //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
             self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
         }
-        else if([currentStage.cookTimeMinimum doubleValue] == 0)
+        else if([currentStage.cookTimeMinimum doubleValue] == 0 && [toBeStage.cookTimeMaximum doubleValue] != -1)
         {
+            //TODO: workaround, see setCookingTimes
             //cook time not set
             self.cookMode = FSTParagonCookingStatePrecisionCookingWithoutTime;
         }

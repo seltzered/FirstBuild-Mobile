@@ -7,7 +7,7 @@
 //
 
 #import "FSTDirectCookingStateViewController.h"
-#import "FSTPrecisionCookingStateReachingMinTimeLayer.m"
+#import "FSTPrecisionCookingStateReachingMinTimeLayer.h"
 
 @interface FSTDirectCookingStateViewController ()
 
