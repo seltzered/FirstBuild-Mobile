@@ -379,12 +379,12 @@ NSIndexPath *_indexPathForDeletion;
             productCell.disabledView.hidden = YES;
             productCell.arrowButton.hidden = NO;
             productCell.loadingProgressView.hidden = YES;
-            productCell.userInteractionEnabled = YES;
+            //productCell.userInteractionEnabled = YES;
         }
     }
     else
     {
-        productCell.userInteractionEnabled = NO;
+        //productCell.userInteractionEnabled = NO;
         productCell.offlineLabel.text = @"offline";
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
@@ -430,6 +430,17 @@ NSIndexPath *_indexPathForDeletion;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 120.0; // edit hight of table view cell
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    FSTProduct *product = self.products[indexPath.row];
+    
+    if (product.online && !product.loading) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 -(BOOL)tableView: (UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
