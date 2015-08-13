@@ -391,6 +391,7 @@ NSIndexPath *_indexPathForDeletion;
     {
         //productCell.userInteractionEnabled = NO;
         productCell.offlineLabel.text = @"offline";
+        productCell.offlineLabel.hidden = NO;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
         productCell.loadingProgressView.hidden = YES;
