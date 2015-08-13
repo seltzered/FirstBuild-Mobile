@@ -40,6 +40,7 @@ NSObject* _deviceRenamedObserver;
 NSObject* _deviceDisconnectedObserver;
 NSObject* _deviceBatteryChangedObserver;
 NSObject* _deviceConnectedObserver;
+NSObject* _deviceLoadProgressUpdated;
 
 NSIndexPath *_indexPathForDeletion;
 
@@ -73,6 +74,8 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceDisconnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceBatteryChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceLoadProgressUpdated];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,7 +118,6 @@ NSIndexPath *_indexPathForDeletion;
        [weakSelf connectBleDevices];
     }];
     
-    
     //when a device is connected check and see if we have it in our products list
     //we may get messages here about devices that are connected that are not saved yet (commissioning)
     //in that case we listen to FSTBleCentralManagerNewDeviceBound
@@ -148,7 +150,19 @@ NSIndexPath *_indexPathForDeletion;
         }
     }];
     
-
+    //device is already connected, but a percentage of how much data is read and ready
+    _deviceLoadProgressUpdated = [center addObserverForName:FSTDeviceLoadProgressUpdated
+                                                     object:nil
+                                                      queue:nil
+                                                 usingBlock:^(NSNotification *notification)
+    {
+        [weakSelf.tableView reloadData];
+    }];
+    
+    
+    
+    //this is once a device is ready for action, it will be device dependented and there will
+    //be a call in the appropriate product class to send the notifcation
     _deviceReadyObserver = [center addObserverForName:FSTDeviceReadyNotification
                                                    object:nil
                                                     queue:nil
@@ -168,18 +182,9 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     bleProduct.peripheral = peripheral;
                     bleProduct.peripheral.delegate = bleProduct;
-                    if ([bleProduct isKindOfClass: [FSTParagon class]
-                        ]) {
-                        FSTParagon* paragon = (FSTParagon*)bleProduct;
-                        if ([paragon.loadingProgress isEqualToNumber:[NSNumber numberWithInt:1]]) { // will this be accurate enough
-                            paragon.loading = NO;
-                        } else {
-                            paragon.loading = YES; // might put this logic into a new notification
-                        }
-                    } else { // don't pay attention to its progress
-                        bleProduct.loading = NO;
-                    }
-                    [weakSelf.tableView reloadData]; // this calls pretty often with the *hack* on paragon, might cause the problem with the delete key 
+                    
+                    bleProduct.loading = NO;
+                    [weakSelf.tableView reloadData]; // this calls pretty often with the *hack* on paragon, might cause the problem with the delete key
                 }
             }
         }
@@ -370,15 +375,13 @@ NSIndexPath *_indexPathForDeletion;
         }
     }
     
-    
     if (product.online)
     {
         if (product.loading)
         {
-            productCell.offlineLabel.hidden = YES;//.text = @"loading...";
+            productCell.offlineLabel.hidden = YES;
             productCell.loadingProgressView.hidden = NO;
-            productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue]; // set the progress bar based on the number of loading characteristics
-            productCell.disabledView.hidden = NO;
+            productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
             productCell.arrowButton.hidden = YES;
         }
         else
@@ -386,18 +389,16 @@ NSIndexPath *_indexPathForDeletion;
             productCell.disabledView.hidden = YES;
             productCell.arrowButton.hidden = NO;
             productCell.loadingProgressView.hidden = YES;
-            //productCell.userInteractionEnabled = YES;
         }
     }
     else
     {
-        //productCell.userInteractionEnabled = NO;
         productCell.offlineLabel.text = @"offline";
+        productCell.offlineLabel.hidden = NO;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
         productCell.loadingProgressView.hidden = YES;
     }
-    
     
     return productCell;
 }

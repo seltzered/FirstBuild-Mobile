@@ -277,6 +277,8 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
     {
+        //we haven't informed the application that the device is completely loaded, but we have
+        //all the data we need
         self.initialCharacteristicValuesRead = YES;
         
         [self notifyDeviceReady]; // logic contained in notification center
@@ -287,23 +289,23 @@ __weak NSTimer* _readCharacteristicsTimer;
             {
                 [self.peripheral setNotifyValue:YES forCharacteristic:c ];
             }
-            
         }
     }
+    else if(self.initialCharacteristicValuesRead == NO)
+    {
+        //we don't have all the data yet...
+        // calculate fraction
+        double progressCount = [[NSNumber numberWithInt:(int)requiredCount] doubleValue];
+        double progressTotal = [[NSNumber numberWithInt:(int)[requiredCharacteristics count]] doubleValue];
+        self.loadingProgress = [NSNumber numberWithDouble: progressCount/progressTotal];
+        
+        [self notifyDeviceLoadProgressUpdated];
+    }
     
-    // calculate fraction
-    double progressCount = [[NSNumber numberWithInt:(int)requiredCount] doubleValue];
-    double progressTotal = [[NSNumber numberWithInt:(int)[requiredCharacteristics count]] doubleValue];
-    self.loadingProgress = [NSNumber numberWithDouble: progressCount/progressTotal];
-    
-    //TODO *hack* need to add a second notification to determine when progress updated
-    [self notifyDeviceReady];
-  
 #ifdef DEBUG
     if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
     {
         printf(".");
-        
     }
     else
     {

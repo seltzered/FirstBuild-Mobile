@@ -55,6 +55,11 @@ CBPeripheralManager * _peripheralManager; //temporary
     return self;
 }
 
+- (void)dealloc
+{
+    
+}
+
 #pragma mark - External Methods
 
 -(CBPeripheral*) connectToSavedPeripheralWithUUID: (NSUUID*) uuid

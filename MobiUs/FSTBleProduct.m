@@ -10,7 +10,8 @@
 
 @implementation FSTBleProduct
 
-NSString * const FSTDeviceReadyNotification                 = @"FSTDeviceReadyNotification";
+NSString * const FSTDeviceReadyNotification    = @"FSTDeviceReadyNotification";
+NSString * const FSTDeviceLoadProgressUpdated  = @"FSTDeviceLoadProgressUpdated";
 
 - (instancetype)init
 {
@@ -25,6 +26,11 @@ NSString * const FSTDeviceReadyNotification                 = @"FSTDeviceReadyNo
 - (void) notifyDeviceReady
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceReadyNotification  object:self.peripheral];
+}
+
+- (void) notifyDeviceLoadProgressUpdated
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceLoadProgressUpdated  object:self.peripheral];
 }
 
 #pragma mark - Stub Interface Selectors

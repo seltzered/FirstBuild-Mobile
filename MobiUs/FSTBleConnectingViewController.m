@@ -33,7 +33,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     {
         if (weakSelf.peripheral == (CBPeripheral*)notification.object)
         {
-            weakSelf.peripheral.delegate = self;
+            weakSelf.peripheral.delegate = weakSelf;
             
             NSUUID* uuid = [[NSUUID alloc]initWithUUIDString:@"Device Information"];
             NSArray* services = [[NSArray alloc] initWithObjects:uuid, nil];
@@ -43,7 +43,8 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     }];
     
     NSMutableArray *imgListArray = [NSMutableArray array];
-    for (int i=11; i <= 33; i++) {
+    for (int i=11; i <= 33; i++)
+    {
         NSString *strImgeName = [NSString stringWithFormat:@"pulsing rings_%05d.png", i];
         UIImage *image = [UIImage imageNamed:strImgeName];
         if (!image) {
@@ -105,8 +106,9 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     }
 }
 
--(void)dealloc // when does this happen?
+-(void)dealloc 
 {
+    NSLog(@"dealloc");
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
 }
 
