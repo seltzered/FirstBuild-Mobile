@@ -705,6 +705,11 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="tEH-bh-K63" secondAttribute="trailing" id="kDa-EO-eaV"/>
                                         <constraint firstAttribute="centerY" secondItem="tEH-bh-K63" secondAttribute="centerY" id="nhl-Kt-bCU"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Y2f-9W-p3P"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -912,6 +917,9 @@
                                     <variation key="default">
                                         <mask key="subviews">
                                             <exclude reference="c4h-wl-VPA"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="65k-nE-OsK"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1186,6 +1194,6 @@
         <image name="teardrop" width="33" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VJe-HR-x9M"/>
+        <segue reference="vWQ-Kt-73W"/>
     </inferredMetricsTieBreakers>
 </document>

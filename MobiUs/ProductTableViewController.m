@@ -57,6 +57,13 @@ NSIndexPath *_indexPathForDeletion;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
 
+/*-(void)viewDidAppear:(BOOL)animated {
+    //TESTING: remove this segue that evades the acm
+    
+    [self performSegueWithIdentifier:@"segueParagon" sender:self];
+    
+}*/
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_connectedToBleObserver];

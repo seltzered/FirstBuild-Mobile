@@ -10,6 +10,8 @@
 		511A71621B5ED7C10015E4B5 /* ProductBatteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 511A71611B5ED7C10015E4B5 /* ProductBatteryView.m */; };
 		515340E91B3C31C60035DEBA /* FSTBleNamingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 515340E81B3C31C60035DEBA /* FSTBleNamingViewController.m */; };
 		51537B541B42C6A700769B35 /* FSTParagonDisconnectedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51537B531B42C6A700769B35 /* FSTParagonDisconnectedLabel.m */; };
+		515CD89A1B7CD6340087F9C7 /* FSTRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 515CD8991B7CD6340087F9C7 /* FSTRecipe.m */; };
+		515CD89D1B7CDC900087F9C7 /* FSTEditRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 515CD89C1B7CDC900087F9C7 /* FSTEditRecipeViewController.m */; };
 		517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */; };
 		517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */; };
 		518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */; };
@@ -142,6 +144,10 @@
 		515340E81B3C31C60035DEBA /* FSTBleNamingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleNamingViewController.m; sourceTree = "<group>"; };
 		51537B521B42C6A700769B35 /* FSTParagonDisconnectedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonDisconnectedLabel.h; sourceTree = "<group>"; };
 		51537B531B42C6A700769B35 /* FSTParagonDisconnectedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonDisconnectedLabel.m; sourceTree = "<group>"; };
+		515CD8981B7CD6340087F9C7 /* FSTRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTRecipe.h; sourceTree = "<group>"; };
+		515CD8991B7CD6340087F9C7 /* FSTRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTRecipe.m; sourceTree = "<group>"; };
+		515CD89B1B7CDC900087F9C7 /* FSTEditRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTEditRecipeViewController.h; sourceTree = "<group>"; };
+		515CD89C1B7CDC900087F9C7 /* FSTEditRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTEditRecipeViewController.m; sourceTree = "<group>"; };
 		517EC1071B3B32AB0025ECA1 /* FSTBleFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleFoundViewController.h; sourceTree = "<group>"; };
 		517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleFoundViewController.m; sourceTree = "<group>"; };
 		517EC10A1B3B4E8C0025ECA1 /* FSTBleErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleErrorViewController.h; sourceTree = "<group>"; };
@@ -533,6 +539,8 @@
 				5BCBBA001B03CA5200B8E043 /* FSTCookingMethods.m */,
 				5BCBBA021B03E92300B8E043 /* FSTSousVideCookingMethods.h */,
 				5BCBBA031B03E92300B8E043 /* FSTSousVideCookingMethods.m */,
+				515CD8981B7CD6340087F9C7 /* FSTRecipe.h */,
+				515CD8991B7CD6340087F9C7 /* FSTRecipe.m */,
 				5B4460271B1E25D5001A4953 /* FSTParagonCookingSession.h */,
 				5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */,
 				5B44602A1B1E2601001A4953 /* FSTParagonCookingStage.h */,
@@ -618,6 +626,8 @@
 				51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */,
 				5BE687831B71019B00C7FDC5 /* FSTCookSettingsViewController.h */,
 				5BE687841B71019B00C7FDC5 /* FSTCookSettingsViewController.m */,
+				515CD89B1B7CDC900087F9C7 /* FSTEditRecipeViewController.h */,
+				515CD89C1B7CDC900087F9C7 /* FSTEditRecipeViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1032,6 +1042,7 @@
 				5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */,
 				51A9D0461B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m in Sources */,
 				5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */,
+				515CD89D1B7CDC900087F9C7 /* FSTEditRecipeViewController.m in Sources */,
 				5BC3647E1A2F637800D03B9C /* FSTDevice.m in Sources */,
 				5BC364971A3260E200D03B9C /* FSTChillHub.m in Sources */,
 				5B3E180B1A41CC76004F1FA0 /* ProductMainViewController.m in Sources */,
@@ -1077,6 +1088,7 @@
 				5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */,
 				5BE687851B71019B00C7FDC5 /* FSTCookSettingsViewController.m in Sources */,
 				5BCBB9EC1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m in Sources */,
+				515CD89A1B7CD6340087F9C7 /* FSTRecipe.m in Sources */,
 				51A9D0491B73E11B000AE293 /* FSTCookingStateViewController.m in Sources */,
 				5B99E0811A1A5D10005FB881 /* WifiCommissioningViewController.m in Sources */,
 				5BBFAD0219E4965500E42575 /* ProductTableViewCell.m in Sources */,
