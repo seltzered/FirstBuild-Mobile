@@ -12,6 +12,8 @@
 @interface FSTBleProduct : FSTProduct <CBPeripheralDelegate>
 
 extern NSString * const FSTDeviceReadyNotification;
+extern NSString * const FSTDeviceLoadProgressUpdated;
+
 
 @property (strong,nonatomic) CBPeripheral* peripheral;
 @property (strong,nonatomic) NSUUID* savedUuid;
@@ -19,6 +21,7 @@ extern NSString * const FSTDeviceReadyNotification;
 @property (atomic) BOOL initialCharacteristicValuesRead;
 
 - (void) notifyDeviceReady;
+- (void) notifyDeviceLoadProgressUpdated;
 - (void) writeHandler: (CBCharacteristic*)characteristic;
 - (void) readHandler: (CBCharacteristic*)characteristic;
 - (void) handleDiscoverCharacteristics: (NSArray*)characteristics;
