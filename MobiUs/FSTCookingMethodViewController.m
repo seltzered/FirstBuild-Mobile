@@ -13,6 +13,7 @@
 #import "FSTCookingMethodSubSelectionViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
+#import "FSTEditRecipeViewController.h"
 
 @interface FSTCookingMethodViewController ()
 
@@ -62,7 +63,7 @@ FSTCookingMethods* _methods;
     
     if  (
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
-            [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]]
+         [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]] || [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]]
         )
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
@@ -78,6 +79,10 @@ FSTCookingMethods* _methods;
 - (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod
 {
     [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
+}
+
+- (IBAction)recipeTap:(id)sender {
+    [self performSegueWithIdentifier:@"segueRecipes" sender:nil];
 }
 
 - (IBAction)customTap:(id)sender {

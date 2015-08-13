@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTRecipe.h"
+#import "FSTParagon.h"
 
-@interface FSTEditRecipeViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+@interface FSTEditRecipeViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property FSTRecipe* activeRecipe;
+
+@property FSTParagon* currentParagon;
 
 @end
