@@ -368,15 +368,13 @@ NSIndexPath *_indexPathForDeletion;
         }
     }
     
-    
     if (product.online)
     {
         if (product.loading)
         {
-            productCell.offlineLabel.hidden = YES;//.text = @"loading...";
+            productCell.offlineLabel.hidden = YES;
             productCell.loadingProgressView.hidden = NO;
-            productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue]; // set the progress bar based on the number of loading characteristics
-            productCell.disabledView.hidden = NO;
+            productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
             productCell.arrowButton.hidden = YES;
         }
         else
@@ -384,19 +382,16 @@ NSIndexPath *_indexPathForDeletion;
             productCell.disabledView.hidden = YES;
             productCell.arrowButton.hidden = NO;
             productCell.loadingProgressView.hidden = YES;
-            //productCell.userInteractionEnabled = YES;
         }
     }
     else
     {
-        //productCell.userInteractionEnabled = NO;
         productCell.offlineLabel.text = @"offline";
         productCell.offlineLabel.hidden = NO;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
         productCell.loadingProgressView.hidden = YES;
     }
-    
     
     return productCell;
 }
