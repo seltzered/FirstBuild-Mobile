@@ -36,52 +36,52 @@ CBPeripheral* _currentlySelectedPeripheral;
     
     //since we are using self in the block callback below we need to create a weak
     //reference so ARC can actually dealloc when the view  unload (and observers can removed in dealloc)
-    //__weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(_devices) weakDevices = _devices;
     
     _discoveryObserver = [center addObserverForName:FSTBleCentralManagerDeviceFound
                                              object:nil
                                               queue:nil
                                          usingBlock:^(NSNotification *notification)
     {
-      CBPeripheral* peripheral = (CBPeripheral*)notification.object;
-      BOOL found = NO;
-      
-      DLog("found a peripheral and was notified in ble commissioning %@", [peripheral.identifier UUIDString]);
-      
-      for (CBPeripheral* p in _devices)
-      {
-          if ([p isEqual:peripheral])
-          {
-              found = YES;
-              return;
-          }
-      }
-      
-      if (found==NO)
-      {
-          DLog("peripheral doesn't exist adding to table");
-          [_devices addObject:peripheral];
-          //[weakSelf.tableView reloadData];
-          tableController.devices = _devices; // reset table data
-          [tableController.tableView reloadData]; // better way to do this? why only on second time
-          //hopefully it doesn't happen before the segue (we could force the segue call earlier in this function)
-      }
-      else
-      {
-          DLog(@"peripheral already exists in table");
-      }
-      
-      if ([_devices count] > 1) {
-          self.singletonView.hidden = true; // users can go ahead and interact with the table
-      } else {
-          self.singletonView.hidden = false;
-         if ([_devices count] == 1)
-         {
-            _currentlySelectedPeripheral = _devices[0];
-            [self performSegueWithIdentifier:@"plainConnectingSegue" sender:self];
-         }
-        // perform segue with the first item in the erray
-      } // checks when adding or removing devices
+        CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+        BOOL found = NO;
+
+        DLog("found a peripheral and was notified in ble commissioning %@", [peripheral.identifier UUIDString]);
+
+        for (CBPeripheral* p in weakDevices)
+        {
+            if ([p isEqual:peripheral])
+            {
+                found = YES;
+                return;
+            }
+        }
+
+        if (found==NO)
+        {
+            DLog("peripheral doesn't exist adding to table");
+            [weakDevices addObject:peripheral];
+            tableController.devices = weakDevices;
+            [tableController.tableView reloadData];
+        }
+        else
+        {
+            DLog(@"peripheral already exists in table");
+        }
+
+        if ([weakDevices count] > 1) {
+            weakSelf.singletonView.hidden = true;
+        }
+        else
+        {
+            weakSelf.singletonView.hidden = false;
+            if ([weakDevices count] == 1)
+            {
+                _currentlySelectedPeripheral = weakDevices[0];
+                [weakSelf performSegueWithIdentifier:@"plainConnectingSegue" sender:weakSelf];
+            }
+        }
     }];
     
     _undiscoveryObserver = [center addObserverForName:FSTBleCentralManagerDeviceUnFound
@@ -91,25 +91,25 @@ CBPeripheral* _currentlySelectedPeripheral;
     {
         CBPeripheral* peripheral = (CBPeripheral*)notification.object;
         
-        [_devices removeObject:peripheral];
+        [weakDevices removeObject:peripheral];
         DLog(@"device undiscovered %@", [peripheral.identifier UUIDString]);
-        tableController.devices = _devices; // reset table data
+        tableController.devices = weakDevices; // reset table data
         [tableController.tableView reloadData];
-        //[weakSelf.tableView reloadData];
         
-        if ([_devices count] > 1) {
-            self.singletonView.hidden = true;
-        } else {
-            self.singletonView.hidden = false;
-            if ([_devices count] == 1)
+        if ([weakDevices count] > 1)
+        {
+            weakSelf.singletonView.hidden = true;
+        }
+        else
+        {
+            weakSelf.singletonView.hidden = false;
+            if ([weakDevices count] == 1)
             {
-                _currentlySelectedPeripheral = _devices[0];
-                [self performSegueWithIdentifier:@"plainConnectingSegue" sender:self];
+                _currentlySelectedPeripheral = weakDevices[0];
+                [weakSelf performSegueWithIdentifier:@"plainConnectingSegue" sender:weakSelf];
             }
-            // perform segue with the first item in the erray
-        } // checks when adding or removing devices
-    }
-    ];
+        }
+    }];
     
     
     [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
@@ -132,9 +132,6 @@ CBPeripheral* _currentlySelectedPeripheral;
     [self.searchingIcon setAnimationImages:imgListArray];
     [self.searchingIcon setAnimationDuration:.75];
     [self.searchingIcon startAnimating];
-    
-
-    
 }
 
 -(void)dealloc
@@ -151,20 +148,19 @@ CBPeripheral* _currentlySelectedPeripheral;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [self cleanup];
-    
     if ([segue.identifier isEqualToString:@"connectingSegue"])
     {
         FSTBleConnectingViewController* vc = (FSTBleConnectingViewController*)segue.destinationViewController;
         vc.peripheral = _currentlySelectedPeripheral;
         vc.friendlyName = @"My Paragon 1";  // dummy name //_friendlyName;
-        
+        [self cleanup];
        // [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
         // has a problem with dismissing the keyboard
         
     } else if ([segue.identifier isEqualToString:@"plainConnectingSegue"]) {
         FSTBleConnectingViewController* vc = (FSTBleConnectingViewController*)segue.destinationViewController;
         vc.peripheral = _currentlySelectedPeripheral;
+        [self cleanup];
         vc.friendlyName = @"My Paragon 1";  // dummy name //_friendlyName;
         
     }else if ([segue.identifier isEqualToString:@"tableSegue"]) {
