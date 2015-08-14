@@ -14,9 +14,10 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 
-@property (weak, nonatomic) IBOutlet UITextField *noteField;
+@property (weak, nonatomic) IBOutlet UITextView *noteView;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *stageView;
 
 @end
 
@@ -31,7 +32,7 @@
         self.imageEditor.image = self.activeRecipe.photo;
     }
     [self.nameField setDelegate:self];
-    [self.noteField setDelegate:self];
+    [self.noteView setDelegate:self];
     // will probably save the recipes in a dictionary in NSUserDefaults
 }
 
@@ -39,16 +40,12 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidLayoutSubviews {
-    self.scrollView.contentSize = CGSizeMake(600, 1000);
-}
-
 #pragma mark - image editing
 - (IBAction)imageEditorTapped:(id)sender {
     UIImagePickerController* mealImagePicker = [[UIImagePickerController alloc] init];
     mealImagePicker.delegate = self;
     mealImagePicker.allowsEditing = YES;
-    mealImagePicker.sourceType = UIImagePickerControllerCameraCaptureModePhoto; // change this mode to let users select an image from the library
+    mealImagePicker.sourceType = UIImagePickerControllerCameraDeviceFront; // change this mode to let users select an image from the library
     
     [self presentViewController:mealImagePicker animated:YES completion:NULL];
     
@@ -60,17 +57,33 @@
     self.activeRecipe.photo = imageTaken;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
+    [self.view layoutIfNeeded]; // constraints seem to be off
+   // self.scrollView.contentSize = CGSizeMake(self.stageView.frame.size.width, self.scrollView.contentSize.height);
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-#pragma mark - text field delegates
+#pragma mark - text field and view delegates
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
+    self.activeRecipe.name = [NSMutableString stringWithString:textField.text];
     return YES; // might want to scroll to different positions depending on the delegate
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    self.activeRecipe.note = [NSMutableString stringWithString:textView.text];
+    return YES;
 }
 /*
 #pragma mark - Navigation

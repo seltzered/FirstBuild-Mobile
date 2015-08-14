@@ -14,6 +14,7 @@
 #import "MobiNavigationController.h"
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTRevealViewController.h"
+#import "FSTEditRecipeViewController.h"
 @interface FSTCookingMethodSubSelectionViewController ()
 
 @end
@@ -76,10 +77,14 @@ NSString* headerText;
         [self.currentParagon.toBeCookingMethod addStageToCookingSession];
     }
     
-    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]])
+    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] || [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]])
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
+}
+
+- (IBAction)recipeTap:(id)sender {
+    [self performSegueWithIdentifier:@"recipesSegue" sender:nil];
 }
 
 - (IBAction)customTap:(id)sender {
