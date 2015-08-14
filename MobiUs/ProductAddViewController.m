@@ -8,6 +8,9 @@
 
 #import "ProductAddViewController.h"
 #import <SWRevealViewController.h>
+#import "FSTHumanaPillBottle.h"
+#import "FSTParagon.h"
+#import "FSTBleCommissioningViewController.h"
 
 @interface ProductAddViewController ()
 
@@ -23,7 +26,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -37,6 +40,10 @@
             
         case 1:
             CellIdentifier = @"paragon";
+            break;
+            
+        case 2:
+            CellIdentifier = @"humanapillbottle";
             break;
             
         default:
@@ -73,8 +80,33 @@
   
 }
 
-- (IBAction)revealToggle:(id)sender {
+- (IBAction)revealToggle:(id)sender
+{
     [self.revealViewController revealToggle:sender];
 }
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"segueAddHumanaPillBottle"])
+    {
+        FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
+        vc.bleProductClassName = sender;
+    }
+    else if ([segue.identifier isEqualToString:@"segueAddParagon"])
+    {
+        FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
+        vc.bleProductClassName = sender;
+    }
+}
+
+- (IBAction)pillBottleTouchHandler:(id)sender
+{
+    [self performSegueWithIdentifier:@"segueAddHumanaPillBottle" sender:[FSTHumanaPillBottle class]];
+}
+
+- (IBAction)paragonTouchHandler:(id)sender
+{
+    [self performSegueWithIdentifier:@"segueAddParagon" sender:[FSTParagon class]];
+
+}
 @end

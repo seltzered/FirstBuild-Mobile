@@ -8,6 +8,7 @@
 
 #import "FSTBleCentralManager.h"
 #import "FSTParagonDisconnectedLabel.h"
+#import "FSTBleSavedProduct.h"
 
 @implementation FSTBleCentralManager
 
@@ -106,9 +107,9 @@ CBPeripheralManager * _peripheralManager; //temporary
     }
 }
 
--(void)savePeripheral: (CBPeripheral*)peripheral havingUUIDString: (NSString*)uuid withName: (NSString*)name
+-(void)savePeripheral: (CBPeripheral*)peripheral havingUUIDString: (NSString*)uuid withName: (NSString*)name className: (Class) className
 {
-    if (name && name.length > 0)
+    if (name && name.length > 0 && className)
     {
         NSMutableDictionary* savedDevices = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"]];
         
@@ -117,29 +118,47 @@ CBPeripheralManager * _peripheralManager; //temporary
             savedDevices = [[NSMutableDictionary alloc]init];
         }
         
+        FSTBleSavedProduct* product = [FSTBleSavedProduct new];
+        product.friendlyName = name;
+        product.classNameString = NSStringFromClass(className);
+        [savedDevices setObject:product forKey:uuid];
+        [self saveProductsToDefaults:[NSDictionary dictionaryWithDictionary:savedDevices] key:@"ble-devices"];
+        //[[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
+        
         if (![savedDevices objectForKey:uuid])
         {
             //if this is the first time this UUID has been saved, announce a new device is fully bound and saved
             DLog(@"device doesn't exist");
-            [savedDevices setObject:name forKey:uuid];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
-
             [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerNewDeviceBound object:peripheral];
         }
         else
         {
-            //otherwise just save it
-            [savedDevices setObject:name forKey:uuid];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
+            //otherwise just announce the name change
             [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceNameChanged object:peripheral];
 
         }
     }
 }
 
+- (void)saveProductsToDefaults:(NSDictionary *)object key:(NSString *)key {
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:object];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedObject forKey:key];
+    [defaults synchronize];
+    
+}
+
+- (NSDictionary *)loadProductsFromDefaultsWithKey:(NSString *)key {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *encodedObject = [defaults objectForKey:key];
+    NSDictionary *products = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+    return products;
+}
+
 - (NSDictionary*)getSavedPeripherals
 {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
+    return [self loadProductsFromDefaultsWithKey:@"ble-devices"];
+ //   return [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
 
 }
 

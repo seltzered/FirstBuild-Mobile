@@ -13,6 +13,7 @@
 #import "FirebaseShared.h"
 #import "FSTChillHub.h"
 #import "FSTParagon.h"
+#import "FSTHumanaPillBottle.h"
 #import "ChillHubViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTCookingMethodViewController.h"
@@ -342,6 +343,39 @@ NSIndexPath *_indexPathForDeletion;
     {
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCell" forIndexPath:indexPath];
     }
+    else if ([product isKindOfClass:[FSTHumanaPillBottle class]])
+    {
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellHumanaPillBottle" forIndexPath:indexPath];
+        productCell.friendlyName.text = product.friendlyName;
+        productCell.statusLabel.text = @"No Rx Needed";
+        if (product.online)
+        {
+            if (product.loading)
+            {
+                productCell.offlineLabel.hidden = YES;
+                productCell.loadingProgressView.hidden = NO;
+                productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
+                productCell.arrowButton.hidden = YES;
+            }
+            else
+            {
+                productCell.disabledView.hidden = YES;
+                productCell.arrowButton.hidden = NO;
+                productCell.loadingProgressView.hidden = YES;
+            }
+        }
+        else
+        {
+            productCell.offlineLabel.text = @"offline";
+            productCell.offlineLabel.hidden = NO;
+            productCell.disabledView.hidden = NO;
+            productCell.arrowButton.hidden = YES;
+            productCell.loadingProgressView.hidden = YES;
+        }
+        
+        return productCell;
+
+    }
     else if ([product isKindOfClass:[FSTParagon class]])
     {
         
@@ -482,7 +516,7 @@ NSIndexPath *_indexPathForDeletion;
 -(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"delete");
-        FSTParagon * deletedItem = self.products[indexPath.item];
+        FSTBleProduct * deletedItem = self.products[indexPath.item];
         [self.products removeObjectAtIndex:indexPath.item];
         [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
         [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];

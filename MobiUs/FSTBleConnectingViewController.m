@@ -97,7 +97,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     {
 
         [self performSegueWithIdentifier:@"segueFound" sender:self]; // changed from segueFound
-        [[FSTBleCentralManager sharedInstance] savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon"];
+        [[FSTBleCentralManager sharedInstance] savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon" className:self.bleProductClassName];
     }
     else
     {
@@ -117,6 +117,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     if ([segue.identifier isEqualToString:@"segueFound"]) {
         FSTBleFoundViewController *vc = segue.destinationViewController;
         vc.peripheral = self.peripheral; // we have to do this for a while don't we, is there a better way? // why does this happen later? after the connected screen! maybe it goes through segues through the navigation controller? need to dealloc something else?
+        vc.bleProductClassName = self.bleProductClassName;
     }
     
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];

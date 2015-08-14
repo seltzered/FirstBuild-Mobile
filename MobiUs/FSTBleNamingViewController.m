@@ -36,7 +36,7 @@
 
 - (IBAction)continueTap:(id)sender {
     
-    [[FSTBleCentralManager sharedInstance]savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:self.paragonNameField.text]; // get text from box and save peripheral
+    [[FSTBleCentralManager sharedInstance]savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:self.paragonNameField.text className:self.bleProductClassName]; // get text from box and save peripheral
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 

@@ -607,6 +607,7 @@ __weak NSTimer* _readCharacteristicsTimer;
             {
                 [self.peripheral readValueForCharacteristic:characteristic];
             }
+            NSLog(@"        CAN NOTIFY");
         }
         
         if (characteristic.properties & CBCharacteristicPropertyRead)
