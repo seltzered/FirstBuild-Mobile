@@ -77,8 +77,8 @@
     UIBezierPath* startLinePath = [UIBezierPath bezierPath];
     CGFloat startLength = 25;
     
-    [startLinePath moveToPoint:CGPointMake(self.frame.size.width/2, self.frame.size.width/2 + self.frame.size.width/3 - startLength/2)]; // size relative to width
-    [startLinePath addLineToPoint:CGPointMake(self.frame.size.width/2, self.frame.size.width/2 + self.frame.size.width/3 + startLength/2)];
+    [startLinePath moveToPoint:CGPointMake(self.frame.size.width/2, self.frame.size.width/2 - self.frame.size.width/3 + startLength/2)]; // size relative to width
+    [startLinePath addLineToPoint:CGPointMake(self.frame.size.width/2, self.frame.size.width/2 - self.frame.size.width/3 - startLength/2)];
     self.startLineLayer.path = startLinePath.CGPath;
     self.startLineLayer.lineWidth = progress_width/7;
     NSArray* dashes = [NSArray arrayWithObjects:@(18),@(5), nil]; // for sitting dashed line
@@ -135,7 +135,7 @@
     self.startLineLayer.strokeColor = [UIColor lightGrayColor].CGColor; // starting line at top of circle
     [self addSublayer:self.progressLayer];
     [self insertSublayer:self.sittingLayer above:self.progressLayer];
-    [self insertSublayer:self.startLineLayer above:self.progressLayer];
+    [self insertSublayer:self.startLineLayer above:self.sittingLayer];
     //[self addSublayer:_progressLayerEnd];
     //[self insertSublayer:self.textBackground above:self];
 

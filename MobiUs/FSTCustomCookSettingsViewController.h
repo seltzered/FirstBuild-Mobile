@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSTParagon.h"
 #import "FSTCookSettingsViewController.h"
+#import "FSTStagePickerManager.h"
 
-@interface FSTCustomCookSettingsViewController : FSTCookSettingsViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface FSTCustomCookSettingsViewController : FSTCookSettingsViewController <FSTStagePickerManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *minPickerHeight; // height of min time picker
 
@@ -23,7 +23,5 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *maxPicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *tempPicker;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *continueTapGesturerRecognizer;
-
--(void)updateLabels;
 
 @end

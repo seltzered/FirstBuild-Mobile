@@ -12,7 +12,7 @@
 #import <RBStoryboardLink.h>
 #import "FirebaseShared.h"
 #import "FSTChillHub.h"
-#import "FSTParagon.h"
+//#import "FSTParagon.h"
 #import "ChillHubViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTCookingMethodViewController.h"
