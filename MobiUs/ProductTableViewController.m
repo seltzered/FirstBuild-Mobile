@@ -21,6 +21,7 @@
 #import "FSTCookingViewController.h"
 #import "FSTBleProduct.h"
 #import "ProductGradientView.h" // to control up or down gradient
+#import "FSTBleSavedProduct.h"
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
@@ -86,21 +87,21 @@ NSIndexPath *_indexPathForDeletion;
 
 #pragma mark - Device Configuration
 
-//TODO need to store device type so we can have other types of devices
 -(void)configureBleDevices
 {
-    NSDictionary* devices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+    NSDictionary* savedDevices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     __weak typeof(self) weakSelf = self;
     
     //grab all our saved products and put them in a product array
-    for (id key in devices)
+    for (id key in savedDevices)
     {
-        FSTParagon* paragon = [FSTParagon new];
-        paragon.online = NO;
-        paragon.savedUuid = [[NSUUID alloc]initWithUUIDString:key];
-        paragon.friendlyName = [devices objectForKeyedSubscript:key];
-        [self.products addObject:paragon];
+        FSTBleSavedProduct* savedProduct = [savedDevices objectForKeyedSubscript:key];
+        FSTBleProduct* product = [[NSClassFromString(savedProduct.classNameString) alloc] init];
+        product.online = NO;
+        product.savedUuid = [[NSUUID alloc]initWithUUIDString:key];
+        product.friendlyName = savedProduct.friendlyName;
+        [self.products addObject:product];
         [self.delegate itemCountChanged:self.products.count];
     }
     
@@ -185,7 +186,7 @@ NSIndexPath *_indexPathForDeletion;
                     bleProduct.peripheral.delegate = bleProduct;
                     
                     bleProduct.loading = NO;
-                    [weakSelf.tableView reloadData]; // this calls pretty often with the *hack* on paragon, might cause the problem with the delete key
+                    [weakSelf.tableView reloadData];
                 }
             }
         }
@@ -198,15 +199,21 @@ NSIndexPath *_indexPathForDeletion;
                                               usingBlock:^(NSNotification *notification)
     {
         CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
-        NSDictionary* latestDevices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
-
-        FSTParagon* product = [FSTParagon new]; //TODO type; paragon hardcoded
+        
+        //read all the products from the saved devices and find the new one by its UUID
+        //then create a new BLE product based on the class type stored in the saved device
+        NSDictionary* savedDevices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+        FSTBleSavedProduct* savedProduct = [savedDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
+        FSTBleProduct* product = [[NSClassFromString(savedProduct.classNameString) alloc] init];
+        
+        //setup its delegates and status, and read the friendly name from the stored information
         product.online = YES;
         product.peripheral = peripheral;
         product.peripheral.delegate = product;
+        product.savedUuid = peripheral.identifier;
         [product.peripheral discoverServices:nil];
-        product.friendlyName = [latestDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
-        [self.products addObject:(FSTParagon*)product];
+        product.friendlyName = savedProduct.friendlyName;
+        [self.products addObject:product];
         [self.delegate itemCountChanged:self.products.count];
         [weakSelf.tableView reloadData];
     }];
@@ -218,7 +225,7 @@ NSIndexPath *_indexPathForDeletion;
                                               usingBlock:^(NSNotification *notification)
     {
         CBPeripheral* peripheral = (CBPeripheral*)(notification.object);
-        NSDictionary* latestDevices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
+        NSDictionary* savedDevices = [[FSTBleCentralManager sharedInstance] getSavedPeripherals];
         for (FSTProduct* product in weakSelf.products)
         {
             //get all ble products in the local products array
@@ -229,8 +236,9 @@ NSIndexPath *_indexPathForDeletion;
                 //search for ble peripheral that was renamed
                 if (bleProduct.peripheral.identifier == peripheral.identifier)
                 {
+                    FSTBleSavedProduct* savedProduct = [savedDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
                     //grab it from the saved list
-                    bleProduct.friendlyName = [latestDevices objectForKeyedSubscript:[peripheral.identifier UUIDString]];
+                    bleProduct.friendlyName = savedProduct.friendlyName;
                     [weakSelf.tableView reloadData];
                     break;
                 }
@@ -269,21 +277,7 @@ NSIndexPath *_indexPathForDeletion;
                                                          queue:nil
                                                     usingBlock:^(NSNotification *notification)
     {
-        
-        FSTProduct* noteProduct = (FSTProduct*)notification.object;
-        
-        for (FSTProduct* product in self.products) // shouldn't all products have a battery level
-        {
-            if ([product isKindOfClass:[FSTParagon class]])
-            {
-                FSTParagon* paragon = (FSTParagon*)product;
-                if (paragon == noteProduct) 
-                {
-                    [weakSelf.tableView reloadData];
-                    
-                }
-            }
-        }
+        [weakSelf.tableView reloadData];
     }];
 }
 

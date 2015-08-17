@@ -20,7 +20,7 @@ NSString * const FSTCharacteristicAppInfo               = @"318DB1F5-67F1-119B-6
 
 //acm service
 //NSString * const FSTServiceParagon                      = @"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F";
-NSString * const FSTCharacteristicScratch1       = @"E7CDDD9D-DCAC-4D70-A0E1-D3B6DFEB5E4C"; //read,notify,write
+NSString * const FSTCharacteristicScratch1       = @"A495FF21-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
 

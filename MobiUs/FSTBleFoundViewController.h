@@ -12,5 +12,5 @@
 @interface FSTBleFoundViewController : UIViewController
 
 @property (nonatomic, weak) CBPeripheral* peripheral;
-@property (weak) Class bleProductClassName;
+@property (weak) Class bleProductClass;
 @end

@@ -13,6 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *paragonNameField;
 @property (nonatomic, weak) CBPeripheral* peripheral;
-@property (weak) Class bleProductClassName;
+@property (weak) Class bleProductClass;
 
 @end

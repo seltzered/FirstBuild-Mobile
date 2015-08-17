@@ -108,12 +108,12 @@
     if ([segue.identifier isEqualToString:@"segueAddHumanaPillBottle"])
     {
         FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
-        vc.bleProductClassName = sender;
+        vc.bleProductClass = sender;
     }
     else if ([segue.identifier isEqualToString:@"segueAddParagon"])
     {
         FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
-        vc.bleProductClassName = sender;
+        vc.bleProductClass = sender;
     }
 }
 

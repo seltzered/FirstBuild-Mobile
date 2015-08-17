@@ -111,7 +111,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 {
     if (name && name.length > 0 && className)
     {
-        NSMutableDictionary* savedDevices = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"]];
+        NSMutableDictionary* savedDevices = [NSMutableDictionary dictionaryWithDictionary:[[FSTBleCentralManager sharedInstance] getSavedPeripherals]];
         
         if (!savedDevices)
         {
@@ -121,21 +121,21 @@ CBPeripheralManager * _peripheralManager; //temporary
         FSTBleSavedProduct* product = [FSTBleSavedProduct new];
         product.friendlyName = name;
         product.classNameString = NSStringFromClass(className);
-        [savedDevices setObject:product forKey:uuid];
-        [self saveProductsToDefaults:[NSDictionary dictionaryWithDictionary:savedDevices] key:@"ble-devices"];
-        //[[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedDevices] forKey:@"ble-devices"];
         
         if (![savedDevices objectForKey:uuid])
         {
             //if this is the first time this UUID has been saved, announce a new device is fully bound and saved
             DLog(@"device doesn't exist");
+            [savedDevices setObject:product forKey:uuid];
+            [self saveProductsToDefaults:[NSDictionary dictionaryWithDictionary:savedDevices] key:@"ble-devices"];
             [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerNewDeviceBound object:peripheral];
         }
         else
         {
             //otherwise just announce the name change
+            [savedDevices setObject:product forKey:uuid];
+            [self saveProductsToDefaults:[NSDictionary dictionaryWithDictionary:savedDevices] key:@"ble-devices"];
             [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceNameChanged object:peripheral];
-
         }
     }
 }
@@ -158,15 +158,12 @@ CBPeripheralManager * _peripheralManager; //temporary
 - (NSDictionary*)getSavedPeripherals
 {
     return [self loadProductsFromDefaultsWithKey:@"ble-devices"];
- //   return [[NSUserDefaults standardUserDefaults] objectForKey:@"ble-devices"];
-
 }
 
 -(void) deleteSavedPeripheralWithUUIDString: (NSString*) uuidString {
     NSMutableDictionary* savedPeripherals = [NSMutableDictionary dictionaryWithDictionary:[self getSavedPeripherals]]; // get rid of the uuid keyed device
     [savedPeripherals removeObjectForKey:uuidString];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithDictionary:savedPeripherals] forKey:@"ble-devices"];
-    
+    [self saveProductsToDefaults:[NSDictionary dictionaryWithDictionary:savedPeripherals] key:@"ble-devices"];
 }
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString

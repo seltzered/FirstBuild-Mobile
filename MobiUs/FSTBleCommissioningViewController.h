@@ -14,6 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIView *wheelBackground;
 @property (weak, nonatomic) IBOutlet UIView *singletonView;
 @property (weak, nonatomic) IBOutlet UIImageView *searchingIcon;
-@property (weak) Class bleProductClassName;
+@property (weak) Class bleProductClass;
 
 @end
