@@ -348,7 +348,8 @@ NSIndexPath *_indexPathForDeletion;
             {
                 productCell.offlineLabel.hidden = YES;
                 productCell.loadingProgressView.hidden = NO;
-                productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
+                //TODO: needs to generic
+                //productCell.loadingProgressView.progress = [((FSTBleProduct*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
                 productCell.arrowButton.hidden = YES;
             }
             else
@@ -468,7 +469,8 @@ NSIndexPath *_indexPathForDeletion;
     return 120.0; // edit hight of table view cell
 }
 
--(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     FSTProduct *product = self.products[indexPath.row];
     
@@ -479,35 +481,14 @@ NSIndexPath *_indexPathForDeletion;
     }
 }
 
--(BOOL)tableView: (UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+-(BOOL)tableView: (UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return true; // can delete all
 }
 
-/*-(NSArray*)tableView: (UITableView*)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
-        
-           NSLog(@"Editing\n");
-    }];
-    editAction.backgroundColor = [UIColor grayColor];
-    
-    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
-        //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        NSLog(@"delete");
-        FSTParagon * deletedItem = self.products[indexPath.item];
-        [self.products removeObjectAtIndex:indexPath.item];
-        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
-        [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
-        [self.tableView reloadData];
-        
-        if (self.products.count==0)
-        {
-            [self.delegate itemCountChanged:0];
-        }
-    }];
-    return @[editAction, deleteAction];
-}*/
 
--(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSLog(@"delete");
         FSTBleProduct * deletedItem = self.products[indexPath.item];
@@ -522,7 +503,6 @@ NSIndexPath *_indexPathForDeletion;
         }
     }
     // was empty
-
 }
 
 #pragma mark - BONEYARD
@@ -637,5 +617,30 @@ NSIndexPath *_indexPathForDeletion;
 //        }
 //    });
 //}
+
+/*-(NSArray*)tableView: (UITableView*)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+ UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
+ 
+ NSLog(@"Editing\n");
+ }];
+ editAction.backgroundColor = [UIColor grayColor];
+ 
+ UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
+ //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+ NSLog(@"delete");
+ FSTParagon * deletedItem = self.products[indexPath.item];
+ [self.products removeObjectAtIndex:indexPath.item];
+ [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
+ [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
+ [self.tableView reloadData];
+ 
+ if (self.products.count==0)
+ {
+ [self.delegate itemCountChanged:0];
+ }
+ }];
+ return @[editAction, deleteAction];
+ }*/
+
 
 @end
