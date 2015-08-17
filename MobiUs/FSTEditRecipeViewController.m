@@ -74,14 +74,24 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     [pickerManager setDelegate:self];
     [pickerManager selectAllIndices];
     
+    if ([[self.recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) { //started with a preexisting recipe, should delete and let it resave
+        [self.recipeManager removeItemFromDefaults:self.activeRecipe.name]; // start afresh (but keep pointer to the active recipe). Could consider just passing the name and loading the recipe here
+    }
+    
+    if (!self.activeRecipe) {
+        self.activeRecipe = [[FSTRecipe alloc] init]; // need a strong property since this could be the unique pointer
+    }
+    
+    [self updateLabels];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    if (self.activeRecipe) {
-        self.imageEditor.image = self.activeRecipe.photo;
-    }
+    self.imageEditor.image = self.activeRecipe.photo.image;
     // will probably save the recipes in a dictionary in NSUserDefaults
     [pickerManager selectAllIndices]; // set the current min and max indices on the picker (initially selects lowest possible for min and highest for maxPicker, and we want this to show in the view controller)
+    [self.nameField setText:self.activeRecipe.name];
+    [self.noteView setText:self.activeRecipe.note];
     [self resetPickerHeights];
 
 }
@@ -167,9 +177,9 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* imageTaken = info[UIImagePickerControllerEditedImage];
-    self.imageEditor.image = imageTaken;
-    self.activeRecipe.photo = imageTaken;
-    
+    //self.imageEditor.image = imageTaken;
+    self.activeRecipe.photo.image = imageTaken;
+    self.imageEditor.image = self.activeRecipe.photo.image;
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.view layoutIfNeeded]; // constraints seem to be off
    // self.scrollView.contentSize = CGSizeMake(self.stageView.frame.size.width, self.scrollView.contentSize.height);
@@ -199,6 +209,21 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     self.activeRecipe.note = [NSMutableString stringWithString:textView.text];
     return YES;
 }
+
+#pragma mark - save button
+
+- (IBAction)saveButtonTapped:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+    if ([[self.recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) {
+        // do some alert
+    } else {
+        self.activeRecipe.name = [NSMutableString stringWithString:self.nameField.text];
+        self.activeRecipe.note = [NSMutableString stringWithString:self.noteView.text];
+        self.activeRecipe.photo.image = self.imageEditor.image;
+        [self.recipeManager saveRecipe:self.activeRecipe];
+    }
+}
+
 /*
 #pragma mark - Navigation
 

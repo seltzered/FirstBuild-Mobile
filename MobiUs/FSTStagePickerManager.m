@@ -32,6 +32,8 @@
     NSInteger maxMinuteActual;
 }
 
+// still has seg fault when hitting max minute index at 0
+
 -(instancetype)init {
     self = [super init];
     if (self) {
@@ -266,7 +268,7 @@
         if (component == 0) {
             minHourIndex = row;
             maxHourIndex = maxHourActual - minHourIndex; // subtract to offset to get its index on the picker scale
-            if (minHourIndex == 0 && minMinuteIndex >= ((NSMutableArray*)pickerTimeData[1]).count) { // past index for mintues
+            if (minHourIndex == 0 && minMinuteIndex >= ((NSMutableArray*)pickerTimeData[1]).count - 1) { // past index for mintues
                 minMinuteIndex--; // set it back down if it is one too high // ideally this shifts down or up if there is a transition between 0 and other rows (but be careful of shooting too low or high the other way)
             }
             [self reloadData];
@@ -304,7 +306,7 @@
             if (maxHourActual == 0 && maxMinuteActual >= ((NSMutableArray*)pickerTimeData[1]).count - 1) { // needs to fall below the 1 through 59 index (runs 0 to 58)
                 maxMinuteIndex--;
                 maxMinuteActual--;
-            }
+            } // this logic does not seem to work in the min picker (error was I forgot to subtract 1
             [self reloadData];
             [pickerView selectRow:maxMinuteIndex inComponent:1 animated:NO]; // update the selection in the minutes
         } else if (component == 1) { // selected a minute, track changes to the actual max minute index for reference when changing the hour

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FSTParagonCookingStage.h"
 
-@interface FSTParagonCookingSession : NSObject
+@interface FSTParagonCookingSession : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSMutableArray* paragonCookingStages;
 

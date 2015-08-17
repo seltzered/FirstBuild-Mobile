@@ -19,6 +19,8 @@
 
 @implementation FSTPrecisionCookingStateReachingMinTimeViewController
 
+NSDate* endTime;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -55,6 +57,11 @@
 }
 */
 
+-(void) targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
+    [super targetTimeChanged:minTime withMax:maxTime];
+    endTime = [NSDate dateWithTimeIntervalSinceNow:self.targetMinTime]; // want a constant target time
+}
+
 -(void) updateLabels {
     [super updateLabels];
     
@@ -76,7 +83,7 @@
     
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
     [self.currentTempLabel setAttributedText:currentTempString];
-    [dateFormatter setDateFormat:@"hh:mm a"];
+    [dateFormatter setDateFormat:@"h:mm a"]; //testing, removed an h
     [self.endTimeLabel setText:[dateFormatter stringFromDate:timeComplete]];
 }
 

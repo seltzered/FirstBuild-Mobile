@@ -59,7 +59,7 @@ CBPeripheral* _currentlySelectedPeripheral;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bleDeviceCell" forIndexPath:indexPath];
     
     CBPeripheral* peripheral = (CBPeripheral*)(_devices[indexPath.item]);
-    NSString* label = [NSString stringWithFormat:@"%@,%@", peripheral.name, [peripheral.identifier UUIDString]]; // was NSString*
+    NSString* label = [NSString stringWithFormat:@"%@,%@", peripheral.name, [peripheral.identifier UUIDString]];
     
     cell.textLabel.text = label;
     [cell.textLabel setTextColor:[UIColor whiteColor]];

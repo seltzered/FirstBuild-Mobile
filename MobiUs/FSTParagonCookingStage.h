@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FSTParagonCookingStage : NSObject
+@interface FSTParagonCookingStage : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSNumber* targetTemperature;
 @property (nonatomic, strong) NSNumber* actualTemperature;

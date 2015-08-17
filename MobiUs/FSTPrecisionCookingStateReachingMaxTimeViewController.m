@@ -57,8 +57,8 @@
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
     
-    timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
-    [dateFormatter setDateFormat:@"hh:mm a"];
+    timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60]; // this can some times jump upwards when the elapsed time passes a minute, so the end date does not stay constant
+    [dateFormatter setDateFormat:@"hh:mm a"];// get rid of first h?
     [maxTimeNotice appendAttributedString:[[NSAttributedString alloc] initWithString: [dateFormatter stringFromDate:timeComplete] attributes:boldFontDict]];
     
     [self.italicTimeLabel setAttributedText:maxTimeNotice];

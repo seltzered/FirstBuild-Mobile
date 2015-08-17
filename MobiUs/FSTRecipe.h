@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FSTParagonCookingSession.h"
 
-@interface FSTRecipe : NSObject
+@interface FSTRecipe : NSObject <NSCoding>
 
 @property (nonatomic, strong) FSTParagonCookingSession* session; // contains all the information provided in custom settings
 
@@ -17,6 +17,6 @@
 
 @property (nonatomic, strong) NSMutableString* note;
 
-@property (nonatomic, weak) UIImage* photo; // photo taken of the user's meal (will use UIImagePickerController
+@property (nonatomic, strong) UIImageView* photo; // photo taken of the user's meal (will use UIImagePickerController. need UIImageView to serialize, can take the UIImage property later
 
 @end
