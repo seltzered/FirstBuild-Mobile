@@ -339,8 +339,12 @@ NSIndexPath *_indexPathForDeletion;
     }
     else if ([product isKindOfClass:[FSTHumanaPillBottle class]])
     {
+        FSTHumanaPillBottle* bottle = (FSTHumanaPillBottle*)product; // cast it to check the cooking status
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellHumanaPillBottle" forIndexPath:indexPath];
         productCell.friendlyName.text = product.friendlyName;
+        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[bottle.batteryLevel integerValue]];
+        productCell.batteryView.batteryLevel = [bottle.batteryLevel doubleValue]/100;
+        [productCell.batteryView setNeedsDisplay]; // redraw
         productCell.statusLabel.text = @"No Rx Needed";
         if (product.online)
         {

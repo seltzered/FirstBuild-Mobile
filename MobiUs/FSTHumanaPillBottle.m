@@ -14,13 +14,10 @@
 NSString * const FSTHumanaPillBottleBatteryLevelChangedNotification         = @"FSTHumanaPillBottleBatteryLevelChangedNotification";
 
 
-//app info service
-NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
-NSString * const FSTCharacteristicAppInfo               = @"318DB1F5-67F1-119B-6A41-1EECA0C744CE"; //read
-
-//acm service
-//NSString * const FSTServiceParagon                      = @"05C78A3E-5BFA-4312-8391-8AE1E7DCBF6F";
-NSString * const FSTCharacteristicScratch1       = @"A495FF21-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
+//Blue Bean Characteristics
+//TODO: move standard characteristics to BLE base object
+NSString * const FSTCharacteristicScratch1                = @"A495FF21-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
+NSString * const FSTCharacteristicBatteryLevelDefault     = @"2A19"; //read,notify
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
 
@@ -60,6 +57,10 @@ __weak NSTimer* _readCharacteristicsTimer;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicScratch1];
         [self handleScratch1:characteristic];
     }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelDefault])
+    {
+        [self handleBatteryLevel:characteristic];
+    }
     
     NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
     NSInteger requiredCount = 0; // count the number of discovered characteristics
@@ -96,23 +97,23 @@ __weak NSTimer* _readCharacteristicsTimer;
     
 } // end assignToProperty
 
-//-(void)handleBatteryLevel: (CBCharacteristic*)characteristic
-//{
-//    if (characteristic.value.length != 1)
-//    {
-//        DLog(@"handleBatteryLevel length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
-//        return;
-//    }
-//    
-//    NSData *data = characteristic.value;
-//    Byte bytes[characteristic.value.length] ;
-//    [data getBytes:bytes length:characteristic.value.length];
-//    self.batteryLevel = [NSNumber numberWithUnsignedInt:bytes[0]];
-//    
-//    //NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
-//    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
-//    
-//}
+-(void)handleBatteryLevel: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length != 1)
+    {
+        DLog(@"handleBatteryLevel length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
+    }
+    
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    self.batteryLevel = [NSNumber numberWithUnsignedInt:bytes[0]];
+    
+    //NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
+    
+}
 
 -(void)handleScratch1: (CBCharacteristic*)characteristic
 {
@@ -155,7 +156,8 @@ __weak NSTimer* _readCharacteristicsTimer;
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
             if  (
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicScratch1]
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicScratch1] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelDefault]
                  )
             {
                 [self.peripheral readValueForCharacteristic:characteristic];
