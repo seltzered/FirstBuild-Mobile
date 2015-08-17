@@ -111,7 +111,7 @@
                                     <rect key="frame" x="-4" y="0.0" width="808" height="653.5"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="nRX-Ih-S25" kind="show" identifier="segueRecipes" id="Nnf-id-VQ7"/>
+                                    <segue destination="v8P-8o-YpD" kind="embed" id="M0t-ab-wyg"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mS-z3-yYn" userLabel="customViewWrapper">
@@ -294,6 +294,7 @@
                     <connections>
                         <segue destination="tSd-Ug-HyZ" kind="show" identifier="segueCustom" id="CmD-W5-dtV"/>
                         <segue destination="pN4-mP-ZJw" kind="show" identifier="segueSubCookingMethod" id="Kl6-cd-uIb"/>
+                        <segue destination="nRX-Ih-S25" kind="show" identifier="recipesSegue" id="1eH-PN-fC7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8w-Fr-PZB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -323,7 +324,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1x-Xe-AQR" customClass="FSTLabel">
-                                <rect key="frame" x="76" y="22" width="33.5" height="19"/>
+                                <rect key="frame" x="76" y="22" width="34" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -347,7 +348,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1&quot; Thickness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6O-af-Pg4">
-                                <rect key="frame" x="439" y="125" width="130.5" height="28.5"/>
+                                <rect key="frame" x="439" y="125" width="131" height="29"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="23"/>
                                 <color key="textColor" red="1" green="0.0028989642" blue="0.02123694613" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -475,7 +476,7 @@
                                 <rect key="frame" x="304" y="469" width="300" height="67"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Continue_Large" translatesAutoresizingMaskIntoConstraints="NO" id="Ug7-29-a59">
-                                        <rect key="frame" x="80" y="17" width="33.5" height="33.5"/>
+                                        <rect key="frame" x="80" y="17" width="34" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Ug7-29-a59" secondAttribute="height" multiplier="1:1" id="bVf-r8-pCm"/>
                                         </constraints>
@@ -533,7 +534,7 @@
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Medium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="RgO-Zx-EbY" userLabel="doneness">
-                                <rect key="frame" x="495" y="269" width="75.5" height="26"/>
+                                <rect key="frame" x="495" y="269" width="76" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="KbL-VA-6VS">
                                         <variation key="heightClass=regular-widthClass=regular" constant="35"/>
@@ -573,7 +574,7 @@
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="6xv-hR-cYl">
-                                        <rect key="frame" x="85.5" y="17.5" width="38" height="33.5"/>
+                                        <rect key="frame" x="86" y="18" width="38" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="6xv-hR-cYl" secondAttribute="height" multiplier="54:47" id="Zje-LE-KTH"/>
                                         </constraints>
@@ -608,7 +609,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thickness:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="fQG-A7-Yl2">
-                                <rect key="frame" x="30" y="128" width="79" height="21.5"/>
+                                <rect key="frame" x="30" y="128" width="79" height="22"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -620,7 +621,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="0mW-He-K8h" userLabel="Temp" customClass="FSTLabel">
-                                <rect key="frame" x="486" y="22" width="37.5" height="19"/>
+                                <rect key="frame" x="486" y="22" width="38" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="027-0q-tOU">
                                         <variation key="heightClass=regular-widthClass=regular" constant="25"/>
@@ -920,7 +921,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csz-4M-yY7" userLabel="stageBarView" customClass="FSTStageBarView">
-                                <rect key="frame" x="90" y="5" width="420" height="32.5"/>
+                                <rect key="frame" x="90" y="5" width="420" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="450" id="cga-tx-SUK"/>
@@ -1055,7 +1056,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-Qf-cjt" userLabel="target temp">
-                                                <rect key="frame" x="230" y="249" width="140" height="21.5"/>
+                                                <rect key="frame" x="230" y="249" width="140" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="140" id="iR5-yd-ccY"/>
                                                 </constraints>
@@ -1064,7 +1065,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-xE-spK">
-                                                <rect key="frame" x="268" y="289" width="64.5" height="21.5"/>
+                                                <rect key="frame" x="268" y="289" width="65" height="22"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1192,10 +1193,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIi-zr-GZK" userLabel="continueButtonHolderView">
-                                <rect key="frame" x="0.0" y="471" width="600" height="65"/>
+                                <rect key="frame" x="0.0" y="481" width="600" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="        DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygc-uL-GpJ" customClass="FSTLabel">
-                                        <rect key="frame" x="-54" y="18" width="707" height="30"/>
+                                        <rect key="frame" x="-54" y="13" width="707" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="vJZ-u5-kQU"/>
                                         </constraints>
@@ -1208,7 +1209,7 @@
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Complete" translatesAutoresizingMaskIntoConstraints="NO" id="rmo-by-Dv2">
-                                        <rect key="frame" x="242" y="15" width="35" height="35"/>
+                                        <rect key="frame" x="242" y="10" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="rmo-by-Dv2" secondAttribute="height" multiplier="1:1" id="uki-oi-XDJ"/>
                                         </constraints>
@@ -1219,7 +1220,7 @@
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="ygc-uL-GpJ" secondAttribute="centerX" id="GaA-Wc-M37"/>
                                     <constraint firstItem="rmo-by-Dv2" firstAttribute="height" secondItem="ygc-uL-GpJ" secondAttribute="height" multiplier="1.15" id="Gkj-22-u0z"/>
-                                    <constraint firstAttribute="height" constant="65" id="I9Q-L6-rdR"/>
+                                    <constraint firstAttribute="height" constant="55" id="I9Q-L6-rdR"/>
                                     <constraint firstItem="rmo-by-Dv2" firstAttribute="centerX" secondItem="ygc-uL-GpJ" secondAttribute="centerX" constant="-40" id="Z5p-9g-J1x"/>
                                     <constraint firstItem="rmo-by-Dv2" firstAttribute="centerY" secondItem="ygc-uL-GpJ" secondAttribute="centerY" constant="-0.5" id="gTJ-IQ-Wcs"/>
                                     <constraint firstAttribute="centerY" secondItem="ygc-uL-GpJ" secondAttribute="centerY" id="iqM-nk-Wgi"/>
@@ -1230,10 +1231,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fP0-PX-tzh" userLabel="maxTimeButtonWrapperView">
-                                <rect key="frame" x="141.5" y="156" width="440.5" height="50"/>
+                                <rect key="frame" x="142" y="156" width="441" height="50"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kk-fa-8Ev">
-                                        <rect key="frame" x="0.0" y="11" width="440.5" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="11" width="441" height="28"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1280,7 +1281,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGp-Wl-hju" userLabel="TempLabel" customClass="FSTRegularLabel">
-                                <rect key="frame" x="33" y="241" width="44.5" height="21.5"/>
+                                <rect key="frame" x="33" y="241" width="45" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1289,7 +1290,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ht-tv-yfA" customClass="FSTRegularLabel">
-                                <rect key="frame" x="67" y="99" width="29" height="20.5"/>
+                                <rect key="frame" x="67" y="99" width="29" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28.5" id="mpU-vj-AGM"/>
                                 </constraints>
@@ -1298,16 +1299,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0kK-rJ-2gh" customClass="FSTRegularLabel">
-                                <rect key="frame" x="65" y="170" width="33" height="20.5"/>
+                                <rect key="frame" x="65" y="170" width="33" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AmD-CS-4g1" userLabel="MinPickerView">
-                                <rect key="frame" x="141" y="145" width="440.5" height="1"/>
+                                <rect key="frame" x="141" y="145" width="441" height="1"/>
                                 <subviews>
                                     <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOP-ZX-Zoa">
-                                        <rect key="frame" x="0.0" y="-81" width="440.5" height="162"/>
+                                        <rect key="frame" x="0.0" y="-81" width="441" height="162"/>
                                         <color key="tintColor" red="0.10196078431372549" green="0.59215686274509804" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="207" id="0rQ-nO-0qa">
@@ -1346,10 +1347,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMj-UR-ghE" userLabel="minTimeButtonWrapperView">
-                                <rect key="frame" x="141" y="85" width="440.5" height="50"/>
+                                <rect key="frame" x="141" y="85" width="441" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8c5-nv-rBI">
-                                        <rect key="frame" x="0.0" y="11" width="440.5" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="11" width="441" height="28"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="2" id="23B-5l-bQY"/>
                                         </constraints>
@@ -1386,10 +1387,10 @@
                                 </connections>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIZ-6f-3A0" userLabel="MaxPickerView">
-                                <rect key="frame" x="141.5" y="216" width="440.5" height="1"/>
+                                <rect key="frame" x="142" y="216" width="441" height="1"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfG-Bm-eDB">
-                                        <rect key="frame" x="0.0" y="-80" width="440.5" height="162"/>
+                                        <rect key="frame" x="0.0" y="-80" width="441" height="162"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="G3w-Nb-uKV"/>
                                         </constraints>
@@ -1410,10 +1411,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqq-7G-9ah" userLabel="temperatureButtonWrapperView">
-                                <rect key="frame" x="141.5" y="227" width="440.5" height="50"/>
+                                <rect key="frame" x="142" y="227" width="441" height="50"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="100 F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etS-Y4-d2e">
-                                        <rect key="frame" x="0.0" y="11" width="440.5" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="11" width="441" height="28"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1442,10 +1443,10 @@
                                 </connections>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q0x-ON-ZJf" userLabel="TempPickerView">
-                                <rect key="frame" x="141.5" y="287" width="440.5" height="1"/>
+                                <rect key="frame" x="142" y="287" width="441" height="1"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMe-5Q-KNr">
-                                        <rect key="frame" x="0.0" y="-80" width="440.5" height="162"/>
+                                        <rect key="frame" x="0.0" y="-80" width="441" height="162"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="QcT-vc-8me"/>
                                         </constraints>
@@ -1574,16 +1575,16 @@
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="v8P-8o-YpD" customClass="FSTCookingMethodTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="sXj-ct-Hz4">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="608" height="477"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="9A6-tP-Qs8" customClass="FSTLine">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
+                            <rect key="frame" x="0.0" y="0.0" width="608" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="l0y-jM-v2O">
-                            <rect key="frame" x="0.0" y="88" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="88" width="608" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -1640,23 +1641,26 @@
                                 </variation>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="SiO-ww-dtI">
-                                <rect key="frame" x="-4" y="0.0" width="608" height="476.5"/>
+                                <rect key="frame" x="-4" y="0.0" width="608" height="477"/>
                             </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SfD-pF-dkh">
-                                <rect key="frame" x="-4" y="0.0" width="608" height="476.5"/>
+                                <rect key="frame" x="-4" y="0.0" width="608" height="477"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="v8P-8o-YpD" kind="embed" id="y95-r5-gaz"/>
+                                </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uT2-s3-jjA" userLabel="customViewWrapper">
-                                <rect key="frame" x="304" y="476" width="300" height="59.5"/>
+                                <rect key="frame" x="304" y="476" width="300" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Time_Temp" translatesAutoresizingMaskIntoConstraints="NO" id="AdC-fO-nrV">
-                                        <rect key="frame" x="81" y="13" width="38" height="33.5"/>
+                                        <rect key="frame" x="81" y="13" width="38" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="AdC-fO-nrV" secondAttribute="height" multiplier="54:47" id="m6q-Oi-5JA"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF8-83-p8Y" customClass="FSTLabel">
-                                        <rect key="frame" x="83" y="17" width="133.5" height="24"/>
+                                        <rect key="frame" x="83" y="17" width="134" height="24"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="IaM-PB-2AY">
@@ -1690,6 +1694,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="-70"/>
                                     </constraint>
                                     <constraint firstAttribute="centerY" secondItem="AF8-83-p8Y" secondAttribute="centerY" id="bIr-Jk-fy1"/>
+                                    <constraint firstAttribute="height" constant="59.5" id="mUl-Yf-6Zg"/>
                                     <constraint firstAttribute="width" secondItem="AF8-83-p8Y" secondAttribute="width" id="oD0-3A-Mwx"/>
                                     <constraint firstItem="AdC-fO-nrV" firstAttribute="height" secondItem="AF8-83-p8Y" secondAttribute="height" multiplier="2" id="yT6-1n-V9W"/>
                                     <constraint firstAttribute="height" constant="75" id="zed-pE-teo">
@@ -1710,6 +1715,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="mUl-Yf-6Zg"/>
                                         <exclude reference="zed-pE-teo"/>
                                         <exclude reference="Lz5-FZ-Ht5"/>
                                         <exclude reference="V98-hl-Ly2"/>
@@ -1724,10 +1730,10 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9BM-eY-7Ey" userLabel="recipesViewWrapper">
-                                <rect key="frame" x="-4" y="476" width="306" height="59.5"/>
+                                <rect key="frame" x="-4" y="476" width="306" height="60"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="           MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WEy-Sl-2fP" customClass="FSTLabel">
-                                        <rect key="frame" x="68" y="17" width="170.5" height="24"/>
+                                        <rect key="frame" x="68" y="17" width="171" height="24"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="pd6-nV-GQT">
@@ -1742,7 +1748,7 @@
                                         </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="SIC-89-Q6s">
-                                        <rect key="frame" x="78" y="12" width="41" height="35.5"/>
+                                        <rect key="frame" x="78" y="12" width="41" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="SIC-89-Q6s" secondAttribute="height" multiplier="54:47" id="guU-o6-YV3"/>
                                         </constraints>
@@ -1941,7 +1947,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jdI-wo-5H1" userLabel="Italics Caption">
-                                <rect key="frame" x="215" y="543" width="169" height="21.5"/>
+                                <rect key="frame" x="215" y="543" width="169" height="22"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1987,18 +1993,18 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2l-CB-t8D" userLabel="TIME REMAINING">
-                                                <rect key="frame" x="277" y="249" width="46.5" height="21.5"/>
+                                                <rect key="frame" x="277" y="249" width="47" height="22"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food will be ready at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhy-I1-hje">
-                                                <rect key="frame" x="204" y="287" width="191.5" height="26"/>
+                                                <rect key="frame" x="204" y="287" width="192" height="26"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="21"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDz-qy-srl">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qDz-qy-srl">
                                                 <rect key="frame" x="280" y="281" width="39" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -2115,13 +2121,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140   F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhD-jy-UPK" userLabel="TIME REMAINING">
-                                                <rect key="frame" x="272" y="249" width="55" height="21.5"/>
+                                                <rect key="frame" x="272" y="249" width="55" height="22"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dO-F7-vc6">
-                                                <rect key="frame" x="266" y="286.5" width="68" height="27.5"/>
+                                                <rect key="frame" x="266" y="287" width="68" height="28"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="22"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2188,13 +2194,13 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food can stay until" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9n-tW-qYt" userLabel="Italics Caption">
-                                <rect key="frame" x="229" y="543" width="141" height="21.5"/>
+                                <rect key="frame" x="229" y="543" width="141" height="22"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGV-TM-GLA" userLabel="cookingStatusLabel">
-                                <rect key="frame" x="258" y="5" width="84.5" height="45"/>
+                                <rect key="frame" x="258" y="5" width="85" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="FjA-c1-uoV"/>
                                     <constraint firstAttribute="height" constant="45" id="WBf-GB-83x"/>
@@ -2270,7 +2276,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOF-dv-iof">
-                                                <rect key="frame" x="354" y="542" width="43.5" height="22.5"/>
+                                                <rect key="frame" x="354" y="542" width="44" height="23"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-BoldItalic" family="FS Emeric" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2306,7 +2312,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z6-pv-5gN" userLabel="cookingStatusLabel">
-                                <rect key="frame" x="258" y="5" width="84.5" height="45"/>
+                                <rect key="frame" x="258" y="5" width="85" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="Ed9-5E-Y6E"/>
                                     <constraint firstAttribute="height" constant="45" id="kbc-6z-NYI"/>
@@ -2321,7 +2327,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE FOOD OUT    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43C-Ek-9Lt" userLabel="Italics Caption">
-                                <rect key="frame" x="205" y="542" width="149" height="22.5"/>
+                                <rect key="frame" x="205" y="542" width="149" height="23"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-CoreItalic" family="FS Emeric" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2392,7 +2398,7 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LC0-Y9-yJd">
-                                        <rect key="frame" x="252" y="289" width="96" height="20.5"/>
+                                        <rect key="frame" x="252" y="289" width="96" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2518,7 +2524,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BURNER ON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BsF-Bt-odl" userLabel="cookingStatusLabel">
-                                <rect key="frame" x="213" y="5" width="173.5" height="45"/>
+                                <rect key="frame" x="213" y="5" width="174" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="JZX-Sz-Xaa"/>
                                     <constraint firstAttribute="height" constant="45" id="ZCt-Cl-xIM"/>
@@ -2571,8 +2577,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ReD-aH-O2U">
-                                <rect key="frame" x="0.0" y="20" width="600" height="860"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReD-aH-O2U">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="836"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBankIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Jc0-hN-gS6">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
@@ -2616,7 +2622,7 @@
                                         </variation>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYi-Eu-pME">
-                                        <rect key="frame" x="10" y="339" width="50.5" height="20"/>
+                                        <rect key="frame" x="10" y="339" width="51" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="zYy-cs-LLu"/>
                                         </constraints>
@@ -2639,11 +2645,29 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mib-C1-124" userLabel="Stage">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
                                                 <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z09-xL-xp7" userLabel="TimeLabel" customClass="FSTRegularLabel">
+                                                        <rect key="frame" x="22" y="20" width="50" height="23"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="50" id="8Ez-Kv-Wkg"/>
+                                                            <constraint firstAttribute="width" constant="37.5" id="k7f-bf-Mcg"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="k7f-bf-Mcg"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                        </variation>
+                                                    </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVh-7r-9BY" userLabel="maxTimeButtonWrapperView">
-                                                        <rect key="frame" x="133" y="130" width="456.5" height="50"/>
+                                                        <rect key="frame" x="133" y="130" width="457" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIc-hR-PBg">
-                                                                <rect key="frame" x="0.0" y="11" width="456.5" height="27.5"/>
+                                                                <rect key="frame" x="0.0" y="11" width="457" height="28"/>
                                                                 <gestureRecognizers/>
                                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2667,9 +2691,12 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="RzN-Tp-Ed9" appends="YES" id="8nT-7k-yeO"/>
+                                                        </connections>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVE-12-mWA" userLabel="TempLabel" customClass="FSTRegularLabel">
-                                                        <rect key="frame" x="25" y="215" width="44.5" height="21.5"/>
+                                                        <rect key="frame" x="25" y="215" width="45" height="22"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2678,7 +2705,7 @@
                                                         </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4U-4A-Bmx" customClass="FSTRegularLabel">
-                                                        <rect key="frame" x="59" y="73" width="29" height="20.5"/>
+                                                        <rect key="frame" x="59" y="73" width="29" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="28.5" id="3jc-la-fth"/>
                                                         </constraints>
@@ -2687,16 +2714,16 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVO-Jc-B9o" customClass="FSTRegularLabel">
-                                                        <rect key="frame" x="57" y="144" width="33" height="20.5"/>
+                                                        <rect key="frame" x="57" y="144" width="33" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apx-oN-ed9" userLabel="MinPickerView">
-                                                        <rect key="frame" x="133" y="119" width="456.5" height="1"/>
+                                                        <rect key="frame" x="133" y="119" width="457" height="1"/>
                                                         <subviews>
                                                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oM-62-Ea4">
-                                                                <rect key="frame" x="0.0" y="-81" width="456.5" height="162"/>
+                                                                <rect key="frame" x="0.0" y="-81" width="457" height="162"/>
                                                                 <color key="tintColor" red="0.1019607843" green="0.59215686270000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="207" id="3dZ-pa-n5h">
@@ -2735,10 +2762,10 @@
                                                         </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lV-ee-YOJ" userLabel="minTimeButtonWrapperView">
-                                                        <rect key="frame" x="133" y="59" width="456.5" height="50"/>
+                                                        <rect key="frame" x="133" y="59" width="457" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybz-4p-97l">
-                                                                <rect key="frame" x="0.0" y="11" width="456.5" height="27.5"/>
+                                                                <rect key="frame" x="0.0" y="11" width="457" height="28"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="2" id="2cW-DR-ioR"/>
                                                                 </constraints>
@@ -2770,12 +2797,15 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="cd1-JB-Gi6" appends="YES" id="37Z-KY-MUj"/>
+                                                        </connections>
                                                     </view>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSk-fy-kFz" userLabel="MaxPickerView">
-                                                        <rect key="frame" x="133" y="190" width="456.5" height="1"/>
+                                                        <rect key="frame" x="133" y="190" width="457" height="1"/>
                                                         <subviews>
                                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pfi-He-eqp">
-                                                                <rect key="frame" x="0.0" y="-80" width="456.5" height="162"/>
+                                                                <rect key="frame" x="0.0" y="-80" width="457" height="162"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="90" id="daA-m2-BC7"/>
                                                                 </constraints>
@@ -2796,10 +2826,10 @@
                                                         </variation>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRF-lk-e7V" userLabel="temperatureButtonWrapperView">
-                                                        <rect key="frame" x="133" y="201" width="456.5" height="50"/>
+                                                        <rect key="frame" x="133" y="201" width="457" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="100 F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aQ-br-4E9">
-                                                                <rect key="frame" x="0.0" y="11" width="456.5" height="27.5"/>
+                                                                <rect key="frame" x="0.0" y="11" width="457" height="28"/>
                                                                 <gestureRecognizers/>
                                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2823,12 +2853,15 @@
                                                             </userDefinedRuntimeAttribute>
                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="r68-g0-r9h" appends="YES" id="bkf-rb-kK2"/>
+                                                        </connections>
                                                     </view>
                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4Y-0M-DXW" userLabel="TempPickerView">
-                                                        <rect key="frame" x="133" y="261" width="456.5" height="1"/>
+                                                        <rect key="frame" x="133" y="261" width="457" height="1"/>
                                                         <subviews>
                                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOn-ix-gRR">
-                                                                <rect key="frame" x="0.0" y="-80" width="456.5" height="162"/>
+                                                                <rect key="frame" x="0.0" y="-80" width="457" height="162"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="90" id="YV0-AC-vdY"/>
                                                                 </constraints>
@@ -2849,24 +2882,6 @@
                                                             </mask>
                                                         </variation>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z09-xL-xp7" userLabel="TimeLabel" customClass="FSTRegularLabel">
-                                                        <rect key="frame" x="22" y="20" width="50" height="23"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="8Ez-Kv-Wkg"/>
-                                                            <constraint firstAttribute="width" constant="37.5" id="k7f-bf-Mcg"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                        <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                        <variation key="default">
-                                                            <mask key="constraints">
-                                                                <exclude reference="k7f-bf-Mcg"/>
-                                                            </mask>
-                                                        </variation>
-                                                        <variation key="heightClass=regular-widthClass=regular">
-                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                        </variation>
-                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -2896,6 +2911,7 @@
                                                     <constraint firstItem="8lV-ee-YOJ" firstAttribute="centerY" secondItem="D4U-4A-Bmx" secondAttribute="centerY" id="adT-ca-gKV"/>
                                                     <constraint firstItem="pVh-7r-9BY" firstAttribute="leading" secondItem="8lV-ee-YOJ" secondAttribute="trailing" constant="5" id="auZ-1R-Fo7"/>
                                                     <constraint firstItem="z09-xL-xp7" firstAttribute="centerX" secondItem="tVE-12-mWA" secondAttribute="centerX" id="eXg-I9-izn"/>
+                                                    <constraint firstItem="z09-xL-xp7" firstAttribute="top" secondItem="mib-C1-124" secondAttribute="top" constant="20" id="eyw-bJ-qHZ"/>
                                                     <constraint firstItem="D4Y-0M-DXW" firstAttribute="top" secondItem="LRF-lk-e7V" secondAttribute="bottom" constant="10" id="gPJ-mb-8lq"/>
                                                     <constraint firstAttribute="centerX" secondItem="z09-xL-xp7" secondAttribute="centerX" constant="251.25" id="iqk-cA-8se"/>
                                                     <constraint firstItem="8lV-ee-YOJ" firstAttribute="centerX" secondItem="apx-oN-ed9" secondAttribute="centerX" id="j47-0e-98P"/>
@@ -2913,6 +2929,7 @@
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="VFI-04-Dnd"/>
+                                                        <exclude reference="eyw-bJ-qHZ"/>
                                                         <exclude reference="iqk-cA-8se"/>
                                                         <exclude reference="406-yN-Xe8"/>
                                                         <exclude reference="5Ed-9i-NN7"/>
@@ -3013,13 +3030,37 @@
                     <value key="contentSizeForViewInPopover" type="size" width="1000" height="1500"/>
                     <connections>
                         <outlet property="imageEditor" destination="Jc0-hN-gS6" id="sQB-Pk-HgO"/>
+                        <outlet property="maxLabel" destination="JIc-hR-PBg" id="SV7-XO-4w8"/>
+                        <outlet property="maxPicker" destination="Pfi-He-eqp" id="vd8-hG-ybM"/>
+                        <outlet property="maxPickerHeight" destination="i3H-22-9dS" id="nql-0t-4gx"/>
+                        <outlet property="minLabel" destination="Ybz-4p-97l" id="ULW-Xc-Nha"/>
+                        <outlet property="minPicker" destination="3oM-62-Ea4" id="CLW-pz-7Fh"/>
+                        <outlet property="minPickerHeight" destination="ofh-8F-Ue0" id="Ge9-1N-k6U"/>
                         <outlet property="nameField" destination="hSN-eu-qzh" id="vfd-t8-ByP"/>
                         <outlet property="noteView" destination="Tjk-4e-ZQE" id="vrc-Gw-pe1"/>
                         <outlet property="scrollView" destination="ReD-aH-O2U" id="6qd-bg-ouv"/>
                         <outlet property="stageView" destination="97P-Nq-vMa" id="mLd-ek-7re"/>
+                        <outlet property="tempLabel" destination="5aQ-br-4E9" id="iWk-Qv-Ra2"/>
+                        <outlet property="tempPicker" destination="sOn-ix-gRR" id="C8J-B6-OOf"/>
+                        <outlet property="tempPickerHeight" destination="4Ri-y4-ZqI" id="Dcr-Mc-Unh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3e8-nF-gEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="r68-g0-r9h">
+                    <connections>
+                        <action selector="temperatureTapGesture:" destination="nRX-Ih-S25" id="ISh-xT-mXY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="RzN-Tp-Ed9">
+                    <connections>
+                        <action selector="maxTimeTapGesture:" destination="nRX-Ih-S25" id="Rn0-0x-jWm"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="cd1-JB-Gi6">
+                    <connections>
+                        <action selector="minTimeTapGesture:" destination="nRX-Ih-S25" id="zua-8J-j2W"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <tapGestureRecognizer id="Ifw-eS-h9y">
                     <connections>
                         <action selector="imageEditorTapped:" destination="nRX-Ih-S25" id="zoi-JV-azs"/>
@@ -3046,6 +3087,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="zTN-hz-fZw"/>
         <segue reference="ETw-Ro-4Or"/>
+        <segue reference="y95-r5-gaz"/>
         <segue reference="5L3-xY-jZR"/>
     </inferredMetricsTieBreakers>
 </document>

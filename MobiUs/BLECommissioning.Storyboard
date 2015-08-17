@@ -24,7 +24,6 @@
         <!--Ble Commissioning View Controller-->
         <scene sceneID="d2f-Uc-ac3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iJC-V0-Rek" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="EKb-eh-HBY" customClass="FSTBleCommissioningViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6iI-9F-ZcO"/>
@@ -197,13 +196,13 @@
                         <segue destination="PPp-vg-ydV" kind="custom" identifier="plainConnectingSegue" customClass="PushSegueNoAnimation" id="hEX-aJ-xJy"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iJC-V0-Rek" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="483" y="2152"/>
         </scene>
         <!--Ble Commissioning Table View Controller-->
         <scene sceneID="K8t-bN-zQd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ED0-LU-3qc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="aXV-CX-BWc" customClass="FSTBleCommissioningTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="78C-gH-lpt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
@@ -233,13 +232,13 @@
                         <segue destination="PPp-vg-ydV" kind="show" identifier="segueConnecting" id="1pe-6p-FAA"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ED0-LU-3qc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1291" y="1830"/>
         </scene>
         <!--Ble Connecting View Controller-->
         <scene sceneID="Xwn-Lj-Gxd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="87U-4k-s3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="PPp-vg-ydV" customClass="FSTBleConnectingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AKa-fj-sl1"/>
@@ -257,8 +256,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="q1k-8w-lk0"/>
                                         <exclude reference="3Z0-8f-wFw"/>
+                                        <exclude reference="q1k-8w-lk0"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -316,13 +315,13 @@
                         <segue destination="5rO-YN-2RV" kind="show" identifier="segueFound" id="gjK-a4-y4a"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="87U-4k-s3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2207" y="2112"/>
         </scene>
         <!--Ble Found View Controller-->
         <scene sceneID="RVD-Gh-Bfh">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="34L-iK-Pb9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="5rO-YN-2RV" customClass="FSTBleFoundViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m0h-VL-98W"/>
@@ -348,17 +347,17 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="CpD-4S-RoN"/>
-                                        <exclude reference="zu7-h0-86q"/>
                                         <exclude reference="hV0-IA-Ki0"/>
                                         <exclude reference="y9n-3d-q4p"/>
+                                        <exclude reference="zu7-h0-86q"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
                                         <exclude reference="CpD-4S-RoN"/>
-                                        <include reference="zu7-h0-86q"/>
                                         <exclude reference="hV0-IA-Ki0"/>
                                         <exclude reference="y9n-3d-q4p"/>
+                                        <include reference="zu7-h0-86q"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -439,13 +438,13 @@
                         <segue destination="FEB-U6-3qY" kind="show" identifier="segueNaming" id="cM2-T3-3M8"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="34L-iK-Pb9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3087" y="1676"/>
         </scene>
         <!--Ble Error View Controller-->
         <scene sceneID="tPi-RX-j2V">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j1v-U1-NCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="Sr1-dX-00O" customClass="FSTBleErrorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SWQ-r6-MOj"/>
@@ -500,18 +499,13 @@
                         </constraints>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j1v-U1-NCz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3115" y="2264"/>
         </scene>
         <!--Ble Naming View Controller-->
         <scene sceneID="fr9-lz-vrH">
             <objects>
-                <tapGestureRecognizer id="Fbk-OB-GF8">
-                    <connections>
-                        <action selector="continueTap:" destination="FEB-U6-3qY" id="hfr-X0-yUn"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="smR-a0-ypx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="FEB-U6-3qY" customClass="FSTBleNamingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rfL-30-cBE"/>
@@ -533,8 +527,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="f7c-Lg-cB1"/>
                                         <exclude reference="Fz5-GR-oS8"/>
+                                        <exclude reference="f7c-Lg-cB1"/>
                                     </mask>
                                 </variation>
                             </imageView>
@@ -562,7 +556,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a2p-OA-5ga">
-                                <rect key="frame" x="119" y="340" width="360" height="42.5"/>
+                                <rect key="frame" x="119" y="340" width="360" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="TtA-0U-D77">
                                         <variation key="heightClass=regular-widthClass=regular" constant="55"/>
@@ -625,8 +619,8 @@
                                 </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="WGk-vH-GNm"/>
                                         <exclude reference="4aS-6f-1yp"/>
+                                        <exclude reference="WGk-vH-GNm"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -662,8 +656,8 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
-                                <exclude reference="fKX-h7-Jyv"/>
                                 <include reference="MoX-Ca-gQc"/>
+                                <exclude reference="fKX-h7-Jyv"/>
                             </mask>
                         </variation>
                     </view>
@@ -671,6 +665,12 @@
                         <outlet property="paragonNameField" destination="kYK-qy-P1L" id="IHy-Q4-8cf"/>
                     </connections>
                 </viewController>
+                <tapGestureRecognizer id="Fbk-OB-GF8">
+                    <connections>
+                        <action selector="continueTap:" destination="FEB-U6-3qY" id="hfr-X0-yUn"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="smR-a0-ypx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3987" y="1676"/>
         </scene>

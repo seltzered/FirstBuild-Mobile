@@ -12,6 +12,7 @@
 		51537B541B42C6A700769B35 /* FSTParagonDisconnectedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 51537B531B42C6A700769B35 /* FSTParagonDisconnectedLabel.m */; };
 		515CD89A1B7CD6340087F9C7 /* FSTRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 515CD8991B7CD6340087F9C7 /* FSTRecipe.m */; };
 		515CD89D1B7CDC900087F9C7 /* FSTEditRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 515CD89C1B7CDC900087F9C7 /* FSTEditRecipeViewController.m */; };
+		515CD8A01B7E16F50087F9C7 /* FSTStagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 515CD89F1B7E16F50087F9C7 /* FSTStagePickerManager.m */; };
 		517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */; };
 		517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */; };
 		518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */; };
@@ -152,6 +153,8 @@
 		515CD8991B7CD6340087F9C7 /* FSTRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTRecipe.m; sourceTree = "<group>"; };
 		515CD89B1B7CDC900087F9C7 /* FSTEditRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTEditRecipeViewController.h; sourceTree = "<group>"; };
 		515CD89C1B7CDC900087F9C7 /* FSTEditRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTEditRecipeViewController.m; sourceTree = "<group>"; };
+		515CD89E1B7E16F50087F9C7 /* FSTStagePickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStagePickerManager.h; sourceTree = "<group>"; };
+		515CD89F1B7E16F50087F9C7 /* FSTStagePickerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStagePickerManager.m; sourceTree = "<group>"; };
 		517EC1071B3B32AB0025ECA1 /* FSTBleFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleFoundViewController.h; sourceTree = "<group>"; };
 		517EC1081B3B32AB0025ECA1 /* FSTBleFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleFoundViewController.m; sourceTree = "<group>"; };
 		517EC10A1B3B4E8C0025ECA1 /* FSTBleErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleErrorViewController.h; sourceTree = "<group>"; };
@@ -537,6 +540,8 @@
 			children = (
 				5B7338BE1B0F9CEA004C931E /* Session.h */,
 				5B7338BF1B0F9CEA004C931E /* Session.m */,
+				515CD89E1B7E16F50087F9C7 /* FSTStagePickerManager.h */,
+				515CD89F1B7E16F50087F9C7 /* FSTStagePickerManager.m */,
 				5B99DFC31AB1EB2D00247034 /* FSTParagon.h */,
 				5B99DFC41AB1EB2D00247034 /* FSTParagon.m */,
 				5BCBB9FC1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.h */,
@@ -1082,6 +1087,7 @@
 				51FAEFF21B62DD8100A7DCF9 /* FSTLine.m in Sources */,
 				5BC3648D1A3112EE00D03B9C /* FSTBackgroundLayer.m in Sources */,
 				5BA3A97D1B38B46500E51C51 /* FSTBleConnectingViewController.m in Sources */,
+				515CD8A01B7E16F50087F9C7 /* FSTStagePickerManager.m in Sources */,
 				5BA3A96E1B345DAF00E51C51 /* FSTBleCentralManager.m in Sources */,
 				5BCBB9DA1B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.m in Sources */,
 				51DB66FA1B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.m in Sources */,

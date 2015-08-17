@@ -8,7 +8,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #import "FSTBleProduct.h"
-#import "FSTParagonCookingSession.h"
+//#import "FSTParagonCookingSession.h" // already included in method
 #import "FSTCookingMethod.h"
 #import "FSTBurner.h"
 

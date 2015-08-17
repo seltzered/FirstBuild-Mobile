@@ -82,7 +82,7 @@ FSTCookingMethods* _methods;
 }
 
 - (IBAction)recipeTap:(id)sender {
-    [self performSegueWithIdentifier:@"segueRecipes" sender:nil];
+    [self performSegueWithIdentifier:@"recipesSegue" sender:nil];
 }
 
 - (IBAction)customTap:(id)sender {
