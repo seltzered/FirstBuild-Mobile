@@ -11,9 +11,13 @@
 
 @interface FSTRecipe : NSObject <NSCoding>
 
+// name provided by user
+@property (nonatomic, strong) NSMutableString* friendlyName;
+
 @property (nonatomic, strong) FSTCookingMethod* method; // contains all the information provided in custom settings
 
-@property (nonatomic, strong) NSMutableString* name; // name provided by user
+// name provided by user
+@property (nonatomic, strong) NSString* recipeId;
 
 @property (nonatomic, strong) NSMutableString* note;
 

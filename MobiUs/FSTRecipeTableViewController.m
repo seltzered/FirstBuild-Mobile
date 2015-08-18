@@ -58,7 +58,7 @@ FSTRecipeManager* recipeManager;
     NSString* key = [storedRecipes allKeys][indexPath.item];
     FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];
     // Configure the cell...
-    [cell.nameLabel setText:matchedRecipe.name];
+    [cell.nameLabel setText:matchedRecipe.friendlyName];
     [cell.noteLabel setText:matchedRecipe.note];
     [cell.recipePhoto setImage:matchedRecipe.photo.image];
     
