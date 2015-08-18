@@ -45,11 +45,6 @@ FSTParagonDisconnectedLabel* _warningLabel;
                                                usingBlock:^(NSNotification *notification)
     {
         NSString* item = (NSString*)notification.object;
-        //TODO -- add new product is not part of the menu anymore
-//        if([item isEqual:FSTMenuItemAddNewProduct])
-//        {
-//            [weakSelf performSegueWithIdentifier:@"segueAddNewProduct" sender:self];
-//        }
         if([item isEqual:FSTMenuItemHome])
         {
             [weakSelf.navigationController popToRootViewControllerAnimated:NO];

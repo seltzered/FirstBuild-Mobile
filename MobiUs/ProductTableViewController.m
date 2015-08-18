@@ -39,6 +39,7 @@ NSObject* _connectedToBleObserver;
 NSObject* _deviceReadyObserver;
 NSObject* _newDeviceBoundObserver;
 NSObject* _deviceRenamedObserver;
+NSObject* _cookModeChangedObserver;
 NSObject* _deviceDisconnectedObserver;
 NSObject* _deviceBatteryChangedObserver;
 NSObject* _deviceConnectedObserver;
@@ -47,7 +48,8 @@ NSObject* _deviceLoadProgressUpdated;
 NSIndexPath *_indexPathForDeletion;
 
 #pragma mark - <UIViewDelegate>
-//TODO firebase objects
+
+//TODO: firebase objects
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -60,13 +62,6 @@ NSIndexPath *_indexPathForDeletion;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
 
-/*-(void)viewDidAppear:(BOOL)animated {
-    //TESTING: remove this segue that evades the acm
-    
-    [self performSegueWithIdentifier:@"segueParagon" sender:self];
-    
-}*/
-
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:_connectedToBleObserver];
@@ -77,7 +72,7 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceBatteryChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceLoadProgressUpdated];
-
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -151,6 +146,17 @@ NSIndexPath *_indexPathForDeletion;
             }
         }
     }];
+    
+    
+    //cook mode changed on something, reload the data
+    _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
+                                                   object:nil
+                                                    queue:nil
+                                               usingBlock:^(NSNotification *notification)
+    {
+        [weakSelf.tableView reloadData];
+    }];
+
     
     //device is already connected, but a percentage of how much data is read and ready
     _deviceLoadProgressUpdated = [center addObserverForName:FSTDeviceLoadProgressUpdated
@@ -437,6 +443,28 @@ NSIndexPath *_indexPathForDeletion;
 }
 
 #pragma mark <UITableViewDelegate>
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
