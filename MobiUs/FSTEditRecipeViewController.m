@@ -217,9 +217,6 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
 
 - (IBAction)saveButtonTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    if ([[recipeManager getSavedRecipes] objectForKey:self.activeRecipe.recipeId]) {
-        // do some alert
-    } else {
         self.activeRecipe.friendlyName = [NSMutableString stringWithString:self.nameField.text];
         self.activeRecipe.note = [NSMutableString stringWithString:self.noteView.text];
         self.activeRecipe.photo.image = self.imageEditor.image;
@@ -231,7 +228,6 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
         ((FSTParagonCookingStage*)self.activeRecipe.method.session.paragonCookingStages[0]).targetTemperature = [pickerManager temperatureChosen];
         // get all the session variables from the pickers, then save it
         [recipeManager saveRecipe:self.activeRecipe];
-    }
 }
 
 /*
