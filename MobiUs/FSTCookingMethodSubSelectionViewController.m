@@ -51,9 +51,9 @@ NSString* headerText;
 
 - (FSTCookingMethods*) dataRequestedFromChild
 {
-    if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
+    //if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
     {
-        return (FSTCookingMethods*)[[FSTSousVideCookingMethods alloc]init];
+        return (FSTCookingMethods*)[[[self.currentParagon.toBeCookingMethod class] alloc]init];
     }
     return nil;
 }
@@ -77,7 +77,8 @@ NSString* headerText;
         [self.currentParagon.toBeCookingMethod addStageToCookingSession];
     }
     
-    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] || [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]])
+    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
+        [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]])
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }

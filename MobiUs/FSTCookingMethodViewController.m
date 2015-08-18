@@ -63,7 +63,8 @@ FSTCookingMethods* _methods;
     
     if  (
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
-         [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]] || [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]]
+            [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]] ||
+            [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]]
         )
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;

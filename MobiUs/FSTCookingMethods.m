@@ -8,14 +8,20 @@
 
 #import "FSTCookingMethods.h"
 
+#import "FSTSousVideCookingMethod.h"
+#import "FSTCandyCookingMethod.h"
+
+
 @implementation FSTCookingMethods
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        FSTSousVideCookingMethod *cookingMethod = [[FSTSousVideCookingMethod alloc] init];
-        self.cookingMethods = [[NSArray alloc] initWithObjects:cookingMethod, nil];
+              self.cookingMethods = [[NSArray alloc] initWithObjects:
+                                     [FSTSousVideCookingMethod new],
+                                     [FSTCandyCookingMethod new],
+                                     nil];
     }
     return self;
 }

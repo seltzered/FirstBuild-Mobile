@@ -89,6 +89,9 @@
 		5B9EF10219DEEE1000E8D9F1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B9EF10019DEEE1000E8D9F1 /* LaunchScreen.xib */; };
 		5BA064C31B7E390F002FCE59 /* FSTHumanaPillBottleBleCommissioning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA064C21B7E390F002FCE59 /* FSTHumanaPillBottleBleCommissioning.storyboard */; };
 		5BA064C61B7E5BB7002FCE59 /* FSTBleSavedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA064C51B7E5BB7002FCE59 /* FSTBleSavedProduct.m */; };
+		5BA064C91B8380E6002FCE59 /* FSTCandyCookingMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA064C81B8380E6002FCE59 /* FSTCandyCookingMethods.m */; };
+		5BA064CC1B83816C002FCE59 /* FSTCandyCookingMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA064CB1B83816C002FCE59 /* FSTCandyCookingMethod.m */; };
+		5BA064CF1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA064CE1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.m */; };
 		5BA3A96E1B345DAF00E51C51 /* FSTBleCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */; };
 		5BA3A9741B34722000E51C51 /* BLECommissioning.Storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA3A9731B34722000E51C51 /* BLECommissioning.Storyboard */; };
 		5BA3A9771B3475EF00E51C51 /* FSTBleCommissioningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A9761B3475EF00E51C51 /* FSTBleCommissioningViewController.m */; };
@@ -298,6 +301,12 @@
 		5BA064C21B7E390F002FCE59 /* FSTHumanaPillBottleBleCommissioning.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FSTHumanaPillBottleBleCommissioning.storyboard; sourceTree = "<group>"; };
 		5BA064C41B7E5BB7002FCE59 /* FSTBleSavedProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleSavedProduct.h; sourceTree = "<group>"; };
 		5BA064C51B7E5BB7002FCE59 /* FSTBleSavedProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleSavedProduct.m; sourceTree = "<group>"; };
+		5BA064C71B8380E6002FCE59 /* FSTCandyCookingMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCandyCookingMethods.h; sourceTree = "<group>"; };
+		5BA064C81B8380E6002FCE59 /* FSTCandyCookingMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCandyCookingMethods.m; sourceTree = "<group>"; };
+		5BA064CA1B83816C002FCE59 /* FSTCandyCookingMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCandyCookingMethod.h; sourceTree = "<group>"; };
+		5BA064CB1B83816C002FCE59 /* FSTCandyCookingMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCandyCookingMethod.m; sourceTree = "<group>"; };
+		5BA064CD1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCaramelBrittleCandyCooking.h; sourceTree = "<group>"; };
+		5BA064CE1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCaramelBrittleCandyCooking.m; sourceTree = "<group>"; };
 		5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBleCentralManager.h; sourceTree = "<group>"; };
 		5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleCentralManager.m; sourceTree = "<group>"; };
 		5BA3A9731B34722000E51C51 /* BLECommissioning.Storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BLECommissioning.Storyboard; sourceTree = "<group>"; };
@@ -556,16 +565,22 @@
 				515CD89F1B7E16F50087F9C7 /* FSTStagePickerManager.m */,
 				5B99DFC31AB1EB2D00247034 /* FSTParagon.h */,
 				5B99DFC41AB1EB2D00247034 /* FSTParagon.m */,
-				5BCBB9FC1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.h */,
-				5BCBB9FD1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m */,
 				5BCBB9F71B03905F00B8E043 /* FSTCookingMethod.m */,
 				5BCBB9F61B03905F00B8E043 /* FSTCookingMethod.h */,
-				5BCBB9F91B03909000B8E043 /* FSTSousVideCookingMethod.h */,
-				5BCBB9FA1B03909000B8E043 /* FSTSousVideCookingMethod.m */,
 				5BCBB9FF1B03CA5200B8E043 /* FSTCookingMethods.h */,
 				5BCBBA001B03CA5200B8E043 /* FSTCookingMethods.m */,
 				5BCBBA021B03E92300B8E043 /* FSTSousVideCookingMethods.h */,
 				5BCBBA031B03E92300B8E043 /* FSTSousVideCookingMethods.m */,
+				5BCBB9F91B03909000B8E043 /* FSTSousVideCookingMethod.h */,
+				5BCBB9FA1B03909000B8E043 /* FSTSousVideCookingMethod.m */,
+				5BCBB9FC1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.h */,
+				5BCBB9FD1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m */,
+				5BA064C71B8380E6002FCE59 /* FSTCandyCookingMethods.h */,
+				5BA064C81B8380E6002FCE59 /* FSTCandyCookingMethods.m */,
+				5BA064CA1B83816C002FCE59 /* FSTCandyCookingMethod.h */,
+				5BA064CB1B83816C002FCE59 /* FSTCandyCookingMethod.m */,
+				5BA064CD1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.h */,
+				5BA064CE1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.m */,
 				515CD8981B7CD6340087F9C7 /* FSTRecipe.h */,
 				515CD8991B7CD6340087F9C7 /* FSTRecipe.m */,
 				51EA9E471B82192800A3F421 /* FSTRecipeManager.h */,
@@ -617,6 +632,8 @@
 		5B99DFC21AB1EA3500247034 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5BCBB9F31B0386CE00B8E043 /* FSTCookingMethodTableViewController.h */,
+				5BCBB9F41B0386CE00B8E043 /* FSTCookingMethodTableViewController.m */,
 				5BCBB9D51B02A1A100B8E043 /* FSTCookingMethodViewController.h */,
 				5BCBB9D61B02A1A100B8E043 /* FSTCookingMethodViewController.m */,
 				5BCBB9D81B02A1EA00B8E043 /* FSTCookingMethodSubSelectionViewController.h */,
@@ -647,8 +664,6 @@
 				51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */,
 				5BCBB9EA1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.h */,
 				5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */,
-				5BCBB9F31B0386CE00B8E043 /* FSTCookingMethodTableViewController.h */,
-				5BCBB9F41B0386CE00B8E043 /* FSTCookingMethodTableViewController.m */,
 				5B9EF11D19DEFEF000E8D9F1 /* FSTParagonMenuViewController.h */,
 				5BF9482E19EC15E300CB8BCF /* FSTParagonMenuViewController.m */,
 				51DFCADF1B66B6E700E48084 /* FSTParagonMenuSettingsViewController.h */,
@@ -1184,6 +1199,7 @@
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
 				51A9D0371B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m in Sources */,
 				5B9A6F501B50173F00BDD727 /* FSTBurner.m in Sources */,
+				5BA064CF1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.m in Sources */,
 				5BF6FA4F1B74EF9B00D3EB85 /* FSTCookingViewSegue.m in Sources */,
 				5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */,
 				5BBB0B9A19F1DE8C001D5DF1 /* ScaleViewController.m in Sources */,
@@ -1204,6 +1220,7 @@
 				5B174DD81A5DE1DE00A00505 /* MilkGallonStand.m in Sources */,
 				5B7338BA1B0F9856004C931E /* FSTCookingProgressLayer.m in Sources */,
 				6743AE1F19E30E46000D9CF3 /* MobiNavigationController.m in Sources */,
+				5BA064C91B8380E6002FCE59 /* FSTCandyCookingMethods.m in Sources */,
 				51FAEFEF1B62B85F00A7DCF9 /* ProductGradientView.m in Sources */,
 				5BC3649A1A32624F00D03B9C /* FSTChillHubDevice.m in Sources */,
 				5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */,
@@ -1211,6 +1228,7 @@
 				51A9D02B1B72492E000AE293 /* FSTBleCharacteristic.m in Sources */,
 				5BF9482B19EC15A000CB8BCF /* ChillHubViewController.m in Sources */,
 				51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */,
+				5BA064CC1B83816C002FCE59 /* FSTCandyCookingMethod.m in Sources */,
 				5BCBB9F51B0386CE00B8E043 /* FSTCookingMethodTableViewController.m in Sources */,
 				5BCBB9FB1B03909000B8E043 /* FSTSousVideCookingMethod.m in Sources */,
 				51F570301B7B768B006A27B0 /* FSTDirectCookingStateViewController.m in Sources */,
