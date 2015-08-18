@@ -13,12 +13,14 @@
 
 extern NSString * const FSTDeviceReadyNotification;
 extern NSString * const FSTDeviceLoadProgressUpdated;
-
+extern NSString * const FSTBatteryLevelChangedNotification;
 
 @property (strong,nonatomic) CBPeripheral* peripheral;
 @property (strong,nonatomic) NSUUID* savedUuid;
 @property (strong,nonatomic) NSMutableDictionary* characteristics;
 @property (atomic) BOOL initialCharacteristicValuesRead;
+@property (nonatomic, strong) NSNumber* batteryLevel;
+@property (nonatomic, strong) NSNumber* loadingProgress;
 
 - (void) notifyDeviceReady;
 - (void) notifyDeviceLoadProgressUpdated;

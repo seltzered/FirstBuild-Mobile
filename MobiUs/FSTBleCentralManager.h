@@ -23,7 +23,7 @@ extern NSString * const FSTBleCentralManagerDeviceDisconnected;
 
 -(void)scanForDevicesWithServiceUUIDString: (NSString*)uuid;
 -(void)stopScanning;
--(void)savePeripheral: (CBPeripheral*)peripheral havingUUIDString: (NSString*)uuid withName: (NSString*)name;
+-(void)savePeripheral: (CBPeripheral*)peripheral havingUUIDString: (NSString*)uuid withName: (NSString*)name className: (Class) className;
 -(NSDictionary*)getSavedPeripherals;
 -(CBPeripheral*) connectToSavedPeripheralWithUUID: (NSUUID*) uuid;
 -(void)connectToNewPeripheral: (CBPeripheral*) peripheral;

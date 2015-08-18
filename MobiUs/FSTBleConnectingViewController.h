@@ -14,5 +14,5 @@
 @property (nonatomic, weak) CBPeripheral* peripheral;
 @property (nonatomic, strong) NSString* friendlyName;
 @property (weak, nonatomic) IBOutlet UIImageView *searchingIcon;
-
+@property (weak) Class bleProductClass;
 @end

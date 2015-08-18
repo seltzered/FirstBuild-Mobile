@@ -11,6 +11,9 @@
 #import "FSTBleCommissioningViewController.h"
 #import "FSTBleCommissioningTableViewController.h"
 
+#import "FSTHumanaPillBottle.h"
+#import "FSTParagon.h"
+
 @interface FSTBleCommissioningViewController ()
 
 @end
@@ -111,8 +114,16 @@ CBPeripheral* _currentlySelectedPeripheral;
         }
     }];
     
+    //TODO: rethink this approach / decouple a bit more
+    if (self.bleProductClass == [FSTHumanaPillBottle class])
+    {
+        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"a495ff10-c5b1-4b44-b512-1370f02d74de"];
+    }
+    else if(self.bleProductClass == [FSTParagon class])
+    {
+        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
+    }
     
-    [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
     
     [self.wheelBackground.layer setCornerRadius:self.wheelBackground.frame.size.width/2]; // make it a circle
     
@@ -152,7 +163,8 @@ CBPeripheral* _currentlySelectedPeripheral;
     {
         FSTBleConnectingViewController* vc = (FSTBleConnectingViewController*)segue.destinationViewController;
         vc.peripheral = _currentlySelectedPeripheral;
-        vc.friendlyName = @"My Paragon 1";  // dummy name //_friendlyName;
+        vc.friendlyName = @"My Device 1";  // dummy name //_friendlyName;
+        vc.bleProductClass = self.bleProductClass;
         [self cleanup];
        // [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
         // has a problem with dismissing the keyboard
@@ -160,8 +172,9 @@ CBPeripheral* _currentlySelectedPeripheral;
     } else if ([segue.identifier isEqualToString:@"plainConnectingSegue"]) {
         FSTBleConnectingViewController* vc = (FSTBleConnectingViewController*)segue.destinationViewController;
         vc.peripheral = _currentlySelectedPeripheral;
+        vc.bleProductClass = self.bleProductClass;
         [self cleanup];
-        vc.friendlyName = @"My Paragon 1";  // dummy name //_friendlyName;
+        vc.friendlyName = @"My Device 1";  // dummy name //_friendlyName;
         
     }else if ([segue.identifier isEqualToString:@"tableSegue"]) {
         tableController = segue.destinationViewController; // this is where it initally sets

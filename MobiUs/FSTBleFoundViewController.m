@@ -47,6 +47,7 @@
     if ([segue.identifier isEqualToString:@"segueNaming"]) {
         FSTBleNamingViewController* vc = segue.destinationViewController;
         vc.peripheral = self.peripheral; // set the peripheral
+        vc.bleProductClass = self.bleProductClass;
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     }

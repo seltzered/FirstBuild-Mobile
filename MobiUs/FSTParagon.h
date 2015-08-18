@@ -36,7 +36,6 @@ extern NSString * const FSTBurnerModeChangedNotification;
 extern NSString * const FSTCookingModeChangedNotification;
 
 extern NSString * const FSTElapsedTimeChangedNotification;
-extern NSString * const FSTBatteryLevelChangedNotification;
 extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
 extern NSString * const FSTElapsedTimeSetNotification;
@@ -50,8 +49,7 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;
 @property (nonatomic, strong) NSArray* burners;
-@property (nonatomic, strong) NSNumber* batteryLevel;
-@property (nonatomic, strong) NSNumber* loadingProgress; // a percentage that tells how many characteristics loaded
+ // a percentage that tells how many characteristics loaded
 
 - (void)startHeating;
 - (void)setCookingTimes;

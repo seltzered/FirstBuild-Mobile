@@ -10,14 +10,17 @@
 
 @implementation FSTBleProduct
 
-NSString * const FSTDeviceReadyNotification    = @"FSTDeviceReadyNotification";
-NSString * const FSTDeviceLoadProgressUpdated  = @"FSTDeviceLoadProgressUpdated";
+NSString * const FSTDeviceReadyNotification             = @"FSTDeviceReadyNotification";
+NSString * const FSTDeviceLoadProgressUpdated           = @"FSTDeviceLoadProgressUpdated";
+NSString * const FSTBatteryLevelChangedNotification     = @"FSTBatteryLevelChangedNotification";
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         self.initialCharacteristicValuesRead = NO;
+        self.batteryLevel = [NSNumber numberWithInt:0];
+        self.loadingProgress = [NSNumber numberWithInt:0];
         self.characteristics = [[NSMutableDictionary alloc]init];
     }
     return self;
