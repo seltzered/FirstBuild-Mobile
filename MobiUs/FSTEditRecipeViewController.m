@@ -93,7 +93,7 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     }
     // will probably save the recipes in a dictionary in NSUserDefaults
     [pickerManager selectAllIndices]; // set the current min and max indices on the picker (initially selects lowest possible for min and highest for maxPicker, and we want this to show in the view controller)
-    [self.nameField setText:self.activeRecipe.name];
+    [self.nameField setText:self.activeRecipe.friendlyName];
     [self.noteView setText:self.activeRecipe.note];
     [self resetPickerHeights];
 
@@ -196,7 +196,7 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    self.activeRecipe.name = [NSMutableString stringWithString:textField.text];
+    self.activeRecipe.friendlyName = [NSMutableString stringWithString:textField.text];
     return YES; // might want to scroll to different positions depending on the delegate
 }
 
@@ -217,10 +217,10 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
 
 - (IBAction)saveButtonTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    if ([[recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) {
+    if ([[recipeManager getSavedRecipes] objectForKey:self.activeRecipe.recipeId]) {
         // do some alert
     } else {
-        self.activeRecipe.name = [NSMutableString stringWithString:self.nameField.text];
+        self.activeRecipe.friendlyName = [NSMutableString stringWithString:self.nameField.text];
         self.activeRecipe.note = [NSMutableString stringWithString:self.noteView.text];
         self.activeRecipe.photo.image = self.imageEditor.image;
         // will probably for loop through all the picker manager to support multiStages
