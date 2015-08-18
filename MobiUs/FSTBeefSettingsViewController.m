@@ -134,6 +134,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
+    //once the temperature is confirmed to be set then it will segue above because
     [self.currentParagon startHeating];
     
 }
@@ -142,9 +143,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 {    
     if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
     {
-        FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
-        [self.currentParagon startHeating];
-
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
