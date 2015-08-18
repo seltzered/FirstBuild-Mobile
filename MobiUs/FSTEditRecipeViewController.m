@@ -77,10 +77,6 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     [pickerManager setDelegate:self];
     [pickerManager selectAllIndices];
     
-    if ([[recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) { //started with a preexisting recipe, should delete and let it resave
-        [recipeManager removeItemFromDefaults:self.activeRecipe.name]; // start afresh (but keep pointer to the active recipe). Could consider just passing the name and loading the recipe here
-    }
-    
     if (!self.activeRecipe) {
         self.activeRecipe = [[FSTRecipe alloc] init]; // need a strong property since this could be the unique pointer
     }
@@ -90,7 +86,11 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.imageEditor.image = self.activeRecipe.photo.image;
+    if (self.activeRecipe) {
+        self.imageEditor.image = self.activeRecipe.photo.image;
+    } else {
+        self.imageEditor.image = [UIImage imageNamed:@"sad-robot"];
+    }
     // will probably save the recipes in a dictionary in NSUserDefaults
     [pickerManager selectAllIndices]; // set the current min and max indices on the picker (initially selects lowest possible for min and highest for maxPicker, and we want this to show in the view controller)
     [self.nameField setText:self.activeRecipe.name];
@@ -182,7 +182,7 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     UIImage* imageTaken = info[UIImagePickerControllerEditedImage];
     //self.imageEditor.image = imageTaken;
     self.activeRecipe.photo.image = imageTaken;
-    self.imageEditor.image = self.activeRecipe.photo.image;
+    self.imageEditor.image = imageTaken;
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.view layoutIfNeeded]; // constraints seem to be off
    // self.scrollView.contentSize = CGSizeMake(self.stageView.frame.size.width, self.scrollView.contentSize.height);
