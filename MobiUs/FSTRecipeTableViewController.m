@@ -95,6 +95,12 @@ FSTRecipeManager* recipeManager;
         // needs to be empty to let my edit actions take place
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString* key = [storedRecipes allKeys][indexPath.item];
+    FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];
+    [self.delegate startCookingWithSession:matchedRecipe.method.session]; // grab the selected session and start a cooking stage (probably should pass the method
+}
+
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
@@ -109,14 +115,5 @@ FSTRecipeManager* recipeManager;
 }
 */
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

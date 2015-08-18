@@ -10,6 +10,13 @@
 
 @implementation FSTCookingMethod
 
+-(id) initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        self.session = [aDecoder decodeObjectForKey:@"session"];
+    }
+    return self;
+}
 -(id) init
 {
     self = [super init];
@@ -27,5 +34,8 @@
     FSTParagonCookingStage* stage = [[FSTParagonCookingStage alloc] init];
     [self.session.paragonCookingStages addObject:stage];
     return stage;
+}
+-(void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.session forKey:@"session"];
 }
 @end

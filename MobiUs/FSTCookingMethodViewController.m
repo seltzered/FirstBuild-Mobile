@@ -13,7 +13,7 @@
 #import "FSTCookingMethodSubSelectionViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
-#import "FSTEditRecipeViewController.h"
+#import "FSTRecipeViewController.h"
 
 @interface FSTCookingMethodViewController ()
 
@@ -64,7 +64,8 @@ FSTCookingMethods* _methods;
     if  (
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]] ||
-            [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]]
+            [segue.destinationViewController isKindOfClass:[FSTRecipeViewController class]]
+
         )
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;

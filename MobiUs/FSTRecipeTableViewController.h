@@ -13,6 +13,8 @@
 
 -(void)segueWithRecipe:(FSTRecipe*)recipe;
 
+-(void)startCookingWithSession:(FSTParagonCookingSession*)session;
+
 @end
 
 @interface FSTRecipeTableViewController : UITableViewController
