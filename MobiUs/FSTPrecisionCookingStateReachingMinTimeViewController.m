@@ -59,7 +59,6 @@ NSDate* endTime;
 
 -(void) targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
     [super targetTimeChanged:minTime withMax:maxTime];
-    endTime = [NSDate dateWithTimeIntervalSinceNow:self.targetMinTime*60]; // want a constant target time
 }
 
 -(void) updateLabels {
@@ -80,11 +79,13 @@ NSDate* endTime;
     double timeRemaining = self.targetMinTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
-    
+    if (!endTime) {
+        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMinTime - self.elapsedTime)*60]; // want a constant target time that sets once
+    }
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
     [self.currentTempLabel setAttributedText:currentTempString];
     [dateFormatter setDateFormat:@"h:mm a"]; //testing, removed an h
-    [self.endTimeLabel setText:[dateFormatter stringFromDate:timeComplete]]; // end time does not reset when you return to the app, needs to stay on the probe no the view controller. Or it could update once when the screen appears
+    [self.endTimeLabel setText:[dateFormatter stringFromDate:endTime]];//timeComplete]]; // end time does not reset when you return to the app, needs to stay on the probe no the view controller. Or it could update once when the screen appears
 }
 
 

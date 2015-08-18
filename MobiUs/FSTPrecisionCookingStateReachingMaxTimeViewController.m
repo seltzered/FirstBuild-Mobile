@@ -40,7 +40,7 @@ NSDate* endTime;
 
 -(void)targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
     [super targetTimeChanged:minTime withMax:maxTime];
-    endTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMaxTime - self.targetMinTime)*60]; // get the updated max time interval to see when this state will end
+
 }
 
 -(void) updateLabels {
@@ -63,6 +63,9 @@ NSDate* endTime;
     double timeRemaining = self.targetMaxTime - self.elapsedTime; // starting from the min time requirement, the progress towards the max time.
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
+    /*if (!endTime) {
+        endTime = [NSDate dateWithTimeIntervalSinceNow:((self.targetMaxTime - self.elapsedTime)*60)]; // get the updated max time interval to see when this state will end
+    } // wants to update labels and endTime not set, calculate end time, but some times elapsed time is not set*/
     
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60]; // this can some times jump upwards when the elapsed time passes a minute, so the end date does not stay constant
     [dateFormatter setDateFormat:@"hh:mm a"];// get rid of first h?
