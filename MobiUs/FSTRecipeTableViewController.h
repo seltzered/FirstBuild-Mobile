@@ -15,6 +15,8 @@
 
 -(void)startCookingWithSession:(FSTParagonCookingSession*)session;
 
+-(void)didDeleteRecipe;
+
 @end
 
 @interface FSTRecipeTableViewController : UITableViewController

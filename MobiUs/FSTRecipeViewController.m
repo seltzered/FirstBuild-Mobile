@@ -13,6 +13,8 @@
 
 @interface FSTRecipeViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *emptyTableView;
+
 @end
 
 @implementation FSTRecipeViewController
@@ -28,7 +30,9 @@ FSTRecipeManager* recipeManager;
 
 - (void)viewWillAppear:(BOOL)animated {
     if ([[recipeManager getSavedRecipes] allKeys].count <= 0) {
-        [self performSegueWithIdentifier:@"editRecipesSegue" sender:self]; // set the headline here
+        self.emptyTableView.hidden = false;
+    } else {
+        self.emptyTableView.hidden = true;
     }
     ((FSTRecipeTableViewController*)self.childViewControllers[0]).delegate = self;
 }
@@ -40,6 +44,12 @@ FSTRecipeManager* recipeManager;
 
 - (IBAction)addRecipeTapped:(id)sender {
     [self performSegueWithIdentifier:@"editRecipesSegue" sender:self];
+}
+
+-(void)didDeleteRecipe {
+    if ([[recipeManager getSavedRecipes] allKeys].count <= 0) {
+        self.emptyTableView.hidden = false;
+    }
 }
 
 

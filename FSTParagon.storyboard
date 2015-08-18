@@ -54,6 +54,7 @@
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Thin.otf">
             <string>FSEmeric-Thin</string>
@@ -85,6 +86,44 @@
                                     <segue destination="aBm-QU-KRm" kind="embed" id="4a3-7A-bIz"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYh-Ne-N1s" userLabel="emptyTableView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="KEF-Yh-FNT">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sad-robot" translatesAutoresizingMaskIntoConstraints="NO" id="VLo-gx-SVe" userLabel="Robot Image View">
+                                        <rect key="frame" x="180" y="133" width="240" height="350"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="350" id="fet-iU-Cl0"/>
+                                            <constraint firstAttribute="width" constant="240" id="r3m-8Z-Mvz"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have no recipes." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkH-7r-reG">
+                                        <rect key="frame" x="203.5" y="65" width="193" height="26"/>
+                                        <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="21"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="KEF-Yh-FNT" secondAttribute="width" id="1Cg-Wc-pf3"/>
+                                    <constraint firstItem="VLo-gx-SVe" firstAttribute="top" secondItem="dkH-7r-reG" secondAttribute="bottom" constant="42" id="1Jj-S2-zt8"/>
+                                    <constraint firstItem="dkH-7r-reG" firstAttribute="centerX" secondItem="KEF-Yh-FNT" secondAttribute="centerX" id="6Aa-Io-uVH"/>
+                                    <constraint firstItem="KEF-Yh-FNT" firstAttribute="centerX" secondItem="VLo-gx-SVe" secondAttribute="centerX" id="8hu-Cn-Ob9"/>
+                                    <constraint firstAttribute="centerY" secondItem="KEF-Yh-FNT" secondAttribute="centerY" id="EiJ-lU-Qs2"/>
+                                    <constraint firstItem="KEF-Yh-FNT" firstAttribute="centerY" secondItem="VLo-gx-SVe" secondAttribute="centerY" constant="-40" id="PsY-nk-gU6"/>
+                                    <constraint firstAttribute="width" secondItem="KEF-Yh-FNT" secondAttribute="width" id="dWf-vt-hAC"/>
+                                    <constraint firstAttribute="height" secondItem="KEF-Yh-FNT" secondAttribute="height" id="hQf-gd-uTV"/>
+                                    <constraint firstAttribute="centerX" secondItem="KEF-Yh-FNT" secondAttribute="centerX" id="wDm-gh-JjW"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dWf-vt-hAC"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqY-47-Y8S" userLabel="saveButtonHolderView">
                                 <rect key="frame" x="0.0" y="481" width="600" height="55"/>
                                 <subviews>
@@ -164,13 +203,18 @@
                             <constraint firstItem="mqY-47-Y8S" firstAttribute="leading" secondItem="mEK-ix-n7X" secondAttribute="leading" id="0Wb-g4-MV0"/>
                             <constraint firstAttribute="centerY" secondItem="mEK-ix-n7X" secondAttribute="centerY" id="4oY-pf-tVB"/>
                             <constraint firstItem="mqY-47-Y8S" firstAttribute="width" secondItem="PIP-WZ-GhK" secondAttribute="width" id="7Mv-9V-a76"/>
+                            <constraint firstItem="yYh-Ne-N1s" firstAttribute="height" secondItem="PIP-WZ-GhK" secondAttribute="height" id="L8B-B5-zvB"/>
+                            <constraint firstAttribute="centerY" secondItem="yYh-Ne-N1s" secondAttribute="centerY" id="Ysm-DS-4BF"/>
                             <constraint firstItem="MYu-wk-ssL" firstAttribute="top" secondItem="mqY-47-Y8S" secondAttribute="bottom" id="c41-EE-cJh"/>
                             <constraint firstAttribute="centerX" secondItem="mEK-ix-n7X" secondAttribute="centerX" id="h5V-7V-Mvq"/>
                             <constraint firstItem="mEK-ix-n7X" firstAttribute="width" secondItem="PIP-WZ-GhK" secondAttribute="width" id="hWD-JW-hY4"/>
+                            <constraint firstAttribute="centerX" secondItem="yYh-Ne-N1s" secondAttribute="centerX" id="k4C-Xi-oVB"/>
+                            <constraint firstItem="yYh-Ne-N1s" firstAttribute="width" secondItem="PIP-WZ-GhK" secondAttribute="width" id="l2h-Xl-c1M"/>
                             <constraint firstItem="mEK-ix-n7X" firstAttribute="height" secondItem="PIP-WZ-GhK" secondAttribute="height" id="yvh-tb-3zx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyTableView" destination="yYh-Ne-N1s" id="5lp-ZV-3Ir"/>
                         <segue destination="nRX-Ih-S25" kind="show" identifier="editRecipesSegue" id="10z-yG-xhj"/>
                         <segue destination="rkF-e7-Olw" kind="show" identifier="cookingSegue" id="R9G-mo-I5G"/>
                     </connections>
@@ -182,7 +226,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1223" y="496"/>
+            <point key="canvasLocation" x="-1255" y="596"/>
         </scene>
         <!--CookingMethodViewController-->
         <scene sceneID="GLY-f9-ve8">
@@ -3336,6 +3380,7 @@
         <image name="paragonSousVideBackground@1x" width="580" height="667"/>
         <image name="placefood_in" width="849" height="1277"/>
         <image name="reveal-icon" width="22" height="17"/>
+        <image name="sad-robot" width="180" height="307"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="R9G-mo-I5G"/>

@@ -87,6 +87,7 @@ FSTRecipeManager* recipeManager;
          NSLog(@"delete");
          storedRecipes = [recipeManager getSavedRecipes];
          [self.tableView reloadData]; // want to update with removed item gone
+         [self.delegate didDeleteRecipe];
      }];
  return @[editAction, deleteAction];
  }

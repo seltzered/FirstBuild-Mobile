@@ -79,7 +79,7 @@ NSDate* endTime;
     double timeRemaining = self.targetMinTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
     //int hour = timeRemaining / 60;
     //int minutes = fmod(timeRemaining, 60.0);
-    if (!endTime) {
+    if (!endTime && self.elapsedTime && self.targetMinTime) { // want this to set once, only when the elapsedTime and targetMinTime has been set.
         endTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMinTime - self.elapsedTime)*60]; // want a constant target time that sets once
     }
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
