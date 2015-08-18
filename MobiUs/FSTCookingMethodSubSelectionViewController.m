@@ -15,6 +15,9 @@
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTRevealViewController.h"
 #import "FSTRecipeViewController.h"
+#import "FSTCandyCookingMethod.h"
+#import "FSTCandyCookingMethods.h"
+
 
 @interface FSTCookingMethodSubSelectionViewController ()
 
@@ -52,9 +55,13 @@ NSString* headerText;
 
 - (FSTCookingMethods*) dataRequestedFromChild
 {
-    //if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
+    if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
     {
-        return (FSTCookingMethods*)[[[self.currentParagon.toBeCookingMethod class] alloc]init];
+        return (FSTCookingMethods*)[[FSTSousVideCookingMethods alloc]init];
+    }
+    else if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTCandyCookingMethod class]])
+    {
+        return (FSTCookingMethods*)[[FSTCandyCookingMethods alloc]init];
     }
     return nil;
 }
