@@ -59,7 +59,7 @@ NSDate* endTime;
 
 -(void) targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
     [super targetTimeChanged:minTime withMax:maxTime];
-    endTime = [NSDate dateWithTimeIntervalSinceNow:self.targetMinTime]; // want a constant target time
+    endTime = [NSDate dateWithTimeIntervalSinceNow:self.targetMinTime*60]; // want a constant target time
 }
 
 -(void) updateLabels {
@@ -84,7 +84,7 @@ NSDate* endTime;
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
     [self.currentTempLabel setAttributedText:currentTempString];
     [dateFormatter setDateFormat:@"h:mm a"]; //testing, removed an h
-    [self.endTimeLabel setText:[dateFormatter stringFromDate:timeComplete]];
+    [self.endTimeLabel setText:[dateFormatter stringFromDate:timeComplete]]; // end time does not reset when you return to the app, needs to stay on the probe no the view controller. Or it could update once when the screen appears
 }
 
 

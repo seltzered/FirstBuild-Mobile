@@ -18,6 +18,4 @@
 
 @property (nonatomic, weak) FSTParagon* currentParagon;
 
-@property (nonatomic, weak) FSTRecipeManager* recipeManager;
-
 @end

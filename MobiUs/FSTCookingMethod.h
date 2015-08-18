@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FSTParagonCookingSession.h"
 
-@interface FSTCookingMethod : NSObject
+@interface FSTCookingMethod : NSObject <NSCoding>
 
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) FSTParagonCookingSession* session;

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTRecipeTableViewController.h"
+#import "FSTParagon.h"
 
 @interface FSTRecipeViewController : UIViewController <FSTRecipeTableDelegate>
+
+@property FSTParagon* currentParagon;
 
 @end

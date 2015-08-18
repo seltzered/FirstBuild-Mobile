@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FSTParagonCookingSession.h"
+#import "FSTCookingMethod.h"
 
 @interface FSTRecipe : NSObject <NSCoding>
 
-@property (nonatomic, strong) FSTParagonCookingSession* session; // contains all the information provided in custom settings
+@property (nonatomic, strong) FSTCookingMethod* method; // contains all the information provided in custom settings
 
 @property (nonatomic, strong) NSMutableString* name; // name provided by user
 

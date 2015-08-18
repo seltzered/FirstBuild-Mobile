@@ -17,6 +17,8 @@
 
 @implementation FSTPrecisionCookingStateReachingMaxTimeViewController
 
+NSDate* endTime;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
@@ -34,6 +36,11 @@
     [super updatePercent];
     self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime - self.targetMinTime toTime:self.targetMaxTime - self.targetMinTime];
     //subtract the time already elapsed and find what remains in this stage
+}
+
+-(void)targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
+    [super targetTimeChanged:minTime withMax:maxTime];
+    endTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMaxTime - self.targetMinTime)*60]; // get the updated max time interval to see when this state will end
 }
 
 -(void) updateLabels {

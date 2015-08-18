@@ -14,7 +14,8 @@
 #import "MobiNavigationController.h"
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTRevealViewController.h"
-#import "FSTEditRecipeViewController.h"
+#import "FSTRecipeViewController.h"
+
 @interface FSTCookingMethodSubSelectionViewController ()
 
 @end
@@ -77,7 +78,7 @@ NSString* headerText;
         [self.currentParagon.toBeCookingMethod addStageToCookingSession];
     }
     
-    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] || [segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]])
+    if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] || [segue.destinationViewController isKindOfClass:[FSTRecipeViewController class]])
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }

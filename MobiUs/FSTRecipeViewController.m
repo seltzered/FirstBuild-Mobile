@@ -9,6 +9,7 @@
 #import "FSTRecipeViewController.h"
 #import "FSTRecipeManager.h"
 #import "FSTEditRecipeViewController.h"
+#import "FSTReadyToPreheatViewController.h"
 
 @interface FSTRecipeViewController ()
 
@@ -47,16 +48,25 @@ FSTRecipeManager* recipeManager;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]]) {
-        ((FSTEditRecipeViewController*)segue.destinationViewController).recipeManager = recipeManager; // give it this newly initiaized recipe manager (there's probably no need for this
         if ([sender isKindOfClass:[FSTRecipe class]]) {
             ((FSTEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
         }
+    } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]]) {
+        ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
     
 }
 
+#pragma mark - table delegate
+
 -(void)segueWithRecipe:(FSTRecipe *)recipe {
     [self performSegueWithIdentifier:@"editRecipesSegue" sender:recipe];
+}
+
+-(void)startCookingWithSession:(FSTParagonCookingSession *)session {
+    self.currentParagon.toBeCookingMethod.session = session; // set the method?
+    [self.currentParagon startHeating];
+    [self performSegueWithIdentifier:@"cookingSegue" sender:self];
 }
 
 

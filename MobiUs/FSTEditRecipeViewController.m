@@ -45,6 +45,8 @@
 @implementation FSTEditRecipeViewController
 {
     FSTStagePickerManager* pickerManager;
+    
+    FSTRecipeManager* recipeManager;
 }
 
 typedef enum variableSelections {
@@ -63,6 +65,7 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     [super viewDidLoad];
     
     pickerManager = [[FSTStagePickerManager alloc] init];
+    recipeManager = [[FSTRecipeManager alloc] init];
     [self.nameField setDelegate:self];
     [self.noteView setDelegate:self];
     [self.minPicker setDelegate:pickerManager];
@@ -74,8 +77,8 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     [pickerManager setDelegate:self];
     [pickerManager selectAllIndices];
     
-    if ([[self.recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) { //started with a preexisting recipe, should delete and let it resave
-        [self.recipeManager removeItemFromDefaults:self.activeRecipe.name]; // start afresh (but keep pointer to the active recipe). Could consider just passing the name and loading the recipe here
+    if ([[recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) { //started with a preexisting recipe, should delete and let it resave
+        [recipeManager removeItemFromDefaults:self.activeRecipe.name]; // start afresh (but keep pointer to the active recipe). Could consider just passing the name and loading the recipe here
     }
     
     if (!self.activeRecipe) {
@@ -214,13 +217,20 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
 
 - (IBAction)saveButtonTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    if ([[self.recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) {
+    if ([[recipeManager getSavedRecipes] objectForKey:self.activeRecipe.name]) {
         // do some alert
     } else {
         self.activeRecipe.name = [NSMutableString stringWithString:self.nameField.text];
         self.activeRecipe.note = [NSMutableString stringWithString:self.noteView.text];
         self.activeRecipe.photo.image = self.imageEditor.image;
-        [self.recipeManager saveRecipe:self.activeRecipe];
+        // will probably for loop through all the picker manager to support multiStages
+        [self.activeRecipe.method createCookingSession];
+        [self.activeRecipe.method addStageToCookingSession];
+        ((FSTParagonCookingStage*)self.activeRecipe.method.session.paragonCookingStages[0]).cookTimeMinimum = [pickerManager minMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.method.session.paragonCookingStages[0]).cookTimeMaximum = [pickerManager maxMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.method.session.paragonCookingStages[0]).targetTemperature = [pickerManager temperatureChosen];
+        // get all the session variables from the pickers, then save it
+        [recipeManager saveRecipe:self.activeRecipe];
     }
 }
 
