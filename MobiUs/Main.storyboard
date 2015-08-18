@@ -111,7 +111,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Products" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARm-9e-Aha">
-                                            <rect key="frame" x="243" y="10" width="114" height="24"/>
+                                            <rect key="frame" x="243" y="10" width="114" height="23.5"/>
                                             <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -131,7 +131,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bF6-vk-C0z">
-                                            <rect key="frame" x="263" y="10" width="74" height="24"/>
+                                            <rect key="frame" x="262.5" y="10" width="73.5" height="23.5"/>
                                             <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -171,7 +171,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yC3-B1-e1H">
-                                            <rect key="frame" x="256" y="10" width="89" height="24"/>
+                                            <rect key="frame" x="255.5" y="10" width="89" height="23.5"/>
                                             <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -191,7 +191,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBF-B3-tlY">
-                                            <rect key="frame" x="273" y="11" width="54" height="24"/>
+                                            <rect key="frame" x="272.5" y="11" width="54" height="23.5"/>
                                             <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -608,11 +608,11 @@
         <scene sceneID="PUl-ZV-Wea">
             <objects>
                 <tableViewController id="49I-rS-3h0" customClass="ProductTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g8o-UE-XJL">
+                    <tableView key="view" opaque="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="g8o-UE-XJL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="MVE-Y9-zXg">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="1"/>
@@ -635,7 +635,7 @@
                                             <rect key="frame" x="8" y="8" width="584" height="28"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_chillhub_product" translatesAutoresizingMaskIntoConstraints="NO" id="s13-ZL-F1W">
-                                                    <rect key="frame" x="10" y="-54" width="230" height="135"/>
+                                                    <rect key="frame" x="10" y="-53.5" width="230" height="135"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="135" id="B1c-RQ-wyi"/>
                                                         <constraint firstAttribute="width" constant="230" id="ri9-JU-jpW"/>
@@ -649,7 +649,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E17-DA-tmL" userLabel="disabledView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="28"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="27.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="offline" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="624-cF-6RM">
                                                             <rect key="frame" x="0.0" y="0.0" width="584" height="28"/>
@@ -742,7 +742,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Paragon_Logo_Red" translatesAutoresizingMaskIntoConstraints="NO" id="Bux-WE-LyN">
-                                                    <rect key="frame" x="23" y="1" width="38" height="9"/>
+                                                    <rect key="frame" x="23" y="1" width="37.5" height="9"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Bux-WE-LyN" secondAttribute="height" multiplier="4:1" id="aFG-dr-XBL"/>
                                                         <constraint firstAttribute="height" constant="75" id="nyh-q5-MTn"/>
@@ -808,10 +808,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eej-Lt-xYW" userLabel="disabledView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="27"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="26.5"/>
                                                     <subviews>
                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ieL-yn-cEe">
-                                                            <rect key="frame" x="175" y="12" width="234" height="4"/>
+                                                            <rect key="frame" x="175" y="11.5" width="234" height="4"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="4" id="bt0-cZ-aO1"/>
                                                             </constraints>
@@ -991,7 +991,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refill" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZS8-fR-aSu" userLabel="status">
-                                                    <rect key="frame" x="522" y="0.0" width="30" height="21"/>
+                                                    <rect key="frame" x="522" y="0.0" width="29.5" height="21"/>
                                                     <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="16"/>
                                                     <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1010,7 +1010,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H7z-Fu-JhW" userLabel="disabledView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="27"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="26.5"/>
                                                     <subviews>
                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="C80-Fw-uSV">
                                                             <rect key="frame" x="175" y="11" width="234" height="4"/>
