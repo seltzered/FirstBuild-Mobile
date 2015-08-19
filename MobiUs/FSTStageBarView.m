@@ -112,7 +112,28 @@ CGFloat point1, point2, point3, point4;
     [dot3 stroke];
     [dot4 stroke];
     
+    //TODO:experimental
+    CAShapeLayer *ring = [CAShapeLayer layer];
+    ring.path = dot1.CGPath;
+    ring.fillColor = [UIColor clearColor].CGColor;
+    ring.strokeColor = [[UIColor orangeColor] CGColor];
+    ring.lineWidth = dot1.lineWidth;
+    [self.layer addSublayer:ring];
+    CABasicAnimation *branchGrowAnimation = [CABasicAnimation animationWithKeyPath:@"lineWidth"];
+    branchGrowAnimation.duration = 3.0;
+    branchGrowAnimation.autoreverses = YES;
+    branchGrowAnimation.repeatCount = HUGE_VAL;
+    branchGrowAnimation.fromValue = [NSNumber numberWithFloat:dotRadius*4];
+    branchGrowAnimation.toValue = [NSNumber numberWithFloat:dotRadius*8];
+    [ring addAnimation:branchGrowAnimation forKey:@"lineWidth"];
+    /////////////
+    
     //[self updateCircle]; // set circle position after drawing. layoutSubviews might take care of this
+}
+
+- (void) drawRing
+{
+    
 }
 
 @end
