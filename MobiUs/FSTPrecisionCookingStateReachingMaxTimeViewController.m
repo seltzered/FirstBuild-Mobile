@@ -17,7 +17,7 @@
 
 @implementation FSTPrecisionCookingStateReachingMaxTimeViewController
 
-NSDate* endTime;
+NSDate* endMaxTime;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,11 +25,11 @@ NSDate* endTime;
 
 - (void) viewWillLayoutSubviews {
     [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMaxTimeLayer class]];
+    [self updatePercent];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updatePercent];
     [self updateLabels];
 }
 
@@ -73,15 +73,17 @@ NSDate* endTime;
         endTime = [NSDate dateWithTimeIntervalSinceNow:((self.targetMaxTime - self.elapsedTime)*60)]; // get the updated max time interval to see when this state will end
     } // wants to update labels and endTime not set, calculate end time, but some times elapsed time is not set*/
     
-    if (!endTime && self.elapsedTime >= 0 && self.targetMaxTime > 0) { // want this to set once, only when the elapsedTime and targetMinTime has been set.
-        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMaxTime - self.elapsedTime)*60]; // want a constant target time that sets once
+    if (!endMaxTime && self.elapsedTime >= 0 && self.targetMaxTime > 0) { // want this to set once, only when the elapsedTime and targetMinTime has been set.
+        endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMaxTime - self.elapsedTime)*60]; // want a constant target time that sets once
     }
 
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60]; // this can some times jump upwards when the elapsed time passes a minute, so the end date does not stay constant
     [dateFormatter setDateFormat:@"hh:mm a"];// get rid of first h?
-    [maxTimeNotice appendAttributedString:[[NSAttributedString alloc] initWithString: [dateFormatter stringFromDate:endTime] attributes:boldFontDict]];
+    if (endMaxTime) {
+        [maxTimeNotice appendAttributedString:[[NSAttributedString alloc] initWithString: [dateFormatter stringFromDate:endMaxTime] attributes:boldFontDict]];
     
-    [self.italicTimeLabel setAttributedText:maxTimeNotice];
+        [self.italicTimeLabel setAttributedText:maxTimeNotice];
+    }
     
     double currentTemperature = self.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended

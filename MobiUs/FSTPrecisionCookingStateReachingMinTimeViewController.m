@@ -28,12 +28,14 @@ NSDate* endTime;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updatePercent];
+    //[self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMinTimeLayer class]];
     [self updateLabels];
+    //[self updatePercent];
 }
 
 - (void)viewWillLayoutSubviews {
     [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMinTimeLayer class]];
+    [self updatePercent]; // sublayer needs to exist first
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,8 +86,11 @@ NSDate* endTime;
     }
     timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
     [self.currentTempLabel setAttributedText:currentTempString];
-    [dateFormatter setDateFormat:@"h:mm a"]; //testing, removed an h
-    [self.endTimeLabel setText:[dateFormatter stringFromDate:endTime]];//timeComplete]]; // end time does not reset when you return to the app, needs to stay on the probe no the view controller. Or it could update once when the screen appears
+    
+    if (endTime) {
+        [dateFormatter setDateFormat:@"h:mm a"]; //testing, removed an h
+        [self.endTimeLabel setText:[dateFormatter stringFromDate:endTime]];//timeComplete]]; // end time does not reset when you return to the app, needs to stay on the probe no the view controller. Or it could update once when the screen appears
+    }
 }
 
 
