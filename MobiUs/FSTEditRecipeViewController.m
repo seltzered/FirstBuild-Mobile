@@ -79,18 +79,17 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     
     if (!self.activeRecipe) {
         self.activeRecipe = [[FSTRecipe alloc] init]; // need a strong property since this could be the unique pointer
+        self.imageEditor.image = [UIImage imageNamed:@"sad-robot"];
+    } else {
+        self.imageEditor.image = self.activeRecipe.photo.image;
     }
+        
     
     [self updateLabels];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    if (self.activeRecipe) {
-        self.imageEditor.image = self.activeRecipe.photo.image;
-    } else {
-        self.imageEditor.image = [UIImage imageNamed:@"sad-robot"];
-    }
     // will probably save the recipes in a dictionary in NSUserDefaults
     [pickerManager selectAllIndices]; // set the current min and max indices on the picker (initially selects lowest possible for min and highest for maxPicker, and we want this to show in the view controller)
     [self.nameField setText:self.activeRecipe.friendlyName];

@@ -35,7 +35,6 @@
 }
 
 -(void) updatePercent {
-    [super updatePercent];
     self.circleProgressView.progressLayer.percent = [self calculatePercentWithTemp:self.currentTemp];
 }
 
