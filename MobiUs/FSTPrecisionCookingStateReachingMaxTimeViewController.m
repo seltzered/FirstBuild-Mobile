@@ -73,7 +73,7 @@ NSDate* endTime;
         endTime = [NSDate dateWithTimeIntervalSinceNow:((self.targetMaxTime - self.elapsedTime)*60)]; // get the updated max time interval to see when this state will end
     } // wants to update labels and endTime not set, calculate end time, but some times elapsed time is not set*/
     
-    if (!endTime && self.elapsedTime >= 0 && self.targetMinTime > 0) { // want this to set once, only when the elapsedTime and targetMinTime has been set.
+    if (!endTime && self.elapsedTime >= 0 && self.targetMaxTime > 0) { // want this to set once, only when the elapsedTime and targetMinTime has been set.
         endTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMaxTime - self.elapsedTime)*60]; // want a constant target time that sets once
     }
 
