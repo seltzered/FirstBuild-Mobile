@@ -132,6 +132,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     stage.targetTemperature = _currentTemperature;
     double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
+    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutes + 30];
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
     //once the temperature is confirmed to be set then it will segue above because
