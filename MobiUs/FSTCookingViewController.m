@@ -98,14 +98,21 @@ NSObject* _cookTimeChangedObserver;
 -(void)transitionToCurrentCookMode
 {
     __weak typeof(self) weakSelf = self;
-
+    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     NSString* stateIdentifier = nil;
     
     switch (weakSelf.currentParagon.cookMode) {
         case FSTParagonCookingStatePrecisionCookingPreheating:
             stateIdentifier = @"preheatingStateSegue";
             weakSelf.continueButton.hidden = YES;
-            weakSelf.stageBar.hidden = NO;
+            if ([_currentCookingStage.cookTimeMinimum isEqualToNumber:[NSNumber numberWithInt:0]])
+            {
+               weakSelf.stageBar.hidden = YES;
+            }
+            else
+            {
+                weakSelf.stageBar.hidden = NO;
+            }
             break;
         case FSTParagonCookingStatePrecisionCookingPreheatingReached:
             stateIdentifier = @"preheatingReachedStateSegue";
