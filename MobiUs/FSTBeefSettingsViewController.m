@@ -84,6 +84,9 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     UIFont *labelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:12.0];
     NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
     
+    UIFont *bigLabelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
+    NSDictionary *bigLabelFontDict = [NSDictionary dictionaryWithObject: bigLabelFont forKey:NSFontAttributeName];
+    
     NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
     NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[1]);
     //TODO add actual data rather than this temporary demonstration, setting the max time one hour above
@@ -115,15 +118,15 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self.maxBeefSettingsLabel setAttributedText:maxHourString]; // hour string with one additional hour
     [self.tempSettingsLabel setAttributedText:temperature];
     
-    NSMutableAttributedString* thicknessString = [[NSMutableAttributedString alloc] initWithString:[_currentThickness stringValue] attributes:labelFontDict];
-    NSMutableAttributedString* thicknessStringTag = [[NSMutableAttributedString alloc] initWithString:@"\"" attributes:labelFontDict];
+    NSMutableAttributedString* thicknessString = [[NSMutableAttributedString alloc] initWithString:[_currentThickness stringValue] attributes:bigLabelFontDict];
+    NSMutableAttributedString* thicknessStringTag = [[NSMutableAttributedString alloc] initWithString:@"\"" attributes:bigLabelFontDict];
     [thicknessString appendAttributedString:thicknessStringTag];
     // number then '" Thickness'
     
     [self.thicknessLabel setAttributedText:thicknessString];
     
     // label above doneness slider
-    [self.donenessLabel setAttributedText:[[NSAttributedString alloc] initWithString:[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature] attributes:labelFontDict]];
+    [self.donenessLabel setAttributedText:[[NSAttributedString alloc] initWithString:[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature] attributes:bigLabelFontDict]];
 }
 
 - (void)didReceiveMemoryWarning {
