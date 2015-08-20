@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LRW-2o-PG4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -32,6 +32,9 @@
             <string>FSEmeric</string>
         </mutableArray>
         <mutableArray key="FSEmeric-SemiBold.otf">
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
@@ -2543,10 +2546,41 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAC-5m-r4X" userLabel="progressView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L57-KY-fZU" userLabel="circleProgressView" customClass="FSTCookingProgressView">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAQ-cI-qhi" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmh-hW-TgD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeU-mV-AWa" userLabel="target temp">
+                                                <rect key="frame" x="230" y="249" width="140" height="21.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="140" id="qpE-dF-gNV"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
+                                                <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxX-Lp-dIG">
+                                                <rect key="frame" x="268" y="289" width="64.5" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
+                                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIP-Fm-Wb2" userLabel="currentTemp">
+                                                <rect key="frame" x="295.5" y="311" width="9.5" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="DLb-Qt-B8r"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
+                                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mu9-nc-4kG">
+                                                <rect key="frame" x="241" y="281" width="117" height="1"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="HGg-Ly-MUb"/>
+                                                </constraints>
+                                            </view>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5B-A6-vAw">
                                                 <rect key="frame" x="129" y="109" width="105" height="22"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2554,34 +2588,37 @@
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="L57-KY-fZU" secondAttribute="height" multiplier="1:1" id="5yy-5P-40V"/>
+                                            <constraint firstItem="WeU-mV-AWa" firstAttribute="centerY" secondItem="D5B-A6-vAw" secondAttribute="centerY" id="5g2-ql-eO7"/>
+                                            <constraint firstAttribute="centerY" secondItem="WeU-mV-AWa" secondAttribute="centerY" constant="40" id="D2O-uB-Fkr"/>
+                                            <constraint firstItem="mu9-nc-4kG" firstAttribute="top" secondItem="WeU-mV-AWa" secondAttribute="bottom" constant="10" id="PJx-xb-wfV"/>
+                                            <constraint firstItem="WeU-mV-AWa" firstAttribute="centerX" secondItem="mu9-nc-4kG" secondAttribute="centerX" id="Q3n-Ta-8sh"/>
+                                            <constraint firstAttribute="centerX" secondItem="KxX-Lp-dIG" secondAttribute="centerX" id="Rgo-pE-tIc"/>
+                                            <constraint firstAttribute="centerX" secondItem="WeU-mV-AWa" secondAttribute="centerX" id="Y1g-ad-MfZ"/>
+                                            <constraint firstAttribute="centerX" secondItem="nIP-Fm-Wb2" secondAttribute="centerX" id="Zl2-r8-Psd"/>
+                                            <constraint firstItem="WeU-mV-AWa" firstAttribute="width" secondItem="D5B-A6-vAw" secondAttribute="width" id="a6O-CP-oSW"/>
+                                            <constraint firstItem="WeU-mV-AWa" firstAttribute="centerX" secondItem="D5B-A6-vAw" secondAttribute="centerX" id="gKQ-wF-qy1"/>
+                                            <constraint firstAttribute="width" secondItem="dAQ-cI-qhi" secondAttribute="height" multiplier="1:1" id="hQa-VM-Pkg"/>
+                                            <constraint firstAttribute="centerY" secondItem="KxX-Lp-dIG" secondAttribute="centerY" id="iSB-bz-A2I"/>
+                                            <constraint firstItem="KxX-Lp-dIG" firstAttribute="bottom" secondItem="nIP-Fm-Wb2" secondAttribute="top" id="iwC-00-FCk"/>
+                                            <constraint firstItem="WeU-mV-AWa" firstAttribute="height" secondItem="D5B-A6-vAw" secondAttribute="height" id="pgp-YW-WWd"/>
+                                            <constraint firstItem="WeU-mV-AWa" firstAttribute="width" secondItem="mu9-nc-4kG" secondAttribute="width" multiplier="1.2" id="rEI-e0-jKU"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
-                                                <exclude reference="Zmh-hW-TgD"/>
+                                                <exclude reference="D5B-A6-vAw"/>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LC0-Y9-yJd">
-                                        <rect key="frame" x="296" y="286" width="8.5" height="26.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="L57-KY-fZU" firstAttribute="width" secondItem="pAC-5m-r4X" secondAttribute="width" id="IS5-E9-0lA"/>
+                                    <constraint firstAttribute="centerY" secondItem="dAQ-cI-qhi" secondAttribute="centerY" id="Gqv-7D-XFG"/>
                                     <constraint firstAttribute="width" secondItem="pAC-5m-r4X" secondAttribute="height" multiplier="1:1" id="IUI-IK-csv"/>
-                                    <constraint firstAttribute="centerY" secondItem="L57-KY-fZU" secondAttribute="centerY" id="N4U-Yb-Yqe"/>
-                                    <constraint firstItem="LC0-Y9-yJd" firstAttribute="centerY" secondItem="L57-KY-fZU" secondAttribute="centerY" id="NZK-rD-tsd"/>
-                                    <constraint firstItem="L57-KY-fZU" firstAttribute="height" secondItem="pAC-5m-r4X" secondAttribute="height" multiplier="0.7" id="YN5-gv-4mp"/>
-                                    <constraint firstItem="LC0-Y9-yJd" firstAttribute="centerX" secondItem="L57-KY-fZU" secondAttribute="centerX" id="dea-g0-FDD"/>
-                                    <constraint firstAttribute="centerX" secondItem="L57-KY-fZU" secondAttribute="centerX" id="oop-Ei-irW"/>
+                                    <constraint firstAttribute="centerX" secondItem="dAQ-cI-qhi" secondAttribute="centerX" id="isi-dk-shN"/>
+                                    <constraint firstItem="dAQ-cI-qhi" firstAttribute="width" secondItem="pAC-5m-r4X" secondAttribute="width" id="xHe-en-zp7"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="IUI-IK-csv"/>
-                                        <exclude reference="YN5-gv-4mp"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2620,8 +2657,9 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="circleProgressView" destination="L57-KY-fZU" id="qzn-9P-wQ7"/>
-                        <outlet property="currentTempLabel" destination="LC0-Y9-yJd" id="tk0-8h-hsV"/>
+                        <outlet property="circleProgressView" destination="dAQ-cI-qhi" id="Mh4-Lb-NfW"/>
+                        <outlet property="currentTempLabel" destination="nIP-Fm-Wb2" id="5YV-EC-wA8"/>
+                        <outlet property="targetTempLabel" destination="WeU-mV-AWa" id="Ia8-DT-EJ8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2K-PO-xdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
