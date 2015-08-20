@@ -458,6 +458,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         //in precision cooking mode and preheating
         self.cookMode = FSTParagonCookingStatePrecisionCookingPreheating;
+        // TODO: this might cause the problem with precision cooking without time
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
     {

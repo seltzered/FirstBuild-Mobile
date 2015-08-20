@@ -14,6 +14,7 @@
 @interface FSTBeefSettingsViewController : FSTCookSettingsViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *beefSettingsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *maxBeefSettingsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tempSettingsLabel;
 @property (weak, nonatomic) IBOutlet UISlider *donenessSlider;
 @property (weak, nonatomic) IBOutlet UILabel *donenessLabel;

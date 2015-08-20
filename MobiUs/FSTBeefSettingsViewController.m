@@ -78,16 +78,19 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 - (void)updateLabels
 {
     //temperature label
-    UIFont *boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:24.0];
+    UIFont *boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:15.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
     
-    UIFont *labelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:21.0];
+    UIFont *labelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:12.0];
     NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
     
     NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
     NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[1]);
+    //TODO add actual data rather than this temporary demonstration, setting the max time one hour above
+    NSNumber* maxHour = [NSNumber numberWithInteger:[hour integerValue] + 1];
     
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: boldFontDict];
+    NSMutableAttributedString *maxHourString = [[NSMutableAttributedString alloc] initWithString:[maxHour stringValue] attributes: boldFontDict];
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H : " attributes: labelFontDict];
     NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[minute stringValue] attributes: boldFontDict];
     NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: labelFontDict];
@@ -100,12 +103,16 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [hourString appendAttributedString:minuteString];
     [hourString appendAttributedString:minuteLabel];
     //[hourString appendAttributedString:separator];
+    [maxHourString appendAttributedString:hourLabel];
+    [maxHourString appendAttributedString:minuteString];
+    [maxHourString appendAttributedString:minuteLabel];
     [temperature appendAttributedString:degreeString];
     [temperature appendAttributedString:temperatureLabel];
     
     // two seperate labels now
     
     [self.beefSettingsLabel setAttributedText:hourString];
+    [self.maxBeefSettingsLabel setAttributedText:maxHourString]; // hour string with one additional hour
     [self.tempSettingsLabel setAttributedText:temperature];
     
     NSMutableAttributedString* thicknessString = [[NSMutableAttributedString alloc] initWithString:[_currentThickness stringValue] attributes:labelFontDict];
@@ -132,7 +139,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     stage.targetTemperature = _currentTemperature;
     double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
-    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutes + 30];
+    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutes + 60];
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
     //once the temperature is confirmed to be set then it will segue above because
