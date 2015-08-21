@@ -52,7 +52,6 @@ FSTRecipeManager* recipeManager;
     }
 }
 
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -75,7 +74,7 @@ FSTRecipeManager* recipeManager;
 
 -(void)startCookingWithSession:(FSTParagonCookingSession *)session {
     self.currentParagon.toBeCookingMethod.session = session; // set the method?
-    [self.currentParagon startHeating];
+    [self.currentParagon startHeatingWithStage:self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]];
     [self performSegueWithIdentifier:@"cookingSegue" sender:self];
 }
 

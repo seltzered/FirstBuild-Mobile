@@ -166,7 +166,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.cookingLabel = @"Custom Profile";
     //stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
-    [self.currentParagon startHeating];
+    [self.currentParagon startHeatingWithStage:stage];
 }
 
 - (void)dealloc

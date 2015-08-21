@@ -61,11 +61,9 @@ __weak NSTimer* _readCharacteristicsTimer;
         [self.currentCookingMethod createCookingSession];
         [self.currentCookingMethod addStageToCookingSession];
         
-        //setup the to-be cooking method, which is the settings for the building
-        //out of a new method and session
-        self.toBeCookingMethod = [[FSTCookingMethod alloc]init];
-        [self.toBeCookingMethod createCookingSession];
-        [self.toBeCookingMethod addStageToCookingSession];
+        //forcibly set the toBe cooking method to nil since we are just creating the paragon
+        //object and there is not way it could exist yet
+        self.toBeCookingMethod = nil;
         
         self.burners = [NSArray arrayWithObjects:[FSTBurner new], [FSTBurner new],[FSTBurner new],[FSTBurner new],[FSTBurner new], nil];
         
@@ -88,28 +86,31 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 #pragma mark - External Interface Selectors
 
--(void)startHeating
+-(void)startHeatingWithStage: (FSTParagonCookingStage*)stage
 {
-    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
-    [self writeTargetTemperature:toBeStage.targetTemperature];
+    if (!stage)
+    {
+        DLog(@"no stage set when attempting to heat");
+        return;
+    }
+    
+    [self writeTargetTemperature:stage.targetTemperature];
 }
 
--(void)setCookingTimes
+-(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage
 {
-    FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
-    
-    //TODO: - once we actually have max time then remove this calculation
-    //toBeStage.cookTimeMaximum = [NSNumber numberWithInt:[cookingTimeMinimum intValue] + 3*60];
-    
+    if (!stage)
+    {
+        DLog(@"no stage set when attempting to send cooking times");
+        return;
+    }
+
     //must reset elapsed time to 0 before writing the cooktime
     [self writeElapsedTime];
-    [self writeCookTimesWithMinimumCooktime:toBeStage.cookTimeMinimum havingMaximumCooktime:toBeStage.cookTimeMaximum];
+    [self writeCookTimesWithMinimumCooktime:stage.cookTimeMinimum havingMaximumCooktime:stage.cookTimeMaximum];
     
-    //erase the tobe cooktimes now that they are set
-    //TODO: - this needs attention using a workaround now. we need to reset the cooktime here
-    //but the determine state logic keys throws it to precision cooking without time because
-    //tobe cooktime is 0 and the actual cook time is not yet written.
-    toBeStage.cookTimeMaximum = [NSNumber numberWithInt:-1];
+    //now that we set everything, lets git rid of the stage
+    stage = nil;
 }
 
 #pragma mark - Write Handlers
@@ -429,14 +430,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     
-    //kind of hacky, but force the min and max cook time to 0 when
-    //we detect the burner has been turned off
-    if (self.burnerMode == kPARAGON_OFF)
-    {
-        [self writeElapsedTime];
-        [self writeCookTimesWithMinimumCooktime:[NSNumber numberWithInt:0] havingMaximumCooktime:[NSNumber numberWithInt:0]];
-    }
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
     [self determineCookMode];
 }
@@ -453,6 +446,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     if (self.burnerMode == kPARAGON_OFF)
     {
         self.cookMode = FSTParagonCookingStateOff;
+       
     }
     else if (self.burnerMode == kPARAGON_PRECISION_PREHEATING)
     {
@@ -478,19 +472,19 @@ __weak NSTimer* _readCharacteristicsTimer;
             //elapsed time is less than the minimum time and the cook time is set
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMinTime;
         }
-        else if ([toBeStage.cookTimeMinimum doubleValue] > 0)
+        else if (toBeStage && [toBeStage.cookTimeMinimum doubleValue] > 0)
         {
             //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
             self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
         }
-        else if([currentStage.cookTimeMinimum doubleValue] == 0 && [toBeStage.cookTimeMaximum doubleValue] != -1)
+        else if([currentStage.cookTimeMinimum doubleValue] == 0 && !toBeStage)
         {
-            //TODO: workaround, see setCookingTimes
             //cook time not set
             self.cookMode = FSTParagonCookingStatePrecisionCookingWithoutTime;
         }
         else
         {
+            self.cookMode = FSTParagonCookingStateUnknown;
             DLog(@"UNABLE TO DETERMINE COOK MODE");
         }
     }
@@ -499,6 +493,14 @@ __weak NSTimer* _readCharacteristicsTimer;
     if (self.cookMode != currentCookMode)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookingModeChangedNotification object:self];
+        
+        //now if the cooking mode has changed to off lets reset the values by
+        //writing them to the paragon
+        if (self.cookMode == FSTParagonCookingStateOff)
+        {
+            [self writeElapsedTime];
+            [self writeCookTimesWithMinimumCooktime:[NSNumber numberWithInt:0] havingMaximumCooktime:[NSNumber numberWithInt:0]];
+        }
     }
 
 }
@@ -636,7 +638,15 @@ __weak NSTimer* _readCharacteristicsTimer;
     NSLog(@"------PARAGON-------");
     NSLog(@"bmode %d, cmode %d, curtmp %@", self.burnerMode, self.cookMode, currentStage.actualTemperature);
     NSLog(@"\tACTUAL: tartmp %@, mint %@, maxt %@, elapt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeElapsed);
-    NSLog(@"\t  TOBE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum, toBeStage.cookTimeElapsed);
+    if (toBeStage)
+    {
+        NSLog(@"\t  TOBE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
+    }
+    else
+    {
+        NSLog(@"\t TOBE: not set");
+    }
+    
 }
 #endif
 
