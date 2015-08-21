@@ -78,10 +78,10 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 - (void)updateLabels
 {
     //temperature label
-    UIFont *boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:15.0];
+    UIFont *boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:17.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
     
-    UIFont *labelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:12.0];
+    UIFont *labelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:14.0];
     NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
     
     UIFont *bigLabelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
@@ -94,9 +94,9 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: boldFontDict];
     NSMutableAttributedString *maxHourString = [[NSMutableAttributedString alloc] initWithString:[maxHour stringValue] attributes: boldFontDict];
-    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@"H : " attributes: labelFontDict];
-    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[minute stringValue] attributes: boldFontDict];
-    NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: labelFontDict];
+    NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: labelFontDict];
+    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"%02d",[minute integerValue]] attributes: boldFontDict];
+    //NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: labelFontDict];
     //NSMutableAttributedString *separator = [[NSMutableAttributedString alloc] initWithString:@"  |  " attributes: boldFontDict];
     NSMutableAttributedString *temperature = [[NSMutableAttributedString alloc] initWithString:[_currentTemperature stringValue] attributes: boldFontDict];
     NSMutableAttributedString *degreeString = [[NSMutableAttributedString alloc] initWithString:@"\u00b0" attributes:boldFontDict];
@@ -104,11 +104,11 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     
     [hourString appendAttributedString:hourLabel];
     [hourString appendAttributedString:minuteString];
-    [hourString appendAttributedString:minuteLabel];
+    //[hourString appendAttributedString:minuteLabel];
     //[hourString appendAttributedString:separator];
     [maxHourString appendAttributedString:hourLabel];
     [maxHourString appendAttributedString:minuteString];
-    [maxHourString appendAttributedString:minuteLabel];
+    //[maxHourString appendAttributedString:minuteLabel];
     [temperature appendAttributedString:degreeString];
     [temperature appendAttributedString:temperatureLabel];
     
