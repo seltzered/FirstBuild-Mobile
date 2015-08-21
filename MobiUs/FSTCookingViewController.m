@@ -98,6 +98,7 @@ NSObject* _cookTimeChangedObserver;
 -(void)transitionToCurrentCookMode
 {
     __weak typeof(self) weakSelf = self;
+    __block FSTParagonCookingStage* _toBeCookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.currentCookingMethod.session.paragonCookingStages[0]);
     NSString* stateIdentifier = nil;
     
@@ -105,13 +106,18 @@ NSObject* _cookTimeChangedObserver;
         case FSTParagonCookingStatePrecisionCookingPreheating:
             stateIdentifier = @"preheatingStateSegue";
             weakSelf.continueButton.hidden = YES;
-            if ([_currentCookingStage.cookTimeMinimum isEqualToNumber:[NSNumber numberWithInt:0]])
+            
+            //if we have a current cook time or a to be cooktime then we need a stage bar
+            if (
+                    (_toBeCookingStage && [_toBeCookingStage.cookTimeMinimum intValue] > 0) ||
+                    [_currentCookingStage.cookTimeMinimum intValue] > 0
+                )
             {
-               weakSelf.stageBar.hidden = YES;
+               weakSelf.stageBar.hidden = NO;
             }
             else
             {
-                weakSelf.stageBar.hidden = NO;
+                weakSelf.stageBar.hidden = YES;
             }
             break;
         case FSTParagonCookingStatePrecisionCookingPreheatingReached:
@@ -189,20 +195,8 @@ NSObject* _cookTimeChangedObserver;
 }
 
 - (IBAction)continueButtonTap:(id)sender {
-
-    //write the cooking time, once the cooktime is written to the paragon
-    //the appropriate state will automatically update in FSTParagon and
-    //then dispatch the corresponding state, which the cookModeChangeObserver will
-    //pickup and transition to the correct embeded view
-    FSTParagonCookingStage* _cookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]);
     
-//    TODO: HACK TESTING
-//    _cookingStage.cookTimeMinimum = [NSNumber numberWithInt:2];
-//    _cookingStage.cookTimeMaximum = [NSNumber numberWithInt:4];
-//    END TODO
-
-    
-    [self.currentParagon setCookingTimes];
+    [self.currentParagon setCookingTimesWithStage:self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]];
     
     //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode
     self.continueButton.userInteractionEnabled = NO;

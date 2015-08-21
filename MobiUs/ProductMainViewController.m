@@ -63,7 +63,6 @@ FSTParagonDisconnectedLabel* _warningLabel;
             [_warningLabel removeFromSuperview];
             _warningLabel = nil;
         }
-        
     }];
 
     

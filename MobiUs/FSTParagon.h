@@ -26,9 +26,14 @@ typedef enum {
     FSTParagonCookingStatePrecisionCookingReachingMaxTime = 4,
     FSTParagonCookingStatePrecisionCookingPastMaxTime = 5,
     FSTParagonCookingStatePrecisionCookingWithoutTime = 6,
+    
     //direct cooking
     FSTParagonCookingDirectCooking,
-    FSTParagonCookingDirectCookingWithTime
+    FSTParagonCookingDirectCookingWithTime,
+    
+    //unknown
+    FSTParagonCookingStateUnknown
+    
 } ParagonCookMode;
 
 extern NSString * const FSTActualTemperatureChangedNotification;
@@ -51,7 +56,7 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 @property (nonatomic, strong) NSArray* burners;
  // a percentage that tells how many characteristics loaded
 
-- (void)startHeating;
-- (void)setCookingTimes;
+-(void)startHeatingWithStage: (FSTParagonCookingStage*)stage;
+-(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
 
 @end

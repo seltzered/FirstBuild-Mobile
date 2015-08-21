@@ -32,12 +32,12 @@ FSTCookingMethods* _methods;
     {
         ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
     }
-    
-    
 }
 
 - (void)dealloc
 {
+    //we no longer have a valid cooking method
+    self.product.toBeCookingMethod = nil;
     DLog(@"dealloc");
 }
 
@@ -56,11 +56,14 @@ FSTCookingMethods* _methods;
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    
+    //if we actually have a product chosen for the segue then initialize the cooking method
     if ([sender isKindOfClass:[FSTCookingMethod class]])
     {
         self.product.toBeCookingMethod = (FSTCookingMethod*)sender;
     }
     
+    //if we are segueing to stored recipes, new custom cook mode or a sub selection then
+    //we need to set the paragon
     if  (
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]] ||
