@@ -451,11 +451,14 @@
 		5B3F1C9A19E8845400303242 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				5B9EF0F219DEEE1000E8D9F1 /* Info.plist */,
+				5B9EF0F319DEEE1000E8D9F1 /* main.m */,
+				5B9EF12319DF08E700E8D9F1 /* MobiUs.pch */,
+				5B9EF0F519DEEE1000E8D9F1 /* AppDelegate.h */,
+				5B9EF0F619DEEE1000E8D9F1 /* AppDelegate.m */,
 				5B3F1C9D19E8853500303242 /* model */,
 				5B3F1C9C19E8853000303242 /* views */,
 				5B3F1C9B19E8852A00303242 /* controllers */,
-				5B9EF0F519DEEE1000E8D9F1 /* AppDelegate.h */,
-				5B9EF0F619DEEE1000E8D9F1 /* AppDelegate.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -762,21 +765,18 @@
 		5B9EF0F019DEEE1000E8D9F1 /* FirstBuild */ = {
 			isa = PBXGroup;
 			children = (
-				5BE77E1E1B7D2E6F00B762B8 /* HumanaPillBottle */,
-				5BA3A96F1B3470FA00E51C51 /* BLECommissioning */,
-				5B99DFBF1AB1EA2200247034 /* Paragon */,
-				5B99E0791A1A5870005FB881 /* WifiCommissioning */,
+				5B3F1C9A19E8845400303242 /* Main */,
+				5BA064D01B8743DB002FCE59 /* Apps */,
+				5BA064D11B8743F9002FCE59 /* Device Management */,
 				5BC5A1BC19EF5E6B009C93B1 /* Authentication */,
 				67926FFA19EDDA4B00E346C2 /* Shared */,
-				5B3F1C9A19E8845400303242 /* Main */,
-				5B3F1C9919E8843900303242 /* ChillHub */,
-				5B9EF0F119DEEE1000E8D9F1 /* Supporting Files */,
+				5B9EF0F119DEEE1000E8D9F1 /* Media */,
 			);
 			name = FirstBuild;
 			path = MobiUs;
 			sourceTree = "<group>";
 		};
-		5B9EF0F119DEEE1000E8D9F1 /* Supporting Files */ = {
+		5B9EF0F119DEEE1000E8D9F1 /* Media */ = {
 			isa = PBXGroup;
 			children = (
 				51FAEFF31B62F50C00A7DCF9 /* FSEmeric-ExtraLight.otf */,
@@ -797,11 +797,49 @@
 				67926FF119ED8BA000E346C2 /* PT_Sans-Narrow-Web-Regular.ttf */,
 				5B8C10871A39324C00F481E6 /* fontawesome-webfont.ttf */,
 				67926FF819EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf */,
-				5B9EF0F219DEEE1000E8D9F1 /* Info.plist */,
-				5B9EF0F319DEEE1000E8D9F1 /* main.m */,
-				5B9EF12319DF08E700E8D9F1 /* MobiUs.pch */,
 			);
-			name = "Supporting Files";
+			name = Media;
+			sourceTree = "<group>";
+		};
+		5BA064D01B8743DB002FCE59 /* Apps */ = {
+			isa = PBXGroup;
+			children = (
+				5B3F1C9919E8843900303242 /* ChillHub */,
+				5B99DFBF1AB1EA2200247034 /* Paragon */,
+				5BE77E1E1B7D2E6F00B762B8 /* HumanaPillBottle */,
+			);
+			name = Apps;
+			sourceTree = "<group>";
+		};
+		5BA064D11B8743F9002FCE59 /* Device Management */ = {
+			isa = PBXGroup;
+			children = (
+				5BA064D31B874434002FCE59 /* BLE */,
+				5BA064D21B87442C002FCE59 /* WiFi */,
+			);
+			name = "Device Management";
+			sourceTree = "<group>";
+		};
+		5BA064D21B87442C002FCE59 /* WiFi */ = {
+			isa = PBXGroup;
+			children = (
+				5B99E0791A1A5870005FB881 /* WifiCommissioning */,
+			);
+			name = WiFi;
+			sourceTree = "<group>";
+		};
+		5BA064D31B874434002FCE59 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				5BA3A9851B3C95FF00E51C51 /* FSTBleProduct.h */,
+				5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */,
+				51A9D0291B72492E000AE293 /* FSTBleCharacteristic.h */,
+				51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */,
+				5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */,
+				5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */,
+				5BA3A96F1B3470FA00E51C51 /* BLECommissioning */,
+			);
+			name = BLE;
 			sourceTree = "<group>";
 		};
 		5BA3A96F1B3470FA00E51C51 /* BLECommissioning */ = {
@@ -883,8 +921,6 @@
 			children = (
 				6743AE1D19E30E46000D9CF3 /* MobiNavigationController.h */,
 				6743AE1E19E30E46000D9CF3 /* MobiNavigationController.m */,
-				5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */,
-				5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */,
 				518EDF811B41C46100B443EA /* PushSegueNoAnimation.h */,
 				518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */,
 			);
@@ -901,10 +937,6 @@
 				5BC3649C1A32661B00D03B9C /* FSTProduct.m */,
 				5BD467CB1A35ED54009BAC36 /* FirebaseShared.h */,
 				5BD467CC1A35ED54009BAC36 /* FirebaseShared.m */,
-				5BA3A9851B3C95FF00E51C51 /* FSTBleProduct.h */,
-				5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */,
-				51A9D0291B72492E000AE293 /* FSTBleCharacteristic.h */,
-				51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
