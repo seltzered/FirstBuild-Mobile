@@ -35,12 +35,28 @@
             // might increase line width as well
             ((CAShapeLayer*)[self.markLayers objectForKey:key]).strokeColor = UIColorFromRGB(0xF0663A).CGColor; // place holder, color tick marks firstbuild orange as a progress indicator
             ((CAShapeLayer*)[self.markLayers objectForKey:key]).lineWidth = full_tick_width;
+            
+            //TODO:experimental
+//            CAShapeLayer* layer = ((CAShapeLayer*)[self.markLayers objectForKey:key]);
+//            CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"lineWidth"];
+//            animation.duration = 0.1*[key doubleValue];
+//            //animation.autoreverses = YES;
+//            //animation.repeatCount = HUGE_VAL;
+//            animation.fromValue = [NSNumber numberWithFloat:0];
+//            animation.toValue = [NSNumber numberWithFloat:full_tick_width];
+//            [layer addAnimation:animation forKey:@"lineWidth"];
+            ///////
+            
         } else {
             ((CAShapeLayer*)[self.markLayers objectForKey:key]).strokeColor = [UIColor grayColor].CGColor;
             ((CAShapeLayer*)[self.markLayers objectForKey:key]).lineWidth = empty_tick_width;
         }
     }
     self.sittingLayer.strokeEnd = 0.0F;
+    
+    
+    
+    
 }
 
 @end

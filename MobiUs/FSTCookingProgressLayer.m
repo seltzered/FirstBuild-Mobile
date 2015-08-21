@@ -54,20 +54,20 @@
     self.sittingLayer.lineWidth = sitting_width;
     //self.progressLayerEnd.path = [self drawPathWithArcCenter];
     CGFloat line_length = self.progressLayer.lineWidth/2; // for the short lines
-   for (id key in self.markLayers) {
-       UIBezierPath* ninetyMark = [UIBezierPath bezierPath]; // initialize new path
-       CGFloat x_end = self.frame.size.width/2 + (self.frame.size.width/3)*cos([key doubleValue]); // midpoint
-        CGFloat y_end = self.frame.size.width/2 + (self.frame.size.width/3)*sin([key doubleValue]); // move up by subtracting
-        CGFloat x_start;
-        CGFloat y_start;
-        if (fmod([key doubleValue], M_PI/2) < M_PI/60 || fmod([key doubleValue], M_PI/2) > 29*M_PI/60) { // tweak this around
-            x_start = x_end - cos([key doubleValue])*line_length*1.5; // inset by width of line
-            y_start = y_end - sin([key doubleValue])*line_length*1.5;
+        for (id key in self.markLayers) {
+            UIBezierPath* ninetyMark = [UIBezierPath bezierPath]; // initialize new path
+            CGFloat x_end = self.frame.size.width/2 + (self.frame.size.width/3)*cos([key doubleValue]); // midpoint
+            CGFloat y_end = self.frame.size.width/2 + (self.frame.size.width/3)*sin([key doubleValue]); // move up by subtracting
+            CGFloat x_start;
+            CGFloat y_start;
+            if (fmod([key doubleValue], M_PI/2) < M_PI/60 || fmod([key doubleValue], M_PI/2) > 29*M_PI/60) { // tweak this around
+                x_start = x_end - cos([key doubleValue])*line_length*1.5; // inset by width of line
+                y_start = y_end - sin([key doubleValue])*line_length*1.5;
         } else {
             x_start = x_end - cos([key doubleValue])*line_length;
             y_start = y_end - sin([key doubleValue])*line_length; // add to move down
         }
-       
+
         [ninetyMark moveToPoint:CGPointMake(x_start, y_start)];
         [ninetyMark addLineToPoint:CGPointMake(x_end, y_end)];
         ((CAShapeLayer*)[self.markLayers objectForKey:key]).path = ninetyMark.CGPath;
@@ -89,7 +89,6 @@
 }
 
 - (void)setupLayer { // drawPath probably does nothing here
-    
     
     self.markLayers = [[NSMutableDictionary alloc] init];
     
@@ -123,8 +122,12 @@
     self.sittingLayer.lineJoin = kCALineJoinRound;
     
     [self addSublayer:self.bottomLayer];
-    CGFloat mark_angle = 2*M_PI/60; // denominator as number of marks
-    for (CGFloat i = 0; i < 2*M_PI; i += mark_angle) { // might do this for the whole shebang
+    
+    // denominator as number of marks
+    CGFloat mark_angle = 2*M_PI/60;
+    
+    // might do this for the whole shebang
+    for (CGFloat i = 0; i < 2*M_PI; i += mark_angle) {
         CAShapeLayer* newMark = [CAShapeLayer layer];
         newMark.strokeColor = [[UIColor grayColor] colorWithAlphaComponent:0.6].CGColor;
         newMark.lineWidth = self.progressLayer.lineWidth/10; // overwritten in drawPaths
