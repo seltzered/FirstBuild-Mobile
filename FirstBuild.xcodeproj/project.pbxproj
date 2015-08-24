@@ -580,38 +580,13 @@
 		5B99DFC01AB1EA2900247034 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				5BA064D61B8B46EC002FCE59 /* recipe management */,
+				5BA064D51B8B46B9002FCE59 /* paragon cooktop */,
+				5BA064D41B8B4654002FCE59 /* cooking methods */,
 				5B7338BE1B0F9CEA004C931E /* Session.h */,
 				5B7338BF1B0F9CEA004C931E /* Session.m */,
 				515CD89E1B7E16F50087F9C7 /* FSTStagePickerManager.h */,
 				515CD89F1B7E16F50087F9C7 /* FSTStagePickerManager.m */,
-				5B99DFC31AB1EB2D00247034 /* FSTParagon.h */,
-				5B99DFC41AB1EB2D00247034 /* FSTParagon.m */,
-				5BCBB9F71B03905F00B8E043 /* FSTCookingMethod.m */,
-				5BCBB9F61B03905F00B8E043 /* FSTCookingMethod.h */,
-				5BCBB9FF1B03CA5200B8E043 /* FSTCookingMethods.h */,
-				5BCBBA001B03CA5200B8E043 /* FSTCookingMethods.m */,
-				5BCBBA021B03E92300B8E043 /* FSTSousVideCookingMethods.h */,
-				5BCBBA031B03E92300B8E043 /* FSTSousVideCookingMethods.m */,
-				5BCBB9F91B03909000B8E043 /* FSTSousVideCookingMethod.h */,
-				5BCBB9FA1B03909000B8E043 /* FSTSousVideCookingMethod.m */,
-				5BCBB9FC1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.h */,
-				5BCBB9FD1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m */,
-				5BA064C71B8380E6002FCE59 /* FSTCandyCookingMethods.h */,
-				5BA064C81B8380E6002FCE59 /* FSTCandyCookingMethods.m */,
-				5BA064CA1B83816C002FCE59 /* FSTCandyCookingMethod.h */,
-				5BA064CB1B83816C002FCE59 /* FSTCandyCookingMethod.m */,
-				5BA064CD1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.h */,
-				5BA064CE1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.m */,
-				515CD8981B7CD6340087F9C7 /* FSTRecipe.h */,
-				515CD8991B7CD6340087F9C7 /* FSTRecipe.m */,
-				51EA9E471B82192800A3F421 /* FSTRecipeManager.h */,
-				51EA9E481B82192900A3F421 /* FSTRecipeManager.m */,
-				5B4460271B1E25D5001A4953 /* FSTParagonCookingSession.h */,
-				5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */,
-				5B44602A1B1E2601001A4953 /* FSTParagonCookingStage.h */,
-				5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */,
-				5B9A6F4E1B50173F00BDD727 /* FSTBurner.h */,
-				5B9A6F4F1B50173F00BDD727 /* FSTBurner.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -865,6 +840,55 @@
 				5BA3A96F1B3470FA00E51C51 /* BLECommissioning */,
 			);
 			name = BLE;
+			sourceTree = "<group>";
+		};
+		5BA064D41B8B4654002FCE59 /* cooking methods */ = {
+			isa = PBXGroup;
+			children = (
+				5BCBB9FF1B03CA5200B8E043 /* FSTCookingMethods.h */,
+				5BCBBA001B03CA5200B8E043 /* FSTCookingMethods.m */,
+				5BCBB9F61B03905F00B8E043 /* FSTCookingMethod.h */,
+				5BCBB9F71B03905F00B8E043 /* FSTCookingMethod.m */,
+				5BCBBA021B03E92300B8E043 /* FSTSousVideCookingMethods.h */,
+				5BCBBA031B03E92300B8E043 /* FSTSousVideCookingMethods.m */,
+				5BCBB9F91B03909000B8E043 /* FSTSousVideCookingMethod.h */,
+				5BCBB9FA1B03909000B8E043 /* FSTSousVideCookingMethod.m */,
+				5BCBB9FC1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.h */,
+				5BCBB9FD1B0390C500B8E043 /* FSTBeefSousVideCookingMethod.m */,
+				5BA064C71B8380E6002FCE59 /* FSTCandyCookingMethods.h */,
+				5BA064C81B8380E6002FCE59 /* FSTCandyCookingMethods.m */,
+				5BA064CA1B83816C002FCE59 /* FSTCandyCookingMethod.h */,
+				5BA064CB1B83816C002FCE59 /* FSTCandyCookingMethod.m */,
+				5BA064CD1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.h */,
+				5BA064CE1B8383E6002FCE59 /* FSTCaramelBrittleCandyCooking.m */,
+			);
+			name = "cooking methods";
+			sourceTree = "<group>";
+		};
+		5BA064D51B8B46B9002FCE59 /* paragon cooktop */ = {
+			isa = PBXGroup;
+			children = (
+				5B99DFC31AB1EB2D00247034 /* FSTParagon.h */,
+				5B99DFC41AB1EB2D00247034 /* FSTParagon.m */,
+				5B4460271B1E25D5001A4953 /* FSTParagonCookingSession.h */,
+				5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */,
+				5B44602A1B1E2601001A4953 /* FSTParagonCookingStage.h */,
+				5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */,
+				5B9A6F4E1B50173F00BDD727 /* FSTBurner.h */,
+				5B9A6F4F1B50173F00BDD727 /* FSTBurner.m */,
+			);
+			name = "paragon cooktop";
+			sourceTree = "<group>";
+		};
+		5BA064D61B8B46EC002FCE59 /* recipe management */ = {
+			isa = PBXGroup;
+			children = (
+				515CD8981B7CD6340087F9C7 /* FSTRecipe.h */,
+				515CD8991B7CD6340087F9C7 /* FSTRecipe.m */,
+				51EA9E471B82192800A3F421 /* FSTRecipeManager.h */,
+				51EA9E481B82192900A3F421 /* FSTRecipeManager.m */,
+			);
+			name = "recipe management";
 			sourceTree = "<group>";
 		};
 		5BA3A96F1B3470FA00E51C51 /* BLECommissioning */ = {
@@ -1421,6 +1445,7 @@
 				GCC_PREFIX_HEADER = MobiUs/MobiUs.pch;
 				INFOPLIST_FILE = MobiUs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = FirstBuild;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1445,6 +1470,7 @@
 				GCC_PREFIX_HEADER = MobiUs/MobiUs.pch;
 				INFOPLIST_FILE = MobiUs/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = FirstBuild;
 				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = YES;
