@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EKb-eh-HBY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EKb-eh-HBY">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -117,11 +117,11 @@
                                             </constraint>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="40w-LY-aXa" customClass="FSTRegularLabel">
-                                        <rect key="frame" x="174" y="393" width="250" height="41"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon. This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="40w-LY-aXa" customClass="FSTRegularLabel">
+                                        <rect key="frame" x="169" y="393" width="260" height="41"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="250" id="UK2-I6-zY3">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="225"/>
+                                            <constraint firstAttribute="width" constant="260" id="UK2-I6-zY3">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="280"/>
                                             </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -272,26 +272,26 @@
                                     </constraint>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Searching for your Paragon This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKq-fc-GoK" customClass="FSTRegularLabel">
-                                <rect key="frame" x="174" y="413" width="250" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="PfG-24-6FO">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="225"/>
-                                    </constraint>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                </variation>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="JCE-hF-dbv">
                                 <rect key="frame" x="0.0" y="535" width="600" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="Qlx-VM-RAF"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon. This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKq-fc-GoK" customClass="FSTRegularLabel">
+                                <rect key="frame" x="170" y="413" width="260" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="PfG-24-6FO">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="280"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -556,7 +556,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a2p-OA-5ga">
-                                <rect key="frame" x="119" y="340" width="360" height="43"/>
+                                <rect key="frame" x="119" y="340" width="360" height="42.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="TtA-0U-D77">
                                         <variation key="heightClass=regular-widthClass=regular" constant="55"/>
@@ -582,11 +582,16 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kYK-qy-P1L">
                                 <rect key="frame" x="134" y="437" width="330" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="0.25" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="pAo-uf-sm9">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                    </constraint>
+                                </constraints>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 </variation>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITX-t3-yHe" userLabel="continueButtonHolderView">

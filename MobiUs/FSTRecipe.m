@@ -15,6 +15,7 @@
         self.recipeId = [decoder decodeObjectForKey:@"recipeId"];
         self.friendlyName = [decoder decodeObjectForKey:@"friendlyName"];
         self.note = [decoder decodeObjectForKey:@"note"];
+        self.ingredients = [decoder decodeObjectForKey:@"ingredients"];
         self.method = [decoder decodeObjectForKey:@"method"];
         self.photo = [decoder decodeObjectForKey:@"photo"];
     }
@@ -35,6 +36,7 @@
     [encoder encodeObject:self.recipeId forKey:@"recipeId"];
     [encoder encodeObject:self.friendlyName forKey:@"friendlyName"];
     [encoder encodeObject:self.note forKey:@"note"];
+    [encoder encodeObject:self.ingredients forKey:@"ingredients"];
     [encoder encodeObject:self.method forKey:@"method"]; // this session will need its own coder
     [encoder encodeObject:self.photo forKey:@"photo"];
 }

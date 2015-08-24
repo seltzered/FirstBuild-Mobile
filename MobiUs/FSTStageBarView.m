@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) NSMutableArray* grayDots;
 
+@property (nonatomic, strong) NSMutableArray* dotTransforms;
+
 @property (nonatomic) CGFloat lineWidth; // this was public before, could just be a global variable
 
 @end
@@ -37,6 +39,7 @@
 }
 
 -(void) awakeFromNib {
+    [super awakeFromNib];
     //self.dotPaths = [[NSMutableArray alloc] init];
     [self setupDots];
 }
@@ -46,6 +49,7 @@
     //[self addSubview:self.circleMarker]; // create the circle marker
     //self.dotPaths = [[NSMutableArray alloc] init];
     self.grayDots = [[NSMutableArray alloc] init]; // an array to hold all the dot subviews
+    self.dotTransforms = [[NSMutableArray alloc] init];
     /*for (int idots = 0; idots < 4; idots++) {
         [self.dotPaths addObject:[UIBezierPath bezierPath]];
     } // instantiate four bezier paths*/
@@ -54,33 +58,72 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.lineWidth = 4*self.bounds.size.width/5; //update scaled linewidth so subviews can match (same proportion set in drawRect, but with scaled up
+    // this is too early to arrange the transforms. all the dots need to be drawn
+    //[self arrangeTransforms];
     [self updateCircle];
 }
 
-- (void) updateCircle {
-    /*CGFloat new_x = 0; // change x position of stageCircle
-    CGFloat mid_x = self.bounds.size.width/2;
-    CGFloat start_x = mid_x - self.lineWidth/2; //start of bar (line is slightly inset)*/ // is there a better place to set the dot paths?
-    // points for dots set here
-    // I need to call draw rect again
+- (void) arrangeTransforms {
+    
+    if (self.dotTransforms.count > 0) {
+        [self.dotTransforms removeAllObjects];
+    }
+    CGFloat ringScale = 0.3; // how much the line widht shrinks down (for some reason scaling down the path makes our stroke thinner
+    //baseline scale transform that every dot undergoes
+    CGAffineTransform sizeTransform = CGAffineTransformMakeScale(ringScale, ringScale);
+    // use these bounds to calculate the size for offsets and scales (never mind, it scales relative to the layer bounds
+    CGAffineTransform ringTransform;
+    CGRect circleBounds;
+    CGSize ringSize;
+    CGFloat offsetWidth, offsetHeight;
+    CGSize ringOffset;
+    
+    for (int itr = 0; itr < 4; itr++) {
+        circleBounds = CGPathGetBoundingBox(((CAShapeLayer*)self.grayDots[itr]).path);
+         // calculate what size the ring will be after this transform for the offset
+        ringSize = CGSizeApplyAffineTransform(CGSizeMake(circleBounds.origin.x + circleBounds.size.width/2, circleBounds.origin.y + circleBounds.size.height/2), sizeTransform);
+        // get the rectangle of its position in which it scales down
+        // establish the offset to place the ring in the center
+        offsetWidth = circleBounds.origin.x + circleBounds.size.width/2 - ringSize.width;
+        offsetHeight = circleBounds.origin.y + circleBounds.size.height/2 - ringSize.height;
+        ringOffset = CGSizeMake(offsetWidth/(ringScale), offsetHeight/(ringScale));
+        // mix that transform with the offset
+        ringTransform = CGAffineTransformTranslate(sizeTransform, ringOffset.width, ringOffset.height);
+        [self.dotTransforms addObject:[NSValue valueWithCGAffineTransform:ringTransform]];//ringOffset.width, ringOffset.height);
+        // something goes really wrong
+    }
+    
+}
+
+- (void) updateCircle { // problem on ipad, all layers need to update their position
+    
+     // ring is about a third the width of those gray dots
     if (self.grayDots.count >= 4) { // sometimes can enter updateCircle before drawing the rect, so grayDots need to be set first.
+        // transforms should have already been set up
+        
+        
+        CGAffineTransform transform;
+
         switch (self.circleState) {
             case FSTParagonCookingStatePrecisionCookingPreheating:
-                self.ring.path = ((CAShapeLayer*)self.grayDots[0]).path;//new_x = start_x; // beginning of bar
+                transform = [(NSValue*)self.dotTransforms[0] CGAffineTransformValue];
+                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[0]).path, &transform);//new_x = start_x; //((CAShapeLayer*)self.grayDots[0]).path;// beginning of bar
                     ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor orangeColor].CGColor;
                     ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor orangeColor].CGColor;
                     ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
                     ((CAShapeLayer*)self.grayDots[3]).strokeColor = [UIColor orangeColor].CGColor;
                 break;
             case FSTParagonCookingStatePrecisionCookingPreheatingReached:
-                self.ring.path = ((CAShapeLayer*)self.grayDots[1]).path;//new_x = start_x + self.lineWidth/3;
+                transform = [(NSValue*)self.dotTransforms[1] CGAffineTransformValue];
+                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[1]).path, &transform);//self.ring.path = ((CAShapeLayer*)self.grayDots[1]).path;//new_x = start_x + self.lineWidth/3;
                 ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor grayColor].CGColor;
                 ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor orangeColor].CGColor;
                 ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
                 ((CAShapeLayer*)self.grayDots[3]).strokeColor = [UIColor orangeColor].CGColor;
                 break;
             case FSTParagonCookingStatePrecisionCookingReachingMinTime:
-                self.ring.path = ((CAShapeLayer*)self.grayDots[2]).path;//new_x = start_x + 2*self.lineWidth/3;
+                transform = [(NSValue*)self.dotTransforms[2] CGAffineTransformValue];
+                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[2]).path, &transform);//new_x = start_x + 2*self.lineWidth/3;
                 ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor grayColor].CGColor;
                 ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor grayColor].CGColor;
                 ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
@@ -88,7 +131,8 @@
                 break;
             case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
             case FSTParagonCookingStatePrecisionCookingPastMaxTime:
-                self.ring.path = ((CAShapeLayer*)self.grayDots[3]).path;//new_x = start_x + self.lineWidth;
+                transform = [(NSValue*)self.dotTransforms[3] CGAffineTransformValue];
+                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[3]).path, &transform);//new_x = start_x + self.lineWidth;
                 ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor grayColor].CGColor;
                 ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor grayColor].CGColor;
                 ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor grayColor].CGColor;
@@ -96,15 +140,17 @@
                 break;
             default:
                 NSLog(@"NO STATE FOR STAGE BAR\n");
-                self.ring.path = ((CAShapeLayer*)self.grayDots[0]).path;//new_x = start_x + self.lineWidth/2; // we'll just hide this anyway
+                transform = [(NSValue*)self.dotTransforms[0] CGAffineTransformValue];
+                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[0]).path, &transform);
+                //self.ring.path = ((CAShapeLayer*)self.grayDots[0]).path;//new_x = start_x + self.lineWidth/2; // we'll just hide this anyway
                 break;
         } // need to integrate with new states, or commit animations at every transition
         //[self setNeedsDisplay]; // get it to redraw with new state this failed miserably because of the invalid context
         
-    }
+    }// end if statement
     /*CGFloat new_w = self.bounds.size.height; // the circle is always 1 to 1 and fills the height
     [self.circleMarker setFrame:CGRectMake(new_x - new_w/2, 0, new_w, new_w)]; // set new circle frame with width and x value.*/
-}
+} // end method
 
 - (void)setCircleState:(ParagonCookMode)circleState { // state changed externally
     _circleState = circleState;
@@ -184,20 +230,20 @@
     
     //TODO:experimental
     self.ring = [CAShapeLayer layer];
-    self.ring.path = grayLayer1.path;
+    //self.ring.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point1, y) radius:dotRadius*4 startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;//grayLayer1.path;
     self.ring.fillColor = [UIColor clearColor].CGColor;
     self.ring.strokeColor = [[UIColor orangeColor] CGColor];
-    self.ring.lineWidth = grayLayer1.lineWidth;
+    //self.ring.lineWidth = grayLayer1.lineWidth/3;
     [self.layer addSublayer:self.ring];
     CABasicAnimation *branchGrowAnimation = [CABasicAnimation animationWithKeyPath:@"lineWidth"];
     branchGrowAnimation.duration = 3.0;
     branchGrowAnimation.autoreverses = YES;
     branchGrowAnimation.repeatCount = HUGE_VAL;
-    branchGrowAnimation.fromValue = [NSNumber numberWithFloat:dotRadius*4];
-    branchGrowAnimation.toValue = [NSNumber numberWithFloat:dotRadius*8];
+    branchGrowAnimation.fromValue = [NSNumber numberWithFloat:dotRadius*8];//*4];
+    branchGrowAnimation.toValue = [NSNumber numberWithFloat:dotRadius*4];
     [self.ring addAnimation:branchGrowAnimation forKey:@"lineWidth"];
     /////////////
-    
+    [self arrangeTransforms]; // create the affine transformations for the ring at every gray dot
     //[self updateCircle]; // set circle position after drawing. layoutSubviews might take care of this
 }
 

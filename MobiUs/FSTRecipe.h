@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong) NSMutableString* note;
 
+@property (nonatomic, strong) NSMutableString* ingredients;
+
 @property (nonatomic, strong) UIImageView* photo; // photo taken of the user's meal (will use UIImagePickerController. need UIImageView to serialize, can take the UIImage property later
 
 @end
