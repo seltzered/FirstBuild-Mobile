@@ -45,7 +45,7 @@
     }
     
     if ([segue.destinationViewController isKindOfClass:[FSTCookingStateViewController class]]) {
-        FSTParagonCookingStage* stage = self.paragon.currentCookingMethod.session.paragonCookingStages[0];
+        FSTParagonCookingStage* stage = self.paragon.activeRecipe.session.paragonCookingStages[0];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetMinTime = [stage.cookTimeMinimum doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetMaxTime = [stage.cookTimeMaximum doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetTemp = [stage.targetTemperature doubleValue];

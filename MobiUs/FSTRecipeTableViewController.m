@@ -1,36 +1,39 @@
 //
-//  FSTRecipeTableViewController.m
+//  FSTCookingMethodTableViewController.m
 //  FirstBuild
 //
-//  Created by John Nolan on 8/17/15.
+//  Created by Myles Caley on 5/13/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
 #import "FSTRecipeTableViewController.h"
-
-#import "FSTRecipeTableViewCell.h"
-
-#import "FSTRecipeManager.h"
+#import "FSTLine.h"
 
 @interface FSTRecipeTableViewController ()
+
+@property (nonatomic,retain) FSTRecipes* recipes;
 
 @end
 
 @implementation FSTRecipeTableViewController
 
-NSDictionary* storedRecipes; // set on loading
-
-FSTRecipeManager* recipeManager;
-
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    recipeManager = [[FSTRecipeManager alloc] init]; // can be totally seperate, it still reaches the same data. Just make it in this scope
+    self.clearsSelectionOnViewWillAppear = NO; // changing this to yes did nothing, perhaps it doesn't appear again since it is the same tableview twice.
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    storedRecipes = [recipeManager getSavedRecipes]; // needs to reload on the back button as well
-    [self.tableView reloadData]; // apparently count has to reset
+- (void)dealloc
+{
+    DLog("dealloc");
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.tableView.userInteractionEnabled = YES;
+
+    self.recipes = [self.delegate dataRequestedFromChild];
     
 }
 
@@ -42,79 +45,76 @@ FSTRecipeManager* recipeManager;
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return [storedRecipes allKeys].count; // will find the number of recipes in memory
+    // Return the number of rows in the section.
+    return self.recipes.recipes.count;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FSTRecipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recipe_cell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+     // eventually, the cells will control the subcategories, so the tables load new data depending on the current selection. Perhaps there is some animation to fill in a tableview, and I could reset the table with the selection as the first member (the pointed header could be the selected background view)
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath]; // changed from UITableViewCell,only animation overloaded on this version
     
-    NSString* key = [storedRecipes allKeys][indexPath.item];
-    FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];
-    // Configure the cell...
-    [cell.nameLabel setText:matchedRecipe.friendlyName];
-    [cell.noteLabel setText:matchedRecipe.note];
-    [cell.recipePhoto setImage:matchedRecipe.photo.image];
+    cell.textLabel.text = ((FSTRecipe*)self.recipes.recipes[indexPath.row]).name; // this is all caps, set back to normal text
+    cell.textLabel.textColor = [UIColor blackColor];//UIColorFromRGB(0xFF0105); // set to red color
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font = [UIFont fontWithName:@"FSEmeric-Light" size:22];
     
-    return cell;
-}
-
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return YES; // need to create our own edit methods as well
-}
-
--(NSArray*)tableView: (UITableView*)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
-     UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
-         NSString* key = [storedRecipes allKeys][indexPath.item];
-         FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];
-         [self.delegate segueWithRecipe:matchedRecipe];
-         NSLog(@"Editing\n");
-     }];
-     editAction.backgroundColor = [UIColor grayColor];
-     
-     UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
-         //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-         [recipeManager removeItemFromDefaults:(NSString*)([storedRecipes allKeys][indexPath.item])];
-         NSLog(@"delete");
-         storedRecipes = [recipeManager getSavedRecipes];
-         [self.tableView reloadData]; // want to update with removed item gone
-         [self.delegate didDeleteRecipe];
-     }];
- return @[editAction, deleteAction];
- }
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-        // needs to be empty to let my edit actions take place
+    FSTLine *lineView = [[FSTLine alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
+    lineView.backgroundColor = [UIColor clearColor];
+    [cell.contentView addSubview:lineView]; // a line at the bottom of the cell
+    
+    UIView *view = [[UIView alloc]initWithFrame:cell.frame]; // highlight filling in the whole background
+    view.backgroundColor = UIColorFromRGB(0xF0663A);// UIColorFromRGB(0xFF0105); // orange highlight color
+    [cell setSelectedBackgroundView:view];
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+    return cell; // al this will work in the tableviewcontroller initialization
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString* key = [storedRecipes allKeys][indexPath.item];
-    FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];
-    [self.delegate startCookingWithSession:matchedRecipe.method.session]; // grab the selected session and start a cooking stage (probably should pass the method
+
+    __weak typeof(self) weakSelf = self;
+
+    self.tableView.userInteractionEnabled = NO;
+    
+    FSTRecipe* recipe = self.recipes.recipes[indexPath.row];
+    
+    // clear selection property not making a difference // this might be a problem if the selection changes
+    [weakSelf.tableView deselectRowAtIndexPath:weakSelf.tableView.indexPathForSelectedRow animated:YES];
+    [weakSelf.delegate recipeSelected:recipe];
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+//note: this and viewDidLayoutSubviews are hacks to get the cells to go all the way to the left
+//not sure why this is necessary.
+//todo: revisit
+//http://stackoverflow.com/questions/25770119/ios-8-uitableview-separator-inset-0-not-working
+//
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setBackgroundColor:[UIColor clearColor]]; // default is white in some versions
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
-*/
 
+-(void)viewDidLayoutSubviews
+{
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
+}
 
 @end

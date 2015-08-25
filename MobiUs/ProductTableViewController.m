@@ -16,7 +16,7 @@
 #import "FSTHumanaPillBottle.h"
 #import "ChillHubViewController.h"
 #import "MobiNavigationController.h"
-#import "FSTCookingMethodViewController.h"
+#import "FSTRecipeViewController.h"
 #import "FSTBleCentralManager.h"
 #import "FSTCookingViewController.h"
 #import "FSTBleProduct.h"
@@ -306,9 +306,9 @@ NSIndexPath *_indexPathForDeletion;
     
     if ([sender isKindOfClass:[FSTParagon class]])
     {
-        if ([destination.scene isKindOfClass:[FSTCookingMethodViewController class]])
+        if ([destination.scene isKindOfClass:[FSTRecipeViewController class]])
         {
-            FSTCookingMethodViewController *vc = (FSTCookingMethodViewController*)destination.scene;
+            FSTRecipeViewController *vc = (FSTRecipeViewController*)destination.scene;
             vc.product = sender;
         }
         else

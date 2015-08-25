@@ -2,39 +2,50 @@
 //  FSTRecipeViewController.m
 //  FirstBuild
 //
-//  Created by John Nolan on 8/17/15.
+//  Created by Myles Caley on 5/12/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
 #import "FSTRecipeViewController.h"
-#import "FSTRecipeManager.h"
-#import "FSTEditRecipeViewController.h"
-#import "FSTReadyToPreheatViewController.h"
+#import "FSTCustomCookSettingsViewController.h"
+#import "FSTBeefSousVideRecipe.h"
+#import "FSTRecipes.h"
+#import "FSTRecipeSubSelectionViewController.h"
+#import "MobiNavigationController.h"
+#import "FSTRevealViewController.h"
+#import "FSTSavedRecipeViewController.h"
 
 @interface FSTRecipeViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *emptyTableView;
 
 @end
 
 @implementation FSTRecipeViewController
 
-FSTRecipeManager* recipeManager;
-// perhaps we need some delegate methods so the table can decide when this is empty
+FSTRecipes* _methods;
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    recipeManager = [[FSTRecipeManager alloc] init];
+    
+    _methods = [[FSTRecipes alloc]init];
+    if ([self.childViewControllers[0] isKindOfClass:[FSTRecipeTableViewController class]])
+    {
+        ((FSTRecipeTableViewController*) self.childViewControllers[0]).delegate = self;
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    if ([[recipeManager getSavedRecipes] allKeys].count <= 0) {
-        self.emptyTableView.hidden = false;
-    } else {
-        self.emptyTableView.hidden = true;
-    }
-    ((FSTRecipeTableViewController*)self.childViewControllers[0]).delegate = self;
+- (void)dealloc
+{
+    //we no longer have a valid cooking method
+    self.product.toBeRecipe = nil;
+    DLog(@"dealloc");
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
+    [navigation setHeaderImageNamed:@"Paragon_Logo_Red" withFrameRect:CGRectMake(0, 0, 120, 30)];
+    [navigation.navigationBar setBarTintColor:[UIColor blackColor]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,40 +53,49 @@ FSTRecipeManager* recipeManager;
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)addRecipeTapped:(id)sender {
-    [self performSegueWithIdentifier:@"editRecipesSegue" sender:self];
-}
-
--(void)didDeleteRecipe {
-    if ([[recipeManager getSavedRecipes] allKeys].count <= 0) {
-        self.emptyTableView.hidden = false;
-    }
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]]) {
-        if ([sender isKindOfClass:[FSTRecipe class]]) {
-            ((FSTEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
-        }
-    } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]]) {
-        ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   
+    //if we actually have a product chosen for the segue then initialize the cooking method
+    if ([sender isKindOfClass:[FSTRecipe class]])
+    {
+        self.product.toBeRecipe = (FSTRecipe*)sender;
     }
     
+    //if we are segueing to stored recipes, new custom cook mode or a sub selection then
+    //we need to set the paragon
+    if  (
+            [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
+            [segue.destinationViewController isKindOfClass:[FSTRecipeSubSelectionViewController class]] ||
+            [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]
+
+        )
+    {
+        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
+    }
+
 }
 
-#pragma mark - table delegate
-
--(void)segueWithRecipe:(FSTRecipe *)recipe {
-    [self performSegueWithIdentifier:@"editRecipesSegue" sender:recipe];
+- (FSTRecipes*) dataRequestedFromChild
+{
+    return _methods;
 }
 
--(void)startCookingWithSession:(FSTParagonCookingSession *)session {
-    self.currentParagon.toBeCookingMethod.session = session; // set the method?
-    [self.currentParagon startHeatingWithStage:self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]];
-    [self performSegueWithIdentifier:@"cookingSegue" sender:self];
+- (void) recipeSelected:(FSTRecipe *)recipe
+{
+    [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:recipe];
+}
+
+- (IBAction)recipeTap:(id)sender {
+    [self performSegueWithIdentifier:@"recipesSegue" sender:nil];
+}
+
+- (IBAction)customTap:(id)sender {
+    [self performSegueWithIdentifier:@"segueCustom" sender:nil];
+
+}
+- (IBAction)menuToggleTapped:(id)sender {
+    [self.revealViewController rightRevealToggle:self.product];
 }
 
 

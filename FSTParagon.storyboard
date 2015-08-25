@@ -75,10 +75,10 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Recipe View Controller-->
+        <!--Saved Recipe View Controller-->
         <scene sceneID="ykT-EZ-HBK">
             <objects>
-                <viewController id="hw0-Uz-Ei3" customClass="FSTRecipeViewController" sceneMemberID="viewController">
+                <viewController id="hw0-Uz-Ei3" customClass="FSTSavedRecipeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EVe-VH-gpX"/>
                         <viewControllerLayoutGuide type="bottom" id="MYu-wk-ssL"/>
@@ -238,7 +238,7 @@
         <!--CookingMethodViewController-->
         <scene sceneID="GLY-f9-ve8">
             <objects>
-                <viewController id="LRW-2o-PG4" userLabel="CookingMethodViewController" customClass="FSTCookingMethodViewController" sceneMemberID="viewController">
+                <viewController id="LRW-2o-PG4" userLabel="CookingMethodViewController" customClass="FSTRecipeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hPz-QQ-InC"/>
                         <viewControllerLayoutGuide type="bottom" id="qQV-PC-wkI"/>
@@ -1825,7 +1825,7 @@
         <!--Directions-->
         <scene sceneID="ocb-SC-AWx">
             <objects>
-                <viewController storyboardIdentifier="instructionsTab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D2u-Kr-Lc4" customClass="FSTRecipeInstructionsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="instructionsTab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D2u-Kr-Lc4" customClass="FSTSavedRecipeInstructionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oXo-Yj-0Yd"/>
                         <viewControllerLayoutGuide type="bottom" id="Ogk-Gi-Hxz"/>
@@ -1834,7 +1834,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RX-xy-fCZ" userLabel="underLineView" customClass="FSTRecipeUnderLineView">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="crack it" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjW-Su-fcz">
+                                <rect key="frame" x="272" y="290" width="57" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4RX-xy-fCZ" userLabel="underLineView" customClass="FSTSavedRecipeUnderLineView">
                                 <rect key="frame" x="0.0" y="65" width="600" height="3"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1876,7 +1882,7 @@
         <!--Settings-->
         <scene sceneID="ayJ-Ta-2Ba">
             <objects>
-                <viewController storyboardIdentifier="settingsTab" id="xgP-ul-Mog" customClass="FSTRecipeSettingsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="settingsTab" id="xgP-ul-Mog" customClass="FSTSavedRecipeSettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Gf-EE-etd"/>
                         <viewControllerLayoutGuide type="bottom" id="h0O-z6-fUn"/>
@@ -1885,7 +1891,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xge-nx-8rk" userLabel="underLineView" customClass="FSTRecipeUnderLineView">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(Hella' ScrollViews)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfd-NK-Pfx">
+                                <rect key="frame" x="228" y="290" width="145" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xge-nx-8rk" userLabel="underLineView" customClass="FSTSavedRecipeUnderLineView">
                                 <rect key="frame" x="0.0" y="65" width="600" height="3"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2018,6 +2030,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="raH-pV-blr" appends="YES" id="N62-tC-VUi"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6QB-Hn-9Jc" userLabel="maxTimeButtonWrapperView">
                                                 <rect key="frame" x="133" y="130" width="457" height="50"/>
@@ -2047,6 +2062,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="N52-oB-dGz" appends="YES" id="8fj-CE-kVe"/>
+                                                </connections>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0rD-kg-Zob" userLabel="MaxPickerView">
                                                 <rect key="frame" x="133" y="190" width="457" height="1"/>
@@ -2100,6 +2118,9 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="BJE-lm-M7F" appends="YES" id="Ywa-Rv-dX2"/>
+                                                </connections>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gFx-6d-4T8" userLabel="TempPickerView">
                                                 <rect key="frame" x="133" y="261" width="457" height="1"/>
@@ -2174,20 +2195,20 @@
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="eZI-tU-uLn"/>
-                                                <exclude reference="ZGQ-vT-uon"/>
                                                 <exclude reference="0co-pz-TnJ"/>
                                                 <exclude reference="Vfq-Wb-vOa"/>
+                                                <exclude reference="ZGQ-vT-uon"/>
                                                 <exclude reference="CwS-Hz-xcF"/>
                                                 <exclude reference="F1L-Hy-2Hx"/>
                                                 <exclude reference="c1b-wt-PMk"/>
-                                                <exclude reference="h5X-bA-yXJ"/>
                                                 <exclude reference="e9S-rL-FR2"/>
+                                                <exclude reference="h5X-bA-yXJ"/>
                                                 <exclude reference="4xj-BV-hpb"/>
                                                 <exclude reference="dUg-aq-adt"/>
                                                 <exclude reference="Pgx-6J-ohk"/>
                                                 <exclude reference="a85-aD-tCy"/>
-                                                <exclude reference="rZU-bb-i56"/>
                                                 <exclude reference="ITt-bK-hlQ"/>
+                                                <exclude reference="rZU-bb-i56"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -2225,10 +2246,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="C6e-PN-TKD"/>
-                                <exclude reference="ywY-ey-ABS"/>
                                 <exclude reference="H7v-xX-exw"/>
                                 <exclude reference="kQI-Db-XqF"/>
+                                <exclude reference="C6e-PN-TKD"/>
+                                <exclude reference="ywY-ey-ABS"/>
                             </mask>
                         </variation>
                     </view>
@@ -2237,18 +2258,42 @@
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="maxLabel" destination="krQ-mO-Tl9" id="BNj-JR-jxw"/>
+                        <outlet property="maxPicker" destination="wmk-6w-KMg" id="PtM-Qj-nAl"/>
+                        <outlet property="maxPickerHeight" destination="byQ-6X-Xxn" id="xeB-AB-iOW"/>
+                        <outlet property="minLabel" destination="6eU-yc-JgD" id="GlL-u8-bWF"/>
+                        <outlet property="minPicker" destination="w9V-jJ-oW6" id="OEY-eP-xU1"/>
+                        <outlet property="minPickerHeight" destination="BWg-yB-K3S" id="2PO-dH-hnN"/>
+                        <outlet property="tempLabel" destination="fHF-MU-Lny" id="dX3-gk-vuk"/>
+                        <outlet property="tempPicker" destination="N31-ex-f4E" id="cOt-tv-xWu"/>
+                        <outlet property="tempPickerHeight" destination="UoC-eA-PLV" id="M5t-hY-lFd"/>
                         <outlet property="underLineSpacing" destination="Ku7-6x-gBI" id="UVm-fe-bxb"/>
                         <outlet property="underLineView" destination="xge-nx-8rk" id="oXR-Y5-e9M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRV-Kw-hya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="raH-pV-blr">
+                    <connections>
+                        <action selector="minTimeTapGesture:" destination="xgP-ul-Mog" id="1Wm-l2-TPQ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="N52-oB-dGz">
+                    <connections>
+                        <action selector="maxTimeTapGesture:" destination="xgP-ul-Mog" id="2Vv-dA-FrX"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="BJE-lm-M7F">
+                    <connections>
+                        <action selector="temperatureTapGesture:" destination="xgP-ul-Mog" id="BFA-wo-OYQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="483" y="3550"/>
         </scene>
         <!--Ingredients-->
         <scene sceneID="F54-ch-6gX">
             <objects>
-                <viewController storyboardIdentifier="ingredientsTab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M8d-rk-zhL" customClass="FSTRecipeIngredientsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ingredientsTab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M8d-rk-zhL" customClass="FSTSavedRecipeIngredientsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jMg-2k-JFz"/>
                         <viewControllerLayoutGuide type="bottom" id="6gv-ij-JQp"/>
@@ -2257,7 +2302,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFq-Ov-vv7" userLabel="underLineView" customClass="FSTRecipeUnderLineView">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Eggs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3Q-4m-3FU">
+                                <rect key="frame" x="281" y="290" width="39" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IFq-Ov-vv7" userLabel="underLineView" customClass="FSTSavedRecipeUnderLineView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="3"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2296,10 +2347,10 @@
             </objects>
             <point key="canvasLocation" x="672" y="2229"/>
         </scene>
-        <!--Recipe Tab Bar Controller-->
+        <!--Saved Recipe Tab Bar Controller-->
         <scene sceneID="IC7-MU-LTa">
             <objects>
-                <tabBarController id="w6B-75-VGu" customClass="FSTRecipeTabBarController" sceneMemberID="viewController">
+                <tabBarController id="w6B-75-VGu" customClass="FSTSavedRecipeTabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="fill" id="exr-HG-S4M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -2313,12 +2364,12 @@
             </objects>
             <point key="canvasLocation" x="-148" y="2561"/>
         </scene>
-        <!--Cooking Method Table View Controller-->
+        <!--Recipe Table View Controller-->
         <scene sceneID="9V9-m9-PON">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="v8P-8o-YpD" customClass="FSTCookingMethodTableViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="v8P-8o-YpD" customClass="FSTRecipeTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="sXj-ct-Hz4">
-                        <rect key="frame" x="0.0" y="0.0" width="608" height="477"/>
+                        <rect key="frame" x="0.0" y="0.0" width="608" height="476"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="9A6-tP-Qs8" customClass="FSTLine">
@@ -2351,7 +2402,7 @@
         <!--CookingMethodViewController-->
         <scene sceneID="fdf-rD-TM5">
             <objects>
-                <viewController id="pN4-mP-ZJw" userLabel="CookingMethodViewController" customClass="FSTCookingMethodSubSelectionViewController" sceneMemberID="viewController">
+                <viewController id="pN4-mP-ZJw" userLabel="CookingMethodViewController" customClass="FSTRecipeSubSelectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o8R-hG-dfc"/>
                         <viewControllerLayoutGuide type="bottom" id="gjY-kK-xfg"/>
@@ -3349,16 +3400,16 @@
             </objects>
             <point key="canvasLocation" x="3168" y="760"/>
         </scene>
-        <!--Recipe Table View Controller-->
+        <!--Saved Recipe Table View Controller-->
         <scene sceneID="oK5-Wa-J3g">
             <objects>
-                <tableViewController id="aBm-QU-KRm" customClass="FSTRecipeTableViewController" sceneMemberID="viewController">
+                <tableViewController id="aBm-QU-KRm" customClass="FSTSavedRecipeTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="131" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hvn-Bk-Xhg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipe_cell" rowHeight="131" id="Q2A-88-VQm" customClass="FSTRecipeTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipe_cell" rowHeight="131" id="Q2A-88-VQm" customClass="FSTSavedRecipeTableViewCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q2A-88-VQm" id="lII-DL-mNd">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -3370,14 +3421,14 @@
                                                 <constraint firstAttribute="width" secondItem="As0-PJ-Q1q" secondAttribute="height" multiplier="1:1" id="UJU-iy-ESW"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Recipe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kq6-T5-r76">
-                                            <rect key="frame" x="128" y="30" width="93" height="25"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="My Recipe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kq6-T5-r76">
+                                            <rect key="frame" x="128" y="30" width="95.5" height="23.5"/>
                                             <fontDescription key="fontDescription" name="FSEmeric-Core" family="FS Emeric" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="great stuff!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3G-he-hyH">
-                                            <rect key="frame" x="128" y="63" width="88" height="23"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="great stuff!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3G-he-hyH">
+                                            <rect key="frame" x="128" y="61.5" width="86" height="21"/>
                                             <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -3409,10 +3460,10 @@
             </objects>
             <point key="canvasLocation" x="-1081" y="1374"/>
         </scene>
-        <!--Edit Recipe View Controller-->
+        <!--Saved Edit Recipe View Controller-->
         <scene sceneID="F3U-AV-G5u">
             <objects>
-                <viewController id="nRX-Ih-S25" customClass="FSTEditRecipeViewController" sceneMemberID="viewController">
+                <viewController id="nRX-Ih-S25" customClass="FSTSavedEditRecipeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="84v-Ud-Af7"/>
                         <viewControllerLayoutGuide type="bottom" id="eOx-xf-Eiy"/>
@@ -3424,7 +3475,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ReD-aH-O2U">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="836"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97P-Nq-vMa" userLabel="Stage View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97P-Nq-vMa" userLabel="Recipe View">
                                         <rect key="frame" x="0.0" y="469" width="600" height="750"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mib-C1-124" userLabel="Stage">
@@ -3517,8 +3568,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lV-ee-YOJ" userLabel="minTimeButtonWrapperView">
                                                         <rect key="frame" x="133" y="59" width="457" height="50"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybz-4p-97l">
-                                                                <rect key="frame" x="0.0" y="11" width="457" height="27.5"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybz-4p-97l">
+                                                                <rect key="frame" x="0.0" y="12" width="457" height="26"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="2" id="2cW-DR-ioR"/>
                                                                 </constraints>
@@ -3557,8 +3608,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVh-7r-9BY" userLabel="maxTimeButtonWrapperView">
                                                         <rect key="frame" x="133" y="130" width="457" height="50"/>
                                                         <subviews>
-                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIc-hR-PBg">
-                                                                <rect key="frame" x="0.0" y="11" width="457" height="27.5"/>
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIc-hR-PBg">
+                                                                <rect key="frame" x="0.0" y="12" width="457" height="26"/>
                                                                 <gestureRecognizers/>
                                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3613,8 +3664,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRF-lk-e7V" userLabel="temperatureButtonWrapperView">
                                                         <rect key="frame" x="133" y="201" width="457" height="50"/>
                                                         <subviews>
-                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="100 F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aQ-br-4E9">
-                                                                <rect key="frame" x="0.0" y="11" width="457" height="27.5"/>
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="100 F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aQ-br-4E9">
+                                                                <rect key="frame" x="0.0" y="12" width="457" height="26"/>
                                                                 <gestureRecognizers/>
                                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="22"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3763,7 +3814,7 @@
                                         </connections>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWd-eh-7tY">
-                                        <rect key="frame" x="10" y="250" width="51" height="24"/>
+                                        <rect key="frame" x="10" y="250" width="50.5" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="H0C-28-9Vf"/>
                                             <constraint firstAttribute="height" constant="24" id="bO6-5r-Mem"/>
@@ -3796,8 +3847,8 @@
                                         <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="This is my recipe." translatesAutoresizingMaskIntoConstraints="NO" id="Tjk-4e-ZQE">
-                                        <rect key="frame" x="45" y="379" width="510" height="75"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="This is my recipe." translatesAutoresizingMaskIntoConstraints="NO" id="Tjk-4e-ZQE">
+                                        <rect key="frame" x="45" y="380" width="510" height="75"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.12" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="T2H-HQ-KDz"/>
@@ -3865,8 +3916,8 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="i63-wb-ZD0">
-                                        <rect key="frame" x="238.5" y="14.5" width="32" height="27.5"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="i63-wb-ZD0">
+                                        <rect key="frame" x="238" y="14" width="32" height="27.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="i63-wb-ZD0" secondAttribute="height" multiplier="54:47" id="erl-Yc-f7a"/>
                                         </constraints>
@@ -4002,9 +4053,9 @@
         <image name="sad-robot" width="180" height="307"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vH5-uL-Cgr"/>
-        <segue reference="y95-r5-gaz"/>
-        <segue reference="ETw-Ro-4Or"/>
         <segue reference="zTN-hz-fZw"/>
+        <segue reference="CmD-W5-dtV"/>
+        <segue reference="M0t-ab-wyg"/>
+        <segue reference="gtX-KY-lli"/>
     </inferredMetricsTieBreakers>
 </document>
