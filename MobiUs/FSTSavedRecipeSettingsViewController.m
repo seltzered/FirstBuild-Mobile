@@ -67,6 +67,7 @@ CGFloat const SEL_HEIGHT_T = 90; // the standard picker height for the current s
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.pickerManager selectAllIndices];
+    [self resetPickerHeights];
     [self updateLabels];
 }
 -(void)viewWillLayoutSubviews {

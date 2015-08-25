@@ -7,46 +7,36 @@
 //
 
 #import "FSTSavedEditRecipeViewController.h"
-
-
+#import "FSTSavedRecipeTabBarController.h"
+#import "FSTSavedRecipeIngredientsViewController.h"
+#import "FSTSavedRecipeInstructionsViewController.h"
+#import "FSTSavedRecipeSettingsViewController.h"
+#import "FSTSavedRecipeTabBarController.h"
 
 @interface FSTSavedEditRecipeViewController ()
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *minPickerHeight;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *maxPickerHeight;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tempPickerHeight;
-
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageEditor;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 
-@property (weak, nonatomic) IBOutlet UITextView *noteView;
-
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property (weak, nonatomic) IBOutlet UIView *stageView;
-
-@property (weak, nonatomic) IBOutlet UIPickerView *minPicker;
-
-@property (weak, nonatomic) IBOutlet UILabel *minLabel;
-
-@property (weak, nonatomic) IBOutlet UIPickerView *maxPicker;
-
-@property (weak, nonatomic) IBOutlet UILabel *maxLabel;
-
-@property (weak, nonatomic) IBOutlet UIPickerView *tempPicker;
-
-@property (weak, nonatomic) IBOutlet UILabel *tempLabel;
 
 @end
 
 @implementation FSTSavedEditRecipeViewController
 {
-    FSTStagePickerManager* pickerManager;
-    
     FSTSavedRecipeManager* recipeManager;
+    
+    // some crucial data objects in the children
+    FSTStagePickerManager* childPickerManager;
+    
+    UITextView* childInstructionsTextView;
+    
+    UITextView* childIngredientsTextView;
+    
+    
 }
 
 typedef enum variableSelections {
@@ -59,15 +49,11 @@ typedef enum variableSelections {
 
 VariableSelection _selection;
 
-CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current selection (equal to the constant picker height
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    pickerManager = [[FSTStagePickerManager alloc] init];
     recipeManager = [[FSTSavedRecipeManager alloc] init];
     [self.nameField setDelegate:self];
-    [self.noteView setDelegate:self];
     
     if (!self.activeRecipe) {
         self.activeRecipe = [[FSTRecipe alloc] init]; // need a strong property since this could be the unique pointer
@@ -75,18 +61,21 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     } else {
         self.imageEditor.image = self.activeRecipe.photo.image;
     }
-        
     
-    [self updateLabels];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    // will probably save the recipes in a dictionary in NSUserDefaults
-    [pickerManager selectAllIndices]; // set the current min and max indices on the picker (initially selects lowest possible for min and highest for maxPicker, and we want this to show in the view controller)
+    [super viewWillAppear:animated];
+    // set the name if it is in the recipe
     [self.nameField setText:self.activeRecipe.friendlyName];
-    [self.noteView setText:self.activeRecipe.note];
-
+    FSTSavedRecipeTabBarController* recipeTBC = [self.childViewControllers objectAtIndex:0];
+    recipeTBC.delegate = self;
+        if ([recipeTBC.viewControllers[0] isKindOfClass:[FSTSavedRecipeIngredientsViewController class]])
+        {
+            childIngredientsTextView = ((FSTSavedRecipeIngredientsViewController*)recipeTBC.viewControllers[0]).textView;
+        } // ingredients view should be the first one in the array (set it before it is visible)
+    [childIngredientsTextView setText:self.activeRecipe.ingredients];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -133,16 +122,38 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
 - (IBAction)saveButtonTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
         self.activeRecipe.friendlyName = [NSMutableString stringWithString:self.nameField.text];
-        self.activeRecipe.note = [NSMutableString stringWithString:self.noteView.text];
+        self.activeRecipe.note = [NSMutableString stringWithString:childInstructionsTextView.text];
+        self.activeRecipe.ingredients = [NSMutableString stringWithString:childIngredientsTextView.text];
         self.activeRecipe.photo.image = self.imageEditor.image;
         // will probably for loop through all the picker manager to support multiStages
         [self.activeRecipe createCookingSession];
         [self.activeRecipe addStageToCookingSession];
-        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMinimum = [pickerManager minMinutesChosen];
-        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMaximum = [pickerManager maxMinutesChosen];
-        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).targetTemperature = [pickerManager temperatureChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMinimum = [childPickerManager minMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).targetTemperature = [childPickerManager temperatureChosen];
         // get all the session variables from the pickers, then save it
         [recipeManager saveRecipe:self.activeRecipe];
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+    // load the pertinent members of each view controller after we select it
+    if ([viewController isKindOfClass:[FSTSavedRecipeInstructionsViewController class]])
+    {
+        childInstructionsTextView = ((FSTSavedRecipeInstructionsViewController*)viewController).textView;
+    }
+    else if ([viewController isKindOfClass:[FSTSavedRecipeSettingsViewController class]])
+    {
+        childPickerManager = ((FSTSavedRecipeSettingsViewController*)viewController).pickerManager;
+    }
+    else if ([viewController isKindOfClass:[FSTSavedRecipeIngredientsViewController class]])
+    {
+        childIngredientsTextView = ((FSTSavedRecipeIngredientsViewController*)viewController).textView;
+    }
+    // TODO: set the text of each view once it appears, but only if the text is not set. Im not certain how best to approach this. Perhaps with a sentinel value in the storyboard template; we would reset the text if it is there. 
+    
 }
 
 /*
