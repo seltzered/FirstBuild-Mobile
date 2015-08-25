@@ -45,7 +45,7 @@ NSObject* _cookTimeChangedObserver;
 -(void)setupEventHandlers
 {
     __weak typeof(self) weakSelf = self;
-    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.activeRecipe.session.paragonCookingStages[0]);
+    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.activeRecipe.paragonCookingStages[0]);
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
@@ -98,8 +98,8 @@ NSObject* _cookTimeChangedObserver;
 -(void)transitionToCurrentCookMode
 {
     __weak typeof(self) weakSelf = self;
-    __block FSTParagonCookingStage* _toBeCookingStage = (FSTParagonCookingStage*)(self.currentParagon.toBeRecipe.session.paragonCookingStages[0]);
-    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.activeRecipe.session.paragonCookingStages[0]);
+    __block FSTParagonCookingStage* _toBeCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
+    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.activeRecipe.paragonCookingStages[0]);
     NSString* stateIdentifier = nil;
     
     switch (weakSelf.currentParagon.cookMode) {
@@ -196,7 +196,7 @@ NSObject* _cookTimeChangedObserver;
 
 - (IBAction)continueButtonTap:(id)sender {
     
-    [self.currentParagon setCookingTimesWithStage:self.currentParagon.toBeRecipe.session.paragonCookingStages[0]];
+    [self.currentParagon setCookingTimesWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
     
     //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode
     self.continueButton.userInteractionEnabled = NO;

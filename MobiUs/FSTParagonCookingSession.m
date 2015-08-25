@@ -10,22 +10,15 @@
 
 @implementation FSTParagonCookingSession
 
--(id)initWithCoder:(NSCoder *)aDecoder {
-    if (self = [super init]) {
-        self.paragonCookingStages = [aDecoder decodeObjectForKey:@"Stages"];
-    }
-    return self;
-}
 -(instancetype)init
 {
     self = [super init];
     if (self) {
-        self.paragonCookingStages = [[NSMutableArray alloc]init];
+        self.activeRecipe = nil;
+        self.toBeRecipe = nil;
+        self.currentStage = 0;
     }
     return self;
 }
 
--(void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.paragonCookingStages forKey:@"Stages"];
-}
 @end

@@ -99,7 +99,7 @@ FSTSavedRecipeManager* recipeManager;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString* key = [storedRecipes allKeys][indexPath.item];
     FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];
-    [self.delegate startCookingWithSession:matchedRecipe.session]; // grab the selected session and start a cooking stage (probably should pass the method
+    [self.delegate startCookingWithRecipe:matchedRecipe]; // grab the selected session and start a cooking stage (probably should pass the method
 }
 
 /*

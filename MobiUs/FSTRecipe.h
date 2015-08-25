@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FSTParagonCookingSession.h"
+#import "FSTParagonCookingStage.h"
 
 @interface FSTRecipe : NSObject <NSCoding>
 
@@ -25,12 +25,12 @@
 @property (nonatomic, strong) UIImageView* photo; // photo taken of the user's meal (will use UIImagePickerController. need UIImageView to serialize, can take the UIImage property later
 
 
-
-
 @property (nonatomic, retain) NSString* name;
-@property (nonatomic, retain) FSTParagonCookingSession* session;
 
-- (FSTParagonCookingSession*) createCookingSession;
-- (FSTParagonCookingStage*) addStageToCookingSession;
+@property (nonatomic, strong) NSMutableArray* paragonCookingStages;
+
+
+- (FSTParagonCookingStage*) addStage;
+
 
 @end

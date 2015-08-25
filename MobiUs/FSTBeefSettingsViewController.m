@@ -138,7 +138,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     
     self.continueTapGestureRecognizer.enabled = NO;
     
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeRecipe.session.paragonCookingStages[0]);
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
     stage.targetTemperature = _currentTemperature;
     double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];

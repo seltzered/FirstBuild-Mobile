@@ -37,9 +37,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     [super viewDidLoad];
 
     //create a new cooking session
-    self.currentParagon.toBeRecipe = (FSTRecipe*) [[FSTSousVideRecipe alloc] init];
-    [self.currentParagon.toBeRecipe createCookingSession]; 
-    [self.currentParagon.toBeRecipe addStageToCookingSession];
+    self.currentParagon.session.toBeRecipe = (FSTRecipe*) [[FSTSousVideRecipe alloc] init];
+    [self.currentParagon.session.toBeRecipe addStage];
     
     pickerManager = [[FSTStagePickerManager alloc] init];
         
@@ -158,7 +157,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     //TODO grey out the button?
     self.continueTapGesturerRecognizer.enabled = NO;
     
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.toBeRecipe.session.paragonCookingStages[0]); 
+    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
 
     stage.targetTemperature = [pickerManager temperatureChosen];
     stage.cookTimeMinimum = [pickerManager minMinutesChosen];
