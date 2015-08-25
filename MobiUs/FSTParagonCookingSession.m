@@ -17,6 +17,7 @@
         self.activeRecipe = nil;
         self.toBeRecipe = nil;
         self.currentStage = 0;
+        self.currentProbeTemperature = 0;
     }
     return self;
 }

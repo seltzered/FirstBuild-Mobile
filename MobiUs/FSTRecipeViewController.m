@@ -68,12 +68,10 @@ FSTRecipes* _methods;
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTRecipeSubSelectionViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]
-
         )
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
     }
-
 }
 
 - (FSTRecipes*) dataRequestedFromChild

@@ -79,7 +79,7 @@ NSObject* _cookTimeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-       NSNumber* actualTemperature = _currentCookingStage.actualTemperature;
+       NSNumber* actualTemperature = self.currentParagon.session.currentProbeTemperature;
        [weakSelf.delegate currentTemperatureChanged:[actualTemperature doubleValue]];
     }];
     

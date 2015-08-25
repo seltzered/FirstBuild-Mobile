@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) FSTRecipe* activeRecipe;
 @property (nonatomic, strong) FSTRecipe* toBeRecipe;
+@property (nonatomic, strong) NSNumber* currentProbeTemperature;
 
 @property (nonatomic) int currentStage;
 

@@ -566,7 +566,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
-        currentStage.actualTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+        self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
     }
 }
@@ -636,7 +636,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
     FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
     NSLog(@"------PARAGON-------");
-    NSLog(@"bmode %d, cmode %d, curtmp %@", self.burnerMode, self.cookMode, currentStage.actualTemperature);
+    NSLog(@"bmode %d, cmode %d, curtmp %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature);
     NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@, elapt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeElapsed);
     if (toBeStage)
     {
