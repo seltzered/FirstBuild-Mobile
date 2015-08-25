@@ -578,8 +578,8 @@
 			isa = PBXGroup;
 			children = (
 				5BA064D61B8B46EC002FCE59 /* recipe management */,
-				5BA064D51B8B46B9002FCE59 /* paragon cooktop */,
 				5BA064D41B8B4654002FCE59 /* recipes */,
+				5BA064D51B8B46B9002FCE59 /* paragon cooktop */,
 				5B7338BE1B0F9CEA004C931E /* Session.h */,
 				5B7338BF1B0F9CEA004C931E /* Session.m */,
 				515CD89E1B7E16F50087F9C7 /* FSTStagePickerManager.h */,
@@ -842,8 +842,12 @@
 		5BA064D41B8B4654002FCE59 /* recipes */ = {
 			isa = PBXGroup;
 			children = (
+				515CD8981B7CD6340087F9C7 /* FSTRecipe.h */,
+				515CD8991B7CD6340087F9C7 /* FSTRecipe.m */,
 				5BCBB9FF1B03CA5200B8E043 /* FSTRecipes.h */,
 				5BCBBA001B03CA5200B8E043 /* FSTRecipes.m */,
+				51EA9E471B82192800A3F421 /* FSTSavedRecipeManager.h */,
+				51EA9E481B82192900A3F421 /* FSTSavedRecipeManager.m */,
 				5BCBBA021B03E92300B8E043 /* FSTSousVideRecipes.h */,
 				5BCBBA031B03E92300B8E043 /* FSTSousVideRecipes.m */,
 				5BCBB9F91B03909000B8E043 /* FSTSousVideRecipe.h */,
@@ -878,10 +882,6 @@
 		5BA064D61B8B46EC002FCE59 /* recipe management */ = {
 			isa = PBXGroup;
 			children = (
-				515CD8981B7CD6340087F9C7 /* FSTRecipe.h */,
-				515CD8991B7CD6340087F9C7 /* FSTRecipe.m */,
-				51EA9E471B82192800A3F421 /* FSTSavedRecipeManager.h */,
-				51EA9E481B82192900A3F421 /* FSTSavedRecipeManager.m */,
 			);
 			name = "recipe management";
 			sourceTree = "<group>";

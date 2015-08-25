@@ -637,14 +637,14 @@ __weak NSTimer* _readCharacteristicsTimer;
     FSTParagonCookingStage* toBeStage = self.toBeRecipe.session.paragonCookingStages[0];
     NSLog(@"------PARAGON-------");
     NSLog(@"bmode %d, cmode %d, curtmp %@", self.burnerMode, self.cookMode, currentStage.actualTemperature);
-    NSLog(@"\tACTUAL: tartmp %@, mint %@, maxt %@, elapt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeElapsed);
+    NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@, elapt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeElapsed);
     if (toBeStage)
     {
-        NSLog(@"\t  TOBE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
+        NSLog(@"\t  TOBE RECIPE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
     }
     else
     {
-        NSLog(@"\t TOBE: not set");
+        NSLog(@"\t TOBE RECIPE : not set");
     }
     
 }
