@@ -47,7 +47,7 @@ typedef enum variableSelections {
 VariableSelection _selection;
 
 
-CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current selection (equal to the constant picker height
+CGFloat const SEL_HEIGHT_T = 90; // the standard picker height for the current selection (equal to the constant picker height
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,7 +95,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     if (_selection != MIN_TIME) { // only needs to run when a change should be made
         // set selection to MIN_TIME now that the new min picker is about to show
         _selection = MIN_TIME;
-        self.minPickerHeight.constant = SEL_HEIGHT;
+        self.minPickerHeight.constant = SEL_HEIGHT_T;
     } else {
         _selection = NONE;
     }// if it was MIN_TIME it should close, then change to NONE
@@ -110,7 +110,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     [self resetPickerHeights];
     if (_selection != MAX_TIME) { // only needs to run when a change should be made
         _selection = MAX_TIME;
-        self.maxPickerHeight.constant = SEL_HEIGHT;
+        self.maxPickerHeight.constant = SEL_HEIGHT_T;
     } else {
         _selection = NONE;
     }
@@ -127,7 +127,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
     if (_selection != TEMPERATURE) {
         _selection = TEMPERATURE;
-        self.tempPickerHeight.constant = SEL_HEIGHT;
+        self.tempPickerHeight.constant = SEL_HEIGHT_T;
     } else {
         _selection = NONE;
     }
