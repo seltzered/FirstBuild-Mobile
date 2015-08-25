@@ -48,8 +48,8 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
-@property (nonatomic, strong) FSTRecipe* currentCookingMethod;
-@property (nonatomic, strong) FSTRecipe* toBeCookingMethod;
+@property (nonatomic, strong) FSTRecipe* activeRecipe;
+@property (nonatomic, strong) FSTRecipe* toBeRecipe;
 
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;

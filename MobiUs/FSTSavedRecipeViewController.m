@@ -73,8 +73,8 @@ FSTSavedRecipeManager* recipeManager;
 }
 
 -(void)startCookingWithSession:(FSTParagonCookingSession *)session {
-    self.currentParagon.toBeCookingMethod.session = session; // set the method?
-    [self.currentParagon startHeatingWithStage:self.currentParagon.toBeCookingMethod.session.paragonCookingStages[0]];
+    self.currentParagon.toBeRecipe.session = session; // set the method?
+    [self.currentParagon startHeatingWithStage:self.currentParagon.toBeRecipe.session.paragonCookingStages[0]];
     [self performSegueWithIdentifier:@"cookingSegue" sender:self];
 }
 

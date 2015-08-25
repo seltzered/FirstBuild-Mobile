@@ -34,7 +34,7 @@ NSString* headerText;
     {
         ((FSTRecipeTableViewController*) self.childViewControllers[0]).delegate = self;
     }
-    headerText = [self.currentParagon.toBeCookingMethod.name uppercaseString]; // grabs the current cooking method (sous vide most likely) upon loading
+    headerText = [self.currentParagon.toBeRecipe.name uppercaseString]; // grabs the current cooking method (sous vide most likely) upon loading
 
 }
 
@@ -55,11 +55,11 @@ NSString* headerText;
 
 - (FSTRecipes*) dataRequestedFromChild
 {
-    if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideRecipe class]])
+    if ([self.currentParagon.toBeRecipe isKindOfClass:[FSTSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTSousVideRecipes alloc]init];
     }
-    else if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTCandyRecipe class]])
+    else if ([self.currentParagon.toBeRecipe isKindOfClass:[FSTCandyRecipe class]])
     {
         return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
     }
@@ -80,9 +80,9 @@ NSString* headerText;
     //then we need to set the cooking method. the custom settings will initialize the cooking method on its own
     if ([sender isKindOfClass:[FSTRecipe class]])
     {
-        self.currentParagon.toBeCookingMethod = (FSTRecipe*)sender;
-        [self.currentParagon.toBeCookingMethod createCookingSession];
-        [self.currentParagon.toBeCookingMethod addStageToCookingSession];
+        self.currentParagon.toBeRecipe = (FSTRecipe*)sender;
+        [self.currentParagon.toBeRecipe createCookingSession];
+        [self.currentParagon.toBeRecipe addStageToCookingSession];
     }
     
     if (
