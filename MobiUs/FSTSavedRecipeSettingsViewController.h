@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTStagePickerManager.h"
 
-@interface FSTSavedRecipeSettingsViewController : UIViewController
-
+@interface FSTSavedRecipeSettingsViewController : UIViewController<FSTStagePickerManagerDelegate>
+@property (nonatomic, strong) FSTStagePickerManager* pickerManager;
 @end

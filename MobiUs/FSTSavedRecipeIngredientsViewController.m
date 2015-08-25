@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.textView.delegate = self;
     //UIImage* selectedImage = [UIImage imageNamed:@"Paragon_Mark_Red"];//[FSTColorImage imageWithColor:[UIColor orangeColor] inRect:CGRectMake(0, 0, 30, 24)];
     //[self.tabBarItem setSelectedImage:selectedImage];
     //self.tabBarItem.imageInsets = UIEdgeInsetsMake(12, 0, -12, 0); // trying to shift the whole thing down.
@@ -40,6 +41,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Text View delegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    // must set active recipe when parent segues
+    return YES;
+}
 
 
 @end
