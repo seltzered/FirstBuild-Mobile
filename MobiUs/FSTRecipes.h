@@ -1,5 +1,5 @@
 //
-//  FSTCookingMethods.h
+//  FSTRecipes.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/13/15.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FSTCookingMethods : NSObject
-@property (nonatomic,retain) NSArray* cookingMethods;
+@interface FSTRecipes : NSObject
+@property (nonatomic,retain) NSArray* recipes;
 @end

@@ -1,5 +1,5 @@
 //
-//  FSTCookingMethodViewController.h
+//  FSTRecipeViewController.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/12/15.
@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FSTCookingMethodTableViewController.h"
+#import "FSTRecipeTableViewController.h"
 #import "FSTParagon.h"
 
-@interface FSTCookingMethodViewController : UIViewController <FSTCookingMethodTableViewControllerDelegate>
+@interface FSTRecipeViewController : UIViewController <FSTRecipeTableViewControllerDelegate>
 
 @property (weak, nonatomic) FSTParagon* product;
 

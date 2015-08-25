@@ -67,7 +67,7 @@
         <!--CookingMethodViewController-->
         <scene sceneID="yJ2-IB-mFy">
             <objects>
-                <viewController id="IBy-wN-DMH" userLabel="CookingMethodViewController" customClass="FSTCookingMethodViewController" sceneMemberID="viewController">
+                <viewController id="IBy-wN-DMH" userLabel="CookingMethodViewController" customClass="FSTRecipeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1xX-YM-luJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Fdh-H0-dfo"/>
@@ -1733,10 +1733,10 @@
             </objects>
             <point key="canvasLocation" x="105" y="1952"/>
         </scene>
-        <!--Cooking Method Table View Controller-->
+        <!--Recipe Table View Controller-->
         <scene sceneID="UuD-Mx-U6L">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="fk5-A6-9nq" customClass="FSTCookingMethodTableViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="fk5-A6-9nq" customClass="FSTRecipeTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="CMc-Zt-xbm">
                         <rect key="frame" x="0.0" y="0.0" width="608" height="476"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1771,7 +1771,7 @@
         <!--CookingMethodViewController-->
         <scene sceneID="C2l-2F-BLe">
             <objects>
-                <viewController id="u6A-yd-FFM" userLabel="CookingMethodViewController" customClass="FSTCookingMethodSubSelectionViewController" sceneMemberID="viewController">
+                <viewController id="u6A-yd-FFM" userLabel="CookingMethodViewController" customClass="FSTRecipeSubSelectionViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="odf-ib-biO"/>
                         <viewControllerLayoutGuide type="bottom" id="lnk-KT-kQQ"/>

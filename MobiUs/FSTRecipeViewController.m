@@ -1,36 +1,36 @@
 //
-//  FSTCookingMethodViewController.m
+//  FSTRecipeViewController.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/12/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTCookingMethodViewController.h"
+#import "FSTRecipeViewController.h"
 #import "FSTCustomCookSettingsViewController.h"
-#import "FSTBeefSousVideCookingMethod.h"
-#import "FSTCookingMethods.h"
-#import "FSTCookingMethodSubSelectionViewController.h"
+#import "FSTBeefSousVideRecipe.h"
+#import "FSTRecipes.h"
+#import "FSTRecipeSubSelectionViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
 #import "FSTSavedRecipeViewController.h"
 
-@interface FSTCookingMethodViewController ()
+@interface FSTRecipeViewController ()
 
 @end
 
-@implementation FSTCookingMethodViewController
+@implementation FSTRecipeViewController
 
-FSTCookingMethods* _methods;
+FSTRecipes* _methods;
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
     
-    _methods = [[FSTCookingMethods alloc]init];
-    if ([self.childViewControllers[0] isKindOfClass:[FSTCookingMethodTableViewController class]])
+    _methods = [[FSTRecipes alloc]init];
+    if ([self.childViewControllers[0] isKindOfClass:[FSTRecipeTableViewController class]])
     {
-        ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
+        ((FSTRecipeTableViewController*) self.childViewControllers[0]).delegate = self;
     }
 }
 
@@ -57,16 +57,16 @@ FSTCookingMethods* _methods;
 {
    
     //if we actually have a product chosen for the segue then initialize the cooking method
-    if ([sender isKindOfClass:[FSTCookingMethod class]])
+    if ([sender isKindOfClass:[FSTRecipe class]])
     {
-        self.product.toBeCookingMethod = (FSTCookingMethod*)sender;
+        self.product.toBeCookingMethod = (FSTRecipe*)sender;
     }
     
     //if we are segueing to stored recipes, new custom cook mode or a sub selection then
     //we need to set the paragon
     if  (
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
-            [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]] ||
+            [segue.destinationViewController isKindOfClass:[FSTRecipeSubSelectionViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]
 
         )
@@ -76,14 +76,14 @@ FSTCookingMethods* _methods;
 
 }
 
-- (FSTCookingMethods*) dataRequestedFromChild
+- (FSTRecipes*) dataRequestedFromChild
 {
     return _methods;
 }
 
-- (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod
+- (void) recipeSelected:(FSTRecipe *)recipe
 {
-    [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
+    [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:recipe];
 }
 
 - (IBAction)recipeTap:(id)sender {

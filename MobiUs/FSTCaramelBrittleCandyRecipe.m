@@ -1,14 +1,14 @@
 //
-//  FSTCaramelBrittleCandyCooking.m
+//  FSTCaramelBrittleCandyRecipe.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 8/18/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTCaramelBrittleCandyCooking.h"
+#import "FSTCaramelBrittleCandyRecipe.h"
 
-@implementation FSTCaramelBrittleCandyCooking
+@implementation FSTCaramelBrittleCandyRecipe
 - (id) init
 {
     self = [super init];

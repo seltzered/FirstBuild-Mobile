@@ -7,7 +7,7 @@
 //
 
 #import "FSTCustomCookSettingsViewController.h"
-#import "FSTSousVideCookingMethod.h"
+#import "FSTSousVideRecipe.h"
 #import "FSTReadyToPreheatViewController.h"
 
 @interface FSTCustomCookSettingsViewController ()
@@ -37,7 +37,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     [super viewDidLoad];
 
     //create a new cooking session
-    self.currentParagon.toBeCookingMethod = (FSTCookingMethod*) [[FSTSousVideCookingMethod alloc] init];
+    self.currentParagon.toBeCookingMethod = (FSTRecipe*) [[FSTSousVideRecipe alloc] init];
     [self.currentParagon.toBeCookingMethod createCookingSession]; 
     [self.currentParagon.toBeCookingMethod addStageToCookingSession];
     

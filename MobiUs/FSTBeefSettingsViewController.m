@@ -7,7 +7,7 @@
 //
 
 #import "FSTBeefSettingsViewController.h"
-#import "FSTBeefSousVideCookingMethod.h"
+#import "FSTBeefSousVideRecipe.h"
 #import "FSTReadyToPreheatViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
@@ -23,7 +23,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     //data values for corresponding view relationships
     NSNumber* _currentThickness;
     NSNumber* _currentTemperature;
-    FSTBeefSousVideCookingMethod* _beefCookingMethod;
+    FSTBeefSousVideRecipe* _beefCookingMethod;
 
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
@@ -37,7 +37,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [super viewDidLoad];
     
     //set up for data objects
-    _beefCookingMethod = [[FSTBeefSousVideCookingMethod alloc]init];
+    _beefCookingMethod = [[FSTBeefSousVideRecipe alloc]init];
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
     _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
     _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));

@@ -1,14 +1,14 @@
 //
-//  FSTBeefSousVideCookingMethod.h
+//  FSTBeefSousVideRecipe.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/13/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTSousVideCookingMethod.h"
+#import "FSTSousVideRecipe.h"
 
-@interface FSTBeefSousVideCookingMethod : FSTSousVideCookingMethod
+@interface FSTBeefSousVideRecipe : FSTSousVideRecipe
 
 //todo: create real objects from these, combine
 @property (nonatomic, retain) NSArray* thicknesses;

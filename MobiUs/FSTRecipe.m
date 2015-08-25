@@ -16,8 +16,8 @@
         self.friendlyName = [decoder decodeObjectForKey:@"friendlyName"];
         self.note = [decoder decodeObjectForKey:@"note"];
         self.ingredients = [decoder decodeObjectForKey:@"ingredients"];
-        self.method = [decoder decodeObjectForKey:@"method"];
         self.photo = [decoder decodeObjectForKey:@"photo"];
+        self.session = [decoder decodeObjectForKey:@"session"];
     }
     return self;
 }
@@ -26,7 +26,6 @@
     self = [super init];
     if (self) {
         self.photo = [[UIImageView alloc] init];
-        self.method = [[FSTCookingMethod alloc] init];
         self.recipeId = [[NSUUID UUID] UUIDString];
     }
     return self;
@@ -37,8 +36,21 @@
     [encoder encodeObject:self.friendlyName forKey:@"friendlyName"];
     [encoder encodeObject:self.note forKey:@"note"];
     [encoder encodeObject:self.ingredients forKey:@"ingredients"];
-    [encoder encodeObject:self.method forKey:@"method"]; // this session will need its own coder
     [encoder encodeObject:self.photo forKey:@"photo"];
+    [encoder encodeObject:self.session forKey:@"session"];
+}
+
+- (FSTParagonCookingSession*) createCookingSession
+{
+    self.session = [[FSTParagonCookingSession alloc] init];
+    return self.session;
+}
+
+- (FSTParagonCookingStage*) addStageToCookingSession
+{
+    FSTParagonCookingStage* stage = [[FSTParagonCookingStage alloc] init];
+    [self.session.paragonCookingStages addObject:stage];
+    return stage;
 }
 
 @end

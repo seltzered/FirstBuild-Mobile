@@ -220,11 +220,11 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
         self.activeRecipe.note = [NSMutableString stringWithString:self.noteView.text];
         self.activeRecipe.photo.image = self.imageEditor.image;
         // will probably for loop through all the picker manager to support multiStages
-        [self.activeRecipe.method createCookingSession];
-        [self.activeRecipe.method addStageToCookingSession];
-        ((FSTParagonCookingStage*)self.activeRecipe.method.session.paragonCookingStages[0]).cookTimeMinimum = [pickerManager minMinutesChosen];
-        ((FSTParagonCookingStage*)self.activeRecipe.method.session.paragonCookingStages[0]).cookTimeMaximum = [pickerManager maxMinutesChosen];
-        ((FSTParagonCookingStage*)self.activeRecipe.method.session.paragonCookingStages[0]).targetTemperature = [pickerManager temperatureChosen];
+        [self.activeRecipe createCookingSession];
+        [self.activeRecipe addStageToCookingSession];
+        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMinimum = [pickerManager minMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMaximum = [pickerManager maxMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).targetTemperature = [pickerManager temperatureChosen];
         // get all the session variables from the pickers, then save it
         [recipeManager saveRecipe:self.activeRecipe];
 }

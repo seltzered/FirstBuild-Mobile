@@ -1,14 +1,14 @@
 //
-//  FSTCandyCookingMethod.m
+//  FSTCandyRecipe.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 8/18/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTCandyCookingMethod.h"
+#import "FSTCandyRecipe.h"
 
-@implementation FSTCandyCookingMethod
+@implementation FSTCandyRecipe
 - (id) init
 {
     self = [super init];

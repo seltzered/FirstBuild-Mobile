@@ -1,38 +1,38 @@
 //
-//  FSTCookingMethodSubSelectionViewController.m
+//  FSTRecipeSubSelectionViewController.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/12/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTCookingMethodSubSelectionViewController.h"
-#import "FSTCookingMethods.h"
-#import "FSTSousVideCookingMethods.h"
-#import "FSTBeefSousVideCookingMethod.h"
+#import "FSTRecipeSubSelectionViewController.h"
+#import "FSTRecipes.h"
+#import "FSTSousVideRecipes.h"
+#import "FSTBeefSousVideRecipe.h"
 #import "FSTBeefSettingsViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTRevealViewController.h"
 #import "FSTSavedRecipeViewController.h"
-#import "FSTCandyCookingMethod.h"
-#import "FSTCandyCookingMethods.h"
+#import "FSTCandyRecipe.h"
+#import "FSTCandyRecipes.h"
 
 
-@interface FSTCookingMethodSubSelectionViewController ()
+@interface FSTRecipeSubSelectionViewController ()
 
 @end
 
-@implementation FSTCookingMethodSubSelectionViewController
+@implementation FSTRecipeSubSelectionViewController
 
 NSString* headerText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if ([self.childViewControllers[0] isKindOfClass:[FSTCookingMethodTableViewController class]])
+    if ([self.childViewControllers[0] isKindOfClass:[FSTRecipeTableViewController class]])
     {
-        ((FSTCookingMethodTableViewController*) self.childViewControllers[0]).delegate = self;
+        ((FSTRecipeTableViewController*) self.childViewControllers[0]).delegate = self;
     }
     headerText = [self.currentParagon.toBeCookingMethod.name uppercaseString]; // grabs the current cooking method (sous vide most likely) upon loading
 
@@ -53,22 +53,22 @@ NSString* headerText;
     [super didReceiveMemoryWarning];
 }
 
-- (FSTCookingMethods*) dataRequestedFromChild
+- (FSTRecipes*) dataRequestedFromChild
 {
-    if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideCookingMethod class]])
+    if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTSousVideRecipe class]])
     {
-        return (FSTCookingMethods*)[[FSTSousVideCookingMethods alloc]init];
+        return (FSTRecipes*)[[FSTSousVideRecipes alloc]init];
     }
-    else if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTCandyCookingMethod class]])
+    else if ([self.currentParagon.toBeCookingMethod isKindOfClass:[FSTCandyRecipe class]])
     {
-        return (FSTCookingMethods*)[[FSTCandyCookingMethods alloc]init];
+        return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
     }
     return nil;
 }
 
-- (void) cookingMethodSelected:(FSTCookingMethod *)cookingMethod
+- (void) recipeSelected:(FSTRecipe *)cookingMethod
 {
-    if ([cookingMethod isKindOfClass:[FSTBeefSousVideCookingMethod class]])
+    if ([cookingMethod isKindOfClass:[FSTBeefSousVideRecipe class]])
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
     }
@@ -78,9 +78,9 @@ NSString* headerText;
 {
     //if we are going to anything other than the custom settings view controller
     //then we need to set the cooking method. the custom settings will initialize the cooking method on its own
-    if ([sender isKindOfClass:[FSTCookingMethod class]])
+    if ([sender isKindOfClass:[FSTRecipe class]])
     {
-        self.currentParagon.toBeCookingMethod = (FSTCookingMethod*)sender;
+        self.currentParagon.toBeCookingMethod = (FSTRecipe*)sender;
         [self.currentParagon.toBeCookingMethod createCookingSession];
         [self.currentParagon.toBeCookingMethod addStageToCookingSession];
     }

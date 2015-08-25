@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTSousVideCookingMethod.h"
+#import "FSTSousVideRecipe.h"
 
-@implementation FSTSousVideCookingMethod
+@implementation FSTSousVideRecipe
 
 - (id) init
 {

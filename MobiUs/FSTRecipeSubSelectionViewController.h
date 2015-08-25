@@ -1,5 +1,5 @@
 //
-//  FSTCookingMethodSubSelectionViewController.h
+//  FSTRecipeSubSelectionViewController.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/12/15.
@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSTCookingMethodTableViewController.h"
+#import "FSTRecipeTableViewController.h"
 #import "FSTParagon.h"
 
-@interface FSTCookingMethodSubSelectionViewController : UIViewController<FSTCookingMethodTableViewControllerDelegate>
+@interface FSTRecipeSubSelectionViewController : UIViewController<FSTRecipeTableViewControllerDelegate>
 
 @property (nonatomic,weak) FSTParagon* currentParagon;
 @end

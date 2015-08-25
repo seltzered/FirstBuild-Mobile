@@ -6,16 +6,16 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTCookingMethodTableViewController.h"
+#import "FSTRecipeTableViewController.h"
 #import "FSTLine.h"
 
-@interface FSTCookingMethodTableViewController ()
+@interface FSTRecipeTableViewController ()
 
-@property (nonatomic,retain) FSTCookingMethods* methods;
+@property (nonatomic,retain) FSTRecipes* recipes;
 
 @end
 
-@implementation FSTCookingMethodTableViewController
+@implementation FSTRecipeTableViewController
 
 - (void)viewDidLoad {
     
@@ -33,7 +33,7 @@
 {
     self.tableView.userInteractionEnabled = YES;
 
-    self.methods = [self.delegate dataRequestedFromChild];
+    self.recipes = [self.delegate dataRequestedFromChild];
     
 }
 
@@ -51,14 +51,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.methods.cookingMethods.count;
+    return self.recipes.recipes.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
      // eventually, the cells will control the subcategories, so the tables load new data depending on the current selection. Perhaps there is some animation to fill in a tableview, and I could reset the table with the selection as the first member (the pointed header could be the selected background view)
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CookingMethodCell" forIndexPath:indexPath]; // changed from UITableViewCell,only animation overloaded on this version
     
-    cell.textLabel.text = ((FSTCookingMethod*)self.methods.cookingMethods[indexPath.row]).name; // this is all caps, set back to normal text
+    cell.textLabel.text = ((FSTRecipe*)self.recipes.recipes[indexPath.row]).name; // this is all caps, set back to normal text
     cell.textLabel.textColor = [UIColor blackColor];//UIColorFromRGB(0xFF0105); // set to red color
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.font = [UIFont fontWithName:@"FSEmeric-Light" size:22];
@@ -80,11 +80,11 @@
 
     self.tableView.userInteractionEnabled = NO;
     
-    FSTCookingMethod* method = self.methods.cookingMethods[indexPath.row];
+    FSTRecipe* recipe = self.recipes.recipes[indexPath.row];
     
     // clear selection property not making a difference // this might be a problem if the selection changes
     [weakSelf.tableView deselectRowAtIndexPath:weakSelf.tableView.indexPathForSelectedRow animated:YES];
-    [weakSelf.delegate cookingMethodSelected:method];
+    [weakSelf.delegate recipeSelected:recipe];
 }
 
 

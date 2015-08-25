@@ -9,7 +9,7 @@
 
 #import "FSTBleProduct.h"
 //#import "FSTParagonCookingSession.h" // already included in method
-#import "FSTCookingMethod.h"
+#import "FSTRecipe.h"
 #import "FSTBurner.h"
 
 @interface FSTParagon : FSTBleProduct 
@@ -48,8 +48,8 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
-@property (nonatomic, strong) FSTCookingMethod* currentCookingMethod;
-@property (nonatomic, strong) FSTCookingMethod* toBeCookingMethod;
+@property (nonatomic, strong) FSTRecipe* currentCookingMethod;
+@property (nonatomic, strong) FSTRecipe* toBeCookingMethod;
 
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;

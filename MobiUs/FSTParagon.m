@@ -57,7 +57,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         //setup the current cooking method and session, which is the actual
         //state of the cooking as reported by the cooktop
-        self.currentCookingMethod = [[FSTCookingMethod alloc]init];
+        self.currentCookingMethod = [[FSTRecipe alloc]init];
         [self.currentCookingMethod createCookingSession];
         [self.currentCookingMethod addStageToCookingSession];
         
