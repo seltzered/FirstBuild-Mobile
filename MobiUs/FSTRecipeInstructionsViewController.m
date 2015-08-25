@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.textView.delegate = self;
     //self.tabBarController.tabBar.frame.size
     // Do any additional setup after loading the view.
 }
@@ -35,6 +36,25 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Text View delegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    // must set active recipe when parent segues
+    return YES;
+}
+
+
 
 /*
 #pragma mark - Navigation

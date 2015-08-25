@@ -199,19 +199,6 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     return YES; // might want to scroll to different positions depending on the delegate
 }
 
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    } else {
-        return YES;
-    }
-}
--(BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    self.activeRecipe.note = [NSMutableString stringWithString:textView.text];
-    return YES;
-}
-
 #pragma mark - save button
 
 - (IBAction)saveButtonTapped:(id)sender {

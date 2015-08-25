@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTRecipeIngredientsViewController : UIViewController
+@interface FSTRecipeIngredientsViewController : UIViewController<UITextViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
 
 @end
