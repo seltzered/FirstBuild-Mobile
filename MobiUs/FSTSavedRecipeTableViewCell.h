@@ -1,5 +1,5 @@
 //
-//  FSTRecipeTableViewCell.h
+//  FSTSavedRecipeTableViewCell.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/17/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTRecipeTableViewCell : UITableViewCell
+@interface FSTSavedRecipeTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *recipePhoto;
 

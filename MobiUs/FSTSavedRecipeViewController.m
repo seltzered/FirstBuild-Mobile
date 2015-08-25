@@ -1,31 +1,31 @@
 //
-//  FSTRecipeViewController.m
+//  FSTSavedRecipeViewController.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/17/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTRecipeViewController.h"
-#import "FSTRecipeManager.h"
-#import "FSTEditRecipeViewController.h"
+#import "FSTSavedRecipeViewController.h"
+#import "FSTSavedRecipeManager.h"
+#import "FSTSavedEditRecipeViewController.h"
 #import "FSTReadyToPreheatViewController.h"
 
-@interface FSTRecipeViewController ()
+@interface FSTSavedRecipeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *emptyTableView;
 
 @end
 
-@implementation FSTRecipeViewController
+@implementation FSTSavedRecipeViewController
 
-FSTRecipeManager* recipeManager;
+FSTSavedRecipeManager* recipeManager;
 // perhaps we need some delegate methods so the table can decide when this is empty
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    recipeManager = [[FSTRecipeManager alloc] init];
+    recipeManager = [[FSTSavedRecipeManager alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -34,7 +34,7 @@ FSTRecipeManager* recipeManager;
     } else {
         self.emptyTableView.hidden = true;
     }
-    ((FSTRecipeTableViewController*)self.childViewControllers[0]).delegate = self;
+    ((FSTSavedRecipeTableViewController*)self.childViewControllers[0]).delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,9 +56,9 @@ FSTRecipeManager* recipeManager;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.destinationViewController isKindOfClass:[FSTEditRecipeViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[FSTSavedEditRecipeViewController class]]) {
         if ([sender isKindOfClass:[FSTRecipe class]]) {
-            ((FSTEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
+            ((FSTSavedEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
         }
     } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]]) {
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;

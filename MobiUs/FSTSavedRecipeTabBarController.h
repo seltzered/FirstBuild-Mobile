@@ -1,5 +1,5 @@
 //
-//  FSTRecipeTabBarController.h
+//  FSTSavedRecipeTabBarController.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/24/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTRecipeTabBarController : UITabBarController <UITabBarControllerDelegate>
+@interface FSTSavedRecipeTabBarController : UITabBarController <UITabBarControllerDelegate>
 
 @end

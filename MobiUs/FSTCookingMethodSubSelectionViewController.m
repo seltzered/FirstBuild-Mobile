@@ -14,7 +14,7 @@
 #import "MobiNavigationController.h"
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTRevealViewController.h"
-#import "FSTRecipeViewController.h"
+#import "FSTSavedRecipeViewController.h"
 #import "FSTCandyCookingMethod.h"
 #import "FSTCandyCookingMethods.h"
 
@@ -87,7 +87,7 @@ NSString* headerText;
     
     if (
         [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
-        [segue.destinationViewController isKindOfClass:[FSTRecipeViewController class]]
+        [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]
         )
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;

@@ -1,23 +1,23 @@
 //
-//  FSTRecipeInstructionsViewController.m
+//  FSTSavedRecipeInstructionsViewController.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/24/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTRecipeInstructionsViewController.h"
-#import "FSTRecipeUnderLineView.h"
+#import "FSTSavedRecipeInstructionsViewController.h"
+#import "FSTSavedRecipeUnderLineView.h"
 
-@interface FSTRecipeInstructionsViewController ()
+@interface FSTSavedRecipeInstructionsViewController ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *underLineSpacing;
 
-@property (weak, nonatomic) IBOutlet FSTRecipeUnderLineView *underLineView;
+@property (weak, nonatomic) IBOutlet FSTSavedRecipeUnderLineView *underLineView;
 
 @end
 
-@implementation FSTRecipeInstructionsViewController
+@implementation FSTSavedRecipeInstructionsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

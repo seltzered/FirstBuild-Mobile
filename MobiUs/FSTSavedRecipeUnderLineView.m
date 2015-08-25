@@ -1,20 +1,20 @@
 //
-//  FSTRecipeUnderLineView.m
+//  FSTSavedRecipeUnderLineView.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/24/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTRecipeUnderLineView.h"
+#import "FSTSavedRecipeUnderLineView.h"
 
-@interface FSTRecipeUnderLineView()
+@interface FSTSavedRecipeUnderLineView()
 
 @property (nonatomic, strong) UIView* underLine;
 
 @end
 
-@implementation FSTRecipeUnderLineView
+@implementation FSTSavedRecipeUnderLineView
 
 CGFloat ulWidth;
 

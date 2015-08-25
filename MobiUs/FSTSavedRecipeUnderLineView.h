@@ -1,5 +1,5 @@
 //
-//  FSTRecipeUnderLineView.h
+//  FSTSavedRecipeUnderLineView.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/24/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTRecipeUnderLineView : UIView
+@interface FSTSavedRecipeUnderLineView : UIView
 
 -(void)setHorizontalPosition:(CGFloat)position;
 

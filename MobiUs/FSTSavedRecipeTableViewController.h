@@ -1,5 +1,5 @@
 //
-//  FSTRecipeTableViewController.h
+//  FSTSavedRecipeTableViewController.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/17/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTRecipe.h"
 
-@protocol FSTRecipeTableDelegate <NSObject>
+@protocol FSTSavedRecipeTableDelegate <NSObject>
 
 -(void)segueWithRecipe:(FSTRecipe*)recipe;
 
@@ -19,8 +19,8 @@
 
 @end
 
-@interface FSTRecipeTableViewController : UITableViewController
+@interface FSTSavedRecipeTableViewController : UITableViewController
 
-@property (nonatomic, weak) id <FSTRecipeTableDelegate> delegate;
+@property (nonatomic, weak) id <FSTSavedRecipeTableDelegate> delegate;
 
 @end

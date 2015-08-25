@@ -1,5 +1,5 @@
 //
-//  FSTRecipeViewController.h
+//  FSTSavedRecipeViewController.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/17/15.
@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSTRecipeTableViewController.h"
+#import "FSTSavedRecipeTableViewController.h"
 #import "FSTParagon.h"
 
-@interface FSTRecipeViewController : UIViewController <FSTRecipeTableDelegate>
+@interface FSTSavedRecipeViewController : UIViewController <FSTSavedRecipeTableDelegate>
 
 @property FSTParagon* currentParagon;
 

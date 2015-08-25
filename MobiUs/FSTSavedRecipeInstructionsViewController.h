@@ -1,5 +1,5 @@
 //
-//  FSTRecipeSettingsViewController.h
+//  FSTSavedRecipeInstructionsViewController.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/24/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTRecipeSettingsViewController : UIViewController
+@interface FSTSavedRecipeInstructionsViewController : UIViewController
 
 @end

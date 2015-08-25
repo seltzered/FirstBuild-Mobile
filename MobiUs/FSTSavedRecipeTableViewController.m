@@ -1,30 +1,30 @@
 //
-//  FSTRecipeTableViewController.m
+//  FSTSavedRecipeTableViewController.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/17/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTRecipeTableViewController.h"
+#import "FSTSavedRecipeTableViewController.h"
 
-#import "FSTRecipeTableViewCell.h"
+#import "FSTSavedRecipeTableViewCell.h"
 
-#import "FSTRecipeManager.h"
+#import "FSTSavedRecipeManager.h"
 
-@interface FSTRecipeTableViewController ()
+@interface FSTSavedRecipeTableViewController ()
 
 @end
 
-@implementation FSTRecipeTableViewController
+@implementation FSTSavedRecipeTableViewController
 
 NSDictionary* storedRecipes; // set on loading
 
-FSTRecipeManager* recipeManager;
+FSTSavedRecipeManager* recipeManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    recipeManager = [[FSTRecipeManager alloc] init]; // can be totally seperate, it still reaches the same data. Just make it in this scope
+    recipeManager = [[FSTSavedRecipeManager alloc] init]; // can be totally seperate, it still reaches the same data. Just make it in this scope
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,7 +53,7 @@ FSTRecipeManager* recipeManager;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    FSTRecipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recipe_cell" forIndexPath:indexPath];
+    FSTSavedRecipeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"recipe_cell" forIndexPath:indexPath];
     
     NSString* key = [storedRecipes allKeys][indexPath.item];
     FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];

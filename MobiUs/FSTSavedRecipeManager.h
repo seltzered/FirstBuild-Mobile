@@ -1,5 +1,5 @@
 //
-//  FSTRecipeManager.h
+//  FSTSavedRecipeManager.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/17/15.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "FSTRecipe.h"
 
-@interface FSTRecipeManager : NSObject
+@interface FSTSavedRecipeManager : NSObject
 
 -(void)saveRecipe:(FSTRecipe*)recipe;
 

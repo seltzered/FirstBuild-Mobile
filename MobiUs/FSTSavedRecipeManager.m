@@ -1,14 +1,14 @@
 //
-//  FSTRecipeManager.m
+//  FSTSavedRecipeManager.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/17/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTRecipeManager.h"
+#import "FSTSavedRecipeManager.h"
 
-@implementation FSTRecipeManager
+@implementation FSTSavedRecipeManager
 
 
 -(void)saveRecipe:(FSTRecipe *)recipe {

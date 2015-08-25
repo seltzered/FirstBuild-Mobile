@@ -1,27 +1,27 @@
 //
-//  FSTRecipeTabBarController.m
+//  FSTSavedRecipeTabBarController.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/24/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTRecipeTabBarController.h"
-#import "FSTRecipeIngredientsViewController.h"
-#import "FSTRecipeInstructionsViewController.h"
-#import "FSTRecipeSettingsViewController.h"
+#import "FSTSavedRecipeTabBarController.h"
+#import "FSTSavedRecipeIngredientsViewController.h"
+#import "FSTSavedRecipeInstructionsViewController.h"
+#import "FSTSavedRecipeSettingsViewController.h"
 
-@interface FSTRecipeTabBarController ()
+@interface FSTSavedRecipeTabBarController ()
 
 @end
 
-@implementation FSTRecipeTabBarController
+@implementation FSTSavedRecipeTabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    FSTRecipeIngredientsViewController* ingredientsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ingredientsTab"];
-    FSTRecipeInstructionsViewController* instructionsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"instructionsTab"];
-    FSTRecipeSettingsViewController* settingsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"settingsTab"];
+    FSTSavedRecipeIngredientsViewController* ingredientsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ingredientsTab"];
+    FSTSavedRecipeInstructionsViewController* instructionsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"instructionsTab"];
+    FSTSavedRecipeSettingsViewController* settingsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"settingsTab"];
     self.viewControllers = [NSArray arrayWithObjects:ingredientsVC, instructionsVC, settingsVC, nil];
     self.delegate = self;
     

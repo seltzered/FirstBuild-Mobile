@@ -13,7 +13,7 @@
 #import "FSTCookingMethodSubSelectionViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
-#import "FSTRecipeViewController.h"
+#import "FSTSavedRecipeViewController.h"
 
 @interface FSTCookingMethodViewController ()
 
@@ -67,7 +67,7 @@ FSTCookingMethods* _methods;
     if  (
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTCookingMethodSubSelectionViewController class]] ||
-            [segue.destinationViewController isKindOfClass:[FSTRecipeViewController class]]
+            [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]
 
         )
     {

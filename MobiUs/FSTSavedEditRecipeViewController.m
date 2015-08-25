@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTEditRecipeViewController.h"
+#import "FSTSavedEditRecipeViewController.h"
 
 
 
-@interface FSTEditRecipeViewController ()
+@interface FSTSavedEditRecipeViewController ()
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *minPickerHeight;
 
@@ -42,11 +42,11 @@
 
 @end
 
-@implementation FSTEditRecipeViewController
+@implementation FSTSavedEditRecipeViewController
 {
     FSTStagePickerManager* pickerManager;
     
-    FSTRecipeManager* recipeManager;
+    FSTSavedRecipeManager* recipeManager;
 }
 
 typedef enum variableSelections {
@@ -65,7 +65,7 @@ CGFloat const SEL_HEIGHT_R = 90; // the standard picker height for the current s
     [super viewDidLoad];
     
     pickerManager = [[FSTStagePickerManager alloc] init];
-    recipeManager = [[FSTRecipeManager alloc] init];
+    recipeManager = [[FSTSavedRecipeManager alloc] init];
     [self.nameField setDelegate:self];
     [self.noteView setDelegate:self];
     [self.minPicker setDelegate:pickerManager];

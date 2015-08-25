@@ -10,9 +10,9 @@
 #import "FSTRecipe.h"
 #import "FSTParagon.h"
 #import "FSTStagePickerManager.h"
-#import "FSTRecipeManager.h"
+#import "FSTSavedRecipeManager.h"
 
-@interface FSTEditRecipeViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, FSTStagePickerManagerDelegate>
+@interface FSTSavedEditRecipeViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, FSTStagePickerManagerDelegate>
 
 @property (nonatomic, strong) FSTRecipe* activeRecipe;
 
