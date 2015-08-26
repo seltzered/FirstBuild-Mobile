@@ -352,7 +352,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
-        currentStage.cookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
+        self.session.currentStageCookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
         [self determineCookMode];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
     }
@@ -456,18 +456,18 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
     {
-        if ([currentStage.cookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
+        if ([self.session.currentStageCookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the maximum time
             self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
         }
-        else if ([currentStage.cookTimeElapsed doubleValue] >= [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
+        else if ([self.session.currentStageCookTimeElapsed doubleValue] >= [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the minimum time, but less than or equal to the max time
             //and the cookTime is set
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMaxTime;
         }
-        else if([currentStage.cookTimeElapsed doubleValue] < [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
+        else if([self.session.currentStageCookTimeElapsed doubleValue] < [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is less than the minimum time and the cook time is set
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMinTime;
@@ -636,8 +636,8 @@ __weak NSTimer* _readCharacteristicsTimer;
     FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
     FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
     NSLog(@"------PARAGON-------");
-    NSLog(@"bmode %d, cmode %d, curtmp %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature);
-    NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@, elapt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum, currentStage.cookTimeElapsed);
+    NSLog(@"bmode %d, cmode %d, curtmp %@, stage %d, elapt %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature, self.session.currentStage, self.session.currentStageCookTimeElapsed);
+    NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
     if (toBeStage)
     {
         NSLog(@"\t  TOBE RECIPE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);

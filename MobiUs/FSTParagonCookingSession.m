@@ -18,6 +18,7 @@
         self.toBeRecipe = nil;
         self.currentStage = 0;
         self.currentProbeTemperature = 0;
+        self.currentStageCookTimeElapsed = 0;
     }
     return self;
 }
