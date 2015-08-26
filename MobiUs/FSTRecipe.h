@@ -26,11 +26,10 @@
 
 
 @property (nonatomic, retain) NSString* name;
-
 @property (nonatomic, strong) NSMutableArray* paragonCookingStages;
 
-
 - (FSTParagonCookingStage*) addStage;
+
 
 
 @end
