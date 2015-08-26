@@ -32,10 +32,6 @@
     // some crucial data objects in the children
     FSTStagePickerManager* childPickerManager;
     
-    NSString* childIngredients;
-    
-    NSString* childInstructions;
-    
 }
 
 typedef enum variableSelections {
