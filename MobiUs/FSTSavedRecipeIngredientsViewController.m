@@ -12,6 +12,8 @@
 
 @interface FSTSavedRecipeIngredientsViewController ()
 
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *underLineSpacing;
 
 @property (weak, nonatomic) IBOutlet FSTSavedRecipeUnderLineView *underLineView;
@@ -24,10 +26,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.textView.delegate = self;
+    self.textView.text = self.ingredients;
     //UIImage* selectedImage = [UIImage imageNamed:@"Paragon_Mark_Red"];//[FSTColorImage imageWithColor:[UIColor orangeColor] inRect:CGRectMake(0, 0, 30, 24)];
     //[self.tabBarItem setSelectedImage:selectedImage];
     //self.tabBarItem.imageInsets = UIEdgeInsetsMake(12, 0, -12, 0); // trying to shift the whole thing down.
     //title should be set in storyboard
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.textView.text = self.ingredients; // this is the first to load so this could happen to late
+}
+
+-(void)setIngredients:(NSMutableString *)ingredients { // parent set the ingredients
+    _ingredients = ingredients;
+    self.textView.text = ingredients;
 }
 
 -(void)viewWillLayoutSubviews {
@@ -54,7 +66,7 @@
 
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    // must set active recipe when parent segues
+    self.ingredients = [NSMutableString stringWithString:textView.text];
     return YES;
 }
 

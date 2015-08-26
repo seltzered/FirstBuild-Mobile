@@ -10,6 +10,6 @@
 
 @interface FSTSavedRecipeInstructionsViewController : UIViewController<UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) NSMutableString* instructions;
 
 @end

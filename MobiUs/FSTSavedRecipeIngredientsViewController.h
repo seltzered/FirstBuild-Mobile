@@ -10,6 +10,6 @@
 
 @interface FSTSavedRecipeIngredientsViewController : UIViewController <UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) NSMutableString* ingredients; //needs to be strong since there is a new string initialized upon entering text
 
 @end

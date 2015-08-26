@@ -10,5 +10,7 @@
 #import "FSTStagePickerManager.h"
 
 @interface FSTSavedRecipeSettingsViewController : UIViewController<FSTStagePickerManagerDelegate>
+
 @property (nonatomic, strong) FSTStagePickerManager* pickerManager;
+
 @end

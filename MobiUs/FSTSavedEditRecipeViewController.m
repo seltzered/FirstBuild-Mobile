@@ -32,10 +32,9 @@
     // some crucial data objects in the children
     FSTStagePickerManager* childPickerManager;
     
-    UITextView* childInstructionsTextView;
+    NSString* childIngredients;
     
-    UITextView* childIngredientsTextView;
-    
+    NSString* childInstructions;
     
 }
 
@@ -65,17 +64,22 @@ VariableSelection _selection;
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated { // perhaps view did load? I want view did load in the child to have called. Could just have an ingredients setter if it does not work
     [super viewWillAppear:animated];
     // set the name if it is in the recipe
     [self.nameField setText:self.activeRecipe.friendlyName];
     FSTSavedRecipeTabBarController* recipeTBC = [self.childViewControllers objectAtIndex:0];
     recipeTBC.delegate = self;
-        if ([recipeTBC.viewControllers[0] isKindOfClass:[FSTSavedRecipeIngredientsViewController class]])
+    
+    for (UIViewController* vc in recipeTBC.viewControllers) {
+        if ([vc isKindOfClass:[FSTSavedRecipeIngredientsViewController class]])
         {
-            childIngredientsTextView = ((FSTSavedRecipeIngredientsViewController*)recipeTBC.viewControllers[0]).textView;
-        } // ingredients view should be the first one in the array (set it before it is visible)
-    [childIngredientsTextView setText:self.activeRecipe.ingredients];
+            ((FSTSavedRecipeIngredientsViewController*)vc).ingredients = self.activeRecipe.ingredients; // set the ingredients property for when it loads
+            // ingredients view should be the first one in the array (set it before it is visible)
+        } else if ([vc isKindOfClass:[FSTSavedRecipeInstructionsViewController class]]) {
+            ((FSTSavedRecipeInstructionsViewController*)vc).instructions = self.activeRecipe.note; // this can be set later in view did load
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -120,39 +124,34 @@ VariableSelection _selection;
 #pragma mark - save button
 
 - (IBAction)saveButtonTapped:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
         self.activeRecipe.friendlyName = [NSMutableString stringWithString:self.nameField.text];
-        self.activeRecipe.note = [NSMutableString stringWithString:childInstructionsTextView.text];
-        self.activeRecipe.ingredients = [NSMutableString stringWithString:childIngredientsTextView.text];
-        self.activeRecipe.photo.image = self.imageEditor.image;
-        // will probably for loop through all the picker manager to support multiStages
+    FSTSavedRecipeTabBarController* recipeTBC = (FSTSavedRecipeTabBarController*)self.childViewControllers[0];
+    self.activeRecipe.ingredients = ((FSTSavedRecipeIngredientsViewController*)recipeTBC.viewControllers[0]).ingredients;
+    self.activeRecipe.note = ((FSTSavedRecipeInstructionsViewController*)recipeTBC.viewControllers[1]).instructions;
+    self.activeRecipe.photo.image = self.imageEditor.image;
+    // will probably for loop through all the picker manager to support multiStages
+    if (childPickerManager) { // child PickerManager was set, so the setting might have changed
         [self.activeRecipe createCookingSession];
         [self.activeRecipe addStageToCookingSession];
         ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMinimum = [childPickerManager minMinutesChosen];
         ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
         ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).targetTemperature = [childPickerManager temperatureChosen];
-        // get all the session variables from the pickers, then save it
-        [recipeManager saveRecipe:self.activeRecipe];
+    }
+    // TODO: work out the session / recipe issue
+    // get all the session variables from the pickers, then save it
+    [recipeManager saveRecipe:self.activeRecipe];
+    [self.navigationController popViewControllerAnimated:YES]; // perhaps the other views will dealloc later
 }
 
 #pragma mark - UITabBarControllerDelegate
 
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     
-    // load the pertinent members of each view controller after we select it
-    if ([viewController isKindOfClass:[FSTSavedRecipeInstructionsViewController class]])
-    {
-        childInstructionsTextView = ((FSTSavedRecipeInstructionsViewController*)viewController).textView;
-    }
-    else if ([viewController isKindOfClass:[FSTSavedRecipeSettingsViewController class]])
+   if ([viewController isKindOfClass:[FSTSavedRecipeSettingsViewController class]])
     {
         childPickerManager = ((FSTSavedRecipeSettingsViewController*)viewController).pickerManager;
-    }
-    else if ([viewController isKindOfClass:[FSTSavedRecipeIngredientsViewController class]])
-    {
-        childIngredientsTextView = ((FSTSavedRecipeIngredientsViewController*)viewController).textView;
-    }
-    // TODO: set the text of each view once it appears, but only if the text is not set. Im not certain how best to approach this. Perhaps with a sentinel value in the storyboard template; we would reset the text if it is there. 
+    } // get the picker manager for quick access from the
     
 }
 

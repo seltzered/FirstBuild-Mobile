@@ -11,6 +11,9 @@
 
 @interface FSTSavedRecipeInstructionsViewController ()
 
+
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *underLineSpacing;
 
 @property (weak, nonatomic) IBOutlet FSTSavedRecipeUnderLineView *underLineView;
@@ -22,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.textView.delegate = self;
+    self.textView.text = self.instructions;
     //self.tabBarController.tabBar.frame.size
     // Do any additional setup after loading the view.
 }
@@ -51,6 +55,7 @@
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView {
     // must set active recipe when parent segues
+    self.instructions = [NSMutableString stringWithString:textView.text];
     return YES;
 }
 
