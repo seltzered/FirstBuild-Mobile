@@ -8,7 +8,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #import "FSTBleProduct.h"
-//#import "FSTParagonCookingSession.h" // already included in Recipe
+#import "FSTParagonCookingSession.h"
 #import "FSTRecipe.h"
 #import "FSTBurner.h"
 
@@ -48,15 +48,17 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
-@property (nonatomic, strong) FSTRecipe* activeRecipe;
-@property (nonatomic, strong) FSTRecipe* toBeRecipe;
 
+@property (nonatomic, strong) NSNumber* recipeId;
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;
 @property (nonatomic, strong) NSArray* burners;
- // a percentage that tells how many characteristics loaded
+
 
 -(void)startHeatingWithStage: (FSTParagonCookingStage*)stage;
 -(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
+-(void)moveNextStage;
+
+@property (nonatomic, retain) FSTParagonCookingSession* session;
 
 @end

@@ -37,7 +37,7 @@ FSTRecipes* _methods;
 - (void)dealloc
 {
     //we no longer have a valid cooking method
-    self.product.toBeRecipe = nil;
+    self.product.session.toBeRecipe = nil;
     DLog(@"dealloc");
 }
 
@@ -59,7 +59,7 @@ FSTRecipes* _methods;
     //if we actually have a product chosen for the segue then initialize the cooking method
     if ([sender isKindOfClass:[FSTRecipe class]])
     {
-        self.product.toBeRecipe = (FSTRecipe*)sender;
+        self.product.session.toBeRecipe = (FSTRecipe*)sender;
     }
     
     //if we are segueing to stored recipes, new custom cook mode or a sub selection then
@@ -68,12 +68,10 @@ FSTRecipes* _methods;
             [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTRecipeSubSelectionViewController class]] ||
             [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]
-
         )
     {
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.product;
     }
-
 }
 
 - (FSTRecipes*) dataRequestedFromChild

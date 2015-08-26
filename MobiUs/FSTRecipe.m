@@ -17,7 +17,6 @@
         self.note = [decoder decodeObjectForKey:@"note"];
         self.ingredients = [decoder decodeObjectForKey:@"ingredients"];
         self.photo = [decoder decodeObjectForKey:@"photo"];
-        self.session = [decoder decodeObjectForKey:@"session"];
     }
     return self;
 }
@@ -37,19 +36,12 @@
     [encoder encodeObject:self.note forKey:@"note"];
     [encoder encodeObject:self.ingredients forKey:@"ingredients"];
     [encoder encodeObject:self.photo forKey:@"photo"];
-    [encoder encodeObject:self.session forKey:@"session"];
 }
 
-- (FSTParagonCookingSession*) createCookingSession
-{
-    self.session = [[FSTParagonCookingSession alloc] init];
-    return self.session;
-}
-
-- (FSTParagonCookingStage*) addStageToCookingSession
+- (FSTParagonCookingStage*) addStage
 {
     FSTParagonCookingStage* stage = [[FSTParagonCookingStage alloc] init];
-    [self.session.paragonCookingStages addObject:stage];
+    [self.paragonCookingStages addObject:stage];
     return stage;
 }
 

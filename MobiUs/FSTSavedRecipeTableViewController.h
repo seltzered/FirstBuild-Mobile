@@ -13,7 +13,7 @@
 
 -(void)segueWithRecipe:(FSTRecipe*)recipe;
 
--(void)startCookingWithSession:(FSTParagonCookingSession*)session;
+-(void)startCookingWithRecipe:(FSTRecipe*)recipe;
 
 -(void)didDeleteRecipe;
 

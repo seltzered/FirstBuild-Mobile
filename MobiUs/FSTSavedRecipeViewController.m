@@ -25,7 +25,7 @@ FSTSavedRecipeManager* recipeManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    recipeManager = [[FSTSavedRecipeManager alloc] init];
+    recipeManager = [FSTSavedRecipeManager sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,9 +72,9 @@ FSTSavedRecipeManager* recipeManager;
     [self performSegueWithIdentifier:@"editRecipesSegue" sender:recipe];
 }
 
--(void)startCookingWithSession:(FSTParagonCookingSession *)session {
-    self.currentParagon.toBeRecipe.session = session; // set the method?
-    [self.currentParagon startHeatingWithStage:self.currentParagon.toBeRecipe.session.paragonCookingStages[0]];
+-(void)startCookingWithRecipe:(FSTRecipe *)recipe {
+    self.currentParagon.session.toBeRecipe = recipe; // set the method?
+    [self.currentParagon startHeatingWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
     [self performSegueWithIdentifier:@"cookingSegue" sender:self];
 }
 

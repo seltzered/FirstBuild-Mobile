@@ -51,7 +51,7 @@ VariableSelection _selection;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    recipeManager = [[FSTSavedRecipeManager alloc] init];
+    recipeManager = [FSTSavedRecipeManager sharedInstance];
     [self.nameField setDelegate:self];
     
     if (!self.activeRecipe) {
@@ -132,11 +132,10 @@ VariableSelection _selection;
     self.activeRecipe.photo.image = self.imageEditor.image;
     // will probably for loop through all the picker manager to support multiStages
     if (childPickerManager) { // child PickerManager was set, so the setting might have changed
-        [self.activeRecipe createCookingSession];
-        [self.activeRecipe addStageToCookingSession];
-        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMinimum = [childPickerManager minMinutesChosen];
-        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
-        ((FSTParagonCookingStage*)self.activeRecipe.session.paragonCookingStages[0]).targetTemperature = [childPickerManager temperatureChosen];
+        [self.activeRecipe addStage];
+        ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMinimum = [childPickerManager minMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
+        ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).targetTemperature = [childPickerManager temperatureChosen];
     }
     // TODO: work out the session / recipe issue
     // get all the session variables from the pickers, then save it

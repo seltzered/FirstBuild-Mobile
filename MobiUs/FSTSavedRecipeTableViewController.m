@@ -24,7 +24,7 @@ FSTSavedRecipeManager* recipeManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    recipeManager = [[FSTSavedRecipeManager alloc] init]; // can be totally seperate, it still reaches the same data. Just make it in this scope
+    recipeManager = [FSTSavedRecipeManager sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,7 +99,7 @@ FSTSavedRecipeManager* recipeManager;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString* key = [storedRecipes allKeys][indexPath.item];
     FSTRecipe* matchedRecipe = [storedRecipes objectForKey:key];
-    [self.delegate startCookingWithSession:matchedRecipe.session]; // grab the selected session and start a cooking stage (probably should pass the method
+    [self.delegate startCookingWithRecipe:matchedRecipe]; // grab the selected session and start a cooking stage (probably should pass the method
 }
 
 /*

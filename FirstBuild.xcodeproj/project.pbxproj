@@ -380,7 +380,7 @@
 		5BC7C7B31A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChillHubDeviceTableViewCell.m; sourceTree = "<group>"; };
 		5BCBB9D31B02991B00B8E043 /* FSTParagon.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FSTParagon.storyboard; sourceTree = SOURCE_ROOT; };
 		5BCBB9D51B02A1A100B8E043 /* FSTRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTRecipeViewController.h; sourceTree = "<group>"; };
-		5BCBB9D61B02A1A100B8E043 /* FSTRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTRecipeViewController.m; sourceTree = "<group>"; };
+		5BCBB9D61B02A1A100B8E043 /* FSTRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FSTRecipeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5BCBB9D81B02A1EA00B8E043 /* FSTRecipeSubSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTRecipeSubSelectionViewController.h; sourceTree = "<group>"; };
 		5BCBB9D91B02A1EA00B8E043 /* FSTRecipeSubSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTRecipeSubSelectionViewController.m; sourceTree = "<group>"; };
 		5BCBB9DB1B02A22B00B8E043 /* FSTBeefSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBeefSettingsViewController.h; sourceTree = "<group>"; };
@@ -577,7 +577,6 @@
 		5B99DFC01AB1EA2900247034 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				5BA064D61B8B46EC002FCE59 /* recipe management */,
 				5BA064D41B8B4654002FCE59 /* recipes */,
 				5BA064D51B8B46B9002FCE59 /* paragon cooktop */,
 				5B7338BE1B0F9CEA004C931E /* Session.h */,
@@ -877,13 +876,6 @@
 				5B9A6F4F1B50173F00BDD727 /* FSTBurner.m */,
 			);
 			name = "paragon cooktop";
-			sourceTree = "<group>";
-		};
-		5BA064D61B8B46EC002FCE59 /* recipe management */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "recipe management";
 			sourceTree = "<group>";
 		};
 		5BA3A96F1B3470FA00E51C51 /* BLECommissioning */ = {

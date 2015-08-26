@@ -10,6 +10,15 @@
 
 @implementation FSTSavedRecipeManager
 
++ (id) sharedInstance {
+    
+    static FSTSavedRecipeManager *sharedSingletonInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedSingletonInstance = [[self alloc] init];
+    });
+    return sharedSingletonInstance;
+}
 
 -(void)saveRecipe:(FSTRecipe *)recipe {
     if (recipe.friendlyName.length > 0) {

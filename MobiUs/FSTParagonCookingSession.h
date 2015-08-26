@@ -6,11 +6,14 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "FSTParagonCookingStage.h"
+#import "FSTRecipe.h"
 
-@interface FSTParagonCookingSession : NSObject <NSCoding>
+@interface FSTParagonCookingSession : NSObject
 
-@property (nonatomic, strong) NSMutableArray* paragonCookingStages;
+@property (nonatomic, strong) FSTRecipe* activeRecipe;
+@property (nonatomic, strong) FSTRecipe* toBeRecipe;
+@property (nonatomic, strong) NSNumber* currentProbeTemperature;
+@property (nonatomic, strong) NSNumber* currentStageCookTimeElapsed;
+@property (nonatomic, weak) FSTParagonCookingStage* currentStage;
 
 @end
