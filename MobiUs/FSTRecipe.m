@@ -26,6 +26,7 @@
     if (self) {
         self.photo = [[UIImageView alloc] init];
         self.recipeId = [[NSUUID UUID] UUIDString];
+        self.paragonCookingStages = [[NSMutableArray alloc] init];
     }
     return self;
 }

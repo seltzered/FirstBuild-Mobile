@@ -39,7 +39,7 @@ NSString * const FSTCharacteristicTargetTemperature     = @"71B1A100-E3AE-46FF-B
 NSString * const FSTCharacteristicElapsedTime           = @"998142D1-658E-33E2-DFC0-32091E2354EC"; //read,notify
 NSString * const FSTCharacteristicCookTime              = @"C4510188-9062-4D28-97EF-4FB32FFE1AC5"; //read,write
 NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"; //read,notify
-NSString * const FSTCharacteristicRecipeId              = @"";
+NSString * const FSTCharacteristicRecipeId              = @"FF";
 
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
@@ -66,9 +66,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         self.session = [[FSTParagonCookingSession alloc] init];
         self.session.activeRecipe = nil;
         
-        //TODO: Hack! we need an actual recipe
-        [self handleRecipeId:nil];
-        
         //forcibly set the toBe cooking method to nil since we are just creating the paragon
         //object and there is not way it could exist yet
         self.session.toBeRecipe = nil;
@@ -83,6 +80,10 @@ __weak NSTimer* _readCharacteristicsTimer;
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicCookTime,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicRecipeId,
                                    nil]; // booleans for all the required characteristics, tell us whether or not the characteristic loaded
+        
+        //TODO: Hack! we need an actual recipe
+        [self handleRecipeId:nil];
+
     }
 
     return self;
@@ -345,8 +346,12 @@ __weak NSTimer* _readCharacteristicsTimer;
 //    Byte bytes[characteristic.value.length] ;
 //    [data getBytes:bytes length:characteristic.value.length];
 //    self.recipeId = [NSNumber numberWithUnsignedInt:bytes[0]];
+    
+    //TODO: REMOVE ALL OF THIS!
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRecipeId];
     self.session.activeRecipe = [FSTRecipe new];
     self.session.currentStage = [self.session.activeRecipe addStage];
+    ///////////////////////////
 }
 
 -(void)handleBatteryLevel: (CBCharacteristic*)characteristic
