@@ -7,6 +7,7 @@
 //
 
 #import "FSTParagon.h"
+#import "FSTSavedRecipeManager.h"
 //#import "FSTParagonCookingSession.h" 
 
 @implementation FSTParagon
@@ -38,8 +39,11 @@ NSString * const FSTCharacteristicTargetTemperature     = @"71B1A100-E3AE-46FF-B
 NSString * const FSTCharacteristicElapsedTime           = @"998142D1-658E-33E2-DFC0-32091E2354EC"; //read,notify
 NSString * const FSTCharacteristicCookTime              = @"C4510188-9062-4D28-97EF-4FB32FFE1AC5"; //read,write
 NSString * const FSTCharacteristicCurrentTemperature    = @"8F080B1C-7C3B-FBB9-584A-F0AFD57028F0"; //read,notify
+NSString * const FSTCharacteristicRecipeId              = @"";
+
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+
 
 
 //TODO put sizes for the characteristics here and remove magic numbers below
@@ -57,9 +61,13 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         //setup the current cooking method and session, which is the actual
         //state of the cooking as reported by the cooktop
+        //TODO: create a new recipe based on the actual recipe
+        self.recipeId = nil;
         self.session = [[FSTParagonCookingSession alloc] init];
-        self.session.activeRecipe = [[FSTRecipe alloc]init];
-        [self.session.activeRecipe addStage];
+        self.session.activeRecipe = nil;
+        
+        //TODO: Hack! we need an actual recipe
+        [self handleRecipeId:nil];
         
         //forcibly set the toBe cooking method to nil since we are just creating the paragon
         //object and there is not way it could exist yet
@@ -73,6 +81,7 @@ __weak NSTimer* _readCharacteristicsTimer;
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicElapsedTime,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicTargetTemperature,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicCookTime,
+            [[NSNumber alloc] initWithBool:0], FSTCharacteristicRecipeId,
                                    nil]; // booleans for all the required characteristics, tell us whether or not the characteristic loaded
     }
 
@@ -269,7 +278,12 @@ __weak NSTimer* _readCharacteristicsTimer;
         //characteristicStatusFlags.FSTCharacteristicCurrentTemperature = 1;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentTemperature];
         [self handleCurrentTemperature:characteristic];
-    } // end all characteristic cases
+    }
+    else if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicRecipeId])
+    {
+        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRecipeId];
+        [self handleRecipeId:characteristic];
+    }// end all characteristic cases
     
     NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
     NSInteger requiredCount = 0; // count the number of discovered characteristics
@@ -318,6 +332,23 @@ __weak NSTimer* _readCharacteristicsTimer;
     
 } // end assignToProperty
 
+-(void)handleRecipeId: (CBCharacteristic*)characteristic
+{
+    //TODO: implement with actual recipe id characteristic when we have that
+//    if (characteristic.value.length != 1)
+//    {
+//        DLog(@"handleRecipeId length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+//        return;
+//    }
+    
+//    NSData *data = characteristic.value;
+//    Byte bytes[characteristic.value.length] ;
+//    [data getBytes:bytes length:characteristic.value.length];
+//    self.recipeId = [NSNumber numberWithUnsignedInt:bytes[0]];
+    self.session.activeRecipe = [FSTRecipe new];
+    self.session.currentStage = [self.session.activeRecipe addStage];
+}
+
 -(void)handleBatteryLevel: (CBCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
@@ -344,9 +375,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         return;
     }
     
-    FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
-    
-    if (currentStage)
+    if (self.session.currentStage)
     {
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
@@ -366,8 +395,6 @@ __weak NSTimer* _readCharacteristicsTimer;
         DLog(@"handleBurnerStatus length of %lu not what was expected, %lu", (unsigned long)characteristic.value.length, (unsigned long)self.burners.count);
         return;
     }
-    
-    //FSTParagonCookingStage* toBeStage = self.toBeCookingMethod.session.paragonCookingStages[0];
     
     //There are 5 burner statuses and and 5 bytes. Each byte is a status
     //the statuses are:
@@ -438,8 +465,6 @@ __weak NSTimer* _readCharacteristicsTimer;
 -(void)determineCookMode
 {
     //TODO: add direct cook
-    FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
-    FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
     
     ParagonCookMode currentCookMode = self.cookMode;
     
@@ -456,28 +481,28 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
     {
-        if ([self.session.currentStageCookTimeElapsed doubleValue] > [currentStage.cookTimeMaximum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
+        if ([self.session.currentStageCookTimeElapsed doubleValue] > [self.session.currentStage.cookTimeMaximum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the maximum time
             self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
         }
-        else if ([self.session.currentStageCookTimeElapsed doubleValue] >= [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
+        else if ([self.session.currentStageCookTimeElapsed doubleValue] >= [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is greater than the minimum time, but less than or equal to the max time
             //and the cookTime is set
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMaxTime;
         }
-        else if([self.session.currentStageCookTimeElapsed doubleValue] < [currentStage.cookTimeMinimum doubleValue] && [currentStage.cookTimeMinimum doubleValue] > 0)
+        else if([self.session.currentStageCookTimeElapsed doubleValue] < [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
         {
             //elapsed time is less than the minimum time and the cook time is set
             self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMinTime;
         }
-        else if (toBeStage && [toBeStage.cookTimeMinimum doubleValue] > 0)
+        else if (self.session.toBeRecipe)
         {
             //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
             self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
         }
-        else if([currentStage.cookTimeMinimum doubleValue] == 0 && !toBeStage)
+        else if([self.session.currentStage.cookTimeMinimum doubleValue] == 0 && !self.session.toBeRecipe)
         {
             //cook time not set
             self.cookMode = FSTParagonCookingStatePrecisionCookingWithoutTime;
@@ -513,15 +538,13 @@ __weak NSTimer* _readCharacteristicsTimer;
         return;
     }
     
-    FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
-
-    if (currentStage)
+    if (self.session.currentStage)
     {
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
-        currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+        self.session.currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
     }
 }
@@ -534,9 +557,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         return;
     }
     
-    FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
-
-    if (currentStage)
+    if (self.session.currentStage)
     {
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
@@ -544,8 +565,8 @@ __weak NSTimer* _readCharacteristicsTimer;
         
         uint16_t minimumTime = OSReadBigInt16(bytes, 0);
         uint16_t maximumTime = OSReadBigInt16(bytes, 2);
-        currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
-        currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
+        self.session.currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
+        self.session.currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
         [self determineCookMode];
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
     }
@@ -559,8 +580,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         return;
     }
     
-    FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
-    if (currentStage)
+    if (self.session.currentStage)
     {
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
@@ -633,10 +653,10 @@ __weak NSTimer* _readCharacteristicsTimer;
 #ifdef DEBUG
 -(void)logParagon
 {
-    FSTParagonCookingStage* currentStage = self.session.activeRecipe.paragonCookingStages[0];
+    FSTParagonCookingStage* currentStage = self.session.currentStage;
     FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
     NSLog(@"------PARAGON-------");
-    NSLog(@"bmode %d, cmode %d, curtmp %@, stage %d, elapt %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature, self.session.currentStage, self.session.currentStageCookTimeElapsed);
+    NSLog(@"bmode %d, cmode %d, curtmp %@, stage %@, elapt %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature, self.session.currentStage, self.session.currentStageCookTimeElapsed);
     NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
     if (toBeStage)
     {

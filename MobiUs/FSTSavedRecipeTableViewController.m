@@ -24,7 +24,7 @@ FSTSavedRecipeManager* recipeManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    recipeManager = [[FSTSavedRecipeManager alloc] init]; // can be totally seperate, it still reaches the same data. Just make it in this scope
+    recipeManager = [FSTSavedRecipeManager sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

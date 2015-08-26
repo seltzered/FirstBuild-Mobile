@@ -17,4 +17,6 @@
 
 -(void)removeItemFromDefaults:(NSString*)key;
 
++(id) sharedInstance;
+
 @end

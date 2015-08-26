@@ -45,7 +45,7 @@ NSObject* _cookTimeChangedObserver;
 -(void)setupEventHandlers
 {
     __weak typeof(self) weakSelf = self;
-    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.activeRecipe.paragonCookingStages[0]);
+    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
@@ -98,8 +98,7 @@ NSObject* _cookTimeChangedObserver;
 -(void)transitionToCurrentCookMode
 {
     __weak typeof(self) weakSelf = self;
-    __block FSTParagonCookingStage* _toBeCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
-    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.activeRecipe.paragonCookingStages[0]);
+    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
     NSString* stateIdentifier = nil;
     
     switch (weakSelf.currentParagon.cookMode) {
@@ -107,13 +106,13 @@ NSObject* _cookTimeChangedObserver;
             stateIdentifier = @"preheatingStateSegue";
             weakSelf.continueButton.hidden = YES;
             
-            //if we have a current cook time or a to be cooktime then we need a stage bar
+            //if we have a current cook time or a to-be recipe then we need the stage bar
             if (
-                    (_toBeCookingStage && [_toBeCookingStage.cookTimeMinimum intValue] > 0) ||
+                    weakSelf.currentParagon.session.toBeRecipe ||
                     [_currentCookingStage.cookTimeMinimum intValue] > 0
                 )
             {
-               weakSelf.stageBar.hidden = NO;
+                weakSelf.stageBar.hidden = NO;
             }
             else
             {

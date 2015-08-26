@@ -52,7 +52,7 @@ VariableSelection _selection;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    recipeManager = [[FSTSavedRecipeManager alloc] init];
+    recipeManager = [FSTSavedRecipeManager sharedInstance];
     [self.nameField setDelegate:self];
     
     if (!self.activeRecipe) {

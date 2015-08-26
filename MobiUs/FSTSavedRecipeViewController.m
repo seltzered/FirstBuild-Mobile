@@ -25,7 +25,7 @@ FSTSavedRecipeManager* recipeManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    recipeManager = [[FSTSavedRecipeManager alloc] init];
+    recipeManager = [FSTSavedRecipeManager sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
