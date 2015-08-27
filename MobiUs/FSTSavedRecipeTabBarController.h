@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTSavedRecipeTabBarController : UITabBarController <UITabBarControllerDelegate>
+@interface FSTSavedRecipeTabBarController : UITabBarController
+
+@property (nonatomic) BOOL is_multi_stage;
 
 @end

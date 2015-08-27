@@ -7,6 +7,7 @@
 //
 
 #import "FSTStageSettingsViewController.h"
+#import "FSTSavedRecipeViewController.h"
 
 @interface FSTStageSettingsViewController ()
 
@@ -65,8 +66,19 @@ CGFloat const SEL_HEIGHT_S = 70;
     
     self.speedPicker.dataSource = self;
     self.speedPicker.delegate = self;
-    pickerManager.delegate = self;
-    // Do any additional setup after loading the view.
+    self.directionsTextView.delegate = self;
+    pickerManager.delegate = self; // needs to update time and temp labels
+    [self.directionsTextView setText:self.activeStage.cookingLabel]; // set the active text if it has been set in this stage
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [pickerManager selectAllIndices];
+    [self resetPickerHeights];
+    [self updateLabels];
+    [self updateSpeedLabel];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,13 +97,22 @@ CGFloat const SEL_HEIGHT_S = 70;
     return [[NSNumber numberWithInt:row] stringValue]; // just need to number the rows 0 through 9
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [self.speedLabel setText:[[NSNumber numberWithInt:row] stringValue]]; // this is the only time we need to update the speed label
+    [self updateSpeedLabel];
+}
+
+-(void)updateSpeedLabel {
+    UIFont* labelsFont = [UIFont fontWithName:@"FSEmeric-Thin" size:32.0];
+    NSDictionary* labelFontDictionary = [NSDictionary dictionaryWithObject:labelsFont forKey:NSFontAttributeName];
+    
+    NSMutableAttributedString* speedText = [[NSMutableAttributedString alloc] initWithString:[[NSNumber numberWithInt:[self.speedPicker selectedRowInComponent:0]] stringValue] attributes:labelFontDictionary];
+    
+    [self.speedLabel setAttributedText:speedText]; // this is the only time we need to update the speed label
 }
 
 // manager delegate method
 -(void)updateLabels {
-    [self.timeLabel setText:(NSString*)[pickerManager minLabel]]; // there is no max time here
-    [self.tempLabel setText:(NSString*)[pickerManager tempLabel]];
+    [self.timeLabel setAttributedText:[pickerManager minLabel]]; // there is no max time here
+    [self.tempLabel setAttributedText:[pickerManager tempLabel]];
     
 }
 
@@ -133,7 +154,7 @@ CGFloat const SEL_HEIGHT_S = 70;
     
     if (_selection != SPEED) {
         _selection = SPEED;
-        self.tempPickerHeight.constant = SEL_HEIGHT_S;
+        self.speedPickerHeight.constant = SEL_HEIGHT_S;
     } else {
         _selection = NONE;
     }
@@ -149,6 +170,35 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.speedPickerHeight.constant = 0;
     self.tempPickerHeight.constant = 0; // careful to reset the constants, not the pointers to the constraints
     // changes layout in a subsequent animation
+}
+
+- (IBAction)saveButtonTapped:(id)sender {
+    // TODO: set the speed somehow
+    self.activeStage.maxPowerLevel = [NSNumber numberWithInteger:[self.speedPicker selectedRowInComponent:0]];
+    self.activeStage.cookTimeMinimum = [pickerManager minMinutesChosen];
+    self.activeStage.targetTemperature = [pickerManager temperatureChosen];
+    self.activeStage.cookingLabel = self.directionsTextView.text; // is cookingLabel the correct variable
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
+//TODO: the recipes need to actually save these stages
+
+#pragma mark - Text View delegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    // must set active recipe when parent segues
+    return YES;
 }
 
 /*

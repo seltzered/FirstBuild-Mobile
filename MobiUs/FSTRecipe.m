@@ -17,6 +17,7 @@
         self.note = [decoder decodeObjectForKey:@"note"];
         self.ingredients = [decoder decodeObjectForKey:@"ingredients"];
         self.photo = [decoder decodeObjectForKey:@"photo"];
+        self.paragonCookingStages = [decoder decodeObjectForKey:@"paragonCookingStages"];
     }
     return self;
 }
@@ -37,6 +38,7 @@
     [encoder encodeObject:self.note forKey:@"note"];
     [encoder encodeObject:self.ingredients forKey:@"ingredients"];
     [encoder encodeObject:self.photo forKey:@"photo"];
+    [encoder encodeObject:self.paragonCookingStages forKey:@"paragonCookingStages"];
 }
 
 - (FSTParagonCookingStage*) addStage

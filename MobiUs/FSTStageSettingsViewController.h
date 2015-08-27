@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTStagePickerManager.h"
+#import "FSTRecipe.h"
 
-@interface FSTStageSettingsViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, FSTStagePickerManagerDelegate>
+@interface FSTStageSettingsViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, FSTStagePickerManagerDelegate, UITextViewDelegate>
 
+@property (nonatomic, weak) FSTParagonCookingStage* activeStage;
 @end

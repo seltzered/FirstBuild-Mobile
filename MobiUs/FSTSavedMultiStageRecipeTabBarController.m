@@ -1,36 +1,29 @@
 //
-//  FSTSavedRecipeTabBarController.m
+//  FSTSavedMultiStageRecipeTabBarController.m
 //  FirstBuild
 //
-//  Created by John Nolan on 8/24/15.
+//  Created by John Nolan on 8/27/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTSavedRecipeTabBarController.h"
+#import "FSTSavedMultiStageRecipeTabBarController.h"
 #import "FSTSavedRecipeIngredientsViewController.h"
 #import "FSTSavedRecipeInstructionsViewController.h"
-#import "FSTSavedRecipeSettingsViewController.h"
-#import "FSTStageTableContainerViewController.h"
+#import "FSTStageTableViewController.h"
 
-@interface FSTSavedRecipeTabBarController ()
+
+@interface FSTSavedMultiStageRecipeTabBarController ()
 
 @end
 
-@implementation FSTSavedRecipeTabBarController
+@implementation FSTSavedMultiStageRecipeTabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     FSTSavedRecipeIngredientsViewController* ingredientsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ingredientsTab"];
     FSTSavedRecipeInstructionsViewController* instructionsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"instructionsTab"];
-    FSTSavedRecipeSettingsViewController* settingsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"settingsTab"];
-    FSTStageTableContainerViewController* stageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"stageContainer"];
-    
-    if (self.is_multi_stage) {
-        self.viewControllers = [NSArray arrayWithObjects:ingredientsVC, instructionsVC, stageVC, nil];
-    } else {
-        self.viewControllers = [NSArray arrayWithObjects:ingredientsVC, instructionsVC, stageVC, nil];//settingsVC, nil];
-    }
-    
+    FSTStageTableViewController* stageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"stageTab"];
+    self.viewControllers = [NSArray arrayWithObjects:ingredientsVC, instructionsVC, stageVC, nil];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -47,9 +40,17 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
+    // Dispose of any resources that can be recreated.
 }
 
-// delegate method
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

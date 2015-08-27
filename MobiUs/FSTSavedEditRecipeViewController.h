@@ -11,11 +11,12 @@
 #import "FSTParagon.h"
 #import "FSTStagePickerManager.h"
 #import "FSTSavedRecipeManager.h"
+#import "FSTStageTableViewController.h"
 
-@interface FSTSavedEditRecipeViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UITabBarControllerDelegate>
+@interface FSTSavedEditRecipeViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UITextViewDelegate, UITabBarControllerDelegate, FSTStageTableViewControllerDelegate>
 
-@property (nonatomic, strong) FSTRecipe* activeRecipe;
-
+@property (nonatomic, strong) FSTRecipe* activeRecipe; 
+// need two different classes to decide what settings to load
 @property (nonatomic, weak) FSTParagon* currentParagon;
 
 @end

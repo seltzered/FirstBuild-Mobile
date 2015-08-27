@@ -43,7 +43,7 @@ FSTSavedRecipeManager* recipeManager;
 }
 
 - (IBAction)addRecipeTapped:(id)sender {
-    [self performSegueWithIdentifier:@"editRecipesSegue" sender:self];
+    [self performSegueWithIdentifier:@"addRecipeSegue" sender:self];
 }
 
 -(void)didDeleteRecipe {
@@ -62,8 +62,7 @@ FSTSavedRecipeManager* recipeManager;
         }
     } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]]) {
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
-    }
-    
+    } // it does not really need to pass anything to the addRecipe table
 }
 
 #pragma mark - table delegate
