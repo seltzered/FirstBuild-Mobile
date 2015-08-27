@@ -579,6 +579,153 @@
 			name = views;
 			sourceTree = "<group>";
 		};
+		5B74A74C1B8F615A00A11296 /* cooking */ = {
+			isa = PBXGroup;
+			children = (
+				5B74A74F1B8F61DD00A11296 /* recipe editor */,
+				5B74A74E1B8F61D100A11296 /* stage bar */,
+				5B74A74D1B8F618F00A11296 /* states */,
+			);
+			name = cooking;
+			sourceTree = "<group>";
+		};
+		5B74A74D1B8F618F00A11296 /* states */ = {
+			isa = PBXGroup;
+			children = (
+				5B7338BB1B0F9A7E004C931E /* FSTCookingProgressView.h */,
+				5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */,
+				5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */,
+				5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */,
+				51A9D02C1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.h */,
+				51A9D02D1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m */,
+				51A9D0321B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.h */,
+				51A9D0331B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m */,
+				51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.h */,
+				51A9D0301B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m */,
+				51A9D0351B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.h */,
+				51A9D0361B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m */,
+				51DB66FB1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.h */,
+				51DB66FC1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.m */,
+			);
+			name = states;
+			sourceTree = "<group>";
+		};
+		5B74A74E1B8F61D100A11296 /* stage bar */ = {
+			isa = PBXGroup;
+			children = (
+				51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */,
+				51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */,
+				51F8EF3E1B55961400F40882 /* FSTStageBarView.h */,
+				51F8EF3F1B55961400F40882 /* FSTStageBarView.m */,
+			);
+			name = "stage bar";
+			sourceTree = "<group>";
+		};
+		5B74A74F1B8F61DD00A11296 /* recipe editor */ = {
+			isa = PBXGroup;
+			children = (
+				51A114D41B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.h */,
+				51A114D51B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.m */,
+				51EA9E4A1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.h */,
+				51EA9E4B1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.m */,
+			);
+			name = "recipe editor";
+			sourceTree = "<group>";
+		};
+		5B74A7501B8F896B00A11296 /* cooking */ = {
+			isa = PBXGroup;
+			children = (
+				51B297501B8EAA780017DCA2 /* FSTStageTableViewController.h */,
+				51B297511B8EAA780017DCA2 /* FSTStageTableViewController.m */,
+				51B2974A1B8E34900017DCA2 /* FSTStageSettingsViewController.h */,
+				51B2974B1B8E34900017DCA2 /* FSTStageSettingsViewController.m */,
+				51A9D04A1B73FFDC000AE293 /* FSTContainerViewController.h */,
+				51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */,
+				5BCBB9DE1B02A24100B8E043 /* FSTReadyToPreheatViewController.h */,
+				5BCBB9DF1B02A24100B8E043 /* FSTReadyToPreheatViewController.m */,
+				5BCBB9E71B02A51700B8E043 /* FSTCookingViewController.h */,
+				5BCBB9E81B02A51700B8E043 /* FSTCookingViewController.m */,
+				51A9D0471B73E11B000AE293 /* FSTCookingStateViewController.h */,
+				51A9D0481B73E11B000AE293 /* FSTCookingStateViewController.m */,
+				51A9D03E1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.h */,
+				51A9D03F1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m */,
+				51A9D03B1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.h */,
+				51A9D03C1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m */,
+				51A9D0411B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.h */,
+				51A9D0421B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m */,
+				51A9D0441B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.h */,
+				51A9D0451B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m */,
+				51DB66F81B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.h */,
+				51DB66F91B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.m */,
+				51DB66FE1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.h */,
+				51DB66FF1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.m */,
+				51F5702E1B7B768B006A27B0 /* FSTDirectCookingStateViewController.h */,
+				51F5702F1B7B768B006A27B0 /* FSTDirectCookingStateViewController.m */,
+			);
+			name = cooking;
+			sourceTree = "<group>";
+		};
+		5B74A7511B8F8B9200A11296 /* recipe menu */ = {
+			isa = PBXGroup;
+			children = (
+				5BE687831B71019B00C7FDC5 /* FSTCookSettingsViewController.h */,
+				5BE687841B71019B00C7FDC5 /* FSTCookSettingsViewController.m */,
+				5BCBB9F31B0386CE00B8E043 /* FSTRecipeTableViewController.h */,
+				5BCBB9F41B0386CE00B8E043 /* FSTRecipeTableViewController.m */,
+				5BCBB9D51B02A1A100B8E043 /* FSTRecipeViewController.h */,
+				5BCBB9D61B02A1A100B8E043 /* FSTRecipeViewController.m */,
+				5BCBB9D81B02A1EA00B8E043 /* FSTRecipeSubSelectionViewController.h */,
+				5BCBB9D91B02A1EA00B8E043 /* FSTRecipeSubSelectionViewController.m */,
+				5BCBB9DB1B02A22B00B8E043 /* FSTBeefSettingsViewController.h */,
+				5BCBB9DC1B02A22B00B8E043 /* FSTBeefSettingsViewController.m */,
+				5BCBB9EA1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.h */,
+				5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */,
+			);
+			name = "recipe menu";
+			sourceTree = "<group>";
+		};
+		5B74A7521B8F8BA600A11296 /* recipe editor */ = {
+			isa = PBXGroup;
+			children = (
+				51EA9E501B82444700A3F421 /* FSTSavedRecipeViewController.h */,
+				51EA9E511B82444700A3F421 /* FSTSavedRecipeViewController.m */,
+				51EA9E4D1B823E2900A3F421 /* FSTSavedRecipeTableViewController.h */,
+				51EA9E4E1B823E2900A3F421 /* FSTSavedRecipeTableViewController.m */,
+				51B2975C1B8F65E80017DCA2 /* FSTRecipeTypeTableViewController.h */,
+				51B2975D1B8F65E80017DCA2 /* FSTRecipeTypeTableViewController.m */,
+				515CD89B1B7CDC900087F9C7 /* FSTSavedEditRecipeViewController.h */,
+				515CD89C1B7CDC900087F9C7 /* FSTSavedEditRecipeViewController.m */,
+				51DC77611B8B837000313611 /* FSTSavedRecipeTabBarController.h */,
+				51DC77621B8B837000313611 /* FSTSavedRecipeTabBarController.m */,
+				51DC77641B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.h */,
+				51DC77651B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m */,
+				51DC77671B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.h */,
+				51DC77681B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.m */,
+				51A114D71B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.h */,
+				51A114D81B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m */,
+				51B2975F1B8F730E0017DCA2 /* FSTStageTableContainerViewController.h */,
+				51B297601B8F730E0017DCA2 /* FSTStageTableContainerViewController.m */,
+				51B297501B8EAA780017DCA2 /* FSTStageTableViewController.h */,
+				51B297511B8EAA780017DCA2 /* FSTStageTableViewController.m */,
+				51B2974A1B8E34900017DCA2 /* FSTStageSettingsViewController.h */,
+				51B2974B1B8E34900017DCA2 /* FSTStageSettingsViewController.m */,
+			);
+			name = "recipe editor";
+			sourceTree = "<group>";
+		};
+		5B74A7531B8F8BDF00A11296 /* menu system */ = {
+			isa = PBXGroup;
+			children = (
+				5B9EF11D19DEFEF000E8D9F1 /* FSTParagonMenuViewController.h */,
+				5BF9482E19EC15E300CB8BCF /* FSTParagonMenuViewController.m */,
+				51DFCADF1B66B6E700E48084 /* FSTParagonMenuSettingsViewController.h */,
+				51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */,
+				51DFCAE21B66B7D500E48084 /* FSTParagonMenuAboutViewController.h */,
+				51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */,
+			);
+			name = "menu system";
+			sourceTree = "<group>";
+		};
 		5B99DFBF1AB1EA2200247034 /* Paragon */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,33 +752,12 @@
 		5B99DFC11AB1EA2F00247034 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				5B74A74C1B8F615A00A11296 /* cooking */,
 				5BCBB9D31B02991B00B8E043 /* FSTParagon.storyboard */,
 				517CA53A1B86176600CE9F1B /* FSTDottedDividerView.h */,
 				517CA53B1B86176600CE9F1B /* FSTDottedDividerView.m */,
-				51A114D41B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.h */,
-				51A114D51B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.m */,
-				51A9D02C1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.h */,
-				51A9D02D1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m */,
-				51A9D0321B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.h */,
-				51A9D0331B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m */,
-				51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.h */,
-				51A9D0301B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m */,
-				51A9D0351B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.h */,
-				51A9D0361B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m */,
-				51DB66FB1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.h */,
-				51DB66FC1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.m */,
-				5B7338BB1B0F9A7E004C931E /* FSTCookingProgressView.h */,
-				5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */,
-				5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */,
-				5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */,
-				51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */,
-				51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */,
-				51F8EF3E1B55961400F40882 /* FSTStageBarView.h */,
-				51F8EF3F1B55961400F40882 /* FSTStageBarView.m */,
 				5BF6FA4D1B74EF9B00D3EB85 /* FSTCookingViewSegue.h */,
 				5BF6FA4E1B74EF9B00D3EB85 /* FSTCookingViewSegue.m */,
-				51EA9E4A1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.h */,
-				51EA9E4B1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.m */,
 				51DB93CE1B70EE0E005B31CC /* FSTRegularLabel.h */,
 				51DB93CF1B70EE0E005B31CC /* FSTRegularLabel.m */,
 				5194A9441B6A9EC80033BA26 /* FSTLabel.h */,
@@ -643,68 +769,10 @@
 		5B99DFC21AB1EA3500247034 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5BCBB9F31B0386CE00B8E043 /* FSTRecipeTableViewController.h */,
-				5BCBB9F41B0386CE00B8E043 /* FSTRecipeTableViewController.m */,
-				5BCBB9D51B02A1A100B8E043 /* FSTRecipeViewController.h */,
-				5BCBB9D61B02A1A100B8E043 /* FSTRecipeViewController.m */,
-				5BCBB9D81B02A1EA00B8E043 /* FSTRecipeSubSelectionViewController.h */,
-				5BCBB9D91B02A1EA00B8E043 /* FSTRecipeSubSelectionViewController.m */,
-				5BCBB9DB1B02A22B00B8E043 /* FSTBeefSettingsViewController.h */,
-				5BCBB9DC1B02A22B00B8E043 /* FSTBeefSettingsViewController.m */,
-				5BCBB9DE1B02A24100B8E043 /* FSTReadyToPreheatViewController.h */,
-				5BCBB9DF1B02A24100B8E043 /* FSTReadyToPreheatViewController.m */,
-				5BCBB9E71B02A51700B8E043 /* FSTCookingViewController.h */,
-				5BCBB9E81B02A51700B8E043 /* FSTCookingViewController.m */,
-				51A9D0471B73E11B000AE293 /* FSTCookingStateViewController.h */,
-				51A9D0481B73E11B000AE293 /* FSTCookingStateViewController.m */,
-				51A9D03E1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.h */,
-				51A9D03F1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m */,
-				51A9D03B1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.h */,
-				51A9D03C1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m */,
-				51A9D0411B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.h */,
-				51A9D0421B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m */,
-				51A9D0441B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.h */,
-				51A9D0451B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m */,
-				51DB66F81B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.h */,
-				51DB66F91B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.m */,
-				51DB66FE1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.h */,
-				51DB66FF1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.m */,
-				51F5702E1B7B768B006A27B0 /* FSTDirectCookingStateViewController.h */,
-				51F5702F1B7B768B006A27B0 /* FSTDirectCookingStateViewController.m */,
-				51A9D04A1B73FFDC000AE293 /* FSTContainerViewController.h */,
-				51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */,
-				5BCBB9EA1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.h */,
-				5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */,
-				5B9EF11D19DEFEF000E8D9F1 /* FSTParagonMenuViewController.h */,
-				5BF9482E19EC15E300CB8BCF /* FSTParagonMenuViewController.m */,
-				51DFCADF1B66B6E700E48084 /* FSTParagonMenuSettingsViewController.h */,
-				51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */,
-				51DFCAE21B66B7D500E48084 /* FSTParagonMenuAboutViewController.h */,
-				51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */,
-				5BE687831B71019B00C7FDC5 /* FSTCookSettingsViewController.h */,
-				5BE687841B71019B00C7FDC5 /* FSTCookSettingsViewController.m */,
-				51EA9E501B82444700A3F421 /* FSTSavedRecipeViewController.h */,
-				51EA9E511B82444700A3F421 /* FSTSavedRecipeViewController.m */,
-				51EA9E4D1B823E2900A3F421 /* FSTSavedRecipeTableViewController.h */,
-				51EA9E4E1B823E2900A3F421 /* FSTSavedRecipeTableViewController.m */,
-				51B2975C1B8F65E80017DCA2 /* FSTRecipeTypeTableViewController.h */,
-				51B2975D1B8F65E80017DCA2 /* FSTRecipeTypeTableViewController.m */,
-				515CD89B1B7CDC900087F9C7 /* FSTSavedEditRecipeViewController.h */,
-				515CD89C1B7CDC900087F9C7 /* FSTSavedEditRecipeViewController.m */,
-				51DC77611B8B837000313611 /* FSTSavedRecipeTabBarController.h */,
-				51DC77621B8B837000313611 /* FSTSavedRecipeTabBarController.m */,
-				51DC77641B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.h */,
-				51DC77651B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m */,
-				51DC77671B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.h */,
-				51DC77681B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.m */,
-				51A114D71B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.h */,
-				51A114D81B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m */,
-				51B2975F1B8F730E0017DCA2 /* FSTStageTableContainerViewController.h */,
-				51B297601B8F730E0017DCA2 /* FSTStageTableContainerViewController.m */,
-				51B297501B8EAA780017DCA2 /* FSTStageTableViewController.h */,
-				51B297511B8EAA780017DCA2 /* FSTStageTableViewController.m */,
-				51B2974A1B8E34900017DCA2 /* FSTStageSettingsViewController.h */,
-				51B2974B1B8E34900017DCA2 /* FSTStageSettingsViewController.m */,
+				5B74A7531B8F8BDF00A11296 /* menu system */,
+				5B74A7521B8F8BA600A11296 /* recipe editor */,
+				5B74A7511B8F8B9200A11296 /* recipe menu */,
+				5B74A7501B8F896B00A11296 /* cooking */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
