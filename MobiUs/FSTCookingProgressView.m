@@ -129,8 +129,6 @@
         [self.layer insertSublayer:self.progressLayer atIndex:0];
         self.progressLayer.frame = self.bounds;
         [self.progressLayer setNeedsDisplay];
-        NSLog(@"DEMON BABY height %f, width %f, %f, %f", self.progressLayer.frame.size.height, self.progressLayer.frame.size.width , self.progressLayer.frame.origin.x, self.progressLayer.frame.origin.y);
-
     } else {
         NSLog(@"Cooking Progress Layer already set.\n");
     }
