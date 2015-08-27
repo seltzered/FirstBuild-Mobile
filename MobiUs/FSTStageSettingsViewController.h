@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTStagePickerManager.h"
 
-@interface FSTStageSettingsViewController : UIViewController <UIPickerViewDelegate>
+@interface FSTStageSettingsViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, FSTStagePickerManagerDelegate>
 
 @end
