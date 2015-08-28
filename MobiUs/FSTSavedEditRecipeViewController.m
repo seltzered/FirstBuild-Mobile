@@ -61,12 +61,12 @@ VariableSelection _selection;
         self.imageEditor.image = self.activeRecipe.photo.image;
     }
     
-    if ([self.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) { //TODO: add a Multi Stage Recipe class
+    /*if ([self.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) { //TODO: add a Multi Stage Recipe class
         ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = NO; // sous vide has min and max time, no stages
     } else {
         ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = YES;
     // how do I get the tab bar to load the right view controller after this? this sets after viewDidLoad in tab bar
-    }
+    }*/ // the child will check the variable on its parent
 }
 
 - (void)viewWillAppear:(BOOL)animated { // perhaps view did load? I want view did load in the child to have called. Could just have an ingredients setter if it does not work
@@ -185,6 +185,8 @@ VariableSelection _selection;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"stageSettingsSegue"]) {
         ((FSTStageSettingsViewController*)segue.destinationViewController).activeStage = (FSTParagonCookingStage*)sender; // some stage must have been set before the segue
+    } else if ([segue.identifier isEqualToString:@"tabBarSegue"]) {
+        ((FSTSavedRecipeTabBarController*)segue.destinationViewController).is_multi_stage = self.is_multi_stage;
     }
 }
 

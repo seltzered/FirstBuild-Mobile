@@ -7,6 +7,7 @@
 //
 
 #import "FSTSavedRecipeTabBarController.h"
+#import "FSTSavedEditRecipeViewController.h"
 #import "FSTSavedRecipeIngredientsViewController.h"
 #import "FSTSavedRecipeInstructionsViewController.h"
 #import "FSTSavedRecipeSettingsViewController.h"
@@ -25,10 +26,10 @@
     FSTSavedRecipeSettingsViewController* settingsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"settingsTab"];
     FSTStageTableContainerViewController* stageVC = [self.storyboard instantiateViewControllerWithIdentifier:@"stageContainer"];
     
-    if (self.is_multi_stage) {
+    if ([self.is_multi_stage boolValue]) {
         self.viewControllers = [NSArray arrayWithObjects:ingredientsVC, instructionsVC, stageVC, nil];
     } else {
-        self.viewControllers = [NSArray arrayWithObjects:ingredientsVC, instructionsVC, stageVC, nil];//settingsVC, nil];
+        self.viewControllers = [NSArray arrayWithObjects:ingredientsVC, instructionsVC, settingsVC, nil];
     }
     
 }

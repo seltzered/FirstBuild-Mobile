@@ -68,6 +68,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     ((FSTSavedEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender; // hopefully it is still the correct class in the edit recipe view controller
+    if ([sender isKindOfClass:[FSTSousVideRecipe class]]) {
+        ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:NO];
+        // no multi stage on sous vide
+    } else if ([sender isKindOfClass:[FSTMultiStageRecipe class]]) {
+        ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:YES];
+    }
 }
 // TODO: deque 2 viewControllerswhen saving the recipe
 

@@ -10,7 +10,8 @@
 #import "FSTSavedRecipeManager.h"
 #import "FSTSavedEditRecipeViewController.h"
 #import "FSTReadyToPreheatViewController.h"
-
+#import "FSTSousVideRecipe.h"
+#import "FSTMultiStageRecipe.h"
 @interface FSTSavedRecipeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *emptyTableView;
@@ -59,6 +60,11 @@ FSTSavedRecipeManager* recipeManager;
     if ([segue.destinationViewController isKindOfClass:[FSTSavedEditRecipeViewController class]]) {
         if ([sender isKindOfClass:[FSTRecipe class]]) {
             ((FSTSavedEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
+            if ([sender isKindOfClass:[FSTSousVideRecipe class]]) {
+                ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:NO];
+            } else if ([sender isKindOfClass:[FSTMultiStageRecipe class]]) {
+                ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:YES]; // decide which views to load in the tab bar
+            }
         }
     } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]]) {
         ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;

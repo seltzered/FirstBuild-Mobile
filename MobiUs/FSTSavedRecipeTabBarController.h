@@ -10,6 +10,7 @@
 
 @interface FSTSavedRecipeTabBarController : UITabBarController
 
-@property (nonatomic) BOOL is_multi_stage;
+@property (nonatomic) NSNumber* is_multi_stage;
+// boolean copied from container view controller
 
 @end
