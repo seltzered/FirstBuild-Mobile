@@ -9,6 +9,8 @@
 #import "FSTSavedRecipeViewController.h"
 #import "FSTSavedRecipeManager.h"
 #import "FSTSavedEditRecipeViewController.h"
+#import "FSTSousVideRecipe.h"
+#import "FSTMultiStageRecipe.h"
 #import "FSTReadyToReachTemperatureViewController.h"
 
 @interface FSTSavedRecipeViewController ()
@@ -59,6 +61,11 @@ FSTSavedRecipeManager* recipeManager;
     if ([segue.destinationViewController isKindOfClass:[FSTSavedEditRecipeViewController class]]) {
         if ([sender isKindOfClass:[FSTRecipe class]]) {
             ((FSTSavedEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
+            if ([sender isKindOfClass:[FSTSousVideRecipe class]]) {
+                ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:NO];
+            } else if ([sender isKindOfClass:[FSTMultiStageRecipe class]]) {
+                ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:YES]; // decide which views to load in the tab bar
+            }
         }
     } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToReachTemperatureViewController class]]) {
         ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;

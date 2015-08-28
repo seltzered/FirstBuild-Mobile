@@ -19,4 +19,7 @@
 // need two different classes to decide what settings to load
 @property (nonatomic, weak) FSTParagon* currentParagon;
 
+@property (nonatomic) NSNumber* is_multi_stage;
+// the tab bar checks this to decide what views to load
+
 @end
