@@ -477,7 +477,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     if (self.burnerMode == kPARAGON_OFF)
     {
         self.cookMode = FSTParagonCookingStateOff;
-       
     }
     else if (self.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
     {

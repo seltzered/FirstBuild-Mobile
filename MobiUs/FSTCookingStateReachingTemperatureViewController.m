@@ -56,9 +56,6 @@
     
     [self.targetLabel setAttributedText:targetTempString];
     [self.currentLabel setAttributedText:currentTempString];
-
-    
-
 }
 
 @end
