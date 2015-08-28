@@ -118,8 +118,8 @@
     //self.progressLayer = [[FSTCookingProgressLayer alloc] init]; this should be set by the view controller
     
     if (!self.progressLayer) {
-        NSLog(@"SELF height %f, width %f, %f, %f", self.frame.size.height, self.frame.size.width , self.frame.origin.x, self.frame.origin.y);
-        NSLog(@"PARENT height %f, width %f, %f, %f", self.superview.frame.size.height, self.superview.frame.size.width , self.superview.frame.origin.x, self.superview.frame.origin.y);
+//        NSLog(@"SELF height %f, width %f, %f, %f", self.frame.size.height, self.frame.size.width , self.frame.origin.x, self.frame.origin.y);
+//        NSLog(@"PARENT height %f, width %f, %f, %f", self.superview.frame.size.height, self.superview.frame.size.width , self.superview.frame.origin.x, self.superview.frame.origin.y);
         self.progressLayer = [[layerClass alloc] init];
         //CGPointMake(self.layer.bounds.size.width/4, self.layer.bounds.size.height/4);//self.layer.anchorPoint;
         [self.progressLayer setupLayer];

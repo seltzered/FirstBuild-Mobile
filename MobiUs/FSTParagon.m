@@ -350,6 +350,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO: REMOVE ALL OF THIS!
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRecipeId];
     self.session.activeRecipe = [FSTRecipe new];
+    self.session.previousStage = self.session.currentStage;
     self.session.currentStage = [self.session.activeRecipe addStage];
     ///////////////////////////
 }
@@ -481,7 +482,15 @@ __weak NSTimer* _readCharacteristicsTimer;
     else if (self.burnerMode == kPARAGON_PRECISION_PREHEATING)
     {
         //in precision cooking mode and preheating
-        self.cookMode = FSTParagonCookingStatePrecisionCookingPreheating;
+        if (self.session.currentStage.targetTemperature > self.session.currentProbeTemperature)
+        {
+            self.cookMode = FSTParagonCookingStatePrecisionCookingPreheating;
+        }
+        else
+        {
+            self.cookMode = FSTParagonCookingStatePrecisionCookingPreCooling;
+        }
+        
         // TODO: this might cause the problem with precision cooking without time
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
@@ -534,6 +543,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
 
 }
+
 
 -(void)handleTargetTemperature: (CBCharacteristic*)characteristic
 {

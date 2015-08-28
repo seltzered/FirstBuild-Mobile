@@ -574,31 +574,22 @@
 			isa = PBXGroup;
 			children = (
 				5B74A74F1B8F61DD00A11296 /* recipe editor */,
-				5B74A74E1B8F61D100A11296 /* stage bar */,
-				5B74A74D1B8F618F00A11296 /* states */,
+				5B74A74D1B8F618F00A11296 /* cooking */,
 			);
 			name = cooking;
 			sourceTree = "<group>";
 		};
-		5B74A74D1B8F618F00A11296 /* states */ = {
+		5B74A74D1B8F618F00A11296 /* cooking */ = {
 			isa = PBXGroup;
 			children = (
+				5B74A7551B8F917700A11296 /* state layers */,
+				5B74A74E1B8F61D100A11296 /* stage bar */,
 				5B7338BB1B0F9A7E004C931E /* FSTCookingProgressView.h */,
 				5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */,
 				5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */,
 				5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */,
-				51A9D02C1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.h */,
-				51A9D02D1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m */,
-				51A9D0321B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.h */,
-				51A9D0331B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m */,
-				51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.h */,
-				51A9D0301B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m */,
-				51A9D0351B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.h */,
-				51A9D0361B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m */,
-				51DB66FB1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.h */,
-				51DB66FC1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.m */,
 			);
-			name = states;
+			name = cooking;
 			sourceTree = "<group>";
 		};
 		5B74A74E1B8F61D100A11296 /* stage bar */ = {
@@ -626,6 +617,7 @@
 		5B74A7501B8F896B00A11296 /* cooking */ = {
 			isa = PBXGroup;
 			children = (
+				5B74A7541B8F916300A11296 /* states */,
 				51B297501B8EAA780017DCA2 /* FSTStageTableViewController.h */,
 				51B297511B8EAA780017DCA2 /* FSTStageTableViewController.m */,
 				51B2974A1B8E34900017DCA2 /* FSTStageSettingsViewController.h */,
@@ -638,20 +630,6 @@
 				5BCBB9E81B02A51700B8E043 /* FSTCookingViewController.m */,
 				51A9D0471B73E11B000AE293 /* FSTCookingStateViewController.h */,
 				51A9D0481B73E11B000AE293 /* FSTCookingStateViewController.m */,
-				51A9D03E1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.h */,
-				51A9D03F1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m */,
-				51A9D03B1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.h */,
-				51A9D03C1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m */,
-				51A9D0411B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.h */,
-				51A9D0421B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m */,
-				51A9D0441B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.h */,
-				51A9D0451B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m */,
-				51DB66F81B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.h */,
-				51DB66F91B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.m */,
-				51DB66FE1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.h */,
-				51DB66FF1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.m */,
-				51F5702E1B7B768B006A27B0 /* FSTDirectCookingStateViewController.h */,
-				51F5702F1B7B768B006A27B0 /* FSTDirectCookingStateViewController.m */,
 			);
 			name = cooking;
 			sourceTree = "<group>";
@@ -707,6 +685,44 @@
 				51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */,
 			);
 			name = "menu system";
+			sourceTree = "<group>";
+		};
+		5B74A7541B8F916300A11296 /* states */ = {
+			isa = PBXGroup;
+			children = (
+				51A9D03E1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.h */,
+				51A9D03F1B73DE6E000AE293 /* FSTCookingStatePreheatingViewController.m */,
+				51A9D03B1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.h */,
+				51A9D03C1B73DE36000AE293 /* FSTPrecisionCookingStatePreheatingReachedViewController.m */,
+				51A9D0411B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.h */,
+				51A9D0421B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m */,
+				51A9D0441B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.h */,
+				51A9D0451B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m */,
+				51DB66F81B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.h */,
+				51DB66F91B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.m */,
+				51DB66FE1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.h */,
+				51DB66FF1B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.m */,
+				51F5702E1B7B768B006A27B0 /* FSTDirectCookingStateViewController.h */,
+				51F5702F1B7B768B006A27B0 /* FSTDirectCookingStateViewController.m */,
+			);
+			name = states;
+			sourceTree = "<group>";
+		};
+		5B74A7551B8F917700A11296 /* state layers */ = {
+			isa = PBXGroup;
+			children = (
+				51A9D02C1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.h */,
+				51A9D02D1B73ABD3000AE293 /* FSTCookingStatePreheatingLayer.m */,
+				51A9D0321B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.h */,
+				51A9D0331B73D3B7000AE293 /* FSTPrecisionCookingStatePreheatingReachedLayer.m */,
+				51A9D02F1B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.h */,
+				51A9D0301B73B14B000AE293 /* FSTPrecisionCookingStateReachingMinTimeLayer.m */,
+				51A9D0351B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.h */,
+				51A9D0361B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m */,
+				51DB66FB1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.h */,
+				51DB66FC1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.m */,
+			);
+			name = "state layers";
 			sourceTree = "<group>";
 		};
 		5B99DFBF1AB1EA2200247034 /* Paragon */ = {
