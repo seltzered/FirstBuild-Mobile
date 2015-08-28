@@ -17,7 +17,7 @@
     self.sittingLayer.strokeEnd = 0.0F;
 }
 -(void) drawPathsForPercent {
-[self drawCompleteTicks];// preheating complete
+[self drawCompleteTicks];
 self.progressLayer.strokeEnd = self.percent;
 self.sittingLayer.strokeEnd = 0.0F;
 }

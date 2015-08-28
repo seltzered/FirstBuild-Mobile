@@ -8,7 +8,7 @@
 
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTSousVideRecipe.h"
-#import "FSTReadyToPreheatViewController.h"
+#import "FSTReadyToReachTemperatureViewController.h"
 
 @interface FSTCustomCookSettingsViewController ()
 
@@ -185,9 +185,9 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
-    if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
+    if ([segue.destinationViewController isKindOfClass:[FSTReadyToReachTemperatureViewController class]])
     {
-        ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
 

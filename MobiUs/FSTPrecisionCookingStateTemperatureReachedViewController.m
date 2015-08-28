@@ -1,26 +1,26 @@
 //
-//  FSTPrecisionCookingStatePreheatingReachedViewController.m
+//  FSTPrecisionCookingStateTemperatureReachedViewController.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/6/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTPrecisionCookingStatePreheatingReachedViewController.h"
-#import "FSTPrecisionCookingStatePreheatingReachedLayer.h"
+#import "FSTPrecisionCookingStateTemperatureReachedViewController.h"
+#import "FSTPrecisionCookingStateTemperatureReachedLayer.h"
 
-@interface FSTPrecisionCookingStatePreheatingReachedViewController ()
+@interface FSTPrecisionCookingStateTemperatureReachedViewController ()
 
 @end
 
-@implementation FSTPrecisionCookingStatePreheatingReachedViewController
+@implementation FSTPrecisionCookingStateTemperatureReachedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
 -(void) viewWillLayoutSubviews {
-    [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStatePreheatingReachedLayer class]];
+    [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateTemperatureReachedLayer class]];
 }
 
 - (void)didReceiveMemoryWarning {

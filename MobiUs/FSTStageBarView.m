@@ -105,7 +105,7 @@
         CGAffineTransform transform;
 
         switch (self.circleState) {
-            case FSTParagonCookingStatePrecisionCookingPreheating:
+            case FSTParagonCookingStatePrecisionCookingReachingTemperature:
                 transform = [(NSValue*)self.dotTransforms[0] CGAffineTransformValue];
                 self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[0]).path, &transform);//new_x = start_x; //((CAShapeLayer*)self.grayDots[0]).path;// beginning of bar
                     ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor orangeColor].CGColor;
@@ -113,7 +113,7 @@
                     ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
                     ((CAShapeLayer*)self.grayDots[3]).strokeColor = [UIColor orangeColor].CGColor;
                 break;
-            case FSTParagonCookingStatePrecisionCookingPreheatingReached:
+            case FSTParagonCookingStatePrecisionCookingTemperatureReached:
                 transform = [(NSValue*)self.dotTransforms[1] CGAffineTransformValue];
                 self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[1]).path, &transform);//self.ring.path = ((CAShapeLayer*)self.grayDots[1]).path;//new_x = start_x + self.lineWidth/3;
                 ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor grayColor].CGColor;

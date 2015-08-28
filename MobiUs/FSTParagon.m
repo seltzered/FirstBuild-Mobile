@@ -350,6 +350,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO: REMOVE ALL OF THIS!
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRecipeId];
     self.session.activeRecipe = [FSTRecipe new];
+    self.session.previousStage = self.session.currentStage;
     self.session.currentStage = [self.session.activeRecipe addStage];
     ///////////////////////////
 }
@@ -439,7 +440,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         {
             if((bytes[burner] & BURNER_PREHEAT_MASK) == BURNER_PREHEAT_MASK)
             {
-                currentBurner.burnerMode = kPARAGON_PRECISION_PREHEATING;
+                currentBurner.burnerMode = kPARAGON_PRECISION_REACHING_TEMPERATURE;
             }
             else
             {
@@ -478,10 +479,9 @@ __weak NSTimer* _readCharacteristicsTimer;
         self.cookMode = FSTParagonCookingStateOff;
        
     }
-    else if (self.burnerMode == kPARAGON_PRECISION_PREHEATING)
+    else if (self.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
     {
-        //in precision cooking mode and preheating
-        self.cookMode = FSTParagonCookingStatePrecisionCookingPreheating;
+        self.cookMode = FSTParagonCookingStatePrecisionCookingReachingTemperature;
         // TODO: this might cause the problem with precision cooking without time
     }
     else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
@@ -505,7 +505,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         else if (self.session.toBeRecipe)
         {
             //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
-            self.cookMode = FSTParagonCookingStatePrecisionCookingPreheatingReached;
+            self.cookMode = FSTParagonCookingStatePrecisionCookingTemperatureReached;
         }
         else if([self.session.currentStage.cookTimeMinimum doubleValue] == 0 && !self.session.toBeRecipe)
         {
@@ -534,6 +534,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
 
 }
+
 
 -(void)handleTargetTemperature: (CBCharacteristic*)characteristic
 {

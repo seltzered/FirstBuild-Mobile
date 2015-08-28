@@ -20,6 +20,7 @@
         self.currentProbeTemperature = 0;
         self.currentStageCookTimeElapsed = 0;
         self.currentStage = nil;
+        self.previousStage = nil;
     }
     return self;
 }

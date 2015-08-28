@@ -1,5 +1,5 @@
 //
-//  FSTReadyToPreheatViewController.h
+//  FSTReadyToReachTemperatureViewController.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 5/12/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTParagon.h"
 
-@interface FSTReadyToPreheatViewController : UIViewController
+@interface FSTReadyToReachTemperatureViewController : UIViewController
 
 @property (nonatomic,weak) FSTParagon* currentParagon;
 

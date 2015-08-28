@@ -8,7 +8,7 @@
 
 #import "FSTBeefSettingsViewController.h"
 #import "FSTBeefSousVideRecipe.h"
-#import "FSTReadyToPreheatViewController.h"
+#import "FSTReadyToReachTemperatureViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
 
@@ -152,9 +152,9 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
-    if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]])
+    if ([segue.destinationViewController isKindOfClass:[FSTReadyToReachTemperatureViewController class]])
     {
-        ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
 }
 

@@ -9,9 +9,10 @@
 #import "FSTSavedRecipeViewController.h"
 #import "FSTSavedRecipeManager.h"
 #import "FSTSavedEditRecipeViewController.h"
-#import "FSTReadyToPreheatViewController.h"
 #import "FSTSousVideRecipe.h"
 #import "FSTMultiStageRecipe.h"
+#import "FSTReadyToReachTemperatureViewController.h"
+
 @interface FSTSavedRecipeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *emptyTableView;
@@ -66,8 +67,8 @@ FSTSavedRecipeManager* recipeManager;
                 ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:YES]; // decide which views to load in the tab bar
             }
         }
-    } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]]) {
-        ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToReachTemperatureViewController class]]) {
+        ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     } // it does not really need to pass anything to the addRecipe table
 }
 

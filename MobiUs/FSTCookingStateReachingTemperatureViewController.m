@@ -1,15 +1,15 @@
 //
-//  FSTCookingStatePreheatingViewController.m
+//  FSTCookingStateReachingTemperatureViewController.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/6/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTCookingStatePreheatingViewController.h"
-#import "FSTCookingStatePreheatingLayer.h"
+#import "FSTCookingStateReachingTemperatureViewController.h"
+#import "FSTCookingStateReachingTemperatureLayer.h"
 
-@interface FSTCookingStatePreheatingViewController ()
+@interface FSTCookingStateReachingTemperatureViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *targetLabel;
 
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation FSTCookingStatePreheatingViewController
+@implementation FSTCookingStateReachingTemperatureViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,7 +26,7 @@
 
 -(void)viewWillLayoutSubviews
 {
-     [self.circleProgressView setupViewsWithLayerClass:[FSTCookingStatePreheatingLayer class]];
+     [self.circleProgressView setupViewsWithLayerClass:[FSTCookingStateReachingTemperatureLayer class]];
 }
 
 - (void)didReceiveMemoryWarning {

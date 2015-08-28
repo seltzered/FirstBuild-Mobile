@@ -1,5 +1,5 @@
 //
-//  FSTCookingStatePreheatingViewController.h
+//  FSTCookingStateReachingTemperatureViewController.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/6/15.
@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FSTCookingStatePreheatingLayer.h"
+#import "FSTCookingStateReachingTemperatureLayer.h"
 #import "FSTCookingStateViewController.h"
 
-@interface FSTCookingStatePreheatingViewController :FSTCookingStateViewController
+@interface FSTCookingStateReachingTemperatureViewController :FSTCookingStateViewController
 @property (strong, nonatomic) IBOutlet FSTCookingProgressView *circleProgressView;
 
 

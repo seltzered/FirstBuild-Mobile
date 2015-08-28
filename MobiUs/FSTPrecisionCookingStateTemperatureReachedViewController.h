@@ -1,5 +1,5 @@
 //
-//  FSTPrecisionCookingStatePreheatingReachedViewController.h
+//  FSTPrecisionCookingStateTemperatureReachedViewController.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/6/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTCookingStateViewController.h"
 
-@interface FSTPrecisionCookingStatePreheatingReachedViewController : FSTCookingStateViewController
+@interface FSTPrecisionCookingStateTemperatureReachedViewController : FSTCookingStateViewController
 
 @property (weak, nonatomic) IBOutlet FSTCookingProgressView *circleProgressView;
 
