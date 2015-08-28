@@ -1,5 +1,5 @@
 //
-//  FSTCookingProgressStatePreheatingLayer.h
+//  FSTCookingStateReachingTemperatureLayer.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/6/15.
@@ -8,6 +8,6 @@
 
 #import "FSTCookingProgressLayer.h"
 
-@interface FSTCookingStatePreheatingLayer : FSTCookingProgressLayer
+@interface FSTCookingStateReachingTemperatureLayer : FSTCookingProgressLayer
 
 @end

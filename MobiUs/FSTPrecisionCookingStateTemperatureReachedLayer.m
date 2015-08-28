@@ -1,14 +1,14 @@
 //
-//  FSTPrecisionCookingStatePreheatingReachedLayer.m
+//  FSTPrecisionCookingStateTemperatureReachedLayer.m
 //  FirstBuild
 //
 //  Created by John Nolan on 8/6/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTPrecisionCookingStatePreheatingReachedLayer.h"
+#import "FSTPrecisionCookingStateTemperatureReachedLayer.h"
 
-@implementation FSTPrecisionCookingStatePreheatingReachedLayer
+@implementation FSTPrecisionCookingStateTemperatureReachedLayer
 
 -(void) layoutSublayers {
     [super layoutSublayers];

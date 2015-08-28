@@ -1,5 +1,5 @@
 //
-//  FSTPrecisionCookingStatePreheatingReachedLayer.h
+//  FSTPrecisionCookingStateTemperatureReachedLayer.h
 //  FirstBuild
 //
 //  Created by John Nolan on 8/6/15.
@@ -8,6 +8,6 @@
 
 #import "FSTCookingProgressLayer.h"
 
-@interface FSTPrecisionCookingStatePreheatingReachedLayer : FSTCookingProgressLayer
+@interface FSTPrecisionCookingStateTemperatureReachedLayer : FSTCookingProgressLayer
 
 @end

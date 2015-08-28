@@ -102,7 +102,7 @@ NSObject* _cookTimeChangedObserver;
     NSString* stateIdentifier = nil;
     
     switch (weakSelf.currentParagon.cookMode) {
-        case FSTParagonCookingStatePrecisionCookingPreheating:
+        case FSTParagonCookingStatePrecisionCookingReachingTemperature:
             stateIdentifier = @"preheatingStateSegue";
             weakSelf.continueButton.hidden = YES;
             
@@ -119,7 +119,7 @@ NSObject* _cookTimeChangedObserver;
                 weakSelf.stageBar.hidden = YES;
             }
             break;
-        case FSTParagonCookingStatePrecisionCookingPreheatingReached:
+        case FSTParagonCookingStatePrecisionCookingTemperatureReached:
             stateIdentifier = @"preheatingReachedStateSegue";
             weakSelf.continueButton.userInteractionEnabled = YES;
             weakSelf.continueButton.hidden = NO; // this should be hidden otherwise. What happens after it is pressed?

@@ -30,17 +30,3 @@
 // http://code4app.net (en) http://code4app.com (cn)
 // From the most professional code share website: Code4App.net
 
-#pragma -mark boneyard
-/*@property (nonatomic) NSTimeInterval elapsedTime;
- 
- @property (nonatomic) NSTimeInterval timeLimit;
- 
- @property (nonatomic) CGFloat currentTemp; // set the current temperature in preheating
- 
- //@property (nonatomic, retain) NSString *status;
- 
- @property (assign, nonatomic, readonly) double percent;
- 
- @property (nonatomic) CGFloat startingTemp;
- 
- @property (nonatomic) CGFloat targetTemp;*/ // boneyard

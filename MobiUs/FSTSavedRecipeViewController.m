@@ -9,7 +9,7 @@
 #import "FSTSavedRecipeViewController.h"
 #import "FSTSavedRecipeManager.h"
 #import "FSTSavedEditRecipeViewController.h"
-#import "FSTReadyToPreheatViewController.h"
+#import "FSTReadyToReachTemperatureViewController.h"
 
 @interface FSTSavedRecipeViewController ()
 
@@ -60,8 +60,8 @@ FSTSavedRecipeManager* recipeManager;
         if ([sender isKindOfClass:[FSTRecipe class]]) {
             ((FSTSavedEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
         }
-    } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToPreheatViewController class]]) {
-        ((FSTReadyToPreheatViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToReachTemperatureViewController class]]) {
+        ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     } // it does not really need to pass anything to the addRecipe table
 }
 

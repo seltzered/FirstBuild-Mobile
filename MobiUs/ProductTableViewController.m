@@ -396,7 +396,7 @@ NSIndexPath *_indexPathForDeletion;
         
         //TODO: use cookmode not burner mode
         // check paragon cook modes to update status label
-        if (paragon.burnerMode == kPARAGON_PRECISION_PREHEATING)
+        if (paragon.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
         {
             [productCell.statusLabel setText:@"Preheating"];
         }
@@ -482,7 +482,7 @@ NSIndexPath *_indexPathForDeletion;
             FSTParagon* paragon = (FSTParagon*)product;
             
             //if we are heating or pre-heating then jump to the cooking view controller
-            if (paragon.burnerMode == kPARAGON_PRECISION_PREHEATING || paragon.burnerMode == kPARAGON_PRECISION_HEATING)
+            if (paragon.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE || paragon.burnerMode == kPARAGON_PRECISION_HEATING)
             {
                 FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
                 vc.currentParagon = paragon;
