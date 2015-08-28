@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FSTStageTableViewControllerDelegate <NSObject>
+
+-(void)editStageAtIndex:(NSInteger)index; // this will editing view controller know what stage to load into the stage editor
+
+@end
 @interface FSTStageTableViewController : UITableViewController
 
 @property (nonatomic) NSInteger stageCount;
+
+@property (nonatomic) id<FSTStageTableViewControllerDelegate> delegate;
 @end

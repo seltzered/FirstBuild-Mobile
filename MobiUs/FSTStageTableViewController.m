@@ -7,10 +7,12 @@
 //
 
 #import "FSTStageTableViewController.h"
+#import "FSTSavedRecipeUnderLineView.h"
 
 @interface FSTStageTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *addStageView;
+
 
 @end
 
@@ -18,7 +20,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.stageCount = 1; //I believe the stages should always start out as one in the table
+    //self.stageCount = 1; //TODO: need a way to tell this how many stages there are (will probably set it when the edit screen loads
+    self.clearsSelectionOnViewWillAppear = YES;
+    [self.tableView reloadData]; // not resetting the stage count at the beginning
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated]; // this is the only time the stage is set
+    [self.tableView reloadData];
+    if (self.stageCount >= 5) {
+        self.addStageView.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,7 +44,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.stageCount;
+    return self.stageCount; // when does this set?
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -41,7 +53,7 @@
     return cell;
 }
 
-- (IBAction)addStageTapped:(id)sender {
+- (IBAction)addStageTapped:(id)sender { // created a new stage
     if (self.stageCount < 5) {
         self.stageCount++; // increment under 5
     }
@@ -49,6 +61,15 @@
     if (self.stageCount >= 5) {
         self.addStageView.hidden = true;
     }
+    
+    [self.delegate editStageAtIndex:self.stageCount]; // tell the edit controller we want to change this stage number
+    [self.tableView reloadData];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // selected an existing stage
+    [self.delegate editStageAtIndex:indexPath.item];
+    
 }
 
 /*

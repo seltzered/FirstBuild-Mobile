@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTRecipe.h"
+#import "FSTMultiStageRecipe.h"
 
-@interface FSTCandyRecipe : FSTRecipe
+@interface FSTCandyRecipe : FSTMultiStageRecipe
 
 @end

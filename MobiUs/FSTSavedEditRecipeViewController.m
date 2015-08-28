@@ -7,11 +7,16 @@
 //
 
 #import "FSTSavedEditRecipeViewController.h"
+#import "FSTSavedMultiStageRecipeController.h"
 #import "FSTSavedRecipeTabBarController.h"
 #import "FSTSavedRecipeIngredientsViewController.h"
 #import "FSTSavedRecipeInstructionsViewController.h"
 #import "FSTSavedRecipeSettingsViewController.h"
 #import "FSTSavedRecipeTabBarController.h"
+#import "FSTStageSettingsViewController.h"
+#import "FSTStageTableContainerViewController.h"
+#import "FSTSavedRecipeViewController.h"
+#import "FSTSousVideRecipe.h"
 
 @interface FSTSavedEditRecipeViewController ()
 
@@ -50,14 +55,18 @@ VariableSelection _selection;
     recipeManager = [FSTSavedRecipeManager sharedInstance];
     [self.nameField setDelegate:self];
     
-    if (!self.activeRecipe) {
-        self.activeRecipe = [[FSTRecipe alloc] init]; // need a strong property since this could be the unique pointer
+    if (!self.activeRecipe.photo.image) {
         self.imageEditor.image = [UIImage imageNamed:@"sad-robot"];
     } else {
         self.imageEditor.image = self.activeRecipe.photo.image;
     }
     
-    
+    if ([self.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) { //TODO: add a Multi Stage Recipe class
+        ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = NO; // sous vide has min and max time, no stages
+    } else {
+        ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = YES;
+    // how do I get the tab bar to load the right view controller after this? this sets after viewDidLoad in tab bar
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated { // perhaps view did load? I want view did load in the child to have called. Could just have an ingredients setter if it does not work
@@ -136,7 +145,12 @@ VariableSelection _selection;
     // TODO: work out the session / recipe issue
     // get all the session variables from the pickers, then save it
     [recipeManager saveRecipe:self.activeRecipe];
-    [self.navigationController popViewControllerAnimated:YES]; // perhaps the other views will dealloc later
+    for (UIViewController* vc in [self.navigationController viewControllers]) {
+        if ([vc isKindOfClass:[FSTSavedRecipeViewController class]]) {
+            // the table container two vc's back
+            [self.navigationController popToViewController:vc animated:YES];
+        }
+    }
 }
 
 #pragma mark - UITabBarControllerDelegate
@@ -146,18 +160,32 @@ VariableSelection _selection;
    if ([viewController isKindOfClass:[FSTSavedRecipeSettingsViewController class]])
     {
         childPickerManager = ((FSTSavedRecipeSettingsViewController*)viewController).pickerManager;
+    } else if ([viewController isKindOfClass:[FSTStageTableContainerViewController class]]) {
+        ((FSTStageTableViewController*)viewController.childViewControllers[0]).delegate = self; //need to know which stage was selected in the table (table is now imbedded) // child view controller needs to be set within view did load, the the delegate
+        ((FSTStageTableViewController*)viewController.childViewControllers[0]).stageCount = self.activeRecipe.paragonCookingStages.count; // number of stages that appear in the table
     } // get the picker manager for quick access from the
     
 }
 
-/*
+#pragma mark - FSTStageTableViewControllerDelegate
+
+-(void)editStageAtIndex:(NSInteger)index {
+    FSTParagonCookingStage* selectedStage;
+    if (index < self.activeRecipe.paragonCookingStages.count) {
+        selectedStage = self.activeRecipe.paragonCookingStages[index];
+    } else {
+        selectedStage = [self.activeRecipe addStage]; // add a new stage and reference it for editing
+    }
+    [self performSegueWithIdentifier:@"stageSettingsSegue" sender:selectedStage]; // pass the stage for editing in the coming view controller
+    
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"stageSettingsSegue"]) {
+        ((FSTStageSettingsViewController*)segue.destinationViewController).activeStage = (FSTParagonCookingStage*)sender; // some stage must have been set before the segue
+    }
 }
-*/
 
 @end
