@@ -42,6 +42,11 @@ NSObject* _cookTimeChangedObserver;
     [self setupEventHandlers];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+    [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
+}
+
 -(void)setupEventHandlers
 {
     __weak typeof(self) weakSelf = self;
@@ -169,10 +174,6 @@ NSObject* _cookTimeChangedObserver;
     
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
-    [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
