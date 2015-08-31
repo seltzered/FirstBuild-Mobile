@@ -54,10 +54,25 @@
 
 -(double)calculatePercentWithTemp:(CGFloat)temp {
     CGFloat progress = 0; // defaults to this
-    if (temp > _startingTemp) {
-        progress = (temp - _startingTemp)/(_targetTemp - _startingTemp);
-        if ((progress * 100) > 100) {
-            progress = 1.0f; // complete
+    if (_targetTemp > _startingTemp) {
+        if (temp > _startingTemp) {
+            progress = (temp - _startingTemp)/(_targetTemp - _startingTemp);
+            if ((progress * 100) > 100) {
+                progress = 1.0f; // complete
+            }
+        }
+    } else if (_targetTemp < _startingTemp) {
+        // they should never be equal
+        if (temp > _targetTemp) { // target temp is in the low range
+            // want a positive denominator, and the percentage should reflect the distance to the target, although here it is negative
+            progress = (_targetTemp - temp)/(_startingTemp - _targetTemp);
+            if ((progress * 100) < -100) {
+                progress = -1.0f;
+                // complete blue tick marks
+            } else if ((progress * 100) > 0) {
+                progress = 0.0f;
+                //pretty much cooled, but shot over, set it to zero
+            }
         }
     }
     return progress;

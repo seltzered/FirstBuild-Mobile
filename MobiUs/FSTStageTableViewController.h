@@ -10,7 +10,11 @@
 
 @protocol FSTStageTableViewControllerDelegate <NSObject>
 
--(void)editStageAtIndex:(NSInteger)index; // this will editing view controller know what stage to load into the stage editor
+-(void)editStageAtIndex:(NSInteger)index;
+// this will let editing view controller know what stage to load into the stage editor
+
+-(void)deleteStageAtIndex:(NSInteger)index;
+// how does the recipe remove a stage?
 
 @end
 @interface FSTStageTableViewController : UITableViewController
