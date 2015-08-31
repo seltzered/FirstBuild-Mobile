@@ -55,12 +55,6 @@ VariableSelection _selection;
     recipeManager = [FSTSavedRecipeManager sharedInstance];
     [self.nameField setDelegate:self];
     
-    if (!self.activeRecipe.photo.image) {
-        self.imageEditor.image = [UIImage imageNamed:@"sad-robot"];
-    } else {
-        self.imageEditor.image = self.activeRecipe.photo.image;
-    }
-    
     /*if ([self.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) { //TODO: add a Multi Stage Recipe class
         ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = NO; // sous vide has min and max time, no stages
     } else {
@@ -69,8 +63,35 @@ VariableSelection _selection;
     }*/ // the child will check the variable on its parent
 }
 
+- (void)registerKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    UIEdgeInsets editScrollInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = editScrollInsets;
+    self.scrollView.scrollIndicatorInsets = editScrollInsets;
+    
+    CGRect sRect = self.view.frame;
+    sRect.size.height -= kbSize.height;
+    if ([self.nameField isFirstResponder]) {
+        // check if nameField is within the bounds
+        
+    } else {
+        // check if child is within the bounds
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification {
+    
+}
 - (void)viewWillAppear:(BOOL)animated { // perhaps view did load? I want view did load in the child to have called. Could just have an ingredients setter if it does not work
     [super viewWillAppear:animated];
+    // set the recipe image (either taken from the camera or initialized in the recipe object), same as the activeRecipePhoto, which only changes when the imageEditor finishes
+    [self.imageEditor setImage:self.activeRecipe.photo.image];
     // set the name if it is in the recipe
     [self.nameField setText:self.activeRecipe.friendlyName];
     FSTSavedRecipeTabBarController* recipeTBC = [self.childViewControllers objectAtIndex:0];
@@ -107,8 +128,9 @@ VariableSelection _selection;
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* imageTaken = info[UIImagePickerControllerEditedImage];
     //self.imageEditor.image = imageTaken;
-    self.activeRecipe.photo.image = imageTaken;
-    self.imageEditor.image = imageTaken;
+    [self.activeRecipe.photo setImage:imageTaken];
+    // sets when save button pressed
+    //self.imageEditor.image = imageTaken;
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.view layoutIfNeeded]; // constraints seem to be off
    // self.scrollView.contentSize = CGSizeMake(self.stageView.frame.size.width, self.scrollView.contentSize.height);
@@ -134,7 +156,9 @@ VariableSelection _selection;
     FSTSavedRecipeTabBarController* recipeTBC = (FSTSavedRecipeTabBarController*)self.childViewControllers[0];
     self.activeRecipe.ingredients = ((FSTSavedRecipeIngredientsViewController*)recipeTBC.viewControllers[0]).ingredients;
     self.activeRecipe.note = ((FSTSavedRecipeInstructionsViewController*)recipeTBC.viewControllers[1]).instructions;
-    self.activeRecipe.photo.image = self.imageEditor.image;
+    //[self.activeRecipe.photo setImage:self.imageEditor.image];
+    // the image editor already has a pointer to the active recipe, do not reverse that
+    // for some reason the image clears
     // will probably for loop through all the picker manager to support multiStages
     if (childPickerManager) { // child PickerManager was set, so the setting might have changed
         [self.activeRecipe addStage];

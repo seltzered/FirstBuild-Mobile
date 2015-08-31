@@ -973,11 +973,11 @@
                                 <exclude reference="vwg-4Y-QAx"/>
                                 <exclude reference="8MY-JQ-Lwk"/>
                                 <exclude reference="VWC-aX-IoI"/>
-                                <exclude reference="0ee-j5-hQQ"/>
                                 <exclude reference="BFy-2p-j5E"/>
                                 <exclude reference="mQ5-0g-POK"/>
                                 <exclude reference="n9I-Np-GdF"/>
                                 <exclude reference="yab-Ln-smS"/>
+                                <exclude reference="0ee-j5-hQQ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -1174,8 +1174,8 @@
                                     <constraint firstAttribute="centerY" secondItem="x66-n4-Uku" secondAttribute="centerY" id="Ni8-oh-NYr"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csz-4M-yY7" userLabel="stageBarView" customClass="FSTStateBarView">
-                                <rect key="frame" x="90" y="5" width="420" height="33"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csz-4M-yY7" userLabel="stateBarView" customClass="FSTStateBarView">
+                                <rect key="frame" x="0.0" y="5" width="600" height="46.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="450" id="cga-tx-SUK"/>
@@ -1215,7 +1215,7 @@
                             <constraint firstAttribute="centerX" secondItem="kiR-eC-M5K" secondAttribute="centerX" id="M5M-w5-gGr"/>
                             <constraint firstItem="bKQ-z6-QqS" firstAttribute="width" secondItem="K61-Ka-9YT" secondAttribute="width" id="OVB-6U-7aS"/>
                             <constraint firstItem="kiR-eC-M5K" firstAttribute="top" secondItem="s3l-qE-nxY" secondAttribute="bottom" id="X8K-vQ-KbE"/>
-                            <constraint firstItem="Csz-4M-yY7" firstAttribute="width" secondItem="K61-Ka-9YT" secondAttribute="width" multiplier="0.7" id="XbG-yW-68V"/>
+                            <constraint firstItem="Csz-4M-yY7" firstAttribute="width" secondItem="K61-Ka-9YT" secondAttribute="width" id="XbG-yW-68V"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kiR-eC-M5K" secondAttribute="trailing" id="dDb-Aj-Lvc"/>
                             <constraint firstItem="ByG-7i-BGW" firstAttribute="centerY" secondItem="bKQ-z6-QqS" secondAttribute="centerY" id="h8x-Lo-14B"/>
                             <constraint firstAttribute="centerY" secondItem="U1T-Fa-p7y" secondAttribute="centerY" id="htN-D0-Qga"/>
@@ -2397,7 +2397,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Tk-x0-jyK" userLabel="Stage">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Tk-x0-jyK" userLabel="Stage">
                                 <rect key="frame" x="0.0" y="-31" width="600" height="596"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fq4-qa-dDl" userLabel="TempLabel" customClass="FSTRegularLabel">
@@ -4078,7 +4078,7 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBankIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Jc0-hN-gS6">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beerBankIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Jc0-hN-gS6">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                                         <gestureRecognizers/>
                                         <constraints>

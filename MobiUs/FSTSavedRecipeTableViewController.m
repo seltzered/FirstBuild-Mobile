@@ -61,7 +61,6 @@ FSTSavedRecipeManager* recipeManager;
     [cell.nameLabel setText:matchedRecipe.friendlyName];
     [cell.noteLabel setText:matchedRecipe.note];
     [cell.recipePhoto setImage:matchedRecipe.photo.image];
-    
     return cell;
 }
 
