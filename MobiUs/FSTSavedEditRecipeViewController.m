@@ -180,6 +180,10 @@ VariableSelection _selection;
     
 }
 
+-(void)deleteStageAtIndex:(NSInteger)index {
+    [self.activeRecipe.paragonCookingStages removeObjectAtIndex:index];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
