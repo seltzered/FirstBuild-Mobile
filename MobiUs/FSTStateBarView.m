@@ -45,33 +45,25 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setupDots];
-        //self.dotPaths = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 -(void) awakeFromNib {
     [super awakeFromNib];
-    //self.dotPaths = [[NSMutableArray alloc] init];
     [self setupDots];
 }
 
 -(void)setupDots { // could happen after init or awake from nib. Initialize subviews
-    //self.circleMarker = [[FSTStageCircleView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.height, self.bounds.size.height)]; // always proportional to height
-    //[self addSubview:self.circleMarker]; // create the circle marker
-    //self.dotPaths = [[NSMutableArray alloc] init];
     self.grayDots = [[NSMutableArray alloc] init]; // an array to hold all the dot subviews
     self.dotTransforms = [[NSMutableArray alloc] init];
-    /*for (int idots = 0; idots < 4; idots++) {
-        [self.dotPaths addObject:[UIBezierPath bezierPath]];
-    } // instantiate four bezier paths*/
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.lineWidth = 4*self.bounds.size.width/5; //update scaled linewidth so subviews can match (same proportion set in drawRect, but with scaled up
+    //update scaled linewidth so subviews can match (same proportion set in drawRect, but with scaled up
     // this is too early to arrange the transforms. all the dots need to be drawn
-    //[self arrangeTransforms];
+    self.lineWidth = 4*self.bounds.size.width/5;
     [self updateCircle];
 }
 
@@ -90,7 +82,7 @@
     CGFloat offsetWidth, offsetHeight;
     CGSize ringOffset;
     
-    for (int itr = 0; itr < [self.numberOfStates intValue]; itr++) {
+    for (int itr = 0; itr < self.grayDots.count; itr++) {
         circleBounds = CGPathGetBoundingBox(((CAShapeLayer*)self.grayDots[itr]).path);
          // calculate what size the ring will be after this transform for the offset
         ringSize = CGSizeApplyAffineTransform(CGSizeMake(circleBounds.origin.x + circleBounds.size.width/2, circleBounds.origin.y + circleBounds.size.height/2), sizeTransform);
@@ -113,7 +105,7 @@
     transform = [(NSValue*)self.dotTransforms[activeStateNumber] CGAffineTransformValue];
     self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[activeStateNumber]).path, &transform);
 
-    for (int i=0; i<=self.grayDots.count;i++)
+    for (int i=0; i < self.grayDots.count;i++)
     {
         if (i < activeStateNumber)
         {
@@ -121,7 +113,7 @@
         }
         else
         {
-            ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
+            ((CAShapeLayer*)self.grayDots[i]).strokeColor = [UIColor orangeColor].CGColor;
         }
     }
 }

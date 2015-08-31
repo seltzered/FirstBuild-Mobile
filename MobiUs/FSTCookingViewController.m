@@ -41,8 +41,9 @@ NSObject* _cookTimeChangedObserver;
     [self transitionToCurrentCookMode];
     [self setupEventHandlers];
     
-    self.stageBar.numberOfStates = [NSNumber numberWithUnsignedInteger:self.currentParagon.session.activeRecipe.paragonCookingStages.count];
+    [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
@@ -100,6 +101,8 @@ NSObject* _cookTimeChangedObserver;
          NSNumber* targetTemperature = _currentCookingStage.targetTemperature;
          [weakSelf.delegate targetTemperatureChanged:[targetTemperature doubleValue]];
      }];
+    
+    //TODO: handle stage change
 }
 
 -(void)transitionToCurrentCookMode
@@ -176,6 +179,27 @@ NSObject* _cookTimeChangedObserver;
     
 }
 
+-(void)setStageBarStateCountForState: (FSTParagonCookingStage*) stage
+{
+    int stateCount = 1;
+    
+    if (stage.cookTimeMinimum && stage.cookTimeMinimum > 0)
+    {
+        stateCount++;
+    }
+    
+    if (stage.cookTimeMaximum && stage.cookTimeMaximum > 0)
+    {
+        stateCount++;
+    }
+    
+    if (stage.targetTemperature && stage.targetTemperature > 0)
+    {
+        stateCount++;
+    }
+    
+    self.stageBar.numberOfStates = [NSNumber numberWithInt:stateCount];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
