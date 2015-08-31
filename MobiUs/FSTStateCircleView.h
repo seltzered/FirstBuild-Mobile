@@ -1,5 +1,5 @@
 //
-//  FSTStageCircleView.h
+//  FSTStateCircleView.h
 //  FirstBuild
 //
 //  Created by John Nolan on 7/14/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSTStageCircleView : UIView
+@interface FSTStateCircleView : UIView
 
 @end

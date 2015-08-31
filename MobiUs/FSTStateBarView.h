@@ -1,5 +1,5 @@
 //
-//  FSTStageBarView.h
+//  FSTStateBarView.h
 //  FirstBuild
 //
 //  Created by John Nolan on 7/14/15.
@@ -10,8 +10,9 @@
 #import "FSTCookingProgressLayer.h"
 #import "FSTParagon.h"
 
-@interface FSTStageBarView : UIView
+@interface FSTStateBarView : UIView
 
 @property (nonatomic)  ParagonCookMode circleState;
+@property (strong, nonatomic) NSNumber* numberOfStates;
 
 @end

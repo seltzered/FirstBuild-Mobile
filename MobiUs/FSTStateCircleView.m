@@ -1,14 +1,14 @@
 //
-//  FSTStageCircleView.m
+//  FSTStateCircleView.m
 //  FirstBuild
 //
 //  Created by John Nolan on 7/14/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTStageCircleView.h"
+#import "FSTStateCircleView.h"
 
-@implementation FSTStageCircleView
+@implementation FSTStateCircleView
 
 
 -(id)initWithFrame:(CGRect)frame {

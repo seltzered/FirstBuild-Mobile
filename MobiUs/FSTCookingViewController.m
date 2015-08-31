@@ -8,8 +8,8 @@
 
 #import "FSTCookingViewController.h"
 #import "Session.h"
-#import "FSTStageBarView.h"
-#import "FSTStageCircleView.h"
+#import "FSTStateBarView.h"
+#import "FSTStateCircleView.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
 #import "FSTCookingStateViewController.h"
@@ -17,7 +17,7 @@
 
 @interface FSTCookingViewController ()
 
-@property (weak, nonatomic) IBOutlet FSTStageBarView *stageBar;
+@property (weak, nonatomic) IBOutlet FSTStateBarView *stageBar;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;

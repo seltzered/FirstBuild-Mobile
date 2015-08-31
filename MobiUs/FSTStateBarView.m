@@ -1,15 +1,15 @@
 //
-//  FSTStageBarView.m
+//  FSTStateBarView.m
 //  FirstBuild
 //
 //  Created by John Nolan on 7/14/15.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTStageBarView.h"
-#import "FSTStageCircleView.h"
+#import "FSTStateBarView.h"
+#import "FSTStateCircleView.h"
 
-@interface FSTStageBarView()
+@interface FSTStateBarView()
 
 //@property (nonatomic, strong) FSTStageCircleView* circleMarker;
 
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation FSTStageBarView
+@implementation FSTStateBarView
 
 
 
