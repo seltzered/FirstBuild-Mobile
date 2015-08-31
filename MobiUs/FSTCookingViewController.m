@@ -40,6 +40,8 @@ NSObject* _cookTimeChangedObserver;
     
     [self transitionToCurrentCookMode];
     [self setupEventHandlers];
+    
+    self.stageBar.numberOfStates = [NSNumber numberWithUnsignedInteger:self.currentParagon.session.activeRecipe.paragonCookingStages.count];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
