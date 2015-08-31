@@ -18,7 +18,7 @@
         self.ingredients = [decoder decodeObjectForKey:@"ingredients"];
         self.photo = [decoder decodeObjectForKey:@"photo"];
         self.paragonCookingStages = [decoder decodeObjectForKey:@"paragonCookingStages"];
-    }
+    } // calling TWICE?
     return self;
 }
 
@@ -26,6 +26,8 @@
     self = [super init];
     if (self) {
         self.photo = [[UIImageView alloc] init];
+        self.photo.image = [UIImage imageNamed:@"camera"];
+        // now it defaults to this, without having to check if it sets
         self.recipeId = [[NSUUID UUID] UUIDString];
         self.paragonCookingStages = [[NSMutableArray alloc] init];
     }
