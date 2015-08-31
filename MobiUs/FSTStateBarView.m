@@ -23,11 +23,23 @@
 
 @property (nonatomic) CGFloat lineWidth; // this was public before, could just be a global variable
 
+
 @end
 
 @implementation FSTStateBarView
 
+@synthesize numberOfStates = _numberOfStates;
 
+-(void)setNumberOfStates:(NSNumber *)numberOfStates
+{
+    [self setupDots];
+    _numberOfStates = numberOfStates;
+}
+
+- (NSNumber*) numberOfStates
+{
+    return _numberOfStates;
+}
 
 -(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -78,7 +90,7 @@
     CGFloat offsetWidth, offsetHeight;
     CGSize ringOffset;
     
-    for (int itr = 0; itr < 4; itr++) {
+    for (int itr = 0; itr < [self.numberOfStates intValue]; itr++) {
         circleBounds = CGPathGetBoundingBox(((CAShapeLayer*)self.grayDots[itr]).path);
          // calculate what size the ring will be after this transform for the offset
         ringSize = CGSizeApplyAffineTransform(CGSizeMake(circleBounds.origin.x + circleBounds.size.width/2, circleBounds.origin.y + circleBounds.size.height/2), sizeTransform);
@@ -95,71 +107,90 @@
     
 }
 
+- (void) colorDotsForActiveStateNumber: (int)activeStateNumber
+{
+    CGAffineTransform transform;
+    transform = [(NSValue*)self.dotTransforms[activeStateNumber] CGAffineTransformValue];
+    self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[activeStateNumber]).path, &transform);
+
+    for (int i=0; i<=self.grayDots.count;i++)
+    {
+        if (i < activeStateNumber)
+        {
+            ((CAShapeLayer*)self.grayDots[i]).strokeColor = [UIColor grayColor].CGColor;
+        }
+        else
+        {
+            ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
+        }
+    }
+}
+
 - (void) updateCircle { // problem on ipad, all layers need to update their position
     
      // ring is about a third the width of those gray dots
-    if (self.grayDots.count >= 4) { // sometimes can enter updateCircle before drawing the rect, so grayDots need to be set first.
+    if (self.grayDots.count >= 1) { // sometimes can enter updateCircle before drawing the rect, so grayDots need to be set first.
         // transforms should have already been set up
-        
-        
-        CGAffineTransform transform;
-
         switch (self.circleState) {
             case FSTParagonCookingStatePrecisionCookingReachingTemperature:
-                transform = [(NSValue*)self.dotTransforms[0] CGAffineTransformValue];
-                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[0]).path, &transform);//new_x = start_x; //((CAShapeLayer*)self.grayDots[0]).path;// beginning of bar
-                    ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor orangeColor].CGColor;
-                    ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor orangeColor].CGColor;
-                    ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
-                    ((CAShapeLayer*)self.grayDots[3]).strokeColor = [UIColor orangeColor].CGColor;
+                [self colorDotsForActiveStateNumber:0];
                 break;
             case FSTParagonCookingStatePrecisionCookingTemperatureReached:
-                transform = [(NSValue*)self.dotTransforms[1] CGAffineTransformValue];
-                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[1]).path, &transform);//self.ring.path = ((CAShapeLayer*)self.grayDots[1]).path;//new_x = start_x + self.lineWidth/3;
-                ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor grayColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor orangeColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[3]).strokeColor = [UIColor orangeColor].CGColor;
+                [self colorDotsForActiveStateNumber:1];
                 break;
             case FSTParagonCookingStatePrecisionCookingReachingMinTime:
-                transform = [(NSValue*)self.dotTransforms[2] CGAffineTransformValue];
-                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[2]).path, &transform);//new_x = start_x + 2*self.lineWidth/3;
-                ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor grayColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor grayColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor orangeColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[3]).strokeColor = [UIColor orangeColor].CGColor;
+                [self colorDotsForActiveStateNumber:2];
                 break;
             case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
             case FSTParagonCookingStatePrecisionCookingPastMaxTime:
-                transform = [(NSValue*)self.dotTransforms[3] CGAffineTransformValue];
-                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[3]).path, &transform);//new_x = start_x + self.lineWidth;
-                ((CAShapeLayer*)self.grayDots[0]).strokeColor = [UIColor grayColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[1]).strokeColor = [UIColor grayColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[2]).strokeColor = [UIColor grayColor].CGColor;
-                ((CAShapeLayer*)self.grayDots[3]).strokeColor = [UIColor orangeColor].CGColor;
+                [self colorDotsForActiveStateNumber:3];
                 break;
             default:
                 NSLog(@"NO STATE FOR STAGE BAR\n");
-                transform = [(NSValue*)self.dotTransforms[0] CGAffineTransformValue];
-                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[0]).path, &transform);
+//                transform = [(NSValue*)self.dotTransforms[0] CGAffineTransformValue];
+//                self.ring.path = CGPathCreateCopyByTransformingPath(((CAShapeLayer*)self.grayDots[0]).path, &transform);
                 //self.ring.path = ((CAShapeLayer*)self.grayDots[0]).path;//new_x = start_x + self.lineWidth/2; // we'll just hide this anyway
                 break;
-        } // need to integrate with new states, or commit animations at every transition
-        //[self setNeedsDisplay]; // get it to redraw with new state this failed miserably because of the invalid context
-        
-    }// end if statement
-    /*CGFloat new_w = self.bounds.size.height; // the circle is always 1 to 1 and fills the height
-    [self.circleMarker setFrame:CGRectMake(new_x - new_w/2, 0, new_w, new_w)]; // set new circle frame with width and x value.*/
-} // end method
+        }
+    }
+}
 
 - (void)setCircleState:(ParagonCookMode)circleState { // state changed externally
     _circleState = circleState;
     [self updateCircle];
 }
 
+-(void)addState:(CGRect)rect
+{
+    CGFloat y = rect.size.height/2;
+    CGFloat dotRadius = rect.size.height/8;
+    
+    //distance between the dots
+    CGFloat barXSpacing = .2 * rect.size.width;
+    
+    //the width of the entire state bar
+    CGFloat barWidth = .2 * ([self.numberOfStates intValue]-1);
+    
+    //the beginning of the state bar
+    CGFloat barXOrigin = (rect.size.width - barWidth) / 2;
+    
+    //the current point's position
+    CGFloat point = barXOrigin + (barXSpacing * self.grayDots.count);
+    
+    CAShapeLayer* grayLayer = [CAShapeLayer layer];
+    grayLayer.strokeColor = [UIColor orangeColor].CGColor;
+    
+    grayLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
+    grayLayer.lineWidth = dotRadius*2;
+    
+    [self.layer insertSublayer:grayLayer above:self.layer];
+    [self.grayDots addObject:grayLayer];
+    
+}
+
 - (void)drawRect:(CGRect)rect {
     // replaced self.frame with rect
-    CGFloat point1, point2, point3, point4;
+//    CGFloat point1, point2, point3, point4;
     CGFloat x_start = rect.size.width/10; // the starting x coordinate (starts at beginning
     CGFloat x_end = rect.size.width - x_start;
     CGFloat width = x_end - x_start; // width of the whole line
@@ -168,33 +199,38 @@
     CGFloat dotRadius = rect.size.height/8;
     
     
+    for (int i=0; i<= [self.numberOfStates intValue]; i++)
+    {
+        [self addState:rect];
+    }
+    
     self.lineWidth = width; // let the viewContoller access that for position calculations
     [underPath moveToPoint:CGPointMake(x_start, y)];
     [underPath addLineToPoint:CGPointMake(x_end, y)];
     [[UIColor lightGrayColor] setStroke];
     [underPath stroke]; // paint it light gray
     
-    point1 = x_start;
-    point2 = x_start + width/3;
-    point3 = x_start + 2*width/3;
-    point4 = x_start + width;
+//    point1 = x_start;
+//    point2 = x_start + width/3;
+//    point3 = x_start + 2*width/3;
+//    point4 = x_start + width;
     // drawing context has a serious problem
-    CAShapeLayer* grayLayer1 = [CAShapeLayer layer];
-    grayLayer1.strokeColor = [UIColor orangeColor].CGColor;
+//    CAShapeLayer* grayLayer1 = [CAShapeLayer layer];
+//    grayLayer1.strokeColor = [UIColor orangeColor].CGColor;
+//    
+//    CAShapeLayer* grayLayer2 = [CAShapeLayer layer];
+//    grayLayer2.strokeColor = [UIColor orangeColor].CGColor;
+//    
+//    CAShapeLayer* grayLayer3 = [CAShapeLayer layer];
+//    grayLayer3.strokeColor = [UIColor orangeColor].CGColor;
+//    
+//    CAShapeLayer* grayLayer4 = [CAShapeLayer layer];
+//    grayLayer4.strokeColor = [UIColor orangeColor].CGColor;
     
-    CAShapeLayer* grayLayer2 = [CAShapeLayer layer];
-    grayLayer2.strokeColor = [UIColor orangeColor].CGColor;
-    
-    CAShapeLayer* grayLayer3 = [CAShapeLayer layer];
-    grayLayer3.strokeColor = [UIColor orangeColor].CGColor;
-    
-    CAShapeLayer* grayLayer4 = [CAShapeLayer layer];
-    grayLayer4.strokeColor = [UIColor orangeColor].CGColor;
-    
-    grayLayer1.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point1, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
-    grayLayer2.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point2, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
-    grayLayer3.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point3, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
-    grayLayer4.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point4, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
+//    grayLayer1.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point1, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
+//    grayLayer2.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point2, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
+//    grayLayer3.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point3, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
+//    grayLayer4.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point4, y) radius:dotRadius startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;
     // I would like some way to re draw this rather than instantiate a new one every time*/ // not good to redraw!
     
     /*[self.dotPaths addObject:dot1];
@@ -202,10 +238,10 @@
     [self.dotPaths addObject:dot3];
     [self.dotPaths addObject:dot4];*/
     
-    grayLayer1.lineWidth = dotRadius*2;
-    grayLayer2.lineWidth = dotRadius*2;
-    grayLayer3.lineWidth = dotRadius*2;
-    grayLayer4.lineWidth = dotRadius*2;
+//    grayLayer1.lineWidth = dotRadius*2;
+//    grayLayer2.lineWidth = dotRadius*2;
+//    grayLayer3.lineWidth = dotRadius*2;
+//    grayLayer4.lineWidth = dotRadius*2;
     //((UIBezierPath*)self.dotPaths[1]).lineWidth = dotRadius*2;
 
     /*[[UIColor orangeColor] setStroke];
@@ -217,15 +253,15 @@
     
     // basically make gray copies of all those dots (there is probably no need for the dotPaths array perhaps these dots can change colors dynamically?
     
-    [self.layer insertSublayer:grayLayer1 above:self.layer];
-    [self.layer insertSublayer:grayLayer2 above:self.layer];
-    [self.layer insertSublayer:grayLayer3 above:self.layer];
-    [self.layer insertSublayer:grayLayer4 above:self.layer];
-    
-    [self.grayDots addObject:grayLayer1];
-    [self.grayDots addObject:grayLayer2];
-    [self.grayDots addObject:grayLayer3];
-    [self.grayDots addObject:grayLayer4]; // use the array to reference dots when updating the circle state
+//    [self.layer insertSublayer:grayLayer1 above:self.layer];
+//    [self.layer insertSublayer:grayLayer2 above:self.layer];
+//    [self.layer insertSublayer:grayLayer3 above:self.layer];
+//    [self.layer insertSublayer:grayLayer4 above:self.layer];
+//    
+//    [self.grayDots addObject:grayLayer1];
+//    [self.grayDots addObject:grayLayer2];
+//    [self.grayDots addObject:grayLayer3];
+//    [self.grayDots addObject:grayLayer4]; // use the array to reference dots when updating the circle state
     
     
     //TODO:experimental
