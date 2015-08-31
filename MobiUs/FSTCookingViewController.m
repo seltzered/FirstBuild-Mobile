@@ -8,8 +8,8 @@
 
 #import "FSTCookingViewController.h"
 #import "Session.h"
-#import "FSTStageBarView.h"
-#import "FSTStageCircleView.h"
+#import "FSTStateBarView.h"
+#import "FSTStateCircleView.h"
 #import "MobiNavigationController.h"
 #import "FSTRevealViewController.h"
 #import "FSTCookingStateViewController.h"
@@ -17,7 +17,7 @@
 
 @interface FSTCookingViewController ()
 
-@property (weak, nonatomic) IBOutlet FSTStageBarView *stageBar;
+@property (weak, nonatomic) IBOutlet FSTStateBarView *stageBar;
 
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;
@@ -40,6 +40,11 @@ NSObject* _cookTimeChangedObserver;
     
     [self transitionToCurrentCookMode];
     [self setupEventHandlers];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+    [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
 }
 
 -(void)setupEventHandlers
@@ -169,10 +174,6 @@ NSObject* _cookTimeChangedObserver;
     
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
-    [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

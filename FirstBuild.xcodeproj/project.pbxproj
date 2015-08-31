@@ -56,8 +56,8 @@
 		51EA9E4F1B823E2900A3F421 /* FSTSavedRecipeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EA9E4E1B823E2900A3F421 /* FSTSavedRecipeTableViewController.m */; };
 		51EA9E521B82444700A3F421 /* FSTSavedRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EA9E511B82444700A3F421 /* FSTSavedRecipeViewController.m */; };
 		51F570301B7B768B006A27B0 /* FSTDirectCookingStateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F5702F1B7B768B006A27B0 /* FSTDirectCookingStateViewController.m */; };
-		51F8EF401B55961400F40882 /* FSTStageBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF3F1B55961400F40882 /* FSTStageBarView.m */; };
-		51F8EF431B559F8A00F40882 /* FSTStageCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */; };
+		51F8EF401B55961400F40882 /* FSTStateBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF3F1B55961400F40882 /* FSTStateBarView.m */; };
+		51F8EF431B559F8A00F40882 /* FSTStateCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51F8EF421B559F8A00F40882 /* FSTStateCircleView.m */; };
 		51FAEFEC1B62722500A7DCF9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFEB1B62722500A7DCF9 /* Images.xcassets */; };
 		51FAEFEF1B62B85F00A7DCF9 /* ProductGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FAEFEE1B62B85F00A7DCF9 /* ProductGradientView.m */; };
 		51FAEFF21B62DD8100A7DCF9 /* FSTLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FAEFF11B62DD8100A7DCF9 /* FSTLine.m */; };
@@ -255,10 +255,10 @@
 		51EA9E511B82444700A3F421 /* FSTSavedRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTSavedRecipeViewController.m; sourceTree = "<group>"; };
 		51F5702E1B7B768B006A27B0 /* FSTDirectCookingStateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTDirectCookingStateViewController.h; sourceTree = "<group>"; };
 		51F5702F1B7B768B006A27B0 /* FSTDirectCookingStateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTDirectCookingStateViewController.m; sourceTree = "<group>"; };
-		51F8EF3E1B55961400F40882 /* FSTStageBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStageBarView.h; sourceTree = "<group>"; };
-		51F8EF3F1B55961400F40882 /* FSTStageBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStageBarView.m; sourceTree = "<group>"; };
-		51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStageCircleView.h; sourceTree = "<group>"; };
-		51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStageCircleView.m; sourceTree = "<group>"; };
+		51F8EF3E1B55961400F40882 /* FSTStateBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStateBarView.h; sourceTree = "<group>"; };
+		51F8EF3F1B55961400F40882 /* FSTStateBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStateBarView.m; sourceTree = "<group>"; };
+		51F8EF411B559F8A00F40882 /* FSTStateCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStateCircleView.h; sourceTree = "<group>"; };
+		51F8EF421B559F8A00F40882 /* FSTStateCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStateCircleView.m; sourceTree = "<group>"; };
 		51FAEFEB1B62722500A7DCF9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		51FAEFED1B62B85F00A7DCF9 /* ProductGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductGradientView.h; sourceTree = "<group>"; };
 		51FAEFEE1B62B85F00A7DCF9 /* ProductGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductGradientView.m; sourceTree = "<group>"; };
@@ -604,10 +604,10 @@
 		5B74A74E1B8F61D100A11296 /* stage bar */ = {
 			isa = PBXGroup;
 			children = (
-				51F8EF411B559F8A00F40882 /* FSTStageCircleView.h */,
-				51F8EF421B559F8A00F40882 /* FSTStageCircleView.m */,
-				51F8EF3E1B55961400F40882 /* FSTStageBarView.h */,
-				51F8EF3F1B55961400F40882 /* FSTStageBarView.m */,
+				51F8EF411B559F8A00F40882 /* FSTStateCircleView.h */,
+				51F8EF421B559F8A00F40882 /* FSTStateCircleView.m */,
+				51F8EF3E1B55961400F40882 /* FSTStateBarView.h */,
+				51F8EF3F1B55961400F40882 /* FSTStateBarView.m */,
 			);
 			name = "stage bar";
 			sourceTree = "<group>";
@@ -627,10 +627,6 @@
 			isa = PBXGroup;
 			children = (
 				5B74A7541B8F916300A11296 /* states */,
-				51B297501B8EAA780017DCA2 /* FSTStageTableViewController.h */,
-				51B297511B8EAA780017DCA2 /* FSTStageTableViewController.m */,
-				51B2974A1B8E34900017DCA2 /* FSTStageSettingsViewController.h */,
-				51B2974B1B8E34900017DCA2 /* FSTStageSettingsViewController.m */,
 				51A9D04A1B73FFDC000AE293 /* FSTContainerViewController.h */,
 				51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */,
 				5BCBB9DE1B02A24100B8E043 /* FSTReadyToReachTemperatureViewController.h */,
@@ -683,6 +679,10 @@
 				51A114D81B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m */,
 				51B2975F1B8F730E0017DCA2 /* FSTStageTableContainerViewController.h */,
 				51B297601B8F730E0017DCA2 /* FSTStageTableContainerViewController.m */,
+				51B297501B8EAA780017DCA2 /* FSTStageTableViewController.h */,
+				51B297511B8EAA780017DCA2 /* FSTStageTableViewController.m */,
+				51B2974A1B8E34900017DCA2 /* FSTStageSettingsViewController.h */,
+				51B2974B1B8E34900017DCA2 /* FSTStageSettingsViewController.m */,
 			);
 			name = "recipe editor";
 			sourceTree = "<group>";
@@ -1335,7 +1335,7 @@
 				5BC364811A2F63C200D03B9C /* FSTDeviceAuth.m in Sources */,
 				5BF9482F19EC15E300CB8BCF /* FSTParagonMenuViewController.m in Sources */,
 				5BCBBA011B03CA5200B8E043 /* FSTRecipes.m in Sources */,
-				51F8EF401B55961400F40882 /* FSTStageBarView.m in Sources */,
+				51F8EF401B55961400F40882 /* FSTStateBarView.m in Sources */,
 				511A71621B5ED7C10015E4B5 /* ProductBatteryView.m in Sources */,
 				5BCDFBF51A65584A006E6055 /* WifiCommissioningNetworksTableViewController.m in Sources */,
 				5BCDFBF21A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m in Sources */,
@@ -1380,7 +1380,7 @@
 				5BCBBA041B03E92300B8E043 /* FSTSousVideRecipes.m in Sources */,
 				5BC7C7B41A83CD06003DA2F3 /* ChillHubDeviceTableViewCell.m in Sources */,
 				518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */,
-				51F8EF431B559F8A00F40882 /* FSTStageCircleView.m in Sources */,
+				51F8EF431B559F8A00F40882 /* FSTStateCircleView.m in Sources */,
 				5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */,
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
 				51A9D0371B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m in Sources */,
