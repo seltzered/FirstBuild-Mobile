@@ -69,8 +69,29 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.directionsTextView.delegate = self;
     pickerManager.delegate = self; // needs to update time and temp labels
     [self.directionsTextView setText:self.activeStage.cookingLabel]; // set the active text if it has been set in this stage
+    [self registerKeyboardNotifications];
 }
 
+#pragma mark - keyboard events
+- (void)registerKeyboardNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)keyboardWasShown:(NSNotification*)notification {
+    NSDictionary* info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    //CGRect adjustedFrame = self.view.frame;
+    //adjustedFrame.origin.y -= kbSize.height;
+    CGAffineTransform keyboardUp = CGAffineTransformTranslate(self.view.transform, 0.0, -kbSize.height + 80); // the 80 is hard coded, just a slight offset
+    [UIView animateWithDuration:0.2 animations:^(void) {
+        [self.view setTransform:keyboardUp];
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification {
+    [self.view setTransform:CGAffineTransformIdentity];
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -194,7 +215,6 @@ CGFloat const SEL_HEIGHT_S = 70;
         return YES;
     }
 }
-
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView {
     // must set active recipe when parent segues

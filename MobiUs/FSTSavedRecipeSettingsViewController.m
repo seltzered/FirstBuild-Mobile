@@ -70,6 +70,7 @@ CGFloat const SEL_HEIGHT_T = 90; // the standard picker height for the current s
     [self resetPickerHeights];
     [self updateLabels];
 }
+
 -(void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     self.underLineSpacing.constant = self.tabBarController.tabBar.frame.size.height;

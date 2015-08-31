@@ -37,6 +37,7 @@
     // some crucial data objects in the children
     FSTStagePickerManager* childPickerManager;
     
+    
 }
 
 typedef enum variableSelections {
@@ -54,7 +55,7 @@ VariableSelection _selection;
     
     recipeManager = [FSTSavedRecipeManager sharedInstance];
     [self.nameField setDelegate:self];
-    
+    [self registerKeyboardNotifications];
     /*if ([self.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) { //TODO: add a Multi Stage Recipe class
         ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = NO; // sous vide has min and max time, no stages
     } else {
@@ -63,9 +64,12 @@ VariableSelection _selection;
     }*/ // the child will check the variable on its parent
 }
 
+
+#pragma mark - keyboard events
 - (void)registerKeyboardNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    // DEALLOC these?
 }
 
 - (void)keyboardWasShown:(NSNotification*)notification {
@@ -77,17 +81,28 @@ VariableSelection _selection;
     
     CGRect sRect = self.view.frame;
     sRect.size.height -= kbSize.height;
+    CGPoint scrollOffset;
     if ([self.nameField isFirstResponder]) {
-        // check if nameField is within the bounds
         
+        scrollOffset = CGPointMake(0.0, kbSize.height - self.nameField.frame.origin.y/2);
+            // the vertical distance between the keyboard and the nameField origin. (buffer it a bit so the namefield is just above.
     } else {
         // check if child is within the bounds
+        CGRect childFrame =((UIViewController*)[self.childViewControllers objectAtIndex:0]).view.frame;
+//        if (!CGRectContainsPoint(sRect, childFrame.origin)) {
+            scrollOffset = CGPointMake(0.0, kbSize.height ); // move it up as far as the keyboard went
+//        }
+        
     }
+    [self.scrollView setContentOffset:scrollOffset animated:YES];
 }
 
 - (void)keyboardWillHide:(NSNotification*)notification {
-    
+    UIEdgeInsets scrollInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = scrollInsets;
+    self.scrollView.scrollIndicatorInsets = scrollInsets;
 }
+
 - (void)viewWillAppear:(BOOL)animated { // perhaps view did load? I want view did load in the child to have called. Could just have an ingredients setter if it does not work
     [super viewWillAppear:animated];
     // set the recipe image (either taken from the camera or initialized in the recipe object), same as the activeRecipePhoto, which only changes when the imageEditor finishes
