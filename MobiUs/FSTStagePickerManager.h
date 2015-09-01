@@ -35,6 +35,12 @@
 
 -(NSNumber*)temperatureChosen;
 
+-(void)selectMinMinutes:(NSNumber*)minMinutes;
+
+-(void)selectMinMinutes:(NSNumber *)minMinutes withMaxMinutes:(NSNumber *)maxMinutes;
+
+-(void)selectTemperature:(NSNumber*)temperature;
+
 -(NSAttributedString*)minLabel;
 
 -(NSAttributedString*)maxLabel;

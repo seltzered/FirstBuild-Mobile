@@ -210,6 +210,14 @@ VariableSelection _selection;
    if ([viewController isKindOfClass:[FSTSavedRecipeSettingsViewController class]])
     {
         childPickerManager = ((FSTSavedRecipeSettingsViewController*)viewController).pickerManager;
+        if ([self.activeRecipe.paragonCookingStages count] > 0) {
+            // there is at least some stage set
+            FSTParagonCookingStage* firstStage = self.activeRecipe.paragonCookingStages[0];
+            // select the times in the child
+            [childPickerManager selectMinMinutes:firstStage.cookTimeMinimum withMaxMinutes:firstStage.cookTimeMaximum];
+            // select the temperature in the last picker
+            [childPickerManager selectTemperature:firstStage.targetTemperature];
+        }
     } else if ([viewController isKindOfClass:[FSTStageTableContainerViewController class]]) {
         ((FSTStageTableViewController*)viewController.childViewControllers[0]).delegate = self; //need to know which stage was selected in the table (table is now imbedded) // child view controller needs to be set within view did load, the the delegate
         ((FSTStageTableViewController*)viewController.childViewControllers[0]).stageCount = self.activeRecipe.paragonCookingStages.count; // number of stages that appear in the table

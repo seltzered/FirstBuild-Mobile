@@ -324,6 +324,53 @@
     [self.delegate updateLabels]; // indices needed for writing the labels from picker data
 }
 
+// the following methods let the view controllers select the correct index
+- (void) selectMinMinutes:(NSNumber *)minMinutes {
+    [self selectMinutes:minMinutes inPicker:self.minPicker];
+}
+
+-(void) selectMinMinutes:(NSNumber *)minMinutes withMaxMinutes:(NSNumber*)maxMinutes {
+    // if there are two temperatures, select both since it is much easier to set the maxMinutes first
+    [self selectMinutes:maxMinutes inPicker:self.maxPicker];
+    [self selectMinMinutes:minMinutes];
+    // then just select the minMinutes the same way (this will move the maxMinutes up to the correct position
+}
+
+- (void) selectMinutes:(NSNumber *)minutes inPicker:(UIPickerView*)picker {
+    NSInteger hour_pi = [minutes integerValue]/60; // hour picker index
+    NSInteger minute_pi;
+    [picker selectRow:hour_pi inComponent:0 animated:NO];
+    [self pickerView:picker didSelectRow:hour_pi inComponent:0];
+    if (hour_pi == 0) {
+        if ([minutes integerValue] > 0) {
+            minute_pi = [minutes integerValue] - 1;
+        } else {
+            minute_pi = 0;
+        }
+    } else {
+        minute_pi = [minutes integerValue] % 60;
+    }
+    [picker selectRow:minute_pi inComponent:1 animated:NO];
+    [self pickerView:picker didSelectRow:minute_pi inComponent:1];
+    // hopefully this calls did select, other wise I will call it myself
+}
+
+-(void) selectTemperature:(NSNumber *)temperature {
+    NSInteger min_temp = [((NSString*)[pickerTemperatureData objectAtIndex:0]) integerValue];
+    NSInteger temp_pi;
+    // picker index, offset from 0
+    if ([temperature integerValue] >= min_temp) {
+        temp_pi = [temperature integerValue] - min_temp;
+        // take the value minus the minimum to find the index
+    } else {
+        temp_pi = 0;
+        // default to the first value, 90
+    }
+    [self.tempPicker selectRow:temp_pi inComponent:0 animated:NO];
+    [self pickerView:self.tempPicker didSelectRow:temp_pi inComponent:0];
+    // tell it to update its variables
+}
+
 - (void)reloadData {
     [self.minPicker reloadAllComponents];
     [self.maxPicker reloadAllComponents];

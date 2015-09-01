@@ -66,9 +66,11 @@ CGFloat const SEL_HEIGHT_S = 70;
     
     self.speedPicker.dataSource = self;
     self.speedPicker.delegate = self;
+    
     self.directionsTextView.delegate = self;
     pickerManager.delegate = self; // needs to update time and temp labels
     [self.directionsTextView setText:self.activeStage.cookingLabel]; // set the active text if it has been set in this stage
+    [pickerManager selectAllIndices];
     [self registerKeyboardNotifications];
 }
 
@@ -95,10 +97,15 @@ CGFloat const SEL_HEIGHT_S = 70;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [pickerManager selectAllIndices];
+    // I feel that it's better to catch this after all the pickers load
+    [pickerManager selectMinMinutes:self.activeStage.cookTimeMinimum];
+    [pickerManager selectTemperature:self.activeStage.targetTemperature];
+    //[self.speedPicker selectRow:self.activeStage.speed inComponent:0 animated:NO];
+    // speed still not set in the stages
     [self resetPickerHeights];
     [self updateLabels];
     [self updateSpeedLabel];
+    
     
 }
 
@@ -115,7 +122,7 @@ CGFloat const SEL_HEIGHT_S = 70;
     return 1;
 }
 -(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [[NSNumber numberWithInt:row] stringValue]; // just need to number the rows 0 through 9
+    return [[NSNumber numberWithLong:row] stringValue]; // just need to number the rows 0 through 9
 }
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     [self updateSpeedLabel];
@@ -125,7 +132,7 @@ CGFloat const SEL_HEIGHT_S = 70;
     UIFont* labelsFont = [UIFont fontWithName:@"FSEmeric-Thin" size:32.0];
     NSDictionary* labelFontDictionary = [NSDictionary dictionaryWithObject:labelsFont forKey:NSFontAttributeName];
     
-    NSMutableAttributedString* speedText = [[NSMutableAttributedString alloc] initWithString:[[NSNumber numberWithInt:[self.speedPicker selectedRowInComponent:0]] stringValue] attributes:labelFontDictionary];
+    NSMutableAttributedString* speedText = [[NSMutableAttributedString alloc] initWithString:[[NSNumber numberWithLong:[self.speedPicker selectedRowInComponent:0]] stringValue] attributes:labelFontDictionary];
     
     [self.speedLabel setAttributedText:speedText]; // this is the only time we need to update the speed label
 }
