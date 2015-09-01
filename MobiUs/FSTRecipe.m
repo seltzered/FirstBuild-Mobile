@@ -26,7 +26,7 @@
     self = [super init];
     if (self) {
         self.photo = [[UIImageView alloc] init];
-        self.photo.image = [UIImage imageNamed:@"camera"];
+        //self.photo.image = [UIImage imageNamed:@"camera"];
         // now it defaults to this, without having to check if it sets
         self.recipeId = [[NSUUID UUID] UUIDString];
         self.paragonCookingStages = [[NSMutableArray alloc] init];

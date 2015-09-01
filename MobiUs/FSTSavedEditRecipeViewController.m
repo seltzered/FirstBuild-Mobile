@@ -106,7 +106,11 @@ VariableSelection _selection;
 - (void)viewWillAppear:(BOOL)animated { // perhaps view did load? I want view did load in the child to have called. Could just have an ingredients setter if it does not work
     [super viewWillAppear:animated];
     // set the recipe image (either taken from the camera or initialized in the recipe object), same as the activeRecipePhoto, which only changes when the imageEditor finishes
-    [self.imageEditor setImage:self.activeRecipe.photo.image];
+    if (self.activeRecipe.photo.image) {
+        [self.imageEditor setImage:self.activeRecipe.photo.image];
+    } else {
+        [self.imageEditor setImage:[UIImage imageNamed:@"camera"]];
+    }
     // set the name if it is in the recipe
     [self.nameField setText:self.activeRecipe.friendlyName];
     FSTSavedRecipeTabBarController* recipeTBC = [self.childViewControllers objectAtIndex:0];
@@ -145,7 +149,8 @@ VariableSelection _selection;
     //self.imageEditor.image = imageTaken;
     [self.activeRecipe.photo setImage:imageTaken];
     // sets when save button pressed
-    //self.imageEditor.image = imageTaken;
+    [self.imageEditor setImage:self.activeRecipe.photo.image];
+    // set the pointer to the recipe image now that it is set
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.view layoutIfNeeded]; // constraints seem to be off
    // self.scrollView.contentSize = CGSizeMake(self.stageView.frame.size.width, self.scrollView.contentSize.height);
@@ -179,6 +184,7 @@ VariableSelection _selection;
         [self.activeRecipe addStage];
         ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMinimum = [childPickerManager minMinutesChosen];
         ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
+        // why is this too low?
         ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).targetTemperature = [childPickerManager temperatureChosen];
     }
     // TODO: work out the session / recipe issue
@@ -214,7 +220,8 @@ VariableSelection _selection;
             // there is at least some stage set
             FSTParagonCookingStage* firstStage = self.activeRecipe.paragonCookingStages[0];
             // select the times in the child
-            [childPickerManager selectMinMinutes:firstStage.cookTimeMinimum withMaxMinutes:firstStage.cookTimeMaximum];
+            [childPickerManager selectMinMinutes:firstStage.cookTimeMinimum withMaxMinutes:firstStage.cookTimeMaximum];//[NSNumber numberWithInteger:[firstStage.cookTimeMinimum integerValue] + [firstStage.cookTimeMaximum integerValue]]];
+            // TODO: error with the value that saves for the maxTime, it is far to low every time I reload it, and this calculation is not correct (*fixed by changing maxHourIndex to MaxHourActual*)
             // select the temperature in the last picker
             [childPickerManager selectTemperature:firstStage.targetTemperature];
         }

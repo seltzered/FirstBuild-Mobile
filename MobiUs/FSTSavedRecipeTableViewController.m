@@ -60,7 +60,11 @@ FSTSavedRecipeManager* recipeManager;
     // Configure the cell...
     [cell.nameLabel setText:matchedRecipe.friendlyName];
     [cell.noteLabel setText:matchedRecipe.note];
-    [cell.recipePhoto setImage:matchedRecipe.photo.image];
+    if (matchedRecipe.photo.image) {
+        [cell.recipePhoto setImage:matchedRecipe.photo.image];
+    } else {
+        [cell.recipePhoto setImage:[UIImage imageNamed:@"camera"]];
+    }
     return cell;
 }
 

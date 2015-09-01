@@ -127,7 +127,7 @@
 - (NSNumber*)maxMinutesChosen {
     NSNumberFormatter* convert = [[NSNumberFormatter alloc] init];
     convert.numberStyle = NSNumberFormatterDecimalStyle;
-    NSInteger maxHourMinutes = [[convert numberFromString:pickerTimeData[0][maxHourIndex]] integerValue] * 60; // maxHour value in minutes
+    NSInteger maxHourMinutes = [[convert numberFromString:pickerTimeData[0][maxHourActual]] integerValue] * 60; // maxHour value in minutes
     NSInteger maxMinutes;
     if (maxHourActual == 0) { // changed this to match the labels given
         maxMinutes = [[convert numberFromString:[pickerTimeData[1][maxMinuteActual + 1] substringFromIndex:1]] integerValue];
@@ -331,9 +331,12 @@
 
 -(void) selectMinMinutes:(NSNumber *)minMinutes withMaxMinutes:(NSNumber*)maxMinutes {
     // if there are two temperatures, select both since it is much easier to set the maxMinutes first
+    [self selectMinutes:[NSNumber numberWithInt:1] inPicker:self.minPicker];
+    // make sure the maxMinutes has the maximum range first
     [self selectMinutes:maxMinutes inPicker:self.maxPicker];
     [self selectMinMinutes:minMinutes];
     // then just select the minMinutes the same way (this will move the maxMinutes up to the correct position
+    // did select row calls to often
 }
 
 - (void) selectMinutes:(NSNumber *)minutes inPicker:(UIPickerView*)picker {
