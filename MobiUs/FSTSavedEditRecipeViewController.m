@@ -174,8 +174,8 @@ VariableSelection _selection;
     //[self.activeRecipe.photo setImage:self.imageEditor.image];
     // the image editor already has a pointer to the active recipe, do not reverse that
     // for some reason the image clears
-    // will probably for loop through all the picker manager to support multiStages
-    if (childPickerManager) { // child PickerManager was set, so the setting might have changed
+    if (childPickerManager) {
+        // child PickerManager was set, so the setting might have changed (otherwise these values did not change or were not set)
         [self.activeRecipe addStage];
         ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMinimum = [childPickerManager minMinutesChosen];
         ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
@@ -183,12 +183,23 @@ VariableSelection _selection;
     }
     // TODO: work out the session / recipe issue
     // get all the session variables from the pickers, then save it
-    [recipeManager saveRecipe:self.activeRecipe];
-    for (UIViewController* vc in [self.navigationController viewControllers]) {
-        if ([vc isKindOfClass:[FSTSavedRecipeViewController class]]) {
-            // the table container two vc's back
-            [self.navigationController popToViewController:vc animated:YES];
+    if ([self.activeRecipe.paragonCookingStages count] > 0 && self.activeRecipe.friendlyName.length > 0) {
+        // this is safe to write to the paragon
+        [recipeManager saveRecipe:self.activeRecipe];
+        for (UIViewController* vc in [self.navigationController viewControllers]) {
+            if ([vc isKindOfClass:[FSTSavedRecipeViewController class]]) {
+                // the table container two vc's back
+                [self.navigationController popToViewController:vc animated:YES];
+            }
         }
+    } else if ([self.activeRecipe.paragonCookingStages count] == 0){
+        // needs cooking settings
+        UIAlertView* settingsAlert = [[UIAlertView alloc] initWithTitle:@"Settings Required" message:@"A functional recipe requires at least one cooking stage" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [settingsAlert show];
+    } else if (self.activeRecipe.friendlyName.length == 0) {
+        // needs cooking settings
+        UIAlertView* settingsAlert = [[UIAlertView alloc] initWithTitle:@"Name Required" message:@"The recipes cannot save without a name" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [settingsAlert show];
     }
 }
 
