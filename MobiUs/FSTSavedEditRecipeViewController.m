@@ -22,8 +22,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageEditor;
 
-@property (weak, nonatomic) IBOutlet UITextField *nameField;
-
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UIView *stageView;
@@ -88,7 +86,8 @@ VariableSelection _selection;
             // the vertical distance between the keyboard and the nameField origin. (buffer it a bit so the namefield is just above.
     } else {
         // check if child is within the bounds
-        CGRect childFrame =((UIViewController*)[self.childViewControllers objectAtIndex:0]).view.frame;
+        // CGRect childFrame =((UIViewController*)[self.childViewControllers objectAtIndex:0]).view.frame;
+        // never mind, just always scroll to the same height
 //        if (!CGRectContainsPoint(sRect, childFrame.origin)) {
             scrollOffset = CGPointMake(0.0, kbSize.height ); // move it up as far as the keyboard went
 //        }
@@ -108,8 +107,13 @@ VariableSelection _selection;
     // set the recipe image (either taken from the camera or initialized in the recipe object), same as the activeRecipePhoto, which only changes when the imageEditor finishes
     if (self.activeRecipe.photo.image) {
         [self.imageEditor setImage:self.activeRecipe.photo.image];
+        [self.imageEditor setContentMode:UIViewContentModeScaleAspectFill];
+        self.smallCamera.hidden = false;
     } else {
-        [self.imageEditor setImage:[UIImage imageNamed:@"camera"]];
+        //[self.imageEditor setImage:[UIImage imageNamed:@"camera"]];
+        self.imageEditor.hidden = true; // camera should show behind it
+        //[self.imageEditor setContentMode:UIViewContentModeScaleAspectFit];
+        self.smallCamera.hidden = true;
     }
     // set the name if it is in the recipe
     [self.nameField setText:self.activeRecipe.friendlyName];
@@ -150,6 +154,10 @@ VariableSelection _selection;
     [self.activeRecipe.photo setImage:imageTaken];
     // sets when save button pressed
     [self.imageEditor setImage:self.activeRecipe.photo.image];
+    [self.imageEditor setContentMode:UIViewContentModeScaleAspectFill];
+    self.imageEditor.hidden = false;
+    //blocks the big camera
+    self.smallCamera.hidden = false;
     // set the pointer to the recipe image now that it is set
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.view layoutIfNeeded]; // constraints seem to be off
@@ -162,9 +170,12 @@ VariableSelection _selection;
 
 #pragma mark - text field and view delegates
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+        self.activeRecipe.friendlyName = [NSMutableString stringWithString:textField.text];
+    // the ipad can just dismiss this without returning
+}
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    self.activeRecipe.friendlyName = [NSMutableString stringWithString:textField.text];
     return YES; // might want to scroll to different positions depending on the delegate
 }
 
@@ -241,7 +252,7 @@ VariableSelection _selection;
     } else {
         selectedStage = [self.activeRecipe addStage]; // add a new stage and reference it for editing
     }
-    [self performSegueWithIdentifier:@"stageSettingsSegue" sender:selectedStage]; // pass the stage for editing in the coming view controller
+    [self performSegueWithIdentifier:@"stageSettingsSegue" sender:selectedStage]; // pass the stage for editing in the coming view controller // hopefully that references the container
     
 }
 

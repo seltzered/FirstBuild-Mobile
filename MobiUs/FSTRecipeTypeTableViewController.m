@@ -10,6 +10,7 @@
 #import "FSTSousVideRecipe.h"
 #import "FSTMultiStageRecipe.h"
 #import "FSTSavedEditRecipeViewController.h"
+#import "FSTLine.h"
 
 @interface FSTRecipeTypeTableViewController ()
 
@@ -43,10 +44,23 @@
     
     if (indexPath.item == 0) {
         [cell.textLabel setText:@"Sous Vide"];
+        
     } else {
         [cell.textLabel setText:@"Multi-stage"];
     }
     
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font = [UIFont fontWithName:@"FSEmeric-Light" size:22];
+    
+    FSTLine *lineView = [[FSTLine alloc] initWithFrame:CGRectMake(0, cell.contentView.frame.size.height - 1.0, cell.contentView.frame.size.width, 1)];
+    lineView.backgroundColor = [UIColor clearColor];
+    [cell.contentView addSubview:lineView]; // a line at the bottom of the cell
+    
+    UIView *view = [[UIView alloc]initWithFrame:cell.frame]; // highlight filling in the whole background
+    view.backgroundColor = UIColorFromRGB(0xF0663A);// UIColorFromRGB(0xFF0105); // orange highlight color
+    [cell setSelectedBackgroundView:view];
+    cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+
     return cell;
 }
 
@@ -58,23 +72,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item == 0) { // selected Sous Vide recipe
-        [self performSegueWithIdentifier:@"editSegue" sender:[[FSTSousVideRecipe alloc] init]];
+        [self.delegate performSegueWithIdentifier:@"editSegue" sender:[[FSTSousVideRecipe alloc] init]];
     } else { // selected multi stage
-        [self performSegueWithIdentifier:@"editSegue" sender:[[FSTMultiStageRecipe alloc] init]];
+        [self.delegate performSegueWithIdentifier:@"editSegue" sender:[[FSTMultiStageRecipe alloc] init]];
     } // so now there will always be a recipe set in the edit recipe screen
 }
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    ((FSTSavedEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender; // hopefully it is still the correct class in the edit recipe view controller
-    if ([sender isKindOfClass:[FSTSousVideRecipe class]]) {
-        ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:NO];
-        // no multi stage on sous vide
-    } else if ([sender isKindOfClass:[FSTMultiStageRecipe class]]) {
-        ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:YES];
-    }
-}
-// TODO: deque 2 viewControllerswhen saving the recipe
 
 @end

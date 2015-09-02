@@ -32,9 +32,9 @@ FSTSavedRecipeManager* recipeManager;
 
 - (void)viewWillAppear:(BOOL)animated {
     if ([[recipeManager getSavedRecipes] allKeys].count <= 0) {
-        self.emptyTableView.hidden = false;
+        self.emptyTableView.hidden = NO;
     } else {
-        self.emptyTableView.hidden = true;
+        self.emptyTableView.hidden = YES;
     }
     ((FSTSavedRecipeTableViewController*)self.childViewControllers[0]).delegate = self;
 }
@@ -50,7 +50,12 @@ FSTSavedRecipeManager* recipeManager;
 
 -(void)didDeleteRecipe {
     if ([[recipeManager getSavedRecipes] allKeys].count <= 0) {
-        self.emptyTableView.hidden = false;
+        self.emptyTableView.alpha = 0;
+        self.emptyTableView.hidden = NO;
+        [UIView animateWithDuration:0.5 animations:^{
+            // same animation as the product table
+            self.emptyTableView.alpha = 1;
+        }];
     }
 }
 

@@ -10,4 +10,6 @@
 
 @interface FSTRecipeTypeTableViewController : UITableViewController
 
+@property (nonatomic, weak) id delegate;
+// there are no added protocols, I just need to segue
 @end
