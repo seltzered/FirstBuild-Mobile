@@ -1268,8 +1268,20 @@
                                     <segue destination="bAi-bP-Frd" kind="embed" identifier="containerSegue" id="Bcj-z2-2JV"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oV-AB-lQ8" userLabel="thumbView" customClass="FSTThumbTabView">
+                                <rect key="frame" x="-6" y="28" width="35" height="45"/>
+                                <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="QEl-vd-eTe"/>
+                                    <constraint firstAttribute="width" constant="35" id="pAL-M3-qIS"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="VCi-vK-wA2" appends="YES" id="EMM-Cq-7PQ"/>
+                                </connections>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECI-56-BeB" userLabel="PopOutView" customClass="FSTRoundedBorderView">
-                                <rect key="frame" x="-26" y="-22" width="25" height="482"/>
+                                <rect key="frame" x="-26" y="-22" width="25" height="537"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c8t-Ki-MIk">
                                         <rect key="frame" x="0.0" y="15" width="428.5" height="452"/>
@@ -1304,18 +1316,6 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oV-AB-lQ8" userLabel="thumbView">
-                                <rect key="frame" x="-1" y="28" width="25" height="45"/>
-                                <color key="backgroundColor" red="0.94117647058823528" green="0.40000000000000002" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="QEl-vd-eTe"/>
-                                    <constraint firstAttribute="width" constant="25" id="pAL-M3-qIS"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="VCi-vK-wA2" appends="YES" id="EMM-Cq-7PQ"/>
-                                </connections>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1328,11 +1328,11 @@
                             <constraint firstItem="kiR-eC-M5K" firstAttribute="leading" secondItem="K61-Ka-9YT" secondAttribute="leadingMargin" id="DXo-8K-8Xt"/>
                             <constraint firstItem="hBx-nA-wFa" firstAttribute="top" secondItem="kiR-eC-M5K" secondAttribute="bottom" id="E88-kr-bFb"/>
                             <constraint firstAttribute="width" secondItem="c8t-Ki-MIk" secondAttribute="width" id="GBn-XH-4SX"/>
-                            <constraint firstItem="hBx-nA-wFa" firstAttribute="top" secondItem="ECI-56-BeB" secondAttribute="bottom" constant="140" id="HPv-YG-FLP"/>
+                            <constraint firstItem="hBx-nA-wFa" firstAttribute="top" secondItem="ECI-56-BeB" secondAttribute="bottom" constant="85" id="HPv-YG-FLP"/>
                             <constraint firstAttribute="width" secondItem="Csz-4M-yY7" secondAttribute="width" multiplier="4:3" id="IBO-Mk-4eo"/>
                             <constraint firstAttribute="centerX" secondItem="kiR-eC-M5K" secondAttribute="centerX" id="M5M-w5-gGr"/>
                             <constraint firstItem="bKQ-z6-QqS" firstAttribute="width" secondItem="K61-Ka-9YT" secondAttribute="width" id="OVB-6U-7aS"/>
-                            <constraint firstItem="3oV-AB-lQ8" firstAttribute="leading" secondItem="ECI-56-BeB" secondAttribute="trailing" id="U5c-Qq-3ZP"/>
+                            <constraint firstItem="3oV-AB-lQ8" firstAttribute="leading" secondItem="ECI-56-BeB" secondAttribute="trailing" constant="-5" id="U5c-Qq-3ZP"/>
                             <constraint firstAttribute="height" secondItem="c8t-Ki-MIk" secondAttribute="height" id="Vzb-yW-4mK"/>
                             <constraint firstItem="kiR-eC-M5K" firstAttribute="top" secondItem="s3l-qE-nxY" secondAttribute="bottom" id="X8K-vQ-KbE"/>
                             <constraint firstItem="Csz-4M-yY7" firstAttribute="width" secondItem="K61-Ka-9YT" secondAttribute="width" id="XbG-yW-68V"/>
