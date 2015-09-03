@@ -7,6 +7,9 @@
 //
 
 #import "FSTSavedDisplayRecipeViewController.h"
+#import "FSTReadyToReachTemperatureViewController.h"
+#import "FSTStageSettingsViewController.h"
+#import "FSTSavedRecipeTabBarController.h"
 
 @interface FSTSavedDisplayRecipeViewController ()
 
@@ -25,7 +28,7 @@
     self.nameField.userInteractionEnabled = NO;
     self.nameField.backgroundColor = [UIColor whiteColor];
     self.smallCamera.hidden = YES; // will never show up in this view
-}
+} // is_multi_stage does not pass
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -36,14 +39,25 @@
     [super tabBarController:tabBarController didSelectViewController:viewController];
     viewController.view.userInteractionEnabled = NO;
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)cookButtonTapped:(id)sender {
+    [self performSegueWithIdentifier:@"startSegue" sender:self];
 }
-*/
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"startSegue"]) {
+        ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        //TODO: setup cooking with the recipe some how
+        self.currentParagon.session.toBeRecipe = self.activeRecipe; // set the method?
+        [self.currentParagon startHeatingWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
+        // where should I start heating?
+    } else if ([segue.identifier isEqualToString:@"stageSettingsSegue"]) {
+        ((FSTStageSettingsViewController*)segue.destinationViewController).activeStage = (FSTParagonCookingStage*)sender;
+        // we probably
+    } else if ([segue.identifier isEqualToString:@"tabBarSegue"]) {
+        ((FSTSavedRecipeTabBarController*)segue.destinationViewController).is_multi_stage = self.is_multi_stage;
+    }
+} // TODO: set this up in storyboard
+
 
 @end

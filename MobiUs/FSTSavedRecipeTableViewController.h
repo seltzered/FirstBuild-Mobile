@@ -13,7 +13,7 @@
 
 -(void)segueWithRecipe:(FSTRecipe*)recipe;
 
--(void)startCookingWithRecipe:(FSTRecipe*)recipe;
+-(void)displayWithRecipe:(FSTRecipe*)recipe;
 
 -(void)didDeleteRecipe;
 

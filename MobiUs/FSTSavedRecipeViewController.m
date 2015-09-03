@@ -11,7 +11,7 @@
 #import "FSTSavedEditRecipeViewController.h"
 #import "FSTSousVideRecipe.h"
 #import "FSTMultiStageRecipe.h"
-#import "FSTReadyToReachTemperatureViewController.h"
+#import "FSTSavedDisplayRecipeViewController.h"
 
 @interface FSTSavedRecipeViewController ()
 
@@ -64,17 +64,17 @@ FSTSavedRecipeManager* recipeManager;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([segue.destinationViewController isKindOfClass:[FSTSavedEditRecipeViewController class]]) {
+        // this applies to the display view controller as well
         if ([sender isKindOfClass:[FSTRecipe class]]) {
             ((FSTSavedEditRecipeViewController*)segue.destinationViewController).activeRecipe = (FSTRecipe*)sender;
+            ((FSTSavedEditRecipeViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
             if ([sender isKindOfClass:[FSTSousVideRecipe class]]) {
                 ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:NO];
             } else if ([sender isKindOfClass:[FSTMultiStageRecipe class]]) {
                 ((FSTSavedEditRecipeViewController*)segue.destinationViewController).is_multi_stage = [NSNumber numberWithBool:YES]; // decide which views to load in the tab bar
             }
         }
-    } else if ([segue.destinationViewController isKindOfClass:[FSTReadyToReachTemperatureViewController class]]) {
-        ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
-    } // it does not really need to pass anything to the addRecipe table
+    }  // it does not really need to pass anything to the addRecipe table
 }
 
 #pragma mark - table delegate
@@ -83,10 +83,8 @@ FSTSavedRecipeManager* recipeManager;
     [self performSegueWithIdentifier:@"editRecipesSegue" sender:recipe];
 }
 
--(void)startCookingWithRecipe:(FSTRecipe *)recipe {
-    self.currentParagon.session.toBeRecipe = recipe; // set the method?
-    [self.currentParagon startHeatingWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
-    [self performSegueWithIdentifier:@"cookingSegue" sender:self];
+-(void)displayWithRecipe:(FSTRecipe *)recipe {
+    [self performSegueWithIdentifier:@"displaySegue" sender:recipe];
 }
 
 

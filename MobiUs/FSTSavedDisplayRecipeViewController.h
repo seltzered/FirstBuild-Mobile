@@ -7,6 +7,8 @@
 //
 
 #import "FSTSavedEditRecipeViewController.h"
+#import "FSTRecipe.h"
+#import "FSTParagon.h"
 
 @interface FSTSavedDisplayRecipeViewController : FSTSavedEditRecipeViewController
 
