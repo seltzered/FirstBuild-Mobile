@@ -28,7 +28,8 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated]; // this is the only time the stage is set
     [self.tableView reloadData];
-    if (self.stageCount >= 5) {
+    if (self.stageCount >= 5 || ![self.delegate canEditStages]) {
+        // hide immediately if the delegate says you should not edit
         self.addStageView.hidden = YES;
     }
 }
@@ -44,11 +45,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.stageCount >= 5) {
-        self.addStageView.hidden = true;
+    if ([self.delegate canEditStages]) {
+        if (self.stageCount >= 5) {
+            self.addStageView.hidden = true;
+        } else {
+            self.addStageView.hidden = false;
+            // number can lower with deletion
+        }
     } else {
-        self.addStageView.hidden = false;
-        // number can lower with deletion
+        self.addStageView.hidden = YES;
     }
     return self.stageCount; // when does this set?
 }
@@ -60,16 +65,20 @@
 }
 
 - (IBAction)addStageTapped:(id)sender { // created a new stage
-    if (self.stageCount < 5) {
-        self.stageCount++; // increment under 5
-    }
-    // now check if we should hide
-    if (self.stageCount >= 5) {
-        self.addStageView.hidden = true;
+    if ([self.delegate canEditStages]) {
+        if (self.stageCount < 5) {
+            self.stageCount++; // increment under 5
+        }
+        // now check if we should hide
+        if (self.stageCount >= 5) {
+            self.addStageView.hidden = YES;
+        } else {
+            self.addStageView.hidden = NO;
+        }
+        // perhaps only need this in number of rows function
     } else {
-        self.addStageView.hidden = false;
+        self.addStageView.hidden = YES;
     }
-    // perhaps only need this in number of rows function
     
     [self.delegate editStageAtIndex:self.stageCount]; // tell the edit controller we want to change this stage number
     [self.tableView reloadData];
@@ -84,7 +93,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return YES;
+    return [self.delegate canEditStages];
 
 }
 

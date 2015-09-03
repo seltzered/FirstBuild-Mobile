@@ -260,6 +260,10 @@ VariableSelection _selection;
     [self.activeRecipe.paragonCookingStages removeObjectAtIndex:index];
 }
 
+-(BOOL)canEditStages {
+    return YES; // this view controller's child can always edit
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

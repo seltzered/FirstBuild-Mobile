@@ -16,10 +16,13 @@
 -(void)deleteStageAtIndex:(NSInteger)index;
 // how does the recipe remove a stage?
 
+-(BOOL)canEditStages;
+
 @end
 @interface FSTStageTableViewController : UITableViewController
 
 @property (nonatomic) NSInteger stageCount;
 
 @property (nonatomic) id<FSTStageTableViewControllerDelegate> delegate;
+
 @end

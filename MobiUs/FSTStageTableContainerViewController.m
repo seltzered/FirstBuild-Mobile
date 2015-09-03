@@ -33,6 +33,6 @@
     [self.underLineView setHorizontalPosition:5*self.view.frame.size.width/6];
 } // this table container basically just holds the underline view in its proper place.
 
-//TODO: the edit view controller will now have to access the child's delegate
+
 
 @end

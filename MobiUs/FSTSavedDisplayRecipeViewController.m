@@ -49,6 +49,11 @@
     [self performSegueWithIdentifier:@"startSegue" sender:self];
 }
 
+// delegate method
+- (BOOL)canEditStages {
+    return NO;
+    // the user cannot edit anything here
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"startSegue"]) {
