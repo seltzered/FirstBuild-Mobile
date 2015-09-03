@@ -28,6 +28,9 @@
     self.nameField.userInteractionEnabled = NO;
     self.nameField.backgroundColor = [UIColor whiteColor];
     self.smallCamera.hidden = YES; // will never show up in this view
+    if ([self.will_hide_cook boolValue]) {
+        self.cookButton.hidden = true;
+    }
 } // is_multi_stage does not pass
 
 - (void)didReceiveMemoryWarning {

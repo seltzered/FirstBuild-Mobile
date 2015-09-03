@@ -12,4 +12,8 @@
 
 @interface FSTSavedDisplayRecipeViewController : FSTSavedEditRecipeViewController
 
+@property (weak, nonatomic) IBOutlet UIView *cookButton;
+
+@property (weak, nonatomic) NSNumber* will_hide_cook;
+
 @end

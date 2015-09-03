@@ -14,11 +14,16 @@
 #import "FSTRevealViewController.h"
 #import "FSTCookingStateViewController.h"
 #import "FSTContainerViewController.h"
+#import "FSTSavedDisplayRecipeViewController.h"
+#import "FSTSousVideRecipe.h"
+#import "FSTMultiStageRecipe.h"
 
 @interface FSTCookingViewController ()
 
 @property (weak, nonatomic) IBOutlet FSTStateBarView *stageBar;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *popOutConstraint;
+// this constant holds it against the side or protrudes it
 @property (strong, nonatomic) NSTimer *timer;
 @property (nonatomic) Session *session;
 
@@ -26,17 +31,21 @@
 
 @implementation FSTCookingViewController
 
-NSObject* _temperatureChangedObserver;
-NSObject* _timeElapsedChangedObserver;
-NSObject* _cookModeChangedObserver;
-NSObject* _targetTemperatureChangedObserver;
-NSObject* _cookTimeChangedObserver;
+{
+    NSObject* _temperatureChangedObserver;
+    NSObject* _timeElapsedChangedObserver;
+    NSObject* _cookModeChangedObserver;
+    NSObject* _targetTemperatureChangedObserver;
+    NSObject* _cookTimeChangedObserver;
+    BOOL popped_out;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.navigationItem.hidesBackButton = YES;
     self.continueButton.hidden = YES;
+    popped_out = NO;
     
     [self transitionToCurrentCookMode];
     [self setupEventHandlers];
@@ -227,7 +236,18 @@ NSObject* _cookTimeChangedObserver;
     //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode
     self.continueButton.userInteractionEnabled = NO;
 }
-     
+
+- (IBAction)recipeTabTapped:(id)sender {
+    // tapped on orange view to po the recipe out
+    if (popped_out) {
+        self.popOutConstraint.constant = -17.0; // for some reason the trailing constraint appears this far offset.
+        popped_out = NO;
+    } else {
+        self.popOutConstraint.constant = 5*self.view.frame.size.width/6;
+        popped_out = YES;
+    }
+}
+
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon];
 }
@@ -242,6 +262,16 @@ NSObject* _cookTimeChangedObserver;
        containerVC.paragon = self.currentParagon;
        //[containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
        self.stateContainer = containerVC;
+   } else if ([segue.identifier isEqualToString:@"displayPopOut"]) {
+       FSTSavedDisplayRecipeViewController* displayVC = (FSTSavedDisplayRecipeViewController*)segue.destinationViewController;
+       displayVC.activeRecipe = self.currentParagon.session.toBeRecipe;
+       displayVC.will_hide_cook = [NSNumber numberWithBool:YES]; // don't want them to select this and push on another cooking session.
+       if ([self.currentParagon.session.toBeRecipe isKindOfClass:[FSTSousVideRecipe class]]) {
+           displayVC.is_multi_stage = [NSNumber numberWithBool:NO];
+       } else if ([self.currentParagon.session.toBeRecipe isKindOfClass:[FSTMultiStageRecipe class]]) {
+           displayVC.is_multi_stage = [NSNumber numberWithBool:YES];
+       } // this tells it what third view controller to load
+       // I could just set is_multi_stage by checking the activeRecipe in the display Maybe that does not happen soon enough
    }
 }
 
