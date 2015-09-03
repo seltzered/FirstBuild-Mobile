@@ -13,6 +13,8 @@
 
 @interface FSTSavedDisplayRecipeViewController ()
 
+@property UITabBarController* childTabController;
+
 @end
 
 @implementation FSTSavedDisplayRecipeViewController
@@ -31,6 +33,7 @@
     if ([self.will_hide_cook boolValue]) {
         self.cookButton.hidden = true;
     }
+    ((UIViewController*)self.childTabController.viewControllers[0]).view.userInteractionEnabled = NO; // do not yet users press the first view that loads // there are some layout issues as well, how to fix that?
 } // is_multi_stage does not pass
 
 - (void)didReceiveMemoryWarning {
@@ -59,6 +62,7 @@
         // we probably
     } else if ([segue.identifier isEqualToString:@"tabBarSegue"]) {
         ((FSTSavedRecipeTabBarController*)segue.destinationViewController).is_multi_stage = self.is_multi_stage;
+        self.childTabController = (FSTSavedRecipeTabBarController*)segue.destinationViewController;
     }
 } // TODO: set this up in storyboard
 

@@ -246,6 +246,9 @@
         self.popOutConstraint.constant = 5*self.view.frame.size.width/6;
         popped_out = YES;
     }
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (IBAction)menuToggleTapped:(id)sender {
