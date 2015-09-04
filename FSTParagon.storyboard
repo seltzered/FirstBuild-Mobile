@@ -1362,13 +1362,13 @@
                             <mask key="constraints">
                                 <exclude reference="IBO-Mk-4eo"/>
                                 <exclude reference="skh-Gl-pLN"/>
-                                <exclude reference="8DR-a2-edA"/>
-                                <exclude reference="GBn-XH-4SX"/>
                                 <exclude reference="Vzb-yW-4mK"/>
                                 <exclude reference="mqT-Gw-vfK"/>
                                 <exclude reference="c3w-IT-99Y"/>
                                 <exclude reference="hxV-ng-wLP"/>
                                 <exclude reference="x0t-Oo-4zE"/>
+                                <exclude reference="8DR-a2-edA"/>
+                                <exclude reference="GBn-XH-4SX"/>
                                 <exclude reference="wIe-Pm-Yqj"/>
                             </mask>
                         </variation>
@@ -2955,12 +2955,16 @@
                     <connections>
                         <outlet property="autoTransitionSwitch" destination="TTh-v0-EcQ" id="Xfr-LN-oFJ"/>
                         <outlet property="directionsTextView" destination="ar4-76-cGw" id="9pI-VW-xLr"/>
+                        <outlet property="saveButtonWrapper" destination="nFu-DH-RJi" id="P2H-qh-9O1"/>
+                        <outlet property="speedButtonWrapper" destination="6j5-pN-EiH" id="b7j-DJ-ERV"/>
                         <outlet property="speedLabel" destination="gwa-Ax-43t" id="WZn-a3-wqm"/>
                         <outlet property="speedPicker" destination="ZjC-jr-2oQ" id="HxU-2h-HYT"/>
                         <outlet property="speedPickerHeight" destination="470-kx-k2f" id="DhM-Hh-oyi"/>
+                        <outlet property="tempButtonWrapper" destination="0xs-bc-yHZ" id="9FP-gN-Yeg"/>
                         <outlet property="tempLabel" destination="KBw-Ej-Hg9" id="ULy-8k-oCj"/>
                         <outlet property="tempPicker" destination="7hW-yV-ziv" id="6dZ-dg-c5p"/>
                         <outlet property="tempPickerHeight" destination="4fq-hh-2hm" id="4n1-xX-MEB"/>
+                        <outlet property="timeButtonWrapper" destination="DWC-42-5wt" id="CK3-17-XWQ"/>
                         <outlet property="timeLabel" destination="gAR-w8-AKH" id="cnZ-J7-iA8"/>
                         <outlet property="timePicker" destination="5Rp-um-LEF" id="yxh-ea-DhS"/>
                         <outlet property="timePickerHeight" destination="hyw-aX-Ar2" id="AuD-8e-Trf"/>
@@ -4228,15 +4232,15 @@
                                 <exclude reference="BhO-Ge-qJV"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="1Ik-or-UOj"/>
+                                <exclude reference="8CV-rO-JlV"/>
+                                <exclude reference="YGd-0D-FSn"/>
+                                <exclude reference="gMq-JD-ToA"/>
                                 <exclude reference="h4U-7b-yRT"/>
                                 <exclude reference="kFf-Vy-WPn"/>
                                 <exclude reference="lKX-xQ-ore"/>
                                 <exclude reference="m6f-8Y-rL9"/>
                                 <exclude reference="o9u-YD-tKC"/>
-                                <exclude reference="1Ik-or-UOj"/>
-                                <exclude reference="8CV-rO-JlV"/>
-                                <exclude reference="YGd-0D-FSn"/>
-                                <exclude reference="gMq-JD-ToA"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -4245,15 +4249,15 @@
                                 <include reference="BhO-Ge-qJV"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="1Ik-or-UOj"/>
+                                <include reference="8CV-rO-JlV"/>
+                                <include reference="YGd-0D-FSn"/>
+                                <include reference="gMq-JD-ToA"/>
                                 <include reference="h4U-7b-yRT"/>
                                 <include reference="kFf-Vy-WPn"/>
                                 <exclude reference="lKX-xQ-ore"/>
                                 <include reference="m6f-8Y-rL9"/>
                                 <include reference="o9u-YD-tKC"/>
-                                <include reference="1Ik-or-UOj"/>
-                                <include reference="8CV-rO-JlV"/>
-                                <include reference="YGd-0D-FSn"/>
-                                <include reference="gMq-JD-ToA"/>
                             </mask>
                         </variation>
                     </view>
@@ -4824,12 +4828,12 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="Lc4-aA-lEj"/>
-                                <exclude reference="Cd7-tZ-WRN"/>
-                                <exclude reference="YCZ-XW-HBW"/>
-                                <exclude reference="Xx9-tW-Bhk"/>
-                                <exclude reference="fnZ-wt-ULU"/>
                                 <exclude reference="1BG-Zo-1rF"/>
+                                <exclude reference="Cd7-tZ-WRN"/>
+                                <exclude reference="Lc4-aA-lEj"/>
+                                <exclude reference="Xx9-tW-Bhk"/>
+                                <exclude reference="YCZ-XW-HBW"/>
+                                <exclude reference="fnZ-wt-ULU"/>
                             </mask>
                         </variation>
                     </view>
@@ -4873,7 +4877,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="275.5" y="1797"/>
+            <point key="canvasLocation" x="193.25" y="1783"/>
         </scene>
     </scenes>
     <resources>

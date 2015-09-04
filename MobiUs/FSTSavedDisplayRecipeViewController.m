@@ -10,6 +10,8 @@
 #import "FSTReadyToReachTemperatureViewController.h"
 #import "FSTStageSettingsViewController.h"
 #import "FSTSavedRecipeTabBarController.h"
+#import "FSTStageSettingsViewController.h"
+#import "FSTStageTableContainerViewController.h"
 
 @interface FSTSavedDisplayRecipeViewController ()
 
@@ -43,7 +45,12 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     [super tabBarController:tabBarController didSelectViewController:viewController];
-    viewController.view.userInteractionEnabled = NO;
+    if ([viewController isKindOfClass:[FSTStageTableContainerViewController class]]) {
+        viewController.view.userInteractionEnabled = YES;
+        // users can still select members of the table
+    } else {
+        viewController.view.userInteractionEnabled = NO;
+    }
 }
 - (IBAction)cookButtonTapped:(id)sender {
     [self performSegueWithIdentifier:@"startSegue" sender:self];
@@ -64,7 +71,7 @@
         // where should I start heating?
     } else if ([segue.identifier isEqualToString:@"stageSettingsSegue"]) {
         ((FSTStageSettingsViewController*)segue.destinationViewController).activeStage = (FSTParagonCookingStage*)sender;
-        // we probably
+        ((FSTStageSettingsViewController*)segue.destinationViewController).can_edit = [NSNumber numberWithBool:NO];
     } else if ([segue.identifier isEqualToString:@"tabBarSegue"]) {
         ((FSTSavedRecipeTabBarController*)segue.destinationViewController).is_multi_stage = self.is_multi_stage;
         self.childTabController = (FSTSavedRecipeTabBarController*)segue.destinationViewController;

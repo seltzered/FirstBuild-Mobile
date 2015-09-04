@@ -11,11 +11,15 @@
 
 @interface FSTStageSettingsViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *saveButtonWrapper;
+
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *timePicker;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timePickerHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *timeButtonWrapper;
 
 @property (weak, nonatomic) IBOutlet UILabel *tempLabel;
 
@@ -23,11 +27,15 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tempPickerHeight;
 
+@property (weak, nonatomic) IBOutlet UIView *tempButtonWrapper;
+
 @property (weak, nonatomic) IBOutlet UILabel *speedLabel;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *speedPicker;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *speedPickerHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *speedButtonWrapper;
 
 @property (weak, nonatomic) IBOutlet UISwitch *autoTransitionSwitch;
 
@@ -105,8 +113,41 @@ CGFloat const SEL_HEIGHT_S = 70;
     [self resetPickerHeights];
     [self updateLabels];
     [self updateSpeedLabel];
-    
-    
+    if (![self.can_edit boolValue]) {
+        // in display mode
+        self.view.userInteractionEnabled = NO;
+        
+        //label backgrounds
+        self.timeButtonWrapper.backgroundColor = [UIColor whiteColor];
+        self.timeButtonWrapper.layer.borderColor = [UIColor blackColor].CGColor;
+        self.timeButtonWrapper.layer.borderWidth = 2.0f;
+        
+        self.tempButtonWrapper.backgroundColor = [UIColor whiteColor];
+        self.tempButtonWrapper.layer.borderColor = [UIColor blackColor].CGColor;
+        self.tempButtonWrapper.layer.borderWidth = 2.0f;
+        
+        self.speedButtonWrapper.backgroundColor = [UIColor whiteColor];
+        self.speedButtonWrapper.layer.borderColor = [UIColor blackColor].CGColor;
+        self.speedButtonWrapper.layer.borderWidth = 2.0f;
+        
+        self.speedButtonWrapper.backgroundColor = [UIColor whiteColor];
+        self.speedButtonWrapper.layer.borderColor = [UIColor blackColor].CGColor;
+        self.speedButtonWrapper.layer.borderWidth = 2.0f;
+        
+        self.directionsTextView.backgroundColor = [UIColor whiteColor];
+        self.directionsTextView.layer.borderColor = [UIColor blackColor].CGColor;
+        self.directionsTextView.layer.borderWidth = 2.0f;
+        
+        // text colors
+        self.timeLabel.textColor = [UIColor blackColor];
+        self.tempLabel.textColor = [UIColor blackColor];
+        self.speedLabel.textColor = [UIColor blackColor];
+        self.directionsTextView.textColor = [UIColor blackColor];
+        
+        self.saveButtonWrapper.hidden = YES;
+        
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

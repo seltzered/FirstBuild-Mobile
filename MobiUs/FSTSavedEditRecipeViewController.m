@@ -240,7 +240,7 @@ VariableSelection _selection;
         ((FSTStageTableViewController*)viewController.childViewControllers[0]).delegate = self; //need to know which stage was selected in the table (table is now imbedded) // child view controller needs to be set within view did load, the the delegate
         ((FSTStageTableViewController*)viewController.childViewControllers[0]).stageCount = self.activeRecipe.paragonCookingStages.count; // number of stages that appear in the table
     } // get the picker manager for quick access from the
-    
+    viewController.view.userInteractionEnabled = YES;
 }
 
 #pragma mark - FSTStageTableViewControllerDelegate
@@ -269,6 +269,7 @@ VariableSelection _selection;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"stageSettingsSegue"]) {
         ((FSTStageSettingsViewController*)segue.destinationViewController).activeStage = (FSTParagonCookingStage*)sender; // some stage must have been set before the segue
+        ((FSTStageSettingsViewController*)segue.destinationViewController).can_edit = [NSNumber numberWithBool:YES];
     } else if ([segue.identifier isEqualToString:@"tabBarSegue"]) {
         ((FSTSavedRecipeTabBarController*)segue.destinationViewController).is_multi_stage = self.is_multi_stage;
     }
