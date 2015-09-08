@@ -1,4 +1,4 @@
-MobiUs
+FirstBuild-Mobile
 ======
 Open Source iOS app used for connected products made by FirstBuild. 
 
@@ -11,6 +11,8 @@ The navigation is driven by SWRevealViewController which maps to a specific prod
 - Paragon
 
 ###ChillHub
+
+
 
 ###Paragon
 
