@@ -500,6 +500,7 @@
 				5B3F1C9B19E8852A00303242 /* controllers */,
 			);
 			name = Main;
+			path = ../FirstBuild;
 			sourceTree = "<group>";
 		};
 		5B3F1C9B19E8852A00303242 /* controllers */ = {
@@ -891,8 +892,7 @@
 				67926FFA19EDDA4B00E346C2 /* Shared */,
 				5B9EF0F119DEEE1000E8D9F1 /* Media */,
 			);
-			name = FirstBuild;
-			path = MobiUs;
+			path = FirstBuild;
 			sourceTree = "<group>";
 		};
 		5B9EF0F119DEEE1000E8D9F1 /* Media */ = {
@@ -918,6 +918,7 @@
 				67926FF819EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf */,
 			);
 			name = Media;
+			path = ../FirstBuild;
 			sourceTree = "<group>";
 		};
 		5BA064D01B8743DB002FCE59 /* Apps */ = {
@@ -928,6 +929,7 @@
 				5BE77E1E1B7D2E6F00B762B8 /* HumanaPillBottle */,
 			);
 			name = Apps;
+			path = ../FirstBuild;
 			sourceTree = "<group>";
 		};
 		5BA064D11B8743F9002FCE59 /* Device Management */ = {
@@ -937,6 +939,7 @@
 				5BA064D21B87442C002FCE59 /* WiFi */,
 			);
 			name = "Device Management";
+			path = ../FirstBuild;
 			sourceTree = "<group>";
 		};
 		5BA064D21B87442C002FCE59 /* WiFi */ = {
@@ -1110,6 +1113,7 @@
 				5BC5A1C719EF64EE009C93B1 /* model */,
 			);
 			name = Authentication;
+			path = ../FirstBuild;
 			sourceTree = "<group>";
 		};
 		5BC5A1C719EF64EE009C93B1 /* model */ = {
@@ -1180,6 +1184,7 @@
 				5BC3648E1A3249EA00D03B9C /* views */,
 			);
 			name = Shared;
+			path = ../FirstBuild;
 			sourceTree = "<group>";
 		};
 		CBE251472FAFD71676539304 /* Frameworks */ = {
@@ -1559,11 +1564,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MobiUs",
+					"$(PROJECT_DIR)/FirstBuild",
 					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks",
 				);
-				GCC_PREFIX_HEADER = "MobiUs/FirstBuild-Mobile.pch";
-				INFOPLIST_FILE = MobiUs/Info.plist;
+				GCC_PREFIX_HEADER = "FirstBuild/FirstBuild-Mobile.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/FirstBuild/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = FirstBuild;
@@ -1584,11 +1589,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/MobiUs",
+					"$(PROJECT_DIR)/FirstBuild",
 					"$(DEVELOPER_DIR)/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks",
 				);
-				GCC_PREFIX_HEADER = "MobiUs/FirstBuild-Mobile.pch";
-				INFOPLIST_FILE = MobiUs/Info.plist;
+				GCC_PREFIX_HEADER = "FirstBuild/FirstBuild-Mobile.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/FirstBuild/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = FirstBuild;
