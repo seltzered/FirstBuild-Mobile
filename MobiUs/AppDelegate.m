@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  MobiUs
+//  FirstBuild-Mobile
 //
 //  Created by Myles Caley on 10/3/14.
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
