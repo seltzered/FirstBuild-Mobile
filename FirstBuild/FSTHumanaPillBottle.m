@@ -16,7 +16,7 @@ NSString * const FSTHumanaPillBottleBatteryLevelChangedNotification         = @"
 
 //Blue Bean Characteristics
 //TODO: move standard characteristics to BLE base object
-NSString * const FSTCharacteristicScratch1                = @"A495FF21-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
+NSString * const FSTCharacteristicSerialPassThrough       = @"A495FF11-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
 NSString * const FSTCharacteristicBatteryLevelDefault     = @"2A19"; //read,notify
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
@@ -33,7 +33,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     {
         // booleans for all the required characteristics, tell us whether or not the characteristic loaded
         requiredCharacteristics = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[
-            [NSNumber alloc] initWithBool:0], FSTCharacteristicScratch1,
+            [NSNumber alloc] initWithBool:0], FSTCharacteristicSerialPassThrough,
             nil];
     }
     
@@ -52,10 +52,10 @@ __weak NSTimer* _readCharacteristicsTimer;
 {
     [super readHandler:characteristic];
     
-    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicScratch1])
+    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicSerialPassThrough])
     {
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicScratch1];
-        [self handleScratch1:characteristic];
+        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicSerialPassThrough];
+        [self handleSerial:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelDefault])
     {
@@ -115,9 +115,9 @@ __weak NSTimer* _readCharacteristicsTimer;
     
 }
 
--(void)handleScratch1: (CBCharacteristic*)characteristic
+-(void)handleSerial: (CBCharacteristic*)characteristic
 {
-    if (characteristic.value.length != 2)
+    if (characteristic.value.length != 20)
     {
         //DLog(@"handleElapsedTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
         return;
@@ -126,6 +126,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     NSData *data = characteristic.value;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
+    NSLog(@"serial data %@", data);
 //        uint16_t raw = OSReadBigInt16(bytes, 0);
 //        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
     
@@ -139,7 +140,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     [super handleDiscoverCharacteristics:characteristics];
     
     self.initialCharacteristicValuesRead = NO;
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicScratch1];
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicSerialPassThrough];
     NSLog(@"=======================================================================");
   //  NSLog(@"SERVICE %@", [service.UUID UUIDString]);
     
@@ -156,7 +157,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
             if  (
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicScratch1] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicSerialPassThrough] ||
                  [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelDefault]
                  )
             {
