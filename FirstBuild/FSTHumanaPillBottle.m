@@ -117,17 +117,18 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleSerial: (CBCharacteristic*)characteristic
 {
-    if (characteristic.value.length != 20)
+    if (characteristic.value.length != 8)
     {
         //DLog(@"handleElapsedTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
         return;
     }
-    
-    NSData *data = characteristic.value;
-    Byte bytes[characteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.value.length];
-    NSLog(@"serial data %@", data);
-//        uint16_t raw = OSReadBigInt16(bytes, 0);
+
+    //using BlueBean data layer.. see GATT_Serial_Message.m in Bean-iOS-OSX-SDK
+    NSData* payload = [characteristic.value subdataWithRange: NSMakeRange (2, [characteristic.value length]-4)];
+
+    //3f = all digital pins HIGH
+    //3d = D1 is off 
+    NSLog(@"serial data %@", payload);
 //        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
     
 }
