@@ -14,14 +14,14 @@
 NSString * const FSTHumanaPillBottleBatteryLevelChangedNotification         = @"FSTHumanaPillBottleBatteryLevelChangedNotification";
 
 
+NSTimeInterval _buttonDownStartTime;
+
 //Blue Bean Characteristics
 //TODO: move standard characteristics to BLE base object
 NSString * const FSTCharacteristicSerialPassThrough       = @"A495FF11-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
 NSString * const FSTCharacteristicBatteryLevelDefault     = @"2A19"; //read,notify
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-
-__weak NSTimer* _readCharacteristicsTimer;
 
 #pragma mark - Allocation
 
@@ -31,6 +31,8 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     if (self)
     {
+        self.needsRxRefill = NO;
+        _buttonDownStartTime = 0;
         // booleans for all the required characteristics, tell us whether or not the characteristic loaded
         requiredCharacteristics = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[
             [NSNumber alloc] initWithBool:0], FSTCharacteristicSerialPassThrough,
@@ -39,12 +41,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     return self;
 }
-
--(void)dealloc
-{
-    [_readCharacteristicsTimer invalidate];
-}
-
 
 #pragma mark - Read Handlers
 
@@ -127,10 +123,28 @@ __weak NSTimer* _readCharacteristicsTimer;
     NSData* payload = [characteristic.value subdataWithRange: NSMakeRange (2, [characteristic.value length]-4)];
 
     //3f = all digital pins HIGH
-    //3d = D1 is off 
-    NSLog(@"serial data %@", payload);
-//        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
+    //3d = D1 is off
+    Byte bytes[payload.length] ;
+    [payload getBytes:bytes length:payload.length];
     
+    //hacky hacky
+    if (bytes[3] == 0x3f)
+    {
+        NSLog(@"button down");
+        _buttonDownStartTime = [NSDate timeIntervalSinceReferenceDate];
+    }
+    else  if (bytes[3] == 0x3d)
+    {
+        NSLog(@"button up");
+        NSTimeInterval _buttonUpTime = [NSDate timeIntervalSinceReferenceDate];
+        if (_buttonUpTime - _buttonDownStartTime > 3 && _buttonDownStartTime != 0)
+        {
+            NSLog(@"button up GREATER THAN 3 second");
+            self.needsRxRefill = !self.needsRxRefill;
+            [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceEssentialDataChangedNotification  object:self];
+        }
+        _buttonDownStartTime = 0;
+    }
 }
 
 

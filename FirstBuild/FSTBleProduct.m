@@ -12,7 +12,9 @@
 
 NSString * const FSTDeviceReadyNotification             = @"FSTDeviceReadyNotification";
 NSString * const FSTDeviceLoadProgressUpdated           = @"FSTDeviceLoadProgressUpdated";
+NSString * const FSTDeviceEssentialDataChangedNotification       = @"FSTDeviceEssentialDataChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification     = @"FSTBatteryLevelChangedNotification";
+
 
 - (instancetype)init
 {
@@ -34,6 +36,11 @@ NSString * const FSTBatteryLevelChangedNotification     = @"FSTBatteryLevelChang
 - (void) notifyDeviceLoadProgressUpdated
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceLoadProgressUpdated  object:self.peripheral];
+}
+
+- (void) notifyDeviceEssentialDataChanged
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceEssentialDataChangedNotification  object:self.peripheral];
 }
 
 #pragma mark - Stub Interface Selectors

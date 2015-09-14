@@ -13,6 +13,7 @@
 
 extern NSString * const FSTDeviceReadyNotification;
 extern NSString * const FSTDeviceLoadProgressUpdated;
+extern NSString * const FSTDeviceEssentialDataChangedNotification;
 extern NSString * const FSTBatteryLevelChangedNotification;
 
 @property (strong,nonatomic) CBPeripheral* peripheral;
@@ -24,6 +25,7 @@ extern NSString * const FSTBatteryLevelChangedNotification;
 
 - (void) notifyDeviceReady;
 - (void) notifyDeviceLoadProgressUpdated;
+- (void) notifyDeviceEssentialDataChanged;
 - (void) writeHandler: (CBCharacteristic*)characteristic;
 - (void) readHandler: (CBCharacteristic*)characteristic;
 - (void) handleDiscoverCharacteristics: (NSArray*)characteristics;

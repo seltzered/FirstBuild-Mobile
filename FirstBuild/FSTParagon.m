@@ -522,6 +522,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     if (self.cookMode != currentCookMode)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookingModeChangedNotification object:self];
+        [self notifyDeviceEssentialDataChanged];
         
         //now if the cooking mode has changed to off lets reset the values by
         //writing them to the paragon

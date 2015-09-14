@@ -9,4 +9,5 @@
 #import "FSTBleProduct.h"
 
 @interface FSTHumanaPillBottle : FSTBleProduct
+@property (atomic) BOOL needsRxRefill;
 @end

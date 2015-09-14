@@ -39,7 +39,7 @@ NSObject* _connectedToBleObserver;
 NSObject* _deviceReadyObserver;
 NSObject* _newDeviceBoundObserver;
 NSObject* _deviceRenamedObserver;
-NSObject* _cookModeChangedObserver;
+NSObject* _deviceEssentialDataChangedObserver;
 NSObject* _deviceDisconnectedObserver;
 NSObject* _deviceBatteryChangedObserver;
 NSObject* _deviceConnectedObserver;
@@ -72,7 +72,7 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceBatteryChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceLoadProgressUpdated];
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceEssentialDataChangedObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -149,7 +149,7 @@ NSIndexPath *_indexPathForDeletion;
     
     
     //cook mode changed on something, reload the data
-    _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
+    _deviceEssentialDataChangedObserver = [center addObserverForName:FSTDeviceEssentialDataChangedNotification
                                                    object:nil
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
@@ -351,7 +351,17 @@ NSIndexPath *_indexPathForDeletion;
         productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[bottle.batteryLevel integerValue]];
         productCell.batteryView.batteryLevel = [bottle.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
-        productCell.statusLabel.text = @"No Rx Needed";
+        
+        
+        if (bottle.needsRxRefill == YES)
+        {
+             productCell.statusLabel.text = @"Rx Needed!";
+        }
+        else
+        {
+             productCell.statusLabel.text = @"No Rx Needed";
+        }
+       
         if (product.online)
         {
             if (product.loading)
