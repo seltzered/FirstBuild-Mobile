@@ -36,6 +36,8 @@ typedef enum {
     
 } ParagonCookMode;
 
+extern NSString * const FSTServiceParagon ;
+
 extern NSString * const FSTActualTemperatureChangedNotification;
 extern NSString * const FSTBurnerModeChangedNotification;
 extern NSString * const FSTCookingModeChangedNotification;

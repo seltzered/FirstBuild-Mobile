@@ -33,6 +33,9 @@
     
     DLog(@"%@", [UIFont fontNamesForFamilyName:@"PT Sans Narrow"]);
     
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
     
    //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"ble-devices"];
     

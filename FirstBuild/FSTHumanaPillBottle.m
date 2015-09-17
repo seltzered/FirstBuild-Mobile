@@ -142,6 +142,21 @@ NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with bo
             NSLog(@"button up GREATER THAN 3 second");
             self.needsRxRefill = !self.needsRxRefill;
             [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceEssentialDataChangedNotification  object:self];
+            
+            
+            
+            ///
+            UILocalNotification* local = [[UILocalNotification alloc]init];
+            if (local)
+            {
+                local.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+                local.alertBody = @"Refill Status Changed";
+                local.timeZone = [NSTimeZone defaultTimeZone];
+                [[UIApplication sharedApplication] scheduleLocalNotification:local];
+                
+            }
+            /////
+            
         }
         _buttonDownStartTime = 0;
     }
