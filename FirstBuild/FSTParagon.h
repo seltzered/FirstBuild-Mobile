@@ -36,6 +36,14 @@ typedef enum {
     
 } ParagonCookMode;
 
+typedef enum {
+    FSTParagonCookStateOff = 0,
+    FSTParagonCookStateReachingTemperature = 1,
+    FSTParagonCookStateReady = 2,
+    FSTParagonCookStateCooking = 3,
+    FSTParagonCookStateDone = 4
+} ParagonCookState;
+
 extern NSString * const FSTServiceParagon ;
 
 extern NSString * const FSTActualTemperatureChangedNotification;
@@ -46,7 +54,8 @@ extern NSString * const FSTElapsedTimeChangedNotification;
 extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
 extern NSString * const FSTElapsedTimeSetNotification;
-extern NSString * const FSTTargetTemperatureSetNotification;
+extern NSString * const FSTCookConfigurationSetNotification;
+//extern NSString * const FSTTargetTemperatureSetNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
@@ -54,10 +63,10 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 @property (nonatomic, strong) NSNumber* recipeId;
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;
-@property (nonatomic, strong) NSArray* burners;
 
+@property (atomic) ParagonCookState cookState;
+@property (nonatomic, strong) NSNumber* remainingHoldTime;
 
--(void)startHeatingWithStage: (FSTParagonCookingStage*)stage;
 -(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
 -(void)sendRecipeToCooktop: (FSTRecipe*)recipe;
 

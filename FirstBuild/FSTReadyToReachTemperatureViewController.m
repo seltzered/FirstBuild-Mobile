@@ -33,12 +33,12 @@ NSObject* _cookModeChangedObserver;
                                                       object:weakSelf.currentParagon
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
-   {
+    {
        if(weakSelf.currentParagon.cookMode != FSTParagonCookingStateOff)
        {
            [weakSelf performSegueWithIdentifier:@"segueCooking" sender:weakSelf];
        }
-   }];
+    }];
     self.navigationItem.hidesBackButton = YES;
     // remove the back button
     NSMutableArray* pushImages = [[NSMutableArray alloc] init];
@@ -56,9 +56,6 @@ NSObject* _cookModeChangedObserver;
     [self.pushButtonImageView setAnimationImages:pushImages]; // assign all the frames
     [self.pushButtonImageView setAnimationDuration:2.0];
     [self.pushButtonImageView startAnimating];
-    
-    
-        
 }
 
 -(void)removeObservers

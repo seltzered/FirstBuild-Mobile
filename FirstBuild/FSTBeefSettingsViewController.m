@@ -28,7 +28,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
     
-    NSObject* _temperatureSetObserver;
+    NSObject* _cookConfigurationSetObserver;
 
 }
 
@@ -55,7 +55,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     __weak typeof(self) weakSelf = self;
     
-    _temperatureSetObserver = [center addObserverForName:FSTTargetTemperatureSetNotification
+    _cookConfigurationSetObserver = [center addObserverForName:FSTCookConfigurationSetNotification
                                                   object:weakSelf.currentParagon
                                                    queue:nil
                                               usingBlock:^(NSNotification *notification)
@@ -71,7 +71,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
 - (void)removeObservers
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureSetObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookConfigurationSetObserver];
 }
 
 
@@ -146,8 +146,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
     //once the temperature is confirmed to be set then it will segue above because
-    [self.currentParagon startHeatingWithStage:stage];
-    
+    [self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe];    
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -37,6 +37,7 @@ typedef enum {
     
 } GECooktopParagonCookMode;
 
+
 extern NSString * const FSTActualTemperatureChangedNotification;
 extern NSString * const FSTBurnerModeChangedNotification;
 extern NSString * const FSTCookingModeChangedNotification;
@@ -51,7 +52,7 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 @property (nonatomic, strong) NSString* modelNumber;
 
 @property (nonatomic, strong) NSNumber* recipeId;
-@property (atomic) ParagonBurnerMode burnerMode;
+@property (atomic) GECooktopBurnerMode burnerMode;
 @property (atomic) GECooktopParagonCookMode cookMode;
 @property (nonatomic, strong) NSArray* burners;
 

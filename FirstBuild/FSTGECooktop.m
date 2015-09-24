@@ -21,7 +21,7 @@
 //NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
 //NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
 //NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
-//NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
+NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
 
 //app info service
 NSString * const FSTGECooktopServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
@@ -63,7 +63,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         //state of the cooking as reported by the cooktop
         //TODO: create a new recipe based on the actual recipe
         self.recipeId = nil;
-        self.session = [[FSTParagonCookingStage alloc] init];
+        self.session = [[FSTParagonCookingSession alloc] init];
         self.session.activeRecipe = nil;
         
         //forcibly set the toBe cooking method to nil since we are just creating the paragon
@@ -434,17 +434,17 @@ __weak NSTimer* _readCharacteristicsTimer;
         //figure out what mode the burner is
         if ((bytes[burner] & SOUS_VIDE_ON_OR_OFF_MASK) != SOUS_VIDE_ON_OR_OFF_MASK)
         {
-            currentBurner.burnerMode = kPARAGON_OFF;
+            currentBurner.geCooktopBurnerMode = kGECOOKTOP_OFF;
         }
         else
         {
             if((bytes[burner] & BURNER_PREHEAT_MASK) == BURNER_PREHEAT_MASK)
             {
-                currentBurner.burnerMode = kPARAGON_PRECISION_REACHING_TEMPERATURE;
+                currentBurner.geCooktopBurnerMode = kGECOOKTOP_PRECISION_REACHING_TEMPERATURE;
             }
             else
             {
-                currentBurner.burnerMode = kPARAGON_PRECISION_HEATING;
+                currentBurner.geCooktopBurnerMode = kGECOOKTOP_PRECISION_HEATING;
             }
         }
     }
@@ -452,14 +452,14 @@ __weak NSTimer* _readCharacteristicsTimer;
     //now go through each of the burners and see if we can find one that is not off
     //in order to set the overall burner mode (self.burnerMode)
     for (FSTBurner* burner in self.burners) {
-        if (burner.burnerMode != kPARAGON_OFF )
+        if (burner.geCooktopBurnerMode != kGECOOKTOP_OFF )
         {
-            self.burnerMode = burner.burnerMode;
+            self.burnerMode = burner.geCooktopBurnerMode;
             break;
         }
         else
         {
-            self.burnerMode = kPARAGON_OFF;
+            self.burnerMode = kGECOOKTOP_OFF;
         }
     }
     
@@ -474,16 +474,16 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     GECooktopParagonCookMode currentCookMode = self.cookMode;
     
-    if (self.burnerMode == kPARAGON_OFF)
+    if (self.burnerMode == kGECOOKTOP_OFF)
     {
         self.cookMode = FSTGECooktopCookingStateOff;
     }
-    else if (self.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
+    else if (self.burnerMode == kGECOOKTOP_PRECISION_REACHING_TEMPERATURE)
     {
         self.cookMode = FSTGECooktopCookingStatePrecisionCookingReachingTemperature;
         // TODO: this might cause the problem with precision cooking without time
     }
-    else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
+    else if (self.burnerMode == kGECOOKTOP_PRECISION_HEATING)
     {
         if ([self.session.currentStageCookTimeElapsed doubleValue] > [self.session.currentStage.cookTimeMaximum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
         {

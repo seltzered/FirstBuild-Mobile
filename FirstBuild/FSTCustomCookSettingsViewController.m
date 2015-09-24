@@ -16,7 +16,7 @@
 
 @implementation FSTCustomCookSettingsViewController
 {
-    NSObject *_temperatureSetObserver;
+    NSObject *_cookConfigurationSetObserver;
     
     FSTStagePickerManager* pickerManager;
 }
@@ -60,7 +60,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (void)removeObservers
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureSetObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookConfigurationSetObserver];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -79,7 +79,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     __weak typeof(self) weakSelf = self;
     
-    _temperatureSetObserver = [center addObserverForName:FSTTargetTemperatureSetNotification
+    _cookConfigurationSetObserver = [center addObserverForName:FSTCookConfigurationSetNotification
                                                   object:weakSelf.currentParagon
                                                    queue:nil
                                               usingBlock:^(NSNotification *notification)
