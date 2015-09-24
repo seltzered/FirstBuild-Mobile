@@ -9,9 +9,9 @@
 #import "AppDelegate.h"
 #import <Firebase/Firebase.h>
 #import <RKMIMETypes.h>
-#import <GooglePlus/GooglePlus.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+//#import <GooglePlus/GooglePlus.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface AppDelegate ()
 
@@ -38,9 +38,11 @@
     }
     
    //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"ble-devices"];
+    return true;
     
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                    didFinishLaunchingWithOptions:launchOptions];
+    //disabled facebook sdk
+//    return [[FBSDKApplicationDelegate sharedInstance] application:application
+//                                    didFinishLaunchingWithOptions:launchOptions];
     
 }
 
@@ -48,19 +50,21 @@
 - (BOOL)application: (UIApplication *)application
             openURL: (NSURL *)url
   sourceApplication: (NSString *)sourceApplication
-         annotation: (id)annotation {
-    NSInteger facebookPrefixLocation =[[url absoluteString] rangeOfString:@"fb"].location;
-    if (facebookPrefixLocation == NSNotFound)
-    {
-       return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
-    }
-    else
-    {
-        return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                              openURL:url
-                                                    sourceApplication:sourceApplication
-                                                           annotation:annotation];
-    }
+         annotation: (id)annotation
+{
+    return true;
+//    NSInteger facebookPrefixLocation =[[url absoluteString] rangeOfString:@"fb"].location;
+//    if (facebookPrefixLocation == NSNotFound)
+//    {
+//       return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+//    }
+//    else
+//    {
+//        return [[FBSDKApplicationDelegate sharedInstance] application:application
+//                                                              openURL:url
+//                                                    sourceApplication:sourceApplication
+//                                                           annotation:annotation];
+//    }
 
 }
 
@@ -79,7 +83,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-     [FBSDKAppEvents activateApp];
+     //[FBSDKAppEvents activateApp];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

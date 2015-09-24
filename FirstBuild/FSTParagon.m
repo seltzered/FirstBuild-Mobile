@@ -48,8 +48,6 @@ NSString * const FSTCharacteristicCookConfiguration     = @"E0BA615A-A869-1C9D-B
 
 NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
 
-
-
 //TODO put sizes for the characteristics here and remove magic numbers below
 
 
@@ -103,6 +101,16 @@ __weak NSTimer* _readCharacteristicsTimer;
 }
 
 #pragma mark - External Interface Selectors
+
+-(void)sendRecipeToCooktop: (FSTRecipe*)recipe
+{
+    if (!recipe.paragonCookingStages)
+    {
+        DLog(@"recipe does not contain any stages");
+        return;
+    }
+    [self writeCookConfiguration:recipe];
+}
 
 -(void)startHeatingWithStage: (FSTParagonCookingStage*)stage
 {
@@ -160,7 +168,54 @@ __weak NSTimer* _readCharacteristicsTimer;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
     {
         DLog(@"successfully wrote FSTCharacteristicCookConfiguration");
-        //[self handleTargetTemperatureWritten];
+        [self handleCookConfigurationWritten];
+    }
+}
+
+-(void)writeCookConfiguration: (FSTRecipe*)recipe
+{
+    //cook configuration is up to 5 stages
+    //each stage is 8 bytes for a total of 40 bytes
+    //  power - 1 byte (0-10)
+    //  min hold time - 2 bytes
+    //  max hold time - 2 bytes
+    //  target temperature - 2 bytes
+    //  automatic transition to next stage? - 1 byte
+    
+    static const uint8_t NUMBER_OF_STAGES = 5;
+    static const uint8_t POS_POWER = 0;
+    static const uint8_t POS_MIN_HOLD_TIME = POS_POWER + 1;
+    static const uint8_t POS_MAX_HOLD_TIME = POS_MIN_HOLD_TIME + 2;
+    static const uint8_t POS_TARGET_TEMP = POS_MAX_HOLD_TIME + 2;
+    static const uint8_t POS_AUTO_TRANSITION = POS_TARGET_TEMP + 2;
+    static const uint8_t STAGE_SIZE = 8;
+
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
+    
+    if (recipe.paragonCookingStages.count > NUMBER_OF_STAGES)
+    {
+        DLog(@"too many stages to write to cooktop");
+        return;
+    }
+    
+    Byte bytes[NUMBER_OF_STAGES * STAGE_SIZE];
+    memset(bytes, 0, sizeof(bytes));
+    
+    for (uint8_t i=0; i < recipe.paragonCookingStages.count; i++)
+    {
+        FSTParagonCookingStage* stage = recipe.paragonCookingStages[i];
+        uint8_t pos = i * 8;
+        bytes[pos+POS_POWER] = [stage.maxPowerLevel unsignedCharValue];
+        OSWriteBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],   0, [stage.cookTimeMinimum unsignedShortValue]);
+        OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, [stage.cookTimeMaximum unsignedShortValue]);
+        OSWriteBigInt16(&bytes[pos+POS_TARGET_TEMP],     0, [stage.targetTemperature unsignedShortValue]);
+        bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue];
+    }
+    
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
 }
 
@@ -182,28 +237,34 @@ __weak NSTimer* _readCharacteristicsTimer;
 //    }
 }
 
+-(void)writeCookTimesWithMinimumCooktime: (NSNumber*)minimumCooktime havingMaximumCooktime: (NSNumber*)maximumCooktime
+{
+    //    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
+    //
+    //    if (characteristic && minimumCooktime && maximumCooktime)
+    //    {
+    //        Byte bytes[8] = {0x00};
+    //        OSWriteBigInt16(bytes, 0, [minimumCooktime unsignedIntegerValue]);
+    //        OSWriteBigInt16(bytes, 2, [maximumCooktime unsignedIntegerValue]);
+    //        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
+    //        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    //    }
+    //    else
+    //    {
+    //        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
+    //    }
+}
+
 -(void)handleTargetTemperatureWritten
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureSetNotification object:self];
 }
 
--(void)writeCookTimesWithMinimumCooktime: (NSNumber*)minimumCooktime havingMaximumCooktime: (NSNumber*)maximumCooktime
+-(void)handleCookConfigurationWritten
 {
-//    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
-//    
-//    if (characteristic && minimumCooktime && maximumCooktime)
-//    {
-//        Byte bytes[8] = {0x00};
-//        OSWriteBigInt16(bytes, 0, [minimumCooktime unsignedIntegerValue]);
-//        OSWriteBigInt16(bytes, 2, [maximumCooktime unsignedIntegerValue]);
-//        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
-//        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-//    }
-//    else
-//    {
-//        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
-//    }
+    
 }
+
 
 -(void)handleCooktimeWritten
 {

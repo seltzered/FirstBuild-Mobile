@@ -59,6 +59,8 @@ extern NSString * const FSTTargetTemperatureSetNotification;
 
 -(void)startHeatingWithStage: (FSTParagonCookingStage*)stage;
 -(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
+-(void)sendRecipeToCooktop: (FSTRecipe*)recipe;
+
 //-(void)moveNextStage;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;

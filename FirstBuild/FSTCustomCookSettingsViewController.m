@@ -153,8 +153,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (IBAction)continueTapGesture:(id)sender {
     
-    //TODO progress indicator?
-    //TODO grey out the button?
+    //TODO: progress indicator?
+    //TODO: grey out the button?
     self.continueTapGesturerRecognizer.enabled = NO;
     
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
@@ -165,7 +165,16 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.cookingLabel = @"Custom Profile";
     //stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
-    [self.currentParagon startHeatingWithStage:stage];
+    ////TODO: HACK TEMP
+    FSTParagonCookingStage* stage1 = [self.currentParagon.session.toBeRecipe addStage];
+    stage1.maxPowerLevel = [NSNumber numberWithInt:7];
+    stage1.cookTimeMinimum = [NSNumber numberWithInt:20];
+    stage1.cookTimeMaximum = [NSNumber numberWithInt:4000];
+    stage1.targetTemperature = [NSNumber numberWithInt:350];
+    stage1.automaticTransition = [NSNumber numberWithBool:YES];
+    ////HACK TEMP
+
+    [self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe];
 }
 
 - (void)dealloc
