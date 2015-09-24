@@ -111,6 +111,7 @@ NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with bo
     
 }
 
+
 -(void)handleSerial: (CBCharacteristic*)characteristic
 {
     if (characteristic.value.length != 8)
@@ -127,30 +128,23 @@ NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with bo
     Byte bytes[payload.length] ;
     [payload getBytes:bytes length:payload.length];
     
-    //hacky hacky
     if (bytes[3] == 0x3f)
     {
-        NSLog(@"button down");
-        _buttonDownStartTime = [NSDate timeIntervalSinceReferenceDate];
-    }
-    else  if (bytes[3] == 0x3d)
-    {
+        //all of the inputs are high
         NSLog(@"button up");
         NSTimeInterval _buttonUpTime = [NSDate timeIntervalSinceReferenceDate];
-        if (_buttonUpTime - _buttonDownStartTime > 3 && _buttonDownStartTime != 0)
+        if (_buttonUpTime - _buttonDownStartTime > 1.5 && _buttonDownStartTime != 0)
         {
             NSLog(@"button up GREATER THAN 3 second");
             self.needsRxRefill = !self.needsRxRefill;
             [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceEssentialDataChangedNotification  object:self];
-            
-            
             
             ///
             UILocalNotification* local = [[UILocalNotification alloc]init];
             if (local)
             {
                 local.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
-                local.alertBody = @"Refill Status Changed";
+                local.alertBody = self.needsRxRefill?@"Refill request succeeded" : @"Refill request cancelled";
                 local.timeZone = [NSTimeZone defaultTimeZone];
                 [[UIApplication sharedApplication] scheduleLocalNotification:local];
                 
@@ -159,6 +153,14 @@ NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with bo
             
         }
         _buttonDownStartTime = 0;
+       
+    }
+    else
+    {
+        //one of the inputs is low
+        NSLog(@"button down");
+        
+        _buttonDownStartTime = [NSDate timeIntervalSinceReferenceDate];
     }
 }
 

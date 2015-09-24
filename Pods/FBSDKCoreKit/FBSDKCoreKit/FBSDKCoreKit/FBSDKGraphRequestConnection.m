@@ -176,7 +176,6 @@ typedef NS_ENUM(NSUInteger, FBSDKGraphRequestConnectionState)
 
   self.state = kStateStarted;
 
-  [request setValue:[FBSDKGraphRequestConnection userAgent] forHTTPHeaderField:@"User-Agent"];
   [self logRequest:request bodyLength:0 bodyLogger:nil attachmentLogger:nil];
   _requestStartTime = [FBSDKInternalUtility currentTimeInMilliseconds];
 
@@ -346,7 +345,7 @@ typedef NS_ENUM(NSUInteger, FBSDKGraphRequestConnectionState)
     if ([request.HTTPMethod.uppercaseString isEqualToString:@"GET"] &&
         [self _shouldWarnOnMissingFieldsParam:request] &&
         !request.parameters[@"fields"] &&
-        ![request.graphPath containsString:@"fields="]) {
+        [request.graphPath rangeOfString:@"fields="].location == NSNotFound) {
       [FBSDKLogger singleShotLogEntry:FBSDKLoggingBehaviorDeveloperErrors
                          formatString:@"starting with Graph API v2.4, GET requests for /%@ should contain an explicit \"fields\" parameter", request.graphPath];
     }
@@ -430,6 +429,7 @@ typedef NS_ENUM(NSUInteger, FBSDKGraphRequestConnectionState)
 
   [request setValue:[FBSDKGraphRequestConnection userAgent] forHTTPHeaderField:@"User-Agent"];
   [request setValue:[FBSDKGraphRequestBody mimeContentType] forHTTPHeaderField:@"Content-Type"];
+  [request setHTTPShouldHandleCookies:NO];
 
   [self logRequest:request bodyLength:bodyLength bodyLogger:bodyLogger attachmentLogger:attachmentLogger];
 

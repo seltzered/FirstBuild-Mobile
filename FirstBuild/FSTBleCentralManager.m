@@ -308,6 +308,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 }
 
+
 #pragma mark - Peripheral Delegate - temporary
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
     DLog(@"peripheralManagerDidUpdateState : %@", peripheral);
