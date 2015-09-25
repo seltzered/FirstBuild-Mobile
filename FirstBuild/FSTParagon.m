@@ -28,6 +28,8 @@ NSString * const FSTTargetTemperatureChangedNotification    = @"FSTTargetTempera
 NSString * const FSTBurnerModeChangedNotification           = @"FSTBurnerModeChangedNotification";
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 NSString * const FSTCookConfigurationSetNotification        = @"FSTCookConfigurationSetNotification";
+NSString * const FSTHoldTimerSetNotification                = @"FSTHoldTimerSetNotification";
+
 
 NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
 NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
@@ -122,6 +124,11 @@ __weak NSTimer* _readCharacteristicsTimer;
     [self writeCookConfiguration:recipe];
 }
 
+-(void)startTimerForCurrentStage
+{
+    [self writeStartHoldTimer];
+}
+
 -(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage
 {
     if (!stage)
@@ -157,7 +164,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicStartHoldTimer])
     {
         DLog(@"successfully wrote FSTCharacteristicStartHoldTimer");
-        //[self handleTargetTemperatureWritten];
+        [self handleHoldTimerWritten];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
     {
@@ -169,6 +176,20 @@ __weak NSTimer* _readCharacteristicsTimer;
         DLog(@"successfully wrote FSTCharacteristicCookConfiguration");
         [self handleCookConfigurationWritten];
     }
+}
+
+-(void)writeStartHoldTimer
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicStartHoldTimer];
+
+    Byte bytes[1];
+    bytes[0] = 0x01;
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+          
 }
 
 -(void)writeCookConfiguration: (FSTRecipe*)recipe
@@ -252,6 +273,11 @@ __weak NSTimer* _readCharacteristicsTimer;
     //    {
     //        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
     //    }
+}
+
+-(void)handleHoldTimerWritten
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTHoldTimerSetNotification object:self];
 }
 
 -(void)handleCookConfigurationWritten
@@ -611,6 +637,10 @@ __weak NSTimer* _readCharacteristicsTimer;
     else if(_cookState == FSTParagonCookStateReady)
     {
         self.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
+    }
+    else if(_cookState == FSTParagonCookStateCooking)
+    {
+        self.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
     }
     
     //only notify if we have changed cook modes

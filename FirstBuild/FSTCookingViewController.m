@@ -36,7 +36,8 @@
     NSObject* _timeElapsedChangedObserver;
     NSObject* _cookModeChangedObserver;
     NSObject* _targetTemperatureChangedObserver;
-    NSObject* _cookTimeChangedObserver;
+    //NSObject* _cookTimeChangedObserver;
+    NSObject* _holdTimerSetObserver;
     BOOL popped_out;
 }
 
@@ -76,10 +77,17 @@
     }];
     
     //cook time
-    _cookTimeChangedObserver = [center addObserverForName:FSTCookTimeSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
+    _holdTimerSetObserver = [center addObserverForName:FSTHoldTimerSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
     {
         [weakSelf.delegate targetTimeChanged:[_currentCookingStage.cookTimeMinimum doubleValue] withMax:[_currentCookingStage.cookTimeMaximum doubleValue]];
     }];
+    
+    //TODO: GE Cooktop
+    //    _cookTimeChangedObserver = [center addObserverForName:FSTCookTimeSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
+    //    {
+    //        [weakSelf.delegate targetTimeChanged:[_currentCookingStage.cookTimeMinimum doubleValue] withMax:[_currentCookingStage.cookTimeMaximum doubleValue]];
+    //    }];
+    
     
     //cook mode
     _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
@@ -220,7 +228,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookTimeChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_holdTimerSetObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_targetTemperatureChangedObserver];
 }
 
@@ -231,7 +239,8 @@
 
 - (IBAction)continueButtonTap:(id)sender {
     
-    [self.currentParagon setCookingTimesWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
+    [self.currentParagon startTimerForCurrentStage];
+    //TODO: GE COOKTOP[self.currentParagon setCookingTimesWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
     
     //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode
     self.continueButton.userInteractionEnabled = NO;

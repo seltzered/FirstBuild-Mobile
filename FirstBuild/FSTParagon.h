@@ -26,6 +26,8 @@ extern NSString * const FSTCookTimeSetNotification ;
 extern NSString * const FSTTargetTemperatureChangedNotification ;
 extern NSString * const FSTElapsedTimeSetNotification;
 extern NSString * const FSTCookConfigurationSetNotification;
+extern NSString * const FSTHoldTimerSetNotification;
+
 //extern NSString * const FSTTargetTemperatureSetNotification;
 
 @property (nonatomic, strong) NSString* serialNumber;
@@ -37,7 +39,7 @@ extern NSString * const FSTCookConfigurationSetNotification;
 
 @property (nonatomic, strong) NSNumber* remainingHoldTime;
 
--(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
+-(void)startTimerForCurrentStage;
 -(void)sendRecipeToCooktop: (FSTRecipe*)recipe;
 
 //-(void)moveNextStage;
