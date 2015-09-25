@@ -34,7 +34,7 @@ NSObject* _cookModeChangedObserver;
                                                        queue:nil
                                                   usingBlock:^(NSNotification *notification)
     {
-       if(weakSelf.currentParagon.cookMode != FSTParagonCookingStateOff)
+       if(weakSelf.currentParagon.cookMode != FSTCookingStateOff)
        {
            [weakSelf performSegueWithIdentifier:@"segueCooking" sender:weakSelf];
        }

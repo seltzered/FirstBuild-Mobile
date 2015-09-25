@@ -11,38 +11,9 @@
 #import "FSTParagonCookingSession.h"
 #import "FSTRecipe.h"
 #import "FSTBurner.h"
+#import "FSTPrecisionCooking.h"
 
 @interface FSTParagon : FSTBleProduct 
-
-typedef enum {
-    
-    //off
-    FSTParagonCookingStateOff = 0,
-    
-    //precision cooking
-    FSTParagonCookingStatePrecisionCookingReachingTemperature = 1,
-    FSTParagonCookingStatePrecisionCookingTemperatureReached = 2,
-    FSTParagonCookingStatePrecisionCookingReachingMinTime = 3,
-    FSTParagonCookingStatePrecisionCookingReachingMaxTime = 4,
-    FSTParagonCookingStatePrecisionCookingPastMaxTime = 5,
-    FSTParagonCookingStatePrecisionCookingWithoutTime = 6,
-    
-    //direct cooking
-    FSTParagonCookingDirectCooking,
-    FSTParagonCookingDirectCookingWithTime,
-    
-    //unknown
-    FSTParagonCookingStateUnknown
-    
-} ParagonCookMode;
-
-typedef enum {
-    FSTParagonCookStateOff = 0,
-    FSTParagonCookStateReachingTemperature = 1,
-    FSTParagonCookStateReady = 2,
-    FSTParagonCookStateCooking = 3,
-    FSTParagonCookStateDone = 4
-} ParagonCookState;
 
 extern NSString * const FSTServiceParagon ;
 
@@ -64,7 +35,6 @@ extern NSString * const FSTCookConfigurationSetNotification;
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;
 
-@property (atomic) ParagonCookState cookState;
 @property (nonatomic, strong) NSNumber* remainingHoldTime;
 
 -(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;

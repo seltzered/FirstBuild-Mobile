@@ -322,6 +322,7 @@
 		5B8C10881A39EC2A00F481E6 /* ProductAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ProductAddViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5B8C10891A39EC2A00F481E6 /* ProductAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ProductAddViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5B9879BF1BB4333100472130 /* BuildNotes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BuildNotes; sourceTree = "<group>"; };
+		5B9879C11BB5716600472130 /* FSTPrecisionCooking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCooking.h; sourceTree = "<group>"; };
 		5B9925E41AE824BC00B337CB /* LedgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LedgeViewController.h; sourceTree = "<group>"; };
 		5B9925E51AE824BC00B337CB /* LedgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LedgeViewController.m; sourceTree = "<group>"; };
 		5B9925E71AE8251800B337CB /* FSTLedge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTLedge.h; sourceTree = "<group>"; };
@@ -778,7 +779,7 @@
 			isa = PBXGroup;
 			children = (
 				5BA064D41B8B4654002FCE59 /* recipes */,
-				5BA064D51B8B46B9002FCE59 /* paragon cooktop */,
+				5BA064D51B8B46B9002FCE59 /* cooktop */,
 				5B7338BE1B0F9CEA004C931E /* Session.h */,
 				5B7338BF1B0F9CEA004C931E /* Session.m */,
 				515CD89E1B7E16F50087F9C7 /* FSTStagePickerManager.h */,
@@ -997,9 +998,10 @@
 			name = recipes;
 			sourceTree = "<group>";
 		};
-		5BA064D51B8B46B9002FCE59 /* paragon cooktop */ = {
+		5BA064D51B8B46B9002FCE59 /* cooktop */ = {
 			isa = PBXGroup;
 			children = (
+				5B9879C11BB5716600472130 /* FSTPrecisionCooking.h */,
 				5B99DFC31AB1EB2D00247034 /* FSTParagon.h */,
 				5B99DFC41AB1EB2D00247034 /* FSTParagon.m */,
 				5B0817BB1BAB3771000437AC /* FSTGECooktop.h */,
@@ -1011,7 +1013,7 @@
 				5B9A6F4E1B50173F00BDD727 /* FSTBurner.h */,
 				5B9A6F4F1B50173F00BDD727 /* FSTBurner.m */,
 			);
-			name = "paragon cooktop";
+			name = cooktop;
 			sourceTree = "<group>";
 		};
 		5BA3A96F1B3470FA00E51C51 /* BLECommissioning */ = {

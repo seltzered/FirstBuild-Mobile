@@ -121,7 +121,7 @@
     NSString* stateIdentifier = nil;
     
     switch (weakSelf.currentParagon.cookMode) {
-        case FSTParagonCookingStatePrecisionCookingReachingTemperature:
+        case FSTCookingStatePrecisionCookingReachingTemperature:
             stateIdentifier = @"preheatingStateSegue";
             weakSelf.continueButton.hidden = YES;
             
@@ -138,33 +138,33 @@
                 weakSelf.stageBar.hidden = YES;
             }
             break;
-        case FSTParagonCookingStatePrecisionCookingTemperatureReached:
+        case FSTCookingStatePrecisionCookingTemperatureReached:
             stateIdentifier = @"preheatingReachedStateSegue";
             weakSelf.continueButton.userInteractionEnabled = YES;
             weakSelf.continueButton.hidden = NO; // this should be hidden otherwise. What happens after it is pressed?
             weakSelf.stageBar.hidden = NO;
             break;
-        case FSTParagonCookingStatePrecisionCookingReachingMinTime:
+        case FSTCookingStatePrecisionCookingReachingMinTime:
             stateIdentifier = @"reachingMinStateSegue";
             weakSelf.continueButton.hidden = YES;
             weakSelf.stageBar.hidden = NO;
             break;
-        case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
+        case FSTCookingStatePrecisionCookingReachingMaxTime:
             stateIdentifier = @"reachingMaxStateSegue";
             weakSelf.continueButton.hidden = YES;
             weakSelf.stageBar.hidden = NO;
             break;
-        case FSTParagonCookingStatePrecisionCookingPastMaxTime:
+        case FSTCookingStatePrecisionCookingPastMaxTime:
             stateIdentifier = @"pastMaxStateSegue";
             weakSelf.continueButton.hidden = YES;
             weakSelf.stageBar.hidden = NO;
             break;
-        case FSTParagonCookingStatePrecisionCookingWithoutTime:
+        case FSTCookingStatePrecisionCookingWithoutTime:
             stateIdentifier = @"withoutTimeStateSegue";
             weakSelf.continueButton.hidden = YES;
             weakSelf.stageBar.hidden = YES;
             break;
-        case FSTParagonCookingStateOff:
+        case FSTCookingStateOff:
             stateIdentifier = nil;
             weakSelf.stageBar.hidden = YES;
             [weakSelf.navigationController popToRootViewControllerAnimated:NO];

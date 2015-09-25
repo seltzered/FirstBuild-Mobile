@@ -12,12 +12,22 @@
 
 @implementation FSTParagon
 
+typedef enum {
+    FSTParagonCookStateOff = 0,
+    FSTParagonCookStateReachingTemperature = 1,
+    FSTParagonCookStateReady = 2,
+    FSTParagonCookStateCooking = 3,
+    FSTParagonCookStateDone = 4
+} ParagonCookState;
+
+ParagonCookState _cookState;
+
 //notifications
 NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
 NSString * const FSTTargetTemperatureChangedNotification    = @"FSTTargetTemperatureChangedNotification";
 NSString * const FSTBurnerModeChangedNotification           = @"FSTBurnerModeChangedNotification";
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
-NSString * const FSTCookConfigurationSetNotification    = @"FSTCookConfigurationSetNotification";
+NSString * const FSTCookConfigurationSetNotification        = @"FSTCookConfigurationSetNotification";
 
 NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
 NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
@@ -594,9 +604,13 @@ __weak NSTimer* _readCharacteristicsTimer;
 {
     ParagonCookMode currentCookMode = self.cookMode;
     
-    if (self.cookState == FSTParagonCookStateReachingTemperature)
+    if (_cookState == FSTParagonCookStateReachingTemperature)
     {
-        self.cookMode = FSTParagonCookingStatePrecisionCookingReachingTemperature;
+        self.cookMode = FSTCookingStatePrecisionCookingReachingTemperature;
+    }
+    else if(_cookState == FSTParagonCookStateReady)
+    {
+        self.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
     }
     
     //only notify if we have changed cook modes
@@ -607,7 +621,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 
         //now if the cooking mode has changed to off lets reset the values by
         //writing them to the paragon
-//        if (self.cookMode == FSTParagonCookingStateOff)
+//        if (self.cookMode == FSTCookingStateOff)
 //        {
 //            [self writeElapsedTime];
 //            [self writeCookTimesWithMinimumCooktime:[NSNumber numberWithInt:0] havingMaximumCooktime:[NSNumber numberWithInt:0]];
@@ -620,11 +634,11 @@ __weak NSTimer* _readCharacteristicsTimer;
 //    
 //    if (self.burnerMode == kPARAGON_OFF)
 //    {
-//        self.cookMode = FSTParagonCookingStateOff;
+//        self.cookMode = FSTCookingStateOff;
 //    }
 //    else if (self.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
 //    {
-//        self.cookMode = FSTParagonCookingStatePrecisionCookingReachingTemperature;
+//        self.cookMode = FSTCookingStatePrecisionCookingReachingTemperature;
 //        // TODO: this might cause the problem with precision cooking without time
 //    }
 //    else if (self.burnerMode == kPARAGON_PRECISION_HEATING)
@@ -632,32 +646,32 @@ __weak NSTimer* _readCharacteristicsTimer;
 //        if ([self.session.currentStageCookTimeElapsed doubleValue] > [self.session.currentStage.cookTimeMaximum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
 //        {
 //            //elapsed time is greater than the maximum time
-//            self.cookMode = FSTParagonCookingStatePrecisionCookingPastMaxTime;
+//            self.cookMode = FSTCookingStatePrecisionCookingPastMaxTime;
 //        }
 //        else if ([self.session.currentStageCookTimeElapsed doubleValue] >= [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
 //        {
 //            //elapsed time is greater than the minimum time, but less than or equal to the max time
 //            //and the cookTime is set
-//            self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMaxTime;
+//            self.cookMode = FSTCookingStatePrecisionCookingReachingMaxTime;
 //        }
 //        else if([self.session.currentStageCookTimeElapsed doubleValue] < [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
 //        {
 //            //elapsed time is less than the minimum time and the cook time is set
-//            self.cookMode = FSTParagonCookingStatePrecisionCookingReachingMinTime;
+//            self.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
 //        }
 //        else if (self.session.toBeRecipe)
 //        {
 //            //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
-//            self.cookMode = FSTParagonCookingStatePrecisionCookingTemperatureReached;
+//            self.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
 //        }
 //        else if([self.session.currentStage.cookTimeMinimum doubleValue] == 0 && !self.session.toBeRecipe)
 //        {
 //            //cook time not set
-//            self.cookMode = FSTParagonCookingStatePrecisionCookingWithoutTime;
+//            self.cookMode = FSTCookingStatePrecisionCookingWithoutTime;
 //        }
 //        else
 //        {
-//            self.cookMode = FSTParagonCookingStateUnknown;
+//            self.cookMode = FSTCookingStateUnknown;
 //            DLog(@"UNABLE TO DETERMINE COOK MODE");
 //        }
 //    }
@@ -670,7 +684,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 //        
 //        //now if the cooking mode has changed to off lets reset the values by
 //        //writing them to the paragon
-//        if (self.cookMode == FSTParagonCookingStateOff)
+//        if (self.cookMode == FSTCookingStateOff)
 //        {
 //            [self writeElapsedTime];
 //            [self writeCookTimesWithMinimumCooktime:[NSNumber numberWithInt:0] havingMaximumCooktime:[NSNumber numberWithInt:0]];

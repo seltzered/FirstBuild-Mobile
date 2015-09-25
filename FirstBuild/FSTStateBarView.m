@@ -117,17 +117,17 @@
     if (self.grayDots.count >= 1) {
         switch (self.circleState)
         {
-            case FSTParagonCookingStatePrecisionCookingReachingTemperature:
+            case FSTCookingStatePrecisionCookingReachingTemperature:
                 [self colorDotsForActiveStateNumber:0];
                 break;
-            case FSTParagonCookingStatePrecisionCookingTemperatureReached:
+            case FSTCookingStatePrecisionCookingTemperatureReached:
                 [self colorDotsForActiveStateNumber:1];
                 break;
-            case FSTParagonCookingStatePrecisionCookingReachingMinTime:
+            case FSTCookingStatePrecisionCookingReachingMinTime:
                 [self colorDotsForActiveStateNumber:2];
                 break;
-            case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
-            case FSTParagonCookingStatePrecisionCookingPastMaxTime:
+            case FSTCookingStatePrecisionCookingReachingMaxTime:
+            case FSTCookingStatePrecisionCookingPastMaxTime:
                 [self colorDotsForActiveStateNumber:3];
                 break;
             default:
