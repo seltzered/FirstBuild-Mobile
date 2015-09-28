@@ -32,6 +32,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   
     ((FSTCookingViewController*)self.parentViewController).delegate = segue.destinationViewController; // set the current delegate to this parent, allowing for communications around this view controller
 
     if (self.childViewControllers.count > 0) {

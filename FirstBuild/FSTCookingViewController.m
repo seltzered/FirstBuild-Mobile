@@ -30,7 +30,6 @@
 @end
 
 @implementation FSTCookingViewController
-
 {
     NSObject* _temperatureChangedObserver;
     NSObject* _timeElapsedChangedObserver;
@@ -38,6 +37,9 @@
     NSObject* _targetTemperatureChangedObserver;
     //NSObject* _cookTimeChangedObserver;
     NSObject* _holdTimerSetObserver;
+    NSObject* _currentCookStageChangedObserver;
+    NSObject* _cookConfigurationChangedObserver;
+    
     BOOL popped_out;
 }
 
@@ -52,6 +54,7 @@
     [self setupEventHandlers];
     
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
+    
 }
 
 
@@ -63,7 +66,7 @@
 -(void)setupEventHandlers
 {
     __weak typeof(self) weakSelf = self;
-    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
+//    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
@@ -76,11 +79,21 @@
        [weakSelf.delegate elapsedTimeChanged:[weakSelf.currentParagon.session.currentStageCookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
     }];
     
-    //cook time
+    //hold timer has started -- TODO: remove?
     _holdTimerSetObserver = [center addObserverForName:FSTHoldTimerSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
     {
-        [weakSelf.delegate targetTimeChanged:[_currentCookingStage.cookTimeMinimum doubleValue] withMax:[_currentCookingStage.cookTimeMaximum doubleValue]];
+        [weakSelf.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
     }];
+    
+    //cook stage changed, which contains all the information about the current session
+    _currentCookStageChangedObserver = [center addObserverForName:FSTCurrentCookStageChangedNotification object:weakSelf.currentParagon.session queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
+    }];
+    
+    _cookConfigurationChangedObserver = [center addObserverForName:FSTCookConfigurationChangedNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
+    }];
+
     
     //TODO: GE Cooktop
     //    _cookTimeChangedObserver = [center addObserverForName:FSTCookTimeSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
@@ -115,11 +128,10 @@
                                                              queue:nil
                                                         usingBlock:^(NSNotification *notification)
      {
-         NSNumber* targetTemperature = _currentCookingStage.targetTemperature;
+         NSNumber* targetTemperature = self.currentParagon.session.currentStage.targetTemperature;
          [weakSelf.delegate targetTemperatureChanged:[targetTemperature doubleValue]];
      }];
     
-    //TODO: handle stage change
 }
 
 -(void)transitionToCurrentCookMode
@@ -230,6 +242,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_holdTimerSetObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_targetTemperatureChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_currentCookStageChangedObserver];
 }
 
 - (void)dealloc

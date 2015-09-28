@@ -22,17 +22,18 @@ typedef enum {
 
 ParagonCookState _cookState;
 
-//notifications
+//notifications for when things change values
 NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
 NSString * const FSTTargetTemperatureChangedNotification    = @"FSTTargetTemperatureChangedNotification";
 NSString * const FSTBurnerModeChangedNotification           = @"FSTBurnerModeChangedNotification";
 NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
+NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
+NSString * const FSTCookConfigurationChangedNotification    = @"FSTCookConfigurationChangedNotification";
+
+//notifications for confirmations of values written
+NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
 NSString * const FSTCookConfigurationSetNotification        = @"FSTCookConfigurationSetNotification";
 NSString * const FSTHoldTimerSetNotification                = @"FSTHoldTimerSetNotification";
-
-
-NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
-NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
 NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
 
 //app info service
@@ -64,6 +65,16 @@ NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with bo
 
 
 __weak NSTimer* _readCharacteristicsTimer;
+
+
+static const uint8_t NUMBER_OF_STAGES = 5;
+static const uint8_t POS_POWER = 0;
+static const uint8_t POS_MIN_HOLD_TIME = POS_POWER + 1;
+static const uint8_t POS_MAX_HOLD_TIME = POS_MIN_HOLD_TIME + 2;
+static const uint8_t POS_TARGET_TEMP = POS_MAX_HOLD_TIME + 2;
+static const uint8_t POS_AUTO_TRANSITION = POS_TARGET_TEMP + 2;
+static const uint8_t STAGE_SIZE = 8;
+
 
 #pragma mark - Allocation
 
@@ -129,21 +140,21 @@ __weak NSTimer* _readCharacteristicsTimer;
     [self writeStartHoldTimer];
 }
 
--(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage
-{
-    if (!stage)
-    {
-        DLog(@"no stage set when attempting to send cooking times");
-        return;
-    }
-
-    //must reset elapsed time to 0 before writing the cooktime
-    [self writeElapsedTime];
-    [self writeCookTimesWithMinimumCooktime:stage.cookTimeMinimum havingMaximumCooktime:stage.cookTimeMaximum];
-    
-    //now that we set everything, lets git rid of the stage
-    stage = nil;
-}
+//-(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage
+//{
+//    if (!stage)
+//    {
+//        DLog(@"no stage set when attempting to send cooking times");
+//        return;
+//    }
+//
+//    //must reset elapsed time to 0 before writing the cooktime
+//    [self writeElapsedTime];
+//    [self writeCookTimesWithMinimumCooktime:stage.cookTimeMinimum havingMaximumCooktime:stage.cookTimeMaximum];
+//    
+//    //now that we set everything, lets git rid of the stage
+//    stage = nil;
+//}
 
 #pragma mark - Write Handlers
 
@@ -201,14 +212,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     //  max hold time - 2 bytes
     //  target temperature - 2 bytes
     //  automatic transition to next stage? - 1 byte
-    
-    static const uint8_t NUMBER_OF_STAGES = 5;
-    static const uint8_t POS_POWER = 0;
-    static const uint8_t POS_MIN_HOLD_TIME = POS_POWER + 1;
-    static const uint8_t POS_MAX_HOLD_TIME = POS_MIN_HOLD_TIME + 2;
-    static const uint8_t POS_TARGET_TEMP = POS_MAX_HOLD_TIME + 2;
-    static const uint8_t POS_AUTO_TRANSITION = POS_TARGET_TEMP + 2;
-    static const uint8_t STAGE_SIZE = 8;
+
 
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
     
@@ -233,6 +237,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    NSLog(@"cook config payload to write: %@", data);
     if (characteristic)
     {
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
@@ -282,9 +287,14 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 -(void)handleCookConfigurationWritten
 {
+    CBCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
+
+    //since we overwrote whatever the last session was (if anything) we need to reset the stage back to 0
+    //moveToStageIndex will let any interested observers know this
+    [self.session moveToStageIndex:[NSNumber numberWithInt:0]];
+    [self.peripheral readValueForCharacteristic:cookConfigurationCharacteristic];
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookConfigurationSetNotification object:self];
 }
-
 
 -(void)handleCooktimeWritten
 {
@@ -332,9 +342,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
     {
         NSLog(@"char: FSTCharacteristicCurrentCookStage, data: %@", characteristic.value);
-
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentCookStage];
-        //not implemented
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
     {
@@ -376,10 +384,8 @@ __weak NSTimer* _readCharacteristicsTimer;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
     {
         NSLog(@"char: FSTCharacteristicCookConfiguration, data: %@", characteristic.value);
-
-        //characteristicStatusFlags.FSTCharacteristicTargetTemperature = 1;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCookConfiguration];
-//        [self handleTargetTemperature:characteristic];
+        [self handleCookConfiguration:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
     {
@@ -452,11 +458,53 @@ __weak NSTimer* _readCharacteristicsTimer;
     
 } // end assignToProperty
 
+-(void)handleCookConfiguration: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length == 1)
+    {
+        //TODO: hack for working around the, we only have one byte when writing this
+        NSLog(@"hack fixup for 1 character cook config notification");
+        return;
+    }
+    
+    //TODO: length check once we actually get a consistent reading
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    
+    for (uint8_t i=0; i < 1; i++)
+    {
+        FSTParagonCookingStage* stage = self.session.activeRecipe.paragonCookingStages[i];
+        uint8_t pos = i * 8;
+        stage.maxPowerLevel = [NSNumber numberWithChar:bytes[pos+POS_POWER]];
+        stage.cookTimeMinimum = [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],0)];
+        stage.cookTimeMaximum = [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],0)];
+        stage.targetTemperature = [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_TARGET_TEMP],0)];
+        stage.automaticTransition =  [NSNumber numberWithChar:bytes[pos+POS_AUTO_TRANSITION]];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookConfigurationChangedNotification  object:self];
+
+}
+
+-(void)handleCurrentCookStage: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length != 1)
+    {
+        DLog(@"handleCurrentCookStage length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
+    }
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    [self.session moveToStageIndex:[NSNumber numberWithChar:bytes[0]]];
+}
+
 -(void)handleRemainingHoldTime: (CBCharacteristic*)characteristic
 {
     if (characteristic.value.length != 2)
     {
         DLog(@"handleRemainingHoldTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
+        return;
     }
     NSData *data = characteristic.value;
     Byte bytes[characteristic.value.length] ;
@@ -470,6 +518,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     if (characteristic.value.length != 1)
     {
         DLog(@"handleCurrentCookState length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
     }
     
     NSData *data = characteristic.value;
@@ -496,7 +545,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO: REMOVE ALL OF THIS!
 //    [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRecipeId];
     self.session.activeRecipe = [FSTRecipe new];
-    self.session.previousStage = self.session.currentStage;
+   // self.session.previousStage = self.session.currentStage;
     self.session.currentStage = [self.session.activeRecipe addStage];
     ///////////////////////////
 }

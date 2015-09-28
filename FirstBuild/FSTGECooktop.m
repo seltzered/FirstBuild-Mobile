@@ -350,7 +350,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     //TODO: REMOVE ALL OF THIS!
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTGECooktopCharacteristicRecipeId];
     self.session.activeRecipe = [FSTRecipe new];
-    self.session.previousStage = self.session.currentStage;
+    //self.session.previousStage = self.session.currentStage;
     self.session.currentStage = [self.session.activeRecipe addStage];
     ///////////////////////////
 }

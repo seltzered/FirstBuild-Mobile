@@ -15,6 +15,9 @@
 @property (nonatomic, strong) NSNumber* currentProbeTemperature;
 @property (nonatomic, strong) NSNumber* currentStageCookTimeElapsed;
 @property (nonatomic, weak) FSTParagonCookingStage* currentStage;
-@property (nonatomic, weak) FSTParagonCookingStage* previousStage;
+
+extern NSString * const FSTCurrentCookStageChangedNotification;
+
+-(void) moveToStageIndex: (NSNumber*)stageIndex;
 
 @end

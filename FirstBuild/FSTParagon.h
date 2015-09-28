@@ -27,6 +27,8 @@ extern NSString * const FSTTargetTemperatureChangedNotification ;
 extern NSString * const FSTElapsedTimeSetNotification;
 extern NSString * const FSTCookConfigurationSetNotification;
 extern NSString * const FSTHoldTimerSetNotification;
+extern NSString * const FSTCookConfigurationChangedNotification;
+
 
 //extern NSString * const FSTTargetTemperatureSetNotification;
 
