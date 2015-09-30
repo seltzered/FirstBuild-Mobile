@@ -343,6 +343,7 @@ static const uint8_t STAGE_SIZE = 8;
     {
         NSLog(@"char: FSTCharacteristicCurrentCookStage, data: %@", characteristic.value);
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentCookStage];
+        [self handleCurrentCookStage: characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
     {
@@ -419,7 +420,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
     {
-        //we haven't informed the application that the device is completely loaded, but we have
+        //we havent informed the application that the device is completely loaded, but we have
         //all the data we need
         self.initialCharacteristicValuesRead = YES;
         
@@ -435,7 +436,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     else if(self.initialCharacteristicValuesRead == NO)
     {
-        //we don't have all the data yet...
+        //we dont have all the data yet...
         // calculate fraction
         double progressCount = [[NSNumber numberWithInt:(int)requiredCount] doubleValue];
         double progressTotal = [[NSNumber numberWithInt:(int)[requiredCharacteristics count]] doubleValue];
@@ -467,14 +468,25 @@ static const uint8_t STAGE_SIZE = 8;
         return;
     }
     
-    //TODO: length check once we actually get a consistent reading
-    NSData *data = characteristic.value;
-    Byte bytes[characteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.value.length];
+    //TODO: fake data
+    Byte bytes[] = {
+        //pwr   //min         //max         //temp          //auto
+        0x01 ,  0x00, 0x01,   0x02, 0x57,   0x88, 0xb8,     0x00, //stage 1
+        0x07,   0x00, 0x14,   0x00, 0x00,   0x88, 0xb8,     0x01, //stage 2
+        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00,
+        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00,
+        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00
+    };
     
-    for (uint8_t i=0; i < 1; i++)
+    //TODO: length check once we actually get a consistent reading
+//    NSData *data = characteristic.value;
+//    Byte bytes[characteristic.value.length] ;
+//    [data getBytes:bytes length:characteristic.value.length];
+    
+    for (uint8_t i=0; i < NUMBER_OF_STAGES; i++)
     {
-        FSTParagonCookingStage* stage = self.session.activeRecipe.paragonCookingStages[i];
+        FSTParagonCookingStage* stage = [self.session.activeRecipe addStage];
+        //FSTParagonCookingStage* stage = self.session.activeRecipe.paragonCookingStages[i];
         uint8_t pos = i * 8;
         stage.maxPowerLevel = [NSNumber numberWithChar:bytes[pos+POS_POWER]];
         stage.cookTimeMinimum = [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],0)];
@@ -546,7 +558,7 @@ static const uint8_t STAGE_SIZE = 8;
 //    [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRecipeId];
     self.session.activeRecipe = [FSTRecipe new];
    // self.session.previousStage = self.session.currentStage;
-    self.session.currentStage = [self.session.activeRecipe addStage];
+    //self.session.currentStage = [self.session.activeRecipe addStage];
     ///////////////////////////
 }
 

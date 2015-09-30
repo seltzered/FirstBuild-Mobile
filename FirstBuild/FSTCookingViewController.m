@@ -60,7 +60,17 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
-    [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
+
+    if (self.currentParagon.session.activeRecipe.paragonCookingStages.count > 1)
+    {
+        //TODO: hardcode stage for testing
+        [controller setHeaderText:@"1" withFrameRect:CGRectMake(0, 0, 120, 30)];
+    }
+    else
+    {
+        [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
+    }
+    
 }
 
 -(void)setupEventHandlers
@@ -86,11 +96,18 @@
     }];
     
     //cook stage changed, which contains all the information about the current session
-    _currentCookStageChangedObserver = [center addObserverForName:FSTCurrentCookStageChangedNotification object:weakSelf.currentParagon.session queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+    _currentCookStageChangedObserver = [center addObserverForName:FSTCurrentCookStageChangedNotification object:weakSelf.currentParagon.session queue:nil usingBlock:^(NSNotification * _Nonnull note)
+    {
+        //TODO: hardcode stage for testing
+        MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+        [controller setHeaderText:@"2" withFrameRect:CGRectMake(0, 0, 120, 30)];
+
+        [weakSelf setStageBarStateCountForState:self.currentParagon.session.currentStage];
         [weakSelf.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
     }];
     
-    _cookConfigurationChangedObserver = [center addObserverForName:FSTCookConfigurationChangedNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+    _cookConfigurationChangedObserver = [center addObserverForName:FSTCookConfigurationChangedNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification * _Nonnull note)
+    {
         [weakSelf.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
     }];
 
@@ -212,17 +229,17 @@
 {
     int stateCount = 1;
     
-    if (stage.cookTimeMinimum && stage.cookTimeMinimum > 0)
+    if (stage.cookTimeMinimum && [stage.cookTimeMinimum intValue] > 0)
     {
         stateCount++;
     }
     
-    if (stage.cookTimeMaximum && stage.cookTimeMaximum > 0)
+    if (stage.cookTimeMaximum && [stage.cookTimeMaximum intValue] > 0)
     {
         stateCount++;
     }
     
-    if (stage.targetTemperature && stage.targetTemperature > 0)
+    if (stage.targetTemperature && [stage.targetTemperature intValue] > 0)
     {
         stateCount++;
     }
