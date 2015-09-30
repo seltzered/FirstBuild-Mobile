@@ -691,6 +691,10 @@ static const uint8_t STAGE_SIZE = 8;
     {
         self.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
     }
+    else if (_cookState == FSTParagonCookStateDone)
+    {
+        self.cookMode = FSTCookingStatePrecisionCookingReachingMaxTime;
+    }
     
     //only notify if we have changed cook modes
     if (self.cookMode != currentCookMode)
