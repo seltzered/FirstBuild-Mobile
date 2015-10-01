@@ -461,39 +461,41 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)handleCookConfiguration: (CBCharacteristic*)characteristic
 {
-    if (characteristic.value.length == 1)
+    if (characteristic.value.length != 40)
     {
-        //TODO: hack for working around the, we only have one byte when writing this
-        NSLog(@"hack fixup for 1 character cook config notification");
+        DLog(@"handleCookConfiguration length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 40);
         return;
     }
     
-    //TODO: fake data
-    Byte bytes[] = {
-        //pwr   //min         //max         //temp          //auto
-        0x01 ,  0x00, 0x01,   0x02, 0x57,   0x88, 0xb8,     0x00, //stage 1
-        0x07,   0x00, 0x14,   0x00, 0x00,   0x88, 0xb8,     0x01, //stage 2
-        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00,
-        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00,
-        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00
-    };
+    //SAMPLE DATA, helpful for debuggin
+    //    Byte bytes[] = {
+    //        //pwr   //min         //max         //temp          //auto
+    //        0x01 ,  0x00, 0x01,   0x02, 0x57,   0x88, 0xb8,     0x00, //stage 1
+    //        0x07,   0x00, 0x14,   0x00, 0x00,   0x88, 0xb8,     0x01, //stage 2
+    //        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00,
+    //        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00,
+    //        0x00,   0x00, 0x00,   0x00, 0x00,   0x00, 0x00,     0x00
+    //    };
     
-    //TODO: length check once we actually get a consistent reading
-//    NSData *data = characteristic.value;
-//    Byte bytes[characteristic.value.length] ;
-//    [data getBytes:bytes length:characteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    
+    self.session.activeRecipe = [FSTRecipe new];
     
     for (uint8_t i=0; i < NUMBER_OF_STAGES; i++)
     {
         FSTParagonCookingStage* stage = [self.session.activeRecipe addStage];
         //FSTParagonCookingStage* stage = self.session.activeRecipe.paragonCookingStages[i];
         uint8_t pos = i * 8;
-        stage.maxPowerLevel = [NSNumber numberWithChar:bytes[pos+POS_POWER]];
-        stage.cookTimeMinimum = [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],0)];
-        stage.cookTimeMaximum = [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],0)];
-        stage.targetTemperature = [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_TARGET_TEMP],0)];
-        stage.automaticTransition =  [NSNumber numberWithChar:bytes[pos+POS_AUTO_TRANSITION]];
+        stage.maxPowerLevel =       [NSNumber numberWithChar:bytes[pos+POS_POWER]];
+        stage.cookTimeMinimum =     [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],0)];
+        stage.cookTimeMaximum =     [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],0)];
+        stage.targetTemperature =   [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_TARGET_TEMP],0)];
+        stage.automaticTransition = [NSNumber numberWithChar:bytes[pos+POS_AUTO_TRANSITION]];
     }
+    [self.session moveToStageIndex:[NSNumber numberWithInt:0]];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookConfigurationChangedNotification  object:self];
 
 }
@@ -706,6 +708,10 @@ static const uint8_t STAGE_SIZE = 8;
     else if (_cookState == FSTParagonCookStateDone)
     {
         self.cookMode = FSTCookingStatePrecisionCookingReachingMaxTime;
+    }
+    else if (_cookState == FSTParagonCookStateOff)
+    {
+        self.cookMode = FSTCookingStateOff;
     }
     
     //only notify if we have changed cook modes

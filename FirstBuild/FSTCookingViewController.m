@@ -35,7 +35,6 @@
     NSObject* _timeElapsedChangedObserver;
     NSObject* _cookModeChangedObserver;
     NSObject* _targetTemperatureChangedObserver;
-    //NSObject* _cookTimeChangedObserver;
     NSObject* _holdTimerSetObserver;
     NSObject* _currentCookStageChangedObserver;
     NSObject* _cookConfigurationChangedObserver;
@@ -57,7 +56,6 @@
     
 }
 
-
 -(void)viewWillAppear:(BOOL)animated {
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
 
@@ -70,7 +68,6 @@
     {
         [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
     }
-    
 }
 
 -(void)setupEventHandlers
@@ -260,6 +257,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:_holdTimerSetObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_targetTemperatureChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_currentCookStageChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_cookConfigurationChangedObserver];
 }
 
 - (void)dealloc
