@@ -140,22 +140,6 @@ static const uint8_t STAGE_SIZE = 8;
     [self writeStartHoldTimer];
 }
 
-//-(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage
-//{
-//    if (!stage)
-//    {
-//        DLog(@"no stage set when attempting to send cooking times");
-//        return;
-//    }
-//
-//    //must reset elapsed time to 0 before writing the cooktime
-//    [self writeElapsedTime];
-//    [self writeCookTimesWithMinimumCooktime:stage.cookTimeMinimum havingMaximumCooktime:stage.cookTimeMaximum];
-//    
-//    //now that we set everything, lets git rid of the stage
-//    stage = nil;
-//}
-
 #pragma mark - Write Handlers
 
 -(void)writeHandler: (CBCharacteristic*)characteristic
@@ -200,7 +184,11 @@ static const uint8_t STAGE_SIZE = 8;
     {
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
-          
+}
+
+-(void)handleHoldTimerWritten
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTHoldTimerSetNotification object:self];
 }
 
 -(void)writeCookConfiguration: (FSTRecipe*)recipe
@@ -244,47 +232,6 @@ static const uint8_t STAGE_SIZE = 8;
     }
 }
 
--(void)writeTargetTemperature: (NSNumber*)targetTemperature
-{
-//    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicTargetTemperature];
-//
-//    Byte bytes[2] ;
-//    OSWriteBigInt16(bytes, 0, [targetTemperature doubleValue]*100);
-//    NSData *data = [[NSData alloc]initWithBytes:bytes length:2];
-//    
-//    if (characteristic)
-//    {
-//        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-//    }
-//    else
-//    {
-//        DLog(@"characteristic nil for writing target temperature");
-//    }
-}
-
--(void)writeCookTimesWithMinimumCooktime: (NSNumber*)minimumCooktime havingMaximumCooktime: (NSNumber*)maximumCooktime
-{
-    //    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
-    //
-    //    if (characteristic && minimumCooktime && maximumCooktime)
-    //    {
-    //        Byte bytes[8] = {0x00};
-    //        OSWriteBigInt16(bytes, 0, [minimumCooktime unsignedIntegerValue]);
-    //        OSWriteBigInt16(bytes, 2, [maximumCooktime unsignedIntegerValue]);
-    //        NSData *data = [[NSData alloc]initWithBytes:bytes length:8];
-    //        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    //    }
-    //    else
-    //    {
-    //        DLog(@"could not write cook time to BLE device, missing a min or max cooktime");
-    //    }
-}
-
--(void)handleHoldTimerWritten
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTHoldTimerSetNotification object:self];
-}
-
 -(void)handleCookConfigurationWritten
 {
     CBCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
@@ -294,38 +241,6 @@ static const uint8_t STAGE_SIZE = 8;
     [self.session moveToStageIndex:[NSNumber numberWithInt:0]];
     [self.peripheral readValueForCharacteristic:cookConfigurationCharacteristic];
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookConfigurationSetNotification object:self];
-}
-
--(void)handleCooktimeWritten
-{
-//    //read back the characteristic since there is no notification
-//    CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookTime];
-//    [self.peripheral readValueForCharacteristic:cookTimeCharacteristic];
-//    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
-}
-
--(void)writeElapsedTime
-{
-//    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
-//    
-//    if (characteristic)
-//    {
-//        Byte bytes[2] = {0x00,0x00};
-//        NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-//        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-//    }
-//    else
-//    {
-//        DLog(@"could not set elapsed time to 0 on BLE device, characteristic is empty");
-//    }
-}
-
--(void)handleElapsedTimeWritten
-{
-//    CBCharacteristic* elapsedTimeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicElapsedTime];
-//    [self.peripheral readValueForCharacteristic:elapsedTimeCharacteristic];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
 }
 
 #pragma mark - Read Handlers
