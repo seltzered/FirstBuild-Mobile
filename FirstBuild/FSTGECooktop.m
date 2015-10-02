@@ -193,7 +193,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     CBCharacteristic* cookTimeCharacteristic = [self.characteristics objectForKey:FSTGECooktopCharacteristicCookTime];
     [self.peripheral readValueForCharacteristic:cookTimeCharacteristic];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
 }
 
 -(void)writeElapsedTime
@@ -216,7 +216,7 @@ __weak NSTimer* _readCharacteristicsTimer;
 {
     CBCharacteristic* elapsedTimeCharacteristic = [self.characteristics objectForKey:FSTGECooktopCharacteristicElapsedTime];
     [self.peripheral readValueForCharacteristic:elapsedTimeCharacteristic];
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeSetNotification object:self];
 }
 
 #pragma mark - Read Handlers
@@ -389,7 +389,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         uint16_t raw = OSReadBigInt16(bytes, 0);
         self.session.currentStageCookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
         [self determineCookMode];
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
     }
 }
 
@@ -463,7 +463,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBurnerModeChangedNotification object:self];
     [self determineCookMode];
 }
 
@@ -551,7 +551,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
         self.session.currentStage.targetTemperature = [[NSNumber alloc] initWithDouble:raw/100];
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:FSTTargetTemperatureChangedNotification object:self];
     }
 }
 
@@ -574,7 +574,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         self.session.currentStage.cookTimeMinimum = [[NSNumber alloc] initWithDouble:minimumTime];
         self.session.currentStage.cookTimeMaximum = [[NSNumber alloc] initWithDouble:maximumTime];
         [self determineCookMode];
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:FSTCookTimeSetNotification object:self];
     }
 }
 

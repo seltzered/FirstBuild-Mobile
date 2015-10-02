@@ -78,13 +78,13 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
     //time elapsed
-    _timeElapsedChangedObserver = [center addObserverForName:FSTElapsedTimeChangedNotification
-                                                      object:weakSelf.currentParagon
-                                                       queue:nil
-                                                  usingBlock:^(NSNotification *notification)
-    {
-       [weakSelf.delegate elapsedTimeChanged:[weakSelf.currentParagon.session.currentStageCookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
-    }];
+//    _timeElapsedChangedObserver = [center addObserverForName:FSTElapsedTimeChangedNotification
+//                                                      object:weakSelf.currentParagon
+//                                                       queue:nil
+//                                                  usingBlock:^(NSNotification *notification)
+//    {
+//       [weakSelf.delegate elapsedTimeChanged:[weakSelf.currentParagon.session.currentStageCookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
+//    }];
     
     //hold timer has started -- TODO: remove?
     _holdTimerSetObserver = [center addObserverForName:FSTHoldTimerSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
@@ -137,14 +137,14 @@
     
     
     //target temperature
-    _targetTemperatureChangedObserver = [center addObserverForName:FSTTargetTemperatureChangedNotification
-                                                            object:weakSelf.currentParagon
-                                                             queue:nil
-                                                        usingBlock:^(NSNotification *notification)
-     {
-         NSNumber* targetTemperature = self.currentParagon.session.currentStage.targetTemperature;
-         [weakSelf.delegate targetTemperatureChanged:[targetTemperature doubleValue]];
-     }];
+//    _targetTemperatureChangedObserver = [center addObserverForName:FSTTargetTemperatureChangedNotification
+//                                                            object:weakSelf.currentParagon
+//                                                             queue:nil
+//                                                        usingBlock:^(NSNotification *notification)
+//     {
+//         NSNumber* targetTemperature = self.currentParagon.session.currentStage.targetTemperature;
+//         [weakSelf.delegate targetTemperatureChanged:[targetTemperature doubleValue]];
+//     }];
     
 }
 

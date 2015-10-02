@@ -30,8 +30,6 @@ extern NSString * const FSTHoldTimerSetNotification;
 extern NSString * const FSTCookConfigurationChangedNotification;
 
 
-//extern NSString * const FSTTargetTemperatureSetNotification;
-
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 
@@ -42,6 +40,8 @@ extern NSString * const FSTCookConfigurationChangedNotification;
 @property (nonatomic, strong) NSNumber* remainingHoldTime;
 
 -(void)startTimerForCurrentStage;
+
+
 -(void)sendRecipeToCooktop: (FSTRecipe*)recipe;
 
 //-(void)moveNextStage;
