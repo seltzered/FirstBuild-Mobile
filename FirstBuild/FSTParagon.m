@@ -24,7 +24,6 @@ typedef enum {
 ParagonCookState _cookState;
 
 //notifications for when things change values
-NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
 NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
 NSString * const FSTCookConfigurationChangedNotification    = @"FSTCookConfigurationChangedNotification";
 
@@ -238,9 +237,9 @@ static const uint8_t STAGE_SIZE = 8;
 {
     CBCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
 
-    // the previous cooking session is no longer valid, set it to nil. a new one will
+    // the session's active recipe is no longer valid, set it to nil. a new one will
     // be created when we read it back from the paragon
-    self.session = nil;
+    self.session.activeRecipe = nil;
     
     // since we just trampled the entired active recipe we can either copy from the toBeRecipe
     // or make a read request to ensure its as we wrote it. this does take a little longer
@@ -536,15 +535,13 @@ static const uint8_t STAGE_SIZE = 8;
         return;
     }
     
-    if (self.session.currentStage)
-    {
-        NSData *data = characteristic.value;
-        Byte bytes[characteristic.value.length] ;
-        [data getBytes:bytes length:characteristic.value.length];
-        uint16_t raw = OSReadBigInt16(bytes, 0);
-        self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:raw/100];
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
-    }
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    uint16_t raw = OSReadBigInt16(bytes, 0);
+    self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+    [self.delegate actualTemperatureChanged:self.session.currentProbeTemperature];
+
 }
 
 -(void)determineCookMode

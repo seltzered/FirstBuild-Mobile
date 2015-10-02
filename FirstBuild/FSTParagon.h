@@ -13,38 +13,31 @@
 #import "FSTBurner.h"
 #import "FSTPrecisionCooking.h"
 
+@protocol FSTParagonDelegate <NSObject>
+
+- (void) actualTemperatureChanged: (NSNumber*) temperature;
+
+@end
+
 @interface FSTParagon : FSTBleProduct 
 
+@property (nonatomic, weak) id<FSTParagonDelegate> delegate;
+
 extern NSString * const FSTServiceParagon ;
-
-extern NSString * const FSTActualTemperatureChangedNotification;
-extern NSString * const FSTBurnerModeChangedNotification;
 extern NSString * const FSTCookingModeChangedNotification;
-
-extern NSString * const FSTElapsedTimeChangedNotification;
-extern NSString * const FSTCookTimeSetNotification ;
-extern NSString * const FSTTargetTemperatureChangedNotification ;
-extern NSString * const FSTElapsedTimeSetNotification;
 extern NSString * const FSTCookConfigurationSetNotification;
 extern NSString * const FSTHoldTimerSetNotification;
 extern NSString * const FSTCookConfigurationChangedNotification;
 
-
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
-
 @property (nonatomic, strong) NSNumber* recipeId;
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;
-
 @property (nonatomic, strong) NSNumber* remainingHoldTime;
 
 -(void)startTimerForCurrentStage;
-
-
 -(void)sendRecipeToCooktop: (FSTRecipe*)recipe;
-
-//-(void)moveNextStage;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;
 

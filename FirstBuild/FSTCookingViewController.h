@@ -22,7 +22,7 @@
 
 @end
 
-@interface FSTCookingViewController : UIViewController <UIAlertViewDelegate>
+@interface FSTCookingViewController : UIViewController <UIAlertViewDelegate, FSTParagonDelegate>
 
 //@property (weak, nonatomic) IBOutlet UILabel *cookingStatusLabel; // now fixed
 //@property (weak, nonatomic) IBOutlet UIImageView *instructionImage;

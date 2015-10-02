@@ -593,7 +593,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
         self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:raw/100];
-        [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:FSTActualTemperatureChangedNotification object:self];
     }
 }
 

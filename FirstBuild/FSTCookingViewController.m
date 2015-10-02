@@ -31,10 +31,7 @@
 
 @implementation FSTCookingViewController
 {
-    NSObject* _temperatureChangedObserver;
-    NSObject* _timeElapsedChangedObserver;
     NSObject* _cookModeChangedObserver;
-    NSObject* _targetTemperatureChangedObserver;
     NSObject* _holdTimerSetObserver;
     NSObject* _currentCookStageChangedObserver;
     NSObject* _cookConfigurationChangedObserver;
@@ -44,6 +41,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.currentParagon.delegate = self;
 
     self.navigationItem.hidesBackButton = YES;
     self.continueButton.hidden = YES;
@@ -126,14 +125,14 @@
     }];
     
     //current temperature
-    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
-                                                      object:weakSelf.currentParagon
-                                                       queue:nil
-                                                  usingBlock:^(NSNotification *notification)
-    {
-       NSNumber* actualTemperature = self.currentParagon.session.currentProbeTemperature;
-       [weakSelf.delegate currentTemperatureChanged:[actualTemperature doubleValue]];
-    }];
+//    _temperatureChangedObserver = [center addObserverForName:FSTActualTemperatureChangedNotification
+//                                                      object:weakSelf.currentParagon
+//                                                       queue:nil
+//                                                  usingBlock:^(NSNotification *notification)
+//    {
+//       NSNumber* actualTemperature = self.currentParagon.session.currentProbeTemperature;
+//       [weakSelf.delegate currentTemperatureChanged:[actualTemperature doubleValue]];
+//    }];
     
     
     //target temperature
@@ -251,11 +250,8 @@
 
 - (void)removeObservers
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureChangedObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_timeElapsedChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_holdTimerSetObserver];
-    [[NSNotificationCenter defaultCenter] removeObserver:_targetTemperatureChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_currentCookStageChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_cookConfigurationChangedObserver];
 }
@@ -320,6 +316,13 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+#pragma mark - <FSTParagonDelegate>
+
+-(void)actualTemperatureChanged:(NSNumber *)temperature
+{
+    [self.delegate currentTemperatureChanged:[temperature doubleValue]];
 }
 
 
