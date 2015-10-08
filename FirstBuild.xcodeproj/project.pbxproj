@@ -82,6 +82,9 @@
 		5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */; };
 		5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */; };
 		5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */; };
+		5B6364B51BC2E23900322D4F /* hoodie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6364B41BC2E23900322D4F /* hoodie.storyboard */; settings = {ASSET_TAGS = (); }; };
+		5B6364B81BC2E27000322D4F /* FSTHoodie.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6364B71BC2E27000322D4F /* FSTHoodie.m */; settings = {ASSET_TAGS = (); }; };
+		5B6364BB1BC2E6CA00322D4F /* FSTHoodieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6364BA1BC2E6CA00322D4F /* FSTHoodieViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5B7338BA1B0F9856004C931E /* FSTCookingProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */; };
 		5B7338BD1B0F9A7E004C931E /* FSTCookingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */; };
 		5B7338C01B0F9CEA004C931E /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BF1B0F9CEA004C931E /* Session.m */; };
@@ -305,6 +308,13 @@
 		5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonCookingStage.m; sourceTree = "<group>"; };
 		5B4486CB1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = WifiCommissioningNetworkTableViewCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WifiCommissioningNetworkTableViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5B63646D1BC2C7D800322D4F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		5B63646F1BC2C81000322D4F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		5B6364B41BC2E23900322D4F /* hoodie.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = hoodie.storyboard; sourceTree = "<group>"; };
+		5B6364B61BC2E27000322D4F /* FSTHoodie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTHoodie.h; sourceTree = "<group>"; };
+		5B6364B71BC2E27000322D4F /* FSTHoodie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTHoodie.m; sourceTree = "<group>"; };
+		5B6364B91BC2E6CA00322D4F /* FSTHoodieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTHoodieViewController.h; sourceTree = "<group>"; };
+		5B6364BA1BC2E6CA00322D4F /* FSTHoodieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTHoodieViewController.m; sourceTree = "<group>"; };
 		5B7338B81B0F9856004C931E /* FSTCookingProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingProgressLayer.h; sourceTree = "<group>"; };
 		5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingProgressLayer.m; sourceTree = "<group>"; };
 		5B7338BB1B0F9A7E004C931E /* FSTCookingProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingProgressView.h; sourceTree = "<group>"; };
@@ -594,6 +604,42 @@
 				5BA94D5A1A5C9EDE00F9AD79 /* MilkGallonClippingView.m */,
 				5B174DD61A5DE1DE00A00505 /* MilkGallonStand.h */,
 				5B174DD71A5DE1DE00A00505 /* MilkGallonStand.m */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		5B6364B01BC2E20800322D4F /* Hoodie */ = {
+			isa = PBXGroup;
+			children = (
+				5B6364B31BC2E21D00322D4F /* views */,
+				5B6364B21BC2E21900322D4F /* model */,
+				5B6364B11BC2E21100322D4F /* controllers */,
+			);
+			name = Hoodie;
+			sourceTree = "<group>";
+		};
+		5B6364B11BC2E21100322D4F /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5B6364B91BC2E6CA00322D4F /* FSTHoodieViewController.h */,
+				5B6364BA1BC2E6CA00322D4F /* FSTHoodieViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		5B6364B21BC2E21900322D4F /* model */ = {
+			isa = PBXGroup;
+			children = (
+				5B6364B61BC2E27000322D4F /* FSTHoodie.h */,
+				5B6364B71BC2E27000322D4F /* FSTHoodie.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		5B6364B31BC2E21D00322D4F /* views */ = {
+			isa = PBXGroup;
+			children = (
+				5B6364B41BC2E23900322D4F /* hoodie.storyboard */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -931,6 +977,7 @@
 		5BA064D01B8743DB002FCE59 /* Apps */ = {
 			isa = PBXGroup;
 			children = (
+				5B6364B01BC2E20800322D4F /* Hoodie */,
 				5B3F1C9919E8843900303242 /* ChillHub */,
 				5B99DFBF1AB1EA2200247034 /* Paragon */,
 				5BE77E1E1B7D2E6F00B762B8 /* HumanaPillBottle */,
@@ -1200,6 +1247,8 @@
 		CBE251472FAFD71676539304 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B63646F1BC2C81000322D4F /* Social.framework */,
+				5B63646D1BC2C7D800322D4F /* Twitter.framework */,
 				1D09D3E714F461A55F66EB58 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -1285,6 +1334,7 @@
 				5B174DE61A64266100A00505 /* fontawesome-webfont.ttf in Resources */,
 				67926FF919EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf in Resources */,
 				51FAEFF61B62F51400A7DCF9 /* FSEmeric-Light.otf in Resources */,
+				5B6364B51BC2E23900322D4F /* hoodie.storyboard in Resources */,
 				5B88581C1A7310DB00F22325 /* PT_Sans-Narrow-Web-Regular.ttf in Resources */,
 				51DB93CC1B70EDE3005B31CC /* FSEmeric-Core.otf in Resources */,
 				5B88581B1A7308DF00F22325 /* Animations.xcassets in Resources */,
@@ -1396,6 +1446,7 @@
 				51B297521B8EAA780017DCA2 /* FSTStageTableViewController.m in Sources */,
 				5B7FB5581A43C6DF00553797 /* ChillHubDevicesTableViewController.m in Sources */,
 				5BE77E261B7D40EF00B762B8 /* FSTHumanaPillBottle.m in Sources */,
+				5B6364BB1BC2E6CA00322D4F /* FSTHoodieViewController.m in Sources */,
 				5BCBB9D71B02A1A100B8E043 /* FSTRecipeViewController.m in Sources */,
 				5B99E0871A1AA744005FB881 /* FSTNetwork.m in Sources */,
 				5BC5A1C219EF5E79009C93B1 /* FBTAuthenticationViewController.m in Sources */,
@@ -1439,6 +1490,7 @@
 				5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */,
 				51DB66FD1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.m in Sources */,
 				51441A461B98BB7F00AF10E6 /* FSTRoundedBorderView.m in Sources */,
+				5B6364B81BC2E27000322D4F /* FSTHoodie.m in Sources */,
 				5BA94D5B1A5C9EDE00F9AD79 /* MilkGallonClippingView.m in Sources */,
 				5B8C108A1A39EC2A00F481E6 /* ProductAddViewController.m in Sources */,
 				51DB67001B7A7E4E0057717B /* FSTPrecisionCookingStateWithoutTimeViewController.m in Sources */,

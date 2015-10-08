@@ -46,6 +46,10 @@
             CellIdentifier = @"humanapillbottle";
             break;
             
+        case 3:
+            CellIdentifier = @"hoodie";
+            break;
+            
         default:
             break;
     }
@@ -115,11 +119,19 @@
         FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
         vc.bleProductClass = sender;
     }
+    else if ([segue.identifier isEqualToString:@"segueAddHoodie"])
+    {
+        FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
+        vc.bleProductClass = sender;
+    }
 }
 
 - (IBAction)pillBottleTouchHandler:(id)sender
 {
     [self performSegueWithIdentifier:@"segueAddHumanaPillBottle" sender:[FSTHumanaPillBottle class]];
+}
+- (IBAction)hoodieTouchHandler:(id)sender {
+    [self performSegueWithIdentifier:@"segueAddHoodie" sender:[FSTParagon class]];
 }
 
 - (IBAction)paragonTouchHandler:(id)sender

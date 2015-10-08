@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -73,7 +74,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Fdh-H0-dfo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="szn-g8-Hht">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QK9-LY-l0s" userLabel="imageWrapperView">
@@ -99,13 +100,13 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="PwB-3a-leL">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="PwB-3a-leL">
                                 <rect key="frame" x="-4" y="0.0" width="608" height="476"/>
                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="-4" y="0.0" width="808" height="653.5"/>
                                 </variation>
                             </imageView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7it-3b-7Vf">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7it-3b-7Vf">
                                 <rect key="frame" x="-4" y="0.0" width="608" height="476"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
@@ -115,7 +116,7 @@
                                     <segue destination="fk5-A6-9nq" kind="embed" id="s1h-aE-OfA"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kyN-sT-cND" userLabel="customViewWrapper">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kyN-sT-cND" userLabel="customViewWrapper">
                                 <rect key="frame" x="304" y="476" width="300" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Time_Temp" translatesAutoresizingMaskIntoConstraints="NO" id="011-fv-899">
@@ -182,10 +183,10 @@
                                     <outletCollection property="gestureRecognizers" destination="9s5-W8-cjK" appends="YES" id="SZa-vR-ZYB"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oix-B2-Kv1" userLabel="recipesViewWrapper">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oix-B2-Kv1" userLabel="recipesViewWrapper">
                                 <rect key="frame" x="-4" y="476" width="306" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="             MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ox8-AV-SOz" customClass="FSTLabel">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="             MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ox8-AV-SOz" customClass="FSTLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="306" height="60"/>
                                         <gestureRecognizers/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
@@ -195,7 +196,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="NX9-Wq-Qqn">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="NX9-Wq-Qqn">
                                         <rect key="frame" x="86" y="15" width="34" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="NX9-Wq-Qqn" secondAttribute="height" multiplier="54:47" id="L8t-de-iQk"/>
@@ -312,10 +313,10 @@
                         <viewControllerLayoutGuide type="bottom" id="ole-C9-210"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fe9-Ec-ZZ1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4b4-aM-S6Y" customClass="FSTLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4b4-aM-S6Y" customClass="FSTLabel">
                                 <rect key="frame" x="76" y="22" width="34" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -324,7 +325,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpI-rV-5zh" userLabel="Time Dynamic">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OpI-rV-5zh" userLabel="Time Dynamic">
                                 <rect key="frame" x="93" y="42" width="0.0" height="51"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="1Ns-OM-vEd"/>
@@ -339,13 +340,13 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1&quot; Thickness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-DL-guT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1&quot; Thickness" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSg-DL-guT">
                                 <rect key="frame" x="439" y="125" width="131" height="29"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="23"/>
                                 <color key="textColor" red="1" green="0.0028989642" blue="0.02123694613" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkd-6F-8gc" userLabel="Temp Dynamic">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkd-6F-8gc" userLabel="Temp Dynamic">
                                 <rect key="frame" x="505" y="44" width="0.0" height="47"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="47" id="QnV-ya-YTu"/>
@@ -464,7 +465,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIJ-HQ-zm7" userLabel="continueButtonHolderView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gIJ-HQ-zm7" userLabel="continueButtonHolderView">
                                 <rect key="frame" x="304" y="469" width="300" height="67"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Continue_Large" translatesAutoresizingMaskIntoConstraints="NO" id="9gI-eh-mZd">
@@ -542,10 +543,10 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OsC-nv-n0p" userLabel="continueButtonHolderView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OsC-nv-n0p" userLabel="continueButtonHolderView">
                                 <rect key="frame" x="0.0" y="469" width="300" height="67"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    SAVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPg-Ka-h3t" customClass="FSTLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="    SAVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPg-Ka-h3t" customClass="FSTLabel">
                                         <rect key="frame" x="0.0" y="22" width="300" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23.5" id="432-Bb-KbU">
@@ -565,7 +566,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="pgN-w3-35c">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Heart_Plussign_Large" translatesAutoresizingMaskIntoConstraints="NO" id="pgN-w3-35c">
                                         <rect key="frame" x="86" y="18" width="38" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="pgN-w3-35c" secondAttribute="height" multiplier="54:47" id="Nu8-I6-Tza"/>
@@ -600,19 +601,19 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Thickness:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="GvJ-i5-IEV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thickness:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="GvJ-i5-IEV">
                                 <rect key="frame" x="30" y="128" width="79" height="22"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Doneness:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jhb-8G-r8Q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doneness:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Jhb-8G-r8Q">
                                 <rect key="frame" x="31" y="269" width="78" height="26"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="0S0-yg-JLr" userLabel="Temp" customClass="FSTLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Temp" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="0S0-yg-JLr" userLabel="Temp" customClass="FSTLabel">
                                 <rect key="frame" x="486" y="22" width="38" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="ii8-CX-Nds">
@@ -766,13 +767,13 @@
                         <viewControllerLayoutGuide type="bottom" id="2Nn-Hm-fBz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uU0-q8-5pP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="paragonReadyToPreheat" translatesAutoresizingMaskIntoConstraints="NO" id="JLI-U6-SwO">
                                 <rect key="frame" x="0.0" y="60" width="600" height="306"/>
                             </imageView>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Press START on your Paragon" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="nyM-7c-SJe">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press START on your Paragon" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="nyM-7c-SJe">
                                 <rect key="frame" x="0.0" y="396" width="600" height="24"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -846,7 +847,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pqJ-BM-6RK"/>
                     </layoutGuides>
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="v4g-QX-IFe">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="wd4-v7-MtB">
@@ -1047,7 +1048,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LZ4-Vo-Vrn" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Target:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElY-6j-8pc" userLabel="target temp">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElY-6j-8pc" userLabel="target temp">
                                                 <rect key="frame" x="230" y="249" width="140" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="140" id="pl3-Dj-aZI"/>
@@ -1056,13 +1057,13 @@
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GS2-Et-aAg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GS2-Et-aAg">
                                                 <rect key="frame" x="268" y="289" width="65" height="22"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcC-S5-piw" userLabel="currentTemp">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcC-S5-piw" userLabel="currentTemp">
                                                 <rect key="frame" x="0.0" y="311" width="600" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="ikZ-Gs-v3r"/>
@@ -1071,7 +1072,7 @@
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qWp-Ay-c5F">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qWp-Ay-c5F">
                                                 <rect key="frame" x="241" y="281" width="117" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1181,7 +1182,7 @@
                         <viewControllerLayoutGuide type="bottom" id="YHK-m6-Mux"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bCi-0i-TRB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujt-C5-zyk" userLabel="continueButtonHolderView">
@@ -1222,7 +1223,7 @@
                                     <outletCollection property="gestureRecognizers" destination="q9S-ae-DN2" appends="YES" id="77Q-hR-s5f"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qKj-2M-ptb" userLabel="maxTimeButtonWrapperView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qKj-2M-ptb" userLabel="maxTimeButtonWrapperView">
                                 <rect key="frame" x="141" y="130" width="441" height="50"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SU-pG-4Ae">
@@ -1254,7 +1255,7 @@
                                     <outletCollection property="gestureRecognizers" destination="0PW-rz-PzN" appends="YES" id="uhC-wU-wbZ"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbx-HK-HW7" userLabel="TimeLabel" customClass="FSTRegularLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbx-HK-HW7" userLabel="TimeLabel" customClass="FSTRegularLabel">
                                 <rect key="frame" x="30" y="20" width="50" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="7qJ-BC-OT9"/>
@@ -1272,7 +1273,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAt-Ud-WKy" userLabel="TempLabel" customClass="FSTRegularLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Temp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAt-Ud-WKy" userLabel="TempLabel" customClass="FSTRegularLabel">
                                 <rect key="frame" x="33" y="215" width="45" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1281,7 +1282,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMi-aJ-EIP" customClass="FSTRegularLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZMi-aJ-EIP" customClass="FSTRegularLabel">
                                 <rect key="frame" x="67" y="73" width="29" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28.5" id="Zjc-1I-R6X"/>
@@ -1290,16 +1291,16 @@
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFl-d7-rA6" customClass="FSTRegularLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFl-d7-rA6" customClass="FSTRegularLabel">
                                 <rect key="frame" x="65" y="144" width="33" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIn-6L-Q7K" userLabel="MinPickerView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XIn-6L-Q7K" userLabel="MinPickerView">
                                 <rect key="frame" x="141" y="119" width="441" height="1"/>
                                 <subviews>
-                                    <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPw-VI-hOe">
+                                    <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPw-VI-hOe">
                                         <rect key="frame" x="0.0" y="-81" width="441" height="162"/>
                                         <color key="tintColor" red="0.1019607843" green="0.59215686270000001" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -1338,7 +1339,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nib-e6-9yB" userLabel="minTimeButtonWrapperView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nib-e6-9yB" userLabel="minTimeButtonWrapperView">
                                 <rect key="frame" x="141" y="59" width="441" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="00H:00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAg-ve-hdA">
@@ -1378,10 +1379,10 @@
                                     <outletCollection property="gestureRecognizers" destination="TaV-lB-UET" appends="YES" id="dve-Vc-NfP"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HB2-Yi-rXl" userLabel="MaxPickerView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HB2-Yi-rXl" userLabel="MaxPickerView">
                                 <rect key="frame" x="141" y="190" width="441" height="1"/>
                                 <subviews>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khC-1r-nCg">
+                                    <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="khC-1r-nCg">
                                         <rect key="frame" x="0.0" y="-80" width="441" height="162"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="pfj-6w-PyP"/>
@@ -1402,7 +1403,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLw-2d-amO" userLabel="temperatureButtonWrapperView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLw-2d-amO" userLabel="temperatureButtonWrapperView">
                                 <rect key="frame" x="141" y="201" width="441" height="50"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" misplaced="YES" text="100 F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bM0-iv-V1y">
@@ -1434,10 +1435,10 @@
                                     <outletCollection property="gestureRecognizers" destination="B1n-cH-6WJ" appends="YES" id="Vys-Qj-F86"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z8d-PX-f1k" userLabel="TempPickerView">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z8d-PX-f1k" userLabel="TempPickerView">
                                 <rect key="frame" x="141" y="261" width="441" height="1"/>
                                 <subviews>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wdn-1K-bYN">
+                                    <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdn-1K-bYN">
                                         <rect key="frame" x="0.0" y="-80" width="441" height="162"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="9FI-XS-Epr"/>
@@ -1747,14 +1748,16 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ljX-Fd-nDy">
-                            <rect key="frame" x="0.0" y="87" width="608" height="44"/>
+                            <rect key="frame" x="0.0" y="88" width="608" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CookingMethodCell" id="TBr-PJ-2HS">
+                                <rect key="frame" x="0.0" y="23" width="608" height="65"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TBr-PJ-2HS" id="mMo-VC-ybh">
+                                    <rect key="frame" x="0.0" y="0.0" width="608" height="64.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </tableViewCellContentView>
@@ -1777,7 +1780,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lnk-KT-kQQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WhW-0D-TDt">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcx-Gl-WbV" userLabel="imageWrapperView">
@@ -1803,17 +1806,17 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="iPA-nT-C4q">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="White_bg_with_dots" translatesAutoresizingMaskIntoConstraints="NO" id="iPA-nT-C4q">
                                 <rect key="frame" x="-4" y="0.0" width="608" height="477"/>
                             </imageView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Beq-td-cbi">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Beq-td-cbi">
                                 <rect key="frame" x="-4" y="0.0" width="608" height="477"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="fk5-A6-9nq" kind="embed" id="vD1-No-281"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLf-rS-rEq" userLabel="customViewWrapper">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLf-rS-rEq" userLabel="customViewWrapper">
                                 <rect key="frame" x="304" y="476" width="300" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Time_Temp" translatesAutoresizingMaskIntoConstraints="NO" id="lfg-L8-xc3">
@@ -1822,7 +1825,7 @@
                                             <constraint firstAttribute="width" secondItem="lfg-L8-xc3" secondAttribute="height" multiplier="54:47" id="tHX-0l-hWr"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="          CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6z-VC-mU8" customClass="FSTLabel">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="          CUSTOM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6z-VC-mU8" customClass="FSTLabel">
                                         <rect key="frame" x="83" y="17" width="134" height="24"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -1890,10 +1893,10 @@
                                     <outletCollection property="gestureRecognizers" destination="9yA-wf-zwO" appends="YES" id="mZa-Ce-ESq"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTT-8o-Cck" userLabel="recipesViewWrapper">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CTT-8o-Cck" userLabel="recipesViewWrapper">
                                 <rect key="frame" x="-4" y="476" width="306" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="           MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JFI-Mh-Alc" customClass="FSTLabel">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="           MY RECIPES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JFI-Mh-Alc" customClass="FSTLabel">
                                         <rect key="frame" x="68" y="17" width="171" height="24"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -1908,7 +1911,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="Tma-xZ-2Nk">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Heart" translatesAutoresizingMaskIntoConstraints="NO" id="Tma-xZ-2Nk">
                                         <rect key="frame" x="78" y="12" width="41" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Tma-xZ-2Nk" secondAttribute="height" multiplier="54:47" id="xii-AQ-mif"/>
@@ -2098,7 +2101,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zW-AD-H1j" userLabel="Italics Caption">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Place food to continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zW-AD-H1j" userLabel="Italics Caption">
                                 <rect key="frame" x="215" y="543" width="169" height="22"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2144,13 +2147,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1V-h1-Plo" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0n-Q9-9Lc" userLabel="TIME REMAINING">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g0n-Q9-9Lc" userLabel="TIME REMAINING">
                                                 <rect key="frame" x="277" y="249" width="47" height="22"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Food will be ready at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAo-ob-RFk">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food will be ready at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAo-ob-RFk">
                                                 <rect key="frame" x="204" y="287" width="192" height="26"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="21"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2272,19 +2275,19 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anw-L0-BR1" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="140   F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DG-hg-NF5" userLabel="TIME REMAINING">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140   F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DG-hg-NF5" userLabel="TIME REMAINING">
                                                 <rect key="frame" x="272" y="249" width="55" height="22"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Food is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkW-nh-385">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkW-nh-385">
                                                 <rect key="frame" x="266" y="287" width="68" height="28"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="22"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="READY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AA-Kd-LiW" userLabel="doneAtLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="READY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AA-Kd-LiW" userLabel="doneAtLabel">
                                                 <rect key="frame" x="-1" y="314" width="600" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="L5a-2r-F0a"/>
@@ -2293,7 +2296,7 @@
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UOf-S6-dee">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOf-S6-dee">
                                                 <rect key="frame" x="276" y="281" width="46" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -2345,13 +2348,13 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Food can stay until" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ct0-0t-Mif" userLabel="Italics Caption">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food can stay until" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ct0-0t-Mif" userLabel="Italics Caption">
                                 <rect key="frame" x="229" y="543" width="141" height="22"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhD-yM-sa5" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhD-yM-sa5" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="258" y="5" width="85" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="A4z-wS-AOt"/>
@@ -2427,7 +2430,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NOW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZ8-6x-9Dv">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZ8-6x-9Dv">
                                                 <rect key="frame" x="354" y="542" width="44" height="23"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-BoldItalic" family="FS Emeric" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2463,7 +2466,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4M-UJ-Q53" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4M-UJ-Q53" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="258" y="5" width="85" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="X6c-5B-Ft3"/>
@@ -2478,7 +2481,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TAKE FOOD OUT    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTr-US-esX" userLabel="Italics Caption">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE FOOD OUT    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTr-US-esX" userLabel="Italics Caption">
                                 <rect key="frame" x="205" y="542" width="149" height="23"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-CoreItalic" family="FS Emeric" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2549,7 +2552,7 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40X-zt-pk2">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Temperature" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40X-zt-pk2">
                                         <rect key="frame" x="252" y="289" width="96" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2572,7 +2575,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="COOKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBc-2C-D9Y" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COOKING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBc-2C-D9Y" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="231" y="5" width="138" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="PY4-zS-yJG"/>
@@ -2639,7 +2642,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="POWER    LEVEL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2G-SU-Amf">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POWER    LEVEL" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2G-SU-Amf">
                                                 <rect key="frame" x="189" y="257" width="222" height="87"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="222" id="4T5-I1-h7v"/>
@@ -2675,7 +2678,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BURNER ON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh6-go-0yc" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BURNER ON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh6-go-0yc" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="213" y="5" width="174" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="InI-4S-ewC"/>

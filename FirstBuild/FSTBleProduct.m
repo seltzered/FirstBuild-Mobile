@@ -15,7 +15,6 @@ NSString * const FSTDeviceLoadProgressUpdated           = @"FSTDeviceLoadProgres
 NSString * const FSTDeviceEssentialDataChangedNotification       = @"FSTDeviceEssentialDataChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification     = @"FSTBatteryLevelChangedNotification";
 
-
 - (instancetype)init
 {
     self = [super init];

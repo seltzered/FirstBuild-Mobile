@@ -12,6 +12,7 @@ pod 'google-plus-ios-sdk'
 pod "Color-Picker-for-iOS"
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
+pod 'STTwitter'
 
 #target 'FirstBuild' do
 

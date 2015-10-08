@@ -22,6 +22,7 @@
 #import "FSTBleProduct.h"
 #import "ProductGradientView.h" // to control up or down gradient
 #import "FSTBleSavedProduct.h"
+#import "FSTHoodie.h"
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
@@ -343,6 +344,15 @@ NSIndexPath *_indexPathForDeletion;
     {
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCell" forIndexPath:indexPath];
     }
+    else if ([product isKindOfClass:[FSTHoodie class]])
+    {
+        FSTHoodie* hoodie = (FSTHoodie*)product;
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellHoodie" forIndexPath:indexPath];
+        productCell.friendlyName.text = product.friendlyName;
+        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[hoodie.batteryLevel integerValue]];
+        productCell.batteryView.batteryLevel = [hoodie.batteryLevel doubleValue]/100;
+        [productCell.batteryView setNeedsDisplay]; // redraw
+    }
     else if ([product isKindOfClass:[FSTHumanaPillBottle class]])
     {
         FSTHumanaPillBottle* bottle = (FSTHumanaPillBottle*)product; // cast it to check the cooking status
@@ -351,7 +361,6 @@ NSIndexPath *_indexPathForDeletion;
         productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[bottle.batteryLevel integerValue]];
         productCell.batteryView.batteryLevel = [bottle.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
-        
         
         if (bottle.needsRxRefill == YES)
         {
