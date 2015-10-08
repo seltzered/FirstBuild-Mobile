@@ -38,28 +38,23 @@ typedef enum {
 } GECooktopParagonCookMode;
 
 
-extern NSString * const FSTActualTemperatureChangedNotification;
-extern NSString * const FSTBurnerModeChangedNotification;
-extern NSString * const FSTCookingModeChangedNotification;
-
-extern NSString * const FSTElapsedTimeChangedNotification;
-extern NSString * const FSTCookTimeSetNotification ;
-extern NSString * const FSTTargetTemperatureChangedNotification ;
-extern NSString * const FSTElapsedTimeSetNotification;
-extern NSString * const FSTTargetTemperatureSetNotification;
-
-@property (nonatomic, strong) NSString* serialNumber;
-@property (nonatomic, strong) NSString* modelNumber;
+//extern NSString * const FSTActualTemperatureChangedNotification;
+//extern NSString * const FSTBurnerModeChangedNotification;
+//extern NSString * const FSTCookingModeChangedNotification;
+//
+//extern NSString * const FSTElapsedTimeChangedNotification;
+//extern NSString * const FSTCookTimeSetNotification ;
+//extern NSString * const FSTTargetTemperatureChangedNotification ;
+//extern NSString * const FSTElapsedTimeSetNotification;
+//extern NSString * const FSTTargetTemperatureSetNotification;
 
 @property (nonatomic, strong) NSNumber* recipeId;
 @property (atomic) GECooktopBurnerMode burnerMode;
 @property (atomic) GECooktopParagonCookMode cookMode;
 @property (nonatomic, strong) NSArray* burners;
-
-
--(void)startHeatingWithStage: (FSTParagonCookingStage*)stage;
--(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
-//-(void)moveNextStage;
+//
+//-(void)startHeatingWithStage: (FSTParagonCookingStage*)stage;
+//-(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;
 @end

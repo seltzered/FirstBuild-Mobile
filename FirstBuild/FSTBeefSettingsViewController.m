@@ -27,9 +27,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
-    
-    NSObject* _cookConfigurationSetObserver;
-
 }
 
 - (void)viewDidLoad {
@@ -50,30 +47,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self updateLabels];
     
     self.continueTapGestureRecognizer.enabled = YES;
-
-    //setup the observer so we know when the temperature wrote
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    __weak typeof(self) weakSelf = self;
-    
-    _cookConfigurationSetObserver = [center addObserverForName:FSTCookConfigurationSetNotification
-                                                  object:weakSelf.currentParagon
-                                                   queue:nil
-                                              usingBlock:^(NSNotification *notification)
-   {
-       [self performSegueWithIdentifier:@"seguePreheat" sender:self];
-   }];
 }
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [self removeObservers];
-}
-
-- (void)removeObservers
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookConfigurationSetObserver];
-}
-
 
 - (void)updateLabels
 {
@@ -191,5 +165,12 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon];
 }
+
+#pragma mark - <FSTParagonDelegate>
+- (void)cookConfigurationSet
+{
+    [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+}
+
 
 @end

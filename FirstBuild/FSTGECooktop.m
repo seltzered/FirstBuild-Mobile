@@ -19,7 +19,7 @@
 //NSString * const FSTElapsedTimeChangedNotification          = @"FSTElapsedTimeChangedNotification";
 //
 //NSString * const FSTCookTimeSetNotification                 = @"FSTCookTimeSetNotification";
-//NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
+NSString * const FSTCookingModeChangedNotification          = @"FSTCookingModeChangedNotification";
 //NSString * const FSTElapsedTimeSetNotification              = @"FSTElapsedTimeSetNotification";
 NSString * const FSTTargetTemperatureSetNotification        = @"FSTTargetTemperatureSetNotification";
 
