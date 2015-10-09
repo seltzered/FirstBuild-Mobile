@@ -16,8 +16,4 @@
 @property (nonatomic, strong) NSNumber* currentStageCookTimeElapsed;
 @property (nonatomic, weak) FSTParagonCookingStage* currentStage;
 
-extern NSString * const FSTCurrentCookStageChangedNotification;
-
--(void) moveToStageIndex: (NSNumber*)stageIndex;
-
 @end

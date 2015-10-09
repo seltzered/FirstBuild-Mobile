@@ -418,13 +418,15 @@ static const uint8_t STAGE_SIZE = 8;
     }
     
     // since we have a new recipe the current stage is going to be the first one
-    [self.session moveToStageIndex:[NSNumber numberWithInt:0]];
+    self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
     
     [self.delegate cookConfigurationChanged];
 }
 
 /**
- *  This is called when the cooking stage is changed by the paragon
+ *  This is called when the cooking stage is changed by the paragon. Call the delegate method
+ *  with an actual index so the receive can use that for whatever purposes. There is also the
+ *  pointer to the current stage on the session itself
  *
  *  @param characteristic BLE characteristic
  */
@@ -438,7 +440,17 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = characteristic.value;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
-    [self.session moveToStageIndex:[NSNumber numberWithChar:bytes[0]]];
+    
+    uint8_t stage = bytes[0];
+    
+    if (stage >= self.session.activeRecipe.paragonCookingStages.count)
+    {
+        DLog("incoming stage from paragon greater than available");
+        return;
+    }
+    
+    self.session.currentStage = self.session.activeRecipe.paragonCookingStages[stage];
+    [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: stage]];
 }
 
 /**

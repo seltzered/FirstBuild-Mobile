@@ -20,6 +20,7 @@
 @optional - (void) cookConfigurationChanged;
 @optional - (void) cookConfigurationSet;
 @optional - (void) holdTimerSet;
+@optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
 
 @end
 
@@ -28,7 +29,6 @@
 @property (nonatomic, weak) id<FSTParagonDelegate> delegate;
 
 extern NSString * const FSTServiceParagon ;
-
 
 @property (nonatomic, strong) NSNumber* recipeId;
 @property (atomic) ParagonBurnerMode burnerMode;

@@ -31,7 +31,6 @@
 
 @implementation FSTCookingViewController
 {
-    NSObject* _currentCookStageChangedObserver;
     BOOL popped_out;
 }
 
@@ -45,8 +44,6 @@
     popped_out = NO;
     
     [self transitionToCurrentCookMode];
-    [self setupEventHandlers];
-    
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
 }
 
@@ -64,113 +61,76 @@
     }
 }
 
--(void)setupEventHandlers
-{
-    __weak typeof(self) weakSelf = self;
-//    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
-    
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    
-    //time elapsed
-//    _timeElapsedChangedObserver = [center addObserverForName:FSTElapsedTimeChangedNotification
-//                                                      object:weakSelf.currentParagon
-//                                                       queue:nil
-//                                                  usingBlock:^(NSNotification *notification)
-//    {
-//       [weakSelf.delegate elapsedTimeChanged:[weakSelf.currentParagon.session.currentStageCookTimeElapsed doubleValue]]; // set the elapsed time of whatever current segue
-//    }];
-
-    
-    //cook stage changed, which contains all the information about the current session
-    _currentCookStageChangedObserver = [center addObserverForName:FSTCurrentCookStageChangedNotification object:weakSelf.currentParagon.session queue:nil usingBlock:^(NSNotification * _Nonnull note)
-    {
-        //TODO: hardcode stage for testing
-        MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
-        [controller setHeaderText:@"2" withFrameRect:CGRectMake(0, 0, 120, 30)];
-
-        [weakSelf setStageBarStateCountForState:self.currentParagon.session.currentStage];
-        [weakSelf.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
-    }];
-    
-    //TODO: GE Cooktop
-    //    _cookTimeChangedObserver = [center addObserverForName:FSTCookTimeSetNotification object:weakSelf.currentParagon queue:nil usingBlock:^(NSNotification *notification)
-    //    {
-    //        [weakSelf.delegate targetTimeChanged:[_currentCookingStage.cookTimeMinimum doubleValue] withMax:[_currentCookingStage.cookTimeMaximum doubleValue]];
-    //    }];
-}
-
 -(void)transitionToCurrentCookMode
 {
-    __weak typeof(self) weakSelf = self;
-    __block FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
+    FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
     NSString* stateIdentifier = nil;
     
-    switch (weakSelf.currentParagon.cookMode) {
+    switch (self.currentParagon.cookMode) {
         case FSTCookingStatePrecisionCookingReachingTemperature:
             stateIdentifier = @"preheatingStateSegue";
-            weakSelf.continueButton.hidden = YES;
+            self.continueButton.hidden = YES;
             
             //if we have a current cook time or a to-be recipe then we need the stage bar
             if (
-                    weakSelf.currentParagon.session.toBeRecipe ||
+                    self.currentParagon.session.toBeRecipe ||
                     [_currentCookingStage.cookTimeMinimum intValue] > 0
                 )
             {
-                weakSelf.stageBar.hidden = NO;
+                self.stageBar.hidden = NO;
             }
             else
             {
-                weakSelf.stageBar.hidden = YES;
+                self.stageBar.hidden = YES;
             }
             break;
         case FSTCookingStatePrecisionCookingTemperatureReached:
             stateIdentifier = @"preheatingReachedStateSegue";
-            weakSelf.continueButton.userInteractionEnabled = YES;
-            weakSelf.continueButton.hidden = NO; // this should be hidden otherwise. What happens after it is pressed?
-            weakSelf.stageBar.hidden = NO;
+            self.continueButton.userInteractionEnabled = YES;
+            self.continueButton.hidden = NO; // this should be hidden otherwise. What happens after it is pressed?
+            self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingReachingMinTime:
             stateIdentifier = @"reachingMinStateSegue";
-            weakSelf.continueButton.hidden = YES;
-            weakSelf.stageBar.hidden = NO;
+            self.continueButton.hidden = YES;
+            self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingReachingMaxTime:
             stateIdentifier = @"reachingMaxStateSegue";
-            weakSelf.continueButton.hidden = YES;
-            weakSelf.stageBar.hidden = NO;
+            self.continueButton.hidden = YES;
+            self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingPastMaxTime:
             stateIdentifier = @"pastMaxStateSegue";
-            weakSelf.continueButton.hidden = YES;
-            weakSelf.stageBar.hidden = NO;
+            self.continueButton.hidden = YES;
+            self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingWithoutTime:
             stateIdentifier = @"withoutTimeStateSegue";
-            weakSelf.continueButton.hidden = YES;
-            weakSelf.stageBar.hidden = YES;
+            self.continueButton.hidden = YES;
+            self.stageBar.hidden = YES;
             break;
         case FSTCookingStateOff:
             stateIdentifier = nil;
-            weakSelf.stageBar.hidden = YES;
-            [weakSelf.navigationController popToRootViewControllerAnimated:NO];
+            self.stageBar.hidden = YES;
+            [self.navigationController popToRootViewControllerAnimated:NO];
             break;
         default:
-            weakSelf.stageBar.hidden = YES;
+            self.stageBar.hidden = YES;
             stateIdentifier = nil;
             break;
     }
     
-    weakSelf.stageBar.circleState = weakSelf.currentParagon.cookMode;
+    self.stageBar.circleState = self.currentParagon.cookMode;
     
     if (stateIdentifier)
     {
-        [weakSelf.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self.currentParagon];
+        [self.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self.currentParagon];
     }
     else
     {
         DLog(@"unknown state in cook mode, or paragon was shut off");
     }
-    
 }
 
 -(void)setStageBarStateCountForState: (FSTParagonCookingStage*) stage
@@ -198,16 +158,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)removeObservers
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:_currentCookStageChangedObserver];
-}
-
-- (void)dealloc
-{
-    [self removeObservers];
 }
 
 - (IBAction)continueButtonTap:(id)sender {
@@ -289,5 +239,13 @@
     [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
 }
 
+- (void)currentStageIndexChanged:(NSNumber *)stage
+{
+    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+    [controller setHeaderText:[stage stringValue] withFrameRect:CGRectMake(0, 0, 120, 30)];
+    
+    [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
+    [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
+}
 
 @end
