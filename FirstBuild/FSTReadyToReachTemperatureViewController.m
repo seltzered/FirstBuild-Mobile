@@ -42,6 +42,8 @@ NSObject* _cookModeChangedObserver;
     [self.pushButtonImageView setAnimationImages:pushImages]; // assign all the frames
     [self.pushButtonImageView setAnimationDuration:2.0];
     [self.pushButtonImageView startAnimating];
+    
+    self.currentParagon.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated

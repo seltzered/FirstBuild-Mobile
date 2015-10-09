@@ -51,9 +51,7 @@
         ((FSTCookingStateViewController*)segue.destinationViewController).targetMaxTime = [stage.cookTimeMaximum doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetTemp = [stage.targetTemperature doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).elapsedTime = [self.paragon.session.currentStageCookTimeElapsed doubleValue];
-        
     }
-    
 }
 
 -(void)swapFromViewController: (UIViewController*)fromController toViewController: (UIViewController*)toController {
@@ -67,15 +65,5 @@
     [fromController removeFromParentViewController];
     [toController didMoveToParentViewController:self];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

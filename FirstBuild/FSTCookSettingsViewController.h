@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTParagon.h"
 
-@interface FSTCookSettingsViewController : UIViewController
+@interface FSTCookSettingsViewController : UIViewController <FSTParagonDelegate>
 
 @property (nonatomic,weak) FSTParagon* currentParagon;
 
