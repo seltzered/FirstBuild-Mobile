@@ -23,6 +23,7 @@
 #import "ProductGradientView.h" // to control up or down gradient
 #import "FSTBleSavedProduct.h"
 #import "FSTHoodie.h"
+#import "FSTHoodieViewController.h"
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
@@ -322,6 +323,11 @@ NSIndexPath *_indexPathForDeletion;
         ChillHubViewController *vc = (ChillHubViewController*)destination.scene;
         vc.product = sender;
     }
+    else if ([sender isKindOfClass:[FSTHoodie class]])
+    {
+        FSTHoodieViewController *vc = (FSTHoodieViewController*)destination.scene;
+        vc.hoodie = sender;
+    }
 }
 
 #pragma mark <UITableViewDataSource>
@@ -497,9 +503,14 @@ NSIndexPath *_indexPathForDeletion;
         {
             [self performSegueWithIdentifier:@"segueChillHub" sender:product];
         }
-        if ([product isKindOfClass:[FSTParagon class]])
+        else if ([product isKindOfClass:[FSTHoodie class]])
         {
-            FSTParagon* paragon = (FSTParagon*)product;
+//            FSTHoodie* hoodie = (FSTHoodie*)product;
+            [self performSegueWithIdentifier:@"segueHoodie" sender:product];
+        }
+        else if ([product isKindOfClass:[FSTParagon class]])
+        {
+//            FSTParagon* paragon = (FSTParagon*)product;
             
             //if we are heating or pre-heating then jump to the cooking view controller
             //TODO: implement segue to the correct cook state

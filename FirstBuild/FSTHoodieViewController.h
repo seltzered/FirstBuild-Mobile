@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTHoodie.h"
 
-@interface FSTHoodieViewController : UIViewController
-
+@interface FSTHoodieViewController : UIViewController <FSTHoodieDelegate>
+@property (weak, nonatomic) FSTHoodie* hoodie;
 @end

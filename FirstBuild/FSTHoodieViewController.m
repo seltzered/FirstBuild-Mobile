@@ -11,10 +11,11 @@
 
 @interface FSTHoodieViewController ()
 
+@property (strong, nonatomic) IBOutlet UITextField *textOverride;
+
 @end
 
 @implementation FSTHoodieViewController
-
 
 
 - (void)viewDidLoad {
@@ -27,6 +28,8 @@
 {
     STTwitterAPI *twitter = [STTwitterAPI twitterAPIOSWithFirstAccount];
     
+    __weak typeof(self) weakSelf = self;
+    
     [twitter verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
         NSLog(@"-- Account: %@", username);
         
@@ -36,6 +39,7 @@
                              stallWarnings:nil
                              progressBlock:^(NSDictionary *json, STTwitterStreamJSONType type) {
                                  
+                                 weakSelf.textOverride.text = [json objectForKey:@"text"] ;
                                  if (type != STTwitterStreamJSONTypeTweet) {
                                      NSLog(@"Invalid tweet (class %@): %@", [json class], json);
                                      exit(1);
@@ -62,6 +66,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)sendClicked:(id)sender {
+    
+    [self.hoodie writeTextOnHoodie:self.textOverride.text];
+}
 
 /*
 #pragma mark - Navigation
