@@ -28,6 +28,7 @@ FSTSavedRecipeManager* recipeManager;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     recipeManager = [FSTSavedRecipeManager sharedInstance];
+    self.currentParagon.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

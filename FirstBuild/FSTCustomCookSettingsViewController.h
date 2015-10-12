@@ -10,7 +10,7 @@
 #import "FSTCookSettingsViewController.h"
 #import "FSTStagePickerManager.h"
 
-@interface FSTCustomCookSettingsViewController : FSTCookSettingsViewController <FSTStagePickerManagerDelegate>
+@interface FSTCustomCookSettingsViewController : FSTCookSettingsViewController <FSTStagePickerManagerDelegate, FSTParagonDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *minPickerHeight; // height of min time picker
 

@@ -10,7 +10,7 @@
 #import "FSTSavedRecipeTableViewController.h"
 #import "FSTParagon.h"
 
-@interface FSTSavedRecipeViewController : UIViewController <FSTSavedRecipeTableDelegate>
+@interface FSTSavedRecipeViewController : UIViewController <FSTSavedRecipeTableDelegate, FSTParagonDelegate>
 
 @property FSTParagon* currentParagon;
 

@@ -11,7 +11,7 @@
 #import "FSTParagon.h"
 #import "FSTCookSettingsViewController.h"
 
-@interface FSTBeefSettingsViewController : FSTCookSettingsViewController
+@interface FSTBeefSettingsViewController : FSTCookSettingsViewController <FSTParagonDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *beefSettingsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *maxBeefSettingsLabel;

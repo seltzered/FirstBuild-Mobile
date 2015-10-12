@@ -17,7 +17,6 @@
 @implementation FSTCustomCookSettingsViewController
 {
     NSObject *_cookConfigurationSetObserver;
-    
     FSTStagePickerManager* pickerManager;
 }
 
@@ -58,34 +57,12 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
 }
 
-- (void)removeObservers
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookConfigurationSetObserver];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [self removeObservers];
-}
-
 - (void) viewWillAppear:(BOOL)animated { //want to make the segue faster
     
     [self resetPickerHeights];
     [self updateLabels]; // set them to current selection (decided by preset hour, minute, temp index
     
     self.continueTapGesturerRecognizer.enabled = YES;
-    
-    //setup the observer so we know when the temperature wrote
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    __weak typeof(self) weakSelf = self;
-    
-    _cookConfigurationSetObserver = [center addObserverForName:FSTCookConfigurationSetNotification
-                                                  object:weakSelf.currentParagon
-                                                   queue:nil
-                                              usingBlock:^(NSNotification *notification)
-   {
-       [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self];
-   }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -200,5 +177,10 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     }
 }
 
+#pragma mark - <FSTParagonDelegate>
+- (void)cookConfigurationSet
+{
+    [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self];
+}
 
 @end

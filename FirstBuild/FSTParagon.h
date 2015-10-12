@@ -15,7 +15,12 @@
 
 @protocol FSTParagonDelegate <NSObject>
 
-- (void) actualTemperatureChanged: (NSNumber*) temperature;
+@optional - (void) actualTemperatureChanged: (NSNumber*) temperature;
+@optional - (void) cookModeChanged: (ParagonCookMode) cookMode;
+@optional - (void) cookConfigurationChanged;
+@optional - (void) cookConfigurationSet;
+@optional - (void) holdTimerSet;
+@optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
 
 @end
 
@@ -24,13 +29,7 @@
 @property (nonatomic, weak) id<FSTParagonDelegate> delegate;
 
 extern NSString * const FSTServiceParagon ;
-extern NSString * const FSTCookingModeChangedNotification;
-extern NSString * const FSTCookConfigurationSetNotification;
-extern NSString * const FSTHoldTimerSetNotification;
-extern NSString * const FSTCookConfigurationChangedNotification;
 
-@property (nonatomic, strong) NSString* serialNumber;
-@property (nonatomic, strong) NSString* modelNumber;
 @property (nonatomic, strong) NSNumber* recipeId;
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;

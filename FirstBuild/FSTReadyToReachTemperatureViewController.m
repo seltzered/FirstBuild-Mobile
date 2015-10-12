@@ -24,21 +24,7 @@ NSObject* _cookModeChangedObserver;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     
-    __weak typeof(self) weakSelf = self;
-    
-    _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
-                                                      object:weakSelf.currentParagon
-                                                       queue:nil
-                                                  usingBlock:^(NSNotification *notification)
-    {
-       if(weakSelf.currentParagon.cookMode != FSTCookingStateOff)
-       {
-           [weakSelf performSegueWithIdentifier:@"segueCooking" sender:weakSelf];
-       }
-    }];
     self.navigationItem.hidesBackButton = YES;
     // remove the back button
     NSMutableArray* pushImages = [[NSMutableArray alloc] init];
@@ -56,16 +42,8 @@ NSObject* _cookModeChangedObserver;
     [self.pushButtonImageView setAnimationImages:pushImages]; // assign all the frames
     [self.pushButtonImageView setAnimationDuration:2.0];
     [self.pushButtonImageView startAnimating];
-}
-
--(void)removeObservers
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
-}
-
--(void)dealloc
-{
-    [self removeObservers];
+    
+    self.currentParagon.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,13 +59,10 @@ NSObject* _cookModeChangedObserver;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [self removeObservers];
-
     if ([segue.destinationViewController isKindOfClass:[FSTCookingViewController class]])
     {
         ((FSTCookingViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,6 +72,16 @@ NSObject* _cookModeChangedObserver;
 
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon];
+}
+
+#pragma mark - <FSTParagonDelegate>
+
+- (void) cookModeChanged:(ParagonCookMode)cookMode
+{
+    if(self.currentParagon.cookMode != FSTCookingStateOff)
+    {
+        [self performSegueWithIdentifier:@"segueCooking" sender:self];
+    }
 }
 
 @end
