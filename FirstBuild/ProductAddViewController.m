@@ -10,6 +10,7 @@
 #import <SWRevealViewController.h>
 #import "FSTHumanaPillBottle.h"
 #import "FSTParagon.h"
+#import "FSTHoodie.h"
 #import "FSTBleCommissioningViewController.h"
 
 @interface ProductAddViewController ()
@@ -26,7 +27,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +132,7 @@
     [self performSegueWithIdentifier:@"segueAddHumanaPillBottle" sender:[FSTHumanaPillBottle class]];
 }
 - (IBAction)hoodieTouchHandler:(id)sender {
-    [self performSegueWithIdentifier:@"segueAddHoodie" sender:[FSTParagon class]];
+    [self performSegueWithIdentifier:@"segueAddHoodie" sender:[FSTHoodie class]];
 }
 
 - (IBAction)paragonTouchHandler:(id)sender

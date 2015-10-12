@@ -16,4 +16,6 @@
 
 @property (nonatomic, weak) id<FSTHoodieDelegate> delegate;
 
+- (void) writeTextOnHoodie: (NSString*)text;
+
 @end

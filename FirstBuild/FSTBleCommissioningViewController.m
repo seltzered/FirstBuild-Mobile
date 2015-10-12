@@ -14,6 +14,7 @@
 #import "FSTHumanaPillBottle.h"
 #import "FSTParagon.h"
 #import "FSTGECooktop.h"
+#import "FSTHoodie.h"
 
 @interface FSTBleCommissioningViewController ()
 
@@ -128,6 +129,10 @@ CBPeripheral* _currentlySelectedPeripheral;
     else if(self.bleProductClass == [FSTGECooktop class])
     {
         [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
+    }
+    else if(self.bleProductClass == [FSTHoodie class])
+    {
+        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"713D0000-503E-4C75-BA94-3148F18D941E"];
     }
     
     [self.wheelBackground.layer setCornerRadius:self.wheelBackground.frame.size.width/2]; // make it a circle

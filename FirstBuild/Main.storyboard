@@ -35,7 +35,6 @@
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
             <string>PTSans-NarrowBold</string>
             <string>PTSans-NarrowBold</string>
-            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
@@ -1181,42 +1180,10 @@
                                                         <constraint firstAttribute="height" constant="1" id="QhY-uq-VDX"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yw0-Ol-Mnn" userLabel="battery" customClass="ProductBatteryView">
-                                                    <rect key="frame" x="546" y="31" width="6" height="12"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="20" id="Fd7-0F-HhC"/>
-                                                        <constraint firstAttribute="width" secondItem="yw0-Ol-Mnn" secondAttribute="height" multiplier="1:2" id="yti-ra-DQ0"/>
-                                                    </constraints>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="Fd7-0F-HhC"/>
-                                                        </mask>
-                                                    </variation>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friendlyName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDI-SL-ArL" userLabel="friendlyname">
                                                     <rect key="frame" x="23" y="20" width="93" height="26"/>
                                                     <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="20"/>
                                                     <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Refill" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWn-Bl-Er6" userLabel="status">
-                                                    <rect key="frame" x="522" y="0.0" width="29.5" height="21"/>
-                                                    <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="16"/>
-                                                    <color key="textColor" red="0.83137254900000002" green="0.20000000000000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="14"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oks-da-ZQj">
-                                                    <rect key="frame" x="498" y="23" width="46" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="46" id="HTN-M3-nCn"/>
-                                                        <constraint firstAttribute="height" constant="25" id="qws-wW-e52"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoM-VA-Grw" userLabel="disabledView">
@@ -1255,8 +1222,8 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="ler-ms-pa9"/>
                                                             <exclude reference="aqY-Jv-adO"/>
+                                                            <exclude reference="ler-ms-pa9"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -1264,37 +1231,24 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <gestureRecognizers/>
                                             <constraints>
-                                                <constraint firstItem="yw0-Ol-Mnn" firstAttribute="width" secondItem="oks-da-ZQj" secondAttribute="width" id="4uS-6F-zP9"/>
                                                 <constraint firstItem="LDI-SL-ArL" firstAttribute="top" secondItem="5zz-z5-zx0" secondAttribute="bottom" constant="-3" id="6BV-hZ-5zv"/>
-                                                <constraint firstAttribute="height" secondItem="yw0-Ol-Mnn" secondAttribute="height" multiplier="2.4" id="79w-OA-V9Z"/>
                                                 <constraint firstItem="LDI-SL-ArL" firstAttribute="leading" secondItem="5zz-z5-zx0" secondAttribute="trailing" constant="-37" id="8GR-91-4bx"/>
                                                 <constraint firstItem="uoM-VA-Grw" firstAttribute="leading" secondItem="pyP-Mn-klM" secondAttribute="leading" constant="20" symbolic="YES" id="Au1-SH-yxv"/>
                                                 <constraint firstAttribute="width" secondItem="uoM-VA-Grw" secondAttribute="width" id="BFb-Sk-ueM"/>
                                                 <constraint firstAttribute="centerY" secondItem="plx-gN-Rs2" secondAttribute="centerY" id="CG7-2w-Snk"/>
                                                 <constraint firstAttribute="centerY" secondItem="uoM-VA-Grw" secondAttribute="centerY" id="E70-9w-CuP"/>
-                                                <constraint firstAttribute="trailing" secondItem="oks-da-ZQj" secondAttribute="trailing" constant="40" id="Fnw-cy-BRp"/>
-                                                <constraint firstItem="yw0-Ol-Mnn" firstAttribute="height" secondItem="oks-da-ZQj" secondAttribute="height" id="Gnh-Vb-Wav"/>
                                                 <constraint firstAttribute="trailing" secondItem="5MN-BF-nkk" secondAttribute="trailing" id="HjB-3Z-gkB"/>
                                                 <constraint firstAttribute="centerX" secondItem="uoM-VA-Grw" secondAttribute="centerX" id="Jem-aG-9ba"/>
                                                 <constraint firstAttribute="height" secondItem="uoM-VA-Grw" secondAttribute="height" constant="1" id="Mfi-Qc-eoh"/>
-                                                <constraint firstItem="OWn-Bl-Er6" firstAttribute="trailing" secondItem="yw0-Ol-Mnn" secondAttribute="trailing" id="NG0-jV-v33"/>
-                                                <constraint firstItem="yw0-Ol-Mnn" firstAttribute="leading" secondItem="oks-da-ZQj" secondAttribute="trailing" constant="2" id="RNN-sv-8Fq"/>
-                                                <constraint firstItem="yw0-Ol-Mnn" firstAttribute="centerY" secondItem="oks-da-ZQj" secondAttribute="centerY" constant="2" id="Tnk-0f-chj"/>
                                                 <constraint firstItem="5MN-BF-nkk" firstAttribute="top" secondItem="pyP-Mn-klM" secondAttribute="top" constant="1" id="UeN-Le-5fA"/>
                                                 <constraint firstItem="uoM-VA-Grw" firstAttribute="top" secondItem="5MN-BF-nkk" secondAttribute="bottom" constant="5" id="WI1-oW-jBu"/>
                                                 <constraint firstAttribute="centerY" secondItem="5zz-z5-zx0" secondAttribute="centerY" id="dqa-0I-EWh"/>
                                                 <constraint firstAttribute="bottom" secondItem="uoM-VA-Grw" secondAttribute="bottom" constant="5" id="e93-hs-Z9Z"/>
                                                 <constraint firstItem="5MN-BF-nkk" firstAttribute="leading" secondItem="pyP-Mn-klM" secondAttribute="leading" id="ePA-V3-eTL"/>
-                                                <constraint firstItem="yw0-Ol-Mnn" firstAttribute="width" secondItem="pyP-Mn-klM" secondAttribute="width" multiplier="0.065" id="mep-ah-x4Z"/>
                                                 <constraint firstItem="5zz-z5-zx0" firstAttribute="leading" secondItem="pyP-Mn-klM" secondAttribute="leading" id="o1A-Ul-OUd"/>
                                                 <constraint firstItem="plx-gN-Rs2" firstAttribute="leading" secondItem="uoM-VA-Grw" secondAttribute="trailing" constant="5" id="oZO-uH-YZQ"/>
-                                                <constraint firstItem="OWn-Bl-Er6" firstAttribute="leading" secondItem="LDI-SL-ArL" secondAttribute="trailing" constant="30" id="sj8-Vi-CSx"/>
-                                                <constraint firstItem="OWn-Bl-Er6" firstAttribute="bottom" secondItem="yw0-Ol-Mnn" secondAttribute="top" constant="-10" id="u1Z-35-9hI"/>
                                                 <constraint firstItem="5zz-z5-zx0" firstAttribute="height" secondItem="pyP-Mn-klM" secondAttribute="height" multiplier="0.6" id="uWl-fG-TEN"/>
-                                                <constraint firstAttribute="centerY" secondItem="oks-da-ZQj" secondAttribute="centerY" constant="-22" id="vkB-9H-nff"/>
                                                 <constraint firstAttribute="trailing" secondItem="plx-gN-Rs2" secondAttribute="trailing" constant="10" id="wYn-Dc-nRs"/>
-                                                <constraint firstItem="LDI-SL-ArL" firstAttribute="centerY" secondItem="OWn-Bl-Er6" secondAttribute="centerY" id="yJU-Cn-XdG"/>
-                                                <constraint firstItem="yw0-Ol-Mnn" firstAttribute="height" secondItem="pyP-Mn-klM" secondAttribute="height" multiplier="0.5" id="yMu-4B-Edd"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
@@ -1302,16 +1256,10 @@
                                                     <exclude reference="5MN-BF-nkk"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="e93-hs-Z9Z"/>
-                                                    <exclude reference="WI1-oW-jBu"/>
                                                     <exclude reference="Au1-SH-yxv"/>
-                                                    <exclude reference="yJU-Cn-XdG"/>
-                                                    <exclude reference="sj8-Vi-CSx"/>
+                                                    <exclude reference="WI1-oW-jBu"/>
+                                                    <exclude reference="e93-hs-Z9Z"/>
                                                     <exclude reference="oZO-uH-YZQ"/>
-                                                    <exclude reference="4uS-6F-zP9"/>
-                                                    <exclude reference="Gnh-Vb-Wav"/>
-                                                    <exclude reference="mep-ah-x4Z"/>
-                                                    <exclude reference="yMu-4B-Edd"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -1335,15 +1283,11 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="arrowButton" destination="plx-gN-Rs2" id="VFH-Jj-cjH"/>
-                                    <outlet property="batteryLabel" destination="oks-da-ZQj" id="sY2-cc-PUs"/>
-                                    <outlet property="batteryView" destination="yw0-Ol-Mnn" id="9la-MB-mho"/>
                                     <outlet property="disabledView" destination="uoM-VA-Grw" id="q36-fL-Dn8"/>
                                     <outlet property="friendlyName" destination="LDI-SL-ArL" id="XDn-ts-fq1"/>
                                     <outlet property="loadingProgressView" destination="FvW-jV-TPt" id="7rq-UA-ysZ"/>
                                     <outlet property="mainView" destination="pyP-Mn-klM" id="Lcp-av-gMG"/>
                                     <outlet property="offlineLabel" destination="6ng-lK-Xno" id="aDP-4C-tcF"/>
-                                    <outlet property="paragonStatusLabel" destination="OWn-Bl-Er6" id="z0q-C2-bpD"/>
-                                    <outlet property="statusLabel" destination="OWn-Bl-Er6" id="2B5-uB-5hD"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1386,7 +1330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EiV-CA-Qd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3614" y="377.5"/>
+            <point key="canvasLocation" x="3766" y="-342.5"/>
         </scene>
         <!--Product Add Wrapper View Controller-->
         <scene sceneID="O4i-X2-52u">
@@ -1511,7 +1455,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <segue destination="cXR-UM-Ibc" kind="show" id="cPM-Uq-Uiz"/>
+                                    <segue destination="cXR-UM-Ibc" kind="show" identifier="" id="cPM-Uq-Uiz"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paragon" id="bR3-Vu-UYR" userLabel="paragon">
@@ -1646,6 +1590,7 @@
                     <connections>
                         <segue destination="M69-p8-HAj" kind="show" identifier="segueAddHumanaPillBottle" id="FdG-5j-Osq"/>
                         <segue destination="r3e-eo-PJC" kind="show" identifier="segueAddParagon" id="q9S-gx-jYB"/>
+                        <segue destination="oC2-A0-T4g" kind="show" identifier="segueAddHoodie" id="VlI-JL-Azi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cy1-Nv-JC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1688,7 +1633,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTY-qA-MHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3614" y="954.5"/>
+            <point key="canvasLocation" x="3766" y="178.5"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="9n3-9f-QcP">
@@ -1711,7 +1656,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U8G-V1-1fR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3614" y="1622"/>
+            <point key="canvasLocation" x="3766" y="709.5"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="dUQ-0C-nfi">
+            <objects>
+                <viewController id="oC2-A0-T4g" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dLl-Dx-x6a"/>
+                        <viewControllerLayoutGuide type="bottom" id="J4q-EN-kyn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pod-3H-AUd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="427"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lXd-7g-DU9"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="FSTHumanaPillBottleBleCommissioning"/>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tQ6-Lq-tQb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3766" y="1380.5"/>
         </scene>
     </scenes>
     <resources>

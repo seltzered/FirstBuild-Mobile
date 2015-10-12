@@ -43,9 +43,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         DLog(@"successfully wrote FSTCharacteristicHoodieWrite");
         //[self handleCooktimeWritten];
     }
-    
 }
-
 
 -(void)readHandler: (CBCharacteristic*)characteristic
 {
@@ -54,14 +52,13 @@ __weak NSTimer* _readCharacteristicsTimer;
     if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicHoodieNotify])
     {
         NSLog(@"char: FSTCharacteristicHoodieNotify, data: %@", characteristic.value);
-        //not implemented
+        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicHoodieNotify];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelHoodie])
     {
         [self handleBatteryLevel:characteristic];
     }
 
-    
     NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
     NSInteger requiredCount = 0; // count the number of discovered characteristics
     for (NSString* characteristic in requiredEnum) {
@@ -111,10 +108,13 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     //NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
-    
 }
 
-
+/**
+ *  call method called when characteristics are discovered
+ *
+ *  @param characteristics an array of the characteristics
+ */
 -(void)handleDiscoverCharacteristics: (NSArray*)characteristics
 {
     [super handleDiscoverCharacteristics:characteristics];
@@ -157,6 +157,28 @@ __weak NSTimer* _readCharacteristicsTimer;
         }
     }
 }
+
+- (void) writeTextOnHoodie: (NSString*)text
+{
+    NSUInteger left = text.length;
+    NSUInteger lastPosition = 0;
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicHoodieWrite];
+    
+    while (left > 0)
+    {
+        NSData *data = [[text substringWithRange:NSMakeRange(lastPosition, lastPosition+19)] dataUsingEncoding:NSUTF8StringEncoding];
+        
+        lastPosition = lastPosition+19;
+        
+        NSLog(@"to write %s", data);
+//        if (characteristic)
+//        {
+//            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+//        }
+       
+    }
+}
+
 
 -(void)dealloc
 {
