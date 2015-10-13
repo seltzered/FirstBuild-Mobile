@@ -106,7 +106,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     [data getBytes:bytes length:characteristic.value.length];
     self.batteryLevel = [NSNumber numberWithUnsignedInt:bytes[0]];
     
-    //NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
 }
 
@@ -160,25 +159,31 @@ __weak NSTimer* _readCharacteristicsTimer;
 
 - (void) writeTextOnHoodie: (NSString*)text
 {
-    NSUInteger left = text.length;
-    NSUInteger lastPosition = 0;
+    NSUInteger chunkSize = 20;
+    
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicHoodieWrite];
     
-    while (left > 0)
+    if (!characteristic)
     {
-        NSData *data = [[text substringWithRange:NSMakeRange(lastPosition, lastPosition+19)] dataUsingEncoding:NSUTF8StringEncoding];
-        
-        lastPosition = lastPosition+19;
-        
-        NSLog(@"to write %s", data);
-//        if (characteristic)
-//        {
-//            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-//        }
-       
+        return;
     }
+    
+    for (int i = 0; i < text.length ; i += chunkSize)
+    {
+        if (i + chunkSize > text.length)
+        {
+            chunkSize = text.length - i;
+        }
+       
+        NSData *data = [[text substringWithRange:NSMakeRange(i, chunkSize)] dataUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"to write %@", data);
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
+    }
+    char nullterm[] = "\0";
+    NSData * data = [NSData dataWithBytes:nullterm length:1];
+    NSLog(@"to write %@", data);
+    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
 }
-
 
 -(void)dealloc
 {

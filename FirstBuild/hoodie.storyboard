@@ -32,16 +32,30 @@
                                     <action selector="sendClicked:" destination="KAm-Qr-YWf" eventType="touchUpInside" id="90U-Wk-eRk"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q5g-3S-TpQ">
+                                <rect key="frame" x="150" y="107" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auto send" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feZ-Me-oww">
+                                <rect key="frame" x="216" y="112" width="76" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="feZ-Me-oww" firstAttribute="top" secondItem="UUt-wZ-zp0" secondAttribute="bottom" constant="12" id="8iD-rH-5nt"/>
                             <constraint firstItem="UUt-wZ-zp0" firstAttribute="centerX" secondItem="a61-OO-aJd" secondAttribute="centerX" id="8qV-8c-QzM"/>
                             <constraint firstItem="UUt-wZ-zp0" firstAttribute="top" secondItem="Zwe-s9-7PH" secondAttribute="bottom" constant="50" id="9Th-GC-MvS"/>
+                            <constraint firstItem="feZ-Me-oww" firstAttribute="leading" secondItem="q5g-3S-TpQ" secondAttribute="trailing" constant="17" id="GNL-Mz-O5I"/>
                             <constraint firstItem="2Wd-es-GSu" firstAttribute="top" secondItem="UUt-wZ-zp0" secondAttribute="bottom" constant="8" id="cMB-2H-ANu"/>
+                            <constraint firstItem="q5g-3S-TpQ" firstAttribute="leading" secondItem="UUt-wZ-zp0" secondAttribute="leading" id="iqi-zj-yiY"/>
+                            <constraint firstItem="q5g-3S-TpQ" firstAttribute="top" secondItem="UUt-wZ-zp0" secondAttribute="bottom" constant="7" id="mzB-eC-2Xs"/>
                             <constraint firstItem="2Wd-es-GSu" firstAttribute="trailing" secondItem="UUt-wZ-zp0" secondAttribute="trailing" id="z9Z-Tu-Y1c"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="autoSwitch" destination="q5g-3S-TpQ" id="ZWI-Ld-LQ4"/>
                         <outlet property="textOverride" destination="UUt-wZ-zp0" id="9qa-Hd-JHk"/>
                     </connections>
                 </viewController>

@@ -12,52 +12,60 @@
 @interface FSTHoodieViewController ()
 
 @property (strong, nonatomic) IBOutlet UITextField *textOverride;
+@property (strong, nonatomic) IBOutlet UISwitch *autoSwitch;
 
 @end
 
 @implementation FSTHoodieViewController
+{
+    STTwitterAPI *twitter;
+    NSString *currentText;
+}
 
-
+//TODO: dealloc/memory stuff
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self startTwitterListener];
+    self.autoSwitch.on = NO;
     // Do any additional setup after loading the view.
 }
 
 - (void)startTwitterListener
 {
-    STTwitterAPI *twitter = [STTwitterAPI twitterAPIOSWithFirstAccount];
+    twitter = [STTwitterAPI twitterAPIOSWithFirstAccount];
     
     __weak typeof(self) weakSelf = self;
+    
     
     [twitter verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
         NSLog(@"-- Account: %@", username);
         
-        [twitter postStatusesFilterUserIDs:nil
-                           keywordsToTrack:@[@"syria"]
-                     locationBoundingBoxes:nil
-                             stallWarnings:nil
-                             progressBlock:^(NSDictionary *json, STTwitterStreamJSONType type) {
-                                 
-                                 weakSelf.textOverride.text = [json objectForKey:@"text"] ;
-                                 if (type != STTwitterStreamJSONTypeTweet) {
-                                     NSLog(@"Invalid tweet (class %@): %@", [json class], json);
-                                     exit(1);
-                                     return;
-                                 }
-                                 
-                                 printf("-----------------------------------------------------------------\n");
-                                 printf("-- user: @%s\n", [[json valueForKeyPath:@"user.screen_name"] cStringUsingEncoding:NSUTF8StringEncoding]);
-                                 printf("-- text: %s\n", [[json objectForKey:@"text"] cStringUsingEncoding:NSUTF8StringEncoding]);
-                                 
-                             } errorBlock:^(NSError *error) {
-                                 NSLog(@"Stream error: %@", error);
-                                 exit(1);
-                             }];
-        
+        [self tick];
+        [NSTimer scheduledTimerWithTimeInterval:5.0
+                                         target:weakSelf
+                                       selector:@selector(tick)
+                                       userInfo:nil
+                                        repeats:YES];
     } errorBlock:^(NSError *error) {
         NSLog(@"-- %@", [error localizedDescription]);
-        exit(1);
+    }];
+}
+
+- (void)tick
+{
+    [twitter getSearchTweetsWithQuery:@"#smarthoodie" successBlock:^(NSDictionary *searchMetadata, NSArray *statuses)
+    {
+        NSLog(@"Search data : %@",searchMetadata);
+        NSString *text = ((NSArray*)([statuses valueForKeyPath:@"text"]))[0];
+        
+        NSLog(@"data : %@",[statuses valueForKeyPath:@"text"]);
+        self.textOverride.text = text;
+        if (![currentText isEqualToString:text] && self.autoSwitch.on)
+        {
+            [self.hoodie writeTextOnHoodie:text];
+        }
+    } errorBlock:^(NSError *error) {
+        NSLog(@"Error : %@",error);
     }];
 }
 
@@ -67,7 +75,9 @@
 }
 
 - (IBAction)sendClicked:(id)sender {
-    
+//    for (int i =0; i<100; i++) {
+//        [self.hoodie writeTextOnHoodie:[NSString stringWithFormat:@"%d",i]];
+//    }
     [self.hoodie writeTextOnHoodie:self.textOverride.text];
 }
 
