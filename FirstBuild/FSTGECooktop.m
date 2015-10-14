@@ -11,6 +11,9 @@
 //#import "FSTGECooktopCookingSession.h"
 
 @implementation FSTGECooktop
+{
+    NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+}
 
 ////notifications
 //NSString * const FSTActualTemperatureChangedNotification    = @"FSTActualTemperatureChangedNotification";
@@ -42,14 +45,8 @@ NSString * const FSTGECooktopCharacteristicCurrentTemperature    = @"8F080B1C-7C
 NSString * const FSTGECooktopCharacteristicRecipeId              = @"FF";
 
 
-NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-
-
 
 //TODO put sizes for the characteristics here and remove magic numbers below
-
-
-__weak NSTimer* _readCharacteristicsTimer;
 
 #pragma mark - Allocation
 
@@ -87,11 +84,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     }
     
     return self;
-}
-
--(void)dealloc
-{
-    [_readCharacteristicsTimer invalidate];
 }
 
 #pragma mark - External Interface Selectors

@@ -11,8 +11,6 @@
 #import "FSTSavedRecipeManager.h"
 //#import "FSTParagonCookingSession.h" 
 
-@implementation FSTParagon
-
 typedef enum {
     FSTParagonCookStateOff = 0,
     FSTParagonCookStateReachingTemperature = 1,
@@ -21,7 +19,11 @@ typedef enum {
     FSTParagonCookStateDone = 4
 } ParagonCookState;
 
-ParagonCookState _cookState;
+@implementation FSTParagon
+{
+    NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+    ParagonCookState _cookState;
+}
 
 //app info service
 NSString * const FSTServiceAppInfoService               = @"E936877A-8DD0-FAA7-B648-F46ACDA1F27B";
@@ -45,13 +47,6 @@ NSString * const FSTCharacteristicStartHoldTimer        = @"4F568285-9D2F-4C3D-8
 NSString * const FSTCharacteristicUserInfo              = @"007A7511-0D69-4749-AAE3-856CFF257912"; //write,read
 NSString * const FSTCharacteristicCookConfiguration     = @"E0BA615A-A869-1C9D-BE45-4E3B83F592D9"; //write,notify,read
 
-
-NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-
-//TODO put sizes for the characteristics here and remove magic numbers below
-
-__weak NSTimer* _readCharacteristicsTimer;
-
 static const uint8_t NUMBER_OF_STAGES = 5;
 static const uint8_t POS_POWER = 0;
 static const uint8_t POS_MIN_HOLD_TIME = POS_POWER + 1;
@@ -60,6 +55,7 @@ static const uint8_t POS_TARGET_TEMP = POS_MAX_HOLD_TIME + 2;
 static const uint8_t POS_AUTO_TRANSITION = POS_TARGET_TEMP + 2;
 static const uint8_t STAGE_SIZE = 8;
 
+//TODO put sizes for the characteristics here and remove magic numbers below
 
 #pragma mark - Allocation
 
@@ -101,11 +97,6 @@ static const uint8_t STAGE_SIZE = 8;
     }
 
     return self;
-}
-
--(void)dealloc
-{
-    [_readCharacteristicsTimer invalidate];
 }
 
 #pragma mark - External Interface Selectors
@@ -265,31 +256,23 @@ static const uint8_t STAGE_SIZE = 8;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
     {
         NSLog(@"char: FSTCharacteristicErrorState, data: %@", characteristic.value);
-
         //not implemented
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState])
     {
         NSLog(@"char: FSTCharacteristicProbeConnectionState, data: %@", characteristic.value);
-
-        // set required dictionary to true for this key
-        //characteristicStatusFlags.FSTCharacteristicProbeConnectionState = 1;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicProbeConnectionState];
         //not implemented
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
     {
         NSLog(@"char: FSTCharacteristicBatteryLevel, data: %@", characteristic.value);
-
-        //characteristicStatusFlags.FSTCharacteristicBatteryLevel = 1;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicBatteryLevel];
         [self handleBatteryLevel:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerState])
     {
         NSLog(@"char: FSTCharacteristicBurnerState, data: %@", characteristic.value);
-
-        //characteristicStatusFlags.FSTCharacteristicBurnerStatus = 1;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicBurnerState];
         [self handleBurnerStatus:characteristic];
     }
@@ -312,16 +295,12 @@ static const uint8_t STAGE_SIZE = 8;
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
     {
-        //NSLog(@"char: FSTCharacteristicCurrentTemperature, data: %@", characteristic.value);
-
-        //characteristicStatusFlags.FSTCharacteristicCurrentTemperature = 1;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentTemperature];
         [self handleCurrentTemperature:characteristic];
     }
     else if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicRemainingHoldTime])
     {
         NSLog(@"char: FSTCharacteristicRemainingHoldTime, data: %@", characteristic.value);
-
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRemainingHoldTime];
         [self handleRemainingHoldTime:characteristic];
     }// end all characteristic cases

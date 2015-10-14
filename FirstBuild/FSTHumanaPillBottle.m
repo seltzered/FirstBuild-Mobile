@@ -9,19 +9,18 @@
 #import "FSTHumanaPillBottle.h"
 
 @implementation FSTHumanaPillBottle
+{
+    NSTimeInterval _buttonDownStartTime;
+    NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+}
 
 //notifications
 NSString * const FSTHumanaPillBottleBatteryLevelChangedNotification         = @"FSTHumanaPillBottleBatteryLevelChangedNotification";
-
-
-NSTimeInterval _buttonDownStartTime;
 
 //Blue Bean Characteristics
 //TODO: move standard characteristics to BLE base object
 NSString * const FSTCharacteristicSerialPassThrough       = @"A495FF11-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
 NSString * const FSTCharacteristicBatteryLevelDefault     = @"2A19"; //read,notify
-
-NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
 
 #pragma mark - Allocation
 

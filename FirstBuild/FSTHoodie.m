@@ -9,14 +9,13 @@
 #import "FSTHoodie.h"
 
 @implementation FSTHoodie
+{
+    NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+}
 
 NSString * const FSTCharacteristicHoodieWrite =  @"713D0003-503E-4C75-BA94-3148F18D941E";
 NSString * const FSTCharacteristicHoodieNotify = @"713D0002-503E-4C75-BA94-3148F18D941E";
-
 NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notify
-
-NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-__weak NSTimer* _readCharacteristicsTimer;
 
 - (id)init
 {
@@ -183,11 +182,6 @@ __weak NSTimer* _readCharacteristicsTimer;
     NSData * data = [NSData dataWithBytes:nullterm length:1];
     NSLog(@"to write %@", data);
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
-}
-
--(void)dealloc
-{
-    [_readCharacteristicsTimer invalidate];
 }
 
 @end
