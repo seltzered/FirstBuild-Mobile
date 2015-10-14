@@ -443,24 +443,6 @@ NSIndexPath *_indexPathForDeletion;
                 [productCell.statusLabel setText:@"Waiting..."];
                 break;
         }
-        //TODO: need to implement for GE and paragon
-        // check paragon cook modes to update status label
-//        if (paragon.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
-//        {
-//            [productCell.statusLabel setText:@"Preheating"];
-//        }
-//        else if(paragon.burnerMode == kPARAGON_PRECISION_HEATING)
-//        {
-//            [productCell.statusLabel setText:@"Cooking"];
-//        }
-//        else if(paragon.burnerMode == kPARAGON_OFF)
-//        {
-//            [productCell.statusLabel setText:@"Off"]; // might need more states
-//        }
-//        else
-//        {
-//            [productCell.statusLabel setText:@"!"];
-//        }
     }
     
     if (product.online)
@@ -528,26 +510,34 @@ NSIndexPath *_indexPathForDeletion;
         }
         else if ([product isKindOfClass:[FSTHoodie class]])
         {
-//            FSTHoodie* hoodie = (FSTHoodie*)product;
             [self performSegueWithIdentifier:@"segueHoodie" sender:product];
         }
         else if ([product isKindOfClass:[FSTParagon class]])
         {
-//            FSTParagon* paragon = (FSTParagon*)product;
+            FSTParagon* paragon = (FSTParagon*)product;
+            UIStoryboard* board;
             
-            //if we are heating or pre-heating then jump to the cooking view controller
-            //TODO: implement segue to the correct cook state
-            [self performSegueWithIdentifier:@"segueParagon" sender:product];
-//            if (paragon.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE || paragon.burnerMode == kPARAGON_PRECISION_HEATING)
-//            {
-//                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
-//                vc.currentParagon = paragon;
-//                [self.navigationController pushViewController:vc animated:YES];
-//            }
-//            else
-//            {
-//                [self performSegueWithIdentifier:@"segueParagon" sender:product];
-//            }
+            switch (paragon.cookMode)
+            {
+                case FSTCookingStateUnknown:
+                case FSTCookingStateOff:
+                    [self performSegueWithIdentifier:@"segueParagon" sender:product];
+                    break;
+                case FSTCookingStatePrecisionCookingReachingTemperature:
+                case FSTCookingStatePrecisionCookingReachingMinTime:
+                case FSTCookingDirectCooking:
+                case FSTCookingDirectCookingWithTime:
+                case FSTCookingStatePrecisionCookingWithoutTime:
+                case FSTCookingStatePrecisionCookingPastMaxTime:
+                case FSTCookingStatePrecisionCookingReachingMaxTime:
+                case FSTCookingStatePrecisionCookingTemperatureReached:
+                    board = [UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil];
+                    FSTCookingViewController *vc = [board instantiateViewControllerWithIdentifier:@"FSTCookingViewController"] ;
+                    vc.currentParagon = paragon;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    break;
+
+            }
         }
     }
 }
