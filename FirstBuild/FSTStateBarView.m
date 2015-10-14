@@ -26,6 +26,7 @@
 {
     [self setupDots];
     _numberOfStates = numberOfStates;
+    [self setNeedsDisplay];
 }
 
 - (NSNumber*) numberOfStates
@@ -170,7 +171,10 @@
     
 }
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect
+{
+    self.layer.sublayers = nil;
+    
     CGFloat barWidth = rect.size.width * (.2 * ([self.numberOfStates intValue]-1));
     CGFloat barXOrigin = (rect.size.width - barWidth) / 2;
     CGFloat y = rect.size.height/2;
@@ -186,10 +190,6 @@
     [underPath addLineToPoint:CGPointMake(barXOrigin + self.lineWidth, y)];
     [[UIColor lightGrayColor] setStroke];
     [underPath stroke];
-
-    
-    
-    
     
     //TODO:experimental
     self.ring = [CAShapeLayer layer];

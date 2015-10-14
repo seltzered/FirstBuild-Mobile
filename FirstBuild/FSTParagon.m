@@ -9,7 +9,6 @@
 
 #import "FSTParagon.h"
 #import "FSTSavedRecipeManager.h"
-//#import "FSTParagonCookingSession.h" 
 
 typedef enum {
     FSTParagonCookStateOff = 0,
@@ -75,8 +74,6 @@ static const uint8_t STAGE_SIZE = 8;
         //forcibly set the toBe cooking method to nil since we are just creating the paragon
         //object and there is not way it could exist yet
         self.session.toBeRecipe = nil;
-        
-//        self.burners = [NSArray arrayWithObjects:[FSTBurner new], [FSTBurner new],[FSTBurner new],[FSTBurner new],[FSTBurner new], nil];
         
         // booleans for all the required characteristics, tell us whether or not the characteristic loaded
         requiredCharacteristics = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
@@ -434,7 +431,7 @@ static const uint8_t STAGE_SIZE = 8;
     self.session.currentStage = self.session.activeRecipe.paragonCookingStages[stage];
     if ([self.delegate respondsToSelector:@selector(currentStageIndexChanged:)])
     {
-        [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: stage]];\
+        [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: stage]];
     }
 }
 

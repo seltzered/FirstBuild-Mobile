@@ -145,8 +145,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     ////TODO: HACK TEMP
     FSTParagonCookingStage* stage1 = [self.currentParagon.session.toBeRecipe addStage];
     stage1.maxPowerLevel = [NSNumber numberWithInt:7];
-    stage1.cookTimeMinimum = [NSNumber numberWithInt:20];
-    stage1.cookTimeMaximum = [NSNumber numberWithInt:4000];
+    stage1.cookTimeMinimum = [NSNumber numberWithInt:0];
+    stage1.cookTimeMaximum = [NSNumber numberWithInt:0];
     stage1.targetTemperature = [NSNumber numberWithInt:350];
     stage1.automaticTransition = [NSNumber numberWithBool:YES];
     ////HACK TEMP
