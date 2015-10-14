@@ -150,7 +150,7 @@ NSIndexPath *_indexPathForDeletion;
     }];
     
     
-    //cook mode changed on something, reload the data
+    //critical data changed on something
     _deviceEssentialDataChangedObserver = [center addObserverForName:FSTDeviceEssentialDataChangedNotification
                                                    object:nil
                                                     queue:nil
@@ -383,8 +383,6 @@ NSIndexPath *_indexPathForDeletion;
             {
                 productCell.offlineLabel.hidden = YES;
                 productCell.loadingProgressView.hidden = NO;
-                //TODO: needs to generic
-                //productCell.loadingProgressView.progress = [((FSTBleProduct*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
                 productCell.arrowButton.hidden = YES;
             }
             else
@@ -420,6 +418,31 @@ NSIndexPath *_indexPathForDeletion;
         //Taken out since those properties were not connected
         [productCell.statusLabel setText:@"<WIP>"];
 
+        switch (paragon.cookMode)
+        {
+            case FSTCookingStateOff:
+                [productCell.statusLabel setText:@"Off"];
+                break;
+            case FSTCookingStatePrecisionCookingReachingTemperature:
+                [productCell.statusLabel setText:@"Preheating"];
+                break;
+            case FSTCookingStatePrecisionCookingReachingMinTime:
+            case FSTCookingDirectCooking:
+            case FSTCookingDirectCookingWithTime:
+            case FSTCookingStatePrecisionCookingWithoutTime:
+                [productCell.statusLabel setText:@"Cooking"];
+                break;
+            case FSTCookingStatePrecisionCookingPastMaxTime:
+            case FSTCookingStatePrecisionCookingReachingMaxTime:
+                [productCell.statusLabel setText:@"Complete"];
+                break;
+            case FSTCookingStateUnknown:
+                [productCell.statusLabel setText:@"!"];
+                break;
+            case FSTCookingStatePrecisionCookingTemperatureReached:
+                [productCell.statusLabel setText:@"Waiting..."];
+                break;
+        }
         //TODO: need to implement for GE and paragon
         // check paragon cook modes to update status label
 //        if (paragon.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
