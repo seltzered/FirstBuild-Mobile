@@ -399,7 +399,10 @@ static const uint8_t STAGE_SIZE = 8;
     // since we have a new recipe the current stage is going to be the first one
     self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
     
-    [self.delegate cookConfigurationChanged];
+    if ([self.delegate respondsToSelector:@selector(cookConfigurationChanged)])
+    {
+        [self.delegate cookConfigurationChanged];
+    }
 }
 
 /**
@@ -429,7 +432,10 @@ static const uint8_t STAGE_SIZE = 8;
     }
     
     self.session.currentStage = self.session.activeRecipe.paragonCookingStages[stage];
-    [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: stage]];
+    if ([self.delegate respondsToSelector:@selector(currentStageIndexChanged:)])
+    {
+        [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: stage]];\
+    }
 }
 
 /**
@@ -497,7 +503,11 @@ static const uint8_t STAGE_SIZE = 8;
     //only notify if we have changed cook modes
     if (self.cookMode != currentCookMode)
     {
-        [self.delegate cookModeChanged:self.cookMode];
+        if ([self.delegate respondsToSelector:@selector(cookModeChanged:)])
+        {
+            [self.delegate cookModeChanged:self.cookMode];
+        }
+        
         [self notifyDeviceEssentialDataChanged];
     }
 }
@@ -587,7 +597,10 @@ static const uint8_t STAGE_SIZE = 8;
     [data getBytes:bytes length:characteristic.value.length];
     uint16_t raw = OSReadBigInt16(bytes, 0);
     self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:raw/100];
-    [self.delegate actualTemperatureChanged:self.session.currentProbeTemperature];
+    if ([self.delegate respondsToSelector:@selector(actualTemperatureChanged:)])
+    {
+        [self.delegate actualTemperatureChanged:self.session.currentProbeTemperature];
+    }
 }
 
 #pragma mark - Characteristic Discovery Handler
