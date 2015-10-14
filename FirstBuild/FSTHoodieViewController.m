@@ -62,6 +62,7 @@
         self.textOverride.text = text;
         if (![currentText isEqualToString:text] && self.autoSwitch.on)
         {
+            currentText = text;
             [self.hoodie writeTextOnHoodie:text];
         }
     } errorBlock:^(NSError *error) {
