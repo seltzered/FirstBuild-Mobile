@@ -41,7 +41,7 @@
         NSLog(@"-- Account: %@", username);
         
         [self tick];
-        [NSTimer scheduledTimerWithTimeInterval:5.0
+        [NSTimer scheduledTimerWithTimeInterval:10.0
                                          target:weakSelf
                                        selector:@selector(tick)
                                        userInfo:nil
@@ -59,9 +59,10 @@
         NSString *text = ((NSArray*)([statuses valueForKeyPath:@"text"]))[0];
         
         NSLog(@"data : %@",[statuses valueForKeyPath:@"text"]);
-        self.textOverride.text = text;
+        
         if (![currentText isEqualToString:text] && self.autoSwitch.on)
         {
+            self.textOverride.text = text;
             currentText = text;
             [self.hoodie writeTextOnHoodie:text];
         }
