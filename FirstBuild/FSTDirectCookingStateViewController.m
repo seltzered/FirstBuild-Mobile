@@ -24,7 +24,7 @@
 }
 
 - (void) updatePercent {
-    self.circleProgressView.progressLayer.percent = self.burnerLevel;
+    self.circleProgressView.progressLayer.percent = (self.burnerLevel * 10)/100;
 }
 
 - (void)didReceiveMemoryWarning {

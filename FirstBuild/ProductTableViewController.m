@@ -406,7 +406,6 @@ NSIndexPath *_indexPathForDeletion;
     }
     else if ([product isKindOfClass:[FSTParagon class]])
     {
-        
         FSTParagon* paragon = (FSTParagon*)product; // cast it to check the cooking status
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellParagon" forIndexPath:indexPath];
         productCell.friendlyName.text = product.friendlyName;
@@ -428,6 +427,8 @@ NSIndexPath *_indexPathForDeletion;
                 break;
             case FSTCookingStatePrecisionCookingReachingMinTime:
             case FSTCookingDirectCooking:
+                [productCell.statusLabel setText:@"Direct"];
+                break;
             case FSTCookingDirectCookingWithTime:
             case FSTCookingStatePrecisionCookingWithoutTime:
                 [productCell.statusLabel setText:@"Cooking"];

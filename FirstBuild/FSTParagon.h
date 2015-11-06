@@ -21,6 +21,7 @@
 @optional - (void) cookConfigurationSet;
 @optional - (void) holdTimerSet;
 @optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
+@optional - (void) currentPowerLevelChanged: (NSNumber*) powerLevel;
 
 @end
 
@@ -36,7 +37,7 @@ extern NSString * const FSTServiceParagon ;
 @property (nonatomic, strong) NSNumber* remainingHoldTime;
 
 -(void)startTimerForCurrentStage;
--(void)sendRecipeToCooktop: (FSTRecipe*)recipe;
+-(BOOL)sendRecipeToCooktop: (FSTRecipe*)recipe;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;
 

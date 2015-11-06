@@ -140,18 +140,38 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.cookTimeMinimum = [pickerManager minMinutesChosen];
     stage.cookTimeMaximum = [pickerManager maxMinutesChosen];
     stage.cookingLabel = @"Custom Profile";
+    
+    
+//    stage.maxPowerLevel = [NSNumber numberWithInt:10];
+//    stage.automaticTransition = [NSNumber numberWithInt:2];
+//    stage.cookTimeMinimum = [NSNumber numberWithInt:0];
+//    stage.cookTimeMaximum = [NSNumber numberWithInt:0];
     //stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
     ////TODO: HACK TEMP
-    FSTParagonCookingStage* stage1 = [self.currentParagon.session.toBeRecipe addStage];
-    stage1.maxPowerLevel = [NSNumber numberWithInt:7];
-    stage1.cookTimeMinimum = [NSNumber numberWithInt:0];
-    stage1.cookTimeMaximum = [NSNumber numberWithInt:0];
-    stage1.targetTemperature = [NSNumber numberWithInt:350];
-    stage1.automaticTransition = [NSNumber numberWithBool:YES];
+//    FSTParagonCookingStage* stage1 = [self.currentParagon.session.toBeRecipe addStage];
+//    stage1.maxPowerLevel = [NSNumber numberWithInt:7];
+//    stage1.cookTimeMinimum = [NSNumber numberWithInt:0];
+//    stage1.cookTimeMaximum = [NSNumber numberWithInt:0];
+//    stage1.targetTemperature = [NSNumber numberWithInt:350];
+//    stage1.automaticTransition = [NSNumber numberWithBool:YES];
     ////HACK TEMP
 
-    [self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe];
+    //once the temperature is confirmed to be set then it will segue because it is
+    //waiting on the cookConfigurationSet delegate. we check the return status because
+    //the user may not have the correct cook mode
+    if (![self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe])
+    {
+        self.continueTapGesturerRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 - (void)dealloc

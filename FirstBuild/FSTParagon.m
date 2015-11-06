@@ -10,18 +10,30 @@
 #import "FSTParagon.h"
 #import "FSTSavedRecipeManager.h"
 
+// this defines the cookstates from the raw paragon cook state on the paragon
+// the overarching cook mode is defined in FSTPrecisionCooking.h in the
+// FSTParagonCookMode
 typedef enum {
     FSTParagonCookStateOff = 0,
     FSTParagonCookStateReachingTemperature = 1,
     FSTParagonCookStateReady = 2,
     FSTParagonCookStateCooking = 3,
-    FSTParagonCookStateDone = 4
+    FSTParagonCookStateDone = 4,
 } ParagonCookState;
+
+typedef enum {
+    FSTParagonUserSelectedCookModeScreenOff = 0,
+    FSTParagonUserSelectedCookModeDirect = 1,
+    FSTParagonUserSelectedCookModeRapid = 2,
+    FSTParagonUserSelectedCookModeGentle = 3,
+    FSTParagonUserSelectedCookModeRemote = 4
+} ParagonUserSelectedCookMode;
 
 @implementation FSTParagon
 {
     NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
     ParagonCookState _cookState;
+    ParagonUserSelectedCookMode _userSelectedCookMode;
 }
 
 //app info service
@@ -45,6 +57,11 @@ NSString * const FSTCharacteristicTempDisplayUnit       = @"C1382B17-2DE7-4593-B
 NSString * const FSTCharacteristicStartHoldTimer        = @"4F568285-9D2F-4C3D-864E-7047A30BD4A8"; //write
 NSString * const FSTCharacteristicUserInfo              = @"007A7511-0D69-4749-AAE3-856CFF257912"; //write,read
 NSString * const FSTCharacteristicCookConfiguration     = @"E0BA615A-A869-1C9D-BE45-4E3B83F592D9"; //write,notify,read
+
+//firmware
+NSString * const FSTCharacteristicOtaControlCommand     = @"4FB34AB1-6207-E5A0-484F-E24A7F638FFF"; //write,notify
+NSString * const FSTCharacteristicOtaImageData          = @"78282AE5-3060-C3B6-7D49-EC74702414E5"; //write
+
 
 static const uint8_t NUMBER_OF_STAGES = 5;
 static const uint8_t POS_POWER = 0;
@@ -86,11 +103,15 @@ static const uint8_t STAGE_SIZE = 8;
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicCookConfiguration,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicUserInfo,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicRemainingHoldTime,
+            [[NSNumber alloc] initWithBool:0], FSTCharacteristicUserSelectedCookMode,
+            [[NSNumber alloc] initWithBool:0], FSTCharacteristicCurrentPowerLevel,
                                    nil];
         
         //TODO: Hack! we need an actual recipe
         [self handleRecipeId:nil];
-
+        
+        _cookState = FSTParagonCookStateOff;
+        _cookMode = FSTCookingStateOff;
     }
 
     return self;
@@ -98,19 +119,32 @@ static const uint8_t STAGE_SIZE = 8;
 
 #pragma mark - External Interface Selectors
 
--(void)sendRecipeToCooktop: (FSTRecipe*)recipe
+-(BOOL)sendRecipeToCooktop: (FSTRecipe*)recipe
 {
     if (!recipe.paragonCookingStages)
     {
         DLog(@"recipe does not contain any stages");
-        return;
+        return NO;
     }
+    else if (_userSelectedCookMode ==  FSTParagonUserSelectedCookModeDirect ||
+             _userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
+    {
+        DLog(@"paragon is not in gentle or rapid cook mode");
+        return NO;
+    }
+    
     [self writeCookConfiguration:recipe];
+    return YES;
 }
 
 -(void)startTimerForCurrentStage
 {
     [self writeStartHoldTimer];
+}
+
+- (void)startOta
+{
+    [self writeStartOta];
 }
 
 #pragma mark - Write Handlers
@@ -146,12 +180,59 @@ static const uint8_t STAGE_SIZE = 8;
     }
 }
 
+-(void)writeStartOta
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
+    
+    Byte bytes[1];
+    bytes[0] = 0x01;
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+-(void)writeOtaDownloadCommand
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
+    
+    Byte bytes[3];
+    bytes[0] = 0x02;
+    OSWriteBigInt16(&bytes[1],   0, 23837);
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+//-(void)writeImage
+//{
+//    NSString *myFilePath = [[NSBundle mainBundle] pathForResource:@InBox ofType: @txt];
+//
+//}
+
+-(void)writeOtaImageVerify
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
+    
+    Byte bytes[1];
+    bytes[0] = 0x03;
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
 -(void)writeStartHoldTimer
 {
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicStartHoldTimer];
 
     Byte bytes[1];
     bytes[0] = 0x01;
+    
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
@@ -197,7 +278,7 @@ static const uint8_t STAGE_SIZE = 8;
         bytes[pos+POS_POWER] = [stage.maxPowerLevel unsignedCharValue];
         OSWriteBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],   0, [stage.cookTimeMinimum unsignedShortValue]);
         OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, [stage.cookTimeMaximum unsignedShortValue]);
-        OSWriteBigInt16(&bytes[pos+POS_TARGET_TEMP],     0, [stage.targetTemperature unsignedShortValue]);
+        OSWriteBigInt16(&bytes[pos+POS_TARGET_TEMP],     0, [stage.targetTemperature unsignedShortValue]*100);
         bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue];
     }
     
@@ -295,6 +376,18 @@ static const uint8_t STAGE_SIZE = 8;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentTemperature];
         [self handleCurrentTemperature:characteristic];
     }
+    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicUserSelectedCookMode])
+    {
+        NSLog(@"char: FSTCharacteristicUserSelectedCookMode, data: %@", characteristic.value);
+        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicUserSelectedCookMode];
+        [self handleUserSelectedCookMode:characteristic];
+    }
+    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentPowerLevel])
+    {
+        NSLog(@"char: FSTCharacteristicCurrentPowerLevel, data: %@", characteristic.value);
+        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentPowerLevel];
+        [self handleCurrentPowerLevel:characteristic];
+    }
     else if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicRemainingHoldTime])
     {
         NSLog(@"char: FSTCharacteristicRemainingHoldTime, data: %@", characteristic.value);
@@ -349,6 +442,26 @@ static const uint8_t STAGE_SIZE = 8;
     
 } // end assignToProperty
 
+
+-(void)handleCurrentPowerLevel: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length != 1)
+    {
+        DLog(@"handleCurrentPowerLevel length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
+    }
+    
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    self.session.currentPowerLevel = [NSNumber numberWithInt:bytes[0]];
+    
+    if ([self.delegate respondsToSelector:@selector(currentPowerLevelChanged:)])
+    {
+        [self.delegate currentPowerLevelChanged:self.session.currentPowerLevel];
+    }
+}
+
 /**
  *  Called when the cook configuration has changed (i.e. on load of the app), or directly read. If 
  *  the user sets the cook configuration from the app then after it successfully writes it a read is called
@@ -368,9 +481,11 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleCookConfiguration: (CBCharacteristic*)characteristic
 {
-    if (characteristic.value.length != 40)
+    //TODO: there is a bug, when reading a user selected mode of rapid or gentle then its
+    //only reporting 38 bytes.
+    if (!(characteristic.value.length == 40 || characteristic.value.length == 8 ||  characteristic.value.length == 38))
     {
-        DLog(@"handleCookConfiguration length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 40);
+        DLog(@"handleCookConfiguration length of %lu not what was expected, %d or %d", (unsigned long)characteristic.value.length, 40, 8);
         return;
     }
     
@@ -381,15 +496,28 @@ static const uint8_t STAGE_SIZE = 8;
     // the active recipe is no longer valid, lets create a new one
     self.session.activeRecipe = [FSTRecipe new];
     
+    uint8_t numberOfStages ;
+    
+    //TODO: there is a bug, when reading a user selected mode of rapid or gentle then its
+    //only reporting 38 bytes.
+    if (characteristic.value.length == 8 || characteristic.value.length == 38)
+    {
+        numberOfStages = 1;
+    }
+    else
+    {
+        numberOfStages = NUMBER_OF_STAGES;
+    }
+    
     // setup all the stages based on the incoming payload
-    for (uint8_t i=0; i < NUMBER_OF_STAGES; i++)
+    for (uint8_t i=0; i < numberOfStages; i++)
     {
         FSTParagonCookingStage* stage = [self.session.activeRecipe addStage];
         uint8_t pos = i * 8;
         stage.maxPowerLevel =       [NSNumber numberWithChar:bytes[pos+POS_POWER]];
         stage.cookTimeMinimum =     [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],0)];
         stage.cookTimeMaximum =     [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],0)];
-        stage.targetTemperature =   [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_TARGET_TEMP],0)];
+        stage.targetTemperature =   [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_TARGET_TEMP],0)/100];
         stage.automaticTransition = [NSNumber numberWithChar:bytes[pos+POS_AUTO_TRANSITION]];
     }
     
@@ -456,8 +584,8 @@ static const uint8_t STAGE_SIZE = 8;
 
 /**
  *  Called when the cook state is changed. Depending on the cook state from the paragon
- *  we then set the cook mode. 
- *  TODO: this is a little confusing and should probably be consolidated once we have the same number of states/modes
+ *  we then set the cook mode. this also takes into account what cook mode the user 
+ *  has selected on the actual paragon.
  *
  *  @param characteristic <#characteristic description#>
  */
@@ -474,25 +602,74 @@ static const uint8_t STAGE_SIZE = 8;
     [data getBytes:bytes length:characteristic.value.length];
     _cookState = bytes[0];
     
+    [self determineCookMode];
+}
+
+/**
+ * Called when the user selects a cook mode on the paragon
+ *
+ *
+ * @param characteristic BLE characteristc
+ */
+-(void)handleUserSelectedCookMode: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length != 1)
+    {
+        DLog(@"handleUserSelectedCookMode length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
+    }
+    
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    _userSelectedCookMode = bytes[0];
+    
+    [self determineCookMode];
+}
+
+-(void)determineCookMode
+{
     ParagonCookMode currentCookMode = self.cookMode;
     
-    if (_cookState == FSTParagonCookStateReachingTemperature)
+    if (_userSelectedCookMode == FSTParagonUserSelectedCookModeDirect)
     {
-        self.cookMode = FSTCookingStatePrecisionCookingReachingTemperature;
+        //we are in direct cook mode, determine what each of the states mean
+        if (_cookState == FSTParagonCookStateReachingTemperature)
+        {
+            self.cookMode = FSTCookingDirectCooking;
+        }
+        else if (_cookState == FSTParagonCookStateOff)
+        {
+            self.cookMode = FSTCookingStateOff;
+        }
     }
-    else if(_cookState == FSTParagonCookStateReady)
+    else if (
+             _userSelectedCookMode == FSTParagonUserSelectedCookModeGentle ||
+             _userSelectedCookMode == FSTParagonUserSelectedCookModeRapid ||
+             _userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
     {
-        self.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
+        if (_cookState == FSTParagonCookStateReachingTemperature)
+        {
+            self.cookMode = FSTCookingStatePrecisionCookingReachingTemperature;
+        }
+        else if(_cookState == FSTParagonCookStateReady)
+        {
+            self.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
+        }
+        else if(_cookState == FSTParagonCookStateCooking)
+        {
+            self.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
+        }
+        else if (_cookState == FSTParagonCookStateDone)
+        {
+            self.cookMode = FSTCookingStatePrecisionCookingReachingMaxTime;
+        }
+        else if (_cookState == FSTParagonCookStateOff)
+        {
+            self.cookMode = FSTCookingStateOff;
+        }
     }
-    else if(_cookState == FSTParagonCookStateCooking)
-    {
-        self.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
-    }
-    else if (_cookState == FSTParagonCookStateDone)
-    {
-        self.cookMode = FSTCookingStatePrecisionCookingReachingMaxTime;
-    }
-    else if (_cookState == FSTParagonCookStateOff)
+    else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
     {
         self.cookMode = FSTCookingStateOff;
     }
@@ -507,6 +684,7 @@ static const uint8_t STAGE_SIZE = 8;
         
         [self notifyDeviceEssentialDataChanged];
     }
+
 }
 
 -(void)handleRecipeId: (CBCharacteristic*)characteristic
@@ -616,6 +794,8 @@ static const uint8_t STAGE_SIZE = 8;
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCookConfiguration];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserInfo];
     [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicRemainingHoldTime];
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentPowerLevel];
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserSelectedCookMode];
     
     NSLog(@"=======================================================================");
     //NSLog(@"SERVICE %@", [service.UUID UUIDString]);
@@ -640,7 +820,9 @@ static const uint8_t STAGE_SIZE = 8;
                  [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState] ||
                  [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookState] ||
                  [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicRemainingHoldTime]
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicRemainingHoldTime] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserSelectedCookMode] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentPowerLevel]
                  )
             {
                 [self.peripheral readValueForCharacteristic:characteristic];

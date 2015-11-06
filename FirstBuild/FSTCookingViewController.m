@@ -110,6 +110,11 @@
             self.continueButton.hidden = YES;
             self.stageBar.hidden = YES;
             break;
+        case FSTCookingDirectCooking:
+            stateIdentifier = @"directStateSegue";
+            self.continueButton.hidden = YES;
+            self.stageBar.hidden = YES;
+            break;
         case FSTCookingStateOff:
             stateIdentifier = nil;
             self.stageBar.hidden = YES;
@@ -197,7 +202,9 @@
        containerVC.paragon = self.currentParagon;
        //[containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
        self.stateContainer = containerVC;
-   } else if ([segue.identifier isEqualToString:@"displayPopOut"]) {
+   }
+   else if ([segue.identifier isEqualToString:@"displayPopOut"])
+   {
        FSTSavedDisplayRecipeViewController* displayVC = (FSTSavedDisplayRecipeViewController*)segue.destinationViewController;
        displayVC.activeRecipe = self.currentParagon.session.toBeRecipe;
        displayVC.will_hide_cook = [NSNumber numberWithBool:YES]; // don't want them to select this and push on another cooking session.
@@ -224,6 +231,7 @@
     [self.delegate currentTemperatureChanged:[temperature doubleValue]];
 }
 
+
 - (void)holdTimerSet
 {
     [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
@@ -232,6 +240,11 @@
 - (void)cookModeChanged:(ParagonCookMode)cookMode
 {
     [self transitionToCurrentCookMode];
+}
+
+-(void)currentPowerLevelChanged:(NSNumber *)powerLevel
+{
+    [self.delegate burnerLevelChanged:[powerLevel doubleValue]];
 }
 
 - (void)cookConfigurationChanged

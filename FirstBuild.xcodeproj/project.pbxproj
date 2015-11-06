@@ -82,6 +82,7 @@
 		5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */; };
 		5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */; };
 		5B4486CD1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */; };
+		5B5495C41BDFFD410057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5B5495C31BDFFD050057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota */; };
 		5B6364B51BC2E23900322D4F /* hoodie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6364B41BC2E23900322D4F /* hoodie.storyboard */; settings = {ASSET_TAGS = (); }; };
 		5B6364B81BC2E27000322D4F /* FSTHoodie.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6364B71BC2E27000322D4F /* FSTHoodie.m */; settings = {ASSET_TAGS = (); }; };
 		5B6364BB1BC2E6CA00322D4F /* FSTHoodieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6364BA1BC2E6CA00322D4F /* FSTHoodieViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -308,6 +309,7 @@
 		5B44602B1B1E2601001A4953 /* FSTParagonCookingStage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonCookingStage.m; sourceTree = "<group>"; };
 		5B4486CB1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = WifiCommissioningNetworkTableViewCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5B4486CC1A656E0300B12E56 /* WifiCommissioningNetworkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WifiCommissioningNetworkTableViewCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5B5495C31BDFFD050057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = paragon_master.bin.signed.01.01.00.00.ota; sourceTree = "<group>"; };
 		5B63646D1BC2C7D800322D4F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		5B63646F1BC2C81000322D4F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5B6364B41BC2E23900322D4F /* hoodie.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = hoodie.storyboard; sourceTree = "<group>"; };
@@ -606,6 +608,14 @@
 				5B174DD71A5DE1DE00A00505 /* MilkGallonStand.m */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		5B5495C21BDFFCEE0057B4B4 /* Hardware Images */ = {
+			isa = PBXGroup;
+			children = (
+				5B5495C31BDFFD050057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota */,
+			);
+			name = "Hardware Images";
 			sourceTree = "<group>";
 		};
 		5B6364B01BC2E20800322D4F /* Hoodie */ = {
@@ -937,6 +947,7 @@
 		5B9EF0F019DEEE1000E8D9F1 /* FirstBuild */ = {
 			isa = PBXGroup;
 			children = (
+				5B5495C21BDFFCEE0057B4B4 /* Hardware Images */,
 				5B3F1C9A19E8845400303242 /* Main */,
 				5BA064D01B8743DB002FCE59 /* Apps */,
 				5BA064D11B8743F9002FCE59 /* Device Management */,
@@ -1314,6 +1325,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B5495C41BDFFD410057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota in Resources */,
 				51FAEFFA1B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf in Resources */,
 				5BBDE3961B9F754800FFC8EC /* FSTParagon.storyboard in Resources */,
 				5BC5A1C619EF6314009C93B1 /* Authentication.storyboard in Resources */,

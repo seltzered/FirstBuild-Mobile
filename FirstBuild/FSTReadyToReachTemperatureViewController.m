@@ -19,9 +19,6 @@
 
 @implementation FSTReadyToReachTemperatureViewController
 
-NSObject* _cookModeChangedObserver;
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -81,6 +78,10 @@ NSObject* _cookModeChangedObserver;
     if(self.currentParagon.cookMode != FSTCookingStateOff)
     {
         [self performSegueWithIdentifier:@"segueCooking" sender:self];
+    }
+    else
+    {
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }
 }
 

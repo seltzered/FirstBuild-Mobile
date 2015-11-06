@@ -19,9 +19,10 @@
     if (self) {
         self.activeRecipe = nil;
         self.toBeRecipe = nil;
-        self.currentProbeTemperature = 0;
-        self.currentStageCookTimeElapsed = 0;
+        self.currentProbeTemperature = nil;
+        self.currentStageCookTimeElapsed = nil;
         self.currentStage = nil;
+        self.currentPowerLevel = nil;
         _currentStageIndex = 0;
     }
     return self;

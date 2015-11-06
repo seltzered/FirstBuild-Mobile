@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSNumber* currentProbeTemperature;
 @property (nonatomic, strong) NSNumber* currentStageCookTimeElapsed;
 @property (nonatomic, weak) FSTParagonCookingStage* currentStage;
+@property (nonatomic, strong) NSNumber* currentPowerLevel;
 
 @end
