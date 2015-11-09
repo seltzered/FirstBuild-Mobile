@@ -142,7 +142,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.cookingLabel = @"Custom Profile";
     
     
-//    stage.maxPowerLevel = [NSNumber numberWithInt:10];
+    stage.maxPowerLevel = [NSNumber numberWithInt:10];
 //    stage.automaticTransition = [NSNumber numberWithInt:2];
 //    stage.cookTimeMinimum = [NSNumber numberWithInt:0];
 //    stage.cookTimeMaximum = [NSNumber numberWithInt:0];

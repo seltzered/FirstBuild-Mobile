@@ -9,9 +9,6 @@
 #import "FSTParagonCookingSession.h"
 
 @implementation FSTParagonCookingSession
-{
-    uint8_t _currentStageIndex;
-}
 
 -(instancetype)init
 {
@@ -23,7 +20,7 @@
         self.currentStageCookTimeElapsed = nil;
         self.currentStage = nil;
         self.currentPowerLevel = nil;
-        _currentStageIndex = 0;
+        self.currentStageIndex = 0;
     }
     return self;
 }

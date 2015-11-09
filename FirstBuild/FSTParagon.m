@@ -557,6 +557,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     
     self.session.currentStage = self.session.activeRecipe.paragonCookingStages[stage];
+    self.session.currentStageIndex = stage;
     if ([self.delegate respondsToSelector:@selector(currentStageIndexChanged:)])
     {
         [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: stage]];
@@ -851,6 +852,7 @@ static const uint8_t STAGE_SIZE = 8;
 #ifdef DEBUG
 -(void)logParagon
 {
+    
     FSTParagonCookingStage* currentStage = self.session.currentStage;
     FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
     NSLog(@"------PARAGON-------");
