@@ -25,7 +25,18 @@
 
 @end
 
-@interface FSTParagon : FSTBleProduct 
+@interface FSTParagon : FSTBleProduct
+
+// this defines the cookstates from the raw paragon cook state on the paragon
+// the overarching cook mode is defined in FSTPrecisionCooking.h in the
+// FSTParagonCookMode
+typedef enum {
+    FSTParagonCookStateOff = 0,
+    FSTParagonCookStateReachingTemperature = 1,
+    FSTParagonCookStateReady = 2,
+    FSTParagonCookStateCooking = 3,
+    FSTParagonCookStateDone = 4,
+} ParagonCookState;
 
 @property (nonatomic, weak) id<FSTParagonDelegate> delegate;
 
@@ -34,6 +45,7 @@ extern NSString * const FSTServiceParagon ;
 @property (nonatomic, strong) NSNumber* recipeId;
 @property (atomic) ParagonBurnerMode burnerMode;
 @property (atomic) ParagonCookMode cookMode;
+@property (nonatomic) ParagonCookState cookState;
 @property (nonatomic, strong) NSNumber* remainingHoldTime;
 
 -(void)startTimerForCurrentStage;

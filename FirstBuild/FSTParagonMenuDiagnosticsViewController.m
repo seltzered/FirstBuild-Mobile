@@ -36,38 +36,39 @@
     
     self.power.text = [self.currentParagon.session.currentPowerLevel stringValue];
     self.stage.text = [NSString stringWithFormat:@"%d", self.currentParagon.session.currentStageIndex];
-    
+    self.rawState.text = [NSString stringWithFormat:@"%d", self.currentParagon.cookState];
+    self.temp.text = [self.currentParagon.session.currentProbeTemperature stringValue];
     switch (self.currentParagon.cookMode)
     {
         case FSTCookingDirectCooking:
-            self.state.text = @"Direct Cooking";
+            self.state.text = @"Direct";
             break;
         case FSTCookingStateOff:
             self.state.text = @"Off";
             break;
         case FSTCookingStatePrecisionCookingPastMaxTime:
-            self.state.text = @"Cooking Past Max Time";
+            self.state.text = @"Past Max";
             break;
         case FSTCookingStatePrecisionCookingReachingMaxTime:
-            self.state.text = @"Cooking Reaching Max TIme";
+            self.state.text = @"Reach MaxT";
             break;
         case FSTCookingStatePrecisionCookingReachingMinTime:
-            self.state.text = @"Cooking Reaching Min Time";
+            self.state.text = @"Reach MinT";
             break;
         case FSTCookingDirectCookingWithTime:
-            self.state.text = @"Direct Cooking - With Time";
+            self.state.text = @"D. Time";
             break;
         case FSTCookingStateUnknown:
             self.state.text = @"Unknown";
             break;
         case FSTCookingStatePrecisionCookingWithoutTime:
-            self.state.text = @"Cooking Without Time";
+            self.state.text = @"P. No Time";
             break;
         case FSTCookingStatePrecisionCookingReachingTemperature:
-            self.state.text = @"Cooking Reaching Temperature";
+            self.state.text = @"P. Reaching";
             break;
         case FSTCookingStatePrecisionCookingTemperatureReached:
-            self.state.text = @"Temperature Reached";
+            self.state.text = @"P. Reached";
             break;
     }
     

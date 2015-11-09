@@ -10,17 +10,6 @@
 #import "FSTParagon.h"
 #import "FSTSavedRecipeManager.h"
 
-// this defines the cookstates from the raw paragon cook state on the paragon
-// the overarching cook mode is defined in FSTPrecisionCooking.h in the
-// FSTParagonCookMode
-typedef enum {
-    FSTParagonCookStateOff = 0,
-    FSTParagonCookStateReachingTemperature = 1,
-    FSTParagonCookStateReady = 2,
-    FSTParagonCookStateCooking = 3,
-    FSTParagonCookStateDone = 4,
-} ParagonCookState;
-
 typedef enum {
     FSTParagonUserSelectedCookModeScreenOff = 0,
     FSTParagonUserSelectedCookModeDirect = 1,
@@ -32,7 +21,6 @@ typedef enum {
 @implementation FSTParagon
 {
     NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-    ParagonCookState _cookState;
     ParagonUserSelectedCookMode _userSelectedCookMode;
 }
 

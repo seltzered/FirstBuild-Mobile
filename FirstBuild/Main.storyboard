@@ -159,7 +159,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="state" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXF-6f-SUV">
-                                <rect key="frame" x="93" y="98" width="32.5" height="17"/>
+                                <rect key="frame" x="517.5" y="99" width="32.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rstate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnU-dT-Gas">
+                                <rect key="frame" x="93" y="99" width="37.5" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -171,6 +177,8 @@
                             <constraint firstItem="tH0-uD-BdZ" firstAttribute="width" secondItem="fJe-0z-6mA" secondAttribute="width" id="3yW-4A-7cl"/>
                             <constraint firstItem="RqN-0s-Yhi" firstAttribute="top" secondItem="PPd-IV-zPb" secondAttribute="bottom" constant="34" id="4qU-0z-fmZ"/>
                             <constraint firstItem="PPd-IV-zPb" firstAttribute="top" secondItem="HUs-N6-DVC" secondAttribute="bottom" constant="8" id="7P7-c9-uy2"/>
+                            <constraint firstItem="MnU-dT-Gas" firstAttribute="centerY" secondItem="RqN-0s-Yhi" secondAttribute="centerY" id="AIQ-4u-Cy0"/>
+                            <constraint firstItem="MnU-dT-Gas" firstAttribute="leading" secondItem="Kzh-g0-f22" secondAttribute="leading" id="DOf-wk-v4h"/>
                             <constraint firstItem="o4k-f8-dVG" firstAttribute="leading" secondItem="HUs-N6-DVC" secondAttribute="trailing" constant="30.5" id="FYM-9I-r0h"/>
                             <constraint firstItem="PPd-IV-zPb" firstAttribute="leading" secondItem="HUs-N6-DVC" secondAttribute="leading" id="GpZ-mJ-Av0"/>
                             <constraint firstAttribute="leadingMargin" secondItem="QZN-ej-R32" secondAttribute="leading" id="KzH-g5-yLo"/>
@@ -180,20 +188,26 @@
                             <constraint firstItem="wk0-NL-hKB" firstAttribute="leading" secondItem="RqN-0s-Yhi" secondAttribute="leading" id="Pty-Yy-D7v"/>
                             <constraint firstItem="o4k-f8-dVG" firstAttribute="centerY" secondItem="HUs-N6-DVC" secondAttribute="centerY" id="V5P-m0-Wco"/>
                             <constraint firstItem="VOE-Lf-fVB" firstAttribute="centerY" secondItem="PPd-IV-zPb" secondAttribute="centerY" id="Xhu-dM-hCi"/>
+                            <constraint firstItem="GXF-6f-SUV" firstAttribute="leading" secondItem="MnU-dT-Gas" secondAttribute="trailing" constant="417" id="Y7i-18-EaI"/>
                             <constraint firstItem="tH0-uD-BdZ" firstAttribute="centerX" secondItem="fJe-0z-6mA" secondAttribute="centerX" id="ZRS-5N-4sB"/>
                             <constraint firstItem="RqN-0s-Yhi" firstAttribute="leading" secondItem="PPd-IV-zPb" secondAttribute="leading" id="dDH-hd-dmE"/>
                             <constraint firstItem="Kzh-g0-f22" firstAttribute="centerY" secondItem="wk0-NL-hKB" secondAttribute="centerY" id="fII-Dp-CRo"/>
                             <constraint firstItem="tH0-uD-BdZ" firstAttribute="top" secondItem="e1p-eO-X85" secondAttribute="bottom" constant="150" id="me2-dH-ZIS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GXF-6f-SUV" secondAttribute="trailing" constant="454.5" id="r6S-wg-Fab"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GXF-6f-SUV" secondAttribute="trailing" constant="30" id="r6S-wg-Fab"/>
                             <constraint firstItem="VOE-Lf-fVB" firstAttribute="leading" secondItem="o4k-f8-dVG" secondAttribute="leading" id="sGL-pz-Tc8"/>
                             <constraint firstItem="Kzh-g0-f22" firstAttribute="leading" secondItem="VOE-Lf-fVB" secondAttribute="leading" id="sq7-Cd-hsS"/>
-                            <constraint firstItem="GXF-6f-SUV" firstAttribute="leading" secondItem="Kzh-g0-f22" secondAttribute="leading" id="t6n-PZ-sTl"/>
                             <constraint firstItem="HUs-N6-DVC" firstAttribute="top" secondItem="e1p-eO-X85" secondAttribute="bottom" constant="20" id="wAN-7X-qMs"/>
                             <constraint firstItem="tH0-uD-BdZ" firstAttribute="top" secondItem="QZN-ej-R32" secondAttribute="bottom" constant="8" id="z2T-yz-rHY"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Y7i-18-EaI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="power" destination="VOE-Lf-fVB" id="jtH-fe-jtX"/>
+                        <outlet property="rawState" destination="MnU-dT-Gas" id="kSS-S6-AJg"/>
                         <outlet property="stage" destination="Kzh-g0-f22" id="DMe-tr-vMY"/>
                         <outlet property="state" destination="GXF-6f-SUV" id="ztA-D6-opg"/>
                         <outlet property="temp" destination="o4k-f8-dVG" id="tQx-j9-OZ9"/>

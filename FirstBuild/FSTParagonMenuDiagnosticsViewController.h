@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *power;
 @property (strong, nonatomic) IBOutlet UILabel *stage;
 @property (strong, nonatomic) IBOutlet UILabel *state;
+@property (strong, nonatomic) IBOutlet UILabel *rawState;
 
 @end
