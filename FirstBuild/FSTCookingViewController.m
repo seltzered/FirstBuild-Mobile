@@ -258,6 +258,7 @@
 
 - (void)cookConfigurationChanged
 {
+    [self.delegate targetTemperatureChanged:[self.currentParagon.session.currentStage.targetTemperature doubleValue]];
     [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
 }
 
