@@ -33,9 +33,9 @@ NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notif
     return self;
 }
 
--(void)writeHandler: (CBCharacteristic*)characteristic
+-(void)writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error
 {
-    [super writeHandler:characteristic];
+    [super writeHandler:characteristic error:error];
     
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicHoodieWrite])
     {

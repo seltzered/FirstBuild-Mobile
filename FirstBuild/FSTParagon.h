@@ -18,7 +18,7 @@
 @optional - (void) actualTemperatureChanged: (NSNumber*) temperature;
 @optional - (void) cookModeChanged: (ParagonCookMode) cookMode;
 @optional - (void) cookConfigurationChanged;
-@optional - (void) cookConfigurationSet;
+@optional - (void) cookConfigurationSet:(NSError *)error;
 @optional - (void) holdTimerSet;
 @optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
 @optional - (void) currentPowerLevelChanged: (NSNumber*) powerLevel;

@@ -180,7 +180,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 }
 
 #pragma mark - <FSTParagonDelegate>
-- (void)cookConfigurationSet
+- (void)cookConfigurationSet:(NSError *)error
 {
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
 }

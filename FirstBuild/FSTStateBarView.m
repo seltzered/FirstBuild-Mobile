@@ -131,6 +131,9 @@
             case FSTCookingStatePrecisionCookingPastMaxTime:
                 [self colorDotsForActiveStateNumber:3];
                 break;
+            case FSTCookingStatePrecisionCookingWithoutTime:
+                [self colorDotsForActiveStateNumber:1];
+                break;
             default:
                 NSLog(@"NO STATE FOR STAGE BAR\n");
                 break;

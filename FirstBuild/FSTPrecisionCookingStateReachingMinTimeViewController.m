@@ -44,7 +44,10 @@
 
 - (void) updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMinTime - self.remainingHoldTime) toTime:self.targetMinTime];
+    if (endTime)
+    {
+        self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMinTime - self.remainingHoldTime) toTime:self.targetMinTime];
+    }
 }
 
 -(void) targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {

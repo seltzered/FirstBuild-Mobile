@@ -198,8 +198,21 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 }
 
 #pragma mark - <FSTParagonDelegate>
-- (void)cookConfigurationSet
+- (void)cookConfigurationSet:(NSError *)error
 {
+    if (error)
+    {
+        self.continueTapGesturerRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must not currently be cooking. Try pressing the Stop button and changing to the Rapid or Gentle Precise cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self];
 }
 

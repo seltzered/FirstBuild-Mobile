@@ -28,7 +28,7 @@ extern NSString * const FSTBatteryLevelChangedNotification;
 - (void) notifyDeviceReady;
 - (void) notifyDeviceLoadProgressUpdated;
 - (void) notifyDeviceEssentialDataChanged;
-- (void) writeHandler: (CBCharacteristic*)characteristic;
+- (void) writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error;
 - (void) readHandler: (CBCharacteristic*)characteristic;
 - (void) handleDiscoverCharacteristics: (NSArray*)characteristics;
 

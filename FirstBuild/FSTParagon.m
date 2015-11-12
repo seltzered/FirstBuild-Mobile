@@ -137,9 +137,10 @@ static const uint8_t STAGE_SIZE = 8;
 
 #pragma mark - Write Handlers
 
--(void)writeHandler: (CBCharacteristic*)characteristic
+-(void)writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error
 {
-    [super writeHandler:characteristic];
+    [super writeHandler:characteristic error:error];
+    
     
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
     {
@@ -154,7 +155,7 @@ static const uint8_t STAGE_SIZE = 8;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicStartHoldTimer])
     {
         DLog(@"successfully wrote FSTCharacteristicStartHoldTimer");
-        [self handleHoldTimerWritten];
+        [self handleHoldTimerWritten ];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
     {
@@ -164,7 +165,7 @@ static const uint8_t STAGE_SIZE = 8;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
     {
         DLog(@"successfully wrote FSTCharacteristicCookConfiguration");
-        [self handleCookConfigurationWritten];
+        [self handleCookConfigurationWritten:error];
     }
 }
 
@@ -291,7 +292,7 @@ static const uint8_t STAGE_SIZE = 8;
 /**
  *  called after cook configuration written
  */
--(void)handleCookConfigurationWritten
+-(void)handleCookConfigurationWritten: (NSError *)error
 {
     CBCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
 
@@ -304,7 +305,7 @@ static const uint8_t STAGE_SIZE = 8;
     // but does indicate everything is in order
     [self.peripheral readValueForCharacteristic:cookConfigurationCharacteristic];
     
-    [self.delegate cookConfigurationSet];
+    [self.delegate cookConfigurationSet:error];
 }
 
 #pragma mark - Read Handlers
@@ -661,10 +662,7 @@ static const uint8_t STAGE_SIZE = 8;
             self.session.cookMode = FSTCookingStateOff;
         }
     }
-    else if (
-             _userSelectedCookMode == FSTParagonUserSelectedCookModeGentle ||
-             _userSelectedCookMode == FSTParagonUserSelectedCookModeRapid ||
-             _userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
+    else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
     {
         if (self.session.cookState == FSTParagonCookStateReachingTemperature)
         {
@@ -689,6 +687,32 @@ static const uint8_t STAGE_SIZE = 8;
         else if (self.session.cookState == FSTParagonCookStateOff)
         {
             self.session.cookMode = FSTCookingStateOff;
+        }
+    }
+    else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeGentle ||
+             _userSelectedCookMode == FSTParagonUserSelectedCookModeRapid
+        )
+    {
+        if (self.session.cookState == FSTParagonCookStateReachingTemperature)
+        {
+            self.session.cookMode = FSTCookingStatePrecisionCookingReachingTemperature;
+        }
+        else if(self.session.cookState == FSTParagonCookStateReady)
+        {
+            self.session.cookMode = FSTCookingStatePrecisionCookingWithoutTime;
+        }
+        else if(self.session.cookState == FSTParagonCookStateCooking)
+        {
+            self.session.cookMode = FSTCookingStatePrecisionCookingWithoutTime;
+        }
+        else if (self.session.cookState == FSTParagonCookStateOff)
+        {
+            self.session.cookMode = FSTCookingStateOff;
+        }
+        else
+        {
+            NSLog(@">>>>>>>> UNKNOWN COOK MODE <<<<<<<<<<");
+            self.session.cookMode = FSTCookingStateUnknown;
         }
     }
     else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)

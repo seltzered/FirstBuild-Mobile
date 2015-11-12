@@ -61,6 +61,7 @@
     }
 }
 
+
 -(void)transitionToCurrentCookMode
 {
     FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
@@ -74,7 +75,8 @@
             //if we have a current cook time or a to-be recipe then we need the stage bar
             if (
                     self.currentParagon.session.toBeRecipe ||
-                    [_currentCookingStage.cookTimeMinimum intValue] > 0
+                    [_currentCookingStage.cookTimeMinimum intValue] > 0 ||
+                    self.currentParagon.session.currentStage.targetTemperature > 0
                 )
             {
                 self.stageBar.hidden = NO;
@@ -108,7 +110,7 @@
         case FSTCookingStatePrecisionCookingWithoutTime:
             stateIdentifier = @"withoutTimeStateSegue";
             self.continueButton.hidden = YES;
-            self.stageBar.hidden = YES;
+            //self.stageBar.hidden = YES;
             break;
         case FSTCookingDirectCooking:
             stateIdentifier = @"directStateSegue";
@@ -138,8 +140,10 @@
     }
 }
 
+
 -(void)setStageBarStateCountForState: (FSTParagonCookingStage*) stage
 {
+    
     int stateCount = 1;
     
     if (stage.cookTimeMinimum && [stage.cookTimeMinimum intValue] > 0)
@@ -158,6 +162,7 @@
     }
     
     self.stageBar.numberOfStates = [NSNumber numberWithInt:stateCount];
+    NSLog(@"calculated %d states", stateCount);
 }
 
 - (void)didReceiveMemoryWarning {

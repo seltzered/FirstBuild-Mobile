@@ -117,9 +117,9 @@ NSString * const FSTGECooktopCharacteristicRecipeId              = @"FF";
 
 #pragma mark - Write Handlers
 
--(void)writeHandler: (CBCharacteristic*)characteristic
+-(void)writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error
 {
-    [super writeHandler:characteristic];
+    [super writeHandler:characteristic error:error];
     
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTGECooktopCharacteristicCookTime])
     {
