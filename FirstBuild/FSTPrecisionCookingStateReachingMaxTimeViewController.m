@@ -41,8 +41,6 @@ NSDate* endMaxTime;
 - (void)updatePercent {
     [super updatePercent];
     self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMaxTime - self.remainingHoldTime) toTime:self.targetMaxTime];
-    //self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime - self.targetMinTime toTime:self.targetMaxTime - self.targetMinTime];
-    //subtract the time already elapsed and find what remains in this stage
 }
 
 -(void)targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
@@ -72,10 +70,7 @@ NSDate* endMaxTime;
         endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60]; // want a constant target time that sets once
     }
 
-    //timeComplete = [[NSDate date] dateByAddingTimeInterval:self.remainingHoldTime*60]; // this can some times jump upwards when the elapsed time passes a minute, so the end date does not stay constant
-    
-    //timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60]; // this can some times jump upwards when the elapsed time passes a minute, so the end date does not stay constant
-    [dateFormatter setDateFormat:@"hh:mm a"];// get rid of first h?
+    [dateFormatter setDateFormat:@"hh:mm a"];
     if (endMaxTime) {
         [maxTimeNotice appendAttributedString:[[NSAttributedString alloc] initWithString: [dateFormatter stringFromDate:endMaxTime] attributes:boldFontDict]];
     
@@ -87,15 +82,5 @@ NSDate* endMaxTime;
     [self.currentTempLabel setAttributedText:currentTempString];
     
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

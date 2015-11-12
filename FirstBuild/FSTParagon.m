@@ -594,6 +594,10 @@ static const uint8_t STAGE_SIZE = 8;
     {
         [self.delegate remainingHoldTimeChanged:self.session.remainingHoldTime];
     }
+    
+    //we need to check the cook mode. if the remaining time is now 0 then we don't
+    //get a notification for a new cookmode if it is reaching past the maximum
+    [self determineCookMode];
 }
 
 /**
@@ -673,6 +677,10 @@ static const uint8_t STAGE_SIZE = 8;
         else if(self.session.cookState == FSTParagonCookStateCooking)
         {
             self.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
+        }
+        else if (self.session.cookState == FSTParagonCookStateDone && [self.session.remainingHoldTime intValue] == 0)
+        {
+            self.session.cookMode = FSTCookingStatePrecisionCookingPastMaxTime;
         }
         else if (self.session.cookState == FSTParagonCookStateDone)
         {

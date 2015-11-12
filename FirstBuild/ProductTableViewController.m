@@ -425,11 +425,11 @@ NSIndexPath *_indexPathForDeletion;
             case FSTCookingStatePrecisionCookingReachingTemperature:
                 [productCell.statusLabel setText:@"Preheating"];
                 break;
-            case FSTCookingStatePrecisionCookingReachingMinTime:
             case FSTCookingDirectCooking:
                 [productCell.statusLabel setText:@"Direct"];
                 break;
             case FSTCookingDirectCookingWithTime:
+            case FSTCookingStatePrecisionCookingReachingMinTime:
             case FSTCookingStatePrecisionCookingWithoutTime:
                 [productCell.statusLabel setText:@"Cooking"];
                 break;
