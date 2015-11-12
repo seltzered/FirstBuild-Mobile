@@ -75,7 +75,7 @@
 
 - (void) cookModeChanged:(ParagonCookMode)cookMode
 {
-    if(self.currentParagon.cookMode != FSTCookingStateOff)
+    if(self.currentParagon.session.cookMode != FSTCookingStateOff)
     {
         [self performSegueWithIdentifier:@"segueCooking" sender:self];
     }

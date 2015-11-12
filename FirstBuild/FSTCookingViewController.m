@@ -66,7 +66,7 @@
     FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
     NSString* stateIdentifier = nil;
     
-    switch (self.currentParagon.cookMode) {
+    switch (self.currentParagon.session.cookMode) {
         case FSTCookingStatePrecisionCookingReachingTemperature:
             stateIdentifier = @"preheatingStateSegue";
             self.continueButton.hidden = YES;
@@ -126,7 +126,7 @@
             break;
     }
     
-    self.stageBar.circleState = self.currentParagon.cookMode;
+    self.stageBar.circleState = self.currentParagon.session.cookMode;
     
     if (stateIdentifier)
     {
@@ -231,6 +231,10 @@
     [self.delegate currentTemperatureChanged:[temperature doubleValue]];
 }
 
+-(void)remainingHoldTimeChanged:(NSNumber *)holdTime
+{
+    [self.delegate remainingHoldTimeChanged:[holdTime doubleValue]];
+}
 
 - (void)holdTimerSet
 {

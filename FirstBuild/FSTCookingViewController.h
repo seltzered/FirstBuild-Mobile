@@ -16,7 +16,8 @@
 
 -(void) currentTemperatureChanged:(CGFloat)currentTemperature;
 -(void) targetTemperatureChanged:(CGFloat)targetTemperature;
--(void) elapsedTimeChanged:(NSTimeInterval)elapsedTime; 
+//-(void) elapsedTimeChanged:(NSTimeInterval)elapsedTime;
+-(void) remainingHoldTimeChanged:(NSTimeInterval)remainingHoldTime;
 -(void) targetTimeChanged:(NSTimeInterval)minTime withMax: (NSTimeInterval) maxTime;
 -(void) burnerLevelChanged:(CGFloat)burnerLevel;
 

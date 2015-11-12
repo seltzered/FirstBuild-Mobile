@@ -417,7 +417,7 @@ NSIndexPath *_indexPathForDeletion;
         //Taken out since those properties were not connected
         [productCell.statusLabel setText:@"<WIP>"];
 
-        switch (paragon.cookMode)
+        switch (paragon.session.cookMode)
         {
             case FSTCookingStateOff:
                 [productCell.statusLabel setText:@"Off"];
@@ -518,7 +518,7 @@ NSIndexPath *_indexPathForDeletion;
             FSTParagon* paragon = (FSTParagon*)product;
             UIStoryboard* board;
             
-            switch (paragon.cookMode)
+            switch (paragon.session.cookMode)
             {
                 case FSTCookingStateUnknown:
                 case FSTCookingStateOff:

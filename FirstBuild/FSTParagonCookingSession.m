@@ -17,10 +17,14 @@
         self.activeRecipe = nil;
         self.toBeRecipe = nil;
         self.currentProbeTemperature = nil;
-        self.currentStageCookTimeElapsed = nil;
         self.currentStage = nil;
         self.currentPowerLevel = nil;
         self.currentStageIndex = 0;
+        self.recipeId = nil;
+        self.burnerMode = 0;
+        self.cookMode = FSTCookingStateUnknown;
+        self.cookState = FSTParagonCookStateOff;
+        self.remainingHoldTime = 0;
     }
     return self;
 }

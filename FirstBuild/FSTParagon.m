@@ -72,7 +72,7 @@ static const uint8_t STAGE_SIZE = 8;
         //setup the current cooking method and session, which is the actual
         //state of the cooking as reported by the cooktop
         //TODO: create a new recipe based on the actual recipe
-        self.recipeId = nil;
+        self.session.recipeId = nil;
         self.session = [[FSTParagonCookingSession alloc] init];
         self.session.activeRecipe = nil;
         
@@ -98,8 +98,8 @@ static const uint8_t STAGE_SIZE = 8;
         //TODO: Hack! we need an actual recipe
         [self handleRecipeId:nil];
         
-        _cookState = FSTParagonCookStateOff;
-        _cookMode = FSTCookingStateOff;
+        self.session.cookState = FSTParagonCookStateOff;
+        self.session.cookMode = FSTCookingStateOff;
     }
 
     return self;
@@ -230,6 +230,16 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)handleHoldTimerWritten
 {
+    
+    // the remaining hold time is not reset until after the first push
+    // lets set it here
+    self.session.remainingHoldTime = [[NSNumber alloc] initWithInt:0];
+    
+    if ([self.delegate respondsToSelector:@selector(remainingHoldTimeChanged:)])
+    {
+        [self.delegate remainingHoldTimeChanged:self.session.remainingHoldTime];
+    }
+    
     [self.delegate holdTimerSet];
 }
 
@@ -516,6 +526,10 @@ static const uint8_t STAGE_SIZE = 8;
     {
         [self.delegate cookConfigurationChanged];
     }
+    
+   
+    
+    [self logParagon];
 }
 
 /**
@@ -544,7 +558,14 @@ static const uint8_t STAGE_SIZE = 8;
         return;
     }
     
-    self.session.currentStage = self.session.activeRecipe.paragonCookingStages[stage];
+    if (stage == 0)
+    {
+        DLog("no current stage");
+        return;
+    }
+    
+    //the array index is of course 0 based, so subtract one
+    self.session.currentStage = self.session.activeRecipe.paragonCookingStages[stage-1];
     self.session.currentStageIndex = stage;
     if ([self.delegate respondsToSelector:@selector(currentStageIndexChanged:)])
     {
@@ -568,7 +589,11 @@ static const uint8_t STAGE_SIZE = 8;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
     uint16_t raw = OSReadBigInt16(bytes, 0);
-    self.remainingHoldTime = [[NSNumber alloc] initWithDouble:raw];
+    self.session.remainingHoldTime = [[NSNumber alloc] initWithDouble:raw];
+    if ([self.delegate respondsToSelector:@selector(remainingHoldTimeChanged:)])
+    {
+        [self.delegate remainingHoldTimeChanged:self.session.remainingHoldTime];
+    }
 }
 
 /**
@@ -589,7 +614,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = characteristic.value;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
-    _cookState = bytes[0];
+    self.session.cookState = bytes[0];
     
     [self determineCookMode];
 }
@@ -618,18 +643,18 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)determineCookMode
 {
-    ParagonCookMode currentCookMode = self.cookMode;
+    ParagonCookMode currentCookMode = self.session.cookMode;
     
     if (_userSelectedCookMode == FSTParagonUserSelectedCookModeDirect)
     {
         //we are in direct cook mode, determine what each of the states mean
-        if (_cookState == FSTParagonCookStateReachingTemperature)
+        if (self.session.cookState == FSTParagonCookStateReachingTemperature)
         {
-            self.cookMode = FSTCookingDirectCooking;
+            self.session.cookMode = FSTCookingDirectCooking;
         }
-        else if (_cookState == FSTParagonCookStateOff)
+        else if (self.session.cookState == FSTParagonCookStateOff)
         {
-            self.cookMode = FSTCookingStateOff;
+            self.session.cookMode = FSTCookingStateOff;
         }
     }
     else if (
@@ -637,42 +662,46 @@ static const uint8_t STAGE_SIZE = 8;
              _userSelectedCookMode == FSTParagonUserSelectedCookModeRapid ||
              _userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
     {
-        if (_cookState == FSTParagonCookStateReachingTemperature)
+        if (self.session.cookState == FSTParagonCookStateReachingTemperature)
         {
-            self.cookMode = FSTCookingStatePrecisionCookingReachingTemperature;
+            self.session.cookMode = FSTCookingStatePrecisionCookingReachingTemperature;
         }
-        else if(_cookState == FSTParagonCookStateReady)
+        else if(self.session.cookState == FSTParagonCookStateReady)
         {
-            self.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
+            self.session.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
         }
-        else if(_cookState == FSTParagonCookStateCooking)
+        else if(self.session.cookState == FSTParagonCookStateCooking)
         {
-            self.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
+            self.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
         }
-        else if (_cookState == FSTParagonCookStateDone)
+        else if (self.session.cookState == FSTParagonCookStateDone)
         {
-            self.cookMode = FSTCookingStatePrecisionCookingReachingMaxTime;
+            self.session.cookMode = FSTCookingStatePrecisionCookingReachingMaxTime;
         }
-        else if (_cookState == FSTParagonCookStateOff)
+        else if (self.session.cookState == FSTParagonCookStateOff)
         {
-            self.cookMode = FSTCookingStateOff;
+            self.session.cookMode = FSTCookingStateOff;
         }
     }
     else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
     {
-        self.cookMode = FSTCookingStateOff;
+        self.session.cookMode = FSTCookingStateOff;
     }
     
     //only notify if we have changed cook modes
-    if (self.cookMode != currentCookMode)
+    if (self.session.cookMode != currentCookMode)
     {
         if ([self.delegate respondsToSelector:@selector(cookModeChanged:)])
         {
-            [self.delegate cookModeChanged:self.cookMode];
+            [self.delegate cookModeChanged:self.session.cookMode];
         }
         
         [self notifyDeviceEssentialDataChanged];
     }
+    
+#ifdef DEBUG
+    [self logParagon];
+#endif
 
 }
 
@@ -735,7 +764,7 @@ static const uint8_t STAGE_SIZE = 8;
     [data getBytes:bytes length:characteristic.value.length];
     if (bytes[0] == 1 || bytes[0] == 0)
     {
-        _burnerMode = bytes[0];
+        self.session.burnerMode = bytes[0];
     }
     else
     {
@@ -841,19 +870,30 @@ static const uint8_t STAGE_SIZE = 8;
 -(void)logParagon
 {
     
-    FSTParagonCookingStage* currentStage = self.session.currentStage;
-    FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
-    NSLog(@"------PARAGON-------");
-    NSLog(@"bmode %d, cmode %d, curtmp %@, stage %@, elapt %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature, self.session.currentStage, self.session.currentStageCookTimeElapsed);
-    NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
-    if (toBeStage)
+//    FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
+    NSLog(@"-----------------------------------------------------");
+    NSLog(@"                    PARAGON");
+    NSLog(@"mode: %d", _userSelectedCookMode);
+    NSLog(@"burner %d, app cook state %d, paragon cook state %d, probe temp %@, cur stage %d, remaining time %@", self.session.burnerMode, self.session.cookMode, self.session.cookState, self.session.currentProbeTemperature, self.session.currentStageIndex, self.session.remainingHoldTime);
+    
+    NSLog(@" stage table");
+
+    for (uint8_t i=0; i<self.session.activeRecipe.paragonCookingStages.count;i++)
     {
-        NSLog(@"\t  TOBE RECIPE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
+        FSTParagonCookingStage* stage= self.session.activeRecipe.paragonCookingStages[i];
+        NSLog(@"\t stage %i: tartmp %@, mint %@, maxt %@", i+1, stage.targetTemperature, stage.cookTimeMinimum, stage.cookTimeMaximum);
+
     }
-    else
-    {
-        NSLog(@"\t TOBE RECIPE : not set");
-    }
+    NSLog(@"-----------------------------------------------------");
+
+//    if (toBeStage)
+//    {
+//        NSLog(@"\t  TOBE RECIPE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
+//    }
+//    else
+//    {
+//        NSLog(@"\t TOBE RECIPE : not set");
+//    }
     
 }
 #endif

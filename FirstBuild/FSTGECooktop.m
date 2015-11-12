@@ -379,7 +379,7 @@ NSString * const FSTGECooktopCharacteristicRecipeId              = @"FF";
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
         uint16_t raw = OSReadBigInt16(bytes, 0);
-        self.session.currentStageCookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
+        //self.session.currentStageCookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
         [self determineCookMode];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
     }
@@ -477,37 +477,37 @@ NSString * const FSTGECooktopCharacteristicRecipeId              = @"FF";
     }
     else if (self.burnerMode == kGECOOKTOP_PRECISION_HEATING)
     {
-        if ([self.session.currentStageCookTimeElapsed doubleValue] > [self.session.currentStage.cookTimeMaximum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
-        {
-            //elapsed time is greater than the maximum time
-            self.cookMode = FSTGECooktopCookingStatePrecisionCookingPastMaxTime;
-        }
-        else if ([self.session.currentStageCookTimeElapsed doubleValue] >= [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
-        {
-            //elapsed time is greater than the minimum time, but less than or equal to the max time
-            //and the cookTime is set
-            self.cookMode = FSTGECooktopCookingStatePrecisionCookingReachingMaxTime;
-        }
-        else if([self.session.currentStageCookTimeElapsed doubleValue] < [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
-        {
-            //elapsed time is less than the minimum time and the cook time is set
-            self.cookMode = FSTGECooktopCookingStatePrecisionCookingReachingMinTime;
-        }
-        else if (self.session.toBeRecipe)
-        {
-            //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
-            self.cookMode = FSTGECooktopCookingStatePrecisionCookingTemperatureReached;
-        }
-        else if([self.session.currentStage.cookTimeMinimum doubleValue] == 0 && !self.session.toBeRecipe)
-        {
-            //cook time not set
-            self.cookMode = FSTGECooktopCookingStatePrecisionCookingWithoutTime;
-        }
-        else
-        {
-            self.cookMode = FSTGECooktopCookingStateUnknown;
-            DLog(@"UNABLE TO DETERMINE COOK MODE");
-        }
+//        if ([self.session.currentStageCookTimeElapsed doubleValue] > [self.session.currentStage.cookTimeMaximum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
+//        {
+//            //elapsed time is greater than the maximum time
+//            self.cookMode = FSTGECooktopCookingStatePrecisionCookingPastMaxTime;
+//        }
+//        else if ([self.session.currentStageCookTimeElapsed doubleValue] >= [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
+//        {
+//            //elapsed time is greater than the minimum time, but less than or equal to the max time
+//            //and the cookTime is set
+//            self.cookMode = FSTGECooktopCookingStatePrecisionCookingReachingMaxTime;
+//        }
+//        else if([self.session.currentStageCookTimeElapsed doubleValue] < [self.session.currentStage.cookTimeMinimum doubleValue] && [self.session.currentStage.cookTimeMinimum doubleValue] > 0)
+//        {
+//            //elapsed time is less than the minimum time and the cook time is set
+//            self.cookMode = FSTGECooktopCookingStatePrecisionCookingReachingMinTime;
+//        }
+//        else if (self.session.toBeRecipe)
+//        {
+//            //if we have a desired cooktime (not set yet) and none of the above cases are satisfied
+//            self.cookMode = FSTGECooktopCookingStatePrecisionCookingTemperatureReached;
+//        }
+//        else if([self.session.currentStage.cookTimeMinimum doubleValue] == 0 && !self.session.toBeRecipe)
+//        {
+//            //cook time not set
+//            self.cookMode = FSTGECooktopCookingStatePrecisionCookingWithoutTime;
+//        }
+//        else
+//        {
+//            self.cookMode = FSTGECooktopCookingStateUnknown;
+//            DLog(@"UNABLE TO DETERMINE COOK MODE");
+//        }
     }
     
     //only notify if we have changed cook modes
@@ -651,19 +651,19 @@ NSString * const FSTGECooktopCharacteristicRecipeId              = @"FF";
 #ifdef DEBUG
 -(void)logParagon
 {
-    FSTParagonCookingStage* currentStage = self.session.currentStage;
-    FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
-    NSLog(@"------PARAGON-------");
-    NSLog(@"bmode %d, cmode %d, curtmp %@, stage %@, elapt %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature, self.session.currentStage, self.session.currentStageCookTimeElapsed);
-    NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
-    if (toBeStage)
-    {
-        NSLog(@"\t  TOBE RECIPE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
-    }
-    else
-    {
-        NSLog(@"\t TOBE RECIPE : not set");
-    }
+//    FSTParagonCookingStage* currentStage = self.session.currentStage;
+//    FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
+//    NSLog(@"------PARAGON-------");
+//    NSLog(@"bmode %d, cmode %d, curtmp %@, stage %@, elapt %@", self.burnerMode, self.cookMode, self.session.currentProbeTemperature, self.session.currentStage, self.session.currentStageCookTimeElapsed);
+//    NSLog(@"\tACTIVE RECIPE : tartmp %@, mint %@, maxt %@", currentStage.targetTemperature, currentStage.cookTimeMinimum, currentStage.cookTimeMaximum);
+//    if (toBeStage)
+//    {
+//        NSLog(@"\t  TOBE RECIPE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
+//    }
+//    else
+//    {
+//        NSLog(@"\t TOBE RECIPE : not set");
+//    }
     
 }
 #endif

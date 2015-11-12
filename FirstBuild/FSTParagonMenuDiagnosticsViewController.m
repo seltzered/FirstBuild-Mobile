@@ -36,9 +36,9 @@
     
     self.power.text = [self.currentParagon.session.currentPowerLevel stringValue];
     self.stage.text = [NSString stringWithFormat:@"%d", self.currentParagon.session.currentStageIndex];
-    self.rawState.text = [NSString stringWithFormat:@"%d", self.currentParagon.cookState];
+    self.rawState.text = [NSString stringWithFormat:@"%d", self.currentParagon.session.cookState];
     self.temp.text = [self.currentParagon.session.currentProbeTemperature stringValue];
-    switch (self.currentParagon.cookMode)
+    switch (self.currentParagon.session.cookMode)
     {
         case FSTCookingDirectCooking:
             self.state.text = @"Direct";

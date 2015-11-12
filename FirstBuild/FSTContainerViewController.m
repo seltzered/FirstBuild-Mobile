@@ -52,7 +52,7 @@
         ((FSTCookingStateViewController*)segue.destinationViewController).targetMinTime = [stage.cookTimeMinimum doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetMaxTime = [stage.cookTimeMaximum doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetTemp = [stage.targetTemperature doubleValue];
-        ((FSTCookingStateViewController*)segue.destinationViewController).elapsedTime = [self.paragon.session.currentStageCookTimeElapsed doubleValue];
+        ((FSTCookingStateViewController*)segue.destinationViewController).remainingHoldTime = [self.paragon.session.remainingHoldTime doubleValue];
     }
 }
 
