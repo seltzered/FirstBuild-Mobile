@@ -53,7 +53,8 @@
     if (self.currentParagon.session.activeRecipe.paragonCookingStages.count > 1)
     {
         //TODO: hardcode stage for testing
-        [controller setHeaderText:@"1" withFrameRect:CGRectMake(0, 0, 120, 30)];
+        //[controller setHeaderText:@"1" withFrameRect:CGRectMake(0, 0, 120, 30)];
+        [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
     }
     else
     {
