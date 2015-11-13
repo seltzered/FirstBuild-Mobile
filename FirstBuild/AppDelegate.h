@@ -28,12 +28,18 @@
 //
 
 #import <UIKit/UIKit.h>
+
+#ifdef CHILLHUB
 #import <RKObjectManager.h>
+#endif
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+#ifdef CHILLHUB
 @property (strong, nonatomic) RKObjectManager *objectManager;
+#endif
 
 @end
 

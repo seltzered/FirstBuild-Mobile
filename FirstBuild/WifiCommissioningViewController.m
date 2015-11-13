@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
+#ifdef WIFI
+
 #import "WifiCommissioningViewController.h"
 #import <RestKit.h>
 #import "FSTNetwork.h"
@@ -188,3 +190,5 @@
 }
 
 @end
+
+#endif

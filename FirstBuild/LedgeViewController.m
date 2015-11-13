@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
+#ifdef CHILLHUB
+
 #import "FirebaseShared.h"
 
 #import "LedgeViewController.h"
@@ -110,3 +112,5 @@
 }
 
 @end
+
+#endif

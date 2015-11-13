@@ -6,6 +6,8 @@
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
+#ifdef EXPERIMENTAL
+
 #import "FSTHoodieViewController.h"
 #import <STTwitter.h>
 
@@ -94,3 +96,5 @@
 */
 
 @end
+
+#endif

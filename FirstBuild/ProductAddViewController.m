@@ -27,7 +27,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    //TODO: need to fix this correctly for conditional build
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -36,11 +37,12 @@
     
     switch (indexPath.row) {
         case 0:
-            CellIdentifier = @"chillhub";
+            CellIdentifier = @"paragon";
             break;
             
         case 1:
-            CellIdentifier = @"paragon";
+            CellIdentifier = @"chillhub";
+            
             break;
             
         case 2:

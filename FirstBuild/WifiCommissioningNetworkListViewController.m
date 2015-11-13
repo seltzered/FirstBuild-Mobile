@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
+#ifdef WIFI
+
 #import "WifiCommissioningNetworkListViewController.h"
 #import "WifiCommissioningConnectingViewController.h"
 #import <RestKit.h>
@@ -77,3 +79,5 @@
 
 
 @end
+
+#endif

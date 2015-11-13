@@ -1316,7 +1316,7 @@
 		5B9EF0E619DEEE1000E8D9F1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = FirstBuild;
 				TargetAttributes = {
 					5B9EF0ED19DEEE1000E8D9F1 = {
@@ -1591,6 +1591,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1609,7 +1610,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				"OTHER_LDFLAGS[arch=*]" = "-v";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "183039aa-905e-4358-9114-c9e21e504021";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1648,7 +1649,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "183039aa-905e-4358-9114-c9e21e504021";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1661,8 +1662,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: myles caley (2ZHVCY7QDD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: myles caley (2ZHVCY7QDD)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1672,11 +1673,12 @@
 				);
 				GCC_PREFIX_HEADER = "FirstBuild/FirstBuild-Mobile.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FirstBuild/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstbuild.firstbuild;
 				PRODUCT_NAME = FirstBuild;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "183039aa-905e-4358-9114-c9e21e504021";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1688,8 +1690,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: myles caley (2ZHVCY7QDD)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: myles caley (2ZHVCY7QDD)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1699,11 +1701,12 @@
 				);
 				GCC_PREFIX_HEADER = "FirstBuild/FirstBuild-Mobile.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FirstBuild/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.firstbuild.firstbuild;
 				PRODUCT_NAME = FirstBuild;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "183039aa-905e-4358-9114-c9e21e504021";
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
