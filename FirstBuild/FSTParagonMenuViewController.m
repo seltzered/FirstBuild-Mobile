@@ -17,6 +17,7 @@
 #import "FSTRevealViewController.h"
 #import "FSTParagonMenuSettingsViewController.h"
 #import "FSTParagonMenuAboutViewController.h"
+#import "FSTParagonMenuDiagnosticsViewController.h"
 
 @implementation FSTParagonMenuViewController
 
@@ -25,7 +26,8 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     kSettings,
     kHelp,
     kFeedback,
-    kAbout
+    kAbout,
+    kDiagonistics
 
 };
 
@@ -47,7 +49,7 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,6 +70,9 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
             break;
         case kAbout:
             CellIdentifier = @"about";
+            break;
+        case kDiagonistics:
+            CellIdentifier = @"diagnostics";
             break;
         default:
             break;
@@ -94,6 +99,9 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
     } else if (indexPath.row == kAbout) {
         [self performSegueWithIdentifier:@"menuAboutSegue" sender:self];
     }
+    else if (indexPath.row == kDiagonistics) {
+        [self performSegueWithIdentifier:@"menuDiagnosticsSegue" sender:self];
+    }
     
 }
 
@@ -103,6 +111,9 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
         ((FSTParagonMenuSettingsViewController*)vc).currentParagon = self.currentParagon;
     } else if([segue.identifier isEqualToString:@"menuAboutSegue"]) {
         // set paragon (not yet a member)
+    }
+    else if([segue.identifier isEqualToString:@"menuDiagnosticsSegue"]) {
+        ((FSTParagonMenuDiagnosticsViewController*)vc).currentParagon = self.currentParagon;
     }
 }
 #pragma mark - BONEYARD

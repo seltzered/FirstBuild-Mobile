@@ -11,53 +11,29 @@
 #import "FSTParagonCookingSession.h"
 #import "FSTRecipe.h"
 #import "FSTBurner.h"
+#import "FSTPrecisionCooking.h"
 
-@interface FSTParagon : FSTBleProduct 
+@protocol FSTParagonDelegate <NSObject>
 
-typedef enum {
-    
-    //off
-    FSTParagonCookingStateOff = 0,
-    
-    //precision cooking
-    FSTParagonCookingStatePrecisionCookingReachingTemperature = 1,
-    FSTParagonCookingStatePrecisionCookingTemperatureReached = 2,
-    FSTParagonCookingStatePrecisionCookingReachingMinTime = 3,
-    FSTParagonCookingStatePrecisionCookingReachingMaxTime = 4,
-    FSTParagonCookingStatePrecisionCookingPastMaxTime = 5,
-    FSTParagonCookingStatePrecisionCookingWithoutTime = 6,
-    
-    //direct cooking
-    FSTParagonCookingDirectCooking,
-    FSTParagonCookingDirectCookingWithTime,
-    
-    //unknown
-    FSTParagonCookingStateUnknown
-    
-} ParagonCookMode;
+@optional - (void) actualTemperatureChanged: (NSNumber*) temperature;
+@optional - (void) cookModeChanged: (ParagonCookMode) cookMode;
+@optional - (void) cookConfigurationChanged;
+@optional - (void) cookConfigurationSet:(NSError *)error;
+@optional - (void) holdTimerSet;
+@optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
+@optional - (void) currentPowerLevelChanged: (NSNumber*) powerLevel;
+@optional - (void) remainingHoldTimeChanged: (NSNumber*) holdTime;
 
-extern NSString * const FSTActualTemperatureChangedNotification;
-extern NSString * const FSTBurnerModeChangedNotification;
-extern NSString * const FSTCookingModeChangedNotification;
+@end
 
-extern NSString * const FSTElapsedTimeChangedNotification;
-extern NSString * const FSTCookTimeSetNotification ;
-extern NSString * const FSTTargetTemperatureChangedNotification ;
-extern NSString * const FSTElapsedTimeSetNotification;
-extern NSString * const FSTTargetTemperatureSetNotification;
+@interface FSTParagon : FSTBleProduct
 
-@property (nonatomic, strong) NSString* serialNumber;
-@property (nonatomic, strong) NSString* modelNumber;
+@property (nonatomic, weak) id<FSTParagonDelegate> delegate;
 
-@property (nonatomic, strong) NSNumber* recipeId;
-@property (atomic) ParagonBurnerMode burnerMode;
-@property (atomic) ParagonCookMode cookMode;
-@property (nonatomic, strong) NSArray* burners;
+extern NSString * const FSTServiceParagon ;
 
-
--(void)startHeatingWithStage: (FSTParagonCookingStage*)stage;
--(void)setCookingTimesWithStage: (FSTParagonCookingStage*)stage;
-//-(void)moveNextStage;
+-(void)startTimerForCurrentStage;
+-(BOOL)sendRecipeToCooktop: (FSTRecipe*)recipe;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;
 

@@ -19,6 +19,9 @@
 @end
 
 @implementation FSTStateBarView
+{
+    CABasicAnimation *circlePulsingAnimation;
+}
 
 @synthesize numberOfStates = _numberOfStates;
 
@@ -26,7 +29,9 @@
 {
     [self setupDots];
     _numberOfStates = numberOfStates;
+    [self setNeedsDisplay];
 }
+
 
 - (NSNumber*) numberOfStates
 {
@@ -37,13 +42,31 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setupDots];
+        
+
     }
     return self;
 }
 
 -(void) awakeFromNib {
     [super awakeFromNib];
-    [self setupDots];
+    
+    // animations stop and are removed when app is backgrounded, force removal and re-add
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+     {
+         [self.ring addAnimation:circlePulsingAnimation forKey:@"lineWidth"];
+     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillResignActiveNotification
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+     {
+         [self.ring removeAnimationForKey:@"lineWidth"];
+     }];
 }
 
 -(void)setupDots { // could happen after init or awake from nib. Initialize subviews
@@ -117,18 +140,21 @@
     if (self.grayDots.count >= 1) {
         switch (self.circleState)
         {
-            case FSTParagonCookingStatePrecisionCookingReachingTemperature:
+            case FSTCookingStatePrecisionCookingReachingTemperature:
                 [self colorDotsForActiveStateNumber:0];
                 break;
-            case FSTParagonCookingStatePrecisionCookingTemperatureReached:
+            case FSTCookingStatePrecisionCookingTemperatureReached:
                 [self colorDotsForActiveStateNumber:1];
                 break;
-            case FSTParagonCookingStatePrecisionCookingReachingMinTime:
+            case FSTCookingStatePrecisionCookingReachingMinTime:
                 [self colorDotsForActiveStateNumber:2];
                 break;
-            case FSTParagonCookingStatePrecisionCookingReachingMaxTime:
-            case FSTParagonCookingStatePrecisionCookingPastMaxTime:
+            case FSTCookingStatePrecisionCookingReachingMaxTime:
+            case FSTCookingStatePrecisionCookingPastMaxTime:
                 [self colorDotsForActiveStateNumber:3];
+                break;
+            case FSTCookingStatePrecisionCookingWithoutTime:
+                [self colorDotsForActiveStateNumber:1];
                 break;
             default:
                 NSLog(@"NO STATE FOR STAGE BAR\n");
@@ -170,7 +196,11 @@
     
 }
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect
+{
+    self.layer.sublayers = nil;
+    [self setupDots];
+    
     CGFloat barWidth = rect.size.width * (.2 * ([self.numberOfStates intValue]-1));
     CGFloat barXOrigin = (rect.size.width - barWidth) / 2;
     CGFloat y = rect.size.height/2;
@@ -186,28 +216,20 @@
     [underPath addLineToPoint:CGPointMake(barXOrigin + self.lineWidth, y)];
     [[UIColor lightGrayColor] setStroke];
     [underPath stroke];
-
     
-    
-    
-    
-    //TODO:experimental
+    //pulsing ring
     self.ring = [CAShapeLayer layer];
-    //self.ring.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(point1, y) radius:dotRadius*4 startAngle:0 endAngle:2*M_PI clockwise:false].CGPath;//grayLayer1.path;
     self.ring.fillColor = [UIColor clearColor].CGColor;
     self.ring.strokeColor = [[UIColor orangeColor] CGColor];
-    //self.ring.lineWidth = grayLayer1.lineWidth/3;
     [self.layer addSublayer:self.ring];
-    CABasicAnimation *branchGrowAnimation = [CABasicAnimation animationWithKeyPath:@"lineWidth"];
-    branchGrowAnimation.duration = 3.0;
-    branchGrowAnimation.autoreverses = YES;
-    branchGrowAnimation.repeatCount = HUGE_VAL;
-    branchGrowAnimation.fromValue = [NSNumber numberWithFloat:dotRadius*8];//*4];
-    branchGrowAnimation.toValue = [NSNumber numberWithFloat:dotRadius*4];
-    [self.ring addAnimation:branchGrowAnimation forKey:@"lineWidth"];
-    /////////////
-    [self arrangeTransforms]; // create the affine transformations for the ring at every gray dot
-    //[self updateCircle]; // set circle position after drawing. layoutSubviews might take care of this
+    circlePulsingAnimation = [CABasicAnimation animationWithKeyPath:@"lineWidth"];
+    circlePulsingAnimation.duration = 3.0;
+    circlePulsingAnimation.autoreverses = YES;
+    circlePulsingAnimation.repeatCount = HUGE_VAL;
+    circlePulsingAnimation.fromValue = [NSNumber numberWithFloat:dotRadius*8];//*4];
+    circlePulsingAnimation.toValue = [NSNumber numberWithFloat:dotRadius*4];
+    [self.ring addAnimation:circlePulsingAnimation forKey:@"lineWidth"];
+    [self arrangeTransforms];
 }
 
 @end

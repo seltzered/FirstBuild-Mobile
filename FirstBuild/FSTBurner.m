@@ -14,7 +14,8 @@
 {
     self = [super init];
     if (self) {
-        self.burnerMode = kPARAGON_UNINITIALIZED;
+        self.geCooktopBurnerMode = kGECOOKTOP_OFF;
+        self.paragonburnerMode = kPARAGON_BURNER_STOP;
     }
     return self;
 }

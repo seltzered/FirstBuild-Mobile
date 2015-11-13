@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
+#ifdef CHILLHUB
+
 #import <UIKit/UIKit.h>
 #import <HRColorPickerView.h>
 
@@ -18,3 +20,5 @@
 @property (strong, nonatomic) FSTLedge *ledge;
 
 @end
+
+#endif

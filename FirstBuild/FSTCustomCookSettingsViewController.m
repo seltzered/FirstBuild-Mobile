@@ -16,8 +16,7 @@
 
 @implementation FSTCustomCookSettingsViewController
 {
-    NSObject *_temperatureSetObserver;
-    
+    NSObject *_cookConfigurationSetObserver;
     FSTStagePickerManager* pickerManager;
 }
 
@@ -58,34 +57,12 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
 }
 
-- (void)removeObservers
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureSetObserver];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [self removeObservers];
-}
-
 - (void) viewWillAppear:(BOOL)animated { //want to make the segue faster
     
     [self resetPickerHeights];
     [self updateLabels]; // set them to current selection (decided by preset hour, minute, temp index
     
     self.continueTapGesturerRecognizer.enabled = YES;
-    
-    //setup the observer so we know when the temperature wrote
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    __weak typeof(self) weakSelf = self;
-    
-    _temperatureSetObserver = [center addObserverForName:FSTTargetTemperatureSetNotification
-                                                  object:weakSelf.currentParagon
-                                                   queue:nil
-                                              usingBlock:^(NSNotification *notification)
-   {
-       [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self];
-   }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,8 +130,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (IBAction)continueTapGesture:(id)sender {
     
-    //TODO progress indicator?
-    //TODO grey out the button?
+    //TODO: progress indicator?
+    //TODO: grey out the button?
     self.continueTapGesturerRecognizer.enabled = NO;
     
     FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
@@ -163,9 +140,38 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.cookTimeMinimum = [pickerManager minMinutesChosen];
     stage.cookTimeMaximum = [pickerManager maxMinutesChosen];
     stage.cookingLabel = @"Custom Profile";
+    
+    
+    stage.maxPowerLevel = [NSNumber numberWithInt:10];
+//    stage.automaticTransition = [NSNumber numberWithInt:2];
+//    stage.cookTimeMinimum = [NSNumber numberWithInt:0];
+//    stage.cookTimeMaximum = [NSNumber numberWithInt:0];
     //stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
-    [self.currentParagon startHeatingWithStage:stage];
+    ////TODO: HACK TEMP
+//    FSTParagonCookingStage* stage1 = [self.currentParagon.session.toBeRecipe addStage];
+//    stage1.maxPowerLevel = [NSNumber numberWithInt:7];
+//    stage1.cookTimeMinimum = [NSNumber numberWithInt:0];
+//    stage1.cookTimeMaximum = [NSNumber numberWithInt:0];
+//    stage1.targetTemperature = [NSNumber numberWithInt:350];
+//    stage1.automaticTransition = [NSNumber numberWithBool:YES];
+    ////HACK TEMP
+
+    //once the temperature is confirmed to be set then it will segue because it is
+    //waiting on the cookConfigurationSet delegate. we check the return status because
+    //the user may not have the correct cook mode
+    if (![self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe])
+    {
+        self.continueTapGesturerRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 - (void)dealloc
@@ -191,5 +197,23 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     }
 }
 
+#pragma mark - <FSTParagonDelegate>
+- (void)cookConfigurationSet:(NSError *)error
+{
+    if (error)
+    {
+        self.continueTapGesturerRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must not currently be cooking. Try pressing the Stop button and changing to the Rapid or Gentle Precise cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self];
+}
 
 @end

@@ -9,5 +9,5 @@
 #import "FSTBleProduct.h"
 
 @interface FSTHumanaPillBottle : FSTBleProduct
-@property (nonatomic, strong) NSNumber* loadingProgress;
+@property (atomic) BOOL needsRxRefill;
 @end

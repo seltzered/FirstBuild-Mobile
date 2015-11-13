@@ -9,6 +9,13 @@
 #ifndef FirstBuild-Mobile_Constants_h
 #define FirstBuild-Mobile_Constants_h
 
+#define _EXPERIMENTAL //remove _ if experimental enabled
+#define _CHILLHUB
+
+#ifdef CHILLHUB
+    #define WIFI
+#endif
+
 FOUNDATION_EXPORT NSString *const FirebaseUrl;
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)(((rgbValue) & 0xFF0000) >> 16))/255.0 green:((float)(((rgbValue) & 0xFF00) >> 8))/255.0 blue:((float)((rgbValue) & 0xFF))/255.0 alpha:1.0]

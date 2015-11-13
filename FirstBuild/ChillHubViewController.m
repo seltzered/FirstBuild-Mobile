@@ -27,7 +27,7 @@
 //  Created by Nick Hodapp on 1/9/13.
 //  Copyright (c) 2013 CoDeveloper. All rights reserved.
 //
-
+#ifdef CHILLHUB
 #import "ChillHubViewController.h"
 #import "ChillHubDevicesTableViewController.h"
 #import "FBTUser.h"
@@ -67,3 +67,4 @@
 }
 
 @end
+#endif

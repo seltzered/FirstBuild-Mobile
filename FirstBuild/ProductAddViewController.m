@@ -10,6 +10,7 @@
 #import <SWRevealViewController.h>
 #import "FSTHumanaPillBottle.h"
 #import "FSTParagon.h"
+#import "FSTHoodie.h"
 #import "FSTBleCommissioningViewController.h"
 
 @interface ProductAddViewController ()
@@ -26,7 +27,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    //TODO: need to fix this correctly for conditional build
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -35,15 +37,20 @@
     
     switch (indexPath.row) {
         case 0:
-            CellIdentifier = @"chillhub";
+            CellIdentifier = @"paragon";
             break;
             
         case 1:
-            CellIdentifier = @"paragon";
+            CellIdentifier = @"chillhub";
+            
             break;
             
         case 2:
             CellIdentifier = @"humanapillbottle";
+            break;
+            
+        case 3:
+            CellIdentifier = @"hoodie";
             break;
             
         default:
@@ -115,11 +122,19 @@
         FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
         vc.bleProductClass = sender;
     }
+    else if ([segue.identifier isEqualToString:@"segueAddHoodie"])
+    {
+        FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
+        vc.bleProductClass = sender;
+    }
 }
 
 - (IBAction)pillBottleTouchHandler:(id)sender
 {
     [self performSegueWithIdentifier:@"segueAddHumanaPillBottle" sender:[FSTHumanaPillBottle class]];
+}
+- (IBAction)hoodieTouchHandler:(id)sender {
+    [self performSegueWithIdentifier:@"segueAddHoodie" sender:[FSTHoodie class]];
 }
 
 - (IBAction)paragonTouchHandler:(id)sender

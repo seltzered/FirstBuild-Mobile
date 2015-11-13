@@ -35,7 +35,6 @@
         ((FSTParagonMenuViewController*)[((UINavigationController*)vc).childViewControllers objectAtIndex:0]).currentParagon = sender;
     }
     
-    
     if (vc)
     {
         self.rightViewController = vc;        

@@ -12,10 +12,11 @@
 
 @end
 
-@implementation FSTCookSettingsViewController
+@implementation FSTCookSettingsViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentParagon.delegate = self;
     // Do any additional setup after loading the view.
 }
 

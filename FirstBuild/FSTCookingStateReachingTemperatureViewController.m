@@ -46,8 +46,7 @@
     
     UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:44.0];
     NSDictionary* bigFontDict = [NSDictionary dictionaryWithObject:bigFont forKey:NSFontAttributeName];
-    
-    
+
     double currentTemperature = self.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: bigFontDict]; // with degrees fareinheit appended
     

@@ -32,6 +32,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   
     ((FSTCookingViewController*)self.parentViewController).delegate = segue.destinationViewController; // set the current delegate to this parent, allowing for communications around this view controller
 
     if (self.childViewControllers.count > 0) {
@@ -44,15 +45,15 @@
         [segue.destinationViewController didMoveToParentViewController:self];
     }
     
-    if ([segue.destinationViewController isKindOfClass:[FSTCookingStateViewController class]]) {
+    if ([segue.destinationViewController isKindOfClass:[FSTCookingStateViewController class]])
+    {
         FSTParagonCookingStage* stage = self.paragon.session.currentStage;
+        ((FSTCookingStateViewController*)segue.destinationViewController).burnerLevel = [self.paragon.session.currentPowerLevel doubleValue] ;
         ((FSTCookingStateViewController*)segue.destinationViewController).targetMinTime = [stage.cookTimeMinimum doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetMaxTime = [stage.cookTimeMaximum doubleValue];
         ((FSTCookingStateViewController*)segue.destinationViewController).targetTemp = [stage.targetTemperature doubleValue];
-        ((FSTCookingStateViewController*)segue.destinationViewController).elapsedTime = [self.paragon.session.currentStageCookTimeElapsed doubleValue];
-        
+        ((FSTCookingStateViewController*)segue.destinationViewController).remainingHoldTime = [self.paragon.session.remainingHoldTime doubleValue];
     }
-    
 }
 
 -(void)swapFromViewController: (UIViewController*)fromController toViewController: (UIViewController*)toController {
@@ -66,15 +67,5 @@
     [fromController removeFromParentViewController];
     [toController didMoveToParentViewController:self];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

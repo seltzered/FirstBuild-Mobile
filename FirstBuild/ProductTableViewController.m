@@ -22,6 +22,8 @@
 #import "FSTBleProduct.h"
 #import "ProductGradientView.h" // to control up or down gradient
 #import "FSTBleSavedProduct.h"
+#import "FSTHoodie.h"
+#import "FSTHoodieViewController.h"
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
@@ -39,7 +41,7 @@ NSObject* _connectedToBleObserver;
 NSObject* _deviceReadyObserver;
 NSObject* _newDeviceBoundObserver;
 NSObject* _deviceRenamedObserver;
-NSObject* _cookModeChangedObserver;
+NSObject* _deviceEssentialDataChangedObserver;
 NSObject* _deviceDisconnectedObserver;
 NSObject* _deviceBatteryChangedObserver;
 NSObject* _deviceConnectedObserver;
@@ -72,7 +74,7 @@ NSIndexPath *_indexPathForDeletion;
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceBatteryChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceLoadProgressUpdated];
-    [[NSNotificationCenter defaultCenter] removeObserver:_cookModeChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceEssentialDataChangedObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,8 +150,8 @@ NSIndexPath *_indexPathForDeletion;
     }];
     
     
-    //cook mode changed on something, reload the data
-    _cookModeChangedObserver = [center addObserverForName:FSTCookingModeChangedNotification
+    //critical data changed on something
+    _deviceEssentialDataChangedObserver = [center addObserverForName:FSTDeviceEssentialDataChangedNotification
                                                    object:nil
                                                     queue:nil
                                                usingBlock:^(NSNotification *notification)
@@ -321,6 +323,11 @@ NSIndexPath *_indexPathForDeletion;
         ChillHubViewController *vc = (ChillHubViewController*)destination.scene;
         vc.product = sender;
     }
+    else if ([sender isKindOfClass:[FSTHoodie class]])
+    {
+        FSTHoodieViewController *vc = (FSTHoodieViewController*)destination.scene;
+        vc.hoodie = sender;
+    }
 }
 
 #pragma mark <UITableViewDataSource>
@@ -343,6 +350,15 @@ NSIndexPath *_indexPathForDeletion;
     {
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCell" forIndexPath:indexPath];
     }
+    else if ([product isKindOfClass:[FSTHoodie class]])
+    {
+        FSTHoodie* hoodie = (FSTHoodie*)product;
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellHoodie" forIndexPath:indexPath];
+        productCell.friendlyName.text = product.friendlyName;
+        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[hoodie.batteryLevel integerValue]];
+        productCell.batteryView.batteryLevel = [hoodie.batteryLevel doubleValue]/100;
+        [productCell.batteryView setNeedsDisplay]; // redraw
+    }
     else if ([product isKindOfClass:[FSTHumanaPillBottle class]])
     {
         FSTHumanaPillBottle* bottle = (FSTHumanaPillBottle*)product; // cast it to check the cooking status
@@ -351,15 +367,22 @@ NSIndexPath *_indexPathForDeletion;
         productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[bottle.batteryLevel integerValue]];
         productCell.batteryView.batteryLevel = [bottle.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
-        productCell.statusLabel.text = @"No Rx Needed";
+        
+        if (bottle.needsRxRefill == YES)
+        {
+             productCell.statusLabel.text = @"Rx Needed!";
+        }
+        else
+        {
+             productCell.statusLabel.text = @"No Rx Needed";
+        }
+       
         if (product.online)
         {
             if (product.loading)
             {
                 productCell.offlineLabel.hidden = YES;
                 productCell.loadingProgressView.hidden = NO;
-                //TODO: needs to generic
-                //productCell.loadingProgressView.progress = [((FSTBleProduct*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
                 productCell.arrowButton.hidden = YES;
             }
             else
@@ -383,7 +406,6 @@ NSIndexPath *_indexPathForDeletion;
     }
     else if ([product isKindOfClass:[FSTParagon class]])
     {
-        
         FSTParagon* paragon = (FSTParagon*)product; // cast it to check the cooking status
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellParagon" forIndexPath:indexPath];
         productCell.friendlyName.text = product.friendlyName;
@@ -393,24 +415,34 @@ NSIndexPath *_indexPathForDeletion;
         productCell.batteryView.batteryLevel = [paragon.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
         //Taken out since those properties were not connected
-        
-        //TODO: use cookmode not burner mode
-        // check paragon cook modes to update status label
-        if (paragon.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE)
+        [productCell.statusLabel setText:@"<WIP>"];
+
+        switch (paragon.session.cookMode)
         {
-            [productCell.statusLabel setText:@"Preheating"];
-        }
-        else if(paragon.burnerMode == kPARAGON_PRECISION_HEATING)
-        {
-            [productCell.statusLabel setText:@"Cooking"];
-        }
-        else if(paragon.burnerMode == kPARAGON_OFF)
-        {
-            [productCell.statusLabel setText:@"Off"]; // might need more states
-        }
-        else
-        {
-            [productCell.statusLabel setText:@"!"];
+            case FSTCookingStateOff:
+                [productCell.statusLabel setText:@"Off"];
+                break;
+            case FSTCookingStatePrecisionCookingReachingTemperature:
+                [productCell.statusLabel setText:@"Preheating"];
+                break;
+            case FSTCookingDirectCooking:
+                [productCell.statusLabel setText:@"Direct"];
+                break;
+            case FSTCookingDirectCookingWithTime:
+            case FSTCookingStatePrecisionCookingReachingMinTime:
+            case FSTCookingStatePrecisionCookingWithoutTime:
+                [productCell.statusLabel setText:@"Cooking"];
+                break;
+            case FSTCookingStatePrecisionCookingPastMaxTime:
+            case FSTCookingStatePrecisionCookingReachingMaxTime:
+                [productCell.statusLabel setText:@"Complete"];
+                break;
+            case FSTCookingStateUnknown:
+                [productCell.statusLabel setText:@"!"];
+                break;
+            case FSTCookingStatePrecisionCookingTemperatureReached:
+                [productCell.statusLabel setText:@"Waiting..."];
+                break;
         }
     }
     
@@ -477,20 +509,35 @@ NSIndexPath *_indexPathForDeletion;
         {
             [self performSegueWithIdentifier:@"segueChillHub" sender:product];
         }
-        if ([product isKindOfClass:[FSTParagon class]])
+        else if ([product isKindOfClass:[FSTHoodie class]])
+        {
+            [self performSegueWithIdentifier:@"segueHoodie" sender:product];
+        }
+        else if ([product isKindOfClass:[FSTParagon class]])
         {
             FSTParagon* paragon = (FSTParagon*)product;
+            UIStoryboard* board;
             
-            //if we are heating or pre-heating then jump to the cooking view controller
-            if (paragon.burnerMode == kPARAGON_PRECISION_REACHING_TEMPERATURE || paragon.burnerMode == kPARAGON_PRECISION_HEATING)
+            switch (paragon.session.cookMode)
             {
-                FSTCookingViewController *vc = [[UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil]instantiateViewControllerWithIdentifier:@"FSTCookingViewController"];
-                vc.currentParagon = paragon;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            else
-            {
-                [self performSegueWithIdentifier:@"segueParagon" sender:product];
+                case FSTCookingStateUnknown:
+                case FSTCookingStateOff:
+                    [self performSegueWithIdentifier:@"segueParagon" sender:product];
+                    break;
+                case FSTCookingStatePrecisionCookingReachingTemperature:
+                case FSTCookingStatePrecisionCookingReachingMinTime:
+                case FSTCookingDirectCooking:
+                case FSTCookingDirectCookingWithTime:
+                case FSTCookingStatePrecisionCookingWithoutTime:
+                case FSTCookingStatePrecisionCookingPastMaxTime:
+                case FSTCookingStatePrecisionCookingReachingMaxTime:
+                case FSTCookingStatePrecisionCookingTemperatureReached:
+                    board = [UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil];
+                    FSTCookingViewController *vc = [board instantiateViewControllerWithIdentifier:@"FSTCookingViewController"] ;
+                    vc.currentParagon = paragon;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    break;
+
             }
         }
     }

@@ -27,9 +27,6 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
-    
-    NSObject* _temperatureSetObserver;
-
 }
 
 - (void)viewDidLoad {
@@ -50,30 +47,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [self updateLabels];
     
     self.continueTapGestureRecognizer.enabled = YES;
-
-    //setup the observer so we know when the temperature wrote
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    __weak typeof(self) weakSelf = self;
-    
-    _temperatureSetObserver = [center addObserverForName:FSTTargetTemperatureSetNotification
-                                                  object:weakSelf.currentParagon
-                                                   queue:nil
-                                              usingBlock:^(NSNotification *notification)
-   {
-       [self performSegueWithIdentifier:@"seguePreheat" sender:self];
-   }];
 }
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [self removeObservers];
-}
-
-- (void)removeObservers
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:_temperatureSetObserver];
-}
-
 
 - (void)updateLabels
 {
@@ -145,9 +119,21 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutes + 60];
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     
-    //once the temperature is confirmed to be set then it will segue above because
-    [self.currentParagon startHeatingWithStage:stage];
-    
+    //once the temperature is confirmed to be set then it will segue because it is
+    //waiting on the cookConfigurationSet delegate. we check the return status because
+    //the user may not have the correct cook mode
+    if (![self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe])
+    {
+        self.continueTapGestureRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -192,5 +178,12 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
 - (IBAction)menuToggleTapped:(id)sender {
     [self.revealViewController rightRevealToggle:self.currentParagon];
 }
+
+#pragma mark - <FSTParagonDelegate>
+- (void)cookConfigurationSet:(NSError *)error
+{
+    [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+}
+
 
 @end

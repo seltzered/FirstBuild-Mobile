@@ -83,7 +83,7 @@ CBCharacteristic* _manufacturerNameCharacteristic;
     for (CBCharacteristic *characteristic in service.characteristics)
     {
         NSLog(@"Discovered characteristic %@", characteristic);
-        if ([[characteristic.UUID UUIDString] isEqualToString:@"2A29"])
+        if ([[characteristic.UUID UUIDString] isEqualToString:@"2A29"] || [[characteristic.UUID UUIDString] isEqualToString:@"2A27"])
         {
             _manufacturerNameCharacteristic = characteristic;
             [peripheral readValueForCharacteristic:_manufacturerNameCharacteristic];

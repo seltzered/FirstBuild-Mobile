@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#ifdef EXPERIMENTAL
 #import <Firebase/Firebase.h>
+
 
 @interface FirebaseShared : NSObject
 
@@ -16,5 +19,8 @@
 
 +(id) sharedInstance;
 
-
 @end
+
+#endif
+
+

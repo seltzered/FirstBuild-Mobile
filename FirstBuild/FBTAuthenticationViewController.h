@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
+#ifdef CHILLHUB
+
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <GooglePlus/GooglePlus.h>
@@ -22,5 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIControl *controlView;
 @property (strong, nonatomic) IBOutlet GPPSignInButton *googleLoginView;
 @property (strong, nonatomic) IBOutlet FBSDKLoginButton *facebookLoginButton;
+
+#endif
 
 @end

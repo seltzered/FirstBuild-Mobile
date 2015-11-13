@@ -13,6 +13,7 @@
 
 extern NSString * const FSTDeviceReadyNotification;
 extern NSString * const FSTDeviceLoadProgressUpdated;
+extern NSString * const FSTDeviceEssentialDataChangedNotification;
 extern NSString * const FSTBatteryLevelChangedNotification;
 
 @property (strong,nonatomic) CBPeripheral* peripheral;
@@ -21,10 +22,13 @@ extern NSString * const FSTBatteryLevelChangedNotification;
 @property (atomic) BOOL initialCharacteristicValuesRead;
 @property (nonatomic, strong) NSNumber* batteryLevel;
 @property (nonatomic, strong) NSNumber* loadingProgress;
+@property (nonatomic, strong) NSString* serialNumber;
+@property (nonatomic, strong) NSString* modelNumber;
 
 - (void) notifyDeviceReady;
 - (void) notifyDeviceLoadProgressUpdated;
-- (void) writeHandler: (CBCharacteristic*)characteristic;
+- (void) notifyDeviceEssentialDataChanged;
+- (void) writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error;
 - (void) readHandler: (CBCharacteristic*)characteristic;
 - (void) handleDiscoverCharacteristics: (NSArray*)characteristics;
 

@@ -84,6 +84,7 @@ NSString* headerText;
         [self.currentParagon.session.toBeRecipe addStage];
     }
     
+    
     if (
         [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
         [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]

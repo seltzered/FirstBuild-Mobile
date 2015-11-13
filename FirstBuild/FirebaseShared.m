@@ -8,6 +8,7 @@
 
 #import "FirebaseShared.h"
 
+#ifdef EXPERIMENTAL
 
 @implementation FirebaseShared
 
@@ -23,3 +24,7 @@
 }
 
 @end
+
+#endif
+
+

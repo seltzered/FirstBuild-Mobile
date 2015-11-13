@@ -12,12 +12,19 @@
 
 //paragon cook mode
 typedef enum {
-    kPARAGON_UNINITIALIZED,
-    kPARAGON_OFF,
-    kPARAGON_PRECISION_REACHING_TEMPERATURE,
-    kPARAGON_PRECISION_HEATING
+    kGECOOKTOP_UNINITIALIZED,
+    kGECOOKTOP_OFF,
+    kGECOOKTOP_PRECISION_REACHING_TEMPERATURE,
+    kGECOOKTOP_PRECISION_HEATING
+} GECooktopBurnerMode;
+
+typedef enum {
+    kPARAGON_BURNER_STOP,
+    kPARAGON_BURNER_START
 } ParagonBurnerMode;
 
-@property (atomic) ParagonBurnerMode burnerMode;
+@property (atomic) GECooktopBurnerMode geCooktopBurnerMode;
+@property (atomic) ParagonBurnerMode paragonburnerMode;
+
 
 @end

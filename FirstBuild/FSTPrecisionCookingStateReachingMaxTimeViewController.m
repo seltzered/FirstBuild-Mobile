@@ -40,8 +40,11 @@ NSDate* endMaxTime;
 
 - (void)updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime - self.targetMinTime toTime:self.targetMaxTime - self.targetMinTime];
-    //subtract the time already elapsed and find what remains in this stage
+    
+    if (endMaxTime)
+    {
+        self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMaxTime - self.remainingHoldTime) toTime:self.targetMaxTime];
+    }
 }
 
 -(void)targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
@@ -64,21 +67,14 @@ NSDate* endMaxTime;
     NSMutableAttributedString* maxTimeNotice = [[NSMutableAttributedString alloc] initWithString:@"Food can stay in until " attributes:italicFontDict]; // string reporting the date food should be taken out
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSDate* timeComplete;
     
-    double timeRemaining = self.targetMaxTime - self.elapsedTime; // starting from the min time requirement, the progress towards the max time.
-    //int hour = timeRemaining / 60;
-    //int minutes = fmod(timeRemaining, 60.0);
-    /*if (!endTime) {
-        endTime = [NSDate dateWithTimeIntervalSinceNow:((self.targetMaxTime - self.elapsedTime)*60)]; // get the updated max time interval to see when this state will end
-    } // wants to update labels and endTime not set, calculate end time, but some times elapsed time is not set*/
-    
-    if (!endMaxTime && self.elapsedTime >= 0 && self.targetMaxTime > 0) { // want this to set once, only when the elapsedTime and targetMinTime has been set.
-        endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMaxTime - self.elapsedTime)*60]; // want a constant target time that sets once
+    // only when the elapsedTime and targetMinTime has been set.
+    if (!endMaxTime && self.remainingHoldTime > 0 && self.targetMaxTime > 0)
+    {
+        endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60]; // want a constant target time that sets once
     }
 
-    timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60]; // this can some times jump upwards when the elapsed time passes a minute, so the end date does not stay constant
-    [dateFormatter setDateFormat:@"hh:mm a"];// get rid of first h?
+    [dateFormatter setDateFormat:@"hh:mm a"];
     if (endMaxTime) {
         [maxTimeNotice appendAttributedString:[[NSAttributedString alloc] initWithString: [dateFormatter stringFromDate:endMaxTime] attributes:boldFontDict]];
     
@@ -90,15 +86,5 @@ NSDate* endMaxTime;
     [self.currentTempLabel setAttributedText:currentTempString];
     
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -16,13 +16,14 @@
 
 -(void) currentTemperatureChanged:(CGFloat)currentTemperature;
 -(void) targetTemperatureChanged:(CGFloat)targetTemperature;
--(void) elapsedTimeChanged:(NSTimeInterval)elapsedTime; 
+//-(void) elapsedTimeChanged:(NSTimeInterval)elapsedTime;
+-(void) remainingHoldTimeChanged:(NSTimeInterval)remainingHoldTime;
 -(void) targetTimeChanged:(NSTimeInterval)minTime withMax: (NSTimeInterval) maxTime;
 -(void) burnerLevelChanged:(CGFloat)burnerLevel;
 
 @end
 
-@interface FSTCookingViewController : UIViewController <UIAlertViewDelegate>
+@interface FSTCookingViewController : UIViewController <UIAlertViewDelegate, FSTParagonDelegate>
 
 //@property (weak, nonatomic) IBOutlet UILabel *cookingStatusLabel; // now fixed
 //@property (weak, nonatomic) IBOutlet UIImageView *instructionImage;

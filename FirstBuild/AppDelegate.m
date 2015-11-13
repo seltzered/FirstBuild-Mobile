@@ -7,11 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import <Firebase/Firebase.h>
+
+#ifdef CHILLHUB
 #import <RKMIMETypes.h>
-#import <GooglePlus/GooglePlus.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <Firebase/Firebase.h>
+//#import <GooglePlus/GooglePlus.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#endif
+
 
 @interface AppDelegate ()
 
@@ -24,20 +28,27 @@
     //setup restkit, by default the first object manager is the shared singleton accessible everywhere
     // initialize AFNetworking HTTPClient and setup shared object manager
     //move url to contstants
+    
+#ifdef CHILLHUB
     NSURL *baseURL = [NSURL URLWithString:@"http://192.168.10.1:80"];
     //NSURL *baseURL = [NSURL URLWithString:@"http://127.0.0.1:3001"];
     AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
     self.objectManager = [[RKObjectManager alloc] initWithHTTPClient:client];
     [[self.objectManager HTTPClient] setDefaultHeader:@"content-type" value:RKMIMETypeJSON];
     self.objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
-    
+#endif 
     DLog(@"%@", [UIFont fontNamesForFamilyName:@"PT Sans Narrow"]);
     
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
     
    //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"ble-devices"];
+    return true;
     
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                    didFinishLaunchingWithOptions:launchOptions];
+    //disabled facebook sdk
+//    return [[FBSDKApplicationDelegate sharedInstance] application:application
+//                                    didFinishLaunchingWithOptions:launchOptions];
     
 }
 
@@ -45,19 +56,21 @@
 - (BOOL)application: (UIApplication *)application
             openURL: (NSURL *)url
   sourceApplication: (NSString *)sourceApplication
-         annotation: (id)annotation {
-    NSInteger facebookPrefixLocation =[[url absoluteString] rangeOfString:@"fb"].location;
-    if (facebookPrefixLocation == NSNotFound)
-    {
-       return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
-    }
-    else
-    {
-        return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                              openURL:url
-                                                    sourceApplication:sourceApplication
-                                                           annotation:annotation];
-    }
+         annotation: (id)annotation
+{
+    return true;
+//    NSInteger facebookPrefixLocation =[[url absoluteString] rangeOfString:@"fb"].location;
+//    if (facebookPrefixLocation == NSNotFound)
+//    {
+//       return [GPPURLHandler handleURL:url sourceApplication:sourceApplication annotation:annotation];
+//    }
+//    else
+//    {
+//        return [[FBSDKApplicationDelegate sharedInstance] application:application
+//                                                              openURL:url
+//                                                    sourceApplication:sourceApplication
+//                                                           annotation:annotation];
+//    }
 
 }
 
@@ -76,7 +89,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-     [FBSDKAppEvents activateApp];
+     //[FBSDKAppEvents activateApp];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

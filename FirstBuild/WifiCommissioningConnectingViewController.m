@@ -5,6 +5,7 @@
 //  Created by Myles Caley on 12/18/14.
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
+#ifdef WIFI
 
 #import "WifiCommissioningConnectingViewController.h"
 #import "FSTDevice.h"
@@ -62,3 +63,5 @@
 }
 
 @end
+
+#endif

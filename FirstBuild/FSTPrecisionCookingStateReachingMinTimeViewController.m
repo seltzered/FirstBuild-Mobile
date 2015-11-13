@@ -18,8 +18,9 @@
 @end
 
 @implementation FSTPrecisionCookingStateReachingMinTimeViewController
-
-NSDate* endTime;
+{
+    NSDate* endTime;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,9 +29,7 @@ NSDate* endTime;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //[self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMinTimeLayer class]];
     [self updateLabels];
-    //[self updatePercent];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -45,19 +44,11 @@ NSDate* endTime;
 
 - (void) updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:self.elapsedTime toTime:self.targetMinTime];
-    //[self.circleProgressView.progressLayer drawPathsForPercent]; must be drawing since it changes
+    if (endTime)
+    {
+        self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMinTime - self.remainingHoldTime) toTime:self.targetMinTime];
+    }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(void) targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
     [super targetTimeChanged:minTime withMax:maxTime];
@@ -68,28 +59,23 @@ NSDate* endTime;
     
     UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
-    
-    UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:40.0];
-    NSDictionary* bigFontDict = [NSDictionary dictionaryWithObject:bigFont forKey:NSFontAttributeName];
-    
+  
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSDate* timeComplete;
     
     double currentTemperature = self.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
     
-    double timeRemaining = self.targetMinTime - self.elapsedTime; // the min time required (set through a delegate method) minus the elapsed time to find when the stage will end
-    //int hour = timeRemaining / 60;
-    //int minutes = fmod(timeRemaining, 60.0);
-    if (!endTime && self.elapsedTime >= 0 && self.targetMinTime > 0) { // want this to set once, only when the elapsedTime and targetMinTime has been set.
-        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.targetMinTime - self.elapsedTime)*60]; // want a constant target time that sets once
+    // set only once. when the remainingTime and targetMinTime has been set.
+    if (!endTime && self.remainingHoldTime > 0 && self.targetMinTime > 0)
+    {
+        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60]; // want a constant target time that sets once
     }
-    timeComplete = [[NSDate date] dateByAddingTimeInterval:timeRemaining*60];
+
     [self.currentTempLabel setAttributedText:currentTempString];
     
     if (endTime) {
         [dateFormatter setDateFormat:@"h:mm a"]; //testing, removed an h
-        [self.endTimeLabel setText:[dateFormatter stringFromDate:endTime]];//timeComplete]]; // end time does not reset when you return to the app, needs to stay on the probe no the view controller. Or it could update once when the screen appears
+        [self.endTimeLabel setText:[dateFormatter stringFromDate:endTime]];
     }
 }
 

@@ -26,7 +26,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
--(void) updatePercent { // hopefully when called wihthin the base class the sub classes should override it
+
+-(void) updatePercent {
 }
 
 -(void) updateLabels {
@@ -99,11 +100,17 @@
     [self updateLabels];
 }
 
--(void)elapsedTimeChanged:(NSTimeInterval)elapsedTime {
-    self.elapsedTime = elapsedTime;
+-(void)remainingHoldTimeChanged:(NSTimeInterval)remainingHoldTime {
+    self.remainingHoldTime = remainingHoldTime;
     [self updatePercent];
     [self updateLabels];
 }
+
+//-(void)elapsedTimeChanged:(NSTimeInterval)elapsedTime {
+//    self.elapsedTime = elapsedTime;
+//    [self updatePercent];
+//    [self updateLabels];
+//}
 
 -(void)burnerLevelChanged:(CGFloat)burnerLevel {
     self.burnerLevel = burnerLevel;

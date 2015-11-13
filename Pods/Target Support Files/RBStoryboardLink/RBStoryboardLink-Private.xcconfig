@@ -1,0 +1,6 @@
+#include "RBStoryboardLink.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/RBStoryboardLink" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/RBStoryboardLink" "${PODS_ROOT}/Headers/Public/SWRevealViewController"
+OTHER_LDFLAGS = ${RBSTORYBOARDLINK_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

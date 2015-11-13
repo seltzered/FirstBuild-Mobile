@@ -16,11 +16,15 @@
     if (self) {
         self.activeRecipe = nil;
         self.toBeRecipe = nil;
-        self.currentStage = 0;
-        self.currentProbeTemperature = 0;
-        self.currentStageCookTimeElapsed = 0;
+        self.currentProbeTemperature = nil;
         self.currentStage = nil;
-        self.previousStage = nil;
+        self.currentPowerLevel = nil;
+        self.currentStageIndex = 0;
+        self.recipeId = nil;
+        self.burnerMode = 0;
+        self.cookMode = FSTCookingStateUnknown;
+        self.cookState = FSTParagonCookStateOff;
+        self.remainingHoldTime = 0;
     }
     return self;
 }

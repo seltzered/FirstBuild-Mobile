@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
+#ifdef CHILLHUB
+
 #import "BeerBankViewController.h"
 #import <Firebase/Firebase.h>
-#
+
 
 @interface BeerBankViewController ()
 
@@ -107,3 +109,5 @@ bool animating = false;
 }
 
 @end
+
+#endif

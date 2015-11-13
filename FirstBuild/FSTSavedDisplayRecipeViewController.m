@@ -65,10 +65,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"startSegue"]) {
         ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
-        //TODO: setup cooking with the recipe some how
         self.currentParagon.session.toBeRecipe = self.activeRecipe; // set the method?
-        [self.currentParagon startHeatingWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
-        // where should I start heating?
+        [self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe];
     } else if ([segue.identifier isEqualToString:@"stageSettingsSegue"]) {
         ((FSTStageSettingsViewController*)segue.destinationViewController).activeStage = (FSTParagonCookingStage*)sender;
         ((FSTStageSettingsViewController*)segue.destinationViewController).can_edit = [NSNumber numberWithBool:NO];

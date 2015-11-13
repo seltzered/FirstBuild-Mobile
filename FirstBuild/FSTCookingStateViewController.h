@@ -12,7 +12,7 @@
 
 @interface FSTCookingStateViewController : UIViewController<FSTCookingViewControllerDelegate>
 
-@property (nonatomic) NSTimeInterval elapsedTime;
+@property (nonatomic) NSTimeInterval remainingHoldTime;
 
 @property (nonatomic) NSTimeInterval targetMinTime;
 

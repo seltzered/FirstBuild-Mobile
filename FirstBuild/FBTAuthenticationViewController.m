@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
+#ifdef CHILLHUB
+
 #import "FBTAuthenticationViewController.h"
 #import <Firebase/Firebase.h>
 #import <SSKeychain.h>
@@ -314,3 +316,5 @@
 
 
 @end
+
+#endif

@@ -12,6 +12,7 @@
 
 NSString * const FSTDeviceReadyNotification             = @"FSTDeviceReadyNotification";
 NSString * const FSTDeviceLoadProgressUpdated           = @"FSTDeviceLoadProgressUpdated";
+NSString * const FSTDeviceEssentialDataChangedNotification       = @"FSTDeviceEssentialDataChangedNotification";
 NSString * const FSTBatteryLevelChangedNotification     = @"FSTBatteryLevelChangedNotification";
 
 - (instancetype)init
@@ -36,8 +37,13 @@ NSString * const FSTBatteryLevelChangedNotification     = @"FSTBatteryLevelChang
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceLoadProgressUpdated  object:self.peripheral];
 }
 
+- (void) notifyDeviceEssentialDataChanged
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceEssentialDataChangedNotification  object:self.peripheral];
+}
+
 #pragma mark - Stub Interface Selectors
--(void)writeHandler: (CBCharacteristic*)characteristic
+- (void) writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error;
 {
 }
 
@@ -60,12 +66,10 @@ NSString * const FSTBatteryLevelChangedNotification     = @"FSTBatteryLevelChang
 {
     if (error)
     {
-        //TODO: what do we do if error writing characteristic?
         DLog(@"error %@, writing characteristic %@", characteristic.UUID, error);
-        return;
     }
     
-    [self writeHandler:characteristic];
+    [self writeHandler:characteristic error:error];
 }
 
 -(void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error

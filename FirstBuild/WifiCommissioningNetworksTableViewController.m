@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
+#ifdef WIFI
+
 #import "WifiCommissioningNetworksTableViewController.h"
 #import "WifiCommissioningNetworkListViewController.h"
 #import "WifiCommissioningNetworkTableViewCell.h"
@@ -81,3 +83,5 @@
 }
 
 @end
+
+#endif

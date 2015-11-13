@@ -50,8 +50,8 @@ CBPeripheralManager * _peripheralManager; //temporary
         //this startup then triggers the central manager initialization. once the service
         //callback check is removed we need to start the central manager here instead of in peripheralManagerDidUpdateState
         self.isPoweredOn = NO;
-        //_centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-        _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        //_peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     }
     return self;
 }
@@ -307,6 +307,7 @@ CBPeripheralManager * _peripheralManager; //temporary
     }
 
 }
+
 
 #pragma mark - Peripheral Delegate - temporary
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {

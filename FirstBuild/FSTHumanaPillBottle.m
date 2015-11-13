@@ -9,19 +9,18 @@
 #import "FSTHumanaPillBottle.h"
 
 @implementation FSTHumanaPillBottle
+{
+    NSTimeInterval _buttonDownStartTime;
+    NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+}
 
 //notifications
 NSString * const FSTHumanaPillBottleBatteryLevelChangedNotification         = @"FSTHumanaPillBottleBatteryLevelChangedNotification";
 
-
 //Blue Bean Characteristics
 //TODO: move standard characteristics to BLE base object
-NSString * const FSTCharacteristicScratch1                = @"A495FF21-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
+NSString * const FSTCharacteristicSerialPassThrough       = @"A495FF11-C5B1-4B44-B512-1370F02D74DE"; //read,notify,write
 NSString * const FSTCharacteristicBatteryLevelDefault     = @"2A19"; //read,notify
-
-NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-
-__weak NSTimer* _readCharacteristicsTimer;
 
 #pragma mark - Allocation
 
@@ -31,20 +30,16 @@ __weak NSTimer* _readCharacteristicsTimer;
     
     if (self)
     {
+        self.needsRxRefill = NO;
+        _buttonDownStartTime = 0;
         // booleans for all the required characteristics, tell us whether or not the characteristic loaded
         requiredCharacteristics = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[
-            [NSNumber alloc] initWithBool:0], FSTCharacteristicScratch1,
+            [NSNumber alloc] initWithBool:0], FSTCharacteristicSerialPassThrough,
             nil];
     }
     
     return self;
 }
-
--(void)dealloc
-{
-    [_readCharacteristicsTimer invalidate];
-}
-
 
 #pragma mark - Read Handlers
 
@@ -52,10 +47,10 @@ __weak NSTimer* _readCharacteristicsTimer;
 {
     [super readHandler:characteristic];
     
-    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicScratch1])
+    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicSerialPassThrough])
     {
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicScratch1];
-        [self handleScratch1:characteristic];
+        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicSerialPassThrough];
+        [self handleSerial:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelDefault])
     {
@@ -115,20 +110,57 @@ __weak NSTimer* _readCharacteristicsTimer;
     
 }
 
--(void)handleScratch1: (CBCharacteristic*)characteristic
+
+-(void)handleSerial: (CBCharacteristic*)characteristic
 {
-    if (characteristic.value.length != 2)
+    if (characteristic.value.length != 8)
     {
         //DLog(@"handleElapsedTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
         return;
     }
+
+    //using BlueBean data layer.. see GATT_Serial_Message.m in Bean-iOS-OSX-SDK
+    NSData* payload = [characteristic.value subdataWithRange: NSMakeRange (2, [characteristic.value length]-4)];
+
+    //3f = all digital pins HIGH
+    //3d = D1 is off
+    Byte bytes[payload.length] ;
+    [payload getBytes:bytes length:payload.length];
     
-    NSData *data = characteristic.value;
-    Byte bytes[characteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.value.length];
-//        uint16_t raw = OSReadBigInt16(bytes, 0);
-//        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];
-    
+    if (bytes[3] == 0x3f)
+    {
+        //all of the inputs are high
+        NSLog(@"button up");
+        NSTimeInterval _buttonUpTime = [NSDate timeIntervalSinceReferenceDate];
+        if (_buttonUpTime - _buttonDownStartTime > 1.5 && _buttonDownStartTime != 0)
+        {
+            NSLog(@"button up GREATER THAN 3 second");
+            self.needsRxRefill = !self.needsRxRefill;
+            [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceEssentialDataChangedNotification  object:self];
+            
+            ///
+            UILocalNotification* local = [[UILocalNotification alloc]init];
+            if (local)
+            {
+                local.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+                local.alertBody = self.needsRxRefill?@"Refill request succeeded" : @"Refill request cancelled";
+                local.timeZone = [NSTimeZone defaultTimeZone];
+                [[UIApplication sharedApplication] scheduleLocalNotification:local];
+                
+            }
+            /////
+            
+        }
+        _buttonDownStartTime = 0;
+       
+    }
+    else
+    {
+        //one of the inputs is low
+        NSLog(@"button down");
+        
+        _buttonDownStartTime = [NSDate timeIntervalSinceReferenceDate];
+    }
 }
 
 
@@ -139,7 +171,7 @@ __weak NSTimer* _readCharacteristicsTimer;
     [super handleDiscoverCharacteristics:characteristics];
     
     self.initialCharacteristicValuesRead = NO;
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicScratch1];
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicSerialPassThrough];
     NSLog(@"=======================================================================");
   //  NSLog(@"SERVICE %@", [service.UUID UUIDString]);
     
@@ -156,7 +188,7 @@ __weak NSTimer* _readCharacteristicsTimer;
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
             if  (
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicScratch1] ||
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicSerialPassThrough] ||
                  [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelDefault]
                  )
             {
