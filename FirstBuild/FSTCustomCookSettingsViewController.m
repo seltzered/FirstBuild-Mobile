@@ -30,7 +30,7 @@ typedef enum variableSelections {
 
 VariableSelection _selection;
 
-CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current selection (equal to the constant picker height
+CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current selection (equal to the constant picker height)
 
 - (void)viewDidLoad {
     [super viewDidLoad];

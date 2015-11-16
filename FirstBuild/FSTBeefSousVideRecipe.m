@@ -17,7 +17,8 @@
     {
         self.name = @"Beef";
         
-        self.donenesses = @[@133,
+        // the temperature variables change for each cut
+        /*self.donenesses = @[@133,
                             @134.5,
                             @136.5,
                             @138,
@@ -45,6 +46,7 @@
                             @151:@"Medium-Well",
                             @158:@"Well",
                             @160:@"Well"};
+         */
         
         self.thicknesses = @[
                              @(0.25),
@@ -68,7 +70,7 @@
                                  @(2):@[@"2",@"",@""]
                              };
         
-        self.cookingTimes =
+        /*self.cookingTimes =
             @{
               @133:@{
                       @0.25:@[@1,@15],
@@ -200,7 +202,7 @@
                       @1.75:@[@1,@30],
                       @2:@[@2,@28],
                       },
-            };
+            };*/
       
     }
     return self;

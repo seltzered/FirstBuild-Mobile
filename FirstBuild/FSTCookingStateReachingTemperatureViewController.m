@@ -15,6 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *currentLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *preheatingLabel;
+
 
 @end
 
@@ -40,6 +42,16 @@
 
 -(void) updateLabels {
     [super updateLabels];
+    
+    if (self.circleProgressView.progressLayer.percent >= 0) {
+        self.preheatingLabel.textColor = UIColorFromRGB(0xF0663A);
+        self.targetLabel.textColor = UIColorFromRGB(0xF0663A);
+        self.currentLabel.textColor = UIColorFromRGB(0xF0663A);
+    } else {
+        self.preheatingLabel.textColor = [UIColor blueColor];
+        self.targetLabel.textColor = [UIColor blueColor];
+        self.currentLabel.textColor = [UIColor blueColor];
+    }
     
     UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0]; // temporary, need to figure out the regular font
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
