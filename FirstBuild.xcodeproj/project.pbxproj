@@ -56,6 +56,8 @@
 		51DFCAE11B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */; };
 		51DFCAE41B66B7D500E48084 /* FSTParagonMenuAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */; };
 		51E754601BF8D51600033090 /* FSTBeefTenderCutsSousVide.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E7545F1BF8D51600033090 /* FSTBeefTenderCutsSousVide.m */; };
+		51E754631BFA77D200033090 /* FSTBeefSteaksSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E754621BFA77D200033090 /* FSTBeefSteaksSousVideRecipe.m */; };
+		51E754661BFA7D4C00033090 /* FSTBeefSteaksToughCutsSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 51E754651BFA7D4C00033090 /* FSTBeefSteaksToughCutsSousVideRecipe.m */; };
 		51EA9E491B82192900A3F421 /* FSTSavedRecipeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EA9E481B82192900A3F421 /* FSTSavedRecipeManager.m */; };
 		51EA9E4C1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EA9E4B1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.m */; };
 		51EA9E4F1B823E2900A3F421 /* FSTSavedRecipeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EA9E4E1B823E2900A3F421 /* FSTSavedRecipeTableViewController.m */; };
@@ -269,6 +271,10 @@
 		51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonMenuAboutViewController.m; sourceTree = "<group>"; };
 		51E7545E1BF8D51600033090 /* FSTBeefTenderCutsSousVide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBeefTenderCutsSousVide.h; sourceTree = "<group>"; };
 		51E7545F1BF8D51600033090 /* FSTBeefTenderCutsSousVide.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBeefTenderCutsSousVide.m; sourceTree = "<group>"; };
+		51E754611BFA77D200033090 /* FSTBeefSteaksSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBeefSteaksSousVideRecipe.h; sourceTree = "<group>"; };
+		51E754621BFA77D200033090 /* FSTBeefSteaksSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBeefSteaksSousVideRecipe.m; sourceTree = "<group>"; };
+		51E754641BFA7D4C00033090 /* FSTBeefSteaksToughCutsSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTBeefSteaksToughCutsSousVideRecipe.h; sourceTree = "<group>"; };
+		51E754651BFA7D4C00033090 /* FSTBeefSteaksToughCutsSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBeefSteaksToughCutsSousVideRecipe.m; sourceTree = "<group>"; };
 		51EA9E471B82192800A3F421 /* FSTSavedRecipeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTSavedRecipeManager.h; sourceTree = "<group>"; };
 		51EA9E481B82192900A3F421 /* FSTSavedRecipeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTSavedRecipeManager.m; sourceTree = "<group>"; };
 		51EA9E4A1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTSavedRecipeTableViewCell.h; sourceTree = "<group>"; };
@@ -1072,6 +1078,10 @@
 				51B2975A1B8F642E0017DCA2 /* FSTMultiStageRecipe.m */,
 				5BCBB9FC1B0390C500B8E043 /* FSTBeefSousVideRecipe.h */,
 				5BCBB9FD1B0390C500B8E043 /* FSTBeefSousVideRecipe.m */,
+				51E754611BFA77D200033090 /* FSTBeefSteaksSousVideRecipe.h */,
+				51E754621BFA77D200033090 /* FSTBeefSteaksSousVideRecipe.m */,
+				51E754641BFA7D4C00033090 /* FSTBeefSteaksToughCutsSousVideRecipe.h */,
+				51E754651BFA7D4C00033090 /* FSTBeefSteaksToughCutsSousVideRecipe.m */,
 				51E7545E1BF8D51600033090 /* FSTBeefTenderCutsSousVide.h */,
 				51E7545F1BF8D51600033090 /* FSTBeefTenderCutsSousVide.m */,
 				5BA064C71B8380E6002FCE59 /* FSTCandyRecipes.h */,
@@ -1468,6 +1478,7 @@
 				511A71621B5ED7C10015E4B5 /* ProductBatteryView.m in Sources */,
 				5BCDFBF51A65584A006E6055 /* WifiCommissioningNetworksTableViewController.m in Sources */,
 				5BCDFBF21A64CFA6006E6055 /* WifiCommissioningPasswordViewController.m in Sources */,
+				51E754631BFA77D200033090 /* FSTBeefSteaksSousVideRecipe.m in Sources */,
 				517CA53C1B86176600CE9F1B /* FSTDottedDividerView.m in Sources */,
 				51DC77661B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m in Sources */,
 				5B0583691B1562C3003782E2 /* UIDashedLineView.m in Sources */,
@@ -1516,6 +1527,7 @@
 				5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */,
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
 				51A9D0371B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m in Sources */,
+				51E754661BFA7D4C00033090 /* FSTBeefSteaksToughCutsSousVideRecipe.m in Sources */,
 				5B9A6F501B50173F00BDD727 /* FSTBurner.m in Sources */,
 				5B9D111D1BF11D0300D50F8A /* DiagnosticsStageTableViewCell.m in Sources */,
 				5BA064CF1B8383E6002FCE59 /* FSTCaramelBrittleCandyRecipe.m in Sources */,
