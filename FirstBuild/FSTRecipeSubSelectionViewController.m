@@ -10,6 +10,10 @@
 #import "FSTRecipes.h"
 #import "FSTSousVideRecipes.h"
 #import "FSTBeefSousVideRecipe.h"
+#import "FSTBeefSousVideRecipes.h"
+#import "FSTBeefSteakSousVideRecipe.h"
+#import "FSTBeefSousVideSteakRecipes.h"
+#import "FSTBeefSteakTenderSousVideRecipe.h"
 #import "FSTBeefSettingsViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTCustomCookSettingsViewController.h"
@@ -25,17 +29,26 @@
 
 @implementation FSTRecipeSubSelectionViewController
 
-NSString* headerText;
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     if ([self.childViewControllers[0] isKindOfClass:[FSTRecipeTableViewController class]])
     {
         ((FSTRecipeTableViewController*) self.childViewControllers[0]).delegate = self;
     }
-    headerText = [self.currentParagon.session.toBeRecipe.name uppercaseString]; // grabs the current cooking method (sous vide most likely) upon loading
-
+    
+    MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
+    if (self.recipe)
+    {
+        NSString* headerText = [self.recipe.name uppercaseString];
+        [navigation setHeaderText:headerText withFrameRect:CGRectMake(0, 0, 120, 30)];
+    }
+    else
+    {
+        [navigation setHeaderImageNamed:@"Paragon_Logo_Red" withFrameRect:CGRectMake(0, 0, 120, 30)];
+        [navigation.navigationBar setBarTintColor:[UIColor blackColor]];
+    }
 }
 
 - (void)dealloc
@@ -43,54 +56,72 @@ NSString* headerText;
     DLog(@"dealloc");
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    
-    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
-    [controller setHeaderText:headerText withFrameRect:CGRectMake(0, 0, 120, 30)];
-    
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 - (FSTRecipes*) dataRequestedFromChild
 {
-    if ([self.currentParagon.session.toBeRecipe isKindOfClass:[FSTSousVideRecipe class]])
+    if ([self.recipe isKindOfClass:[FSTBeefSteakSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTBeefSousVideSteakRecipes alloc]init];
+    }
+    else if ([self.recipe isKindOfClass:[FSTBeefSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTBeefSousVideRecipes alloc]init];
+    }
+    else if ([self.recipe isKindOfClass:[FSTSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTSousVideRecipes alloc]init];
     }
-    else if ([self.currentParagon.session.toBeRecipe isKindOfClass:[FSTCandyRecipe class]])
+    else if ([self.recipe isKindOfClass:[FSTCandyRecipe class]])
     {
         return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
+    }
+    else
+    {
+        return [[FSTRecipes alloc]init];
     }
     return nil;
 }
 
 - (void) recipeSelected:(FSTRecipe *)cookingMethod
 {
-    if ([cookingMethod isKindOfClass:[FSTBeefSousVideRecipe class]])
+    if ([cookingMethod isKindOfClass:[FSTBeefSteakTenderSousVideRecipe class]])
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
     }
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //if we are going to anything other than the custom settings view controller
-    //then we need to set the cooking method. the custom settings will initialize the cooking method on its own
-    if ([sender isKindOfClass:[FSTRecipe class]])
+    if ([segue.destinationViewController isKindOfClass:[FSTRecipeSubSelectionViewController class]])
     {
-        self.currentParagon.session.toBeRecipe = (FSTRecipe*)sender;
-        [self.currentParagon.session.toBeRecipe addStage];
+        ((FSTRecipeSubSelectionViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+        ((FSTRecipeSubSelectionViewController*)segue.destinationViewController).recipe = (FSTRecipe*)sender;
     }
-    
-    
-    if (
-        [segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]] ||
-        [segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]]
-        )
+    else if ([segue.destinationViewController isKindOfClass:[FSTCustomCookSettingsViewController class]])
     {
+        //the actual recipe for a custom cook settings view is initialized in the view itself
+        //just tell it which paragon this should go to
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    }
+    else if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]])
+    {
+        //if its not a custom cook view controller then its some other type of cook settings view controller
+        //so we need to set the to be receip to whatever they just selected, which is the sender
+        //(see recipeSelected)
+        self.currentParagon.session.toBeRecipe = (FSTRecipe*)sender;
+        ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+    }
+    else if([segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]])
+    {
+        ((FSTSavedRecipeViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
+
     }
 }
 
@@ -99,9 +130,10 @@ NSString* headerText;
 }
 
 - (IBAction)customTap:(id)sender {
-    [self performSegueWithIdentifier:@"customSegue" sender:nil];
+    [self performSegueWithIdentifier:@"segueCustom" sender:nil];
 }
-- (IBAction)menuToggleTapped:(id)sender {
+- (IBAction)menuToggleTapped:(id)sender
+{
     [self.revealViewController rightRevealToggle:self.currentParagon]; // the other says product, which is inconsistent
 }
 

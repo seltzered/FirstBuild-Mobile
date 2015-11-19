@@ -34,7 +34,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     [super viewDidLoad];
     
     //set up for data objects
-    _beefCookingMethod = [[FSTBeefSousVideRecipe alloc]init];
+    _beefCookingMethod = (FSTBeefSousVideRecipe*)self.currentParagon.session.toBeRecipe;
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
     _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
     _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
@@ -118,6 +118,7 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
     stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutes + 60];
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
+    stage.maxPowerLevel = [NSNumber numberWithInt:10];
     
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because

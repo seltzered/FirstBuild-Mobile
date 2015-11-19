@@ -13,4 +13,6 @@
 @interface FSTRecipeSubSelectionViewController : UIViewController<FSTRecipeTableViewControllerDelegate>
 
 @property (nonatomic,weak) FSTParagon* currentParagon;
+@property (nonatomic,weak) FSTRecipe* recipe;
+
 @end

@@ -27,6 +27,7 @@
 - (void)dealloc
 {
     DLog("dealloc");
+    self.recipes = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,9 +79,9 @@
 
     __weak typeof(self) weakSelf = self;
 
-    self.tableView.userInteractionEnabled = NO;
+    weakSelf.tableView.userInteractionEnabled = NO;
     
-    FSTRecipe* recipe = self.recipes.recipes[indexPath.row];
+    FSTRecipe* recipe = weakSelf.recipes.recipes[indexPath.row];
     
     // clear selection property not making a difference // this might be a problem if the selection changes
     [weakSelf.tableView deselectRowAtIndexPath:weakSelf.tableView.indexPathForSelectedRow animated:YES];

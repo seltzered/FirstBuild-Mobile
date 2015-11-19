@@ -36,7 +36,6 @@ FSTRecipes* _methods;
 
 - (void)dealloc
 {
-    //we no longer have a valid cooking method
     self.product.session.toBeRecipe = nil;
     DLog(@"dealloc");
 }

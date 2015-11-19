@@ -16,7 +16,7 @@
 #import "FSTHumanaPillBottle.h"
 #import "ChillHubViewController.h"
 #import "MobiNavigationController.h"
-#import "FSTRecipeViewController.h"
+#import "FSTRecipeSubSelectionViewController.h"
 #import "FSTBleCentralManager.h"
 #import "FSTCookingViewController.h"
 #import "FSTBleProduct.h"
@@ -308,10 +308,10 @@ NSIndexPath *_indexPathForDeletion;
     
     if ([sender isKindOfClass:[FSTParagon class]])
     {
-        if ([destination.scene isKindOfClass:[FSTRecipeViewController class]])
+        if ([destination.scene isKindOfClass:[FSTRecipeSubSelectionViewController class]])
         {
-            FSTRecipeViewController *vc = (FSTRecipeViewController*)destination.scene;
-            vc.product = sender;
+            FSTRecipeSubSelectionViewController *vc = (FSTRecipeSubSelectionViewController*)destination.scene;
+            vc.currentParagon = sender;
         }
         else
         {
