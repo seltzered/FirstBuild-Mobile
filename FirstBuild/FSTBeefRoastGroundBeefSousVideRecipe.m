@@ -1,19 +1,20 @@
 //
-//  FSTBeefRoastTenderSousVideRecipe.m
+//  FSTBeefRoastGroundBeefSousVideRecipe.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 11/20/15.
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTBeefRoastTenderSousVideRecipe.h"
+#import "FSTBeefRoastGroundBeefSousVideRecipe.h"
 
-@implementation FSTBeefRoastTenderSousVideRecipe
+@implementation FSTBeefRoastGroundBeefSousVideRecipe
 - (id) init
 {
     self = [super init];
     if (self)
     {
+        self.name = @"Ground Beef";
         
         self.donenesses = @[@125,
                             @130,
