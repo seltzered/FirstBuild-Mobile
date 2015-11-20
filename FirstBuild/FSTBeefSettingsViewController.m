@@ -16,7 +16,7 @@
 
 @end
 
-const uint8_t TEMPERATURE_START_INDEX = 6;
+const uint8_t TEMPERATURE_START_INDEX = 2;
 
 @implementation FSTBeefSettingsViewController
 {
@@ -61,33 +61,38 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     UIFont *bigLabelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
     NSDictionary *bigLabelFontDict = [NSDictionary dictionaryWithObject: bigLabelFont forKey:NSFontAttributeName];
     
+    // min time values
     NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
     NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[1]);
-    //TODO add actual data rather than this temporary demonstration, setting the max time one hour above
-    NSNumber* maxHour = [NSNumber numberWithInteger:[hour integerValue] + 1];
     
+    // max time values
+    NSNumber* maxHour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[2]);
+    NSNumber* maxMinute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[3]);
+    
+    // min time labels
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: boldFontDict];
-    NSMutableAttributedString *maxHourString = [[NSMutableAttributedString alloc] initWithString:[maxHour stringValue] attributes: boldFontDict];
+    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"%02ld",(long)[minute integerValue]] attributes: boldFontDict];
     NSMutableAttributedString *hourLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: labelFontDict];
-    NSMutableAttributedString *minuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"%02d",[minute integerValue]] attributes: boldFontDict];
-    //NSMutableAttributedString *minuteLabel = [[NSMutableAttributedString alloc] initWithString:@"MIN" attributes: labelFontDict];
-    //NSMutableAttributedString *separator = [[NSMutableAttributedString alloc] initWithString:@"  |  " attributes: boldFontDict];
+    
+    // max time labels
+    NSMutableAttributedString *maxHourString = [[NSMutableAttributedString alloc] initWithString:[maxHour stringValue] attributes: boldFontDict];
+    NSMutableAttributedString *maxMinuteString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat: @"%02ld",(long)[maxMinute integerValue]] attributes: boldFontDict];
+    NSMutableAttributedString *maxHourLabel = [[NSMutableAttributedString alloc] initWithString:@":" attributes: labelFontDict];
+    
+    // temperature label
     NSMutableAttributedString *temperature = [[NSMutableAttributedString alloc] initWithString:[_currentTemperature stringValue] attributes: boldFontDict];
     NSMutableAttributedString *degreeString = [[NSMutableAttributedString alloc] initWithString:@"\u00b0" attributes:boldFontDict];
     NSMutableAttributedString *temperatureLabel = [[NSMutableAttributedString alloc] initWithString:@" F" attributes: boldFontDict];
     
+    // create the strings
     [hourString appendAttributedString:hourLabel];
     [hourString appendAttributedString:minuteString];
-    //[hourString appendAttributedString:minuteLabel];
-    //[hourString appendAttributedString:separator];
-    [maxHourString appendAttributedString:hourLabel];
-    [maxHourString appendAttributedString:minuteString];
-    //[maxHourString appendAttributedString:minuteLabel];
+    [maxHourString appendAttributedString:maxHourLabel];
+    [maxHourString appendAttributedString:maxMinuteString];
     [temperature appendAttributedString:degreeString];
     [temperature appendAttributedString:temperatureLabel];
     
-    // two seperate labels now
-    
+    // set the strings on the label
     [self.beefSettingsLabel setAttributedText:hourString];
     [self.maxBeefSettingsLabel setAttributedText:maxHourString]; // hour string with one additional hour
     [self.tempSettingsLabel setAttributedText:temperature];
@@ -112,18 +117,22 @@ const uint8_t TEMPERATURE_START_INDEX = 6;
     
     self.continueTapGestureRecognizer.enabled = NO;
     
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
+    FSTRecipe* recipe = [FSTRecipe new];
+    FSTParagonCookingStage* stage = [recipe addStage];
+    
+//    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
     stage.targetTemperature = _currentTemperature;
-    double cookingMinutes = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
-    stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutes];
-    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutes + 60];
+    double cookingMinutesMin = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
+    double cookingMinutesMax = ([(NSNumber*)_currentCookTimeArray[2] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[3] integerValue]);
+    stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutesMin];
+    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutesMax];
     stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
     stage.maxPowerLevel = [NSNumber numberWithInt:10];
     
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because
     //the user may not have the correct cook mode
-    if (![self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe])
+    if (![self.currentParagon sendRecipeToCooktop:recipe])
     {
         self.continueTapGestureRecognizer.enabled = YES;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
