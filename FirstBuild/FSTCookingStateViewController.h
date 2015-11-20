@@ -22,15 +22,13 @@
 
 @property (nonatomic) CGFloat targetTemp;
 
-@property (nonatomic) CGFloat startingTemp; // beginning of the range
-
 @property (nonatomic) CGFloat burnerLevel;
 
 -(void)updatePercent; // implementation changes for each subclass
 
 -(double)calculatePercent:(NSTimeInterval)fromTime toTime:(NSTimeInterval)endTime;
 
--(double)calculatePercentWithTemp:(CGFloat)temp; // give subclasses access to these functions
+-(double)calculatePercentWithTemp; // give subclasses access to these functions
 
 -(void) updateLabels;
 
