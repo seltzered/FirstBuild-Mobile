@@ -17,6 +17,7 @@
         </mutableArray>
         <mutableArray key="FSEmeric-CoreItalic.otf">
             <string>FSEmeric-CoreItalic</string>
+            <string>FSEmeric-CoreItalic</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Light.otf">
             <string>FSEmeric-Light</string>
@@ -3793,7 +3794,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOW" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOF-dv-iof">
-                                                <rect key="frame" x="354" y="558" width="44" height="23"/>
+                                                <rect key="frame" x="354" y="557" width="43.5" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-BoldItalic" family="FS Emeric" pointSize="18"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -3829,7 +3830,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z6-pv-5gN" userLabel="cookingStatusLabel">
-                                <rect key="frame" x="258" y="5" width="85" height="45"/>
+                                <rect key="frame" x="258" y="5" width="84.5" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="Ed9-5E-Y6E"/>
                                     <constraint firstAttribute="height" constant="45" id="kbc-6z-NYI"/>
@@ -3844,15 +3845,23 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE FOOD OUT    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43C-Ek-9Lt" userLabel="Italics Caption">
-                                <rect key="frame" x="205" y="558" width="149" height="23"/>
+                                <rect key="frame" x="205" y="557" width="149" height="22.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-CoreItalic" family="FS Emeric" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(press Stop on Paragon to finish)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCU-0X-rV7">
+                                <rect key="frame" x="214.5" y="579.5" width="181.5" height="16.5"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-CoreItalic" family="FS Emeric" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BOF-dv-iof" firstAttribute="centerY" secondItem="43C-Ek-9Lt" secondAttribute="centerY" id="0Ca-dD-Qmp"/>
+                            <constraint firstItem="43C-Ek-9Lt" firstAttribute="bottom" secondItem="yCU-0X-rV7" secondAttribute="top" id="DPq-u3-hcE"/>
+                            <constraint firstItem="yCU-0X-rV7" firstAttribute="centerX" secondItem="ayh-C7-kjs" secondAttribute="centerX" constant="5" id="Jtv-Ri-JQn"/>
                             <constraint firstItem="tOF-1R-jpO" firstAttribute="width" secondItem="ayh-C7-kjs" secondAttribute="width" multiplier="0.7" id="aSN-L2-vF1"/>
                             <constraint firstItem="pOk-JZ-2Nx" firstAttribute="top" secondItem="43C-Ek-9Lt" secondAttribute="bottom" constant="20" id="beQ-ee-y2x"/>
                             <constraint firstAttribute="centerX" secondItem="8Z6-pv-5gN" secondAttribute="centerX" id="fCq-xb-bbc"/>

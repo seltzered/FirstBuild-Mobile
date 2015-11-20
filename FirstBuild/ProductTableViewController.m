@@ -454,6 +454,7 @@ NSIndexPath *_indexPathForDeletion;
         }
     }
     
+    // status label, online/offline etc
     if (product.online)
     {
         if (product.loading)
@@ -472,7 +473,7 @@ NSIndexPath *_indexPathForDeletion;
     }
     else
     {
-        productCell.offlineLabel.text = @"offline";
+        productCell.offlineLabel.text = @"searching...";
         productCell.offlineLabel.hidden = NO;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
