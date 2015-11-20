@@ -1,16 +1,14 @@
 //
-//  FSTBeefSteakSousVideRecipe.m
+//  FSTBeefRoastTenderSousVideRecipe.m
 //  FirstBuild
 //
-//  Created by Myles Caley on 11/19/15.
+//  Created by Myles Caley on 11/20/15.
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTBeefSteakTenderSousVideRecipe.h"
+#import "FSTBeefRoastTenderSousVideRecipe.h"
 
-@implementation FSTBeefSteakTenderSousVideRecipe
-
-
+@implementation FSTBeefRoastTenderSousVideRecipe
 - (id) init
 {
     self = [super init];
@@ -66,7 +64,7 @@
                   @2:@[@1,@30,@3,@30],
                   },
           @130:@{
-                  @0.25:@[@1,@0,@1,@30], //<--start here>
+                  @0.25:@[@1,@0,@1,@30],
                   @0.5:@[@1,@15,@1,@30],
                   @0.75:@[@1,@30,@1,@30],
                   @1:@[@1,@45,@1,@30],
@@ -111,6 +109,4 @@
     return self;
     
 }
-
 @end
-
