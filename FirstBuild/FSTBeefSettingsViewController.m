@@ -192,6 +192,19 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
 #pragma mark - <FSTParagonDelegate>
 - (void)cookConfigurationSet:(NSError *)error
 {
+    if (error)
+    {
+        self.continueTapGestureRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must not currently be cooking. Try pressing the Stop button and changing to the Rapid or Gentle Precise cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
 }
 
