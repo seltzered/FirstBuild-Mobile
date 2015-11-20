@@ -12,4 +12,5 @@
 
 @interface FSTCookingStateReachingTemperatureViewController :FSTCookingStateViewController
 @property (strong, nonatomic) IBOutlet FSTCookingProgressView *circleProgressView;
+@property (strong, nonatomic) IBOutlet UILabel *cookingStatusLabel;
 @end

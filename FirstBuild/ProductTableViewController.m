@@ -423,7 +423,15 @@ NSIndexPath *_indexPathForDeletion;
                 [productCell.statusLabel setText:@"Off"];
                 break;
             case FSTCookingStatePrecisionCookingReachingTemperature:
-                [productCell.statusLabel setText:@"Preheating"];
+                if (paragon.session.currentStage.targetTemperature > paragon.session.currentProbeTemperature)
+                {
+                    [productCell.statusLabel setText:@"Preheating"];
+                }
+                else
+                {
+                    [productCell.statusLabel setText:@"Cooling"];
+                }
+                
                 break;
             case FSTCookingDirectCooking:
                 [productCell.statusLabel setText:@"Direct"];

@@ -1519,7 +1519,7 @@
                                     <constraint firstItem="6L2-mW-QwO" firstAttribute="width" secondItem="Eho-uD-hb8" secondAttribute="width" id="r7j-5c-r6B"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREHEATING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMu-Ed-3Sd" userLabel="cookingStatusLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMu-Ed-3Sd" userLabel="cookingStatusLabel">
                                 <rect key="frame" x="0.0" y="5" width="600" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="600" id="skp-Qn-4Zm"/>
@@ -1568,6 +1568,7 @@
                     </view>
                     <connections>
                         <outlet property="circleProgressView" destination="ONX-nm-WVn" id="j3J-ec-Dcw"/>
+                        <outlet property="cookingStatusLabel" destination="aMu-Ed-3Sd" id="hjA-Fg-maB"/>
                         <outlet property="currentLabel" destination="6L2-mW-QwO" id="CQT-mA-nVD"/>
                         <outlet property="targetLabel" destination="T4q-Qf-cjt" id="0fB-7F-NgU"/>
                     </connections>

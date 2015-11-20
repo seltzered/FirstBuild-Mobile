@@ -12,9 +12,7 @@
 @interface FSTCookingStateReachingTemperatureViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *targetLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *currentLabel;
-
 
 @end
 
@@ -22,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 }
 
 -(void)viewWillLayoutSubviews
@@ -40,7 +39,14 @@
 
 -(void) updateLabels {
     [super updateLabels];
-    
+    if (self.currentTemp > self.targetTemp)
+    {
+        self.cookingStatusLabel.text = @"COOLING";
+    }
+    else
+    {
+        self.cookingStatusLabel.text = @"PREHEATING";
+    }
     UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0]; // temporary, need to figure out the regular font
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
     
