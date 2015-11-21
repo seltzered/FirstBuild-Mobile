@@ -141,7 +141,6 @@ static const uint8_t STAGE_SIZE = 8;
 {
     [super writeHandler:characteristic error:error];
     
-    
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
     {
         DLog(@"successfully wrote FSTCharacteristicCurrentCookStage");

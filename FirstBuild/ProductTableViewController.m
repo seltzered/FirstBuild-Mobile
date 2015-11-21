@@ -423,7 +423,15 @@ NSIndexPath *_indexPathForDeletion;
                 [productCell.statusLabel setText:@"Off"];
                 break;
             case FSTCookingStatePrecisionCookingReachingTemperature:
-                [productCell.statusLabel setText:@"Preheating"];
+                if (paragon.session.currentStage.targetTemperature > paragon.session.currentProbeTemperature)
+                {
+                    [productCell.statusLabel setText:@"Preheating"];
+                }
+                else
+                {
+                    [productCell.statusLabel setText:@"Cooling"];
+                }
+                
                 break;
             case FSTCookingDirectCooking:
                 [productCell.statusLabel setText:@"Direct"];
@@ -446,6 +454,7 @@ NSIndexPath *_indexPathForDeletion;
         }
     }
     
+    // status label, online/offline etc
     if (product.online)
     {
         if (product.loading)
@@ -464,7 +473,7 @@ NSIndexPath *_indexPathForDeletion;
     }
     else
     {
-        productCell.offlineLabel.text = @"offline";
+        productCell.offlineLabel.text = @"searching...";
         productCell.offlineLabel.hidden = NO;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;

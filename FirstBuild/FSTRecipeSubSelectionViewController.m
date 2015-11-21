@@ -13,6 +13,7 @@
 #import "FSTBeefSousVideRecipes.h"
 #import "FSTBeefSteakSousVideRecipe.h"
 #import "FSTBeefSousVideSteakRecipes.h"
+#import "FSTBeefSousVideRoastRecipes.h"
 #import "FSTBeefSteakTenderSousVideRecipe.h"
 #import "FSTBeefSettingsViewController.h"
 #import "MobiNavigationController.h"
@@ -21,7 +22,14 @@
 #import "FSTSavedRecipeViewController.h"
 #import "FSTCandyRecipe.h"
 #import "FSTCandyRecipes.h"
-
+#import "FSTBeefSteakNormalSousVideRecipe.h"
+#import "FSTBeefSteakToughSousVideRecipe.h"
+#import "FSTBeefRoastRibEyeSousVideRecipe.h"
+#import "FSTBeefRoastBrisketSousVideRecipe.h"
+#import "FSTBeefRoastChuckRoastSousVideRecipe.h"
+#import "FSTBeefRoastShortRibsSousVideRecipe.h"
+#import "FSTBeefRoastGroundBeefSousVideRecipe.h"
+#import "FSTBeefRoastTenderLoinSousVideRecipe.h"
 
 @interface FSTRecipeSubSelectionViewController ()
 
@@ -66,6 +74,10 @@
     {
         return (FSTRecipes*)[[FSTBeefSousVideSteakRecipes alloc]init];
     }
+    else if ([self.recipe isKindOfClass:[FSTBeefRoastSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTBeefSousVideRoastRecipes alloc]init];
+    }
     else if ([self.recipe isKindOfClass:[FSTBeefSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideRecipes alloc]init];
@@ -87,7 +99,18 @@
 
 - (void) recipeSelected:(FSTRecipe *)cookingMethod
 {
-    if ([cookingMethod isKindOfClass:[FSTBeefSteakTenderSousVideRecipe class]])
+    // here check if an actual complete recipe was selected, if not
+    // then just segue to another instance of this sub selection class
+    if ([cookingMethod isKindOfClass:[FSTBeefSteakTenderSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefSteakNormalSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefSteakToughSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefRoastRibEyeSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefRoastBrisketSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefRoastChuckRoastSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefRoastShortRibsSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefRoastGroundBeefSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTBeefRoastTenderLoinSousVideRecipe class]]
+        )
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
     }
@@ -113,7 +136,7 @@
     else if ([segue.destinationViewController isKindOfClass:[FSTCookSettingsViewController class]])
     {
         //if its not a custom cook view controller then its some other type of cook settings view controller
-        //so we need to set the to be receip to whatever they just selected, which is the sender
+        //so we need to set the to be recipe to whatever they just selected, which is the sender
         //(see recipeSelected)
         self.currentParagon.session.toBeRecipe = (FSTRecipe*)sender;
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;

@@ -1,5 +1,5 @@
 //
-//  FSTBeefRoastOtherSousVideRecipe.h
+//  FSTBeefRoastGroundBeefSousVideRecipe.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 11/20/15.
@@ -8,6 +8,6 @@
 
 #import "FSTBeefRoastSousVideRecipe.h"
 
-@interface FSTBeefRoastOtherSousVideRecipe : FSTBeefRoastSousVideRecipe
+@interface FSTBeefRoastGroundBeefSousVideRecipe : FSTBeefRoastSousVideRecipe
 
 @end

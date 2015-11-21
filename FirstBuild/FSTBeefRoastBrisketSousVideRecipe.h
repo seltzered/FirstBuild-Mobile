@@ -1,5 +1,5 @@
 //
-//  FSTBeefRoastTenderSousVideRecipe.h
+//  FSTBeefRoastBrisketSousVideRecipe.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 11/20/15.
@@ -8,6 +8,6 @@
 
 #import "FSTBeefRoastSousVideRecipe.h"
 
-@interface FSTBeefRoastTenderSousVideRecipe : FSTBeefRoastSousVideRecipe
+@interface FSTBeefRoastBrisketSousVideRecipe : FSTBeefRoastSousVideRecipe
 
 @end

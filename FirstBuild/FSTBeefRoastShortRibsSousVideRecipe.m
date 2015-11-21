@@ -1,19 +1,20 @@
 //
-//  FSTBeefRoastTenderSousVideRecipe.m
+//  FSTBeefRoastShortRibsSousVideRecipe.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 11/20/15.
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTBeefRoastTenderSousVideRecipe.h"
+#import "FSTBeefRoastShortRibsSousVideRecipe.h"
 
-@implementation FSTBeefRoastTenderSousVideRecipe
+@implementation FSTBeefRoastShortRibsSousVideRecipe
 - (id) init
 {
     self = [super init];
     if (self)
     {
+        self.name = @"Short Ribs";
         
         self.donenesses = @[@125,
                             @130,

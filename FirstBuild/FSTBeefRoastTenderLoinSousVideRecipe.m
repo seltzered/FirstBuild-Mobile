@@ -1,19 +1,20 @@
 //
-//  FSTBeefRoastOtherSousVideRecipe.m
+//  FSTBeefRoastTenderLoinSousVideRecipe.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 11/20/15.
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTBeefRoastOtherSousVideRecipe.h"
+#import "FSTBeefRoastTenderLoinSousVideRecipe.h"
 
-@implementation FSTBeefRoastOtherSousVideRecipe
+@implementation FSTBeefRoastTenderLoinSousVideRecipe
 - (id) init
 {
     self = [super init];
     if (self)
     {
+        self.name = @"Tenderloin";
         
         self.donenesses = @[@125,
                             @130,

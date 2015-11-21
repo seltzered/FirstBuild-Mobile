@@ -30,6 +30,7 @@
     UIColor* tic_color;
     // absolute value of percent, to draw the paths
     CGFloat abs_perc;
+    
     if (self.percent >= 0) {
         abs_perc = self.percent;
         tic_color = UIColorFromRGB(0xF0663A);
@@ -37,7 +38,7 @@
     } else {
         // cooling, with negative percentage, shown with blue ticks
         abs_perc = fabs(self.percent);
-        tic_color = [UIColor blueColor];
+        tic_color = UIColorFromRGB(0x3B99C9);
     }
     self.progressLayer.strokeEnd = 0.0f; // not even started yet
     for (id key in self.markLayers) {
@@ -51,9 +52,6 @@
         }
     }
     self.sittingLayer.strokeEnd = 0.0F;
-    
-    
-    
     
 }
 

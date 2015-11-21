@@ -8,6 +8,7 @@
 
 #import "FSTBeefSousVideRecipes.h"
 #import "FSTBeefSteakSousVideRecipe.h"
+#import "FSTBeefRoastSousVideRecipe.h"
 
 @implementation FSTBeefSousVideRecipes
 
@@ -17,6 +18,7 @@
     if (self) {
         self.recipes = [[NSArray alloc] initWithObjects:
                         [FSTBeefSteakSousVideRecipe new],
+                        [FSTBeefRoastSousVideRecipe new],
                         nil];
     }
     return self;
