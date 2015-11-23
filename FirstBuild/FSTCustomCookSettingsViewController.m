@@ -9,6 +9,7 @@
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTSousVideRecipe.h"
 #import "FSTReadyToReachTemperatureViewController.h"
+#import "MobiNavigationController.h"
 
 @interface FSTCustomCookSettingsViewController ()
 
@@ -54,6 +55,11 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
     [pickerManager selectAllIndices]; // hard set all the indices after initialization
     _selection = NONE; // set the initial states for the buttons
+    
+    MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
+    NSString* headerText = [@"QUICK START" uppercaseString];
+    [navigation setHeaderText:headerText withFrameRect:CGRectMake(0, 0, 120, 30)];
+
     
 }
 
