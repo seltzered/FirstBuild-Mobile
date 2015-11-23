@@ -275,7 +275,17 @@ static const uint8_t STAGE_SIZE = 8;
         uint8_t pos = i * 8;
         bytes[pos+POS_POWER] = [stage.maxPowerLevel unsignedCharValue];
         OSWriteBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],   0, [stage.cookTimeMinimum unsignedShortValue]);
-        OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, [stage.cookTimeMaximum unsignedShortValue]);
+
+        if (stage.cookTimeMaximum > 0)
+        {
+            OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, [stage.cookTimeMaximum unsignedShortValue] - [stage.cookTimeMinimum unsignedShortValue]);
+ 
+        }
+        else
+        {
+            OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, 0);
+
+        }
         OSWriteBigInt16(&bytes[pos+POS_TARGET_TEMP],     0, [stage.targetTemperature unsignedShortValue]*100);
         bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue];
     }
@@ -675,8 +685,16 @@ static const uint8_t STAGE_SIZE = 8;
         {
             self.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
         }
-        else if (self.session.cookState == FSTParagonCookStateDone && [self.session.remainingHoldTime intValue] == 0)
+        else if ( self.session.cookState == FSTParagonCookStateDone &&
+                 [self.session.remainingHoldTime intValue] == 0 &&
+                 (currentCookMode == FSTCookingStatePrecisionCookingReachingMaxTime || !currentCookMode)
+                 )
         {
+            //we need to make sure the paragon thinks its done, there is no more hold time remaining AND
+            //the current app cook mode is reaching max time or there is not current cook mode which
+            //could be the case when the app is opened against an already existing session. the issue here
+            //was that the paragon cook state (self.session.cookState) was announced as done before the new
+            //hold timer for the reaching max was set. therefore the app thought it was reaching past max.
             self.session.cookMode = FSTCookingStatePrecisionCookingPastMaxTime;
         }
         else if (self.session.cookState == FSTParagonCookStateDone)
@@ -719,6 +737,10 @@ static const uint8_t STAGE_SIZE = 8;
         self.session.cookMode = FSTCookingStateOff;
     }
     
+#ifdef DEBUG
+    [self logParagon];
+#endif
+    
     //only notify if we have changed cook modes
     if (self.session.cookMode != currentCookMode)
     {
@@ -730,9 +752,7 @@ static const uint8_t STAGE_SIZE = 8;
         [self notifyDeviceEssentialDataChanged];
     }
     
-#ifdef DEBUG
-    [self logParagon];
-#endif
+
 
 }
 
