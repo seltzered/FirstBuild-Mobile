@@ -68,7 +68,8 @@
     // set only once. when the remainingTime and targetMinTime has been set.
     if (!endTime && self.remainingHoldTime > 0 && self.targetMinTime > 0)
     {
-        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60]; // want a constant target time that sets once
+        // want a constant target time that sets once
+        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60];
     }
 
     [self.currentTempLabel setAttributedText:currentTempString];

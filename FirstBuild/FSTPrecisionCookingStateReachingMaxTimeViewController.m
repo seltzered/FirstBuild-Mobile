@@ -61,7 +61,7 @@ NSDate* endMaxTime;
     UIFont* boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:21.0];
     NSDictionary* boldFontDict = [NSDictionary dictionaryWithObject:boldFont forKey:NSFontAttributeName];
     
-    UIFont* italicFont = [UIFont fontWithName:@"FSEmeric-CoreItalic" size:21.0];
+    UIFont* italicFont = [UIFont fontWithName:@"FSEmeric-CoreItalic" size:20.0];
     NSDictionary* italicFontDict = [NSDictionary dictionaryWithObject:italicFont forKey:NSFontAttributeName];
     
     NSMutableAttributedString* maxTimeNotice = [[NSMutableAttributedString alloc] initWithString:@"Food can stay in until " attributes:italicFontDict]; // string reporting the date food should be taken out
@@ -71,10 +71,11 @@ NSDate* endMaxTime;
     // only when the elapsedTime and targetMinTime has been set.
     if (!endMaxTime && self.remainingHoldTime > 0 && self.targetMaxTime > 0)
     {
-        endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60]; // want a constant target time that sets once
+        // want a constant target time that sets once
+        endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60];
     }
 
-    [dateFormatter setDateFormat:@"hh:mm a"];
+    [dateFormatter setDateFormat:@"h:mm a"];
     if (endMaxTime) {
         [maxTimeNotice appendAttributedString:[[NSAttributedString alloc] initWithString: [dateFormatter stringFromDate:endMaxTime] attributes:boldFontDict]];
     
