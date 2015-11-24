@@ -830,6 +830,7 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleCurrentTemperature: (CBCharacteristic*)characteristic
 {
+    NSNumber* oldTemp = self.session.currentProbeTemperature;
     if (characteristic.value.length != 2)
     {
         DLog(@"handleCurrentTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
@@ -840,11 +841,19 @@ static const uint8_t STAGE_SIZE = 8;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
     uint16_t raw = OSReadBigInt16(bytes, 0);
+    
     self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:raw/100];
     if ([self.delegate respondsToSelector:@selector(actualTemperatureChanged:)])
     {
         [self.delegate actualTemperatureChanged:self.session.currentProbeTemperature];
     }
+    
+    if (!oldTemp)
+    {
+        [self notifyDeviceEssentialDataChanged];
+    }
+    
+    
 }
 
 #pragma mark - Characteristic Discovery Handler
