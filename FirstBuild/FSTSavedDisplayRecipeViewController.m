@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentParagon.delegate = self;
     // Do any additional setup after loading the view.
 }
 
@@ -53,7 +54,24 @@
     }
 }
 - (IBAction)cookButtonTapped:(id)sender {
-    [self performSegueWithIdentifier:@"startSegue" sender:self];
+    
+    self.cookButtonGestureRecognizer.enabled = NO;
+    
+    //once the temperature is confirmed to be set then it will segue because it is
+    //waiting on the cookConfigurationSet delegate. we check the return status because
+    //the user may not have the correct cook mode
+    if (![self.currentParagon sendRecipeToCooktop:self.activeRecipe])
+    {
+        self.cookButtonGestureRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 // delegate method
@@ -65,8 +83,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"startSegue"]) {
         ((FSTReadyToReachTemperatureViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
-        self.currentParagon.session.toBeRecipe = self.activeRecipe; // set the method?
-        [self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe];
     } else if ([segue.identifier isEqualToString:@"stageSettingsSegue"]) {
         ((FSTStageSettingsViewController*)segue.destinationViewController).activeStage = (FSTParagonCookingStage*)sender;
         ((FSTStageSettingsViewController*)segue.destinationViewController).can_edit = [NSNumber numberWithBool:NO];
@@ -75,6 +91,27 @@
         self.childTabController = (FSTSavedRecipeTabBarController*)segue.destinationViewController;
     }
 } // TODO: set this up in storyboard
+
+#pragma mark - <FSTParagonDelegate>
+- (void)cookConfigurationSet:(NSError *)error
+{
+    if (error)
+    {
+        //TODO: the recipe could also be invalid
+        self.cookButtonGestureRecognizer.enabled = YES;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"The cooktop must not currently be cooking. Try pressing the Stop button and changing to the Rapid or Gentle Precise cooking mode."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
+    [self performSegueWithIdentifier:@"startSegue" sender:self];
+}
 
 
 @end

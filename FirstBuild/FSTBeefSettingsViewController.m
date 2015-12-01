@@ -120,7 +120,6 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     FSTRecipe* recipe = [FSTRecipe new];
     FSTParagonCookingStage* stage = [recipe addStage];
     
-//    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
     stage.targetTemperature = _currentTemperature;
     double cookingMinutesMin = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
     double cookingMinutesMax = ([(NSNumber*)_currentCookTimeArray[2] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[3] integerValue]);

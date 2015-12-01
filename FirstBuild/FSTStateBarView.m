@@ -147,6 +147,7 @@
                 [self colorDotsForActiveStateNumber:1];
                 break;
             case FSTCookingStatePrecisionCookingReachingMinTime:
+            case FSTCookingStatePrecisionCookingStageDone:
                 [self colorDotsForActiveStateNumber:2];
                 break;
             case FSTCookingStatePrecisionCookingReachingMaxTime:

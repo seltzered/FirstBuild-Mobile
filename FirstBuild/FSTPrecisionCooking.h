@@ -22,6 +22,7 @@ typedef enum {
     FSTCookingStatePrecisionCookingReachingMaxTime = 4,
     FSTCookingStatePrecisionCookingPastMaxTime = 5,
     FSTCookingStatePrecisionCookingWithoutTime = 6,
+    FSTCookingStatePrecisionCookingStageDone = 7,
     
     //direct cooking
     FSTCookingDirectCooking,

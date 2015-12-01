@@ -10,10 +10,11 @@
 #import "FSTRecipe.h"
 #import "FSTParagon.h"
 
-@interface FSTSavedDisplayRecipeViewController : FSTSavedEditRecipeViewController
+@interface FSTSavedDisplayRecipeViewController : FSTSavedEditRecipeViewController  <FSTParagonDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *cookButton;
 
 @property (weak, nonatomic) NSNumber* will_hide_cook;
 
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *cookButtonGestureRecognizer;
 @end

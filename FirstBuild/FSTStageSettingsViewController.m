@@ -247,6 +247,9 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.activeStage.cookTimeMinimum = [pickerManager minMinutesChosen];
     self.activeStage.targetTemperature = [pickerManager temperatureChosen];
     self.activeStage.cookingLabel = self.directionsTextView.text; // is cookingLabel the correct variable
+    
+    //this needs to be 0 since we can't set a maximum time for a non sous-vide stage
+    self.activeStage.cookTimeMaximum = 0;
     [self.navigationController popViewControllerAnimated:YES];
 
 }
@@ -268,15 +271,5 @@ CGFloat const SEL_HEIGHT_S = 70;
     // must set active recipe when parent segues
     return YES;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

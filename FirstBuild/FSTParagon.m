@@ -685,6 +685,12 @@ static const uint8_t STAGE_SIZE = 8;
         {
             self.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
         }
+        else if (self.session.cookState == FSTParagonCookStateDone &&
+                 [self.session.remainingHoldTime intValue] == 0 &&
+                 self.session.currentStage.cookTimeMaximum ==0)
+        {
+            self.session.cookMode = FSTCookingStatePrecisionCookingStageDone;
+        }
         else if ( self.session.cookState == FSTParagonCookStateDone &&
                  [self.session.remainingHoldTime intValue] == 0 &&
                  (currentCookMode == FSTCookingStatePrecisionCookingReachingMaxTime || !currentCookMode)

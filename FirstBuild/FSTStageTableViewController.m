@@ -60,7 +60,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StageCell" forIndexPath:indexPath];
-    [cell.textLabel setText:[NSString stringWithFormat:@"Stage %i", indexPath.item + 1]]; // number stage
+    [cell.textLabel setText:[NSString stringWithFormat:@"Stage %li", indexPath.item + 1]]; // number stage
     return cell;
 }
 
