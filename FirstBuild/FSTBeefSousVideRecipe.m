@@ -16,6 +16,7 @@
     if (self)
     {
         self.name = @"Beef";
+        self.recipeType = [NSNumber numberWithInt: FSTRecipeTypeFirstBuildSousVide];
     }
     return self;
     

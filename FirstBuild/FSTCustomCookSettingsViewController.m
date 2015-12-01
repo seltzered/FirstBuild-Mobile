@@ -136,37 +136,23 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 
 - (IBAction)continueTapGesture:(id)sender {
     
-    //TODO: progress indicator?
-    //TODO: grey out the button?
     self.continueTapGesturerRecognizer.enabled = NO;
     
-    FSTParagonCookingStage* stage = (FSTParagonCookingStage*)(self.currentParagon.session.toBeRecipe.paragonCookingStages[0]);
-
+    FSTRecipe* recipe = [FSTRecipe new];
+    FSTParagonCookingStage* stage = [recipe addStage];
+    
     stage.targetTemperature = [pickerManager temperatureChosen];
     stage.cookTimeMinimum = [pickerManager minMinutesChosen];
     stage.cookTimeMaximum = [pickerManager maxMinutesChosen];
     stage.cookingLabel = @"Custom Profile";
-    
-    
     stage.maxPowerLevel = [NSNumber numberWithInt:10];
-//    stage.automaticTransition = [NSNumber numberWithInt:2];
-//    stage.cookTimeMinimum = [NSNumber numberWithInt:0];
-//    stage.cookTimeMaximum = [NSNumber numberWithInt:0];
-    //stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
-    
-    ////TODO: HACK TEMP
-//    FSTParagonCookingStage* stage1 = [self.currentParagon.session.toBeRecipe addStage];
-//    stage1.maxPowerLevel = [NSNumber numberWithInt:7];
-//    stage1.cookTimeMinimum = [NSNumber numberWithInt:0];
-//    stage1.cookTimeMaximum = [NSNumber numberWithInt:0];
-//    stage1.targetTemperature = [NSNumber numberWithInt:350];
-//    stage1.automaticTransition = [NSNumber numberWithBool:YES];
-    ////HACK TEMP
 
+    recipe.recipeType = [NSNumber numberWithInt: FSTRecipeTypeFirstBuildSousVide];
+    
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because
     //the user may not have the correct cook mode
-    if (![self.currentParagon sendRecipeToCooktop:self.currentParagon.session.toBeRecipe])
+    if (![self.currentParagon sendRecipeToCooktop:recipe])
     {
         self.continueTapGesturerRecognizer.enabled = YES;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"

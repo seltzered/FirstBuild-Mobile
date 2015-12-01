@@ -9,6 +9,8 @@
 
 #import "FSTParagon.h"
 #import "FSTSavedRecipeManager.h"
+#import "FSTRecipe.h"
+#import "FSTParagonUserInformation.h"
 
 typedef enum {
     FSTParagonUserSelectedCookModeScreenOff = 0,
@@ -159,13 +161,14 @@ static const uint8_t STAGE_SIZE = 8;
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
     {
         DLog(@"successfully wrote FSTCharacteristicUserInfo");
-        //[self handleTargetTemperatureWritten];
+        [self handleUserInformationWritten:error];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
     {
         DLog(@"successfully wrote FSTCharacteristicCookConfiguration");
         [self handleCookConfigurationWritten:error];
     }
+
 }
 
 -(void)writeStartOta
@@ -243,6 +246,48 @@ static const uint8_t STAGE_SIZE = 8;
     [self.delegate holdTimerSet];
 }
 
+-(void)writeUserInformation: (FSTParagonUserInformation*)userInformation
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicUserInfo];
+    
+    Byte bytes[16];
+    memset(bytes,0,sizeof(bytes));
+    
+    //recipe type
+    bytes[0] = userInformation.recipeType;
+    
+    //recipe id
+    OSWriteBigInt16(&bytes[1], 0, userInformation.recipeId);
+    
+    //package it up
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+-(void)handleUserInformationWritten: (NSError *)error
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicUserInfo];
+
+    // the session's active recipe id and type are no longer valid
+    // which are stored in the user information portion of the cook configuration
+    // on the paragon
+    if (self.session.activeRecipe)
+    {
+        self.session.activeRecipe.recipeType = nil;
+        self.session.activeRecipe.recipeId = nil;
+    }
+    
+    // we need to read this back now to make sure we have everything set
+    [self.peripheral readValueForCharacteristic:characteristic];
+    if ([self.delegate respondsToSelector:@selector(userInformationSet:)])
+    {
+        [self.delegate userInformationSet:error];
+    }
+}
+
 /**
  *  
  * cook configuration is up to 5 stages
@@ -257,7 +302,6 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)writeCookConfiguration: (FSTRecipe*)recipe
 {
-    
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
     
     if (recipe.paragonCookingStages.count > NUMBER_OF_STAGES)
@@ -279,12 +323,10 @@ static const uint8_t STAGE_SIZE = 8;
         if (stage.cookTimeMaximum > 0)
         {
             OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, [stage.cookTimeMaximum unsignedShortValue] - [stage.cookTimeMinimum unsignedShortValue]);
- 
         }
         else
         {
             OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, 0);
-
         }
         OSWriteBigInt16(&bytes[pos+POS_TARGET_TEMP],     0, [stage.targetTemperature unsignedShortValue]*100);
         bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue];
@@ -294,7 +336,14 @@ static const uint8_t STAGE_SIZE = 8;
     NSLog(@"cook config payload to write: %@", data);
     if (characteristic)
     {
+        // write the actual characteristic
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    
+        FSTParagonUserInformation* info = [FSTParagonUserInformation new];
+        info.recipeId = [recipe.recipeId unsignedShortValue];
+        info.recipeType = [recipe.recipeType unsignedCharValue];
+        
+        [self writeUserInformation: info];
     }
 }
 
@@ -305,13 +354,13 @@ static const uint8_t STAGE_SIZE = 8;
 {
     CBCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
 
+
+    
     // the session's active recipe is no longer valid, set it to nil. a new one will
     // be created when we read it back from the paragon
     self.session.activeRecipe = nil;
     
-    // since we just trampled the entired active recipe we can either copy from the toBeRecipe
-    // or make a read request to ensure its as we wrote it. this does take a little longer
-    // but does indicate everything is in order
+    // request a rebuild of the recipe now
     [self.peripheral readValueForCharacteristic:cookConfigurationCharacteristic];
     
     [self.delegate cookConfigurationSet:error];
@@ -378,6 +427,7 @@ static const uint8_t STAGE_SIZE = 8;
     {
         NSLog(@"char: FSTCharacteristicUserInfo, data: %@", characteristic.value);
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicUserInfo];
+        [self handleUserInformation:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
     {
@@ -450,6 +500,34 @@ static const uint8_t STAGE_SIZE = 8;
     
 } // end assignToProperty
 
+-(void)handleUserInformation: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length != 16)
+    {
+        DLog(@"handleUserInformation length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 16);
+        return;
+    }
+    
+    FSTParagonUserInformation* _userInformation = [FSTParagonUserInformation new];
+
+    // this reflects the most recent version of the user information
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    
+    _userInformation.recipeType = bytes[0];
+    _userInformation.recipeId   = OSReadBigInt16(&bytes[1],0);
+    
+    if (self.session.activeRecipe)
+    {
+        self.session.activeRecipe.recipeType = [NSNumber numberWithChar:_userInformation.recipeType];
+        self.session.activeRecipe.recipeId = [NSNumber numberWithUnsignedShort:_userInformation.recipeId];
+    }
+    else
+    {
+        DLog(@">>>>>>>> NO ACTIVE RECIPE TO SET USER INFORMATION TO <<<<<<<<< ");
+    }
+}
 
 -(void)handleCurrentPowerLevel: (CBCharacteristic*)characteristic
 {
@@ -947,7 +1025,7 @@ static const uint8_t STAGE_SIZE = 8;
     for (uint8_t i=0; i<self.session.activeRecipe.paragonCookingStages.count;i++)
     {
         FSTParagonCookingStage* stage= self.session.activeRecipe.paragonCookingStages[i];
-        NSLog(@"\t stage %i: tartmp %@, mint %@, maxt %@", i+1, stage.targetTemperature, stage.cookTimeMinimum, stage.cookTimeMaximum);
+        NSLog(@"\t stage %i: tartmp %@, mint %@, maxt %@, maxpwr %@, trans %@", i+1, stage.targetTemperature, stage.cookTimeMinimum, stage.cookTimeMaximum, stage.maxPowerLevel, stage.automaticTransition);
 
     }
     NSLog(@"-----------------------------------------------------");

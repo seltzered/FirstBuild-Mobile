@@ -88,7 +88,16 @@
             }
             break;
         case FSTCookingStatePrecisionCookingTemperatureReached:
-            stateIdentifier = @"preheatingReachedStateSegue";
+            if (self.currentParagon.session.activeRecipe.recipeType == FSTRecipeTypeUserSousVide ||
+                self.currentParagon.session.activeRecipe.recipeType == FSTRecipeTypeFirstBuildSousVide)
+            {
+                stateIdentifier = @"preheatingReachedStateSegue";
+            }
+            else
+            {
+                stateIdentifier = @"preheatingNonSousVideReachedStateSegue";
+            }
+            
             self.continueButton.userInteractionEnabled = YES;
             self.continueButton.hidden = NO; // this should be hidden otherwise. What happens after it is pressed?
             self.stageBar.hidden = NO;

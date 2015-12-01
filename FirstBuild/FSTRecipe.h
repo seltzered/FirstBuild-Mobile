@@ -9,24 +9,27 @@
 #import <Foundation/Foundation.h>
 #import "FSTParagonCookingStage.h"
 
+typedef enum {
+    FSTRecipeTypeUndefined = 0,
+    FSTRecipeTypeFirstBuildSousVide = 1,
+    FSTRecipeTypeFirstBuildSingleStage = 2,
+    FSTRecipeTypeFirstBuildMultiStage = 3,
+    FSTRecipeTypeUserSousVide = 4,
+    FSTRecipeTypeUserSingleStage = 5,
+    FSTRecipeTypeUserMultiStage = 6
+} RecipeType;
+
 @interface FSTRecipe : NSObject <NSCoding>
 
 // name provided by user
 @property (nonatomic, strong) NSMutableString* friendlyName;
-
-//@property (nonatomic, strong) FSTCookingMethod* method; // contains all the information provided in custom settings
-
-@property (nonatomic, strong) NSString* recipeId;
-
+@property (nonatomic, strong) NSNumber* recipeId;
 @property (nonatomic, strong) NSMutableString* note;
-
 @property (nonatomic, strong) NSMutableString* ingredients;
-
-@property (nonatomic, strong) UIImageView* photo; // photo taken of the user's meal (will use UIImagePickerController. need UIImageView to serialize, can take the UIImage property later
-
-
+@property (nonatomic, strong) UIImageView* photo;
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, strong) NSMutableArray* paragonCookingStages;
+@property (nonatomic, strong) NSNumber* recipeType;
 
 - (FSTParagonCookingStage*) addStage;
 

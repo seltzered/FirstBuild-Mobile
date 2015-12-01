@@ -18,11 +18,11 @@ typedef enum {
     //precision cooking
     FSTCookingStatePrecisionCookingReachingTemperature = 1, //done
     FSTCookingStatePrecisionCookingTemperatureReached = 2,
-    FSTCookingStatePrecisionCookingReachingMinTime = 3,
-    FSTCookingStatePrecisionCookingReachingMaxTime = 4,
-    FSTCookingStatePrecisionCookingPastMaxTime = 5,
-    FSTCookingStatePrecisionCookingWithoutTime = 6,
-    FSTCookingStatePrecisionCookingStageDone = 7,
+    FSTCookingStatePrecisionCookingReachingMinTime = 4,
+    FSTCookingStatePrecisionCookingReachingMaxTime = 5,
+    FSTCookingStatePrecisionCookingPastMaxTime = 6,
+    FSTCookingStatePrecisionCookingWithoutTime = 7,
+    FSTCookingStatePrecisionCookingStageDone = 8,
     
     //direct cooking
     FSTCookingDirectCooking,
@@ -32,5 +32,7 @@ typedef enum {
     FSTCookingStateUnknown
     
 } ParagonCookMode;
+
+
 
 #endif /* FSTPrecisionCooking_h */

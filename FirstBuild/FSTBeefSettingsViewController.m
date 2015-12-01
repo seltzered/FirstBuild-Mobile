@@ -117,7 +117,7 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     
     self.continueTapGestureRecognizer.enabled = NO;
     
-    FSTRecipe* recipe = [FSTRecipe new];
+    FSTRecipe* recipe = (FSTBeefSousVideRecipe*)self.currentParagon.session.toBeRecipe;
     FSTParagonCookingStage* stage = [recipe addStage];
     
     stage.targetTemperature = _currentTemperature;

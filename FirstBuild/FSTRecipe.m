@@ -18,7 +18,8 @@
         self.ingredients = [decoder decodeObjectForKey:@"ingredients"];
         self.photo = [decoder decodeObjectForKey:@"photo"];
         self.paragonCookingStages = [decoder decodeObjectForKey:@"paragonCookingStages"];
-    } // calling TWICE?
+        self.recipeType = [decoder decodeObjectForKey:@"recipeType"];
+    }
     return self;
 }
 
@@ -26,9 +27,6 @@
     self = [super init];
     if (self) {
         self.photo = [[UIImageView alloc] init];
-        //self.photo.image = [UIImage imageNamed:@"camera"];
-        // now it defaults to this, without having to check if it sets
-        self.recipeId = [[NSUUID UUID] UUIDString];
         self.paragonCookingStages = [[NSMutableArray alloc] init];
     }
     return self;
@@ -41,6 +39,7 @@
     [encoder encodeObject:self.ingredients forKey:@"ingredients"];
     [encoder encodeObject:self.photo forKey:@"photo"];
     [encoder encodeObject:self.paragonCookingStages forKey:@"paragonCookingStages"];
+    [encoder encodeObject:self.recipeType forKey:@"recipeType"];
 }
 
 - (FSTParagonCookingStage*) addStage

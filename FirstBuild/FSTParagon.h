@@ -19,6 +19,7 @@
 @optional - (void) cookModeChanged: (ParagonCookMode) cookMode;
 @optional - (void) cookConfigurationChanged;
 @optional - (void) cookConfigurationSet:(NSError *)error;
+@optional - (void) userInformationSet:(NSError *)error;
 @optional - (void) holdTimerSet;
 @optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
 @optional - (void) currentPowerLevelChanged: (NSNumber*) powerLevel;
