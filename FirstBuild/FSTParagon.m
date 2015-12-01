@@ -315,6 +315,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     for (uint8_t i=0; i < recipe.paragonCookingStages.count; i++)
     {
+        NSLog(@"building stage to send to cooktop...");
         FSTParagonCookingStage* stage = recipe.paragonCookingStages[i];
         uint8_t pos = i * 8;
         bytes[pos+POS_POWER] = [stage.maxPowerLevel unsignedCharValue];
@@ -527,6 +528,10 @@ static const uint8_t STAGE_SIZE = 8;
     {
         DLog(@">>>>>>>> NO ACTIVE RECIPE TO SET USER INFORMATION TO <<<<<<<<< ");
     }
+    
+#ifdef DEBUG
+    [self logParagon];
+#endif
 }
 
 -(void)handleCurrentPowerLevel: (CBCharacteristic*)characteristic
@@ -615,9 +620,10 @@ static const uint8_t STAGE_SIZE = 8;
         [self.delegate cookConfigurationChanged];
     }
     
-   
-    
+#ifdef DEBUG
     [self logParagon];
+#endif
+    
 }
 
 /**
@@ -1019,7 +1025,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSLog(@"                    PARAGON");
     NSLog(@"mode: %d", _userSelectedCookMode);
     NSLog(@"burner %d, app cook state %d, paragon cook state %d, probe temp %@, cur stage %d, remaining time %@", self.session.burnerMode, self.session.cookMode, self.session.cookState, self.session.currentProbeTemperature, self.session.currentStageIndex, self.session.remainingHoldTime);
-    
+    NSLog(@"recipe id %@, recipe type %@", self.session.activeRecipe.recipeId, self.session.activeRecipe.recipeType);
     NSLog(@" stage table");
 
     for (uint8_t i=0; i<self.session.activeRecipe.paragonCookingStages.count;i++)

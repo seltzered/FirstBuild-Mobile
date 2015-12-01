@@ -118,15 +118,15 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     self.continueTapGestureRecognizer.enabled = NO;
     
     FSTRecipe* recipe = (FSTBeefSousVideRecipe*)self.currentParagon.session.toBeRecipe;
-    FSTParagonCookingStage* stage = [recipe addStage];
-    
-    stage.targetTemperature = _currentTemperature;
-    double cookingMinutesMin = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
-    double cookingMinutesMax = ([(NSNumber*)_currentCookTimeArray[2] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[3] integerValue]);
-    stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutesMin];
-    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutesMax];
-    stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
-    stage.maxPowerLevel = [NSNumber numberWithInt:10];
+//    FSTParagonCookingStage* stage = [recipe addStage];
+//    
+//    stage.targetTemperature = _currentTemperature;
+//    double cookingMinutesMin = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
+//    double cookingMinutesMax = ([(NSNumber*)_currentCookTimeArray[2] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[3] integerValue]);
+//    stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutesMin];
+//    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutesMax];
+//    stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
+//    stage.maxPowerLevel = [NSNumber numberWithInt:10];
     
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because
