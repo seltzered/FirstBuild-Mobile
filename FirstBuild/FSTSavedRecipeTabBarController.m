@@ -34,16 +34,17 @@
     
 }
 
-- (void)viewWillLayoutSubviews {
+- (void)viewWillLayoutSubviews
+{
     self.tabBar.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, 45); // not sure yet what the size should be yet, but this should place the tab bar at the top
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    
-    //self.tabBar.barTintColor = [UIColor orangeColor]; // need that firstbuild orange
-    //self.tabBar.barStyle = UIBarStyleDefault;
-    self.tabBar.tintColor = [UIColor orangeColor];
+- (void)viewWillAppear:(BOOL)animated
+{
+
+    self.tabBar.tintColor = UIColorFromRGB(0xEA461A);
     self.tabBar.backgroundColor = [UIColor whiteColor];
+    self.tabBar.shadowImage =[[UIImage alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {

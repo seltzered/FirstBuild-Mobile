@@ -22,7 +22,6 @@
 		517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 517EC10B1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m */; };
 		518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */; };
 		5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5194A9451B6A9EC80033BA26 /* FSTLabel.m */; };
-		5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 5194A9481B6BA9D40033BA26 /* UILabelEx.m */; };
 		51A114D61B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A114D51B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.m */; };
 		51A114D91B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A114D81B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m */; };
 		51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */; };
@@ -52,7 +51,6 @@
 		51DC77631B8B837000313611 /* FSTSavedRecipeTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DC77621B8B837000313611 /* FSTSavedRecipeTabBarController.m */; };
 		51DC77661B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DC77651B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m */; };
 		51DC77691B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DC77681B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.m */; };
-		51DD77851B4AFA1D0024052A /* FSTDashedLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DD77841B4AFA1D0024052A /* FSTDashedLine.m */; };
 		51DFCAE11B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */; };
 		51DFCAE41B66B7D500E48084 /* FSTParagonMenuAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DFCAE31B66B7D500E48084 /* FSTParagonMenuAboutViewController.m */; };
 		51EA9E491B82192900A3F421 /* FSTSavedRecipeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EA9E481B82192900A3F421 /* FSTSavedRecipeManager.m */; };
@@ -70,8 +68,9 @@
 		51FAEFFA1B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFF91B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf */; };
 		51FAEFFC1B62F52300A7DCF9 /* FSEmeric-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFFB1B62F52300A7DCF9 /* FSEmeric-Thin.otf */; };
 		51FAEFFE1B62F52B00A7DCF9 /* FSEmeric-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFFD1B62F52B00A7DCF9 /* FSEmeric-Regular.otf */; };
-		5B0583691B1562C3003782E2 /* UIDashedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0583681B1562C3003782E2 /* UIDashedLineView.m */; };
 		5B05836C1B15F4DE003782E2 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */; };
+		5B059F7E1C0DF4400072AAB5 /* FSTRecipeTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F7D1C0DF4400072AAB5 /* FSTRecipeTabBar.m */; };
+		5B059F811C0DFD9E0072AAB5 /* FSTDottedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F801C0DFD9E0072AAB5 /* FSTDottedBorderView.m */; };
 		5B0817BD1BAB3771000437AC /* FSTGECooktop.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0817BC1BAB3771000437AC /* FSTGECooktop.m */; };
 		5B174DD51A5DB94700A00505 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B174DD41A5DB94700A00505 /* SCSiriWaveformView.m */; };
 		5B174DD81A5DE1DE00A00505 /* MilkGallonStand.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B174DD71A5DE1DE00A00505 /* MilkGallonStand.m */; };
@@ -228,8 +227,6 @@
 		518EDF821B41C46100B443EA /* PushSegueNoAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushSegueNoAnimation.m; sourceTree = "<group>"; };
 		5194A9441B6A9EC80033BA26 /* FSTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTLabel.h; sourceTree = "<group>"; };
 		5194A9451B6A9EC80033BA26 /* FSTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTLabel.m; sourceTree = "<group>"; };
-		5194A9471B6BA9D40033BA26 /* UILabelEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabelEx.h; sourceTree = "<group>"; };
-		5194A9481B6BA9D40033BA26 /* UILabelEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabelEx.m; sourceTree = "<group>"; };
 		51A114D41B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTSavedRecipeUnderLineView.h; sourceTree = "<group>"; };
 		51A114D51B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTSavedRecipeUnderLineView.m; sourceTree = "<group>"; };
 		51A114D71B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTSavedRecipeSettingsViewController.h; sourceTree = "<group>"; };
@@ -285,8 +282,6 @@
 		51DC77651B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTSavedRecipeIngredientsViewController.m; sourceTree = "<group>"; };
 		51DC77671B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTSavedRecipeInstructionsViewController.h; sourceTree = "<group>"; };
 		51DC77681B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTSavedRecipeInstructionsViewController.m; sourceTree = "<group>"; };
-		51DD77831B4AFA1D0024052A /* FSTDashedLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTDashedLine.h; sourceTree = "<group>"; };
-		51DD77841B4AFA1D0024052A /* FSTDashedLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTDashedLine.m; sourceTree = "<group>"; };
 		51DFCADF1B66B6E700E48084 /* FSTParagonMenuSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonMenuSettingsViewController.h; sourceTree = "<group>"; };
 		51DFCAE01B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonMenuSettingsViewController.m; sourceTree = "<group>"; };
 		51DFCAE21B66B7D500E48084 /* FSTParagonMenuAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonMenuAboutViewController.h; sourceTree = "<group>"; };
@@ -316,10 +311,12 @@
 		51FAEFF91B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FSEmeric-SemiBold.otf"; path = "OpenType/FSEmeric-SemiBold.otf"; sourceTree = "<group>"; };
 		51FAEFFB1B62F52300A7DCF9 /* FSEmeric-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FSEmeric-Thin.otf"; path = "OpenType/FSEmeric-Thin.otf"; sourceTree = "<group>"; };
 		51FAEFFD1B62F52B00A7DCF9 /* FSEmeric-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FSEmeric-Regular.otf"; path = "OpenType/FSEmeric-Regular.otf"; sourceTree = "<group>"; };
-		5B0583671B1562C3003782E2 /* UIDashedLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDashedLineView.h; sourceTree = "<group>"; };
-		5B0583681B1562C3003782E2 /* UIDashedLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDashedLineView.m; sourceTree = "<group>"; };
 		5B05836A1B15F4DE003782E2 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
+		5B059F7C1C0DF4400072AAB5 /* FSTRecipeTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTRecipeTabBar.h; sourceTree = "<group>"; };
+		5B059F7D1C0DF4400072AAB5 /* FSTRecipeTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTRecipeTabBar.m; sourceTree = "<group>"; };
+		5B059F7F1C0DFD9E0072AAB5 /* FSTDottedBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTDottedBorderView.h; sourceTree = "<group>"; };
+		5B059F801C0DFD9E0072AAB5 /* FSTDottedBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTDottedBorderView.m; sourceTree = "<group>"; };
 		5B0817BB1BAB3771000437AC /* FSTGECooktop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTGECooktop.h; sourceTree = "<group>"; };
 		5B0817BC1BAB3771000437AC /* FSTGECooktop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTGECooktop.m; sourceTree = "<group>"; };
 		5B174DD31A5DB94700A00505 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSiriWaveformView.h; sourceTree = "<group>"; };
@@ -867,6 +864,8 @@
 				51A114D51B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.m */,
 				51EA9E4A1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.h */,
 				51EA9E4B1B823C5300A3F421 /* FSTSavedRecipeTableViewCell.m */,
+				5B059F7C1C0DF4400072AAB5 /* FSTRecipeTabBar.h */,
+				5B059F7D1C0DF4400072AAB5 /* FSTRecipeTabBar.m */,
 			);
 			name = "recipe editor";
 			sourceTree = "<group>";
@@ -1308,10 +1307,6 @@
 			children = (
 				51FAEFF01B62DD8100A7DCF9 /* FSTLine.h */,
 				51FAEFF11B62DD8100A7DCF9 /* FSTLine.m */,
-				51DD77831B4AFA1D0024052A /* FSTDashedLine.h */,
-				51DD77841B4AFA1D0024052A /* FSTDashedLine.m */,
-				5194A9471B6BA9D40033BA26 /* UILabelEx.h */,
-				5194A9481B6BA9D40033BA26 /* UILabelEx.m */,
 				51A13CD51B4D6CFC00BA3CB7 /* FSTPointedHeaderView.h */,
 				51A13CD61B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m */,
 				5BC3648B1A3112EE00D03B9C /* FSTBackgroundLayer.h */,
@@ -1320,10 +1315,10 @@
 				51537B531B42C6A700769B35 /* FSTParagonDisconnectedLabel.m */,
 				5B8858171A72F63B00F22325 /* UILabel+MultiLineAutoSize.h */,
 				5B8858181A72F63B00F22325 /* UILabel+MultiLineAutoSize.m */,
-				5B0583671B1562C3003782E2 /* UIDashedLineView.h */,
-				5B0583681B1562C3003782E2 /* UIDashedLineView.m */,
 				5B05836A1B15F4DE003782E2 /* CALayer+XibConfiguration.h */,
 				5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */,
+				5B059F7F1C0DFD9E0072AAB5 /* FSTDottedBorderView.h */,
+				5B059F801C0DFD9E0072AAB5 /* FSTDottedBorderView.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -1595,7 +1590,6 @@
 				5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */,
 				51A9D0461B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m in Sources */,
 				5B4A76DE1BFF7E9200018281 /* FSTBeefRoastRibEyeSousVideRecipe.m in Sources */,
-				5194A9491B6BA9D40033BA26 /* UILabelEx.m in Sources */,
 				5B4A769C1BFE32C700018281 /* FSTBeefSteakTenderRibSousVideRecipe.m in Sources */,
 				5B4A76AE1BFF732A00018281 /* FSTBeefRoastSousVideRecipe.m in Sources */,
 				515CD89D1B7CDC900087F9C7 /* FSTSavedEditRecipeViewController.m in Sources */,
@@ -1610,7 +1604,6 @@
 				5B99E0841A1AA63F005FB881 /* WifiCommissioningNetworkListViewController.m in Sources */,
 				5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */,
 				51A9D0431B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m in Sources */,
-				51DD77851B4AFA1D0024052A /* FSTDashedLine.m in Sources */,
 				5BCBB9E01B02A24100B8E043 /* FSTReadyToReachTemperatureViewController.m in Sources */,
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
 				51A114D91B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m in Sources */,
@@ -1632,7 +1625,6 @@
 				5B4A76E11BFF7EA800018281 /* FSTBeefRoastChuckRoastSousVideRecipe.m in Sources */,
 				51DC77661B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m in Sources */,
 				5B4A76B11BFF735600018281 /* FSTBeefRoastTenderLoinSousVideRecipe.m in Sources */,
-				5B0583691B1562C3003782E2 /* UIDashedLineView.m in Sources */,
 				5B4A76C61BFF7B6200018281 /* FSTBeefSteakNormalFlatIronSousVideRecipe.m in Sources */,
 				515340E91B3C31C60035DEBA /* FSTBleNamingViewController.m in Sources */,
 				5BA3A9801B38B47300E51C51 /* FSTBleConnectedViewController.m in Sources */,
@@ -1682,6 +1674,7 @@
 				51F8EF431B559F8A00F40882 /* FSTStateCircleView.m in Sources */,
 				5B4A76EA1BFF7F0E00018281 /* FSTBeefRoastGroundBeefSousVideRecipe.m in Sources */,
 				5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */,
+				5B059F7E1C0DF4400072AAB5 /* FSTRecipeTabBar.m in Sources */,
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
 				51A9D0371B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m in Sources */,
 				5B4A76991BFE1BF500018281 /* FSTBeefSousVideRecipes.m in Sources */,
@@ -1727,6 +1720,7 @@
 				5BF9482B19EC15A000CB8BCF /* ChillHubViewController.m in Sources */,
 				5B4A76E41BFF7EB900018281 /* FSTBeefRoastBrisketSousVideRecipe.m in Sources */,
 				51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */,
+				5B059F811C0DFD9E0072AAB5 /* FSTDottedBorderView.m in Sources */,
 				5BA064CC1B83816C002FCE59 /* FSTCandyRecipe.m in Sources */,
 				5BCBB9F51B0386CE00B8E043 /* FSTRecipeTableViewController.m in Sources */,
 				5B4A76C31BFF7B4A00018281 /* FSTBeefSteakNormalSirloinSousVideRecipe.m in Sources */,
@@ -1844,8 +1838,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: myles caley (2ZHVCY7QDD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: myles caley (2ZHVCY7QDD)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1860,7 +1854,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstbuild.firstbuild;
 				PRODUCT_NAME = FirstBuild;
-				PROVISIONING_PROFILE = "183039aa-905e-4358-9114-c9e21e504021";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1872,8 +1866,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: myles caley (2ZHVCY7QDD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: myles caley (2ZHVCY7QDD)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1888,7 +1882,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstbuild.firstbuild;
 				PRODUCT_NAME = FirstBuild;
-				PROVISIONING_PROFILE = "183039aa-905e-4358-9114-c9e21e504021";
+				PROVISIONING_PROFILE = "";
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

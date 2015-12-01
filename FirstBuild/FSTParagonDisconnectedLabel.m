@@ -14,7 +14,7 @@
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
-    self.backgroundColor = UIColorFromRGB(0xEA461A); // some universal orange color
+    self.backgroundColor = UIColorFromRGB(0xEA461A); 
     UIFont* warningFont = [UIFont fontWithName:@"PTSans-NarrowBold" size:24.0];
     self.font = warningFont;
     self.text = @"A device is not connected";

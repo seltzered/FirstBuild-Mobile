@@ -15,8 +15,9 @@
 @end
 
 @implementation FSTSavedRecipeUnderLineView
-
-CGFloat ulWidth;
+{
+    CGFloat ulWidth;
+}
 
 - (void)drawRect:(CGRect)rect {
     UIBezierPath* grayPath = [UIBezierPath bezierPath];
@@ -29,8 +30,7 @@ CGFloat ulWidth;
     self.underLine = [[UIView alloc] init];
     [self addSubview:self.underLine];
     ulWidth = rect.size.width/8; // change size of orange underline
-    //TODO: change to firstbuild orange
-    self.underLine.backgroundColor = [UIColor orangeColor];
+    self.underLine.backgroundColor = UIColorFromRGB(0xEA461A);
     self.underLine.frame = CGRectMake(rect.size.width/2 - ulWidth/2, 0, ulWidth, rect.size.height);
 }
 

@@ -163,20 +163,9 @@
     }
 }
 
-- (IBAction)recipeTap:(id)sender {
-    
-    //TODO: remove
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Sorry!"
-                                                                             message:@"This functionality is currently disabled for field testing. Please don't be angry."
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:nil];
-    [alertController addAction:actionOk];
-    [self presentViewController:alertController animated:YES completion:nil];
-    
-    //TODO: functionality disabled
-    //[self performSegueWithIdentifier:@"recipesSegue" sender:nil];
+- (IBAction)recipeTap:(id)sender
+{
+    [self performSegueWithIdentifier:@"recipesSegue" sender:nil];
 }
 
 - (IBAction)customTap:(id)sender {
