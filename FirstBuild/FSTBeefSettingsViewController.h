@@ -10,6 +10,7 @@
 
 #import "FSTParagon.h"
 #import "FSTCookSettingsViewController.h"
+#import "FSTBeefSousVideRecipe.h"
 
 @interface FSTBeefSettingsViewController : FSTCookSettingsViewController <FSTParagonDelegate>
 

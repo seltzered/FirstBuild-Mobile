@@ -36,10 +36,6 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //create a new cooking session
-    self.currentParagon.session.toBeRecipe = (FSTRecipe*) [[FSTSousVideRecipe alloc] init];
-    [self.currentParagon.session.toBeRecipe addStage];
-    
     pickerManager = [[FSTStagePickerManager alloc] init];
         
     self.minPicker.dataSource = pickerManager;
@@ -134,7 +130,8 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
 }
 
 
-- (IBAction)continueTapGesture:(id)sender {
+- (IBAction)continueTapGesture:(id)sender
+{
     
     self.continueTapGesturerRecognizer.enabled = NO;
     

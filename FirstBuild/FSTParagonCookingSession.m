@@ -15,7 +15,6 @@
     self = [super init];
     if (self) {
         self.activeRecipe = nil;
-        self.toBeRecipe = nil;
         self.currentProbeTemperature = nil;
         self.currentStage = nil;
         self.currentPowerLevel = nil;

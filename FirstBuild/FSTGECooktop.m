@@ -65,7 +65,7 @@ NSString * const FSTGECooktopCharacteristicRecipeId              = @"FF";
         
         //forcibly set the toBe cooking method to nil since we are just creating the paragon
         //object and there is not way it could exist yet
-        self.session.toBeRecipe = nil;
+        //self.session.toBeRecipe = nil;
         
         self.burners = [NSArray arrayWithObjects:[FSTBurner new], [FSTBurner new],[FSTBurner new],[FSTBurner new],[FSTBurner new], nil];
         

@@ -24,7 +24,6 @@ typedef enum {
 } ParagonCookState;
 
 @property (nonatomic, strong) FSTRecipe* activeRecipe;
-@property (nonatomic, strong) FSTRecipe* toBeRecipe;
 @property (nonatomic, strong) NSNumber* currentProbeTemperature;
 @property (nonatomic, weak) FSTParagonCookingStage* currentStage;
 @property (nonatomic) uint8_t currentStageIndex;

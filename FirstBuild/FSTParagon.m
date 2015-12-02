@@ -78,10 +78,6 @@ static const uint8_t STAGE_SIZE = 8;
         self.session = [[FSTParagonCookingSession alloc] init];
         self.session.activeRecipe = nil;
         
-        //forcibly set the toBe cooking method to nil since we are just creating the paragon
-        //object and there is not way it could exist yet
-        self.session.toBeRecipe = nil;
-        
         // booleans for all the required characteristics, tell us whether or not the characteristic loaded
         requiredCharacteristics = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicProbeConnectionState,
@@ -355,8 +351,6 @@ static const uint8_t STAGE_SIZE = 8;
 {
     CBCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
 
-
-    
     // the session's active recipe is no longer valid, set it to nil. a new one will
     // be created when we read it back from the paragon
     self.session.activeRecipe = nil;
@@ -1020,7 +1014,6 @@ static const uint8_t STAGE_SIZE = 8;
 -(void)logParagon
 {
     
-//    FSTParagonCookingStage* toBeStage = self.session.toBeRecipe.paragonCookingStages[0];
     NSLog(@"-----------------------------------------------------");
     NSLog(@"                    PARAGON");
     NSLog(@"mode: %d", _userSelectedCookMode);
@@ -1035,15 +1028,6 @@ static const uint8_t STAGE_SIZE = 8;
 
     }
     NSLog(@"-----------------------------------------------------");
-
-//    if (toBeStage)
-//    {
-//        NSLog(@"\t  TOBE RECIPE: tartmp %@, mint %@, maxt %@", toBeStage.targetTemperature, toBeStage.cookTimeMinimum, toBeStage.cookTimeMaximum);
-//    }
-//    else
-//    {
-//        NSLog(@"\t TOBE RECIPE : not set");
-//    }
     
 }
 #endif

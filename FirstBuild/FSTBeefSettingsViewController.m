@@ -14,6 +14,7 @@
 
 @interface FSTBeefSettingsViewController ()
 
+
 @end
 
 const uint8_t TEMPERATURE_START_INDEX = 2;
@@ -23,7 +24,8 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     //data values for corresponding view relationships
     NSNumber* _currentThickness;
     NSNumber* _currentTemperature;
-    FSTBeefSousVideRecipe* _beefCookingMethod;
+
+    FSTBeefSousVideRecipe* _beefRecipe;
 
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
@@ -33,11 +35,12 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     
     [super viewDidLoad];
     
+    _beefRecipe = (FSTBeefSousVideRecipe*)self.recipe;
+    
     //set up for data objects
-    _beefCookingMethod = (FSTBeefSousVideRecipe*)self.currentParagon.session.toBeRecipe;
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
-    _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
-    _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
+    _currentTemperature = [NSNumber numberWithDouble:[_beefRecipe.donenesses[TEMPERATURE_START_INDEX] doubleValue]];
+    _currentCookTimeArray = ((NSArray*)([[_beefRecipe.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -62,12 +65,12 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     NSDictionary *bigLabelFontDict = [NSDictionary dictionaryWithObject: bigLabelFont forKey:NSFontAttributeName];
     
     // min time values
-    NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
-    NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[1]);
+    NSNumber* hour = (NSNumber*)(((NSArray*)([[_beefRecipe.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[0]);
+    NSNumber* minute = (NSNumber*)(((NSArray*)([[_beefRecipe.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[1]);
     
     // max time values
-    NSNumber* maxHour = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[2]);
-    NSNumber* maxMinute = (NSNumber*)(((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[3]);
+    NSNumber* maxHour = (NSNumber*)(((NSArray*)([[_beefRecipe.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[2]);
+    NSNumber* maxMinute = (NSNumber*)(((NSArray*)([[_beefRecipe.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]))[3]);
     
     // min time labels
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: boldFontDict];
@@ -105,7 +108,7 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     [self.thicknessLabel setAttributedText:thicknessString];
     
     // label above doneness slider
-    [self.donenessLabel setAttributedText:[[NSAttributedString alloc] initWithString:[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature] attributes:bigLabelFontDict]];
+    [self.donenessLabel setAttributedText:[[NSAttributedString alloc] initWithString:[_beefRecipe.donenessLabels objectForKey:_currentTemperature] attributes:bigLabelFontDict]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,21 +120,29 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     
     self.continueTapGestureRecognizer.enabled = NO;
     
-    FSTRecipe* recipe = (FSTBeefSousVideRecipe*)self.currentParagon.session.toBeRecipe;
-//    FSTParagonCookingStage* stage = [recipe addStage];
-//    
-//    stage.targetTemperature = _currentTemperature;
-//    double cookingMinutesMin = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
-//    double cookingMinutesMax = ([(NSNumber*)_currentCookTimeArray[2] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[3] integerValue]);
-//    stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutesMin];
-//    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutesMax];
-//    stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefCookingMethod.donenessLabels objectForKey:_currentTemperature]];
-//    stage.maxPowerLevel = [NSNumber numberWithInt:10];
+    FSTParagonCookingStage* stage;
+
+    if (_beefRecipe.paragonCookingStages.count == 0)
+    {
+        stage = [_beefRecipe addStage];
+    }
+    else
+    {
+        stage = _beefRecipe.paragonCookingStages[0];
+    }
+    
+    stage.targetTemperature = _currentTemperature;
+    double cookingMinutesMin = ([(NSNumber*)_currentCookTimeArray[0] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[1] integerValue]);
+    double cookingMinutesMax = ([(NSNumber*)_currentCookTimeArray[2] integerValue] * 60) + ([(NSNumber*)_currentCookTimeArray[3] integerValue]);
+    stage.cookTimeMinimum = [NSNumber numberWithDouble:cookingMinutesMin];
+    stage.cookTimeMaximum = [NSNumber numberWithDouble:cookingMinutesMax];
+    stage.cookingLabel = [NSString stringWithFormat:@"%@ (%@)",@"Steak",[_beefRecipe.donenessLabels objectForKey:_currentTemperature]];
+    stage.maxPowerLevel = [NSNumber numberWithInt:10];
     
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because
     //the user may not have the correct cook mode
-    if (![self.currentParagon sendRecipeToCooktop:recipe])
+    if (![self.currentParagon sendRecipeToCooktop:_beefRecipe])
     {
         self.continueTapGestureRecognizer.enabled = YES;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
@@ -157,9 +168,9 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     
     UISlider* slider = sender;
     uint8_t donenessIndex;
-    donenessIndex = floor((_beefCookingMethod.donenesses.count - 1)*slider.value); // donenesses mapped to the slider
-    _currentTemperature = [NSNumber numberWithDouble:[_beefCookingMethod.donenesses[donenessIndex] doubleValue]];
-    _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
+    donenessIndex = floor((_beefRecipe.donenesses.count - 1)*slider.value); // donenesses mapped to the slider
+    _currentTemperature = [NSNumber numberWithDouble:[_beefRecipe.donenesses[donenessIndex] doubleValue]];
+    _currentCookTimeArray = ((NSArray*)([[_beefRecipe.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
     [self updateLabels];
 }
 
@@ -167,7 +178,7 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     // used the thicknessSlider
     UISlider* slider = sender; // get the slider
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue: slider.value]];
-    _currentCookTimeArray = ((NSArray*)([[_beefCookingMethod.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
+    _currentCookTimeArray = ((NSArray*)([[_beefRecipe.cookingTimes objectForKey:_currentTemperature] objectForKey:_currentThickness]));
     [self updateLabels];
 }
 
@@ -176,10 +187,10 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     //find our closest index of thicknesss based on the height of the current view in relation
     //to the maximum size it can grow. that will then give a proportion we can use to search
     //in an array of thicknesses and find the closest one
-    int index = floor(value*(_beefCookingMethod.thicknesses.count - 1));//floor((height-_meatHeightOffset)/(_maxHeight-_meatHeightOffset) * _beefCookingMethod.thicknesses.count); // just give it the range of a slider from 0 to 1. (need to subtract 1 to stay within bounds)
-    if (index < _beefCookingMethod.thicknesses.count)
+    int index = floor(value*(_beefRecipe.thicknesses.count - 1));//floor((height-_meatHeightOffset)/(_maxHeight-_meatHeightOffset) * _beefRecipe.thicknesses.count); // just give it the range of a slider from 0 to 1. (need to subtract 1 to stay within bounds)
+    if (index < _beefRecipe.thicknesses.count)
     {
-        NSNumber *thickness = [_beefCookingMethod.thicknesses objectAtIndex:index];
+        NSNumber *thickness = [_beefRecipe.thicknesses objectAtIndex:index];
         return [thickness doubleValue];
     }
     return 0;

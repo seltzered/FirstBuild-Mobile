@@ -75,7 +75,6 @@
             
             //if we have a current cook time or a to-be recipe then we need the stage bar
             if (
-                    self.currentParagon.session.toBeRecipe ||
                     [_currentCookingStage.cookTimeMinimum intValue] > 0 ||
                     self.currentParagon.session.currentStage.targetTemperature > 0
                 )
@@ -88,8 +87,8 @@
             }
             break;
         case FSTCookingStatePrecisionCookingTemperatureReached:
-            if (self.currentParagon.session.activeRecipe.recipeType == FSTRecipeTypeUserSousVide ||
-                self.currentParagon.session.activeRecipe.recipeType == FSTRecipeTypeFirstBuildSousVide)
+            if ([self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeUserSousVide ||
+                [self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildSousVide)
             {
                 stateIdentifier = @"preheatingReachedStateSegue";
             }
@@ -183,7 +182,6 @@
 - (IBAction)continueButtonTap:(id)sender {
     
     [self.currentParagon startTimerForCurrentStage];
-    //TODO: GE COOKTOP[self.currentParagon setCookingTimesWithStage:self.currentParagon.session.toBeRecipe.paragonCookingStages[0]];
     
     //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode
     self.continueButton.userInteractionEnabled = NO;
@@ -221,11 +219,11 @@
    else if ([segue.identifier isEqualToString:@"displayPopOut"])
    {
        FSTSavedDisplayRecipeViewController* displayVC = (FSTSavedDisplayRecipeViewController*)segue.destinationViewController;
-       displayVC.activeRecipe = self.currentParagon.session.toBeRecipe;
+       displayVC.activeRecipe = self.currentParagon.session.activeRecipe;
        displayVC.will_hide_cook = [NSNumber numberWithBool:YES]; // don't want them to select this and push on another cooking session.
-       if ([self.currentParagon.session.toBeRecipe isKindOfClass:[FSTSousVideRecipe class]]) {
+       if ([self.currentParagon.session.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) {
            displayVC.is_multi_stage = [NSNumber numberWithBool:NO];
-       } else if ([self.currentParagon.session.toBeRecipe isKindOfClass:[FSTMultiStageRecipe class]]) {
+       } else if ([self.currentParagon.session.activeRecipe isKindOfClass:[FSTMultiStageRecipe class]]) {
            displayVC.is_multi_stage = [NSNumber numberWithBool:YES];
        } // this tells it what third view controller to load
        // I could just set is_multi_stage by checking the activeRecipe in the display Maybe that does not happen soon enough

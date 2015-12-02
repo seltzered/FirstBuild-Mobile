@@ -153,7 +153,7 @@
         //if its not a custom cook view controller then its some other type of cook settings view controller
         //so we need to set the to be recipe to whatever they just selected, which is the sender
         //(see recipeSelected)
-        self.currentParagon.session.toBeRecipe = (FSTRecipe*)sender;
+        ((FSTCookSettingsViewController*)segue.destinationViewController).recipe =(FSTRecipe*)sender;
         ((FSTCookSettingsViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
     }
     else if([segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]])
