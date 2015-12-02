@@ -54,12 +54,7 @@ VariableSelection _selection;
     recipeManager = [FSTSavedRecipeManager sharedInstance];
     [self.nameField setDelegate:self];
     [self registerKeyboardNotifications];
-    /*if ([self.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) { //TODO: add a Multi Stage Recipe class
-        ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = NO; // sous vide has min and max time, no stages
-    } else {
-        ((FSTSavedRecipeTabBarController*)self.childViewControllers[0]).is_multi_stage = YES;
-    // how do I get the tab bar to load the right view controller after this? this sets after viewDidLoad in tab bar
-    }*/ // the child will check the variable on its parent
+    
 }
 
 
@@ -197,6 +192,14 @@ VariableSelection _selection;
         ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
         // why is this too low?
         ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).targetTemperature = [childPickerManager temperatureChosen];
+    }
+    if (self.is_multi_stage)
+    {
+        self.activeRecipe.recipeType = [NSNumber numberWithInt:FSTRecipeTypeFirstBuildMultiStage];
+    }
+    else
+    {
+        self.activeRecipe.recipeType = [NSNumber numberWithInt:FSTRecipeTypeFirstBuildSousVide];
     }
     // TODO: work out the session / recipe issue
     // get all the session variables from the pickers, then save it
