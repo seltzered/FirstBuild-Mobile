@@ -85,13 +85,16 @@
                 self.stageBar.hidden = YES;
             }
             break;
+            
         case FSTCookingStatePrecisionCookingTemperatureReached:
             if ([self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildSousVide)
             {
                 stateIdentifier = @"preheatingReachedStateSegue";
+                self.continueButtonText.text = @"     CONTINUE";
             }
             else
             {
+                self.continueButtonText.text = @"     START TIMER";
                 stateIdentifier = @"preheatingNonSousVideReachedStateSegue";
             }
             

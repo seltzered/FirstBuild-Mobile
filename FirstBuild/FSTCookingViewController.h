@@ -29,6 +29,7 @@
 //@property (weak, nonatomic) IBOutlet UIImageView *instructionImage;
 @property (nonatomic) id<FSTCookingViewControllerDelegate> delegate;
 @property (nonatomic, weak) FSTContainerViewController* stateContainer; // is there a better way to trigger these segues reliably?
+@property (strong, nonatomic) IBOutlet UILabel *continueButtonText;
 @property (nonatomic,weak) FSTParagon* currentParagon;
 @property (weak, nonatomic) IBOutlet UIView *continueButton;
 @end

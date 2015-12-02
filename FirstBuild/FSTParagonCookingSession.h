@@ -23,6 +23,15 @@ typedef enum {
     FSTParagonCookStateDone = 4,
 } ParagonCookState;
 
+typedef enum {
+    FSTParagonUserSelectedCookModeScreenOff = 0,
+    FSTParagonUserSelectedCookModeDirect = 1,
+    FSTParagonUserSelectedCookModeRapid = 2,
+    FSTParagonUserSelectedCookModeGentle = 3,
+    FSTParagonUserSelectedCookModeRemote = 4,
+    FSTParagonUserSelectedCookModeUnknown = 5
+} ParagonUserSelectedCookMode;
+
 @property (nonatomic, strong) FSTRecipe* activeRecipe;
 @property (nonatomic, strong) NSNumber* currentProbeTemperature;
 @property (nonatomic, weak) FSTParagonCookingStage* currentStage;
@@ -32,5 +41,7 @@ typedef enum {
 @property (nonatomic) ParagonCookMode cookMode;
 @property (nonatomic) ParagonCookState cookState;
 @property (nonatomic, strong) NSNumber* remainingHoldTime;
+@property ParagonUserSelectedCookMode userSelectedCookMode;
+
 
 @end

@@ -23,6 +23,7 @@
         self.cookMode = FSTCookingStateUnknown;
         self.cookState = FSTParagonCookStateOff;
         self.remainingHoldTime = 0;
+        self.userSelectedCookMode = FSTParagonUserSelectedCookModeUnknown;
     }
     return self;
 }

@@ -12,18 +12,9 @@
 #import "FSTRecipe.h"
 #import "FSTParagonUserInformation.h"
 
-typedef enum {
-    FSTParagonUserSelectedCookModeScreenOff = 0,
-    FSTParagonUserSelectedCookModeDirect = 1,
-    FSTParagonUserSelectedCookModeRapid = 2,
-    FSTParagonUserSelectedCookModeGentle = 3,
-    FSTParagonUserSelectedCookModeRemote = 4
-} ParagonUserSelectedCookMode;
-
 @implementation FSTParagon
 {
     NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-    ParagonUserSelectedCookMode _userSelectedCookMode;
 }
 
 //app info service
@@ -110,8 +101,8 @@ static const uint8_t STAGE_SIZE = 8;
         DLog(@"recipe does not contain any stages");
         return NO;
     }
-    else if (_userSelectedCookMode ==  FSTParagonUserSelectedCookModeDirect ||
-             _userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
+    else if (self.session.userSelectedCookMode ==  FSTParagonUserSelectedCookModeDirect ||
+             self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
     {
         DLog(@"paragon is not in gentle or rapid cook mode");
         return NO;
@@ -726,7 +717,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = characteristic.value;
     Byte bytes[characteristic.value.length] ;
     [data getBytes:bytes length:characteristic.value.length];
-    _userSelectedCookMode = bytes[0];
+    self.session.userSelectedCookMode = bytes[0];
     
     [self determineCookMode];
 }
@@ -735,7 +726,7 @@ static const uint8_t STAGE_SIZE = 8;
 {
     ParagonCookMode currentCookMode = self.session.cookMode;
     
-    if (_userSelectedCookMode == FSTParagonUserSelectedCookModeDirect)
+    if (self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeDirect)
     {
         //we are in direct cook mode, determine what each of the states mean
         if (self.session.cookState == FSTParagonCookStateReachingTemperature)
@@ -747,7 +738,7 @@ static const uint8_t STAGE_SIZE = 8;
             self.session.cookMode = FSTCookingStateOff;
         }
     }
-    else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
+    else if (self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
     {
         if (self.session.cookState == FSTParagonCookStateReachingTemperature)
         {
@@ -788,8 +779,8 @@ static const uint8_t STAGE_SIZE = 8;
             self.session.cookMode = FSTCookingStateOff;
         }
     }
-    else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeGentle ||
-             _userSelectedCookMode == FSTParagonUserSelectedCookModeRapid
+    else if (self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeGentle ||
+             self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeRapid
         )
     {
         if (self.session.cookState == FSTParagonCookStateReachingTemperature)
@@ -814,7 +805,7 @@ static const uint8_t STAGE_SIZE = 8;
             self.session.cookMode = FSTCookingStateUnknown;
         }
     }
-    else if (_userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
+    else if (self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
     {
         self.session.cookMode = FSTCookingStateOff;
     }
@@ -1014,7 +1005,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     NSLog(@"-----------------------------------------------------");
     NSLog(@"                    PARAGON");
-    NSLog(@"mode: %d", _userSelectedCookMode);
+    NSLog(@"mode: %d", self.session.userSelectedCookMode);
     NSLog(@"burner %d, app cook state %d, paragon cook state %d, probe temp %@, cur stage %d, remaining time %@", self.session.burnerMode, self.session.cookMode, self.session.cookState, self.session.currentProbeTemperature, self.session.currentStageIndex, self.session.remainingHoldTime);
     NSLog(@"recipe id %@, recipe type %@", self.session.activeRecipe.recipeId, self.session.activeRecipe.recipeType);
     NSLog(@" stage table");
