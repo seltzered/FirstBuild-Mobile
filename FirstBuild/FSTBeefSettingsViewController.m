@@ -142,7 +142,7 @@ const uint8_t TEMPERATURE_START_INDEX = 2;
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because
     //the user may not have the correct cook mode
-    if (![self.currentParagon sendRecipeToCooktop:_beefRecipe])
+    if (![self.currentParagon sendRecipeToCooktop:self.recipe])
     {
         self.continueTapGestureRecognizer.enabled = YES;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"

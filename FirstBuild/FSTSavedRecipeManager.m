@@ -26,7 +26,27 @@
         if (!recipeDictionary) {
             recipeDictionary = [[NSMutableDictionary alloc] init];
         }
-        [recipeDictionary setObject:recipe forKey:recipe.recipeId]; // will need to make sure names are unique, probably when setting the recipe
+        
+        //first check if this is a new recipe we are saving
+        if (!recipe.recipeId)
+        {
+            //new recipe, so we need an id, lets see what the last recipe id is that we used
+            recipe.recipeId = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastRecipeId"];
+            if (!recipe.recipeId)
+            {
+                //first time we have ever saved a recipe
+                recipe.recipeId = [NSNumber numberWithInt:1001];
+            }
+            else
+            {
+                //increment the old value
+                recipe.recipeId = [NSNumber numberWithInt:[recipe.recipeId intValue]+1];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] setObject:recipe.recipeId forKey:@"lastRecipeId"];
+        }
+        
+        [recipeDictionary setObject:recipe forKey:recipe.recipeId];
         [self saveItemsToDefaults:[NSDictionary dictionaryWithDictionary:recipeDictionary] key:@"Recipes"];
     }
 }

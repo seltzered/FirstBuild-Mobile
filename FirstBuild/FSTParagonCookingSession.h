@@ -28,7 +28,6 @@ typedef enum {
 @property (nonatomic, weak) FSTParagonCookingStage* currentStage;
 @property (nonatomic) uint8_t currentStageIndex;
 @property (nonatomic, strong) NSNumber* currentPowerLevel;
-@property (nonatomic, strong) NSNumber* recipeId;
 @property (nonatomic) ParagonBurnerMode burnerMode;
 @property (nonatomic) ParagonCookMode cookMode;
 @property (nonatomic) ParagonCookState cookState;

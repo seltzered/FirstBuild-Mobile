@@ -135,21 +135,19 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     
     self.continueTapGesturerRecognizer.enabled = NO;
     
-    FSTRecipe* recipe = [FSTRecipe new];
-    FSTParagonCookingStage* stage = [recipe addStage];
+    self.recipe = [FSTSousVideRecipe new];
+    FSTParagonCookingStage* stage = [self.recipe addStage];
     
     stage.targetTemperature = [pickerManager temperatureChosen];
     stage.cookTimeMinimum = [pickerManager minMinutesChosen];
     stage.cookTimeMaximum = [pickerManager maxMinutesChosen];
     stage.cookingLabel = @"Custom Profile";
     stage.maxPowerLevel = [NSNumber numberWithInt:10];
-
-    recipe.recipeType = [NSNumber numberWithInt: FSTRecipeTypeFirstBuildSousVide];
     
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because
     //the user may not have the correct cook mode
-    if (![self.currentParagon sendRecipeToCooktop:recipe])
+    if (![self.currentParagon sendRecipeToCooktop:self.recipe])
     {
         self.continueTapGesturerRecognizer.enabled = YES;
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"

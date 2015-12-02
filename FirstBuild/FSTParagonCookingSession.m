@@ -19,7 +19,6 @@
         self.currentStage = nil;
         self.currentPowerLevel = nil;
         self.currentStageIndex = 0;
-        self.recipeId = nil;
         self.burnerMode = 0;
         self.cookMode = FSTCookingStateUnknown;
         self.cookState = FSTParagonCookStateOff;

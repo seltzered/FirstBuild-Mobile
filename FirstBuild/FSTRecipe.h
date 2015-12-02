@@ -14,9 +14,9 @@ typedef enum {
     FSTRecipeTypeFirstBuildSousVide = 1,
     FSTRecipeTypeFirstBuildSingleStage = 2,
     FSTRecipeTypeFirstBuildMultiStage = 3,
-    FSTRecipeTypeUserSousVide = 4,
-    FSTRecipeTypeUserSingleStage = 5,
-    FSTRecipeTypeUserMultiStage = 6
+//    FSTRecipeTypeUserSousVide = 4,
+//    FSTRecipeTypeUserSingleStage = 5,
+//    FSTRecipeTypeUserMultiStage = 6
 } RecipeType;
 
 @interface FSTRecipe : NSObject <NSCoding>

@@ -73,7 +73,6 @@
             stateIdentifier = @"preheatingStateSegue";
             self.continueButton.hidden = YES;
             
-            //if we have a current cook time or a to-be recipe then we need the stage bar
             if (
                     [_currentCookingStage.cookTimeMinimum intValue] > 0 ||
                     self.currentParagon.session.currentStage.targetTemperature > 0
@@ -87,8 +86,7 @@
             }
             break;
         case FSTCookingStatePrecisionCookingTemperatureReached:
-            if ([self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeUserSousVide ||
-                [self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildSousVide)
+            if ([self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildSousVide)
             {
                 stateIdentifier = @"preheatingReachedStateSegue";
             }

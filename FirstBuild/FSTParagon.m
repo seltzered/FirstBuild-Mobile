@@ -73,8 +73,6 @@ static const uint8_t STAGE_SIZE = 8;
     {
         //setup the current cooking method and session, which is the actual
         //state of the cooking as reported by the cooktop
-        //TODO: create a new recipe based on the actual recipe
-        self.session.recipeId = nil;
         self.session = [[FSTParagonCookingSession alloc] init];
         self.session.activeRecipe = nil;
         
