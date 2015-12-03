@@ -25,6 +25,9 @@
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
             <string>FSEmeric-Light</string>
+            <string>FSEmeric-Light</string>
+            <string>FSEmeric-Light</string>
+            <string>FSEmeric-Light</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Regular.otf">
             <string>FSEmeric</string>
@@ -36,6 +39,12 @@
             <string>FSEmeric</string>
         </mutableArray>
         <mutableArray key="FSEmeric-SemiBold.otf">
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
@@ -1338,14 +1347,14 @@
                             <mask key="constraints">
                                 <exclude reference="IBO-Mk-4eo"/>
                                 <exclude reference="skh-Gl-pLN"/>
-                                <exclude reference="GBn-XH-4SX"/>
-                                <exclude reference="Vzb-yW-4mK"/>
-                                <exclude reference="mqT-Gw-vfK"/>
                                 <exclude reference="c3w-IT-99Y"/>
                                 <exclude reference="hxV-ng-wLP"/>
                                 <exclude reference="x0t-Oo-4zE"/>
-                                <exclude reference="wIe-Pm-Yqj"/>
                                 <exclude reference="8DR-a2-edA"/>
+                                <exclude reference="GBn-XH-4SX"/>
+                                <exclude reference="Vzb-yW-4mK"/>
+                                <exclude reference="mqT-Gw-vfK"/>
+                                <exclude reference="wIe-Pm-Yqj"/>
                             </mask>
                         </variation>
                     </view>
@@ -1404,6 +1413,8 @@
                         <segue destination="cYb-6a-cTS" kind="custom" identifier="withoutTimeStateSegue" customClass="FSTCookingViewSegue" id="LWj-KN-aYq"/>
                         <segue destination="LzW-84-nxF" kind="custom" identifier="directStateSegue" customClass="FSTCookingViewSegue" id="Biv-i5-NSC"/>
                         <segue destination="xoR-iW-vvp" kind="custom" identifier="preheatingNonSousVideReachedStateSegue" customClass="FSTCookingViewSegue" id="6DS-y5-RzX"/>
+                        <segue destination="c3s-Z4-mCR" kind="custom" identifier="reachingMinNonSousVideStateSegue" customClass="FSTCookingViewSegue" id="mZZ-Y8-dU9"/>
+                        <segue destination="JcG-pe-z3W" kind="custom" identifier="reachedMinTimeNonSousVideStateSegue" customClass="FSTCookingViewSegue" id="Ejq-KM-ccn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b1-hP-T1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1552,7 +1563,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mr-Ty-pnw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4419" y="593"/>
+            <point key="canvasLocation" x="1595" y="2273"/>
         </scene>
         <!--Custom Cook Settings View Controller-->
         <scene sceneID="gJg-qu-UJ0">
@@ -3477,7 +3488,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEN-Wt-2c4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4720" y="2235"/>
+            <point key="canvasLocation" x="1840" y="3740"/>
         </scene>
         <!--Precision Cooking State Reaching Min Time View Controller-->
         <scene sceneID="3H1-2u-Tc3">
@@ -3497,7 +3508,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qcs-bY-das" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2l-CB-t8D" userLabel="TIME REMAINING">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z2l-CB-t8D" userLabel="temp">
                                                 <rect key="frame" x="296" y="250" width="8" height="23"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="18"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -3605,7 +3616,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jki-Oc-RfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3919" y="2413"/>
+            <point key="canvasLocation" x="2503" y="3740"/>
         </scene>
         <!--Precision Cooking State Reaching Max Time View Controller-->
         <scene sceneID="iVC-P2-HBB">
@@ -3740,7 +3751,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KBw-tK-gs0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3255" y="2678"/>
+            <point key="canvasLocation" x="3175" y="3756"/>
         </scene>
         <!--Precision Cooking State Past Max Time View Controller-->
         <scene sceneID="9ie-bN-eLo">
@@ -3855,7 +3866,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u9w-el-mW6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2613" y="2908"/>
+            <point key="canvasLocation" x="3861" y="3756"/>
         </scene>
         <!--Precision Cooking State Without Time View Controller-->
         <scene sceneID="D2f-NQ-IUz">
@@ -3990,7 +4001,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2K-PO-xdj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2277" y="2256"/>
+            <point key="canvasLocation" x="4917" y="384"/>
         </scene>
         <!--Direct Cooking State View Controller-->
         <scene sceneID="Mec-J3-lbr">
@@ -4092,7 +4103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6V-2c-eoC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2712" y="488"/>
+            <point key="canvasLocation" x="4917" y="1072"/>
         </scene>
         <!--Saved Recipe Table View Controller-->
         <scene sceneID="oK5-Wa-J3g">
@@ -4661,7 +4672,7 @@
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0M9-hI-t1b">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0M9-hI-t1b">
                                         <rect key="frame" x="118" y="210" width="193" height="2"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -5496,7 +5507,270 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTc-S2-9XV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4419" y="1373"/>
+            <point key="canvasLocation" x="4779" y="3748"/>
+        </scene>
+        <!--Precision Cooking State Reaching Min Time Non Sous Vide View Controller-->
+        <scene sceneID="MOc-qg-cDC">
+            <objects>
+                <viewController id="c3s-Z4-mCR" customClass="FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Ss-jo-reQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="cUt-qH-jm6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9Ih-fA-MsV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Yn-UP-M6I" userLabel="progressView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWt-hi-jNL" userLabel="circleProgressView" customClass="FSTCookingProgressView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv1-zq-8Yi" userLabel="temp">
+                                                <rect key="frame" x="296" y="250" width="8" height="23"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="18"/>
+                                                <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time remaining" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWo-bd-s5X">
+                                                <rect key="frame" x="204" y="287" width="192" height="26"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="21"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Jf-Wl-gV6">
+                                                <rect key="frame" x="296" y="282" width="7" height="1"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="3fk-Xf-vnW"/>
+                                                </constraints>
+                                            </view>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXw-0Q-KC5">
+                                                <rect key="frame" x="129" y="109" width="105" height="22"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsh-cT-jbp" userLabel="doneAtLabel">
+                                                <rect key="frame" x="0.0" y="313" width="600" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="otr-8N-ChA"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="35"/>
+                                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="centerX" secondItem="tsh-cT-jbp" secondAttribute="centerX" id="6FH-wE-sno"/>
+                                            <constraint firstAttribute="centerY" secondItem="iv1-zq-8Yi" secondAttribute="centerY" constant="40" id="DF4-So-3Zm"/>
+                                            <constraint firstItem="iv1-zq-8Yi" firstAttribute="centerX" secondItem="3Jf-Wl-gV6" secondAttribute="centerX" id="ERm-AH-73s"/>
+                                            <constraint firstItem="iv1-zq-8Yi" firstAttribute="width" secondItem="3Jf-Wl-gV6" secondAttribute="width" multiplier="1.2" id="OUE-da-Azo"/>
+                                            <constraint firstAttribute="centerX" secondItem="iv1-zq-8Yi" secondAttribute="centerX" id="OUE-rF-L3d"/>
+                                            <constraint firstAttribute="width" secondItem="JWt-hi-jNL" secondAttribute="height" multiplier="1:1" id="W5H-1N-ubq"/>
+                                            <constraint firstItem="iv1-zq-8Yi" firstAttribute="width" secondItem="DXw-0Q-KC5" secondAttribute="width" id="X4I-zR-vnI"/>
+                                            <constraint firstAttribute="centerX" secondItem="kWo-bd-s5X" secondAttribute="centerX" id="fBs-Fz-noh"/>
+                                            <constraint firstItem="kWo-bd-s5X" firstAttribute="bottom" secondItem="tsh-cT-jbp" secondAttribute="top" id="hgo-Cr-1fC"/>
+                                            <constraint firstItem="iv1-zq-8Yi" firstAttribute="centerY" secondItem="DXw-0Q-KC5" secondAttribute="centerY" id="k8u-mP-HG1"/>
+                                            <constraint firstAttribute="centerY" secondItem="kWo-bd-s5X" secondAttribute="centerY" id="m0V-7s-7se"/>
+                                            <constraint firstItem="3Jf-Wl-gV6" firstAttribute="top" secondItem="iv1-zq-8Yi" secondAttribute="bottom" constant="10" id="qIB-GS-OVB"/>
+                                            <constraint firstItem="iv1-zq-8Yi" firstAttribute="height" secondItem="DXw-0Q-KC5" secondAttribute="height" id="tbe-ND-ZHS"/>
+                                            <constraint firstItem="iv1-zq-8Yi" firstAttribute="centerX" secondItem="DXw-0Q-KC5" secondAttribute="centerX" id="tlk-d9-g4L"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="DXw-0Q-KC5"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tsh-cT-jbp" firstAttribute="width" secondItem="9Yn-UP-M6I" secondAttribute="width" id="E4p-B6-qng"/>
+                                    <constraint firstAttribute="width" secondItem="JWt-hi-jNL" secondAttribute="width" id="HzE-UK-wVt"/>
+                                    <constraint firstAttribute="width" secondItem="9Yn-UP-M6I" secondAttribute="height" multiplier="400:341" id="Q9V-Lm-MeK"/>
+                                    <constraint firstItem="JWt-hi-jNL" firstAttribute="height" secondItem="9Yn-UP-M6I" secondAttribute="height" multiplier="0.7" id="eMK-eY-ZPT"/>
+                                    <constraint firstAttribute="centerX" secondItem="JWt-hi-jNL" secondAttribute="centerX" id="xok-14-J3V"/>
+                                    <constraint firstAttribute="centerY" secondItem="JWt-hi-jNL" secondAttribute="centerY" id="xpo-Du-bOh"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Q9V-Lm-MeK"/>
+                                        <exclude reference="eMK-eY-ZPT"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOLDING TEMPERATURE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="788-6R-imI" userLabel="cookingStatusLabel">
+                                <rect key="frame" x="0.0" y="5" width="600" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="7p6-Hi-yW9"/>
+                                    <constraint firstAttribute="width" constant="600" id="eOd-hD-0DS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="24"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="eOd-hD-0DS"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="788-6R-imI" firstAttribute="top" secondItem="6Ss-jo-reQ" secondAttribute="bottom" constant="5" id="3nw-PL-7ig"/>
+                            <constraint firstItem="9Yn-UP-M6I" firstAttribute="height" secondItem="9Ih-fA-MsV" secondAttribute="height" id="Kk5-UV-s2t"/>
+                            <constraint firstAttribute="centerY" secondItem="9Yn-UP-M6I" secondAttribute="centerY" id="UsQ-8n-gne"/>
+                            <constraint firstItem="788-6R-imI" firstAttribute="width" secondItem="9Ih-fA-MsV" secondAttribute="width" id="WEs-R8-deg"/>
+                            <constraint firstAttribute="centerX" secondItem="788-6R-imI" secondAttribute="centerX" id="dgx-vJ-gUo"/>
+                            <constraint firstAttribute="centerX" secondItem="9Yn-UP-M6I" secondAttribute="centerX" id="eSj-xJ-pRL"/>
+                            <constraint firstItem="9Yn-UP-M6I" firstAttribute="width" secondItem="9Ih-fA-MsV" secondAttribute="width" id="gMs-qA-6vx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="circleProgressView" destination="JWt-hi-jNL" id="Q9X-yT-q4l"/>
+                        <outlet property="currentTempLabel" destination="iv1-zq-8Yi" id="Efg-rA-kuW"/>
+                        <outlet property="endTimeLabel" destination="tsh-cT-jbp" id="bPq-ib-svf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TcQ-wU-3QT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5472" y="3748"/>
+        </scene>
+        <!--Precision Cooking Min Time Reached Non Sous Vide View Controller-->
+        <scene sceneID="LdV-CX-osv">
+            <objects>
+                <viewController id="JcG-pe-z3W" customClass="FSTPrecisionCookingMinTimeReachedNonSousVideViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zof-Gr-QqS"/>
+                        <viewControllerLayoutGuide type="bottom" id="BCh-tN-fQJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K95-BE-H0U">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbq-Nh-z2G" userLabel="circleWrapper">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x1G-o5-cOj" userLabel="circleProgressView" customClass="FSTCookingProgressView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140   F" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xK-eL-9rn" userLabel="TIME REMAINING">
+                                                <rect key="frame" x="272" y="249" width="55" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
+                                                <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rra-Pq-ovn">
+                                                <rect key="frame" x="262" y="286" width="77" height="28"/>
+                                                <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="22"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2h-e2-2Z9" userLabel="doneAtLabel">
+                                                <rect key="frame" x="-1" y="314" width="600" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="rbd-ag-w3j"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="35"/>
+                                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="taN-gY-VU8">
+                                                <rect key="frame" x="276" y="281" width="46" height="1"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="Dtb-dK-du8"/>
+                                                </constraints>
+                                            </view>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FU0-A4-UAv">
+                                                <rect key="frame" x="129" y="109" width="105" height="22"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="taN-gY-VU8" firstAttribute="top" secondItem="4xK-eL-9rn" secondAttribute="bottom" constant="10" id="AsF-Mg-UQN"/>
+                                            <constraint firstItem="4xK-eL-9rn" firstAttribute="width" secondItem="taN-gY-VU8" secondAttribute="width" multiplier="1.2" id="GQj-tS-NLa"/>
+                                            <constraint firstItem="4xK-eL-9rn" firstAttribute="centerY" secondItem="FU0-A4-UAv" secondAttribute="centerY" id="H2R-Jl-ZZJ"/>
+                                            <constraint firstItem="4xK-eL-9rn" firstAttribute="height" secondItem="FU0-A4-UAv" secondAttribute="height" id="OWd-5M-jt1"/>
+                                            <constraint firstAttribute="centerX" secondItem="Rra-Pq-ovn" secondAttribute="centerX" constant="0.5" id="Qca-5l-pgB"/>
+                                            <constraint firstItem="4xK-eL-9rn" firstAttribute="centerX" secondItem="taN-gY-VU8" secondAttribute="centerX" id="Ryy-88-Rej"/>
+                                            <constraint firstItem="4xK-eL-9rn" firstAttribute="width" secondItem="FU0-A4-UAv" secondAttribute="width" id="SOf-mq-6uh"/>
+                                            <constraint firstAttribute="centerY" secondItem="Rra-Pq-ovn" secondAttribute="centerY" id="Tpp-Mv-fRs"/>
+                                            <constraint firstItem="4xK-eL-9rn" firstAttribute="centerX" secondItem="FU0-A4-UAv" secondAttribute="centerX" id="VA1-lp-HkT"/>
+                                            <constraint firstAttribute="width" secondItem="x1G-o5-cOj" secondAttribute="height" multiplier="1:1" id="VIc-xu-QDV"/>
+                                            <constraint firstAttribute="centerY" secondItem="4xK-eL-9rn" secondAttribute="centerY" constant="40" id="Zuz-2W-7My"/>
+                                            <constraint firstAttribute="centerX" secondItem="C2h-e2-2Z9" secondAttribute="centerX" constant="0.5" id="dpV-Rk-Lun"/>
+                                            <constraint firstAttribute="centerX" secondItem="4xK-eL-9rn" secondAttribute="centerX" constant="0.5" id="fC7-wV-T2H"/>
+                                            <constraint firstItem="Rra-Pq-ovn" firstAttribute="bottom" secondItem="C2h-e2-2Z9" secondAttribute="top" id="qN9-w8-mxK"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="FU0-A4-UAv"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Vbq-Nh-z2G" secondAttribute="height" multiplier="400:341" id="XOP-NJ-J35"/>
+                                    <constraint firstItem="x1G-o5-cOj" firstAttribute="height" secondItem="Vbq-Nh-z2G" secondAttribute="height" multiplier="0.7" id="Y9U-gl-Jx9"/>
+                                    <constraint firstAttribute="centerY" secondItem="x1G-o5-cOj" secondAttribute="centerY" id="cyz-Bb-ddw"/>
+                                    <constraint firstAttribute="centerX" secondItem="x1G-o5-cOj" secondAttribute="centerX" id="g04-EN-OlG"/>
+                                    <constraint firstItem="x1G-o5-cOj" firstAttribute="width" secondItem="Vbq-Nh-z2G" secondAttribute="width" id="gn4-pN-Zmk"/>
+                                    <constraint firstItem="C2h-e2-2Z9" firstAttribute="width" secondItem="Vbq-Nh-z2G" secondAttribute="width" id="nlM-tZ-C5s"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XOP-NJ-J35"/>
+                                        <exclude reference="Y9U-gl-Jx9"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zww-z0-SYQ" userLabel="Italics Caption">
+                                <rect key="frame" x="300" y="580" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOLDING TEMPERATURE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOF-bC-RR7" userLabel="cookingStatusLabel">
+                                <rect key="frame" x="156.5" y="5" width="287.5" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="imy-FN-I5g"/>
+                                    <constraint firstAttribute="height" constant="45" id="ldW-rI-UAF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="24"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="imy-FN-I5g"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="uOF-bC-RR7" secondAttribute="centerX" id="2XR-dL-MYR"/>
+                            <constraint firstAttribute="centerX" secondItem="Vbq-Nh-z2G" secondAttribute="centerX" id="Cho-jX-8ay"/>
+                            <constraint firstAttribute="height" secondItem="Vbq-Nh-z2G" secondAttribute="height" id="Kbz-mN-aHp"/>
+                            <constraint firstAttribute="centerY" secondItem="Vbq-Nh-z2G" secondAttribute="centerY" id="Lwi-lD-rck"/>
+                            <constraint firstAttribute="centerX" secondItem="Zww-z0-SYQ" secondAttribute="centerX" id="MhU-Le-xhn"/>
+                            <constraint firstItem="Vbq-Nh-z2G" firstAttribute="width" secondItem="K95-BE-H0U" secondAttribute="width" id="YU5-ln-Vg0"/>
+                            <constraint firstItem="BCh-tN-fQJ" firstAttribute="top" secondItem="Zww-z0-SYQ" secondAttribute="bottom" constant="20" id="c2J-UR-3Wf"/>
+                            <constraint firstItem="uOF-bC-RR7" firstAttribute="top" secondItem="zof-Gr-QqS" secondAttribute="bottom" constant="5" id="uIX-Kz-UEw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="circleProgressView" destination="x1G-o5-cOj" id="YhN-Fo-QCW"/>
+                        <outlet property="currentTempLabel" destination="4xK-eL-9rn" id="k23-aZ-DIi"/>
+                        <outlet property="italicTimeLabel" destination="Zww-z0-SYQ" id="gSx-6c-ynV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IMx-9e-ZrK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6159" y="3748"/>
         </scene>
     </scenes>
     <resources>

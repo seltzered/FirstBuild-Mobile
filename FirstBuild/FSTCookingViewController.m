@@ -65,25 +65,25 @@
 
 -(void)transitionToCurrentCookMode
 {
-    FSTParagonCookingStage* _currentCookingStage = (FSTParagonCookingStage*)(self.currentParagon.session.currentStage);
+
     NSString* stateIdentifier = nil;
     
     switch (self.currentParagon.session.cookMode) {
         case FSTCookingStatePrecisionCookingReachingTemperature:
             stateIdentifier = @"preheatingStateSegue";
             self.continueButton.hidden = YES;
-            
-            if (
-                    [_currentCookingStage.cookTimeMinimum intValue] > 0 ||
-                    self.currentParagon.session.currentStage.targetTemperature > 0
-                )
-            {
-                self.stageBar.hidden = NO;
-            }
-            else
-            {
-                self.stageBar.hidden = YES;
-            }
+            self.stageBar.hidden = NO;
+//            if (
+//                    [_currentCookingStage.cookTimeMinimum intValue] > 0 ||
+//                    self.currentParagon.session.currentStage.targetTemperature > 0
+//                )
+//            {
+//                self.stageBar.hidden = NO;
+//            }
+//            else
+//            {
+//                self.stageBar.hidden = YES;
+//            }
             break;
             
         case FSTCookingStatePrecisionCookingTemperatureReached:
@@ -103,8 +103,23 @@
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingReachingMinTime:
-            stateIdentifier = @"reachingMinStateSegue";
+            if ([self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildMultiStage)
+            {
+                stateIdentifier = @"reachingMinNonSousVideStateSegue";
+            }
+            else
+            {
+                stateIdentifier = @"reachingMinStateSegue";
+            }
+            
             self.continueButton.hidden = YES;
+            self.stageBar.hidden = NO;
+            break;
+        case FSTCookingStatePrecisionCookingCurrentStageDone:
+            stateIdentifier = @"reachedMinTimeNonSousVideStateSegue";
+            self.continueButtonText.text = @"     COMPLETE";
+            self.continueButton.userInteractionEnabled = YES;
+            self.continueButton.hidden = NO;
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingReachingMaxTime:
@@ -153,26 +168,33 @@
 
 -(void)setStageBarStateCountForState: (FSTParagonCookingStage*) stage
 {
-    
-    int stateCount = 1;
-    
-    if (stage.cookTimeMinimum && [stage.cookTimeMinimum intValue] > 0)
+    if ([self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildMultiStage)
     {
-        stateCount++;
+        self.stageBar.numberOfStates = [NSNumber numberWithInt:3];
     }
-    
-    if (stage.cookTimeMaximum && [stage.cookTimeMaximum intValue] > 0)
+    else
     {
-        stateCount++;
+        self.stageBar.numberOfStates = [NSNumber numberWithInt:4];
     }
+//    int stateCount = 1;
+//    
+//    if (stage.cookTimeMinimum && [stage.cookTimeMinimum intValue] > 0)
+//    {
+//        stateCount++;
+//    }
+//    
+//    if (stage.cookTimeMaximum && [stage.cookTimeMaximum intValue] > 0)
+//    {
+//        stateCount++;
+//    }
+//    
+//    if (stage.targetTemperature && [stage.targetTemperature intValue] > 0)
+//    {
+//        stateCount++;
+//    }
     
-    if (stage.targetTemperature && [stage.targetTemperature intValue] > 0)
-    {
-        stateCount++;
-    }
-    
-    self.stageBar.numberOfStates = [NSNumber numberWithInt:stateCount];
-    NSLog(@"calculated %d states", stateCount);
+//    self.stageBar.numberOfStates = [NSNumber numberWithInt:stateCount];
+//    NSLog(@"calculated %d states", stateCount);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -180,12 +202,35 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)continueButtonTap:(id)sender {
-    
-    [self.currentParagon startTimerForCurrentStage];
-    
-    //prevent double press, gets unset when it becomes visible again in transitionToCurrentCookMode
-    self.continueButton.userInteractionEnabled = NO;
+- (IBAction)continueButtonTap:(id)sender
+{
+  
+    if (self.currentParagon.session.currentStageIndex == self.currentParagon.session.activeRecipe.paragonCookingStages.count-1 &&
+        self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+    {
+//        if ([self.continueButtonText.text isEqualToString:@"     COMPLETE"])
+//        {
+//            self.continueButtonText.text = @"     DONE";
+//            self.continueButton.userInteractionEnabled = YES;
+//            self.continueButton.hidden = NO;
+//            self.stageBar.hidden = YES;
+//            [self.stateContainer segueToStateWithIdentifier:@"reachedMinTimeNonSousVideStateSegue" sender:self.currentParagon];
+//        }
+//        else
+//        {
+            self.continueButtonText.text = @"     DONE";
+            self.continueButton.userInteractionEnabled = YES;
+            self.continueButton.hidden = NO;
+            self.stageBar.hidden = YES;
+            [self.stateContainer segueToStateWithIdentifier:@"reachedMinTimeNonSousVideStateSegue" sender:self.currentParagon];
+//        }
+        
+    }
+    else
+    {
+        [self.currentParagon startTimerForCurrentStage];
+        self.continueButton.userInteractionEnabled = NO;
+    }
 }
 
 - (IBAction)recipeTabTapped:(id)sender {

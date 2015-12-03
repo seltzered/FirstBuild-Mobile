@@ -431,7 +431,6 @@ NSIndexPath *_indexPathForDeletion;
                 {
                     [productCell.statusLabel setText:@"Cooling"];
                 }
-                
                 break;
             case FSTCookingDirectCooking:
                 [productCell.statusLabel setText:@"Direct"];
@@ -461,7 +460,8 @@ NSIndexPath *_indexPathForDeletion;
         {
             productCell.offlineLabel.hidden = YES;
             productCell.loadingProgressView.hidden = NO;
-            productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue];             productCell.disabledView.hidden = NO;
+            productCell.loadingProgressView.progress = [((FSTParagon*)product).loadingProgress doubleValue];
+            productCell.disabledView.hidden = NO;
             productCell.arrowButton.hidden = YES;
         }
         else
@@ -541,6 +541,7 @@ NSIndexPath *_indexPathForDeletion;
                 case FSTCookingStatePrecisionCookingPastMaxTime:
                 case FSTCookingStatePrecisionCookingReachingMaxTime:
                 case FSTCookingStatePrecisionCookingTemperatureReached:
+                case FSTCookingStatePrecisionCookingCurrentStageDone:
                     board = [UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil];
                     FSTCookingViewController *vc = [board instantiateViewControllerWithIdentifier:@"FSTCookingViewController"] ;
                     vc.currentParagon = paragon;

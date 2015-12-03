@@ -506,6 +506,7 @@ static const uint8_t STAGE_SIZE = 8;
     {
         self.session.activeRecipe.recipeType = [NSNumber numberWithChar:_userInformation.recipeType];
         self.session.activeRecipe.recipeId = [NSNumber numberWithUnsignedShort:_userInformation.recipeId];
+        [self determineCookMode];
     }
     else
     {
@@ -586,13 +587,22 @@ static const uint8_t STAGE_SIZE = 8;
     // setup all the stages based on the incoming payload
     for (uint8_t i=0; i < numberOfStages; i++)
     {
-        FSTParagonCookingStage* stage = [self.session.activeRecipe addStage];
         uint8_t pos = i * 8;
-        stage.maxPowerLevel =       [NSNumber numberWithChar:bytes[pos+POS_POWER]];
-        stage.cookTimeMinimum =     [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],0)];
-        stage.cookTimeMaximum =     [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],0)];
-        stage.targetTemperature =   [NSNumber numberWithUnsignedShort: OSReadBigInt16(&bytes[pos+POS_TARGET_TEMP],0)/100];
-        stage.automaticTransition = [NSNumber numberWithChar:bytes[pos+POS_AUTO_TRANSITION]];
+        uint16_t minTime = OSReadBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],0);
+        uint16_t maxTime = OSReadBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],0);
+        uint16_t targetTemp = OSReadBigInt16(&bytes[pos+POS_TARGET_TEMP],0)/100;
+        uint8_t maxPowerLevel = bytes[pos+POS_POWER];
+        uint8_t automaticTransition = bytes[pos+POS_AUTO_TRANSITION];
+        
+        if (!(maxPowerLevel==0 && minTime==0 && targetTemp==0))
+        {
+            FSTParagonCookingStage* stage = [self.session.activeRecipe addStage];
+            stage.maxPowerLevel =       [NSNumber numberWithChar:maxPowerLevel];
+            stage.cookTimeMinimum =     [NSNumber numberWithUnsignedShort:minTime];
+            stage.cookTimeMaximum =     [NSNumber numberWithUnsignedShort:maxTime];
+            stage.targetTemperature =   [NSNumber numberWithUnsignedShort:targetTemp ];
+            stage.automaticTransition = [NSNumber numberWithChar:automaticTransition];
+        }
     }
     
     // since we have a new recipe the current stage is going to be the first one
@@ -753,10 +763,9 @@ static const uint8_t STAGE_SIZE = 8;
             self.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
         }
         else if (self.session.cookState == FSTParagonCookStateDone &&
-                 [self.session.remainingHoldTime intValue] == 0 &&
-                 self.session.currentStage.cookTimeMaximum ==0)
+                 [self.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildMultiStage)
         {
-            self.session.cookMode = FSTCookingStatePrecisionCookingStageDone;
+            self.session.cookMode = FSTCookingStatePrecisionCookingCurrentStageDone;
         }
         else if ( self.session.cookState == FSTParagonCookStateDone &&
                  [self.session.remainingHoldTime intValue] == 0 &&
