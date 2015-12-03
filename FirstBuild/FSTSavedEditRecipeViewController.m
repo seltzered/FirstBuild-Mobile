@@ -34,8 +34,6 @@
     
     // some crucial data objects in the children
     FSTStagePickerManager* childPickerManager;
-    
-    
 }
 
 typedef enum variableSelections {
@@ -185,14 +183,13 @@ VariableSelection _selection;
     //[self.activeRecipe.photo setImage:self.imageEditor.image];
     // the image editor already has a pointer to the active recipe, do not reverse that
     // for some reason the image clears
-    if (childPickerManager) {
-        // child PickerManager was set, so the setting might have changed (otherwise these values did not change or were not set)
-        [self.activeRecipe addStage];
-        ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMinimum = [childPickerManager minMinutesChosen];
-        ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).cookTimeMaximum = [childPickerManager maxMinutesChosen];
-        // why is this too low?
-        ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]).targetTemperature = [childPickerManager temperatureChosen];
-    }
+//    if (childPickerManager) {
+//        FSTParagonCookingStage* stage = ((FSTParagonCookingStage*)self.activeRecipe.paragonCookingStages[0]);
+//        [self.activeRecipe addStage];
+//        stage.cookTimeMinimum = [childPickerManager minMinutesChosen];
+//        stage.cookTimeMaximum = [childPickerManager maxMinutesChosen];
+//        stage.targetTemperature = [childPickerManager temperatureChosen];
+//    }
     if (self.is_multi_stage)
     {
         self.activeRecipe.recipeType = [NSNumber numberWithInt:FSTRecipeTypeFirstBuildMultiStage];
@@ -201,7 +198,6 @@ VariableSelection _selection;
     {
         self.activeRecipe.recipeType = [NSNumber numberWithInt:FSTRecipeTypeFirstBuildSousVide];
     }
-    // TODO: work out the session / recipe issue
     // get all the session variables from the pickers, then save it
     if ([self.activeRecipe.paragonCookingStages count] > 0 && self.activeRecipe.friendlyName.length > 0) {
         // this is safe to write to the paragon

@@ -43,6 +43,7 @@
                 recipe.recipeId = [NSNumber numberWithInt:[recipe.recipeId intValue]+1];
             }
             
+            //increment the lastRecipeId since we added a new recipe
             [[NSUserDefaults standardUserDefaults] setObject:recipe.recipeId forKey:@"lastRecipeId"];
         }
         

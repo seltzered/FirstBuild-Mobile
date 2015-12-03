@@ -74,6 +74,9 @@ CGFloat const SEL_HEIGHT_S = 70;
     
     self.speedPicker.dataSource = self;
     self.speedPicker.delegate = self;
+    [self.speedPicker selectRow:[self.activeStage.maxPowerLevel integerValue] inComponent:0 animated:NO];
+    
+    self.autoTransitionSwitch.on = [self.activeStage.automaticTransition boolValue];
     
     self.directionsTextView.delegate = self;
     pickerManager.delegate = self; // needs to update time and temp labels
@@ -145,8 +148,6 @@ CGFloat const SEL_HEIGHT_S = 70;
         self.directionsTextView.textColor = [UIColor blackColor];
         
         self.saveButtonWrapper.hidden = YES;
-        
-        
     }
 }
 
@@ -156,7 +157,7 @@ CGFloat const SEL_HEIGHT_S = 70;
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 10; // this will always be the speed picker
+    return 11; // this will always be the speed picker
 }
 
 -(NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -242,16 +243,14 @@ CGFloat const SEL_HEIGHT_S = 70;
 }
 
 - (IBAction)saveButtonTapped:(id)sender {
-    // TODO: set the speed somehow
     self.activeStage.maxPowerLevel = [NSNumber numberWithInteger:[self.speedPicker selectedRowInComponent:0]];
     self.activeStage.cookTimeMinimum = [pickerManager minMinutesChosen];
     self.activeStage.targetTemperature = [pickerManager temperatureChosen];
     self.activeStage.cookingLabel = self.directionsTextView.text; // is cookingLabel the correct variable
-    
+    self.activeStage.automaticTransition = [NSNumber numberWithBool:self.autoTransitionSwitch];
     //this needs to be 0 since we can't set a maximum time for a non sous-vide stage
     self.activeStage.cookTimeMaximum = 0;
     [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 //TODO: the recipes need to actually save these stages

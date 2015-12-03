@@ -30,7 +30,7 @@
         _targetTemperature = [NSNumber numberWithInt:0];
         _cookTimeMinimum = [NSNumber numberWithInt:0];
         _cookTimeMaximum = [NSNumber numberWithInt:0];
-        _maxPowerLevel = [NSNumber numberWithInt:0];
+        _maxPowerLevel = [NSNumber numberWithInt:5];
         _cookingLabel = @"";
         _automaticTransition = [NSNumber numberWithBool:NO];
     }

@@ -116,8 +116,17 @@
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingCurrentStageDone:
+            if (self.currentParagon.session.currentStageIndex == self.currentParagon.session.activeRecipe.paragonCookingStages.count-1 &&
+                self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+            {
+                self.continueButtonText.text = @"     COMPLETE";
+            }
+            else
+            {
+                self.continueButtonText.text = @"     NEXT STAGE";
+            }
             stateIdentifier = @"reachedMinTimeNonSousVideStateSegue";
-            self.continueButtonText.text = @"     COMPLETE";
+            
             self.continueButton.userInteractionEnabled = YES;
             self.continueButton.hidden = NO;
             self.stageBar.hidden = NO;
@@ -227,6 +236,10 @@
             self.stageBar.hidden = YES;
             [self.stateContainer segueToStateWithIdentifier:@"recipeComplete" sender:self.currentParagon];
 //        }
+        
+    }
+    else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+    {
         
     }
     else
