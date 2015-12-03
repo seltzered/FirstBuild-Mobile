@@ -77,6 +77,7 @@
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Thin.otf">
             <string>FSEmeric-Thin</string>
@@ -1415,6 +1416,7 @@
                         <segue destination="xoR-iW-vvp" kind="custom" identifier="preheatingNonSousVideReachedStateSegue" customClass="FSTCookingViewSegue" id="6DS-y5-RzX"/>
                         <segue destination="c3s-Z4-mCR" kind="custom" identifier="reachingMinNonSousVideStateSegue" customClass="FSTCookingViewSegue" id="mZZ-Y8-dU9"/>
                         <segue destination="JcG-pe-z3W" kind="custom" identifier="reachedMinTimeNonSousVideStateSegue" customClass="FSTCookingViewSegue" id="Ejq-KM-ccn"/>
+                        <segue destination="fXq-Oi-SWc" kind="custom" identifier="recipeComplete" customClass="FSTCookingViewSegue" id="hd7-Ia-msL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b1-hP-T1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5771,6 +5773,86 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IMx-9e-ZrK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6159" y="3748"/>
+        </scene>
+        <!--ReadyToPreheatViewController-->
+        <scene sceneID="Vdz-y2-NvP">
+            <objects>
+                <viewController id="fXq-Oi-SWc" userLabel="ReadyToPreheatViewController" customClass="FSTReadyToReachTemperatureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qdD-QH-8BX"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Zb-Br-t7J"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="18O-A4-yqd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="get started" translatesAutoresizingMaskIntoConstraints="NO" id="kz6-CB-lqT">
+                                <rect key="frame" x="0.0" y="60" width="600" height="370"/>
+                            </imageView>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press STOP on your Paragon" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="qLZ-fT-dH7">
+                                <rect key="frame" x="0.0" y="460" width="600" height="23.5"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="c4P-zW-idT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="19"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="c4P-zW-idT"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=regular">
+                                    <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="24"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="c4P-zW-idT"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="qLZ-fT-dH7" secondAttribute="centerX" id="6xs-bV-PIA"/>
+                            <constraint firstItem="2Zb-Br-t7J" firstAttribute="top" secondItem="kz6-CB-lqT" secondAttribute="bottom" constant="170" id="9Qp-xT-NGb"/>
+                            <constraint firstItem="qLZ-fT-dH7" firstAttribute="width" secondItem="18O-A4-yqd" secondAttribute="width" id="AiS-QG-i8b"/>
+                            <constraint firstAttribute="height" secondItem="kz6-CB-lqT" secondAttribute="height" multiplier="0.1" priority="250" id="Ftc-R8-Krx"/>
+                            <constraint firstAttribute="centerX" secondItem="kz6-CB-lqT" secondAttribute="centerX" id="GsE-IH-h9W"/>
+                            <constraint firstItem="kz6-CB-lqT" firstAttribute="width" secondItem="18O-A4-yqd" secondAttribute="width" id="Hh2-eg-5FB"/>
+                            <constraint firstItem="kz6-CB-lqT" firstAttribute="top" secondItem="qLZ-fT-dH7" secondAttribute="bottom" constant="60" id="J8b-yL-aw4"/>
+                            <constraint firstItem="qLZ-fT-dH7" firstAttribute="top" secondItem="kz6-CB-lqT" secondAttribute="bottom" constant="30" id="ZLi-BI-e6I"/>
+                            <constraint firstItem="kz6-CB-lqT" firstAttribute="top" secondItem="qdD-QH-8BX" secondAttribute="bottom" constant="60" id="dt4-1i-Wel"/>
+                            <constraint firstAttribute="centerX" secondItem="kz6-CB-lqT" secondAttribute="centerX" id="lqT-se-qMY"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lqT-se-qMY"/>
+                                <exclude reference="Ftc-R8-Krx"/>
+                                <exclude reference="J8b-yL-aw4"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="h7B-GH-ZeM">
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="5p0-fI-DMM">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="menuToggleTapped:" destination="fXq-Oi-SWc" id="I7i-yY-ANB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="pushButtonImageView" destination="kz6-CB-lqT" id="0Ij-KH-5Fu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8q8-9w-VfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="N5N-m8-0vN" userLabel="cancelTap">
+                    <connections>
+                        <action selector="cancelLabelClick:" destination="fXq-Oi-SWc" id="k7B-nd-ydn"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="6263" y="1500"/>
         </scene>
     </scenes>
     <resources>

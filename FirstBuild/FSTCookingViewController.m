@@ -128,8 +128,11 @@
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingPastMaxTime:
+            //TODO: NEEDS WORK
+            self.continueButtonText.text = @"     COMPLETE";
+            self.continueButton.userInteractionEnabled = YES;
             stateIdentifier = @"pastMaxStateSegue";
-            self.continueButton.hidden = YES;
+            self.continueButton.hidden = NO;
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingWithoutTime:
@@ -218,11 +221,11 @@
 //        }
 //        else
 //        {
-            self.continueButtonText.text = @"     DONE";
-            self.continueButton.userInteractionEnabled = YES;
-            self.continueButton.hidden = NO;
+//            self.continueButtonText.text = @"     DONE";
+            self.continueButton.userInteractionEnabled = NO;
+            self.continueButton.hidden = YES;
             self.stageBar.hidden = YES;
-            [self.stateContainer segueToStateWithIdentifier:@"reachedMinTimeNonSousVideStateSegue" sender:self.currentParagon];
+            [self.stateContainer segueToStateWithIdentifier:@"recipeComplete" sender:self.currentParagon];
 //        }
         
     }

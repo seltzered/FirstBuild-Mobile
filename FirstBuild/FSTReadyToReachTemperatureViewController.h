@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTParagon.h"
+#import "FSTCookingStateViewController.h"
 
-@interface FSTReadyToReachTemperatureViewController : UIViewController <FSTParagonDelegate>
+@interface FSTReadyToReachTemperatureViewController : FSTCookingStateViewController <FSTParagonDelegate>
 
 @property (nonatomic,weak) FSTParagon* currentParagon;
 
