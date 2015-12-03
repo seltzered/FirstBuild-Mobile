@@ -43,7 +43,6 @@ NSString * const FSTCharacteristicCookConfiguration     = @"E0BA615A-A869-1C9D-B
 NSString * const FSTCharacteristicOtaControlCommand     = @"4FB34AB1-6207-E5A0-484F-E24A7F638FFF"; //write,notify
 NSString * const FSTCharacteristicOtaImageData          = @"78282AE5-3060-C3B6-7D49-EC74702414E5"; //write
 
-
 static const uint8_t NUMBER_OF_STAGES = 5;
 static const uint8_t POS_POWER = 0;
 static const uint8_t POS_MIN_HOLD_TIME = POS_POWER + 1;
@@ -638,6 +637,8 @@ static const uint8_t STAGE_SIZE = 8;
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
     }
     
+    [self setCurrentStageInCookingMatrixWithCurrentIndex];
+    
     if ([self.delegate respondsToSelector:@selector(cookConfigurationChanged)])
     {
         [self.delegate cookConfigurationChanged];
@@ -668,25 +669,39 @@ static const uint8_t STAGE_SIZE = 8;
     [data getBytes:bytes length:characteristic.value.length];
     
     uint8_t stage = bytes[0];
+    self.session.currentStageIndex = stage;
     
-    if (stage >= self.session.activeRecipe.paragonCookingStages.count)
+    if (self.session.currentStageIndex > self.session.activeRecipe.paragonCookingStages.count)
     {
-        DLog("incoming stage from paragon greater than available");
+        DLog("incoming stage from paragon greater than available (may not have cook config yet), just set index for now");
         return;
     }
     
-    if (stage == 0)
+    if (self.session.currentStageIndex == 0)
     {
         DLog("no current stage");
         return;
     }
+
+    [self setCurrentStageInCookingMatrixWithCurrentIndex];
+
+}
+
+-(void)setCurrentStageInCookingMatrixWithCurrentIndex
+{
+    if (self.session.currentStageIndex == 0 && self.session.activeRecipe.paragonCookingStages.count)
+    {
+        // current index not set, so point the stage to the first element
+        self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
+    }
+    else if (self.session.currentStageIndex > 0 && self.session.activeRecipe.paragonCookingStages.count)
+    {
+        self.session.currentStage = self.session.activeRecipe.paragonCookingStages[self.session.currentStageIndex-1];
+    }
     
-    //the array index is of course 0 based, so subtract one
-    self.session.currentStage = self.session.activeRecipe.paragonCookingStages[stage-1];
-    self.session.currentStageIndex = stage;
     if ([self.delegate respondsToSelector:@selector(currentStageIndexChanged:)])
     {
-        [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: stage]];
+        [self.delegate currentStageIndexChanged:[NSNumber numberWithInt: self.session.currentStageIndex]];
     }
 }
 
@@ -863,9 +878,6 @@ static const uint8_t STAGE_SIZE = 8;
         
         [self notifyDeviceEssentialDataChanged];
     }
-    
-
-
 }
 
 -(void)handleRecipeId: (CBCharacteristic*)characteristic
@@ -964,8 +976,6 @@ static const uint8_t STAGE_SIZE = 8;
     {
         [self notifyDeviceEssentialDataChanged];
     }
-    
-    
 }
 
 #pragma mark - Characteristic Discovery Handler
