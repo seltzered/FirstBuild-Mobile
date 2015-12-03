@@ -247,7 +247,7 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.activeStage.cookTimeMinimum = [pickerManager minMinutesChosen];
     self.activeStage.targetTemperature = [pickerManager temperatureChosen];
     self.activeStage.cookingLabel = self.directionsTextView.text; // is cookingLabel the correct variable
-    self.activeStage.automaticTransition = [NSNumber numberWithBool:self.autoTransitionSwitch];
+    self.activeStage.automaticTransition = [NSNumber numberWithBool:self.autoTransitionSwitch.on];
     //this needs to be 0 since we can't set a maximum time for a non sous-vide stage
     self.activeStage.cookTimeMaximum = 0;
     [self.navigationController popViewControllerAnimated:YES];

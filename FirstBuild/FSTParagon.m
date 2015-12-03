@@ -117,6 +117,11 @@ static const uint8_t STAGE_SIZE = 8;
     [self writeStartHoldTimer];
 }
 
+-(void)moveNextStage
+{
+    [self writeMoveNextStage];
+}
+
 - (void)startOta
 {
     [self writeStartOta];
@@ -131,7 +136,7 @@ static const uint8_t STAGE_SIZE = 8;
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
     {
         DLog(@"successfully wrote FSTCharacteristicCurrentCookStage");
-        //[self handleCooktimeWritten];
+        [self handleWriteMoveNextStage:error];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit])
     {
@@ -270,6 +275,28 @@ static const uint8_t STAGE_SIZE = 8;
     if ([self.delegate respondsToSelector:@selector(userInformationSet:)])
     {
         [self.delegate userInformationSet:error];
+    }
+}
+
+-(void)writeMoveNextStage
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
+    
+    Byte bytes[1];
+    bytes[0] = self.session.currentStageIndex + 1;
+    
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+-(void)handleWriteMoveNextStage: (NSError *)error
+{
+    if ([self.delegate respondsToSelector:@selector(nextStageSet:)])
+    {
+        [self.delegate nextStageSet:error];
     }
 }
 
@@ -605,8 +632,11 @@ static const uint8_t STAGE_SIZE = 8;
         }
     }
     
-    // since we have a new recipe the current stage is going to be the first one
-    self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
+    if (self.session.activeRecipe.paragonCookingStages.count)
+    {
+        // since we have a new recipe the current stage is going to be the first one
+        self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
+    }
     
     if ([self.delegate respondsToSelector:@selector(cookConfigurationChanged)])
     {

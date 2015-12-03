@@ -116,14 +116,22 @@
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingCurrentStageDone:
-            if (self.currentParagon.session.currentStageIndex == self.currentParagon.session.activeRecipe.paragonCookingStages.count-1 &&
-                self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+            // small workaround here, when there is only one item in the stage table
+            // the paragon is not incrementing the index
+            if (
+                    (self.currentParagon.session.currentStageIndex == self.currentParagon.session.activeRecipe.paragonCookingStages.count ||
+                     self.currentParagon.session.currentStageIndex ==0)
+                     &&
+                    (self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+                )
             {
+                // entire recipe is complete
                 self.continueButtonText.text = @"     COMPLETE";
             }
             else
             {
-                self.continueButtonText.text = @"     NEXT STAGE";
+                // only stage is complete
+                self.continueButtonText.text = @"     DONE";
             }
             stateIdentifier = @"reachedMinTimeNonSousVideStateSegue";
             
@@ -137,7 +145,6 @@
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingPastMaxTime:
-            //TODO: NEEDS WORK
             self.continueButtonText.text = @"     COMPLETE";
             self.continueButton.userInteractionEnabled = YES;
             stateIdentifier = @"pastMaxStateSegue";
@@ -216,31 +223,40 @@
 
 - (IBAction)continueButtonTap:(id)sender
 {
-  
-    if (self.currentParagon.session.currentStageIndex == self.currentParagon.session.activeRecipe.paragonCookingStages.count-1 &&
-        self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+    //TODO: use an enum to track the button state instead of this hack
+    // small workaround here, when there is only one item in the stage table
+    // the paragon is not incrementing the index
+    if (
+        (self.currentParagon.session.currentStageIndex == self.currentParagon.session.activeRecipe.paragonCookingStages.count ||
+         self.currentParagon.session.currentStageIndex ==0)
+        &&
+        (self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+        )
     {
-//        if ([self.continueButtonText.text isEqualToString:@"     COMPLETE"])
-//        {
-//            self.continueButtonText.text = @"     DONE";
-//            self.continueButton.userInteractionEnabled = YES;
-//            self.continueButton.hidden = NO;
-//            self.stageBar.hidden = YES;
-//            [self.stateContainer segueToStateWithIdentifier:@"reachedMinTimeNonSousVideStateSegue" sender:self.currentParagon];
-//        }
-//        else
-//        {
-//            self.continueButtonText.text = @"     DONE";
-            self.continueButton.userInteractionEnabled = NO;
-            self.continueButton.hidden = YES;
-            self.stageBar.hidden = YES;
-            [self.stateContainer segueToStateWithIdentifier:@"recipeComplete" sender:self.currentParagon];
-//        }
-        
+        // entire recipe is complete
+        self.continueButton.userInteractionEnabled = NO;
+        self.continueButton.hidden = YES;
+        self.stageBar.hidden = YES;
+        [self.stateContainer segueToStateWithIdentifier:@"recipeComplete" sender:self.currentParagon];
     }
-    else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone)
+    else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone &&
+             [self.continueButtonText.text isEqualToString:@"     DONE"])
     {
-        
+        // current stage is complete
+        self.continueButtonText.text = @"     NEXT STAGE";
+        self.continueButton.userInteractionEnabled = YES;
+        self.continueButton.hidden = NO;
+        self.stageBar.hidden = NO;
+        [self.stateContainer segueToStateWithIdentifier:@"stageCompleteSegue" sender:self.currentParagon];
+    }
+    else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone &&
+             [self.continueButtonText.text isEqualToString:@"     NEXT STAGE"])
+    {
+        // stage is complete and user acknwoledged
+        self.continueButton.userInteractionEnabled = NO;
+        self.continueButton.hidden = YES;
+        self.stageBar.hidden = YES;
+        [self.currentParagon moveNextStage];
     }
     else
     {

@@ -20,6 +20,7 @@
 @optional - (void) cookConfigurationChanged;
 @optional - (void) cookConfigurationSet:(NSError *)error;
 @optional - (void) userInformationSet:(NSError *)error;
+@optional - (void) nextStageSet:(NSError *)error;
 @optional - (void) holdTimerSet;
 @optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
 @optional - (void) currentPowerLevelChanged: (NSNumber*) powerLevel;
@@ -35,6 +36,7 @@ extern NSString * const FSTServiceParagon ;
 
 -(void)startTimerForCurrentStage;
 -(BOOL)sendRecipeToCooktop: (FSTRecipe*)recipe;
+-(void)moveNextStage;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;
 

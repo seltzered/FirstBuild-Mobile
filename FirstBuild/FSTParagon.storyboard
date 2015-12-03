@@ -37,6 +37,7 @@
             <string>FSEmeric</string>
             <string>FSEmeric</string>
             <string>FSEmeric</string>
+            <string>FSEmeric</string>
         </mutableArray>
         <mutableArray key="FSEmeric-SemiBold.otf">
             <string>FSEmeric-SemiBold</string>
@@ -1417,6 +1418,7 @@
                         <segue destination="c3s-Z4-mCR" kind="custom" identifier="reachingMinNonSousVideStateSegue" customClass="FSTCookingViewSegue" id="mZZ-Y8-dU9"/>
                         <segue destination="JcG-pe-z3W" kind="custom" identifier="reachedMinTimeNonSousVideStateSegue" customClass="FSTCookingViewSegue" id="Ejq-KM-ccn"/>
                         <segue destination="fXq-Oi-SWc" kind="custom" identifier="recipeComplete" customClass="FSTCookingViewSegue" id="hd7-Ia-msL"/>
+                        <segue destination="Ed2-Uv-C8X" kind="custom" identifier="stageCompleteSegue" customClass="FSTCookingViewSegue" id="PPf-Qf-hUX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8b1-hP-T1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5853,6 +5855,52 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="6263" y="1500"/>
+        </scene>
+        <!--ReadyToPreheatViewController-->
+        <scene sceneID="4k7-z2-zn3">
+            <objects>
+                <viewController id="Ed2-Uv-C8X" userLabel="ReadyToPreheatViewController" customClass="FSTReadyToReachTemperatureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h0z-ch-MW5"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZUX-zf-I23"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U2W-Cm-KiZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instructions" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="7Bw-oY-EEv" userLabel="label">
+                                <rect key="frame" x="250" y="289" width="100.5" height="23.5"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=regular">
+                                    <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="24"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Bw-oY-EEv" firstAttribute="centerY" secondItem="U2W-Cm-KiZ" secondAttribute="centerY" id="0GW-98-IcZ"/>
+                            <constraint firstItem="7Bw-oY-EEv" firstAttribute="centerX" secondItem="U2W-Cm-KiZ" secondAttribute="centerX" id="iuo-Wt-h5z"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="at3-gw-v1u">
+                        <barButtonItem key="rightBarButtonItem" image="reveal-icon" id="S2P-3F-z1h">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="menuToggleTapped:" destination="Ed2-Uv-C8X" id="u4f-T7-V2e"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YUq-x2-0ua" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="6JX-KC-OdT" userLabel="cancelTap">
+                    <connections>
+                        <action selector="cancelLabelClick:" destination="Ed2-Uv-C8X" id="ZCM-GM-ias"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="6903" y="3748"/>
         </scene>
     </scenes>
     <resources>
