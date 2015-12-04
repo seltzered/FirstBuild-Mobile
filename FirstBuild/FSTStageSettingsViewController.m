@@ -40,6 +40,9 @@
 @property (weak, nonatomic) IBOutlet UISwitch *autoTransitionSwitch;
 
 @property (weak, nonatomic) IBOutlet UITextView *directionsTextView;
+@property (weak, nonatomic) IBOutlet UILabel *stageDirectionsLabel;
+@property (weak, nonatomic) IBOutlet UITextView *stageDirectionsTextView;
+@property (nonatomic, assign) id currentResponder;
 
 @end
 
@@ -79,10 +82,20 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.autoTransitionSwitch.on = [self.activeStage.automaticTransition boolValue];
     
     self.directionsTextView.delegate = self;
+    self.stageDirectionsTextView.delegate = self;
     pickerManager.delegate = self; // needs to update time and temp labels
     [self.directionsTextView setText:self.activeStage.cookingLabel]; // set the active text if it has been set in this stage
+    
+    [self.stageDirectionsTextView setText:self.activeStage.cookingPrepLabel];
+    [self.directionsTextView setText:self.activeStage.cookingLabel];
     [pickerManager selectAllIndices];
     [self registerKeyboardNotifications];
+    
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
+    [singleTap setNumberOfTapsRequired:1];
+    [singleTap setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:singleTap];
+    
 }
 
 #pragma mark - keyboard events
@@ -141,11 +154,16 @@ CGFloat const SEL_HEIGHT_S = 70;
         self.directionsTextView.layer.borderColor = [UIColor blackColor].CGColor;
         self.directionsTextView.layer.borderWidth = 2.0f;
         
+        self.stageDirectionsTextView.backgroundColor = [UIColor whiteColor];
+        self.stageDirectionsTextView.layer.borderColor = [UIColor blackColor].CGColor;
+        self.stageDirectionsTextView.layer.borderWidth = 2.0f;
+        
         // text colors
         self.timeLabel.textColor = [UIColor blackColor];
         self.tempLabel.textColor = [UIColor blackColor];
         self.speedLabel.textColor = [UIColor blackColor];
         self.directionsTextView.textColor = [UIColor blackColor];
+        self.stageDirectionsTextView.textColor = [UIColor blackColor];
         
         self.saveButtonWrapper.hidden = YES;
     }
@@ -247,6 +265,8 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.activeStage.cookTimeMinimum = [pickerManager minMinutesChosen];
     self.activeStage.targetTemperature = [pickerManager temperatureChosen];
     self.activeStage.cookingLabel = self.directionsTextView.text; // is cookingLabel the correct variable
+    
+    self.activeStage.cookingPrepLabel = self.stageDirectionsTextView.text;
     self.activeStage.automaticTransition = [NSNumber numberWithBool:self.autoTransitionSwitch.on];
     //this needs to be 0 since we can't set a maximum time for a non sous-vide stage
     self.activeStage.cookTimeMaximum = 0;
@@ -258,17 +278,28 @@ CGFloat const SEL_HEIGHT_S = 70;
 #pragma mark - Text View delegate
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    } else {
-        return YES;
-    }
+    return YES;
+//    if ([text isEqualToString:@"\n"]) {
+//        [textView resignFirstResponder];
+//        return NO;
+//    } else {
+//        return YES;
+//    }
 }
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView {
     // must set active recipe when parent segues
     return YES;
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.currentResponder = textView;
+}
+
+- (void)resignOnTap:(id)iSender
+{
+    [self.currentResponder resignFirstResponder];
 }
 
 @end

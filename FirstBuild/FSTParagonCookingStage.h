@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSNumber* cookTimeMaximum;
 @property (nonatomic, strong) NSNumber* maxPowerLevel;
 @property (nonatomic, strong) NSString* cookingLabel;
+@property (nonatomic, strong) NSString* cookingPrepLabel;
 @property (nonatomic, strong) NSNumber* automaticTransition;
 
 @end
