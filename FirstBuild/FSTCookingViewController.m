@@ -354,6 +354,7 @@
     [controller setHeaderText:[stage stringValue] withFrameRect:CGRectMake(0, 0, 120, 30)];
     
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
+    [self.delegate targetTemperatureChanged:[self.currentParagon.session.currentStage.targetTemperature doubleValue]];
     [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
 }
 

@@ -297,6 +297,12 @@ static const uint8_t STAGE_SIZE = 8;
     {
         [self.delegate nextStageSet:error];
     }
+    
+    if (!error)
+    {
+        CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
+        [self.peripheral readValueForCharacteristic:characteristic];
+    }
 }
 
 /**
@@ -637,7 +643,7 @@ static const uint8_t STAGE_SIZE = 8;
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
     }
     
-    [self setCurrentStageInCookingMatrixWithCurrentIndex];
+    [self findCurrentStageInCookingMatrixWithCurrentIndex];
     
     if ([self.delegate respondsToSelector:@selector(cookConfigurationChanged)])
     {
@@ -683,20 +689,24 @@ static const uint8_t STAGE_SIZE = 8;
         return;
     }
 
-    [self setCurrentStageInCookingMatrixWithCurrentIndex];
+    [self findCurrentStageInCookingMatrixWithCurrentIndex];
 
 }
 
--(void)setCurrentStageInCookingMatrixWithCurrentIndex
+-(void)findCurrentStageInCookingMatrixWithCurrentIndex
 {
     if (self.session.currentStageIndex == 0 && self.session.activeRecipe.paragonCookingStages.count)
     {
         // current index not set, so point the stage to the first element
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
     }
-    else if (self.session.currentStageIndex > 0 && self.session.activeRecipe.paragonCookingStages.count)
+    else if (self.session.currentStageIndex <= self.session.activeRecipe.paragonCookingStages.count)
     {
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[self.session.currentStageIndex-1];
+    }
+    else
+    {
+        NSLog(@">>>>>>>>>> STAGE INDEX GREATER THAN COOKING ARRAY LENGTH <<<<<<<<<<<<<<<");
     }
     
     if ([self.delegate respondsToSelector:@selector(currentStageIndexChanged:)])
