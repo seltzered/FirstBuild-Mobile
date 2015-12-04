@@ -61,11 +61,11 @@
     
     // set all strings according to the picker data
     minHourString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[0][minHourIndex] attributes:labelFontDictionary];
-    if (minHourIndex == 0) { // minute offset case
-        minMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minMinuteIndex + 1] attributes:labelFontDictionary];
-    } else {
+//    if (minHourIndex == 0) { // minute offset case
+//        minMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minMinuteIndex + 1] attributes:labelFontDictionary];
+//    } else {
         minMinuteString = [[NSMutableAttributedString alloc] initWithString:pickerTimeData[1][minMinuteIndex] attributes:labelFontDictionary];
-    }
+//    }
     [minHourString appendAttributedString:minMinuteString]; // put hours and minutes together
     return minHourString;
 
@@ -115,11 +115,11 @@
     convert.numberStyle = NSNumberFormatterDecimalStyle;
     NSInteger minHourMinutes = [[convert numberFromString:pickerTimeData[0][minHourIndex]] integerValue] * 60;
     NSInteger minMinutes;
-    if (minHourIndex == 0) { // changed this to match the labels given
-        minMinutes = [[convert numberFromString:[pickerTimeData[1][minMinuteIndex + 1] substringFromIndex:1]] integerValue];
-    } else {
+//    if (minHourIndex == 0) { // changed this to match the labels given
+//        minMinutes = [[convert numberFromString:[pickerTimeData[1][minMinuteIndex + 1] substringFromIndex:1]] integerValue];
+//    } else {
         minMinutes = [[convert numberFromString:[pickerTimeData[1][minMinuteIndex] substringFromIndex:1]] integerValue];
-    }
+//    }
     return [NSNumber numberWithInt:(minHourMinutes + minMinutes)];
     
 }
@@ -231,11 +231,11 @@
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (pickerView == self.minPicker) {
-        if (minHourIndex == 0 && component == 1) { // minutes in this exception
-            return (NSString*)pickerTimeData[component][row + 1]; // offset for the hidden 1 minute value
-        } else {
+//        if (minHourIndex == 0 && component == 1) { // minutes in this exception
+//            return (NSString*)pickerTimeData[component][row + 1]; // offset for the hidden 1 minute value
+//        } else {
             return (NSString*)pickerTimeData[component][row];// offset max time data with minIndice, this stays constant
-        }
+//        }
     } // end min picker case
     else if (pickerView == self.maxPicker) {
         if (component == 0) {
