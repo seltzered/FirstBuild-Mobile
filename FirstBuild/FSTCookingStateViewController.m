@@ -124,4 +124,11 @@
     [self updateLabels];
 }
 
+-(void)directionLabelsChangedWithPrepDirections:(NSString *)prepDirections andCookingDirections:(NSString *)cookingDirections
+{
+    self.directions = cookingDirections;
+    self.stagePrep = prepDirections;
+    [self updateLabels];
+}
+
 @end

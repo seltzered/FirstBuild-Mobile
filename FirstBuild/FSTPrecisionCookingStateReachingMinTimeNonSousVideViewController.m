@@ -11,6 +11,7 @@
 
 @interface FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *currentTempLabel;
+@property (strong, nonatomic) IBOutlet UILabel *directionsLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
 @end
@@ -69,6 +70,8 @@
     {
         [self.endTimeLabel setText:[NSString stringWithFormat:@"%d mins", (int)self.remainingHoldTime]];
     }
+    self.directionsLabel.text = self.directions;
+
 }
 
 @end

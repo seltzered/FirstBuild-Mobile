@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *currentTempLabel;
 @property (weak, nonatomic) IBOutlet UILabel *italicTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *directionsLabel;
 
 @end
 
@@ -92,6 +93,9 @@
     double currentTemperature = self.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
     [self.currentTempLabel setAttributedText:currentTempString];
+    
+    self.directionsLabel.text = self.directions;
+
     
 }
 

@@ -45,6 +45,7 @@
     
     [self transitionToCurrentCookMode];
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
+    [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -177,6 +178,7 @@
     if (stateIdentifier)
     {
         [self.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self.currentParagon];
+        [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
     }
     else
     {
@@ -248,6 +250,7 @@
         self.continueButton.hidden = NO;
         self.stageBar.hidden = NO;
         [self.stateContainer segueToStateWithIdentifier:@"stageCompleteSegue" sender:self.currentParagon];
+        [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
     }
     else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone &&
              [self.continueButtonText.text isEqualToString:@"     NEXT STAGE"])
@@ -356,6 +359,8 @@
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
     [self.delegate targetTemperatureChanged:[self.currentParagon.session.currentStage.targetTemperature doubleValue]];
     [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
+    
+    [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
 }
 
 @end

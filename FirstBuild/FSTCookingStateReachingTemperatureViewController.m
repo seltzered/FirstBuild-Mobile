@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *targetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *currentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *directionsLabel;
 
 @end
 
@@ -61,6 +62,8 @@
     
     [self.targetLabel setAttributedText:targetTempString];
     [self.currentLabel setAttributedText:currentTempString];
+    
+    [self.directionsLabel setText:self.directions];
 }
 
 @end

@@ -15,6 +15,8 @@
 @implementation FSTParagon
 {
     NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+    FSTSavedRecipeManager* recipeManager;
+    FSTRecipe* activeRecipeFromLocalDatabase;
 }
 
 //app info service
@@ -86,6 +88,8 @@ static const uint8_t STAGE_SIZE = 8;
         
         self.session.cookState = FSTParagonCookStateOff;
         self.session.cookMode = FSTCookingStateOff;
+        
+        recipeManager = [FSTSavedRecipeManager sharedInstance];
     }
 
     return self;
@@ -538,7 +542,13 @@ static const uint8_t STAGE_SIZE = 8;
     {
         self.session.activeRecipe.recipeType = [NSNumber numberWithChar:_userInformation.recipeType];
         self.session.activeRecipe.recipeId = [NSNumber numberWithUnsignedShort:_userInformation.recipeId];
+        
+        //TODO: need to actually check if this is correct before setting
+        //may not be an active recipe or wrong user mode
+        activeRecipeFromLocalDatabase = [recipeManager getRecipeForId:self.session.activeRecipe.recipeId];
+        
         [self determineCookMode];
+        [self setCurrentStageInCookingMatrixWithCurrentIndex];
     }
     else
     {
@@ -643,7 +653,7 @@ static const uint8_t STAGE_SIZE = 8;
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
     }
     
-    [self findCurrentStageInCookingMatrixWithCurrentIndex];
+    [self setCurrentStageInCookingMatrixWithCurrentIndex];
     
     if ([self.delegate respondsToSelector:@selector(cookConfigurationChanged)])
     {
@@ -689,24 +699,39 @@ static const uint8_t STAGE_SIZE = 8;
         return;
     }
 
-    [self findCurrentStageInCookingMatrixWithCurrentIndex];
+    [self setCurrentStageInCookingMatrixWithCurrentIndex];
 
 }
 
--(void)findCurrentStageInCookingMatrixWithCurrentIndex
+-(void)setCurrentStageInCookingMatrixWithCurrentIndex
 {
+    FSTParagonCookingStage* localDbStage;
+    
     if (self.session.currentStageIndex == 0 && self.session.activeRecipe.paragonCookingStages.count)
     {
         // current index not set, so point the stage to the first element
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
+        localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[0];
     }
     else if (self.session.currentStageIndex <= self.session.activeRecipe.paragonCookingStages.count)
     {
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[self.session.currentStageIndex-1];
+        localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[self.session.currentStageIndex-1];
     }
     else
     {
         NSLog(@">>>>>>>>>> STAGE INDEX GREATER THAN COOKING ARRAY LENGTH <<<<<<<<<<<<<<<");
+    }
+    
+    if (!localDbStage)
+    {
+        NSLog(@">>>>>>>>>> NO STAGE FOR THIS RECIPE IN DB <<<<<<<<<<<<<<<");
+
+    }
+    else
+    {
+        self.session.currentStage.cookingLabel = localDbStage.cookingLabel;
+        self.session.currentStage.cookingPrepLabel = localDbStage.cookingPrepLabel;
     }
     
     if ([self.delegate respondsToSelector:@selector(currentStageIndexChanged:)])
@@ -1075,6 +1100,8 @@ static const uint8_t STAGE_SIZE = 8;
         NSLog(@"\t stage %i: tartmp %@, mint %@, maxt %@, maxpwr %@, trans %@", i+1, stage.targetTemperature, stage.cookTimeMinimum, stage.cookTimeMaximum, stage.maxPowerLevel, stage.automaticTransition);
 
     }
+    NSLog(@"current stage instructions: \n\t%@", self.session.currentStage.cookingLabel);
+    NSLog(@"current stage prep instructions: \n\t%@", self.session.currentStage.cookingPrepLabel);
     NSLog(@"-----------------------------------------------------");
     
 }

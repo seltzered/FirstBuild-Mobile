@@ -18,6 +18,10 @@
 
 @property (nonatomic) NSTimeInterval targetMaxTime;
 
+@property (nonatomic, weak) NSString* directions;
+
+@property (nonatomic, weak) NSString* stagePrep;
+
 @property (nonatomic) CGFloat currentTemp;
 
 @property (nonatomic) CGFloat targetTemp;

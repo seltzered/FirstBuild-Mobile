@@ -9,7 +9,9 @@
 #import "FSTSavedRecipeManager.h"
 
 @implementation FSTSavedRecipeManager
-
+{
+    NSMutableDictionary* currentRecipeDictionary;
+}
 + (id) sharedInstance {
     
     static FSTSavedRecipeManager *sharedSingletonInstance = nil;
@@ -20,12 +22,20 @@
     return sharedSingletonInstance;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        currentRecipeDictionary = [NSMutableDictionary dictionaryWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"Recipes"]]]; // a mutable dictionary built from the unarchived data keyed as recipes in standardDefaults
+        if (!currentRecipeDictionary) {
+            currentRecipeDictionary = [[NSMutableDictionary alloc] init];
+        }
+    }
+    return self;
+}
+
 -(void)saveRecipe:(FSTRecipe *)recipe {
     if (recipe.friendlyName.length > 0) {
-        NSMutableDictionary* recipeDictionary = [NSMutableDictionary dictionaryWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"Recipes"]]]; // a mutable dictionary built from the unarchived data keyed as recipes in standardDefaults
-        if (!recipeDictionary) {
-            recipeDictionary = [[NSMutableDictionary alloc] init];
-        }
         
         //first check if this is a new recipe we are saving
         if (!recipe.recipeId)
@@ -47,8 +57,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:recipe.recipeId forKey:@"lastRecipeId"];
         }
         
-        [recipeDictionary setObject:recipe forKey:recipe.recipeId];
-        [self saveItemsToDefaults:[NSDictionary dictionaryWithDictionary:recipeDictionary] key:@"Recipes"];
+        [currentRecipeDictionary setObject:recipe forKey:recipe.recipeId];
+        [self saveItemsToDefaults:[NSDictionary dictionaryWithDictionary:currentRecipeDictionary] key:@"Recipes"];
     }
 }
 -(void)saveItemsToDefaults:(NSDictionary*)object key:(NSString*)key {
@@ -74,4 +84,23 @@
 -(NSDictionary*)getSavedRecipes {
     return [self loadItemsFromDefaultsWithKey: @"Recipes"];
 } // need some way to check a new item against all the keys
+
+-(FSTRecipe*)getRecipeForId: (NSNumber*)recipeId
+{
+    FSTRecipe* recipe;
+    
+    //TODO: return some canned recipe
+    if (!recipeId) {
+        return nil;
+    }
+    
+    recipe = [currentRecipeDictionary objectForKey:recipeId];
+    
+    if (!recipe)
+    {
+        return nil;
+    }
+    
+    return recipe;
+}
 @end

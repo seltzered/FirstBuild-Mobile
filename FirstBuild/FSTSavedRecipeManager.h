@@ -14,6 +14,7 @@
 -(void)saveRecipe:(FSTRecipe*)recipe;
 
 -(NSDictionary*)getSavedRecipes;
+-(FSTRecipe*)getRecipeForId: (NSNumber*)recipeId;
 
 -(void)removeItemFromDefaults:(NSString*)key;
 

@@ -37,7 +37,6 @@
             <string>FSEmeric</string>
             <string>FSEmeric</string>
             <string>FSEmeric</string>
-            <string>FSEmeric</string>
         </mutableArray>
         <mutableArray key="FSEmeric-SemiBold.otf">
             <string>FSEmeric-SemiBold</string>
@@ -5461,6 +5460,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J1-A0-niW">
+                                <rect key="frame" x="0.5" y="572" width="600" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="XAw-fk-KZG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4g-5g-qJt" userLabel="progressView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
@@ -5536,7 +5544,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TARGET TEMPERATURE REACHED" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85C-yK-74O" userLabel="cookingStatusLabel">
-                                <rect key="frame" x="164.5" y="-15" width="271.5" height="86"/>
+                                <rect key="frame" x="164" y="-15" width="271.5" height="86"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="36T-1A-eYF"/>
                                     <constraint firstAttribute="width" constant="600" id="p5f-2e-Usc"/>
@@ -5554,9 +5562,12 @@
                         <constraints>
                             <constraint firstItem="Q4g-5g-qJt" firstAttribute="width" secondItem="tXW-Ry-fiO" secondAttribute="width" id="AEz-aN-UUG"/>
                             <constraint firstItem="85C-yK-74O" firstAttribute="top" secondItem="Q4g-5g-qJt" secondAttribute="top" id="Czn-7l-Q8B"/>
+                            <constraint firstItem="t8j-4f-gV2" firstAttribute="top" secondItem="7J1-A0-niW" secondAttribute="bottom" constant="10" id="G5V-ga-xkW"/>
                             <constraint firstItem="85C-yK-74O" firstAttribute="centerX" secondItem="Q4g-5g-qJt" secondAttribute="centerX" id="Hge-hJ-mGA"/>
                             <constraint firstItem="Q4g-5g-qJt" firstAttribute="height" secondItem="tXW-Ry-fiO" secondAttribute="height" id="Ug1-O8-TG7"/>
                             <constraint firstItem="85C-yK-74O" firstAttribute="centerX" secondItem="tXW-Ry-fiO" secondAttribute="centerX" id="cYx-Wa-uCx"/>
+                            <constraint firstItem="7J1-A0-niW" firstAttribute="width" secondItem="tXW-Ry-fiO" secondAttribute="width" id="f8I-w7-ktO"/>
+                            <constraint firstItem="7J1-A0-niW" firstAttribute="centerX" secondItem="tXW-Ry-fiO" secondAttribute="centerX" id="iK2-bB-CUi"/>
                             <constraint firstItem="85C-yK-74O" firstAttribute="top" secondItem="fXP-fk-TOS" secondAttribute="bottom" constant="-15" id="nSg-RU-NIk"/>
                             <constraint firstAttribute="centerX" secondItem="Q4g-5g-qJt" secondAttribute="centerX" id="tZa-yr-bJm"/>
                             <constraint firstAttribute="centerY" secondItem="Q4g-5g-qJt" secondAttribute="centerY" id="um9-fl-kec"/>
@@ -5571,6 +5582,7 @@
                     <connections>
                         <outlet property="circleProgressView" destination="jUp-9q-QZZ" id="uIX-Kw-Waf"/>
                         <outlet property="currentLabel" destination="fIs-wX-OCF" id="iqu-z1-Uj7"/>
+                        <outlet property="directionsLabel" destination="7J1-A0-niW" id="Su3-LD-xfm"/>
                         <outlet property="targetLabel" destination="LqM-YA-hAe" id="ceY-yf-XtT"/>
                     </connections>
                 </viewController>
@@ -5590,26 +5602,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4V-l5-grr">
+                                <rect key="frame" x="0.0" y="569" width="600" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="L5i-xg-mNo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Yn-UP-M6I" userLabel="progressView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWt-hi-jNL" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv1-zq-8Yi" userLabel="temp">
-                                                <rect key="frame" x="296" y="250" width="8" height="23"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv1-zq-8Yi" userLabel="temp">
+                                                <rect key="frame" x="296" y="249" width="8" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="18"/>
                                                 <color key="textColor" red="0.5568627451" green="0.53725490200000003" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time remaining" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWo-bd-s5X">
-                                                <rect key="frame" x="204" y="287" width="192" height="26"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time remaining" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kWo-bd-s5X">
+                                                <rect key="frame" x="228.5" y="287" width="143" height="26"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="21"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Jf-Wl-gV6">
-                                                <rect key="frame" x="296" y="282" width="7" height="1"/>
+                                                <rect key="frame" x="296" y="281.5" width="7" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="3fk-Xf-vnW"/>
@@ -5689,16 +5710,20 @@
                         <constraints>
                             <constraint firstItem="788-6R-imI" firstAttribute="top" secondItem="6Ss-jo-reQ" secondAttribute="bottom" constant="5" id="3nw-PL-7ig"/>
                             <constraint firstItem="9Yn-UP-M6I" firstAttribute="height" secondItem="9Ih-fA-MsV" secondAttribute="height" id="Kk5-UV-s2t"/>
+                            <constraint firstItem="v4V-l5-grr" firstAttribute="width" secondItem="9Ih-fA-MsV" secondAttribute="width" id="NPe-cb-IzC"/>
                             <constraint firstAttribute="centerY" secondItem="9Yn-UP-M6I" secondAttribute="centerY" id="UsQ-8n-gne"/>
                             <constraint firstItem="788-6R-imI" firstAttribute="width" secondItem="9Ih-fA-MsV" secondAttribute="width" id="WEs-R8-deg"/>
+                            <constraint firstItem="v4V-l5-grr" firstAttribute="centerX" secondItem="9Ih-fA-MsV" secondAttribute="centerX" id="bSE-xR-im3"/>
                             <constraint firstAttribute="centerX" secondItem="788-6R-imI" secondAttribute="centerX" id="dgx-vJ-gUo"/>
                             <constraint firstAttribute="centerX" secondItem="9Yn-UP-M6I" secondAttribute="centerX" id="eSj-xJ-pRL"/>
+                            <constraint firstItem="cUt-qH-jm6" firstAttribute="top" secondItem="v4V-l5-grr" secondAttribute="bottom" constant="10" id="gCW-33-sB1"/>
                             <constraint firstItem="9Yn-UP-M6I" firstAttribute="width" secondItem="9Ih-fA-MsV" secondAttribute="width" id="gMs-qA-6vx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="circleProgressView" destination="JWt-hi-jNL" id="Q9X-yT-q4l"/>
                         <outlet property="currentTempLabel" destination="iv1-zq-8Yi" id="Efg-rA-kuW"/>
+                        <outlet property="directionsLabel" destination="v4V-l5-grr" id="Qns-h6-jYT"/>
                         <outlet property="endTimeLabel" destination="tsh-cT-jbp" id="bPq-ib-svf"/>
                     </connections>
                 </viewController>
@@ -5718,6 +5743,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPc-DR-ggC">
+                                <rect key="frame" x="0.0" y="569" width="600" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="qqi-16-kcU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbq-Nh-z2G" userLabel="circleWrapper">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
@@ -5731,7 +5765,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rra-Pq-ovn">
-                                                <rect key="frame" x="262" y="286" width="77" height="28"/>
+                                                <rect key="frame" x="261.5" y="286.5" width="76.5" height="27.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-Light" family="FS Emeric" pointSize="22"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -5822,18 +5856,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="uOF-bC-RR7" secondAttribute="centerX" id="2XR-dL-MYR"/>
+                            <constraint firstItem="dPc-DR-ggC" firstAttribute="width" secondItem="K95-BE-H0U" secondAttribute="width" id="87y-9O-C9I"/>
                             <constraint firstAttribute="centerX" secondItem="Vbq-Nh-z2G" secondAttribute="centerX" id="Cho-jX-8ay"/>
                             <constraint firstAttribute="height" secondItem="Vbq-Nh-z2G" secondAttribute="height" id="Kbz-mN-aHp"/>
                             <constraint firstAttribute="centerY" secondItem="Vbq-Nh-z2G" secondAttribute="centerY" id="Lwi-lD-rck"/>
                             <constraint firstAttribute="centerX" secondItem="Zww-z0-SYQ" secondAttribute="centerX" id="MhU-Le-xhn"/>
+                            <constraint firstItem="dPc-DR-ggC" firstAttribute="centerX" secondItem="K95-BE-H0U" secondAttribute="centerX" id="PLm-Zs-Gw3"/>
                             <constraint firstItem="Vbq-Nh-z2G" firstAttribute="width" secondItem="K95-BE-H0U" secondAttribute="width" id="YU5-ln-Vg0"/>
                             <constraint firstItem="BCh-tN-fQJ" firstAttribute="top" secondItem="Zww-z0-SYQ" secondAttribute="bottom" constant="20" id="c2J-UR-3Wf"/>
+                            <constraint firstItem="BCh-tN-fQJ" firstAttribute="top" secondItem="dPc-DR-ggC" secondAttribute="bottom" constant="10" id="mXD-N1-kfr"/>
                             <constraint firstItem="uOF-bC-RR7" firstAttribute="top" secondItem="zof-Gr-QqS" secondAttribute="bottom" constant="5" id="uIX-Kz-UEw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="circleProgressView" destination="x1G-o5-cOj" id="YhN-Fo-QCW"/>
                         <outlet property="currentTempLabel" destination="4xK-eL-9rn" id="k23-aZ-DIi"/>
+                        <outlet property="directionsLabel" destination="dPc-DR-ggC" id="96D-g3-NwB"/>
                         <outlet property="italicTimeLabel" destination="Zww-z0-SYQ" id="gSx-6c-ynV"/>
                     </connections>
                 </viewController>
@@ -5921,10 +5959,10 @@
             </objects>
             <point key="canvasLocation" x="6263" y="1500"/>
         </scene>
-        <!--ReadyToPreheatViewController-->
+        <!--FSTStageInstructionsViewController-->
         <scene sceneID="4k7-z2-zn3">
             <objects>
-                <viewController id="Ed2-Uv-C8X" userLabel="ReadyToPreheatViewController" customClass="FSTReadyToReachTemperatureViewController" sceneMemberID="viewController">
+                <viewController id="Ed2-Uv-C8X" userLabel="FSTStageInstructionsViewController" customClass="FSTStageInstructionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h0z-ch-MW5"/>
                         <viewControllerLayoutGuide type="bottom" id="ZUX-zf-I23"/>
@@ -5933,20 +5971,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="instructions" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="7Bw-oY-EEv" userLabel="label">
-                                <rect key="frame" x="250" y="289" width="100.5" height="23.5"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=regular">
-                                    <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="24"/>
-                                </variation>
-                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="DZo-vC-hNV">
+                                <rect key="frame" x="30" y="90" width="540" height="420"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7Bw-oY-EEv" firstAttribute="centerY" secondItem="U2W-Cm-KiZ" secondAttribute="centerY" id="0GW-98-IcZ"/>
-                            <constraint firstItem="7Bw-oY-EEv" firstAttribute="centerX" secondItem="U2W-Cm-KiZ" secondAttribute="centerX" id="iuo-Wt-h5z"/>
+                            <constraint firstItem="DZo-vC-hNV" firstAttribute="centerX" secondItem="U2W-Cm-KiZ" secondAttribute="centerX" id="FbJ-mG-RZp"/>
+                            <constraint firstItem="DZo-vC-hNV" firstAttribute="centerY" secondItem="U2W-Cm-KiZ" secondAttribute="centerY" id="I4R-k0-Jfq"/>
+                            <constraint firstItem="DZo-vC-hNV" firstAttribute="width" secondItem="U2W-Cm-KiZ" secondAttribute="width" multiplier="0.9" id="Kfp-z7-gtb"/>
+                            <constraint firstItem="DZo-vC-hNV" firstAttribute="height" secondItem="U2W-Cm-KiZ" secondAttribute="height" multiplier="0.7" id="UaC-Ed-a61"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="at3-gw-v1u">
@@ -5957,6 +5995,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="DZo-vC-hNV" id="1Iy-FV-SJw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUq-x2-0ua" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="6JX-KC-OdT" userLabel="cancelTap">

@@ -20,6 +20,7 @@
 -(void) remainingHoldTimeChanged:(NSTimeInterval)remainingHoldTime;
 -(void) targetTimeChanged:(NSTimeInterval)minTime withMax: (NSTimeInterval) maxTime;
 -(void) burnerLevelChanged:(CGFloat)burnerLevel;
+-(void) directionLabelsChangedWithPrepDirections: (NSString*)prepDirections andCookingDirections: (NSString*)cookingDirections;
 
 @end
 
