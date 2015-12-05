@@ -35,6 +35,11 @@
    
     ((FSTCookingViewController*)self.parentViewController).delegate = segue.destinationViewController; // set the current delegate to this parent, allowing for communications around this view controller
 
+    if ([segue.destinationViewController isKindOfClass:[FSTCookingStateViewController class]])
+    {
+        ((FSTCookingStateViewController*)segue.destinationViewController).cookingData = self.cookingData;
+    }
+    
     if (self.childViewControllers.count > 0) {
         
         [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:segue.destinationViewController];
@@ -45,10 +50,6 @@
         [segue.destinationViewController didMoveToParentViewController:self];
     }
     
-    if ([segue.destinationViewController isKindOfClass:[FSTCookingStateViewController class]])
-    {
-        ((FSTCookingStateViewController*)segue.destinationViewController).cookingData = self.cookingData;
-    }
 }
 
 -(void)swapFromViewController: (UIViewController*)fromController toViewController: (UIViewController*)toController {

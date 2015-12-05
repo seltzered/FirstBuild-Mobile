@@ -332,6 +332,7 @@
        cookingData.targetMinTime = [currentStage.cookTimeMinimum intValue];
        cookingData.burnerLevel = [self.currentParagon.session.currentPowerLevel intValue];
        cookingData.remainingHoldTime = [self.currentParagon.session.remainingHoldTime intValue];
+       cookingData.currentTemp = [self.currentParagon.session.currentProbeTemperature intValue];
        [self setRecipeStageInstructions];
        containerVC.cookingData = cookingData;
        self.stateContainer = containerVC;
