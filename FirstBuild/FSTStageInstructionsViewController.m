@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.textView.text = self.cookingData.stagePrep;
     // Do any additional setup after loading the view.
 }
 
@@ -29,6 +30,5 @@
 {
     [super updateLabels];
     self.textView.text = self.cookingData.stagePrep;
-
 }
 @end

@@ -39,7 +39,6 @@
 {
     self = [super initWithCoder:coder];
     if (self) {
-        self.currentParagon.delegate = self;
         cookingData = [CookingStateModel new];
     }
     return self;
@@ -51,6 +50,7 @@
     self.continueButton.hidden = YES;
     popped_out = NO;
     
+    self.currentParagon.delegate = self;
     [self transitionToCurrentCookMode];
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
 
