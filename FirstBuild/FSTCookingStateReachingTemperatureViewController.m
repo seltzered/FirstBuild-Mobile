@@ -21,7 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self updateLabels];
+    [self updatePercent];
 }
 
 -(void)viewWillLayoutSubviews
@@ -65,5 +66,6 @@
     
     [self.directionsLabel setText:self.cookingData.directions];
 }
+
 
 @end

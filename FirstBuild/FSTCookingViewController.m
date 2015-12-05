@@ -35,23 +35,21 @@
     CookingStateModel* cookingData;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.currentParagon.delegate = self;
+        cookingData = [CookingStateModel new];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.currentParagon.delegate = self;
-
     self.navigationItem.hidesBackButton = YES;
     self.continueButton.hidden = YES;
     popped_out = NO;
-
-    cookingData = [CookingStateModel new];
-    FSTParagonCookingStage* currentStage = self.currentParagon.session.currentStage;
-    cookingData.targetTemp = [currentStage.targetTemperature intValue];
-    cookingData.targetMaxTime = [currentStage.cookTimeMaximum intValue];
-    cookingData.targetMinTime = [currentStage.cookTimeMinimum intValue];
-    cookingData.burnerLevel = [self.currentParagon.session.currentPowerLevel intValue];
-    cookingData.remainingHoldTime = [self.currentParagon.session.remainingHoldTime intValue];
-    [self setRecipeStageInstructions];
     
     [self transitionToCurrentCookMode];
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
@@ -328,6 +326,13 @@
    if ([segue.identifier isEqualToString:@"containerSegue"])
    {
        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
+       FSTParagonCookingStage* currentStage = self.currentParagon.session.currentStage;
+       cookingData.targetTemp = [currentStage.targetTemperature intValue];
+       cookingData.targetMaxTime = [currentStage.cookTimeMaximum intValue];
+       cookingData.targetMinTime = [currentStage.cookTimeMinimum intValue];
+       cookingData.burnerLevel = [self.currentParagon.session.currentPowerLevel intValue];
+       cookingData.remainingHoldTime = [self.currentParagon.session.remainingHoldTime intValue];
+       [self setRecipeStageInstructions];
        containerVC.cookingData = cookingData;
        self.stateContainer = containerVC;
    }
@@ -356,6 +361,7 @@
 
 -(void)actualTemperatureChanged:(NSNumber *)temperature
 {
+    cookingData.currentTemp = [temperature intValue];
     [self.delegate dataChanged:cookingData];
 }
 
