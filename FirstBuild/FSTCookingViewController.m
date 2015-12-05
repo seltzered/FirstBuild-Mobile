@@ -43,7 +43,7 @@
     self.navigationItem.hidesBackButton = YES;
     self.continueButton.hidden = YES;
     popped_out = NO;
-    
+
     cookingData = [CookingStateModel new];
     FSTParagonCookingStage* currentStage = self.currentParagon.session.currentStage;
     cookingData.targetTemp = [currentStage.targetTemperature intValue];
@@ -51,12 +51,37 @@
     cookingData.targetMinTime = [currentStage.cookTimeMinimum intValue];
     cookingData.burnerLevel = [self.currentParagon.session.currentPowerLevel intValue];
     cookingData.remainingHoldTime = [self.currentParagon.session.remainingHoldTime intValue];
-    cookingData.stagePrep;
-    cookingData.directions;
+    [self setRecipeStageInstructions];
     
     [self transitionToCurrentCookMode];
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
 
+}
+
+-(void)setRecipeStageInstructions
+{
+    FSTSavedRecipeManager* recipeManager = [FSTSavedRecipeManager sharedInstance];
+    FSTRecipe* activeRecipeFromLocalDatabase = [recipeManager getRecipeForId:self.currentParagon.session.activeRecipe.recipeId];
+    FSTParagonCookingStage* localDbStage;
+    if (self.currentParagon.session.currentStageIndex==0)
+    {
+        localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[0];
+    }
+    else
+    {
+        localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[self.currentParagon.session.currentStageIndex-1];
+    }
+    
+    if (!localDbStage)
+    {
+        NSLog(@">>>>>>>>>> NO STAGE FOR THIS RECIPE IN DB <<<<<<<<<<<<<<<");
+        
+    }
+    else
+    {
+        cookingData.directions = localDbStage.cookingLabel;
+        cookingData.stagePrep = localDbStage.cookingPrepLabel;
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -249,7 +274,7 @@
         self.continueButton.userInteractionEnabled = NO;
         self.continueButton.hidden = YES;
         self.stageBar.hidden = YES;
-        [self.stateContainer segueToStateWithIdentifier:@"recipeComplete" sender:self.currentParagon];
+        [self.stateContainer segueToStateWithIdentifier:@"recipeComplete" sender:nil];
     }
     else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone &&
              [self.continueButtonText.text isEqualToString:@"     DONE"])
@@ -259,7 +284,7 @@
         self.continueButton.userInteractionEnabled = YES;
         self.continueButton.hidden = NO;
         self.stageBar.hidden = NO;
-        [self.stateContainer segueToStateWithIdentifier:@"stageCompleteSegue" sender:self.currentParagon];
+        [self.stateContainer segueToStateWithIdentifier:@"stageCompleteSegue" sender:nil];
 //        [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
     }
     else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone &&
@@ -375,7 +400,8 @@
     cookingData.targetTemp =[self.currentParagon.session.currentStage.targetTemperature doubleValue];
     cookingData.targetMinTime = [self.currentParagon.session.currentStage.cookTimeMinimum doubleValue];
     cookingData.targetMaxTime = [self.currentParagon.session.currentStage.cookTimeMaximum doubleValue];
-    [self.delegate dataChanged:cookingData];
+    [self setRecipeStageInstructions];
+    [self.delegate dataChanged:cookingData];    
 }
 
 @end
