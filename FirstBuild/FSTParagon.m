@@ -81,10 +81,7 @@ static const uint8_t STAGE_SIZE = 8;
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicRemainingHoldTime,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicUserSelectedCookMode,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicCurrentPowerLevel,
-                                   nil];
-        
-        //TODO: Hack! we need an actual recipe
-        [self handleRecipeId:nil];
+                                   nil]; 
         
         self.session.cookState = FSTParagonCookStateOff;
         self.session.cookMode = FSTCookingStateOff;
@@ -913,28 +910,6 @@ static const uint8_t STAGE_SIZE = 8;
         
         [self notifyDeviceEssentialDataChanged];
     }
-}
-
--(void)handleRecipeId: (CBCharacteristic*)characteristic
-{
-    //TODO: implement with actual recipe id characteristic when we have that
-//    if (characteristic.value.length != 1)
-//    {
-//        DLog(@"handleRecipeId length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
-//        return;
-//    }
-    
-//    NSData *data = characteristic.value;
-//    Byte bytes[characteristic.value.length] ;
-//    [data getBytes:bytes length:characteristic.value.length];
-//    self.recipeId = [NSNumber numberWithUnsignedInt:bytes[0]];
-    
-    //TODO: REMOVE ALL OF THIS!
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRecipeId];
-    self.session.activeRecipe = [FSTRecipe new];
-   // self.session.previousStage = self.session.currentStage;
-    //self.session.currentStage = [self.session.activeRecipe addStage];
-    ///////////////////////////
 }
 
 //TODO: move to ble product
