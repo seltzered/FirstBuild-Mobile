@@ -28,7 +28,7 @@
 -(void)updateLabels
 {
     [super updateLabels];
-    self.textView.text = self.stagePrep;
+    self.textView.text = self.cookingData.stagePrep;
 
 }
 @end

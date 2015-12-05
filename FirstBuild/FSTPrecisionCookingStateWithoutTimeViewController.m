@@ -31,7 +31,7 @@
 
 - (void) updatePercent {
     [super updatePercent];
-    self.circleProgressView.progressLayer.percent = self.burnerLevel;
+    self.circleProgressView.progressLayer.percent = self.cookingData.burnerLevel;
 }
 
 - (void) updateLabels {
@@ -43,9 +43,9 @@
     UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:41.0];
     NSMutableDictionary* bigFontDict = [NSMutableDictionary dictionaryWithObject:bigFont forKey:NSFontAttributeName];
     
-    NSMutableAttributedString* temperatureString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f%@", self.currentTemp, @"\u00b0 F"] attributes:bigFontDict];
+    NSMutableAttributedString* temperatureString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f%@", self.cookingData.currentTemp, @"\u00b0 F"] attributes:bigFontDict];
     
-    double targetTemperature = self.targetTemp;
+    double targetTemperature = self.cookingData.targetTemp;
     NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Target: %0.0f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
     
     [self.targetTempLabel setAttributedText:targetTempString];

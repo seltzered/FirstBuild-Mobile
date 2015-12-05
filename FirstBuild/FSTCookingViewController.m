@@ -32,6 +32,7 @@
 @implementation FSTCookingViewController
 {
     BOOL popped_out;
+    CookingStateModel* cookingData;
 }
 
 - (void)viewDidLoad {
@@ -43,9 +44,19 @@
     self.continueButton.hidden = YES;
     popped_out = NO;
     
+    cookingData = [CookingStateModel new];
+    FSTParagonCookingStage* currentStage = self.currentParagon.session.currentStage;
+    cookingData.targetTemp = [currentStage.targetTemperature intValue];
+    cookingData.targetMaxTime = [currentStage.cookTimeMaximum intValue];
+    cookingData.targetMinTime = [currentStage.cookTimeMinimum intValue];
+    cookingData.burnerLevel = [self.currentParagon.session.currentPowerLevel intValue];
+    cookingData.remainingHoldTime = [self.currentParagon.session.remainingHoldTime intValue];
+    cookingData.stagePrep;
+    cookingData.directions;
+    
     [self transitionToCurrentCookMode];
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
-    [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -177,8 +188,7 @@
     
     if (stateIdentifier)
     {
-        [self.stateContainer segueToStateWithIdentifier:stateIdentifier sender:self.currentParagon];
-        [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
+        [self.stateContainer segueToStateWithIdentifier:stateIdentifier sender:nil];
     }
     else
     {
@@ -250,7 +260,7 @@
         self.continueButton.hidden = NO;
         self.stageBar.hidden = NO;
         [self.stateContainer segueToStateWithIdentifier:@"stageCompleteSegue" sender:self.currentParagon];
-        [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
+//        [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
     }
     else if ( self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingCurrentStageDone &&
              [self.continueButtonText.text isEqualToString:@"     NEXT STAGE"])
@@ -293,8 +303,7 @@
    if ([segue.identifier isEqualToString:@"containerSegue"])
    {
        FSTContainerViewController* containerVC = (FSTContainerViewController*)segue.destinationViewController;
-       containerVC.paragon = self.currentParagon;
-       //[containerVC segueToStateWithIdentifier:@"preheatingStateSegue" sender:self]; // a default for the initial transition
+       containerVC.cookingData = cookingData;
        self.stateContainer = containerVC;
    }
    else if ([segue.identifier isEqualToString:@"displayPopOut"])
@@ -322,17 +331,20 @@
 
 -(void)actualTemperatureChanged:(NSNumber *)temperature
 {
-    [self.delegate currentTemperatureChanged:[temperature doubleValue]];
+    [self.delegate dataChanged:cookingData];
 }
 
 -(void)remainingHoldTimeChanged:(NSNumber *)holdTime
 {
-    [self.delegate remainingHoldTimeChanged:[holdTime doubleValue]];
+    cookingData.remainingHoldTime = [holdTime intValue];
+    [self.delegate dataChanged:cookingData];
 }
 
 - (void)holdTimerSet
 {
-    [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
+    cookingData.targetMinTime = [self.currentParagon.session.currentStage.cookTimeMinimum doubleValue];
+    cookingData.targetMaxTime = [self.currentParagon.session.currentStage.cookTimeMaximum doubleValue];
+    [self.delegate dataChanged:cookingData];
 }
 
 - (void)cookModeChanged:(ParagonCookMode)cookMode
@@ -342,13 +354,16 @@
 
 -(void)currentPowerLevelChanged:(NSNumber *)powerLevel
 {
-    [self.delegate burnerLevelChanged:[powerLevel doubleValue]];
+    cookingData.burnerLevel = [powerLevel doubleValue];
+    [self.delegate dataChanged:cookingData];
 }
 
 - (void)cookConfigurationChanged
 {
-    [self.delegate targetTemperatureChanged:[self.currentParagon.session.currentStage.targetTemperature doubleValue]];
-    [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
+    cookingData.targetTemp = [self.currentParagon.session.currentStage.targetTemperature doubleValue];
+    cookingData.targetMinTime = [self.currentParagon.session.currentStage.cookTimeMinimum doubleValue];
+    cookingData.targetMaxTime = [self.currentParagon.session.currentStage.cookTimeMaximum doubleValue];
+    [self.delegate dataChanged:cookingData];
 }
 
 - (void)currentStageIndexChanged:(NSNumber *)stage
@@ -357,10 +372,10 @@
     [controller setHeaderText:[stage stringValue] withFrameRect:CGRectMake(0, 0, 120, 30)];
     
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
-    [self.delegate targetTemperatureChanged:[self.currentParagon.session.currentStage.targetTemperature doubleValue]];
-    [self.delegate targetTimeChanged:[self.currentParagon.session.currentStage.cookTimeMinimum doubleValue] withMax:[self.currentParagon.session.currentStage.cookTimeMaximum doubleValue]];
-    
-    [self.delegate directionLabelsChangedWithPrepDirections:self.currentParagon.session.currentStage.cookingPrepLabel andCookingDirections:self.currentParagon.session.currentStage.cookingLabel];
+    cookingData.targetTemp =[self.currentParagon.session.currentStage.targetTemperature doubleValue];
+    cookingData.targetMinTime = [self.currentParagon.session.currentStage.cookTimeMinimum doubleValue];
+    cookingData.targetMaxTime = [self.currentParagon.session.currentStage.cookTimeMaximum doubleValue];
+    [self.delegate dataChanged:cookingData];
 }
 
 @end

@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "FSTParagon.h"
+#import "CookingStateModel.h"
 
 @interface FSTContainerViewController : UIViewController
 
 -(void) segueToStateWithIdentifier:(NSString*)identifier sender:(id)sender; // called at embed segue, switch to one of the child view controllers
 
-@property (nonatomic, weak) FSTParagon* paragon;
+@property (nonatomic, weak) CookingStateModel* cookingData;
+
 @end

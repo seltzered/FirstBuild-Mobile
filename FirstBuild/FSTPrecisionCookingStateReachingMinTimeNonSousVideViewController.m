@@ -44,11 +44,7 @@
 - (void) updatePercent {
     [super updatePercent];
 
-    self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMinTime - self.remainingHoldTime) toTime:self.targetMinTime];
-}
-
--(void) targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
-    [super targetTimeChanged:minTime withMax:maxTime];
+    self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.cookingData.targetMinTime - self.cookingData.remainingHoldTime) toTime:self.cookingData.targetMinTime];
 }
 
 -(void) updateLabels {
@@ -57,20 +53,20 @@
     UIFont* smallFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
     NSDictionary* smallFontDict = [NSDictionary dictionaryWithObject:smallFont forKey:NSFontAttributeName];
     
-    double currentTemperature = self.currentTemp;
+    double currentTemperature = self.cookingData.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict];
 
     
     [self.currentTempLabel setAttributedText:currentTempString];
-    if (self.remainingHoldTime == 1)
+    if (self.cookingData.remainingHoldTime == 1)
     {
-        [self.endTimeLabel setText:[NSString stringWithFormat:@"%d min", (int)self.remainingHoldTime]];
+        [self.endTimeLabel setText:[NSString stringWithFormat:@"%d min", (int)self.cookingData.remainingHoldTime]];
     }
     else
     {
-        [self.endTimeLabel setText:[NSString stringWithFormat:@"%d mins", (int)self.remainingHoldTime]];
+        [self.endTimeLabel setText:[NSString stringWithFormat:@"%d mins", (int)self.cookingData.remainingHoldTime]];
     }
-    self.directionsLabel.text = self.directions;
+    self.directionsLabel.text = self.cookingData.directions;
 
 }
 

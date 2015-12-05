@@ -40,7 +40,7 @@
 
 -(void) updateLabels {
     [super updateLabels];
-    if (self.currentTemp > self.targetTemp)
+    if (self.cookingData.currentTemp > self.cookingData.targetTemp)
     {
         self.cookingStatusLabel.text = @"COOLING";
     }
@@ -54,16 +54,16 @@
     UIFont* bigFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:44.0];
     NSDictionary* bigFontDict = [NSDictionary dictionaryWithObject:bigFont forKey:NSFontAttributeName];
 
-    double currentTemperature = self.currentTemp;
+    double currentTemperature = self.cookingData.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: bigFontDict]; // with degrees fareinheit appended
     
-    double targetTemperature = self.targetTemp;
+    double targetTemperature = self.cookingData.targetTemp;
     NSMutableAttributedString *targetTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Target: %0.0f %@", targetTemperature, @"\u00b0 F"] attributes: smallFontDict];
     
     [self.targetLabel setAttributedText:targetTempString];
     [self.currentLabel setAttributedText:currentTempString];
     
-    [self.directionsLabel setText:self.directions];
+    [self.directionsLabel setText:self.cookingData.directions];
 }
 
 @end

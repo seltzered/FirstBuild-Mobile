@@ -61,9 +61,9 @@
     // if target is greater than current then we are heating, thus
     // preheating, otherwise we are cooling down to temperature
     // and need to calculate the % diff
-    if (_targetTemp > _currentTemp)
+    if (self.cookingData.targetTemp > self.cookingData.currentTemp)
     {
-        progress = (_currentTemp/_targetTemp);
+        progress = (self.cookingData.currentTemp/self.cookingData.targetTemp);
         
         if ((progress * 100) > 100)
         {
@@ -74,9 +74,9 @@
     {
         if (!_startingTemp)
         {
-            _startingTemp = _currentTemp;
+            _startingTemp = self.cookingData.currentTemp;
         }
-        progress = 1 - (_startingTemp - _currentTemp)/(_startingTemp - _targetTemp);
+        progress = 1 - (_startingTemp - self.cookingData.currentTemp)/(_startingTemp - self.cookingData.targetTemp);
         if (progress <=0)
         {
             progress = 0.0f; //complete
@@ -93,41 +93,9 @@
 
 #pragma mark - <CookingViewControllerDelegate>
 
--(void)targetTemperatureChanged:(CGFloat)targetTemperature {
-    self.targetTemp = targetTemperature;
-    [self updatePercent]; // write new value and update layer, happens for every variable
-    [self updateLabels]; // same for the labels
-}
-
--(void)currentTemperatureChanged:(CGFloat)currentTemperature {
-    self.currentTemp = currentTemperature;
-    [self updatePercent];
-    [self updateLabels];
-}
-
--(void)targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval) maxTime  {
-    self.targetMinTime = minTime;
-    self.targetMaxTime = maxTime;
-    [self updatePercent];
-    [self updateLabels];
-}
-
--(void)remainingHoldTimeChanged:(NSTimeInterval)remainingHoldTime {
-    self.remainingHoldTime = remainingHoldTime;
-    [self updatePercent];
-    [self updateLabels];
-}
-
--(void)burnerLevelChanged:(CGFloat)burnerLevel {
-    self.burnerLevel = burnerLevel;
-    [self updatePercent];
-    [self updateLabels];
-}
-
--(void)directionLabelsChangedWithPrepDirections:(NSString *)prepDirections andCookingDirections:(NSString *)cookingDirections
+-(void)dataChanged:(CookingStateModel *)data
 {
-    self.directions = cookingDirections;
-    self.stagePrep = prepDirections;
+    [self updatePercent];
     [self updateLabels];
 }
 

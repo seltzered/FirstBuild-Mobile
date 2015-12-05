@@ -46,12 +46,8 @@
     [super updatePercent];
     if (endTime)
     {
-        self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMinTime - self.remainingHoldTime) toTime:self.targetMinTime];
+        self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.cookingData.targetMinTime - self.cookingData.remainingHoldTime) toTime:self.cookingData.targetMinTime];
     }
-}
-
--(void) targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
-    [super targetTimeChanged:minTime withMax:maxTime];
 }
 
 -(void) updateLabels {
@@ -62,14 +58,14 @@
   
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
-    double currentTemperature = self.currentTemp;
+    double currentTemperature = self.cookingData.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
     
     // set only once. when the remainingTime and targetMinTime has been set.
-    if (!endTime && self.remainingHoldTime > 0 && self.targetMinTime > 0)
+    if (!endTime && self.cookingData.remainingHoldTime > 0 && self.cookingData.targetMinTime > 0)
     {
         // want a constant target time that sets once
-        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60];
+        endTime = [NSDate dateWithTimeIntervalSinceNow:(self.cookingData.remainingHoldTime)*60];
     }
 
     [self.currentTempLabel setAttributedText:currentTempString];

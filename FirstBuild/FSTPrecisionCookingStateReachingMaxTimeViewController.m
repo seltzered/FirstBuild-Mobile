@@ -44,18 +44,13 @@
     
     if (endMaxTime)
     {
-        self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.targetMaxTime - self.remainingHoldTime) toTime:self.targetMaxTime];
+        self.circleProgressView.progressLayer.percent = [self calculatePercent:(self.cookingData.targetMaxTime - self.cookingData.remainingHoldTime) toTime:self.cookingData.targetMaxTime];
     }
 }
 
 -(void)dealloc
 {
     DLog(@"dealloc");
-}
-
--(void)targetTimeChanged:(NSTimeInterval)minTime withMax:(NSTimeInterval)maxTime {
-    [super targetTimeChanged:minTime withMax:maxTime];
-
 }
 
 -(void) updateLabels {
@@ -75,10 +70,10 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     // only when the elapsedTime and targetMinTime has been set.
-    if (!endMaxTime && self.remainingHoldTime > 0 && self.targetMaxTime > 0)
+    if (!endMaxTime && self.cookingData.remainingHoldTime > 0 && self.cookingData.targetMaxTime > 0)
     {
         // want a constant target time that sets once
-        endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.remainingHoldTime)*60];
+        endMaxTime = [NSDate dateWithTimeIntervalSinceNow:(self.cookingData.remainingHoldTime)*60];
     }
 
     [dateFormatter setDateFormat:@"h:mm a"];
@@ -88,10 +83,18 @@
         [self.italicTimeLabel setAttributedText:maxTimeNotice];
     }
     
-    double currentTemperature = self.currentTemp;
+    double currentTemperature = self.cookingData.currentTemp;
     NSMutableAttributedString *currentTempString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%0.0f %@", currentTemperature, @"\u00b0 F"] attributes: smallFontDict]; // with degrees fareinheit appended
     [self.currentTempLabel setAttributedText:currentTempString];
     
+}
+
+#pragma mark - <FSTCookingViewControllerDelegate>
+
+-(void)dataChanged:(CookingStateModel *)data
+{
+    [self updateLabels];
+    [self updatePercent];
 }
 
 @end

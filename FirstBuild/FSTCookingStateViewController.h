@@ -12,21 +12,7 @@
 
 @interface FSTCookingStateViewController : UIViewController<FSTCookingViewControllerDelegate>
 
-@property (nonatomic) NSTimeInterval remainingHoldTime;
-
-@property (nonatomic) NSTimeInterval targetMinTime;
-
-@property (nonatomic) NSTimeInterval targetMaxTime;
-
-@property (nonatomic, weak) NSString* directions;
-
-@property (nonatomic, weak) NSString* stagePrep;
-
-@property (nonatomic) CGFloat currentTemp;
-
-@property (nonatomic) CGFloat targetTemp;
-
-@property (nonatomic) CGFloat burnerLevel;
+@property (nonatomic, weak) CookingStateModel* cookingData;
 
 -(void)updatePercent; // implementation changes for each subclass
 

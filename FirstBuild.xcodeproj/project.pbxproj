@@ -112,6 +112,7 @@
 		5B4A76F11BFF809800018281 /* FSTBeefSousVideRoastRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B4A76F01BFF809800018281 /* FSTBeefSousVideRoastRecipes.m */; };
 		5B5495C41BDFFD410057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5B5495C31BDFFD050057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota */; };
 		5B600BA11C1217FA00120338 /* FSTStageInstructionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B600BA01C1217FA00120338 /* FSTStageInstructionsViewController.m */; };
+		5B600BA41C1351A800120338 /* CookingStateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B600BA31C1351A800120338 /* CookingStateModel.m */; };
 		5B6364B51BC2E23900322D4F /* hoodie.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6364B41BC2E23900322D4F /* hoodie.storyboard */; };
 		5B6364B81BC2E27000322D4F /* FSTHoodie.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6364B71BC2E27000322D4F /* FSTHoodie.m */; };
 		5B6364BB1BC2E6CA00322D4F /* FSTHoodieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B6364BA1BC2E6CA00322D4F /* FSTHoodieViewController.m */; };
@@ -399,6 +400,8 @@
 		5B5495C31BDFFD050057B4B4 /* paragon_master.bin.signed.01.01.00.00.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = paragon_master.bin.signed.01.01.00.00.ota; sourceTree = "<group>"; };
 		5B600B9F1C1217FA00120338 /* FSTStageInstructionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTStageInstructionsViewController.h; sourceTree = "<group>"; };
 		5B600BA01C1217FA00120338 /* FSTStageInstructionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTStageInstructionsViewController.m; sourceTree = "<group>"; };
+		5B600BA21C1351A800120338 /* CookingStateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CookingStateModel.h; sourceTree = "<group>"; };
+		5B600BA31C1351A800120338 /* CookingStateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CookingStateModel.m; sourceTree = "<group>"; };
 		5B63646D1BC2C7D800322D4F /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		5B63646F1BC2C81000322D4F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5B6364B41BC2E23900322D4F /* hoodie.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = hoodie.storyboard; sourceTree = "<group>"; };
@@ -1269,6 +1272,8 @@
 				5B9A6F4F1B50173F00BDD727 /* FSTBurner.m */,
 				5B059F821C0E2AC20072AAB5 /* FSTParagonUserInformation.h */,
 				5B059F831C0E2AC20072AAB5 /* FSTParagonUserInformation.m */,
+				5B600BA21C1351A800120338 /* CookingStateModel.h */,
+				5B600BA31C1351A800120338 /* CookingStateModel.m */,
 			);
 			name = cooktop;
 			sourceTree = "<group>";
@@ -1687,6 +1692,7 @@
 				51A9D0341B73D3B7000AE293 /* FSTPrecisionCookingStateTemperatureReachedLayer.m in Sources */,
 				5BA3A9771B3475EF00E51C51 /* FSTBleCommissioningViewController.m in Sources */,
 				5B4A76AB1BFF72D400018281 /* FSTBeefSteakToughSousVideRecipe.m in Sources */,
+				5B600BA41C1351A800120338 /* CookingStateModel.m in Sources */,
 				5BFC3F871B66764B00A616D4 /* FSTRevealViewController.m in Sources */,
 				5B059F8A1C0FB36F0072AAB5 /* FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController.m in Sources */,
 				5BCBBA041B03E92300B8E043 /* FSTSousVideRecipes.m in Sources */,

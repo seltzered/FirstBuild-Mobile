@@ -81,7 +81,7 @@ static const uint8_t STAGE_SIZE = 8;
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicRemainingHoldTime,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicUserSelectedCookMode,
             [[NSNumber alloc] initWithBool:0], FSTCharacteristicCurrentPowerLevel,
-                                   nil]; 
+                                   nil];
         
         self.session.cookState = FSTParagonCookStateOff;
         self.session.cookMode = FSTCookingStateOff;
