@@ -100,7 +100,6 @@
 
 -(void)transitionToCurrentCookMode
 {
-
     NSString* stateIdentifier = nil;
     
     switch (self.currentParagon.session.cookMode) {

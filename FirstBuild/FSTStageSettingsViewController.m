@@ -131,7 +131,8 @@ CGFloat const SEL_HEIGHT_S = 70;
     [self updateSpeedLabel];
     if (![self.can_edit boolValue]) {
         // in display mode
-        self.view.userInteractionEnabled = NO;
+//        self.view.userInteractionEnabled = NO;
+        self.contentView.userInteractionEnabled = NO;
         
         //label backgrounds
         self.timeButtonWrapper.backgroundColor = [UIColor whiteColor];

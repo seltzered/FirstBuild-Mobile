@@ -13,7 +13,9 @@
 @interface FSTStageSettingsViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource, FSTStagePickerManagerDelegate, UITextViewDelegate>
 
 @property (nonatomic, weak) FSTParagonCookingStage* activeStage;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (nonatomic, strong) NSNumber* can_edit;
 // boolean to set up the view controller for editing or display
 @end
