@@ -1443,7 +1443,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-Qf-cjt" userLabel="target temp">
-                                                <rect key="frame" x="230" y="249" width="140" height="22"/>
+                                                <rect key="frame" x="230" y="249" width="140" height="21.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="140" id="iR5-yd-ccY"/>
                                                 </constraints>
@@ -1452,7 +1452,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4q-xE-spK">
-                                                <rect key="frame" x="268" y="289" width="65" height="22"/>
+                                                <rect key="frame" x="268" y="289" width="64.5" height="21.5"/>
                                                 <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1543,11 +1543,20 @@
                                     <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="24"/>
                                 </variation>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0Y-4q-mtF">
+                                <rect key="frame" x="0.0" y="590" width="600" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Eho-uD-hb8" firstAttribute="height" secondItem="5hI-VW-2lv" secondAttribute="height" id="1cP-h5-t8f"/>
+                            <constraint firstItem="q0Y-4q-mtF" firstAttribute="centerX" secondItem="5hI-VW-2lv" secondAttribute="centerX" id="4Na-GB-8ZP"/>
                             <constraint firstAttribute="centerX" secondItem="aMu-Ed-3Sd" secondAttribute="centerX" id="7yL-Cr-JeH"/>
                             <constraint firstAttribute="centerX" secondItem="Eho-uD-hb8" secondAttribute="centerX" id="ESz-nH-Y1s"/>
+                            <constraint firstItem="q0Y-4q-mtF" firstAttribute="width" secondItem="5hI-VW-2lv" secondAttribute="width" id="Kmc-jn-Fw7"/>
+                            <constraint firstItem="PEN-DM-b8U" firstAttribute="top" secondItem="q0Y-4q-mtF" secondAttribute="bottom" constant="10" id="PKy-hB-Bv0"/>
                             <constraint firstItem="we0-iW-tbm" firstAttribute="top" secondItem="K6k-Et-GaN" secondAttribute="bottom" constant="55" id="PpI-OQ-zw0"/>
                             <constraint firstItem="aMu-Ed-3Sd" firstAttribute="width" secondItem="5hI-VW-2lv" secondAttribute="width" id="XE8-8L-Y41"/>
                             <constraint firstAttribute="centerY" secondItem="Eho-uD-hb8" secondAttribute="centerY" id="XFN-OG-Zfc"/>
@@ -1561,12 +1570,13 @@
                         <outlet property="circleProgressView" destination="ONX-nm-WVn" id="j3J-ec-Dcw"/>
                         <outlet property="cookingStatusLabel" destination="aMu-Ed-3Sd" id="hjA-Fg-maB"/>
                         <outlet property="currentLabel" destination="6L2-mW-QwO" id="CQT-mA-nVD"/>
+                        <outlet property="directionsLabel" destination="q0Y-4q-mtF" id="DgO-1q-yKy"/>
                         <outlet property="targetLabel" destination="T4q-Qf-cjt" id="0fB-7F-NgU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2mr-Ty-pnw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1595" y="2273"/>
+            <point key="canvasLocation" x="1601" y="2257"/>
         </scene>
         <!--Custom Cook Settings View Controller-->
         <scene sceneID="gJg-qu-UJ0">
@@ -5577,7 +5587,7 @@
                     <connections>
                         <outlet property="circleProgressView" destination="jUp-9q-QZZ" id="uIX-Kw-Waf"/>
                         <outlet property="currentLabel" destination="fIs-wX-OCF" id="iqu-z1-Uj7"/>
-                        <outlet property="directionsLabel" destination="7J1-A0-niW" id="Su3-LD-xfm"/>
+                        <outlet property="directionsLabel" destination="7J1-A0-niW" id="EKU-QR-3rw"/>
                         <outlet property="targetLabel" destination="LqM-YA-hAe" id="ceY-yf-XtT"/>
                     </connections>
                 </viewController>
