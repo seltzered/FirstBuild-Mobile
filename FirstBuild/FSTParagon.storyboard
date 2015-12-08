@@ -1980,8 +1980,11 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Provide some directions." translatesAutoresizingMaskIntoConstraints="NO" id="4tP-bf-iIa" userLabel="instructionsText">
-                                <rect key="frame" x="34" y="95" width="532" height="445"/>
+                                <rect key="frame" x="34" y="95" width="532" height="2000"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="0.45000000000000001" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2000" id="9FH-4K-UJf"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
@@ -2011,6 +2014,7 @@
                                 <exclude reference="Gl3-TQ-oBN"/>
                                 <exclude reference="LdK-V2-0dm"/>
                                 <exclude reference="NIb-eS-rDc"/>
+                                <exclude reference="hvY-3X-Akq"/>
                             </mask>
                         </variation>
                     </view>
@@ -2075,7 +2079,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GBW-xn-omb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-625" y="4608"/>
+            <point key="canvasLocation" x="-681" y="4724"/>
         </scene>
         <!--Stage Table View Controller-->
         <scene sceneID="Paw-J8-qsG">
@@ -2538,7 +2542,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="83" y="4608"/>
+            <point key="canvasLocation" x="75" y="4784"/>
         </scene>
         <!--Stage Settings View Controller-->
         <scene sceneID="9cH-Oy-A1t">
@@ -2794,20 +2798,20 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GP-uJ-WRK">
-                                                <rect key="frame" x="180" y="330.5" width="240" height="1"/>
+                                                <rect key="frame" x="180" y="330" width="240" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="DZv-Xo-alm"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cooking Instructions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mK-TS-71X">
-                                                <rect key="frame" x="15" y="361.5" width="167" height="21.5"/>
+                                                <rect key="frame" x="15" y="361" width="167" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ar4-76-cGw">
-                                                <rect key="frame" x="15" y="392.5" width="570" height="50"/>
+                                                <rect key="frame" x="15" y="392" width="570" height="50"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="9gk-35-ifg"/>
@@ -2816,13 +2820,13 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage Preparations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnV-Ay-K53">
-                                                <rect key="frame" x="15" y="452.5" width="154.5" height="21.5"/>
+                                                <rect key="frame" x="15" y="452" width="154.5" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0RV-2A-itb" userLabel="stage text view">
-                                                <rect key="frame" x="15" y="484.5" width="570" height="250"/>
+                                                <rect key="frame" x="15" y="484" width="570" height="250"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="250" id="ZpL-yN-nmx"/>
@@ -3084,8 +3088,11 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write down your ingredients." translatesAutoresizingMaskIntoConstraints="NO" id="FHq-an-ZIx">
-                                <rect key="frame" x="34" y="95" width="532" height="445"/>
+                                <rect key="frame" x="34" y="95" width="532" height="1000"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="0.45000000000000001" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1000" id="ycu-wS-RWe"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
@@ -3115,6 +3122,7 @@
                                 <exclude reference="INB-Vm-eiK"/>
                                 <exclude reference="JpL-at-jFH"/>
                                 <exclude reference="qxB-Vi-DUL"/>
+                                <exclude reference="FKb-WX-pB5"/>
                             </mask>
                         </variation>
                     </view>
@@ -4362,10 +4370,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97P-Nq-vMa" userLabel="Recipe View">
-                                        <rect key="frame" x="0.0" y="230" width="600" height="500"/>
+                                        <rect key="frame" x="0.0" y="230" width="600" height="2000"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VFQ-P8-Bex">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="2000"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -4386,7 +4394,7 @@
                                             <constraint firstAttribute="width" secondItem="VFQ-P8-Bex" secondAttribute="width" id="8mD-CP-0JU"/>
                                             <constraint firstAttribute="centerX" secondItem="VFQ-P8-Bex" secondAttribute="centerX" id="Jld-Mn-wC1"/>
                                             <constraint firstAttribute="centerY" secondItem="VFQ-P8-Bex" secondAttribute="centerY" id="O3B-re-ysZ"/>
-                                            <constraint firstAttribute="height" constant="500" id="Vvc-Mh-r6F"/>
+                                            <constraint firstAttribute="height" constant="2000" id="Vvc-Mh-r6F"/>
                                             <constraint firstAttribute="height" constant="500" id="b5N-vw-ccQ"/>
                                             <constraint firstAttribute="height" secondItem="VFQ-P8-Bex" secondAttribute="height" id="eFy-R4-Hab"/>
                                         </constraints>
@@ -4645,14 +4653,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="429" height="452"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alV-dq-zvx">
-                                <rect key="frame" x="0.0" y="0.0" width="429" height="536"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alV-dq-zvx">
+                                <rect key="frame" x="0.0" y="0.0" width="429" height="452"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKA-SR-Zs7" userLabel="Recipe View">
-                                        <rect key="frame" x="0.0" y="230" width="429" height="500"/>
+                                        <rect key="frame" x="0.0" y="230" width="429" height="2000"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPo-Oy-tpz">
-                                                <rect key="frame" x="0.0" y="0.0" width="429" height="500"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="429" height="2000"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="600" id="p9S-TS-tcY"/>
                                                 </constraints>
@@ -4670,7 +4678,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" secondItem="DPo-Oy-tpz" secondAttribute="height" id="2dz-yc-4VI"/>
                                             <constraint firstAttribute="height" constant="500" id="7d2-lw-kya"/>
-                                            <constraint firstAttribute="height" constant="500" id="JVM-qr-Dop"/>
+                                            <constraint firstAttribute="height" constant="2000" id="JVM-qr-Dop"/>
                                             <constraint firstAttribute="width" secondItem="DPo-Oy-tpz" secondAttribute="width" id="cdG-qJ-SkJ"/>
                                             <constraint firstAttribute="centerY" secondItem="DPo-Oy-tpz" secondAttribute="centerY" id="hZH-UG-fyY"/>
                                             <constraint firstAttribute="centerX" secondItem="DPo-Oy-tpz" secondAttribute="centerX" id="htl-s1-67S"/>
@@ -4681,8 +4689,8 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cjC-LR-hGS" userLabel="images">
-                                        <rect key="frame" x="0.0" y="0.0" width="429" height="152"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjC-LR-hGS" userLabel="images">
+                                        <rect key="frame" x="0.0" y="0.0" width="429" height="150"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fQ5-YU-d4V" userLabel="border" customClass="FSTDottedBorderView">
                                                 <rect key="frame" x="8" y="7" width="416" height="135"/>
@@ -4694,8 +4702,8 @@
                                                     <constraint firstAttribute="width" secondItem="WaG-RJ-4cG" secondAttribute="height" multiplier="15:8" id="I5c-4Q-pSJ"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A2I-VU-QBg">
-                                                <rect key="frame" x="0.0" y="0.0" width="429" height="152"/>
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A2I-VU-QBg">
+                                                <rect key="frame" x="0.0" y="0.0" width="429" height="150"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="DN4-3G-X0k"/>
@@ -4737,7 +4745,7 @@
                                         </connections>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter recipe's name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8o-Gf-RSy">
-                                        <rect key="frame" x="28" y="165" width="542" height="30"/>
+                                        <rect key="frame" x="20" y="165" width="387" height="30"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.12" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="QB3-Sv-iLi"/>
@@ -4785,8 +4793,8 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dbI-mH-Ms2" userLabel="cookButtonHolderView">
-                                <rect key="frame" x="0.0" y="397" width="429" height="56"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbI-mH-Ms2" userLabel="cookButtonHolderView">
+                                <rect key="frame" x="0.0" y="397" width="429" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    COOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8b-Iq-NMU" customClass="FSTLabel">
                                         <rect key="frame" x="0.0" y="15" width="429" height="24"/>
@@ -6040,8 +6048,8 @@
         <segue reference="lvL-CX-hJF"/>
         <segue reference="jGl-td-wfM"/>
         <segue reference="vH5-uL-Cgr"/>
-        <segue reference="ETw-Ro-4Or"/>
         <segue reference="y95-r5-gaz"/>
+        <segue reference="ETw-Ro-4Or"/>
         <segue reference="Lsb-5g-4vw"/>
     </inferredMetricsTieBreakers>
 </document>

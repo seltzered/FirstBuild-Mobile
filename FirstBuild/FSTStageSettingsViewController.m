@@ -273,8 +273,6 @@ CGFloat const SEL_HEIGHT_S = 70;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-//TODO: the recipes need to actually save these stages
-
 #pragma mark - Text View delegate
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

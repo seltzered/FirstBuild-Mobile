@@ -34,6 +34,7 @@
     
     // some crucial data objects in the children
     FSTStagePickerManager* childPickerManager;
+    
 }
 
 typedef enum variableSelections {
@@ -57,6 +58,7 @@ VariableSelection _selection;
 
 
 #pragma mark - keyboard events
+
 - (void)registerKeyboardNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -64,6 +66,7 @@ VariableSelection _selection;
 }
 
 - (void)keyboardWasShown:(NSNotification*)notification {
+    
     NSDictionary* info = [notification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     UIEdgeInsets editScrollInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);

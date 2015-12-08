@@ -18,6 +18,9 @@
 
 @property (weak, nonatomic) IBOutlet FSTSavedRecipeUnderLineView *underLineView;
 
+@property (nonatomic, assign) id currentResponder;
+
+
 @end
 
 @implementation FSTSavedRecipeInstructionsViewController
@@ -26,8 +29,10 @@
     [super viewDidLoad];
     self.textView.delegate = self;
     self.textView.text = self.instructions;
-    //self.tabBarController.tabBar.frame.size
-    // Do any additional setup after loading the view.
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
+    [singleTap setNumberOfTapsRequired:1];
+    [singleTap setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:singleTap];
 }
 
 -(void)viewWillLayoutSubviews {
@@ -43,15 +48,14 @@
 
 #pragma mark - Text View delegate
 
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    } else {
-        return YES;
-    }
-}
-
+//-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    if ([text isEqualToString:@"\n"]) {
+//        [textView resignFirstResponder];
+//        return NO;
+//    } else {
+//        return YES;
+//    }
+//}
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView {
     // must set active recipe when parent segues
@@ -59,7 +63,15 @@
     return YES;
 }
 
+- (void)resignOnTap:(id)iSender
+{
+    [self.currentResponder resignFirstResponder];
+}
 
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.currentResponder = textView;
+}
 
 /*
 #pragma mark - Navigation

@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet FSTSavedRecipeUnderLineView *underLineView;
 
+@property (nonatomic, assign) id currentResponder;
 
 @end
 
@@ -27,10 +28,10 @@
     [super viewDidLoad];
     self.textView.delegate = self;
     self.textView.text = self.ingredients;
-    //UIImage* selectedImage = [UIImage imageNamed:@"Paragon_Mark_Red"];//[FSTColorImage imageWithColor:[UIColor orangeColor] inRect:CGRectMake(0, 0, 30, 24)];
-    //[self.tabBarItem setSelectedImage:selectedImage];
-    //self.tabBarItem.imageInsets = UIEdgeInsetsMake(12, 0, -12, 0); // trying to shift the whole thing down.
-    //title should be set in storyboard
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resignOnTap:)];
+    [singleTap setNumberOfTapsRequired:1];
+    [singleTap setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:singleTap];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,15 +56,24 @@
 
 #pragma mark - Text View delegate
 
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    } else {
-        return YES;
-    }
+//-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+//    if ([text isEqualToString:@"\n"]) {
+//        [textView resignFirstResponder];
+//        return NO;
+//    } else {
+//        return YES;
+//    }
+//}
+
+- (void)resignOnTap:(id)iSender
+{
+    [self.currentResponder resignFirstResponder];
 }
 
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.currentResponder = textView;
+}
 
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView {
     self.ingredients = [NSMutableString stringWithString:textView.text];
