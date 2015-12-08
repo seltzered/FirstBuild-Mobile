@@ -119,7 +119,7 @@ VariableSelection _selection;
             ((FSTSavedRecipeIngredientsViewController*)vc).ingredients = self.activeRecipe.ingredients; // set the ingredients property for when it loads
             // ingredients view should be the first one in the array (set it before it is visible)
         } else if ([vc isKindOfClass:[FSTSavedRecipeInstructionsViewController class]]) {
-            ((FSTSavedRecipeInstructionsViewController*)vc).instructions = self.activeRecipe.note; // this can be set later in view did load
+            ((FSTSavedRecipeInstructionsViewController*)vc).instructions = self.activeRecipe.instructions; // this can be set later in view did load
         }
     }
 }

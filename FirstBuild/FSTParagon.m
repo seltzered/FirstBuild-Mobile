@@ -810,7 +810,17 @@ static const uint8_t STAGE_SIZE = 8;
         }
         else if(self.session.cookState == FSTParagonCookStateReady)
         {
-            self.session.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
+            // if we are in a multi-stage recipe then we need to automatically start the timer
+            // this is because on the paragon for the first stage of multi-stage recipe it
+            // requires the hold timer to be started
+            if ([self.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildMultiStage)
+            {
+                self.session.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
+            }
+            else
+            {
+                [self startTimerForCurrentStage];
+            }
         }
         else if(self.session.cookState == FSTParagonCookStateCooking)
         {
@@ -1052,10 +1062,6 @@ static const uint8_t STAGE_SIZE = 8;
         NSLog(@"\t stage %i: tartmp %@, mint %@, maxt %@, maxpwr %@, trans %@", i+1, stage.targetTemperature, stage.cookTimeMinimum, stage.cookTimeMaximum, stage.maxPowerLevel, stage.automaticTransition);
 
     }
-    NSLog(@"current stage instructions: \n\t%@", self.session.currentStage.cookingLabel);
-    NSLog(@"current stage prep instructions: \n\t%@", self.session.currentStage.cookingPrepLabel);
-    NSLog(@"-----------------------------------------------------");
-    
 }
 #endif
 

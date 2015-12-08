@@ -26,6 +26,7 @@ typedef enum {
 @property (nonatomic, strong) NSNumber* recipeId;
 @property (nonatomic, strong) NSMutableString* note;
 @property (nonatomic, strong) NSMutableString* ingredients;
+@property (nonatomic, strong) NSMutableString* instructions;
 @property (nonatomic, strong) UIImageView* photo;
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, strong) NSMutableArray* paragonCookingStages;

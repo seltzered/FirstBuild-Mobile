@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "FSTLocalRecipeCreator.h"
 
 #ifdef CHILLHUB
 #import <RKMIMETypes.h>
@@ -42,6 +43,9 @@
     if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     }
+    
+    // creates and load recipes
+    [FSTLocalRecipeCreator sharedInstance];
     
    //[[NSUserDefaults standardUserDefaults]removeObjectForKey:@"ble-devices"];
     return true;

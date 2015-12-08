@@ -15,6 +15,7 @@
         self.recipeId = [decoder decodeObjectForKey:@"recipeId"];
         self.friendlyName = [decoder decodeObjectForKey:@"friendlyName"];
         self.note = [decoder decodeObjectForKey:@"note"];
+        self.instructions = [decoder decodeObjectForKey:@"instructions"];
         self.ingredients = [decoder decodeObjectForKey:@"ingredients"];
         self.photo = [decoder decodeObjectForKey:@"photo"];
         self.paragonCookingStages = [decoder decodeObjectForKey:@"paragonCookingStages"];
@@ -36,6 +37,7 @@
     [encoder encodeObject:self.recipeId forKey:@"recipeId"];
     [encoder encodeObject:self.friendlyName forKey:@"friendlyName"];
     [encoder encodeObject:self.note forKey:@"note"];
+    [encoder encodeObject:self.instructions forKey:@"instructions"];
     [encoder encodeObject:self.ingredients forKey:@"ingredients"];
     [encoder encodeObject:self.photo forKey:@"photo"];
     [encoder encodeObject:self.paragonCookingStages forKey:@"paragonCookingStages"];
