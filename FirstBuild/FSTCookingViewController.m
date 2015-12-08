@@ -61,24 +61,37 @@
     FSTSavedRecipeManager* recipeManager = [FSTSavedRecipeManager sharedInstance];
     FSTRecipe* activeRecipeFromLocalDatabase = [recipeManager getRecipeForId:self.currentParagon.session.activeRecipe.recipeId];
     FSTParagonCookingStage* localDbStage;
+    FSTParagonCookingStage* localDbNextStage;
+    uint8_t trueIndex ;
     if (self.currentParagon.session.currentStageIndex==0)
     {
-        localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[0];
+        trueIndex = 0;
     }
     else
     {
-        localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[self.currentParagon.session.currentStageIndex-1];
+        trueIndex = self.currentParagon.session.currentStageIndex-1;
     }
+    
+    localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex];
+    localDbNextStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex+1];
     
     if (!localDbStage)
     {
         NSLog(@">>>>>>>>>> NO STAGE FOR THIS RECIPE IN DB <<<<<<<<<<<<<<<");
-        
     }
     else
     {
         cookingData.directions = localDbStage.cookingLabel;
-        cookingData.stagePrep = localDbStage.cookingPrepLabel;
+    }
+    
+    
+    if (!localDbNextStage)
+    {
+        NSLog(@"no next stage available in order to set stage prep for next stage");
+    }
+    else
+    {
+        cookingData.stagePrep = localDbNextStage.cookingPrepLabel;
     }
 }
 

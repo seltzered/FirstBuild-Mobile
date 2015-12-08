@@ -222,7 +222,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     // the remaining hold time is not reset until after the first push
     // lets set it here
-    self.session.remainingHoldTime = [[NSNumber alloc] initWithInt:0];
+    self.session.remainingHoldTime = @0;
     
     if ([self.delegate respondsToSelector:@selector(remainingHoldTimeChanged:)])
     {
@@ -815,11 +815,11 @@ static const uint8_t STAGE_SIZE = 8;
             // requires the hold timer to be started
             if ([self.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildMultiStage)
             {
-                self.session.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
+                [self startTimerForCurrentStage];
             }
             else
             {
-                [self startTimerForCurrentStage];
+                self.session.cookMode = FSTCookingStatePrecisionCookingTemperatureReached;
             }
         }
         else if(self.session.cookState == FSTParagonCookStateCooking)
