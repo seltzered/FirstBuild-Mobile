@@ -7,7 +7,7 @@
 //
 
 #import "FSTLocalRecipeCreator.h"
-#import "FSTRecipe.h"
+#import "FSTMultiStageRecipe.h"
 #import "FSTSavedRecipeManager.h"
 
 @implementation FSTLocalRecipeCreator
@@ -37,8 +37,13 @@
     // caramel
     //
     {
-        FSTRecipe* recipe = [FSTRecipe new];
-        FSTParagonCookingStage* stage;
+        FSTMultiStageRecipe* recipe = [FSTMultiStageRecipe new];
+        FSTParagonCookingStage* stage1;
+        FSTParagonCookingStage* stage2;
+        FSTParagonCookingStage* stage3;
+        FSTParagonCookingStage* stage4;
+        FSTParagonCookingStage* stage5;
+        
         recipe.recipeId = @1001;
         recipe.recipeType = [NSNumber numberWithInt:FSTRecipeTypeFirstBuildMultiStage];
         recipe.note = [NSMutableString stringWithString:@"Love at first bite"];
@@ -49,34 +54,34 @@
         recipe.friendlyName = [NSMutableString stringWithString:@"Caramel"];
         
         // stage 1
-        stage = [recipe addStage];
-        stage.cookTimeMinimum = @0;
-        stage.cookTimeMaximum = @0;
-        stage.cookingLabel = @"";
-        stage.cookingPrepLabel = @"";
-        stage.targetTemperature = @95;
-        stage.maxPowerLevel = @10;
-        stage.automaticTransition = @0;
+        stage1 = [recipe addStage];
+        stage1.cookTimeMinimum = @0;
+        stage1.cookTimeMaximum = @0;
+        stage1.cookingLabel = @"";
+        stage1.cookingPrepLabel = @"";
+        stage1.targetTemperature = @95;
+        stage1.maxPowerLevel = @10;
+        stage1.automaticTransition = @0;
         
         // stage 2
-        stage = [recipe addStage];
-        stage.cookTimeMinimum = @0;
-        stage.cookTimeMaximum = @0;
-        stage.cookingLabel = @"";
-        stage.cookingPrepLabel = @"";
-        stage.targetTemperature = @95;
-        stage.maxPowerLevel = @10;
-        stage.automaticTransition = @0;
+        stage2 = [recipe addStage];
+        stage2.cookTimeMinimum = @0;
+        stage2.cookTimeMaximum = @0;
+        stage2.cookingLabel = @"";
+        stage2.cookingPrepLabel = @"";
+        stage2.targetTemperature = @95;
+        stage2.maxPowerLevel = @10;
+        stage2.automaticTransition = @0;
         
         // stage 3
-        stage = [recipe addStage];
-        stage.cookTimeMinimum = @0;
-        stage.cookTimeMaximum = @0;
-        stage.cookingLabel = @"";
-        stage.cookingPrepLabel = @"";
-        stage.targetTemperature = @95;
-        stage.maxPowerLevel = @10;
-        stage.automaticTransition = @0;
+        stage3 = [recipe addStage];
+        stage3.cookTimeMinimum = @0;
+        stage3.cookTimeMaximum = @0;
+        stage3.cookingLabel = @"";
+        stage3.cookingPrepLabel = @"";
+        stage3.targetTemperature = @95;
+        stage3.maxPowerLevel = @10;
+        stage3.automaticTransition = @0;
         
         [[FSTSavedRecipeManager sharedInstance] saveRecipe:recipe];
     }

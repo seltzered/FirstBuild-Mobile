@@ -59,6 +59,7 @@
         
         [currentRecipeDictionary setObject:recipe forKey:recipe.recipeId];
         [self saveItemsToDefaults:[NSDictionary dictionaryWithDictionary:currentRecipeDictionary] key:@"Recipes"];
+//        currentRecipeDictionary = [NSMutableDictionary dictionaryWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:@"Recipes"]]];
     }
 }
 -(void)saveItemsToDefaults:(NSDictionary*)object key:(NSString*)key {
@@ -82,7 +83,8 @@
 }
 
 -(NSDictionary*)getSavedRecipes {
-    return [self loadItemsFromDefaultsWithKey: @"Recipes"];
+    //return [self loadItemsFromDefaultsWithKey: @"Recipes"];
+    return currentRecipeDictionary;
 } // need some way to check a new item against all the keys
 
 -(FSTRecipe*)getRecipeForId: (NSNumber*)recipeId
