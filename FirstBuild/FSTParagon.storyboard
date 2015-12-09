@@ -1243,8 +1243,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U1T-Fa-p7y">
-                                <rect key="frame" x="125" y="77" width="350" height="444"/>
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1T-Fa-p7y">
+                                <rect key="frame" x="125" y="78" width="350" height="444"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="Huj-z3-lxC">
                                         <variation key="heightClass=regular-widthClass=regular" constant="600"/>
@@ -1254,8 +1254,8 @@
                                     <segue destination="bAi-bP-Frd" kind="embed" identifier="containerSegue" id="Bcj-z2-2JV"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oV-AB-lQ8" userLabel="thumbView" customClass="FSTThumbTabView">
-                                <rect key="frame" x="-6" y="28" width="35" height="45"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oV-AB-lQ8" userLabel="thumbView" customClass="FSTThumbTabView">
+                                <rect key="frame" x="-2" y="28" width="35" height="45"/>
                                 <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -1266,11 +1266,11 @@
                                     <outletCollection property="gestureRecognizers" destination="VCi-vK-wA2" appends="YES" id="EMM-Cq-7PQ"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ECI-56-BeB" userLabel="PopOutView" customClass="FSTRoundedBorderView">
-                                <rect key="frame" x="-26" y="-22" width="25" height="537"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECI-56-BeB" userLabel="PopOutView" customClass="FSTRoundedBorderView">
+                                <rect key="frame" x="-22" y="-22" width="25" height="537"/>
                                 <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c8t-Ki-MIk">
-                                        <rect key="frame" x="0.0" y="15" width="429" height="452"/>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8t-Ki-MIk">
+                                        <rect key="frame" x="20" y="25" width="545.5" height="512"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="3Jf-Oc-cNj" kind="embed" identifier="displayPopOut" id="dEM-RT-Cg9"/>
@@ -4650,17 +4650,17 @@
                         <viewControllerLayoutGuide type="bottom" id="fSE-LI-xW5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bcb-MU-ev5">
-                        <rect key="frame" x="0.0" y="0.0" width="429" height="452"/>
+                        <rect key="frame" x="0.0" y="0.0" width="545.5" height="512"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alV-dq-zvx">
-                                <rect key="frame" x="0.0" y="0.0" width="429" height="452"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="alV-dq-zvx">
+                                <rect key="frame" x="0.0" y="0.0" width="545.5" height="452"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKA-SR-Zs7" userLabel="Recipe View">
-                                        <rect key="frame" x="0.0" y="230" width="429" height="2000"/>
+                                        <rect key="frame" x="0.0" y="230" width="545.5" height="2000"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPo-Oy-tpz">
-                                                <rect key="frame" x="0.0" y="0.0" width="429" height="2000"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="545.5" height="2000"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="600" id="p9S-TS-tcY"/>
                                                 </constraints>
@@ -4690,20 +4690,20 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjC-LR-hGS" userLabel="images">
-                                        <rect key="frame" x="0.0" y="0.0" width="429" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="545.5" height="150"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fQ5-YU-d4V" userLabel="border" customClass="FSTDottedBorderView">
-                                                <rect key="frame" x="8" y="7" width="416" height="135"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQ5-YU-d4V" userLabel="border" customClass="FSTDottedBorderView">
+                                                <rect key="frame" x="8" y="7" width="529.5" height="135"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="WaG-RJ-4cG" userLabel="bigCamera">
-                                                <rect key="frame" x="152" y="42" width="123" height="65"/>
+                                                <rect key="frame" x="152" y="33" width="155.5" height="83"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="WaG-RJ-4cG" secondAttribute="height" multiplier="15:8" id="I5c-4Q-pSJ"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A2I-VU-QBg">
-                                                <rect key="frame" x="0.0" y="0.0" width="429" height="150"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="545.5" height="150"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="150" id="DN4-3G-X0k"/>
@@ -4716,7 +4716,7 @@
                                                 </variation>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="6YK-vs-vKg">
-                                                <rect key="frame" x="356" y="77" width="52" height="52"/>
+                                                <rect key="frame" x="356" y="77" width="66" height="66"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="6YK-vs-vKg" secondAttribute="height" multiplier="1:1" id="oYg-QT-BJE"/>
                                                 </constraints>
@@ -4745,7 +4745,7 @@
                                         </connections>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter recipe's name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V8o-Gf-RSy">
-                                        <rect key="frame" x="20" y="165" width="387" height="30"/>
+                                        <rect key="frame" x="20" y="165" width="491.5" height="30"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="0.12" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="QB3-Sv-iLi"/>
@@ -4760,7 +4760,7 @@
                                         </variation>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0M9-hI-t1b">
-                                        <rect key="frame" x="118" y="210" width="193" height="2"/>
+                                        <rect key="frame" x="150" y="210" width="245.5" height="2"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="nNO-y3-mwE"/>
@@ -4794,10 +4794,10 @@
                                 </variation>
                             </scrollView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbI-mH-Ms2" userLabel="cookButtonHolderView">
-                                <rect key="frame" x="0.0" y="397" width="429" height="55"/>
+                                <rect key="frame" x="0.0" y="457" width="545.5" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    COOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8b-Iq-NMU" customClass="FSTLabel">
-                                        <rect key="frame" x="0.0" y="15" width="429" height="24"/>
+                                        <rect key="frame" x="0.0" y="15" width="545.5" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23.5" id="9Kd-4e-Mwq">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="32.5"/>

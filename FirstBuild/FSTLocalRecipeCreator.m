@@ -77,7 +77,7 @@
         stage3.cookTimeMaximum = @0;
         stage3.cookingLabel = @"Heating combined mixture no stirring";
         stage3.cookingPrepLabel = @"Remove the 4 quart pan from Paragon and slowly add the cream/butter mixture while whisking gently. The mixture will bubble and triple in size. Stop whisking once the cream and butter have been mixed in. Return the pan to the Paragon. Select 'Next Stage' to continue.";
-        stage3.targetTemperature = @1124;
+        stage3.targetTemperature = @124;
         stage3.maxPowerLevel = @6;
         stage3.automaticTransition = @0;
         

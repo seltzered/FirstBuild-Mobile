@@ -23,8 +23,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.currentParagon.delegate = self;
-    // Do any additional setup after loading the view.
+    
+    //kind of a hack, but if the paragon doesn't have a delegate already then we are
+    //waiting for them to press the COOK button which indicates there is not already
+    //an active recipe. when they press COOK that will trigger the cook config to write
+    //and alert us via delegate. if paragon already has a delegate then we know
+    //are display only and don't need to respond to activities from the paragon
+    if (!self.currentParagon.delegate)
+    {
+       self.currentParagon.delegate = self;
+    }    
+}
+
+- (void)dealloc
+{
+    DLog(@"dealloc");
 }
 
 - (void)viewWillAppear:(BOOL)animated {

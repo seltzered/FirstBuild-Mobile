@@ -56,6 +56,7 @@
 
 }
 
+//TODO: Document
 -(void)setRecipeStageInstructions
 {
     FSTSavedRecipeManager* recipeManager = [FSTSavedRecipeManager sharedInstance];
@@ -73,7 +74,11 @@
     }
     
     localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex];
-    localDbNextStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex+1];
+    
+    if (activeRecipeFromLocalDatabase.paragonCookingStages.count <= trueIndex+1)
+    {
+        localDbNextStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex];
+    }
     
     if (!localDbStage)
     {
@@ -83,7 +88,6 @@
     {
         cookingData.directions = localDbStage.cookingLabel;
     }
-    
     
     if (!localDbNextStage)
     {
@@ -100,9 +104,7 @@
 
     if (self.currentParagon.session.activeRecipe.paragonCookingStages.count > 1)
     {
-        //TODO: hardcode stage for testing
-        //[controller setHeaderText:@"1" withFrameRect:CGRectMake(0, 0, 120, 30)];
-        [controller setHeaderText:@"ACTIVE" withFrameRect:CGRectMake(0, 0, 120, 30)];
+        [controller setHeaderText:[NSString stringWithFormat:@"STAGE %d",self.currentParagon.session.currentStageIndex] withFrameRect:CGRectMake(0, 0, 120, 30)];
     }
     else
     {
@@ -351,12 +353,14 @@
    }
    else if ([segue.identifier isEqualToString:@"displayPopOut"])
    {
+       //TODO: tidy up here, is_multi_stage should not be set here, but rather in the init/viewDidLoad
        FSTSavedDisplayRecipeViewController* displayVC = (FSTSavedDisplayRecipeViewController*)segue.destinationViewController;
-       displayVC.activeRecipe = self.currentParagon.session.activeRecipe;
+       displayVC.currentParagon = self.currentParagon;
+       displayVC.activeRecipe = [[FSTSavedRecipeManager sharedInstance] getRecipeForId:self.currentParagon.session.activeRecipe.recipeId];
        displayVC.will_hide_cook = [NSNumber numberWithBool:YES]; // don't want them to select this and push on another cooking session.
-       if ([self.currentParagon.session.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) {
+       if ([displayVC.activeRecipe isKindOfClass:[FSTSousVideRecipe class]]) {
            displayVC.is_multi_stage = [NSNumber numberWithBool:NO];
-       } else if ([self.currentParagon.session.activeRecipe isKindOfClass:[FSTMultiStageRecipe class]]) {
+       } else if ([displayVC.activeRecipe isKindOfClass:[FSTMultiStageRecipe class]]) {
            displayVC.is_multi_stage = [NSNumber numberWithBool:YES];
        } // this tells it what third view controller to load
        // I could just set is_multi_stage by checking the activeRecipe in the display Maybe that does not happen soon enough
@@ -413,7 +417,7 @@
 - (void)currentStageIndexChanged:(NSNumber *)stage
 {
     MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
-    [controller setHeaderText:[stage stringValue] withFrameRect:CGRectMake(0, 0, 120, 30)];
+    [controller setHeaderText:[NSString stringWithFormat:@"STAGE %d",self.currentParagon.session.currentStageIndex] withFrameRect:CGRectMake(0, 0, 120, 30)];
     
     [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
     cookingData.targetTemp =[self.currentParagon.session.currentStage.targetTemperature doubleValue];
