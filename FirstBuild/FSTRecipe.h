@@ -12,8 +12,8 @@
 typedef enum {
     FSTRecipeTypeUndefined = 0,
     FSTRecipeTypeFirstBuildSousVide = 1,
-//    FSTRecipeTypeFirstBuildSingleStage = 2,
     FSTRecipeTypeFirstBuildMultiStage = 3,
+    //    FSTRecipeTypeFirstBuildSingleStage = 2,
 //    FSTRecipeTypeUserSousVide = 4,
 //    FSTRecipeTypeUserSingleStage = 5,
 //    FSTRecipeTypeUserMultiStage = 6

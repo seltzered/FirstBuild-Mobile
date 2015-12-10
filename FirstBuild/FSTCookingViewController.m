@@ -75,9 +75,9 @@
     
     localDbStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex];
     
-    if (activeRecipeFromLocalDatabase.paragonCookingStages.count <= trueIndex+1)
+    if (trueIndex+1 < activeRecipeFromLocalDatabase.paragonCookingStages.count )
     {
-        localDbNextStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex];
+        localDbNextStage = activeRecipeFromLocalDatabase.paragonCookingStages[trueIndex+1];
     }
     
     if (!localDbStage)

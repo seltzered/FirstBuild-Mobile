@@ -131,27 +131,27 @@ static const uint8_t STAGE_SIZE = 8;
     
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
     {
-        DLog(@"successfully wrote FSTCharacteristicCurrentCookStage");
+        DLog(@"attempted write FSTCharacteristicCurrentCookStage");
         [self handleWriteMoveNextStage:error];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit])
     {
         //[self handleElapsedTimeWritten];
-        DLog(@"successfully wrote FSTCharacteristicTempDisplayUnit");
+        DLog(@"attempted write FSTCharacteristicTempDisplayUnit");
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicStartHoldTimer])
     {
-        DLog(@"successfully wrote FSTCharacteristicStartHoldTimer");
+        DLog(@"attempted write FSTCharacteristicStartHoldTimer");
         [self handleHoldTimerWritten ];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
     {
-        DLog(@"successfully wrote FSTCharacteristicUserInfo");
+        DLog(@"attempted write FSTCharacteristicUserInfo");
         [self handleUserInformationWritten:error];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
     {
-        DLog(@"successfully wrote FSTCharacteristicCookConfiguration");
+        DLog(@"attempted write FSTCharacteristicCookConfiguration");
         [self handleCookConfigurationWritten:error];
     }
 
@@ -330,7 +330,13 @@ static const uint8_t STAGE_SIZE = 8;
     for (uint8_t i=0; i < recipe.paragonCookingStages.count; i++)
     {
         NSLog(@"building stage to send to cooktop...");
+        
         FSTParagonCookingStage* stage = recipe.paragonCookingStages[i];
+        NSLog(@"\tmin time %@", stage.cookTimeMinimum);
+        NSLog(@"\tmax time %@", stage.cookTimeMaximum);
+        NSLog(@"\tmax power level %@", stage.maxPowerLevel);
+        NSLog(@"\ttarget temperature %@", stage.targetTemperature);
+         NSLog(@"\tauto %@", stage.automaticTransition);
         uint8_t pos = i * 8;
         bytes[pos+POS_POWER] = [stage.maxPowerLevel unsignedCharValue];
         OSWriteBigInt16(&bytes[pos+POS_MIN_HOLD_TIME],   0, [stage.cookTimeMinimum unsignedShortValue]);
@@ -699,7 +705,7 @@ static const uint8_t STAGE_SIZE = 8;
         // current index not set, so point the stage to the first element
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[0];
     }
-    else if (self.session.currentStageIndex <= self.session.activeRecipe.paragonCookingStages.count)
+    else if (self.session.activeRecipe.paragonCookingStages.count && self.session.currentStageIndex <= self.session.activeRecipe.paragonCookingStages.count)
     {
         self.session.currentStage = self.session.activeRecipe.paragonCookingStages[self.session.currentStageIndex-1];
     }
