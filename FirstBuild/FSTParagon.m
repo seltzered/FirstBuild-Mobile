@@ -12,9 +12,22 @@
 #import "FSTRecipe.h"
 #import "FSTParagonUserInformation.h"
 
+typedef enum {
+    OtaStateIdle = 0,
+    OtaStateStartRequested = 1,
+    OtaStateDownloadRequested = 2,
+    OtaStateDownloading = 3,
+    OtaStateChunkWriteRequest = 10,
+    OtaStateAbortRequested = 400,
+    OtaStateFailed = 500
+} OtaState;
+
 @implementation FSTParagon
 {
     NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
+    NSData* otaImage;
+    OtaState otaState;
+    uint otaBytesWritten;
 }
 
 //app info service
@@ -61,6 +74,9 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (self)
     {
+        otaState = OtaStateIdle;
+        otaBytesWritten = 0;
+        
         //setup the current cooking method and session, which is the actual
         //state of the cooking as reported by the cooktop
         self.session = [[FSTParagonCookingSession alloc] init];
@@ -120,7 +136,9 @@ static const uint8_t STAGE_SIZE = 8;
 
 - (void)startOta
 {
-    [self writeStartOta];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self writeStartOta];
+    });
 }
 
 #pragma mark - Write Handlers
@@ -131,7 +149,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
     {
-        DLog(@"attempted write FSTCharacteristicCurrentCookStage");
+        DLog(@"write respone FSTCharacteristicCurrentCookStage");
         [self handleWriteMoveNextStage:error];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit])
@@ -154,11 +172,150 @@ static const uint8_t STAGE_SIZE = 8;
         DLog(@"attempted write FSTCharacteristicCookConfiguration");
         [self handleCookConfigurationWritten:error];
     }
+    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaImageData])
+    {
+        [self handleOtaImageDataResponse:error];
+    }
 
+}
+
+// TODO: TEMPORARY
+
+-(void)readOtaFileFromBundle
+{
+    NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"paragon_master_01_02_00_00" ofType:@"ota"];
+    otaImage = [NSData dataWithContentsOfFile:otaFileName];
+}
+
+-(void)handleOtaControlCommand: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length != 1)
+    {
+        DLog(@"handleOtaControlCommand length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
+    }
+    
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    uint8_t response = bytes[0];
+    
+    if (response==0)
+    {
+        switch (otaState) {
+            case OtaStateDownloadRequested:
+                otaState = OtaStateDownloading;
+                [self writeImageBytes];
+                break;
+            
+            case OtaStateStartRequested:
+                [self writeOtaDownloadCommand];
+                break;
+                
+            case OtaStateAbortRequested:
+                NSLog(@">>>>>>>>> aborted OTA <<<<<<<<<<");
+                otaState = OtaStateIdle;
+                break;
+                
+            default:
+                NSLog(@"unknown ota state in handleOtaControlCommand");
+                break;
+        }
+        
+    }
+    else
+    {
+        NSLog(@"OTA START COMMAND FAILED");
+    }
+    
+}
+
+-(void)writeOtaAbort
+{
+    otaState = OtaStateFailed;
+    
+    NSLog(@">>>>>>>>> abort OTA <<<<<<<<<<");
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
+    
+    Byte bytes[1];
+    bytes[0] = 0x07;
+    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+    if (characteristic)
+    {
+        otaState = OtaStateAbortRequested;
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+}
+
+-(void)handleOtaImageDataResponse: (NSError*) error
+{
+    otaState = OtaStateFailed;
+    
+    if (error)
+    {
+        NSLog(@"image write error");
+        return;
+    }
+
+    otaBytesWritten = otaBytesWritten + 20;
+    otaState = OtaStateDownloading;
+    [self writeImageBytes];
+}
+
+-(void)writeImageBytes
+{
+    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaImageData];
+    
+    if (characteristic && otaState == OtaStateDownloading && otaImage.length > 0)
+    {
+        if (otaBytesWritten > 0 && otaBytesWritten%500==0)
+        {
+            NSLog(@"\nwritten %u", otaBytesWritten);
+        }
+        //printf(".");
+        NSUInteger otaImageActualLength = otaImage.length - 160;
+        NSData* data;
+        if (otaBytesWritten < otaImageActualLength)
+        {
+            
+            if (otaBytesWritten+20 > otaImageActualLength)
+            {
+                NSUInteger otaRemainingLength = otaImageActualLength - otaBytesWritten;
+                NSData* lastChunk = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, otaRemainingLength)];
+                //TODO: RANDOM!
+                Byte lastBytes[20];
+                memset(&lastBytes,0,sizeof(lastBytes));
+                memcpy(&lastBytes, [lastChunk bytes],otaRemainingLength);
+                data = [NSData dataWithBytes:lastBytes length:20];
+            }
+            else
+            {
+               data = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, 20)];
+            }
+        }
+        else
+        {
+            [self writeOtaAbort];
+            data = [otaImage subdataWithRange:NSMakeRange(otaImageActualLength, 20)];
+        }
+        
+        otaState = OtaStateChunkWriteRequest;
+        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+    }
+    else
+    {
+        otaState = OtaStateFailed;
+    }
+    
 }
 
 -(void)writeStartOta
 {
+    otaState = OtaStateFailed;
+    
+    otaBytesWritten = 0;
+    
+    NSLog(@">>>>>>>>> start OTA <<<<<<<<<<");
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
     
     Byte bytes[1];
@@ -166,29 +323,37 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
+        otaState = OtaStateStartRequested;
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
 }
 
 -(void)writeOtaDownloadCommand
 {
+    NSLog(@">>>>>>>>> start OTA download <<<<<<<<<<");
+    otaState = OtaStateFailed;
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
     
-    Byte bytes[3];
-    bytes[0] = 0x02;
-    OSWriteBigInt16(&bytes[1],   0, 23837);
-    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-    if (characteristic)
+    [self readOtaFileFromBundle];
+    
+    if (otaImage.length > 160 && otaImage.length < (60*1024))
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }
-}
+        Byte bytes[3];
+        bytes[0] = 0x02;
+        
+        //if the size is 10245, data[1] = 0x05, data[2] = 0x28
+        OSWriteLittleInt16(&bytes[1],   0, otaImage.length);
+        NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
 
-//-(void)writeImage
-//{
-//    NSString *myFilePath = [[NSBundle mainBundle] pathForResource:@InBox ofType: @txt];
-//
-//}
+        NSLog(@"read image from file system, length is %lu, byte[1] = 0x%02x, byte[2] = 0x%02x", (unsigned long)otaImage.length, bytes[1], bytes[2]);
+        if (characteristic)
+        {
+            otaState = OtaStateDownloadRequested;
+            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        }
+    }
+
+}
 
 -(void)writeOtaImageVerify
 {
@@ -465,6 +630,11 @@ static const uint8_t STAGE_SIZE = 8;
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentPowerLevel];
         [self handleCurrentPowerLevel:characteristic];
     }
+    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicOtaControlCommand])
+    {
+        NSLog(@"char: FSTCharacteristicOtaControlCommand, data: %@", characteristic.value);
+        [self handleOtaControlCommand:characteristic];
+    }
     else if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicRemainingHoldTime])
     {
         NSLog(@"char: FSTCharacteristicRemainingHoldTime, data: %@", characteristic.value);
@@ -480,6 +650,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
     {
+        [self startOta];
         //we havent informed the application that the device is completely loaded, but we have
         //all the data we need
         self.initialCharacteristicValuesRead = YES;
@@ -1029,6 +1200,10 @@ static const uint8_t STAGE_SIZE = 8;
                  )
             {
                 [self.peripheral readValueForCharacteristic:characteristic];
+            }
+            else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaControlCommand])
+            {
+                [self.peripheral setNotifyValue:YES forCharacteristic:characteristic ];
             }
             NSLog(@"        CAN NOTIFY");
         }
