@@ -18,6 +18,7 @@ typedef enum {
     OtaStateDownloadRequested = 2,
     OtaStateDownloading = 3,
     OtaStateChunkWriteRequest = 10,
+    OtaStateVerifyImageRequest = 11,
     OtaStateAbortRequested = 400,
     OtaStateFailed = 500
 } OtaState;
@@ -28,6 +29,9 @@ typedef enum {
     NSData* otaImage;
     OtaState otaState;
     uint otaBytesWritten;
+    uint otaBytesWrittenInTrailer;
+    
+    NSMutableData* _debugPayload;
 }
 
 //app info service
@@ -76,6 +80,9 @@ static const uint8_t STAGE_SIZE = 8;
     {
         otaState = OtaStateIdle;
         otaBytesWritten = 0;
+        otaBytesWrittenInTrailer = 0;
+        
+        _debugPayload = [NSMutableData new];
         
         //setup the current cooking method and session, which is the actual
         //state of the cooking as reported by the cooktop
@@ -147,6 +154,10 @@ static const uint8_t STAGE_SIZE = 8;
 {
     [super writeHandler:characteristic error:error];
     
+    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaImageData])
+    {
+        [self handleOtaImageDataResponse:error];
+    }
     if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
     {
         DLog(@"write respone FSTCharacteristicCurrentCookStage");
@@ -172,10 +183,7 @@ static const uint8_t STAGE_SIZE = 8;
         DLog(@"attempted write FSTCharacteristicCookConfiguration");
         [self handleCookConfigurationWritten:error];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaImageData])
-    {
-        [self handleOtaImageDataResponse:error];
-    }
+    
 
 }
 
@@ -217,6 +225,9 @@ static const uint8_t STAGE_SIZE = 8;
                 otaState = OtaStateIdle;
                 break;
                 
+            case OtaStateVerifyImageRequest:
+                break;
+                
             default:
                 NSLog(@"unknown ota state in handleOtaControlCommand");
                 break;
@@ -225,7 +236,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     else
     {
-        NSLog(@"OTA START COMMAND FAILED");
+        NSLog(@"ota command response indicated failure during state %d", otaState);
     }
     
 }
@@ -249,17 +260,24 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)handleOtaImageDataResponse: (NSError*) error
 {
-    otaState = OtaStateFailed;
-    
-    if (error)
+    if (error || otaState != OtaStateChunkWriteRequest)
     {
+        otaState = OtaStateFailed;
         NSLog(@"image write error");
         return;
     }
-
-    otaBytesWritten = otaBytesWritten + 20;
-    otaState = OtaStateDownloading;
-    [self writeImageBytes];
+    
+    if (otaBytesWrittenInTrailer == 160)
+    {
+        [self writeOtaImageVerify];
+    }
+    else
+    {
+        otaBytesWritten = otaBytesWritten + 20;
+        otaState = OtaStateDownloading;
+        [self writeImageBytes];
+        printf(".");
+    }
 }
 
 -(void)writeImageBytes
@@ -270,41 +288,55 @@ static const uint8_t STAGE_SIZE = 8;
     {
         if (otaBytesWritten > 0 && otaBytesWritten%500==0)
         {
-            NSLog(@"\nwritten %u", otaBytesWritten);
+            NSLog(@"written %u", otaBytesWritten);
         }
-        //printf(".");
+        
         NSUInteger otaImageActualLength = otaImage.length - 160;
         NSData* data;
-        if (otaBytesWritten < otaImageActualLength)
+        
+        if (otaBytesWritten <= otaImageActualLength)
         {
             
             if (otaBytesWritten+20 > otaImageActualLength)
             {
+                // padding
                 NSUInteger otaRemainingLength = otaImageActualLength - otaBytesWritten;
                 NSData* lastChunk = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, otaRemainingLength)];
-                //TODO: RANDOM!
-                Byte lastBytes[20];
-                memset(&lastBytes,0,sizeof(lastBytes));
-                memcpy(&lastBytes, [lastChunk bytes],otaRemainingLength);
-                data = [NSData dataWithBytes:lastBytes length:20];
+
+                char remainingBytes[20];
+                memset(remainingBytes,0,20);
+                memcpy(remainingBytes,[lastChunk bytes],otaRemainingLength);
+                
+                data = [NSData dataWithBytes:remainingBytes length:20];
+                NSLog(@"final bytes");
             }
             else
             {
-               data = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, 20)];
+                // normal
+                data = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, 20)];
             }
+            otaState = OtaStateChunkWriteRequest;
+            [_debugPayload appendData:data];
+            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        }
+        else if (otaBytesWrittenInTrailer != 160)
+        {
+            data = [otaImage subdataWithRange:NSMakeRange(otaImageActualLength+otaBytesWrittenInTrailer, 20)];
+            otaBytesWrittenInTrailer = otaBytesWrittenInTrailer + 20;
+            otaState = OtaStateChunkWriteRequest;
+            [_debugPayload appendData:data];
+            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
         }
         else
         {
-            [self writeOtaAbort];
-            data = [otaImage subdataWithRange:NSMakeRange(otaImageActualLength, 20)];
+            otaState = OtaStateFailed;
+            NSLog(@"ota failed during image write, byte issue");
         }
-        
-        otaState = OtaStateChunkWriteRequest;
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
     else
     {
         otaState = OtaStateFailed;
+        NSLog(@"ota failed during image write, unknown state");
     }
     
 }
@@ -357,13 +389,18 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)writeOtaImageVerify
 {
+    NSLog(@">>>>>>>>> image Verify <<<<<<<<<<");
+    
     CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
+    
+    otaState = OtaStateFailed;
     
     Byte bytes[1];
     bytes[0] = 0x03;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
+        otaState = OtaStateVerifyImageRequest;
         [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
 }
@@ -515,7 +552,7 @@ static const uint8_t STAGE_SIZE = 8;
             OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, 0);
         }
         OSWriteBigInt16(&bytes[pos+POS_TARGET_TEMP],     0, [stage.targetTemperature unsignedShortValue]*100);
-        bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue];
+        bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue] + 1;
     }
     
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
@@ -650,7 +687,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
     {
-        [self startOta];
+        //[self startOta];
         //we havent informed the application that the device is completely loaded, but we have
         //all the data we need
         self.initialCharacteristicValuesRead = YES;
