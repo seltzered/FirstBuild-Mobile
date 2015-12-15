@@ -118,6 +118,10 @@
     }
 }
 
+- (IBAction)menuToggleTapped:(id)sender {
+    [self.revealViewController rightRevealToggle:self.currentParagon];
+}
+
 #pragma mark - <FSTParagonDelegate>
 - (void)cookConfigurationSet:(NSError *)error
 {

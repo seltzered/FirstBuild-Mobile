@@ -14,6 +14,7 @@
     self = [super init];
     if (self)
     {
+        self.name = @"Corn";
         FSTParagonCookingStage* stage = [self addStage];
         stage.cookTimeMinimum = @20;
         stage.cookTimeMaximum = @40;

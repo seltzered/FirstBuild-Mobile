@@ -74,6 +74,7 @@
 
 - (FSTRecipes*) dataRequestedFromChild
 {
+    // order matters here, it goes from specific to more generic types
     if ([self.recipe isKindOfClass:[FSTBeefSteakSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideSteakRecipes alloc]init];
@@ -86,6 +87,10 @@
     {
         return (FSTRecipes*)[[FSTBeefSousVideRecipes alloc]init];
     }
+    else if ([self.recipe isKindOfClass:[FSTVegetableRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTVegetableRecipes alloc]init];
+    }
     else if ([self.recipe isKindOfClass:[FSTSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTSousVideRecipes alloc]init];
@@ -94,10 +99,7 @@
     {
         return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
     }
-    else if ([self.recipe isKindOfClass:[FSTVegetableRecipe class]])
-    {
-        return (FSTRecipes*)[[FSTVegetableRecipes alloc]init];
-    }
+
     else
     {
         return [[FSTRecipes alloc]init];
