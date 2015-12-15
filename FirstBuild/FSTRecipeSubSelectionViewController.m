@@ -30,6 +30,10 @@
 #import "FSTBeefRoastShortRibsSousVideRecipe.h"
 #import "FSTBeefRoastGroundBeefSousVideRecipe.h"
 #import "FSTBeefRoastTenderLoinSousVideRecipe.h"
+#import "FSTVegetableRecipes.h"
+#import "FSTVegetableRecipe.h"
+#import "FSTAutoCookViewController.h"
+#import "FSTVegetableAsparagusSousVideRecipe.h"
 
 @interface FSTRecipeSubSelectionViewController ()
 
@@ -90,6 +94,10 @@
     {
         return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
     }
+    else if ([self.recipe isKindOfClass:[FSTVegetableRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTVegetableRecipes alloc]init];
+    }
     else
     {
         return [[FSTRecipes alloc]init];
@@ -114,20 +122,9 @@
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
     }
-    else if ([cookingMethod isKindOfClass:[FSTCandyRecipe class]])
+    else if([cookingMethod isKindOfClass:[FSTVegetableAsparagusSousVideRecipe class]])
     {
-        
-        //TODO: remove, this is a hack
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Sorry!"
-                                                                                 message:@"Only the beef recipes have been implemented for this field test. Please use the Quick Start below to manually enter your recipe."
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alertController addAction:actionOk];
-        [self presentViewController:alertController animated:YES completion:^{
-            ((FSTRecipeTableViewController*) self.childViewControllers[0]).tableView.userInteractionEnabled = YES;
-        }];
+        [self performSegueWithIdentifier:@"segueAutoCook" sender:cookingMethod];
     }
     else
     {

@@ -20,7 +20,6 @@
     if (self) {
               self.recipes = [[NSArray alloc] initWithObjects:
                  [FSTSousVideRecipe new],
-                 [FSTCandyRecipe new],
                  nil];
     }
     return self;

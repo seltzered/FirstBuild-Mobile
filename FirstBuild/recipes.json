@@ -1,0 +1,53 @@
+
+{
+    "recipe-dictionary":{
+        "recipes":[
+                   {
+                   "name":"porterhouse",
+                   "id":1,
+                   "recipe-class-type":1
+                   },
+                   {
+                   "name":"caramel",
+                   "friendly-name":"Chewy goodness",
+                   "id":2,
+                   "stages":[
+                             {
+                             "id":"1",
+                             "type":"manual",
+                             "instructions":"combine butter and milk"
+                             },
+                             {
+                             "id":"2",
+                             "type":"cookware",
+                             "minimum-cooktime":40,
+                             "maximum-cooktime":180,
+                             "target-temperature":140,
+                             "auto":false,
+                             "maximum-power-level":10
+                             }
+                             ]
+                   }
+                   ],
+        "recipe-class-types" : [
+                                {
+                                "id":1,
+                                "name":"SousVide-Beef-Steak-Tender",
+                                "donenesss":[{"degrees":125,"name":"Rare"}],
+                                "thicknesses":[{"size":1.25,"name":"Rare"}]
+                                },
+                                {"id":1, "name":"SousVide-Beef-Steak-Sirloin"},
+                                {"id":1, "name":"SousVide-Beef-Steak-Tough"},
+                                {"id":2, "name":"SousVide-Beef-Roast-Tenderloin"},
+                                {"id":2, "name":"SousVide-Beef-Roast-RibEye"},
+                                {"id":2, "name":"SousVide-Beef-Roast-Tough"},
+                                {"id":2, "name":"SousVide-Beef-Roast-Brisket"},
+                                {"id":2, "name":"SousVide-Beef-Roast-Short-Ribs"},
+                                {"id":2, "name":"SousVide-Beef-Roast-Ground-Beef"},
+                                {"id":3, "name":"SousVide-Chicken"},
+                                {"id":4, "name":"SousVide-Vegetables"},
+                                {"id":5, "name":"SousVide-Eggs"}
+                                 ]
+        
+    }
+}

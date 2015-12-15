@@ -120,6 +120,22 @@
 		5B7338C01B0F9CEA004C931E /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BF1B0F9CEA004C931E /* Session.m */; };
 		5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FB5531A4373C900553797 /* WifiCommissioningConnectingViewController.m */; };
 		5B7FB5581A43C6DF00553797 /* ChillHubDevicesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FB5571A43C6DF00553797 /* ChillHubDevicesTableViewController.m */; };
+		5B80FAB01C1EFF7900818E33 /* recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B80FAAF1C1EFF7900818E33 /* recipes.json */; };
+		5B80FAB41C20871000818E33 /* FSTVegetableRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAB31C20871000818E33 /* FSTVegetableRecipes.m */; };
+		5B80FAB71C20872D00818E33 /* FSTVegetableRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAB61C20872D00818E33 /* FSTVegetableRecipe.m */; };
+		5B80FABA1C20879900818E33 /* FSTVegetableArtichokeSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAB91C20879900818E33 /* FSTVegetableArtichokeSousVideRecipe.m */; };
+		5B80FABD1C208A4A00818E33 /* FSTVegetableGreenBeansSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FABC1C208A4A00818E33 /* FSTVegetableGreenBeansSousVideRecipe.m */; };
+		5B80FAC01C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FABF1C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.m */; };
+		5B80FAC31C208A7500818E33 /* FSTVegetableBrusselSproutsSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAC21C208A7500818E33 /* FSTVegetableBrusselSproutsSousVideRecipe.m */; };
+		5B80FAC61C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAC51C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.m */; };
+		5B80FAC91C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAC81C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.m */; };
+		5B80FACC1C208AA700818E33 /* FSTVegetableCornSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FACB1C208AA700818E33 /* FSTVegetableCornSousVideRecipe.m */; };
+		5B80FACF1C208AB600818E33 /* FSTVegetableCarrotsSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FACE1C208AB600818E33 /* FSTVegetableCarrotsSousVideRecipe.m */; };
+		5B80FAD21C208ACA00818E33 /* FSTVegetableTurnipsSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAD11C208ACA00818E33 /* FSTVegetableTurnipsSousVideRecipe.m */; };
+		5B80FAD51C208ADB00818E33 /* FSTVegetableBeetsSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAD41C208ADB00818E33 /* FSTVegetableBeetsSousVideRecipe.m */; };
+		5B80FAD81C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FAD71C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.m */; };
+		5B80FADB1C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FADA1C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.m */; };
+		5B80FADE1C20917500818E33 /* FSTAutoCookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B80FADD1C20917500818E33 /* FSTAutoCookViewController.m */; };
 		5B8858191A72F63B00F22325 /* UILabel+MultiLineAutoSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8858181A72F63B00F22325 /* UILabel+MultiLineAutoSize.m */; };
 		5B88581B1A7308DF00F22325 /* Animations.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B88581A1A7308DF00F22325 /* Animations.xcassets */; };
 		5B88581C1A7310DB00F22325 /* PT_Sans-Narrow-Web-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67926FF119ED8BA000E346C2 /* PT_Sans-Narrow-Web-Regular.ttf */; };
@@ -419,6 +435,37 @@
 		5B7FB5531A4373C900553797 /* WifiCommissioningConnectingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WifiCommissioningConnectingViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5B7FB5561A43C6DF00553797 /* ChillHubDevicesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ChillHubDevicesTableViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5B7FB5571A43C6DF00553797 /* ChillHubDevicesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ChillHubDevicesTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5B80FAAF1C1EFF7900818E33 /* recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recipes.json; sourceTree = "<group>"; };
+		5B80FAB21C20871000818E33 /* FSTVegetableRecipes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableRecipes.h; sourceTree = "<group>"; };
+		5B80FAB31C20871000818E33 /* FSTVegetableRecipes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableRecipes.m; sourceTree = "<group>"; };
+		5B80FAB51C20872D00818E33 /* FSTVegetableRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableRecipe.h; sourceTree = "<group>"; };
+		5B80FAB61C20872D00818E33 /* FSTVegetableRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableRecipe.m; sourceTree = "<group>"; };
+		5B80FAB81C20879900818E33 /* FSTVegetableArtichokeSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableArtichokeSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FAB91C20879900818E33 /* FSTVegetableArtichokeSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableArtichokeSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FABB1C208A4A00818E33 /* FSTVegetableGreenBeansSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableGreenBeansSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FABC1C208A4A00818E33 /* FSTVegetableGreenBeansSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableGreenBeansSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FABE1C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableAsparagusSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FABF1C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableAsparagusSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FAC11C208A7500818E33 /* FSTVegetableBrusselSproutsSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableBrusselSproutsSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FAC21C208A7500818E33 /* FSTVegetableBrusselSproutsSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableBrusselSproutsSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FAC41C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableBroccoliSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FAC51C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableBroccoliSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FAC71C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableFennelSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FAC81C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableFennelSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FACA1C208AA700818E33 /* FSTVegetableCornSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableCornSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FACB1C208AA700818E33 /* FSTVegetableCornSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableCornSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FACD1C208AB600818E33 /* FSTVegetableCarrotsSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableCarrotsSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FACE1C208AB600818E33 /* FSTVegetableCarrotsSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableCarrotsSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FAD01C208ACA00818E33 /* FSTVegetableTurnipsSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableTurnipsSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FAD11C208ACA00818E33 /* FSTVegetableTurnipsSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableTurnipsSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FAD31C208ADB00818E33 /* FSTVegetableBeetsSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableBeetsSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FAD41C208ADB00818E33 /* FSTVegetableBeetsSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableBeetsSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FAD61C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetableSweetPotatoesSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FAD71C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetableSweetPotatoesSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FAD91C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTVegetablePotatoesSousVideRecipe.h; sourceTree = "<group>"; };
+		5B80FADA1C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTVegetablePotatoesSousVideRecipe.m; sourceTree = "<group>"; };
+		5B80FADC1C20917500818E33 /* FSTAutoCookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTAutoCookViewController.h; sourceTree = "<group>"; };
+		5B80FADD1C20917500818E33 /* FSTAutoCookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTAutoCookViewController.m; sourceTree = "<group>"; };
 		5B8858171A72F63B00F22325 /* UILabel+MultiLineAutoSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MultiLineAutoSize.h"; sourceTree = "<group>"; };
 		5B8858181A72F63B00F22325 /* UILabel+MultiLineAutoSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MultiLineAutoSize.m"; sourceTree = "<group>"; };
 		5B88581A1A7308DF00F22325 /* Animations.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Animations.xcassets; sourceTree = "<group>"; };
@@ -662,6 +709,7 @@
 		5B4A76EB1BFF7FC400018281 /* SousVide */ = {
 			isa = PBXGroup;
 			children = (
+				5B80FAB11C20869200818E33 /* Vegetables */,
 				5B4A76EC1BFF7FCC00018281 /* Beef */,
 			);
 			name = SousVide;
@@ -917,6 +965,8 @@
 				5BCBB9DC1B02A22B00B8E043 /* FSTBeefSettingsViewController.m */,
 				5BCBB9EA1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.h */,
 				5BCBB9EB1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m */,
+				5B80FADC1C20917500818E33 /* FSTAutoCookViewController.h */,
+				5B80FADD1C20917500818E33 /* FSTAutoCookViewController.m */,
 			);
 			name = "recipe menu";
 			sourceTree = "<group>";
@@ -952,6 +1002,7 @@
 				51B2974B1B8E34900017DCA2 /* FSTStageSettingsViewController.m */,
 				5BA332601C17149300E2B9E1 /* FSTLocalRecipeCreator.h */,
 				5BA332611C17149300E2B9E1 /* FSTLocalRecipeCreator.m */,
+				5B80FAAF1C1EFF7900818E33 /* recipes.json */,
 			);
 			name = "recipe editor";
 			sourceTree = "<group>";
@@ -1015,6 +1066,41 @@
 				51DB66FC1B74DDE40057717B /* FSTPrecisionCookingStatePastMaxTimeLayer.m */,
 			);
 			name = "state layers";
+			sourceTree = "<group>";
+		};
+		5B80FAB11C20869200818E33 /* Vegetables */ = {
+			isa = PBXGroup;
+			children = (
+				5B80FAB21C20871000818E33 /* FSTVegetableRecipes.h */,
+				5B80FAB31C20871000818E33 /* FSTVegetableRecipes.m */,
+				5B80FAB51C20872D00818E33 /* FSTVegetableRecipe.h */,
+				5B80FAB61C20872D00818E33 /* FSTVegetableRecipe.m */,
+				5B80FAB81C20879900818E33 /* FSTVegetableArtichokeSousVideRecipe.h */,
+				5B80FAB91C20879900818E33 /* FSTVegetableArtichokeSousVideRecipe.m */,
+				5B80FABB1C208A4A00818E33 /* FSTVegetableGreenBeansSousVideRecipe.h */,
+				5B80FABC1C208A4A00818E33 /* FSTVegetableGreenBeansSousVideRecipe.m */,
+				5B80FABE1C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.h */,
+				5B80FABF1C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.m */,
+				5B80FAC11C208A7500818E33 /* FSTVegetableBrusselSproutsSousVideRecipe.h */,
+				5B80FAC21C208A7500818E33 /* FSTVegetableBrusselSproutsSousVideRecipe.m */,
+				5B80FAC41C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.h */,
+				5B80FAC51C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.m */,
+				5B80FAC71C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.h */,
+				5B80FAC81C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.m */,
+				5B80FACA1C208AA700818E33 /* FSTVegetableCornSousVideRecipe.h */,
+				5B80FACB1C208AA700818E33 /* FSTVegetableCornSousVideRecipe.m */,
+				5B80FACD1C208AB600818E33 /* FSTVegetableCarrotsSousVideRecipe.h */,
+				5B80FACE1C208AB600818E33 /* FSTVegetableCarrotsSousVideRecipe.m */,
+				5B80FAD01C208ACA00818E33 /* FSTVegetableTurnipsSousVideRecipe.h */,
+				5B80FAD11C208ACA00818E33 /* FSTVegetableTurnipsSousVideRecipe.m */,
+				5B80FAD31C208ADB00818E33 /* FSTVegetableBeetsSousVideRecipe.h */,
+				5B80FAD41C208ADB00818E33 /* FSTVegetableBeetsSousVideRecipe.m */,
+				5B80FAD61C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.h */,
+				5B80FAD71C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.m */,
+				5B80FAD91C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.h */,
+				5B80FADA1C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.m */,
+			);
+			name = Vegetables;
 			sourceTree = "<group>";
 		};
 		5B99DFBF1AB1EA2200247034 /* Paragon */ = {
@@ -1543,6 +1629,7 @@
 				51DB93CB1B70EDE3005B31CC /* FSEmeric-BoldItalic.otf in Resources */,
 				51FAEFFE1B62F52B00A7DCF9 /* FSEmeric-Regular.otf in Resources */,
 				5BA064C31B7E390F002FCE59 /* FSTHumanaPillBottleBleCommissioning.storyboard in Resources */,
+				5B80FAB01C1EFF7900818E33 /* recipes.json in Resources */,
 				51DB93CD1B70EDE3005B31CC /* FSEmeric-CoreItalic.otf in Resources */,
 				5BE77E231B7D2F6F00B762B8 /* HumanaPillBottle.storyboard in Resources */,
 				51FAEFEC1B62722500A7DCF9 /* Images.xcassets in Resources */,
@@ -1602,19 +1689,25 @@
 				5BC3648A1A2FAC1A00D03B9C /* FSTMilkyWeigh.m in Sources */,
 				5B4A76CF1BFF7BF500018281 /* FSTBeefSteakToughFlankSousVideRecipe.m in Sources */,
 				51FAEFF21B62DD8100A7DCF9 /* FSTLine.m in Sources */,
+				5B80FADB1C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.m in Sources */,
 				5BC3648D1A3112EE00D03B9C /* FSTBackgroundLayer.m in Sources */,
 				5BA3A97D1B38B46500E51C51 /* FSTBleConnectingViewController.m in Sources */,
 				515CD8A01B7E16F50087F9C7 /* FSTStagePickerManager.m in Sources */,
 				5BA3A96E1B345DAF00E51C51 /* FSTBleCentralManager.m in Sources */,
 				5BCBB9DA1B02A1EA00B8E043 /* FSTRecipeSubSelectionViewController.m in Sources */,
+				5B80FACF1C208AB600818E33 /* FSTVegetableCarrotsSousVideRecipe.m in Sources */,
 				51B2974C1B8E34900017DCA2 /* FSTStageSettingsViewController.m in Sources */,
+				5B80FADE1C20917500818E33 /* FSTAutoCookViewController.m in Sources */,
 				51DB66FA1B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.m in Sources */,
 				5B4A76BD1BFF7AF100018281 /* FSTBeefSteakTenderTBoneSousVideRecipe.m in Sources */,
 				5B4A769F1BFE33A700018281 /* FSTBeefSteakTenderRibEyeSousVideRecipe.m in Sources */,
 				5B0817BD1BAB3771000437AC /* FSTGECooktop.m in Sources */,
 				51441A491B98DD3600AF10E6 /* FSTThumbTabView.m in Sources */,
 				5BBFACFF19E495FC00E42575 /* ProductTableViewController.m in Sources */,
+				5B80FAB71C20872D00818E33 /* FSTVegetableRecipe.m in Sources */,
+				5B80FAB41C20871000818E33 /* FSTVegetableRecipes.m in Sources */,
 				5B44602C1B1E2601001A4953 /* FSTParagonCookingStage.m in Sources */,
+				5B80FAD81C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.m in Sources */,
 				5BA3A97A1B34760700E51C51 /* FSTBleCommissioningTableViewController.m in Sources */,
 				5BCBB9FE1B0390C500B8E043 /* FSTBeefSousVideRecipe.m in Sources */,
 				5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */,
@@ -1638,6 +1731,8 @@
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
 				51A114D91B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m in Sources */,
 				51B2975E1B8F65E80017DCA2 /* FSTRecipeTypeTableViewController.m in Sources */,
+				5B80FAC01C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.m in Sources */,
+				5B80FAC61C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.m in Sources */,
 				517EC10D1B3B4E8C0025ECA1 /* FSTBleErrorViewController.m in Sources */,
 				5B9D11191BF112E300D50F8A /* FSTParagonMenuDiagnosticsStageTableViewController.m in Sources */,
 				5BB1E7E41AF7F4E800730031 /* FSTBeerBank.m in Sources */,
@@ -1670,6 +1765,7 @@
 				5B600BA11C1217FA00120338 /* FSTStageInstructionsViewController.m in Sources */,
 				51441A3D1B9771F400AF10E6 /* FSTRecipeTypeTableContainerViewController.m in Sources */,
 				51B297611B8F730E0017DCA2 /* FSTStageTableContainerViewController.m in Sources */,
+				5B80FAD51C208ADB00818E33 /* FSTVegetableBeetsSousVideRecipe.m in Sources */,
 				5B4A76BA1BFF7ADD00018281 /* FSTBeefSteakTenderTopLoinSousVideRecipe.m in Sources */,
 				51B297521B8EAA780017DCA2 /* FSTStageTableViewController.m in Sources */,
 				5B7FB5581A43C6DF00553797 /* ChillHubDevicesTableViewController.m in Sources */,
@@ -1685,6 +1781,7 @@
 				51DC77631B8B837000313611 /* FSTSavedRecipeTabBarController.m in Sources */,
 				51A9D02E1B73ABD3000AE293 /* FSTCookingStateReachingTemperatureLayer.m in Sources */,
 				51A9D04C1B73FFDC000AE293 /* FSTContainerViewController.m in Sources */,
+				5B80FAC31C208A7500818E33 /* FSTVegetableBrusselSproutsSousVideRecipe.m in Sources */,
 				5B9925E91AE8251800B337CB /* FSTLedge.m in Sources */,
 				5BE687851B71019B00C7FDC5 /* FSTCookSettingsViewController.m in Sources */,
 				5BCBB9EC1B02A5E600B8E043 /* FSTCustomCookSettingsViewController.m in Sources */,
@@ -1706,8 +1803,10 @@
 				518EDF831B41C46100B443EA /* PushSegueNoAnimation.m in Sources */,
 				51F8EF431B559F8A00F40882 /* FSTStateCircleView.m in Sources */,
 				5B4A76EA1BFF7F0E00018281 /* FSTBeefRoastGroundBeefSousVideRecipe.m in Sources */,
+				5B80FAD21C208ACA00818E33 /* FSTVegetableTurnipsSousVideRecipe.m in Sources */,
 				5BB1E7E11AF7F4BA00730031 /* BeerBankViewController.m in Sources */,
 				5B059F7E1C0DF4400072AAB5 /* FSTRecipeTabBar.m in Sources */,
+				5B80FABD1C208A4A00818E33 /* FSTVegetableGreenBeansSousVideRecipe.m in Sources */,
 				5BC3649D1A32661B00D03B9C /* FSTProduct.m in Sources */,
 				51A9D0371B73D702000AE293 /* FSTPrecisionCookingStateReachingMaxTimeLayer.m in Sources */,
 				5B4A76991BFE1BF500018281 /* FSTBeefSousVideRecipes.m in Sources */,
@@ -1726,6 +1825,7 @@
 				5BCBB9DD1B02A22B00B8E043 /* FSTBeefSettingsViewController.m in Sources */,
 				51B2975B1B8F642E0017DCA2 /* FSTMultiStageRecipe.m in Sources */,
 				5B9EF0F419DEEE1000E8D9F1 /* main.m in Sources */,
+				5B80FAC91C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.m in Sources */,
 				5B4A76D51BFF7C2C00018281 /* FSTBeefSteakToughTipSousVideRecipe.m in Sources */,
 				5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */,
 				51DFCAE11B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m in Sources */,
@@ -1740,6 +1840,7 @@
 				51A114D61B8BB2EB00E662D3 /* FSTSavedRecipeUnderLineView.m in Sources */,
 				517EC1091B3B32AB0025ECA1 /* FSTBleFoundViewController.m in Sources */,
 				51441A431B9786E300AF10E6 /* FSTSavedDisplayRecipeViewController.m in Sources */,
+				5B80FACC1C208AA700818E33 /* FSTVegetableCornSousVideRecipe.m in Sources */,
 				5B4A76C01BFF7B0000018281 /* FSTBeefSteakTenderPorterHouseSousVideRecipe.m in Sources */,
 				51A9D03D1B73DE36000AE293 /* FSTPrecisionCookingStateTemperatureReachedViewController.m in Sources */,
 				5B174DD81A5DE1DE00A00505 /* MilkGallonStand.m in Sources */,
@@ -1757,6 +1858,7 @@
 				5B4A76E41BFF7EB900018281 /* FSTBeefRoastBrisketSousVideRecipe.m in Sources */,
 				51A13CD71B4D6CFC00BA3CB7 /* FSTPointedHeaderView.m in Sources */,
 				5B059F811C0DFD9E0072AAB5 /* FSTDottedBorderView.m in Sources */,
+				5B80FABA1C20879900818E33 /* FSTVegetableArtichokeSousVideRecipe.m in Sources */,
 				5BA064CC1B83816C002FCE59 /* FSTCandyRecipe.m in Sources */,
 				5BCBB9F51B0386CE00B8E043 /* FSTRecipeTableViewController.m in Sources */,
 				5B4A76C31BFF7B4A00018281 /* FSTBeefSteakNormalSirloinSousVideRecipe.m in Sources */,
