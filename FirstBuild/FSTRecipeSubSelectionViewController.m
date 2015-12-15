@@ -91,18 +91,18 @@
     {
         return (FSTRecipes*)[[FSTVegetableRecipes alloc]init];
     }
-    else if ([self.recipe isKindOfClass:[FSTSousVideRecipe class]])
-    {
-        return (FSTRecipes*)[[FSTSousVideRecipes alloc]init];
-    }
-    else if ([self.recipe isKindOfClass:[FSTCandyRecipe class]])
-    {
-        return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
-    }
-
+    //Disabled non-sous vide recipes
+//    else if ([self.recipe isKindOfClass:[FSTSousVideRecipe class]])
+//    {
+//        return (FSTRecipes*)[[FSTSousVideRecipes alloc]init];
+//    }
+//    else if ([self.recipe isKindOfClass:[FSTCandyRecipe class]])
+//    {
+//        return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
+//    }
     else
     {
-        return [[FSTRecipes alloc]init];
+        return [[FSTSousVideRecipes alloc]init];
     }
     return nil;
 }
@@ -170,6 +170,7 @@
 - (IBAction)customTap:(id)sender {
     [self performSegueWithIdentifier:@"segueCustom" sender:nil];
 }
+
 - (IBAction)menuToggleTapped:(id)sender
 {
     [self.revealViewController rightRevealToggle:self.currentParagon]; // the other says product, which is inconsistent
