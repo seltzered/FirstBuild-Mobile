@@ -50,15 +50,14 @@
 @end
 
 @implementation FSTRecipeSubSelectionViewController
-{
-    FSTRecipeSubSelectionViewController* subSelectionViewController;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    if ([self.childViewControllers[0] isKindOfClass:[FSTRecipeTableViewController class]])
+    
+    if (self.childViewControllers.count > 0 && [self.childViewControllers[0] isKindOfClass:[FSTRecipeTableViewController class]])
     {
         ((FSTRecipeTableViewController*) self.childViewControllers[0]).delegate = self;
     }
@@ -154,10 +153,11 @@
     }
     else
     {
-        subSelectionViewController = [[FSTRecipeSubSelectionViewController alloc] init];
+        FSTRecipeSubSelectionViewController* subSelectionViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FSTRecipeSubSelectionViewController"];
+
         subSelectionViewController.currentParagon = self.currentParagon;
         subSelectionViewController.recipe = cookingMethod;
-        [self presentViewController:subSelectionViewController animated:YES completion:nil];
+        [self.navigationController pushViewController:subSelectionViewController animated:YES];
         //[self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
     }
 }

@@ -444,39 +444,37 @@ NSIndexPath *_indexPathForDeletion;
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FSTProduct * product = self.products[indexPath.row];
-    NSLog(@"selected %@", product.identifier);
+    NSLog(@"selected %@", product);
     
-    //if (product.online)
+    if ([product isKindOfClass:[FSTParagon class]])
     {
-        if ([product isKindOfClass:[FSTParagon class]])
+        FSTParagon* paragon = (FSTParagon*)product;
+        UIStoryboard* board;
+        
+        switch (paragon.session.cookMode)
         {
-            FSTParagon* paragon = (FSTParagon*)product;
-            UIStoryboard* board;
-            
-            switch (paragon.session.cookMode)
-            {
-                case FSTCookingStateUnknown:
-                case FSTCookingStateOff:
-                    [self performSegueWithIdentifier:@"segueParagon" sender:product];
-                    break;
-                case FSTCookingStatePrecisionCookingReachingTemperature:
-                case FSTCookingStatePrecisionCookingReachingMinTime:
-                case FSTCookingDirectCooking:
-                case FSTCookingDirectCookingWithTime:
-                case FSTCookingStatePrecisionCookingWithoutTime:
-                case FSTCookingStatePrecisionCookingPastMaxTime:
-                case FSTCookingStatePrecisionCookingReachingMaxTime:
-                case FSTCookingStatePrecisionCookingTemperatureReached:
-                case FSTCookingStatePrecisionCookingCurrentStageDone:
-                    board = [UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil];
-                    FSTCookingViewController *vc = [board instantiateViewControllerWithIdentifier:@"FSTCookingViewController"] ;
-                    vc.currentParagon = paragon;
-                    [self.navigationController pushViewController:vc animated:YES];
-                    break;
+            case FSTCookingStateUnknown:
+            case FSTCookingStateOff:
+                [self performSegueWithIdentifier:@"segueParagon" sender:product];
+                break;
+            case FSTCookingStatePrecisionCookingReachingTemperature:
+            case FSTCookingStatePrecisionCookingReachingMinTime:
+            case FSTCookingDirectCooking:
+            case FSTCookingDirectCookingWithTime:
+            case FSTCookingStatePrecisionCookingWithoutTime:
+            case FSTCookingStatePrecisionCookingPastMaxTime:
+            case FSTCookingStatePrecisionCookingReachingMaxTime:
+            case FSTCookingStatePrecisionCookingTemperatureReached:
+            case FSTCookingStatePrecisionCookingCurrentStageDone:
+                board = [UIStoryboard storyboardWithName:@"FSTParagon" bundle:nil];
+                FSTCookingViewController *vc = [board instantiateViewControllerWithIdentifier:@"FSTCookingViewController"] ;
+                vc.currentParagon = paragon;
+                [self.navigationController pushViewController:vc animated:YES];
+                break;
 
-            }
         }
     }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
