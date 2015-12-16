@@ -30,16 +30,29 @@
 #import "FSTBeefRoastShortRibsSousVideRecipe.h"
 #import "FSTBeefRoastGroundBeefSousVideRecipe.h"
 #import "FSTBeefRoastTenderLoinSousVideRecipe.h"
+#import "FSTAutoCookViewController.h"
 #import "FSTVegetableRecipes.h"
 #import "FSTVegetableRecipe.h"
-#import "FSTAutoCookViewController.h"
+#import "FSTVegetableArtichokeSousVideRecipe.h"
 #import "FSTVegetableAsparagusSousVideRecipe.h"
+#import "FSTVegetableBeetsSousVideRecipe.h"
+#import "FSTVegetableBroccoliSousVideRecipe.h"
+#import "FSTVegetableBrusselSproutsSousVideRecipe.h"
+#import "FSTVegetableCarrotsSousVideRecipe.h"
+#import "FSTVegetableCornSousVideRecipe.h"
+#import "FSTVegetableFennelSousVideRecipe.h"
+#import "FSTVegetableGreenBeansSousVideRecipe.h"
+#import "FSTVegetablePotatoesSousVideRecipe.h"
+#import "FSTVegetableSweetPotatoesSousVideRecipe.h"
 
 @interface FSTRecipeSubSelectionViewController ()
 
 @end
 
 @implementation FSTRecipeSubSelectionViewController
+{
+    FSTRecipeSubSelectionViewController* subSelectionViewController;
+}
 
 - (void)viewDidLoad
 {
@@ -109,7 +122,8 @@
 
 - (void) recipeSelected:(FSTRecipe *)cookingMethod
 {
-    // here check if an actual complete recipe was selected, if not
+    // here check if an actual complete recipe was selected, if it is
+    // go to the correct settings, if not
     // then just segue to another instance of this sub selection class
     if ([cookingMethod isKindOfClass:[FSTBeefSteakTenderSousVideRecipe class]]||
         [cookingMethod isKindOfClass:[FSTBeefSteakNormalSousVideRecipe class]]||
@@ -124,13 +138,27 @@
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
     }
-    else if([cookingMethod isKindOfClass:[FSTVegetableAsparagusSousVideRecipe class]])
+    else if([cookingMethod isKindOfClass:[FSTVegetableAsparagusSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableArtichokeSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableBeetsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableBrusselSproutsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableBroccoliSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableCarrotsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableCornSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableFennelSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableGreenBeansSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetablePotatoesSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTVegetableSweetPotatoesSousVideRecipe class]])
     {
         [self performSegueWithIdentifier:@"segueAutoCook" sender:cookingMethod];
     }
     else
     {
-        [self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
+        subSelectionViewController = [[FSTRecipeSubSelectionViewController alloc] init];
+        subSelectionViewController.currentParagon = self.currentParagon;
+        subSelectionViewController.recipe = cookingMethod;
+        [self presentViewController:subSelectionViewController animated:YES completion:nil];
+        //[self performSegueWithIdentifier:@"segueSubCookingMethod" sender:cookingMethod];
     }
 }
 
@@ -158,7 +186,6 @@
     else if([segue.destinationViewController isKindOfClass:[FSTSavedRecipeViewController class]])
     {
         ((FSTSavedRecipeViewController*)segue.destinationViewController).currentParagon = self.currentParagon;
-
     }
 }
 
