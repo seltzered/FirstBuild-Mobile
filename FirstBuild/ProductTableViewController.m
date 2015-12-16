@@ -318,16 +318,6 @@ NSIndexPath *_indexPathForDeletion;
             DLog(@"seguing to nowhere...");
         }
     }
-    else if ([sender isKindOfClass:[FSTChillHub class]])
-    {
-        ChillHubViewController *vc = (ChillHubViewController*)destination.scene;
-        vc.product = sender;
-    }
-    else if ([sender isKindOfClass:[FSTHoodie class]])
-    {
-        FSTHoodieViewController *vc = (FSTHoodieViewController*)destination.scene;
-        vc.hoodie = sender;
-    }
 }
 
 #pragma mark <UITableViewDataSource>
@@ -346,65 +336,7 @@ NSIndexPath *_indexPathForDeletion;
     FSTProduct * product = self.products[indexPath.row];
     ProductTableViewCell *productCell;
     
-    if ([product isKindOfClass:[FSTChillHub class]])
-    {
-        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCell" forIndexPath:indexPath];
-    }
-//    else if ([product isKindOfClass:[FSTHoodie class]])
-//    {
-//        FSTHoodie* hoodie = (FSTHoodie*)product;
-//        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellHoodie" forIndexPath:indexPath];
-//        productCell.friendlyName.text = product.friendlyName;
-//        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[hoodie.batteryLevel integerValue]];
-//        productCell.batteryView.batteryLevel = [hoodie.batteryLevel doubleValue]/100;
-//        [productCell.batteryView setNeedsDisplay]; // redraw
-//    }
-//    else if ([product isKindOfClass:[FSTHumanaPillBottle class]])
-//    {
-//        FSTHumanaPillBottle* bottle = (FSTHumanaPillBottle*)product; // cast it to check the cooking status
-//        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellHumanaPillBottle" forIndexPath:indexPath];
-//        productCell.friendlyName.text = product.friendlyName;
-//        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[bottle.batteryLevel integerValue]];
-//        productCell.batteryView.batteryLevel = [bottle.batteryLevel doubleValue]/100;
-//        [productCell.batteryView setNeedsDisplay]; // redraw
-//        
-//        if (bottle.needsRxRefill == YES)
-//        {
-//             productCell.statusLabel.text = @"Rx Needed!";
-//        }
-//        else
-//        {
-//             productCell.statusLabel.text = @"No Rx Needed";
-//        }
-//       
-//        if (product.online)
-//        {
-//            if (product.loading)
-//            {
-//                productCell.offlineLabel.hidden = YES;
-//                productCell.loadingProgressView.hidden = NO;
-//                productCell.arrowButton.hidden = YES;
-//            }
-//            else
-//            {
-//                productCell.disabledView.hidden = YES;
-//                productCell.arrowButton.hidden = NO;
-//                productCell.loadingProgressView.hidden = YES;
-//            }
-//        }
-//        else
-//        {
-//            productCell.offlineLabel.text = @"offline";
-//            productCell.offlineLabel.hidden = NO;
-//            productCell.disabledView.hidden = NO;
-//            productCell.arrowButton.hidden = YES;
-//            productCell.loadingProgressView.hidden = YES;
-//        }
-//        
-//        return productCell;
-//
-//    }
-    else if ([product isKindOfClass:[FSTParagon class]])
+    if ([product isKindOfClass:[FSTParagon class]])
     {
         FSTParagon* paragon = (FSTParagon*)product; // cast it to check the cooking status
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellParagon" forIndexPath:indexPath];
@@ -415,7 +347,7 @@ NSIndexPath *_indexPathForDeletion;
         productCell.batteryView.batteryLevel = [paragon.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
         //Taken out since those properties were not connected
-        [productCell.statusLabel setText:@"<WIP>"];
+        [productCell.statusLabel setText:@"---"];
 
         switch (paragon.session.cookMode)
         {
@@ -469,6 +401,7 @@ NSIndexPath *_indexPathForDeletion;
             productCell.disabledView.hidden = YES;
             productCell.arrowButton.hidden = NO;
             productCell.loadingProgressView.hidden = YES;
+            productCell.selectionStyle = UITableViewCellSelectionStyleDefault;
         }
     }
     else
@@ -478,6 +411,7 @@ NSIndexPath *_indexPathForDeletion;
         productCell.disabledView.hidden = NO;
         productCell.arrowButton.hidden = YES;
         productCell.loadingProgressView.hidden = YES;
+        productCell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     return productCell;
@@ -512,17 +446,9 @@ NSIndexPath *_indexPathForDeletion;
     FSTProduct * product = self.products[indexPath.row];
     NSLog(@"selected %@", product.identifier);
     
-    if (product.online)
+    //if (product.online)
     {
-        if ([product isKindOfClass:[FSTChillHub class]])
-        {
-            [self performSegueWithIdentifier:@"segueChillHub" sender:product];
-        }
-        else if ([product isKindOfClass:[FSTHoodie class]])
-        {
-            [self performSegueWithIdentifier:@"segueHoodie" sender:product];
-        }
-        else if ([product isKindOfClass:[FSTParagon class]])
+        if ([product isKindOfClass:[FSTParagon class]])
         {
             FSTParagon* paragon = (FSTParagon*)product;
             UIStoryboard* board;
@@ -563,7 +489,8 @@ NSIndexPath *_indexPathForDeletion;
     
     FSTProduct *product = self.products[indexPath.row];
     
-    if (product.online && !product.loading) {
+    if (!product.loading) {
+        
         return true;
     } else {
         return false;
@@ -591,145 +518,5 @@ NSIndexPath *_indexPathForDeletion;
             [self.delegate itemCountChanged:0];
         }
     }
-    // was empty
 }
-
-#pragma mark - BONEYARD
-
-//-(void)configureFirebaseDevices
-//{
-//    //TODO: support multiple device types
-//    Firebase *chillhubsRef = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices/chillhubs"];
-//    [chillhubsRef removeAllObservers];
-//    
-//    //device added
-//    [chillhubsRef observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-//        FSTChillHub* chillhub = [FSTChillHub new];
-//        chillhub.firebaseRef = snapshot.ref ;
-//        chillhub.identifier = snapshot.key;
-//        id rawVal = snapshot.value;
-//        if (rawVal != [NSNull null])
-//        {
-//            NSDictionary* val = rawVal;
-//            if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-//            {
-//                chillhub.online = YES;
-//            }
-//            else
-//            {
-//                chillhub.online = NO;
-//            }
-//            [self.productCollection reloadData];
-//        }
-//        
-//        [self.products addObject:chillhub];
-//        [self.productCollection reloadData];
-//        [self.delegate itemCountChanged:self.products.count];
-//    }];
-//    
-//    //device removed
-//    [chillhubsRef observeEventType:FEventTypeChildRemoved withBlock:^(FDataSnapshot *snapshot) {
-//        for (long i=self.products.count-1; i>-1; i--)
-//        {
-//            FSTChillHub *chillhub = [self.products objectAtIndex:i];
-//            if ([chillhub.identifier isEqualToString:snapshot.key])
-//            {
-//                [self.products removeObject:chillhub];
-//                [self.productCollection reloadData];
-//                break;
-//            }
-//        }
-//        [self.delegate itemCountChanged:self.products.count];
-//    }];
-//    
-//    //device online,offline status
-//    [chillhubsRef observeEventType:FEventTypeChildChanged withBlock:^(FDataSnapshot *snapshot) {
-//        for (long i=self.products.count-1; i>-1; i--)
-//        {
-//            FSTChillHub *chillhub = [self.products objectAtIndex:i];
-//            if ([chillhub.identifier isEqualToString:snapshot.key])
-//            {
-//                id rawVal = snapshot.value;
-//                if (rawVal != [NSNull null])
-//                {
-//                    NSDictionary* val = rawVal;
-//                    if ( [(NSString*)[val objectForKey:@"status"] isEqualToString:@"connected"] )
-//                    {
-//                        chillhub.online = YES;
-//                    }
-//                    else
-//                    {
-//                        chillhub.online = NO;
-//                    }
-//                    [self.productCollection reloadData];
-//                }
-//                break;
-//            }
-//        }
-//    }];
-//}
-//
-
-
-//- (void)checkForCloudProducts
-//{
-//    //TODO: not sure if this is the correct pattern. we want to show the "no products"
-//    //found if there really aren't any products. since there is no timeout concept on the firebase
-//    //API then am not sure what the correct method is for detecting a network error.
-//
-//    Firebase * ref = [[[FirebaseShared sharedInstance] userBaseReference] childByAppendingPath:@"devices"];
-//    [ref removeAllObservers];
-//
-//    __weak typeof(self) weakSelf = self;
-//
-//    [self.loadingIndicator startAnimating];
-//
-//    //detect if we have any products/if the products are removed it is
-//    //detected in the embeded collection view controller and we registered as a delegate
-//    [ref observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
-//        [weakSelf.loadingIndicator stopAnimating];
-//        [weakSelf hideProducts:NO];
-//        [weakSelf hideNoProducts:YES];
-//        weakSelf.hasFirebaseProducts = YES;
-//    } withCancelBlock:^(NSError *error) {
-//        //TODO: if its really a permission error then we need to handle this differently
-//        DLog(@"%@",error.localizedDescription);
-//        [weakSelf.loadingIndicator stopAnimating];
-//    }];
-//
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
-//        if (!self.hasFirebaseProducts)
-//        {
-//            [self.loadingIndicator stopAnimating];
-//            [self noItemsInCollection];
-//        }
-//    });
-//}
-
-/*-(NSArray*)tableView: (UITableView*)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
- UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
- 
- NSLog(@"Editing\n");
- }];
- editAction.backgroundColor = [UIColor grayColor];
- 
- UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction* action, NSIndexPath *indexPath){
- //[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
- NSLog(@"delete");
- FSTParagon * deletedItem = self.products[indexPath.item];
- [self.products removeObjectAtIndex:indexPath.item];
- [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
- [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
- [self.tableView reloadData];
- 
- if (self.products.count==0)
- {
- [self.delegate itemCountChanged:0];
- }
- }];
- return @[editAction, deleteAction];
- }*/
-
-
 @end
