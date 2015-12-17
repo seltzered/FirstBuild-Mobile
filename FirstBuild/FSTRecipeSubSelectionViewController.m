@@ -44,6 +44,9 @@
 #import "FSTVegetableGreenBeansSousVideRecipe.h"
 #import "FSTVegetablePotatoesSousVideRecipe.h"
 #import "FSTVegetableSweetPotatoesSousVideRecipe.h"
+#import "FSTEggScrambledSousVideRecipe.h"
+#import "FSTEggWholeSousVideRecipe.h"
+#import "FSTEggRecipes.h"
 
 @interface FSTRecipeSubSelectionViewController ()
 
@@ -86,7 +89,6 @@
 
 - (FSTRecipes*) dataRequestedFromChild
 {
-    // order matters here, it goes from specific to more generic types
     if ([self.recipe isKindOfClass:[FSTBeefSteakSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideSteakRecipes alloc]init];
@@ -102,6 +104,10 @@
     else if ([self.recipe isKindOfClass:[FSTVegetableRecipe class]])
     {
         return (FSTRecipes*)[[FSTVegetableRecipes alloc]init];
+    }
+    else if ([self.recipe isKindOfClass:[FSTEggRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTEggRecipes alloc]init];
     }
     //Disabled non-sous vide recipes
 //    else if ([self.recipe isKindOfClass:[FSTSousVideRecipe class]])
@@ -147,9 +153,14 @@
             [cookingMethod isKindOfClass:[FSTVegetableFennelSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTVegetableGreenBeansSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTVegetablePotatoesSousVideRecipe class]]||
-            [cookingMethod isKindOfClass:[FSTVegetableSweetPotatoesSousVideRecipe class]])
+            [cookingMethod isKindOfClass:[FSTVegetableSweetPotatoesSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTEggScrambledSousVideRecipe class]])
     {
         [self performSegueWithIdentifier:@"segueAutoCook" sender:cookingMethod];
+    }
+    else if([cookingMethod isKindOfClass:[FSTEggWholeSousVideRecipe class]])
+    {
+        [self performSegueWithIdentifier:@"segueEgg" sender:cookingMethod];
     }
     else
     {

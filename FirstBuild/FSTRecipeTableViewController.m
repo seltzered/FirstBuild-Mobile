@@ -27,7 +27,7 @@
 - (void)dealloc
 {
     DLog("dealloc");
-    self.recipes = nil;
+    //self.recipes = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

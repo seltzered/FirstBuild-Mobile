@@ -9,6 +9,7 @@
 #import "FSTSousVideRecipes.h"
 #import "FSTBeefSousVideRecipe.h"
 #import "FSTVegetableRecipe.h"
+#import "FSTEggRecipe.h"
 
 @implementation FSTSousVideRecipes
 
@@ -19,6 +20,7 @@
         self.recipes = [[NSArray alloc] initWithObjects:
                         [FSTBeefSousVideRecipe new],
                         [FSTVegetableRecipe new],
+                        [FSTEggRecipe new],
                         nil];
     }
     return self;
