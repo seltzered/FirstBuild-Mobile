@@ -25,6 +25,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+    [controller setHeaderText:@"SETTINGS" withFrameRect:CGRectMake(0, 0, 120, 30)];
+    self.continueTapGestureRecognizer.enabled = YES;
     [self.recipe addStage];
     [self getDataForDonenessIndex:3];
     _eggRecipe = [FSTEggWholeSousVideRecipe new];

@@ -47,6 +47,9 @@
 #import "FSTEggScrambledSousVideRecipe.h"
 #import "FSTEggWholeSousVideRecipe.h"
 #import "FSTEggRecipes.h"
+#import "FSTPoultrySousVideRecipes.h"
+#import "FSTPoultrySousVideRecipe.h"
+
 
 @interface FSTRecipeSubSelectionViewController ()
 
@@ -65,6 +68,11 @@
         ((FSTRecipeTableViewController*) self.childViewControllers[0]).delegate = self;
     }
     
+    [self updateHeader];
+}
+
+-(void)updateHeader
+{
     MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
     if (self.recipe)
     {
@@ -89,6 +97,8 @@
 
 - (FSTRecipes*) dataRequestedFromChild
 {
+    [self updateHeader];
+    
     if ([self.recipe isKindOfClass:[FSTBeefSteakSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideSteakRecipes alloc]init];
@@ -109,6 +119,10 @@
     {
         return (FSTRecipes*)[[FSTEggRecipes alloc]init];
     }
+    else if ([self.recipe isKindOfClass:[FSTPoultrySousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTPoultrySousVideRecipes alloc]init];
+    }
     //Disabled non-sous vide recipes
 //    else if ([self.recipe isKindOfClass:[FSTSousVideRecipe class]])
 //    {
@@ -122,6 +136,7 @@
     {
         return [[FSTSousVideRecipes alloc]init];
     }
+    
     return nil;
 }
 

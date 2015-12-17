@@ -10,6 +10,7 @@
 #import "FSTBeefSousVideRecipe.h"
 #import "FSTVegetableRecipe.h"
 #import "FSTEggRecipe.h"
+#import "FSTPoultrySousVideRecipe.h"
 
 @implementation FSTSousVideRecipes
 
@@ -21,6 +22,7 @@
                         [FSTBeefSousVideRecipe new],
                         [FSTVegetableRecipe new],
                         [FSTEggRecipe new],
+                        [FSTPoultrySousVideRecipe new],
                         nil];
     }
     return self;
