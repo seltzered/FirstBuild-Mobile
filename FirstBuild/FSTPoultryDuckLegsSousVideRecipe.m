@@ -15,8 +15,15 @@
     if (self)
     {
         self.name = @"Leg";
+        FSTParagonCookingStage* stage = [self addStage];
+        stage.cookTimeMinimum = @480;
+        stage.cookTimeMaximum = @720;
+        stage.targetTemperature = @175;
+        stage.maxPowerLevel = @10;
+        stage.automaticTransition = @0;
     }
     return self;
+    
 }
 
 @end
