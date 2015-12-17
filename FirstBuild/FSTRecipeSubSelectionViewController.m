@@ -9,47 +9,13 @@
 #import "FSTRecipeSubSelectionViewController.h"
 #import "FSTRecipes.h"
 #import "FSTSousVideRecipes.h"
-#import "FSTBeefSousVideRecipe.h"
-#import "FSTBeefSousVideRecipes.h"
-#import "FSTBeefSteakSousVideRecipe.h"
-#import "FSTBeefSousVideSteakRecipes.h"
-#import "FSTBeefSousVideRoastRecipes.h"
-#import "FSTBeefSteakTenderSousVideRecipe.h"
-#import "FSTBeefSettingsViewController.h"
 #import "MobiNavigationController.h"
+#import "RecipeMaster.h"
+#import "FSTBeefSettingsViewController.h"
 #import "FSTCustomCookSettingsViewController.h"
 #import "FSTRevealViewController.h"
-#import "FSTSavedRecipeViewController.h"
-#import "FSTCandyRecipe.h"
-#import "FSTCandyRecipes.h"
-#import "FSTBeefSteakNormalSousVideRecipe.h"
-#import "FSTBeefSteakToughSousVideRecipe.h"
-#import "FSTBeefRoastRibEyeSousVideRecipe.h"
-#import "FSTBeefRoastBrisketSousVideRecipe.h"
-#import "FSTBeefRoastChuckRoastSousVideRecipe.h"
-#import "FSTBeefRoastShortRibsSousVideRecipe.h"
-#import "FSTBeefRoastGroundBeefSousVideRecipe.h"
-#import "FSTBeefRoastTenderLoinSousVideRecipe.h"
 #import "FSTAutoCookViewController.h"
-#import "FSTVegetableRecipes.h"
-#import "FSTVegetableRecipe.h"
-#import "FSTVegetableArtichokeSousVideRecipe.h"
-#import "FSTVegetableAsparagusSousVideRecipe.h"
-#import "FSTVegetableBeetsSousVideRecipe.h"
-#import "FSTVegetableBroccoliSousVideRecipe.h"
-#import "FSTVegetableBrusselSproutsSousVideRecipe.h"
-#import "FSTVegetableCarrotsSousVideRecipe.h"
-#import "FSTVegetableCornSousVideRecipe.h"
-#import "FSTVegetableFennelSousVideRecipe.h"
-#import "FSTVegetableGreenBeansSousVideRecipe.h"
-#import "FSTVegetablePotatoesSousVideRecipe.h"
-#import "FSTVegetableSweetPotatoesSousVideRecipe.h"
-#import "FSTEggScrambledSousVideRecipe.h"
-#import "FSTEggWholeSousVideRecipe.h"
-#import "FSTEggRecipes.h"
-#import "FSTPoultrySousVideRecipes.h"
-#import "FSTPoultrySousVideRecipe.h"
-
+#import "FSTSavedRecipeViewController.h"
 
 @interface FSTRecipeSubSelectionViewController ()
 
@@ -107,6 +73,10 @@
     {
         return (FSTRecipes*)[[FSTBeefSousVideRoastRecipes alloc]init];
     }
+    else if ([self.recipe isKindOfClass:[FSTPoultryDuckSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTPoultryDuckSousVideRecipes alloc]init];
+    }
     else if ([self.recipe isKindOfClass:[FSTBeefSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideRecipes alloc]init];
@@ -153,7 +123,8 @@
         [cookingMethod isKindOfClass:[FSTBeefRoastChuckRoastSousVideRecipe class]]||
         [cookingMethod isKindOfClass:[FSTBeefRoastShortRibsSousVideRecipe class]]||
         [cookingMethod isKindOfClass:[FSTBeefRoastGroundBeefSousVideRecipe class]]||
-        [cookingMethod isKindOfClass:[FSTBeefRoastTenderLoinSousVideRecipe class]]
+        [cookingMethod isKindOfClass:[FSTBeefRoastTenderLoinSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTPoultryDuckBreastSousVideRecipe class]]
         )
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
@@ -169,7 +140,8 @@
             [cookingMethod isKindOfClass:[FSTVegetableGreenBeansSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTVegetablePotatoesSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTVegetableSweetPotatoesSousVideRecipe class]]||
-            [cookingMethod isKindOfClass:[FSTEggScrambledSousVideRecipe class]])
+            [cookingMethod isKindOfClass:[FSTEggScrambledSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTPoultryDuckLegsSousVideRecipe class]])
     {
         [self performSegueWithIdentifier:@"segueAutoCook" sender:cookingMethod];
     }

@@ -17,7 +17,7 @@
 
 @end
 
-const uint8_t TEMPERATURE_START_INDEX = 2;
+const uint8_t TEMPERATURE_START_INDEX = 1;
 
 @implementation FSTBeefSettingsViewController
 {

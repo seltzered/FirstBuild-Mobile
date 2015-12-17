@@ -216,6 +216,9 @@
 		5BEB7D951C234234006823E2 /* FSTPoultryTurkeySousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7D941C234234006823E2 /* FSTPoultryTurkeySousVideRecipe.m */; };
 		5BEB7D981C234246006823E2 /* FSTPoultryChickenSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7D971C234246006823E2 /* FSTPoultryChickenSousVideRecipe.m */; };
 		5BEB7D9B1C2343E6006823E2 /* FSTPoultrySousVideRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7D9A1C2343E6006823E2 /* FSTPoultrySousVideRecipes.m */; };
+		5BEB7D9E1C236717006823E2 /* FSTPoultryDuckLegsSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7D9D1C236717006823E2 /* FSTPoultryDuckLegsSousVideRecipe.m */; };
+		5BEB7DA11C236727006823E2 /* FSTPoultryDuckBreastSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7DA01C236727006823E2 /* FSTPoultryDuckBreastSousVideRecipe.m */; };
+		5BEB7DA41C236947006823E2 /* FSTPoultryDuckSousVideRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7DA31C236947006823E2 /* FSTPoultryDuckSousVideRecipes.m */; };
 		5BF6FA4F1B74EF9B00D3EB85 /* FSTCookingViewSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF6FA4E1B74EF9B00D3EB85 /* FSTCookingViewSegue.m */; };
 		5BF9482B19EC15A000CB8BCF /* ChillHubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF9482A19EC15A000CB8BCF /* ChillHubViewController.m */; };
 		5BF9482D19EC15BB00CB8BCF /* ChillHub.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BF9482C19EC15BB00CB8BCF /* ChillHub.storyboard */; };
@@ -633,6 +636,13 @@
 		5BEB7D971C234246006823E2 /* FSTPoultryChickenSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPoultryChickenSousVideRecipe.m; sourceTree = "<group>"; };
 		5BEB7D991C2343E6006823E2 /* FSTPoultrySousVideRecipes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPoultrySousVideRecipes.h; sourceTree = "<group>"; };
 		5BEB7D9A1C2343E6006823E2 /* FSTPoultrySousVideRecipes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPoultrySousVideRecipes.m; sourceTree = "<group>"; };
+		5BEB7D9C1C236717006823E2 /* FSTPoultryDuckLegsSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPoultryDuckLegsSousVideRecipe.h; sourceTree = "<group>"; };
+		5BEB7D9D1C236717006823E2 /* FSTPoultryDuckLegsSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPoultryDuckLegsSousVideRecipe.m; sourceTree = "<group>"; };
+		5BEB7D9F1C236727006823E2 /* FSTPoultryDuckBreastSousVideRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPoultryDuckBreastSousVideRecipe.h; sourceTree = "<group>"; };
+		5BEB7DA01C236727006823E2 /* FSTPoultryDuckBreastSousVideRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPoultryDuckBreastSousVideRecipe.m; sourceTree = "<group>"; };
+		5BEB7DA21C236947006823E2 /* FSTPoultryDuckSousVideRecipes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPoultryDuckSousVideRecipes.h; sourceTree = "<group>"; };
+		5BEB7DA31C236947006823E2 /* FSTPoultryDuckSousVideRecipes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPoultryDuckSousVideRecipes.m; sourceTree = "<group>"; };
+		5BEB7DA51C236DA1006823E2 /* RecipeMaster.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecipeMaster.h; sourceTree = "<group>"; };
 		5BF6FA4D1B74EF9B00D3EB85 /* FSTCookingViewSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTCookingViewSegue.h; sourceTree = "<group>"; };
 		5BF6FA4E1B74EF9B00D3EB85 /* FSTCookingViewSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingViewSegue.m; sourceTree = "<group>"; };
 		5BF9482919EC15A000CB8BCF /* ChillHubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChillHubViewController.h; sourceTree = "<group>"; };
@@ -1359,6 +1369,7 @@
 			isa = PBXGroup;
 			children = (
 				5B4A76EB1BFF7FC400018281 /* SousVide */,
+				5BEB7DA51C236DA1006823E2 /* RecipeMaster.h */,
 				515CD8981B7CD6340087F9C7 /* FSTRecipe.h */,
 				515CD8991B7CD6340087F9C7 /* FSTRecipe.m */,
 				5BCBB9FF1B03CA5200B8E043 /* FSTRecipes.h */,
@@ -1594,6 +1605,8 @@
 				5BEB7D8B1C234133006823E2 /* FSTPoultrySousVideRecipe.m */,
 				5BEB7D991C2343E6006823E2 /* FSTPoultrySousVideRecipes.h */,
 				5BEB7D9A1C2343E6006823E2 /* FSTPoultrySousVideRecipes.m */,
+				5BEB7DA21C236947006823E2 /* FSTPoultryDuckSousVideRecipes.h */,
+				5BEB7DA31C236947006823E2 /* FSTPoultryDuckSousVideRecipes.m */,
 			);
 			name = Poultry;
 			sourceTree = "<group>";
@@ -1621,6 +1634,10 @@
 			children = (
 				5BEB7D901C234225006823E2 /* FSTPoultryDuckSousVideRecipe.h */,
 				5BEB7D911C234225006823E2 /* FSTPoultryDuckSousVideRecipe.m */,
+				5BEB7D9C1C236717006823E2 /* FSTPoultryDuckLegsSousVideRecipe.h */,
+				5BEB7D9D1C236717006823E2 /* FSTPoultryDuckLegsSousVideRecipe.m */,
+				5BEB7D9F1C236727006823E2 /* FSTPoultryDuckBreastSousVideRecipe.h */,
+				5BEB7DA01C236727006823E2 /* FSTPoultryDuckBreastSousVideRecipe.m */,
 			);
 			name = Duck;
 			sourceTree = "<group>";
@@ -1808,6 +1825,7 @@
 				515CD89D1B7CDC900087F9C7 /* FSTSavedEditRecipeViewController.m in Sources */,
 				51DC77691B8B99CC00313611 /* FSTSavedRecipeInstructionsViewController.m in Sources */,
 				5BC3647E1A2F637800D03B9C /* FSTDevice.m in Sources */,
+				5BEB7D9E1C236717006823E2 /* FSTPoultryDuckLegsSousVideRecipe.m in Sources */,
 				5BC364971A3260E200D03B9C /* FSTChillHub.m in Sources */,
 				5B3E180B1A41CC76004F1FA0 /* ProductMainViewController.m in Sources */,
 				5B7338C01B0F9CEA004C931E /* Session.m in Sources */,
@@ -1820,6 +1838,7 @@
 				5BCBB9E01B02A24100B8E043 /* FSTReadyToReachTemperatureViewController.m in Sources */,
 				5BD467CD1A35ED54009BAC36 /* FirebaseShared.m in Sources */,
 				51A114D91B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m in Sources */,
+				5BEB7DA11C236727006823E2 /* FSTPoultryDuckBreastSousVideRecipe.m in Sources */,
 				51B2975E1B8F65E80017DCA2 /* FSTRecipeTypeTableViewController.m in Sources */,
 				5B80FAC01C208A6300818E33 /* FSTVegetableAsparagusSousVideRecipe.m in Sources */,
 				5B80FAC61C208A8700818E33 /* FSTVegetableBroccoliSousVideRecipe.m in Sources */,
@@ -1841,6 +1860,7 @@
 				5B4A76E11BFF7EA800018281 /* FSTBeefRoastChuckRoastSousVideRecipe.m in Sources */,
 				5BEB7D951C234234006823E2 /* FSTPoultryTurkeySousVideRecipe.m in Sources */,
 				51DC77661B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m in Sources */,
+				5BEB7DA41C236947006823E2 /* FSTPoultryDuckSousVideRecipes.m in Sources */,
 				5B4A76B11BFF735600018281 /* FSTBeefRoastTenderLoinSousVideRecipe.m in Sources */,
 				5B4A76C61BFF7B6200018281 /* FSTBeefSteakNormalFlatIronSousVideRecipe.m in Sources */,
 				515340E91B3C31C60035DEBA /* FSTBleNamingViewController.m in Sources */,
