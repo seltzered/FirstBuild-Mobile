@@ -1134,9 +1134,68 @@ static const uint8_t STAGE_SIZE = 8;
             [self.delegate cookModeChanged:self.session.cookMode];
         }
         
+        
+        
+        [self sendCookingStatusNotification];
+        
         [self notifyDeviceEssentialDataChanged];
     }
 }
+
+-(void)sendCookingStatusNotification
+{
+    NSString* text;
+    switch (self.session.cookMode)
+    {
+        case FSTCookingStateOff:
+            text = @"Paragon is now off";
+            break;
+        case FSTCookingStatePrecisionCookingReachingTemperature:
+            if ([self.session.currentStage.targetTemperature intValue] > [self.session.currentProbeTemperature intValue])
+            {
+                text = @"Paragon is preheating";
+            }
+            else
+            {
+                text = @"Cooling";
+            }
+            break;
+        case FSTCookingDirectCooking:
+            text = @"Direct cooking started on Paragon.";
+            break;
+        case FSTCookingDirectCookingWithTime:
+        case FSTCookingStatePrecisionCookingReachingMinTime:
+        case FSTCookingStatePrecisionCookingWithoutTime:
+            text = @"Timer started on Paragon.";
+            break;
+        case FSTCookingStatePrecisionCookingPastMaxTime:
+            text = @"Food needs to be removed now.";
+            break;
+        case FSTCookingStatePrecisionCookingReachingMaxTime:
+            text = @"Food is ready!";
+            break;
+        case FSTCookingStateUnknown:
+            break;
+        case FSTCookingStatePrecisionCookingTemperatureReached:
+            text = @"Preheating complete. Please click continue.";
+            break;
+        case FSTCookingStatePrecisionCookingCurrentStageDone:
+            break;
+            
+    }
+    
+    UILocalNotification* local = [[UILocalNotification alloc]init];
+    if (local)
+    {
+        local.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        
+        local.alertBody = text;
+        local.timeZone = [NSTimeZone defaultTimeZone];
+        [[UIApplication sharedApplication] scheduleLocalNotification:local];
+        
+    }
+}
+
 
 //TODO: move to ble product
 -(void)handleBatteryLevel: (CBCharacteristic*)characteristic
