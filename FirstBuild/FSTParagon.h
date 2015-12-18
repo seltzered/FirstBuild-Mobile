@@ -39,5 +39,6 @@ extern NSString * const FSTServiceParagon ;
 -(void)moveNextStage;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;
+@property (nonatomic) BOOL isProbeConnected;
 
 @end

@@ -342,7 +342,15 @@ NSIndexPath *_indexPathForDeletion;
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellParagon" forIndexPath:indexPath];
         productCell.friendlyName.text = product.friendlyName;
         
-        productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[paragon.batteryLevel integerValue]];
+        
+        if ([paragon.batteryLevel integerValue] == 0)
+        {
+            productCell.batteryLabel.text = @"probe\noffline";
+        }
+        else
+        {
+            productCell.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (long)[paragon.batteryLevel integerValue]];
+        }
         
         productCell.batteryView.batteryLevel = [paragon.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
@@ -373,12 +381,14 @@ NSIndexPath *_indexPathForDeletion;
                 [productCell.statusLabel setText:@"Cooking"];
                 break;
             case FSTCookingStatePrecisionCookingPastMaxTime:
+            
             case FSTCookingStatePrecisionCookingReachingMaxTime:
                 [productCell.statusLabel setText:@"Complete"];
                 break;
             case FSTCookingStateUnknown:
-                [productCell.statusLabel setText:@"!"];
+                [productCell.statusLabel setText:@"-"];
                 break;
+            case FSTCookingStatePrecisionCookingCurrentStageDone:
             case FSTCookingStatePrecisionCookingTemperatureReached:
                 [productCell.statusLabel setText:@"Waiting..."];
                 break;

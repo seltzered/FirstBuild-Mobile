@@ -106,6 +106,7 @@ static const uint8_t STAGE_SIZE = 8;
         
         self.session.cookState = FSTParagonCookStateOff;
         self.session.cookMode = FSTCookingStateOff;
+        self.isProbeConnected = NO;
     }
 
     return self;
@@ -618,7 +619,7 @@ static const uint8_t STAGE_SIZE = 8;
     {
         NSLog(@"char: FSTCharacteristicProbeConnectionState, data: %@", characteristic.value);
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicProbeConnectionState];
-        //not implemented
+        [self handleProbeState:characteristic];
     }
     else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
     {
@@ -726,6 +727,30 @@ static const uint8_t STAGE_SIZE = 8;
     
     
 } // end assignToProperty
+
+-(void)handleProbeState: (CBCharacteristic*)characteristic
+{
+    if (characteristic.value.length != 1)
+    {
+        DLog(@"handleProbeState length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+        return;
+    }
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
+    
+    if (bytes[0]!=1)
+    {
+        self.isProbeConnected = NO;
+        self.batteryLevel = [NSNumber numberWithInt:0];
+        [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
+    }
+    else
+    {
+        self.isProbeConnected = YES;
+    }
+
+}
 
 -(void)handleUserInformation: (CBCharacteristic*)characteristic
 {
