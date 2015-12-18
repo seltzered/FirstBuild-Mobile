@@ -52,12 +52,13 @@
     
     //TODO: obviously wrong
     // min time values
-    NSNumber* hour = stage.cookTimeMinimum   ;
-    NSNumber* minute = stage.cookTimeMinimum;
+    
+    NSNumber* hour = [NSNumber numberWithInt:[stage.cookTimeMinimum intValue]/60];
+    NSNumber* minute = [NSNumber numberWithInt:[stage.cookTimeMinimum intValue]%60];
     
     // max time values
-    NSNumber* maxHour = stage.cookTimeMaximum  ;
-    NSNumber* maxMinute = stage.cookTimeMaximum   ;
+    NSNumber* maxHour = [NSNumber numberWithInt:[stage.cookTimeMaximum intValue]/60]  ;
+    NSNumber* maxMinute = [NSNumber numberWithInt:[stage.cookTimeMaximum intValue]%60]   ;
     
     // min time labels
     NSMutableAttributedString *hourString = [[NSMutableAttributedString alloc] initWithString:[hour stringValue] attributes: boldFontDict];
