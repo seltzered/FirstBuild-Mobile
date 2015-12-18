@@ -9,5 +9,10 @@
 #import "FSTSousVideRecipe.h"
 
 @interface FSTPorkSousVideRecipe : FSTSousVideRecipe
+@property (nonatomic, retain) NSArray* thicknesses;
+@property (nonatomic, retain) NSDictionary* thicknessLabels;
+@property (nonatomic, retain) NSArray* donenesses;
+@property (nonatomic, retain) NSDictionary* donenessLabels;
 
+@property (nonatomic, retain) NSDictionary* cookingTimes;
 @end

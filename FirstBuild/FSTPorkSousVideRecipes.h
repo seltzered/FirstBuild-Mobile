@@ -9,7 +9,8 @@
 #import "FSTSousVideRecipes.h"
 #import "FSTPorkChopsSousVideRecipe.h"
 #import "FSTPorkShoulderSousVideRecipe.h"
-#import "FSTPorkRibsSousVideRecipe.h"
+#import "FSTPorkBackRibsSousVideRecipe.h"
+#import "FSTPorkSpareRibsSousVideRecipe.h"
 #import "FSTPorkTenderloinSousVideRecipe.h"
 
 @interface FSTPorkSousVideRecipes : FSTSousVideRecipes

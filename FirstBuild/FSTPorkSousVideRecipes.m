@@ -16,7 +16,8 @@
         self.recipes = [[NSArray alloc] initWithObjects:
                         [FSTPorkChopsSousVideRecipe new],
                         [FSTPorkShoulderSousVideRecipe new],
-                        [FSTPorkRibsSousVideRecipe new],
+                        [FSTPorkSpareRibsSousVideRecipe new],
+                        [FSTPorkBackRibsSousVideRecipe new],
                         [FSTPorkTenderloinSousVideRecipe new],
                         nil];
     }

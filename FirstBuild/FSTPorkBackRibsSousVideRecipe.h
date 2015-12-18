@@ -1,5 +1,5 @@
 //
-//  FSTPorkRibsSousVideRecipe.h
+//  FSTPorkBackRibsSousVideRecipe.h
 //  FirstBuild
 //
 //  Created by Myles Caley on 12/18/15.
@@ -8,6 +8,6 @@
 
 #import "FSTPorkSousVideRecipe.h"
 
-@interface FSTPorkRibsSousVideRecipe : FSTPorkSousVideRecipe
+@interface FSTPorkBackRibsSousVideRecipe : FSTPorkSousVideRecipe
 
 @end

@@ -1,24 +1,24 @@
 //
-//  FSTPorkTenderloinSousVideRecipe.m
+//  FSTPorkSpareRibsSousVideRecipe.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 12/18/15.
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTPorkTenderloinSousVideRecipe.h"
+#import "FSTPorkSpareRibsSousVideRecipe.h"
 
-@implementation FSTPorkTenderloinSousVideRecipe
+@implementation FSTPorkSpareRibsSousVideRecipe
 - (id) init
 {
     self = [super init];
     if (self)
     {
-        self.name = @"Tenderloin";
+        self.name = @"Spare Ribs";
         FSTParagonCookingStage* stage = [self addStage];
-        stage.cookTimeMinimum = @120;
-        stage.cookTimeMaximum = @240;
-        stage.targetTemperature = @140;
+        stage.cookTimeMinimum = @720;
+        stage.cookTimeMaximum = @1440;
+        stage.targetTemperature = @165;
         stage.maxPowerLevel = @10;
         stage.automaticTransition = @1;
     }
