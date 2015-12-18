@@ -553,7 +553,7 @@ static const uint8_t STAGE_SIZE = 8;
             OSWriteBigInt16(&bytes[pos+POS_MAX_HOLD_TIME],   0, 0);
         }
         OSWriteBigInt16(&bytes[pos+POS_TARGET_TEMP],     0, [stage.targetTemperature unsignedShortValue]*100);
-        bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue] + 1;
+        bytes[pos+POS_AUTO_TRANSITION] = [stage.automaticTransition unsignedCharValue];
     }
     
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
