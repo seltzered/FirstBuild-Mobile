@@ -357,33 +357,39 @@ NSIndexPath *_indexPathForDeletion;
         //Taken out since those properties were not connected
         [productCell.statusLabel setText:@"---"];
 
+        //TODO: come back when we understand what the correct text should be on the product listing
         switch (paragon.session.cookMode)
         {
             case FSTCookingStateOff:
-                [productCell.statusLabel setText:@"Off"];
+                [productCell.statusLabel setText:@"Paragon Off"];
                 break;
             case FSTCookingStatePrecisionCookingReachingTemperature:
+                [productCell.statusLabel setText:@"Paragon On"];
+
                 if ([paragon.session.currentStage.targetTemperature intValue] > [paragon.session.currentProbeTemperature intValue])
                 {
-                    [productCell.statusLabel setText:@"Preheating"];
+//                    [productCell.statusLabel setText:@"Preheating"];
                 }
                 else
                 {
-                    [productCell.statusLabel setText:@"Cooling"];
+//                    [productCell.statusLabel setText:@"Cooling"];
                 }
                 break;
             case FSTCookingDirectCooking:
                 [productCell.statusLabel setText:@"Direct"];
+                [productCell.statusLabel setText:@"Paragon On"];
                 break;
             case FSTCookingDirectCookingWithTime:
             case FSTCookingStatePrecisionCookingReachingMinTime:
             case FSTCookingStatePrecisionCookingWithoutTime:
                 [productCell.statusLabel setText:@"Cooking"];
+                [productCell.statusLabel setText:@"Paragon On"];
                 break;
             case FSTCookingStatePrecisionCookingPastMaxTime:
             
             case FSTCookingStatePrecisionCookingReachingMaxTime:
                 [productCell.statusLabel setText:@"Complete"];
+                [productCell.statusLabel setText:@"Paragon On"];
                 break;
             case FSTCookingStateUnknown:
                 [productCell.statusLabel setText:@"-"];
@@ -391,6 +397,7 @@ NSIndexPath *_indexPathForDeletion;
             case FSTCookingStatePrecisionCookingCurrentStageDone:
             case FSTCookingStatePrecisionCookingTemperatureReached:
                 [productCell.statusLabel setText:@"Waiting..."];
+                [productCell.statusLabel setText:@"Paragon On"];
                 break;
         }
     }
