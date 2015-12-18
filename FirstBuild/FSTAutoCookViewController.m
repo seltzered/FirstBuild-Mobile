@@ -16,7 +16,10 @@
 @end
 
 @implementation FSTAutoCookViewController
-
+{
+    IBOutlet UILabel *recipeNameLabel;
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -38,6 +41,8 @@
 
 - (void)updateLabels
 {
+    recipeNameLabel.text = self.recipe.name;
+    
     //temperature label
     UIFont *boldFont = [UIFont fontWithName:@"FSEmeric-SemiBold" size:17.0];
     NSDictionary *boldFontDict = [NSDictionary dictionaryWithObject: boldFont forKey:NSFontAttributeName];
@@ -50,7 +55,6 @@
     
     FSTParagonCookingStage* stage = self.recipe.paragonCookingStages[0];
     
-    //TODO: obviously wrong
     // min time values
     
     NSNumber* hour = [NSNumber numberWithInt:[stage.cookTimeMinimum intValue]/60];
