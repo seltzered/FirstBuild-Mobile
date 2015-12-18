@@ -47,8 +47,10 @@
     }
     else
     {
-        [navigation setHeaderImageNamed:@"Paragon_Logo_Red" withFrameRect:CGRectMake(0, 0, 120, 30)];
-        [navigation.navigationBar setBarTintColor:[UIColor blackColor]];
+        //NSString* headerText = [self.recipe.name uppercaseString];
+        [navigation setHeaderText:@"SOUS VIDE" withFrameRect:CGRectMake(0, 0, 120, 30)];
+//        [navigation setHeaderImageNamed:@"Paragon_Logo_Red" withFrameRect:CGRectMake(0, 0, 120, 30)];
+//        [navigation.navigationBar setBarTintColor:[UIColor blackColor]];
     }
 }
 
@@ -188,7 +190,10 @@
             [cookingMethod isKindOfClass:[FSTFruitPapayaSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTFruitPeachesSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTFruitPearsSousVideRecipe class]]||
-            [cookingMethod isKindOfClass:[FSTFruitPlumsSousVideRecipe class]]
+            [cookingMethod isKindOfClass:[FSTFruitPlumsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTPorkSpareRibsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTPorkBackRibsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTPorkTenderloinSousVideRecipe class]]
             )
     {
         [self performSegueWithIdentifier:@"segueAutoCook" sender:cookingMethod];
