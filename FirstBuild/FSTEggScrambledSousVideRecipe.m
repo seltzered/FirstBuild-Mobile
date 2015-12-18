@@ -21,7 +21,7 @@
         stage.cookTimeMaximum = @60;
         stage.targetTemperature = @167;
         stage.maxPowerLevel = @10;
-        stage.automaticTransition = @0;
+        stage.automaticTransition = @2;
     }
     return self;
     

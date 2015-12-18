@@ -28,13 +28,13 @@
 {
     self = [super init];
     if (self) {
-        _targetTemperature = [NSNumber numberWithInt:0];
-        _cookTimeMinimum = [NSNumber numberWithInt:0];
-        _cookTimeMaximum = [NSNumber numberWithInt:0];
-        _maxPowerLevel = [NSNumber numberWithInt:5];
+        _targetTemperature = @0;
+        _cookTimeMinimum = @0;
+        _cookTimeMaximum = @0;
+        _maxPowerLevel = @10;
         _cookingLabel = @"";
         _cookingPrepLabel = @"";
-        _automaticTransition = [NSNumber numberWithBool:NO];
+        _automaticTransition = @2;
     }
     return self;
 }

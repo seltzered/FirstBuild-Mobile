@@ -63,7 +63,7 @@
         stage1.cookingPrepLabel = @"";
         stage1.targetTemperature = @85;
         stage1.maxPowerLevel = @8;
-        stage1.automaticTransition = @0;
+        stage1.automaticTransition = @2;
         
         // stage 2
         stage2 = [recipe addStage];
@@ -73,7 +73,7 @@
         stage2.cookingPrepLabel = @"Remove butter mixture sauce pan from Paragon and set aside. You will use this in a future step. Move the Paragon Probe from the butter mixture pan to the 4-quart sauce pan with the mixture created during the preparations on to Paragon. Select 'Next Stage' to continue.";
         stage2.targetTemperature = @2;
         stage2.maxPowerLevel = @1;
-        stage2.automaticTransition = @0;
+        stage2.automaticTransition = @2;
         
         // stage 3
         stage3 = [recipe addStage];
@@ -83,7 +83,7 @@
         stage3.cookingPrepLabel = @"Remove the 4 quart pan from Paragon and slowly add the cream/butter mixture while whisking gently. The mixture will bubble and triple in size. Stop whisking once the cream and butter have been mixed in. Return the pan to the Paragon. Select 'Next Stage' to continue.";
         stage3.targetTemperature = @240;
         stage3.maxPowerLevel = @10;
-        stage3.automaticTransition = @0;
+        stage3.automaticTransition = @2;
         
         [[FSTSavedRecipeManager sharedInstance] saveRecipe:recipe];
     }

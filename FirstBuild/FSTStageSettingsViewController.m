@@ -79,7 +79,8 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.speedPicker.delegate = self;
     [self.speedPicker selectRow:[self.activeStage.maxPowerLevel integerValue] inComponent:0 animated:NO];
     
-    self.autoTransitionSwitch.on = [self.activeStage.automaticTransition boolValue];
+    //TODO: need logic here since there are now 3 types
+    //self.autoTransitionSwitch.on = [self.activeStage.automaticTransition boolValue];
     
     self.directionsTextView.delegate = self;
     self.stageDirectionsTextView.delegate = self;
@@ -267,7 +268,9 @@ CGFloat const SEL_HEIGHT_S = 70;
     self.activeStage.cookingLabel = self.directionsTextView.text; // is cookingLabel the correct variable
     
     self.activeStage.cookingPrepLabel = self.stageDirectionsTextView.text;
-    self.activeStage.automaticTransition = [NSNumber numberWithBool:self.autoTransitionSwitch.on];
+    //TODO: need logic here since there are now 3 types
+
+//    self.activeStage.automaticTransition = [NSNumber numberWithBool:self.autoTransitionSwitch.on];
     //this needs to be 0 since we can't set a maximum time for a non sous-vide stage
     self.activeStage.cookTimeMaximum = 0;
     [self.navigationController popViewControllerAnimated:YES];
