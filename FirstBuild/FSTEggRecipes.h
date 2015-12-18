@@ -7,6 +7,8 @@
 //
 
 #import "FSTSousVideRecipes.h"
+#import "FSTEggScrambledSousVideRecipe.h"
+#import "FSTEggWholeSousVideRecipe.h"
 
 @interface FSTEggRecipes : FSTSousVideRecipes
 

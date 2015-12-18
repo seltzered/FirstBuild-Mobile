@@ -7,9 +7,7 @@
 //
 
 #import "FSTPoultryTurkeySousVideRecipes.h"
-#import "FSTPoultryTurkeyBonelessSousVideRecipe.h"
-#import "FSTPoultryTurkeyBoneInSousVideRecipe.h"
-#import "FSTPoultryTurkeyLegsSousVideRecipe.h"
+
 
 @implementation FSTPoultryTurkeySousVideRecipes
 - (instancetype)init

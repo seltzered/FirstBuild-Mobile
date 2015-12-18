@@ -7,6 +7,9 @@
 //
 
 #import "FSTSousVideRecipes.h"
+#import "FSTPoultryChickenBoneInSousVideRecipe.h"
+#import "FSTPoultryChickenBonelessSousVideRecipe.h"
+#import "FSTPoultryChickenLegsSousVideRecipe.h"
 
 @interface FSTPoultryChickenSousVideRecipes : FSTSousVideRecipes
 

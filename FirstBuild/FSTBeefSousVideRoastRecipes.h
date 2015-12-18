@@ -7,6 +7,12 @@
 //
 
 #import "FSTSousVideRecipes.h"
+#import "FSTBeefRoastTenderLoinSousVideRecipe.h"
+#import "FSTBeefRoastRibEyeSousVideRecipe.h"
+#import "FSTBeefRoastChuckRoastSousVideRecipe.h"
+#import "FSTBeefRoastBrisketSousVideRecipe.h"
+#import "FSTBeefRoastShortRibsSousVideRecipe.h"
+#import "FSTBeefRoastGroundBeefSousVideRecipe.h"
 
 @interface FSTBeefSousVideRoastRecipes : FSTSousVideRecipes
 

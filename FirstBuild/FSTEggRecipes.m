@@ -7,8 +7,6 @@
 //
 
 #import "FSTEggRecipes.h"
-#import "FSTEggScrambledSousVideRecipe.h"
-#import "FSTEggWholeSousVideRecipe.h"
 
 @implementation FSTEggRecipes
 

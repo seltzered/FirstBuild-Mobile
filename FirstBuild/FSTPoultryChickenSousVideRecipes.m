@@ -7,9 +7,7 @@
 //
 
 #import "FSTPoultryChickenSousVideRecipes.h"
-#import "FSTPoultryChickenBoneInSousVideRecipe.h"
-#import "FSTPoultryChickenBonelessSousVideRecipe.h"
-#import "FSTPoultryChickenLegsSousVideRecipe.h"
+
 
 
 @implementation FSTPoultryChickenSousVideRecipes
