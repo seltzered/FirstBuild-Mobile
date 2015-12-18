@@ -192,7 +192,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)readOtaFileFromBundle
 {
-    NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"paragon_master_01_02_00_00" ofType:@"ota"];
+    NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"paragon_master_01_03_00_00" ofType:@"ota"];
     otaImage = [NSData dataWithContentsOfFile:otaFileName];
 }
 
@@ -688,7 +688,13 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
     {
+        //TODO: ENABLE REAL OTA
+        
+        /////////////////////////////////////
         //[self startOta];
+        /////////////////////////////////////
+        
+        
         //we havent informed the application that the device is completely loaded, but we have
         //all the data we need
         self.initialCharacteristicValuesRead = YES;
@@ -1192,7 +1198,6 @@ static const uint8_t STAGE_SIZE = 8;
         local.alertBody = text;
         local.timeZone = [NSTimeZone defaultTimeZone];
         [[UIApplication sharedApplication] scheduleLocalNotification:local];
-        
     }
 }
 
