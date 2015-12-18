@@ -1,14 +1,14 @@
 //
-//  FSTPoultryDuckLegsSousVideRecipe.m
+//  FSTPoultryTurkeyLegsSousVideRecipe.m
 //  FirstBuild
 //
-//  Created by Myles Caley on 12/17/15.
+//  Created by Myles Caley on 12/18/15.
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTPoultryDuckLegsSousVideRecipe.h"
+#import "FSTPoultryTurkeyLegsSousVideRecipe.h"
 
-@implementation FSTPoultryDuckLegsSousVideRecipe
+@implementation FSTPoultryTurkeyLegsSousVideRecipe
 - (id) init
 {
     self = [super init];
@@ -17,7 +17,7 @@
         self.name = @"Leg";
         FSTParagonCookingStage* stage = [self addStage];
         stage.cookTimeMinimum = @480;
-        stage.cookTimeMaximum = @720;
+        stage.cookTimeMaximum = @600;
         stage.targetTemperature = @175;
         stage.maxPowerLevel = @10;
         stage.automaticTransition = @1;
@@ -25,5 +25,4 @@
     return self;
     
 }
-
 @end
