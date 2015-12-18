@@ -65,43 +65,67 @@
 {
     [self updateHeader];
     
+    //beef steak
     if ([self.recipe isKindOfClass:[FSTBeefSteakSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideSteakRecipes alloc]init];
     }
+    //beef roast
     else if ([self.recipe isKindOfClass:[FSTBeefRoastSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideRoastRecipes alloc]init];
     }
+    //duck
     else if ([self.recipe isKindOfClass:[FSTPoultryDuckSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTPoultryDuckSousVideRecipes alloc]init];
     }
+    //turkey
+    else if ([self.recipe isKindOfClass:[FSTPoultryTurkeySousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTPoultryTurkeySousVideRecipes alloc]init];
+    }
+    //chicken
+    else if ([self.recipe isKindOfClass:[FSTPoultryChickenSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTPoultryChickenSousVideRecipes alloc]init];
+    }
+    //pork
+    else if ([self.recipe isKindOfClass:[FSTPorkSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTPorkSousVideRecipes alloc]init];
+    }
+    //beef
     else if ([self.recipe isKindOfClass:[FSTBeefSousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTBeefSousVideRecipes alloc]init];
     }
+    //vegetable
     else if ([self.recipe isKindOfClass:[FSTVegetableRecipe class]])
     {
         return (FSTRecipes*)[[FSTVegetableRecipes alloc]init];
     }
+    //fruit
+    else if ([self.recipe isKindOfClass:[FSTFruitSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTFruitSousVideRecipes alloc]init];
+    }
+    //fish
+    else if ([self.recipe isKindOfClass:[FSTFishSousVideRecipe class]])
+    {
+        return (FSTRecipes*)[[FSTFishSousVideRecipes alloc]init];
+    }
+    //egg
     else if ([self.recipe isKindOfClass:[FSTEggRecipe class]])
     {
         return (FSTRecipes*)[[FSTEggRecipes alloc]init];
     }
+    //poultry
     else if ([self.recipe isKindOfClass:[FSTPoultrySousVideRecipe class]])
     {
         return (FSTRecipes*)[[FSTPoultrySousVideRecipes alloc]init];
     }
-    //Disabled non-sous vide recipes
-//    else if ([self.recipe isKindOfClass:[FSTSousVideRecipe class]])
-//    {
-//        return (FSTRecipes*)[[FSTSousVideRecipes alloc]init];
-//    }
-//    else if ([self.recipe isKindOfClass:[FSTCandyRecipe class]])
-//    {
-//        return (FSTRecipes*)[[FSTCandyRecipes alloc]init];
-//    }
+    //sousvide
     else
     {
         return [[FSTSousVideRecipes alloc]init];
@@ -112,6 +136,8 @@
 
 - (void) recipeSelected:(FSTRecipe *)cookingMethod
 {
+    //TODO: clean this up -- consider integrating the view controller as a property on the model objects
+    
     // here check if an actual complete recipe was selected, if it is
     // go to the correct settings, if not
     // then just segue to another instance of this sub selection class
@@ -124,7 +150,15 @@
         [cookingMethod isKindOfClass:[FSTBeefRoastShortRibsSousVideRecipe class]]||
         [cookingMethod isKindOfClass:[FSTBeefRoastGroundBeefSousVideRecipe class]]||
         [cookingMethod isKindOfClass:[FSTBeefRoastTenderLoinSousVideRecipe class]]||
-        [cookingMethod isKindOfClass:[FSTPoultryDuckBreastSousVideRecipe class]]
+        [cookingMethod isKindOfClass:[FSTPoultryDuckBreastSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTPoultryTurkeyBoneInSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTPoultryTurkeyBonelessSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTPoultryChickenBoneInSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTPoultryChickenBonelessSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTPorkChopsSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTPorkShoulderSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTFishFilletSousVideRecipe class]]||
+        [cookingMethod isKindOfClass:[FSTFishSteakSousVideRecipe class]]
         )
     {
         [self performSegueWithIdentifier:@"segueBeefSettings" sender:cookingMethod];
@@ -141,7 +175,21 @@
             [cookingMethod isKindOfClass:[FSTVegetablePotatoesSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTVegetableSweetPotatoesSousVideRecipe class]]||
             [cookingMethod isKindOfClass:[FSTEggScrambledSousVideRecipe class]]||
-            [cookingMethod isKindOfClass:[FSTPoultryDuckLegsSousVideRecipe class]])
+            [cookingMethod isKindOfClass:[FSTPoultryDuckLegsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTPoultryTurkeyLegsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTPoultryChickenLegsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTPoultryTurkeyLegsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitApplesSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitApricotsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitBerriesSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitCherriesSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitMangosSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitNectarinesSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitPapayaSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitPeachesSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitPearsSousVideRecipe class]]||
+            [cookingMethod isKindOfClass:[FSTFruitPlumsSousVideRecipe class]]
+            )
     {
         [self performSegueWithIdentifier:@"segueAutoCook" sender:cookingMethod];
     }

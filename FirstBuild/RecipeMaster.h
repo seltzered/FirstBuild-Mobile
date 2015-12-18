@@ -16,9 +16,15 @@
 #import "FSTEggRecipes.h"
 #import "FSTPoultrySousVideRecipes.h"
 #import "FSTPoultryDuckSousVideRecipes.h"
+#import "FSTPoultryTurkeySousVideRecipe.h"
+#import "FSTPoultryChickenSousVideRecipe.h"
 #import "FSTPoultryTurkeySousVideRecipes.h"
 #import "FSTPoultryChickenSousVideRecipes.h"
 #import "FSTPorkSousVideRecipes.h"
+#import "FSTFruitSousVideRecipes.h"
+#import "FSTFishSousVideRecipes.h"
+#import "FSTFishSousVideRecipe.h"
+#import "FSTFruitSousVideRecipe.h"
 
 
 #endif /* RecipeMaster_h */
