@@ -424,15 +424,18 @@
 
 - (void)currentStageIndexChanged:(NSNumber *)stage
 {
-    MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
-    [controller setHeaderText:[NSString stringWithFormat:@"STAGE %d",self.currentParagon.session.currentStageIndex] withFrameRect:CGRectMake(0, 0, 120, 30)];
-    
-    [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
-    cookingData.targetTemp =[self.currentParagon.session.currentStage.targetTemperature doubleValue];
-    cookingData.targetMinTime = [self.currentParagon.session.currentStage.cookTimeMinimum doubleValue];
-    cookingData.targetMaxTime = [self.currentParagon.session.currentStage.cookTimeMaximum doubleValue];
-    [self setRecipeStageInstructions];
-    [self.delegate dataChanged:cookingData];    
+    if (self.currentParagon.session.activeRecipe.paragonCookingStages.count > 1)
+    {
+        MobiNavigationController* controller = (MobiNavigationController*)self.navigationController;
+        [controller setHeaderText:[NSString stringWithFormat:@"STAGE %d",self.currentParagon.session.currentStageIndex] withFrameRect:CGRectMake(0, 0, 120, 30)];
+        
+        [self setStageBarStateCountForState:self.currentParagon.session.currentStage];
+        cookingData.targetTemp =[self.currentParagon.session.currentStage.targetTemperature doubleValue];
+        cookingData.targetMinTime = [self.currentParagon.session.currentStage.cookTimeMinimum doubleValue];
+        cookingData.targetMaxTime = [self.currentParagon.session.currentStage.cookTimeMaximum doubleValue];
+        [self setRecipeStageInstructions];
+        [self.delegate dataChanged:cookingData];
+    }
 }
 
 @end
