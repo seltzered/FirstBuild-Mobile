@@ -361,10 +361,10 @@ NSIndexPath *_indexPathForDeletion;
         switch (paragon.session.cookMode)
         {
             case FSTCookingStateOff:
-                [productCell.statusLabel setText:@"Paragon Off"];
+                [productCell.statusLabel setText:@""];
                 break;
             case FSTCookingStatePrecisionCookingReachingTemperature:
-                [productCell.statusLabel setText:@"Paragon On"];
+                [productCell.statusLabel setText:@"Cooking"];
 
                 if ([paragon.session.currentStage.targetTemperature intValue] > [paragon.session.currentProbeTemperature intValue])
                 {
