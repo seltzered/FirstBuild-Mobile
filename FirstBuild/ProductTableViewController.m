@@ -364,32 +364,30 @@ NSIndexPath *_indexPathForDeletion;
                 [productCell.statusLabel setText:@""];
                 break;
             case FSTCookingStatePrecisionCookingReachingTemperature:
-                [productCell.statusLabel setText:@"Cooking"];
-
                 if ([paragon.session.currentStage.targetTemperature intValue] > [paragon.session.currentProbeTemperature intValue])
                 {
-//                    [productCell.statusLabel setText:@"Preheating"];
+                    [productCell.statusLabel setText:@"Preheating"];
                 }
                 else
                 {
-//                    [productCell.statusLabel setText:@"Cooling"];
+                    [productCell.statusLabel setText:@"Cooling"];
                 }
+                [productCell.statusLabel setText:@"Cooking"];
                 break;
             case FSTCookingDirectCooking:
                 [productCell.statusLabel setText:@"Direct"];
-                [productCell.statusLabel setText:@"Paragon On"];
+                [productCell.statusLabel setText:@"Cooking"];
                 break;
             case FSTCookingDirectCookingWithTime:
             case FSTCookingStatePrecisionCookingReachingMinTime:
             case FSTCookingStatePrecisionCookingWithoutTime:
                 [productCell.statusLabel setText:@"Cooking"];
-                [productCell.statusLabel setText:@"Paragon On"];
                 break;
             case FSTCookingStatePrecisionCookingPastMaxTime:
             
             case FSTCookingStatePrecisionCookingReachingMaxTime:
                 [productCell.statusLabel setText:@"Complete"];
-                [productCell.statusLabel setText:@"Paragon On"];
+                [productCell.statusLabel setText:@"Cooking"];
                 break;
             case FSTCookingStateUnknown:
                 [productCell.statusLabel setText:@"-"];
@@ -397,7 +395,7 @@ NSIndexPath *_indexPathForDeletion;
             case FSTCookingStatePrecisionCookingCurrentStageDone:
             case FSTCookingStatePrecisionCookingTemperatureReached:
                 [productCell.statusLabel setText:@"Waiting..."];
-                [productCell.statusLabel setText:@"Paragon On"];
+                [productCell.statusLabel setText:@"Cooking"];
                 break;
         }
     }

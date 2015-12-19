@@ -1150,40 +1150,42 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)sendCookingStatusNotification
 {
+    //TODO: temporary notifications
     NSString* text;
+    
     switch (self.session.cookMode)
     {
         case FSTCookingStateOff:
-            text = @"Paragon is now off";
+            text = [NSString stringWithFormat:@"%@ is now off.", self.friendlyName];
             break;
         case FSTCookingStatePrecisionCookingReachingTemperature:
             if ([self.session.currentStage.targetTemperature intValue] > [self.session.currentProbeTemperature intValue])
             {
-                text = @"Paragon is preheating";
+                text = [NSString stringWithFormat:@"%@ is preheating.", self.friendlyName];
             }
             else
             {
-                text = @"Cooling";
+                text = [NSString stringWithFormat:@"%@ is cooling.", self.friendlyName];
             }
             break;
         case FSTCookingDirectCooking:
-            text = @"Direct cooking started on Paragon.";
+            text = [NSString stringWithFormat:@"Direct cooking started on %@.", self.friendlyName];
             break;
         case FSTCookingDirectCookingWithTime:
         case FSTCookingStatePrecisionCookingReachingMinTime:
         case FSTCookingStatePrecisionCookingWithoutTime:
-            text = @"Timer started on Paragon.";
+            text = [NSString stringWithFormat:@"Timer started on %@", self.friendlyName];
             break;
         case FSTCookingStatePrecisionCookingPastMaxTime:
-            text = @"Food needs to be removed now.";
+            text = [NSString stringWithFormat:@"Food needs to be removed now from %@.", self.friendlyName];
             break;
         case FSTCookingStatePrecisionCookingReachingMaxTime:
-            text = @"Food is ready!";
+            text = [NSString stringWithFormat:@"Food is ready on %@.", self.friendlyName];
             break;
         case FSTCookingStateUnknown:
             break;
         case FSTCookingStatePrecisionCookingTemperatureReached:
-            text = @"Preheating complete. Please click continue.";
+            text = [NSString stringWithFormat:@"Preheating complete on %@.", self.friendlyName];
             break;
         case FSTCookingStatePrecisionCookingCurrentStageDone:
             break;
