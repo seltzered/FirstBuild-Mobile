@@ -110,8 +110,8 @@
     if (![self.currentParagon sendRecipeToCooktop:self.recipe])
     {
         self.continueTapGestureRecognizer.enabled = YES;
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
-                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Press Rapid Precise"
+                                                                                 message:@"The cooktop must have the Rapid Precise setting active before pressing CONTINUE."
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault

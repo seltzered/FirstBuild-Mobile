@@ -308,6 +308,14 @@
         self.stageBar.hidden = YES;
         [self.currentParagon moveNextStage];
     }
+    else if (self.currentParagon.session.cookMode == FSTCookingStatePrecisionCookingPastMaxTime)
+    {
+        // entire recipe is complete
+        self.continueButton.userInteractionEnabled = NO;
+        self.continueButton.hidden = YES;
+        self.stageBar.hidden = YES;
+        [self.stateContainer segueToStateWithIdentifier:@"recipeComplete" sender:nil];
+    }
     else
     {
         [self.currentParagon startTimerForCurrentStage];

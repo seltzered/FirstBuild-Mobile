@@ -226,6 +226,7 @@
 		5BE8F3581C24563800DBB32C /* FSTFishSteakSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8F3571C24563800DBB32C /* FSTFishSteakSousVideRecipe.m */; };
 		5BE8F35B1C24566B00DBB32C /* FSTFishSousVideRecipes.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8F35A1C24566B00DBB32C /* FSTFishSousVideRecipes.m */; };
 		5BE8F35D1C24B33200DBB32C /* paragon_master_01_03_00_00.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5BE8F35C1C24B30000DBB32C /* paragon_master_01_03_00_00.ota */; };
+		5BE8F3601C259D9800DBB32C /* FSTRecipeCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8F35F1C259D9800DBB32C /* FSTRecipeCompleteViewController.m */; };
 		5BEB7D7A1C231A26006823E2 /* FSTEggSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7D791C231A26006823E2 /* FSTEggSettingsViewController.m */; };
 		5BEB7D7E1C231C6D006823E2 /* FSTEggRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7D7D1C231C6D006823E2 /* FSTEggRecipe.m */; };
 		5BEB7D811C231CAB006823E2 /* FSTEggWholeSousVideRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB7D801C231CAB006823E2 /* FSTEggWholeSousVideRecipe.m */; };
@@ -688,6 +689,8 @@
 		5BE8F3591C24566B00DBB32C /* FSTFishSousVideRecipes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTFishSousVideRecipes.h; sourceTree = "<group>"; };
 		5BE8F35A1C24566B00DBB32C /* FSTFishSousVideRecipes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTFishSousVideRecipes.m; sourceTree = "<group>"; };
 		5BE8F35C1C24B30000DBB32C /* paragon_master_01_03_00_00.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = paragon_master_01_03_00_00.ota; sourceTree = "<group>"; };
+		5BE8F35E1C259D9800DBB32C /* FSTRecipeCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTRecipeCompleteViewController.h; sourceTree = "<group>"; };
+		5BE8F35F1C259D9800DBB32C /* FSTRecipeCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTRecipeCompleteViewController.m; sourceTree = "<group>"; };
 		5BEB7D781C231A26006823E2 /* FSTEggSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTEggSettingsViewController.h; sourceTree = "<group>"; };
 		5BEB7D791C231A26006823E2 /* FSTEggSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTEggSettingsViewController.m; sourceTree = "<group>"; };
 		5BEB7D7C1C231C6D006823E2 /* FSTEggRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTEggRecipe.h; sourceTree = "<group>"; };
@@ -1082,6 +1085,8 @@
 				5B74A7541B8F916300A11296 /* states */,
 				51A9D04A1B73FFDC000AE293 /* FSTContainerViewController.h */,
 				51A9D04B1B73FFDC000AE293 /* FSTContainerViewController.m */,
+				5BE8F35E1C259D9800DBB32C /* FSTRecipeCompleteViewController.h */,
+				5BE8F35F1C259D9800DBB32C /* FSTRecipeCompleteViewController.m */,
 				5BCBB9DE1B02A24100B8E043 /* FSTReadyToReachTemperatureViewController.h */,
 				5BCBB9DF1B02A24100B8E043 /* FSTReadyToReachTemperatureViewController.m */,
 				5BCBB9E71B02A51700B8E043 /* FSTCookingViewController.h */,
@@ -1979,6 +1984,7 @@
 				5B4A76CF1BFF7BF500018281 /* FSTBeefSteakToughFlankSousVideRecipe.m in Sources */,
 				5BE8F3551C244E9600DBB32C /* FSTFishFilletSousVideRecipe.m in Sources */,
 				51FAEFF21B62DD8100A7DCF9 /* FSTLine.m in Sources */,
+				5BE8F3601C259D9800DBB32C /* FSTRecipeCompleteViewController.m in Sources */,
 				5B80FADB1C208AFC00818E33 /* FSTVegetablePotatoesSousVideRecipe.m in Sources */,
 				5BC3648D1A3112EE00D03B9C /* FSTBackgroundLayer.m in Sources */,
 				5BA3A97D1B38B46500E51C51 /* FSTBleConnectingViewController.m in Sources */,

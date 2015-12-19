@@ -40,12 +40,15 @@
         pickerTemperatureData = [self tempDataInit];
         pickerTimeData = [self timeDataInit];
         minHourIndex = 0;
-        maxHourIndex = [pickerTimeData[0] count] - 1;
-        minMinuteIndex = 0;
-        maxMinuteIndex = [pickerTimeData[1] count] - 1;
+        
+//        maxHourIndex = [pickerTimeData[0] count] - 1;
+        maxHourIndex = 2;
+        minMinuteIndex = 59;
+        maxMinuteIndex = 0;
+//        maxMinuteIndex = [pickerTimeData[1] count] - 1;
         maxHourActual = maxHourIndex;
         maxMinuteActual = maxMinuteIndex;
-        tempIndex = 0;
+        tempIndex = 60;
         
     }
     return self;

@@ -48,7 +48,7 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     pickerManager.maxPicker = self.maxPicker;
     pickerManager.tempPicker = self.tempPicker;
     pickerManager.delegate = self;
-    
+
     [pickerManager selectAllIndices]; // hard set all the indices after initialization
     _selection = NONE; // set the initial states for the buttons
     
@@ -150,9 +150,10 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     if (![self.currentParagon sendRecipeToCooktop:self.recipe])
     {
         self.continueTapGesturerRecognizer.enabled = YES;
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
-                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Press Rapid Precise"
+                                                                                 message:@"The cooktop must have the Rapid Precise setting active before pressing CONTINUE."
                                                                           preferredStyle:UIAlertControllerStyleAlert];
+        
         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault
                                                          handler:nil];

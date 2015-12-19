@@ -29,6 +29,9 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
 
     //array of possible cook times for the selected temperature
     NSArray* _currentCookTimeArray;
+    
+    //TODO: WIP
+    //BOOL _attemptedWrite;
 }
 
 - (void)viewDidLoad {
@@ -36,6 +39,7 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
     [super viewDidLoad];
     
     _beefRecipe = (FSTBeefSousVideRecipe*)self.recipe;
+    
     
     //set up for data objects
     _currentThickness =[NSNumber numberWithDouble:[self meatThicknessWithSliderValue:self.thicknessSlider.value]];
@@ -142,11 +146,18 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
     //once the temperature is confirmed to be set then it will segue because it is
     //waiting on the cookConfigurationSet delegate. we check the return status because
     //the user may not have the correct cook mode
+    
+    //TODO: WIP
+    //_attemptedWrite = NO;
+    
     if (![self.currentParagon sendRecipeToCooktop:self.recipe])
     {
+        //TODO: WIP
+        //_attemptedWrite = YES;
+
         self.continueTapGestureRecognizer.enabled = YES;
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
-                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Press Rapid Precise"
+                                                                                 message:@"The cooktop must have the Rapid Precise setting active before pressing CONTINUE."
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault
@@ -216,6 +227,15 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
         return;
     }
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
+}
+
+-(void)userSelectedCookModeChanged:(ParagonUserSelectedCookMode)userSelectedCookMode
+{
+    //TODO - WIP. Automatically go to the next screen
+//    if (_attemptedWrite && userSelectedCookMode == FSTParagonUserSelectedCookModeRapid)
+//    {
+//        [self.currentParagon sendRecipeToCooktop:self.recipe];
+//    }
 }
 
 

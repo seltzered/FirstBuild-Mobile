@@ -25,7 +25,7 @@
 @optional - (void) currentStageIndexChanged: (NSNumber*) stageIndex;
 @optional - (void) currentPowerLevelChanged: (NSNumber*) powerLevel;
 @optional - (void) remainingHoldTimeChanged: (NSNumber*) holdTime;
-
+@optional - (void) userSelectedCookModeChanged : (ParagonUserSelectedCookMode) userSelectedCookMode;
 @end
 
 @interface FSTParagon : FSTBleProduct

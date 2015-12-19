@@ -585,7 +585,11 @@ static const uint8_t STAGE_SIZE = 8;
     // request a rebuild of the recipe now
     [self.peripheral readValueForCharacteristic:cookConfigurationCharacteristic];
     
-    [self.delegate cookConfigurationSet:error];
+    if ([self.delegate respondsToSelector:@selector(cookConfigurationSet:)])
+    {
+        [self.delegate cookConfigurationSet:error];
+    }
+    
 }
 
 #pragma mark - Read Handlers
@@ -1028,6 +1032,11 @@ static const uint8_t STAGE_SIZE = 8;
     [data getBytes:bytes length:characteristic.value.length];
     self.session.userSelectedCookMode = bytes[0];
     
+    if ([self.delegate respondsToSelector:@selector(userSelectedCookModeChanged:)])
+    {
+        [self.delegate userSelectedCookModeChanged:self.session.userSelectedCookMode];
+    }
+    
     [self determineCookMode];
 }
 
@@ -1078,9 +1087,13 @@ static const uint8_t STAGE_SIZE = 8;
         }
         else if ( self.session.cookState == FSTParagonCookStateDone &&
                  [self.session.remainingHoldTime intValue] == 0 &&
-                 (currentCookMode == FSTCookingStatePrecisionCookingReachingMaxTime || !currentCookMode)
+                 (
+                  (currentCookMode == FSTCookingStatePrecisionCookingReachingMaxTime || !currentCookMode)||
+                    currentCookMode==FSTCookingStatePrecisionCookingPastMaxTime)
                  )
         {
+            //TODO: this is immensely confusing.
+            
             //we need to make sure the paragon thinks its done, there is no more hold time remaining AND
             //the current app cook mode is reaching max time or there is not current cook mode which
             //could be the case when the app is opened against an already existing session. the issue here
