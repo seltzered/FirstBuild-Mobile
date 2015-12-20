@@ -196,7 +196,7 @@ static const uint8_t STAGE_SIZE = 8;
     else if (!self.isProbeConnected)
     {
         actionToCorrect = @"Connect Probe";
-        details = @"Probe is not connected. Please connect the temperature probe by pressing the button on the side of the probe.";
+        details = @"Probe is not connected. Please connect the temperature probe by holding the button on the side of the probe FOR 3 SECONDS.";
         error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorProbeNotConnected userInfo:nil];
     }
     else if (self.session.userSelectedCookMode != FSTParagonUserSelectedCookModeRapid)
