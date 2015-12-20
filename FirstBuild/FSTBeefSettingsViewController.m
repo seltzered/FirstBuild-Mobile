@@ -208,6 +208,10 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
     }
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
 }
+-(void)pendingRecipeCancelled
+{
+    self.continueTapGestureRecognizer.enabled = YES;
+}
 
 
 @end

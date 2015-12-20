@@ -27,6 +27,7 @@
 @optional - (void) remainingHoldTimeChanged: (NSNumber*) holdTime;
 @optional - (void) userSelectedCookModeChanged : (ParagonUserSelectedCookMode) userSelectedCookMode;
 @optional - (void) paragonConnectionStatusChanged : (BOOL) isOnline;
+@optional - (void) pendingRecipeCancelled;
 @end
 
 @interface FSTParagon : FSTBleProduct

@@ -134,4 +134,9 @@
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
 }
 
+-(void)pendingRecipeCancelled
+{
+    self.continueTapGestureRecognizer.enabled = YES;
+}
+
 @end

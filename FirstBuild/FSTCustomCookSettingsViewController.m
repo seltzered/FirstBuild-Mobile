@@ -192,4 +192,9 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     [self performSegueWithIdentifier:@"segueCustomPreheat" sender:self];
 }
 
+-(void)pendingRecipeCancelled
+{
+    self.continueTapGesturerRecognizer.enabled = YES;
+}
+
 @end

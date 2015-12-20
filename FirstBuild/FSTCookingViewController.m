@@ -238,11 +238,19 @@
 {
     if ([self.currentParagon.session.activeRecipe.recipeType intValue] == FSTRecipeTypeFirstBuildMultiStage)
     {
-        self.stageBar.numberOfStates = [NSNumber numberWithInt:3];
+        self.stageBar.numberOfStates = @3;
     }
-    else
+    else if (self.currentParagon.session.userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
     {
-        self.stageBar.numberOfStates = [NSNumber numberWithInt:4];
+        self.stageBar.numberOfStates = @4;
+    }
+    else if (self.currentParagon.session.userSelectedCookMode == FSTParagonUserSelectedCookModeGentle||
+             self.currentParagon.session.userSelectedCookMode == FSTParagonUserSelectedCookModeRapid)
+    {
+        self.stageBar.numberOfStates = @2;
+    }
+    else {
+        self.stageBar.numberOfStates = @0;
     }
 //    int stateCount = 1;
 //    

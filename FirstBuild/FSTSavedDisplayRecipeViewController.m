@@ -115,5 +115,10 @@
     [self performSegueWithIdentifier:@"startSegue" sender:self];
 }
 
+-(void)pendingRecipeCancelled
+{
+    self.cookButtonGestureRecognizer.enabled = YES;
+}
+
 
 @end

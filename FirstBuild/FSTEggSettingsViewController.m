@@ -141,6 +141,11 @@
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
 }
 
+-(void)pendingRecipeCancelled
+{
+    self.continueTapGestureRecognizer.enabled = YES;
+}
+
 - (IBAction)donenessChanged:(id)sender
 {
    [self getDataForDonenessIndex:((UISlider*)sender).value];
@@ -186,6 +191,7 @@
     }
     [self updateLabels];
 }
+
 //
 //#pragma mark <UIPickerViewDelegate, UIPickerViewDataSource>
 //

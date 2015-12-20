@@ -38,6 +38,8 @@ typedef enum {
     
     FSTRecipe* _pendingRecipe;
     MBProgressHUD *pendingRecipeHud;
+    NSTimer* _pendingRecipeTimer;
+    uint8_t _pendingTimerTicks;
     
     NSObject* _deviceDisconnectedObserver;
     NSObject* _deviceConnectedObserver;
@@ -89,6 +91,9 @@ static const uint8_t STAGE_SIZE = 8;
     if (self)
     {
         _pendingRecipe = nil;
+        _pendingRecipeTimer = nil;
+        _pendingTimerTicks = 0;
+
         otaState = OtaStateIdle;
         otaBytesWritten = 0;
         otaBytesWrittenInTrailer = 0;
@@ -214,12 +219,19 @@ static const uint8_t STAGE_SIZE = 8;
     {
         [MBProgressHUD hideAllHUDsForView:view animated:YES];
         pendingRecipeHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-        pendingRecipeHud.mode = MBProgressHUDModeText;
+        pendingRecipeHud.mode = MBProgressHUDModeDeterminate;
         pendingRecipeHud.labelText = actionToCorrect;
         pendingRecipeHud.detailsLabelText = details;
+        pendingRecipeHud.progress = 1.0;
+        
+        _pendingTimerTicks = 0;
+        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
     }
     else
     {
+        [_pendingRecipeTimer invalidate];
+        _pendingRecipeTimer = nil;
+        
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, .8 * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [MBProgressHUD hideAllHUDsForView:view animated:YES];
@@ -228,6 +240,27 @@ static const uint8_t STAGE_SIZE = 8;
     
     return error;
     
+}
+
+-(void)pendingRecipeTimerFired: (NSTimer*)timer
+{
+    if (_pendingTimerTicks==25)
+    {
+        _pendingTimerTicks =0;
+        [_pendingRecipeTimer invalidate];
+        _pendingRecipeTimer = nil;
+        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+        UIView *view = window.rootViewController.view;
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+        if ([self.delegate respondsToSelector:@selector(pendingRecipeCancelled)])
+        {
+            [self.delegate pendingRecipeCancelled];
+        }
+    }
+    else
+    {
+        pendingRecipeHud.progress = (float)(25 -_pendingTimerTicks++)/25;
+    }
 }
 
 -(void)checkAndSendPendingRecipe
