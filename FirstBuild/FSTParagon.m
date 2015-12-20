@@ -39,7 +39,7 @@ typedef enum {
     FSTRecipe* _pendingRecipe;
     MBProgressHUD *pendingRecipeHud;
     NSTimer* _pendingRecipeTimer;
-    uint8_t _pendingTimerTicks;
+    uint16_t _pendingTimerTicks;
     
     NSObject* _deviceDisconnectedObserver;
     NSObject* _deviceConnectedObserver;
@@ -225,7 +225,7 @@ static const uint8_t STAGE_SIZE = 8;
         pendingRecipeHud.progress = 1.0;
         
         _pendingTimerTicks = 0;
-        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
+        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
     }
     else
     {
@@ -244,7 +244,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)pendingRecipeTimerFired: (NSTimer*)timer
 {
-    if (_pendingTimerTicks==25)
+    if (_pendingTimerTicks==200)
     {
         _pendingTimerTicks =0;
         [_pendingRecipeTimer invalidate];
@@ -259,7 +259,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     else
     {
-        pendingRecipeHud.progress = (float)(25 -_pendingTimerTicks++)/25;
+        pendingRecipeHud.progress = (float)(200 -_pendingTimerTicks++)/200;
     }
 }
 
