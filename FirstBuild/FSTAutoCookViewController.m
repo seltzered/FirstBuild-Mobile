@@ -96,21 +96,10 @@
 - (IBAction)continueTapGesture:(id)sender {
     
     self.continueTapGestureRecognizer.enabled = NO;
-        
-    //once the temperature is confirmed to be set then it will segue because it is
-    //waiting on the cookConfigurationSet delegate. we check the return status because
-    //the user may not have the correct cook mode
+    
     if (![self.currentParagon sendRecipeToCooktop:self.recipe])
     {
         self.continueTapGestureRecognizer.enabled = YES;
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
-                                                                                 message:@"The cooktop must be in the Rapid or Gentle cooking mode."
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alertController addAction:actionOk];
-        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

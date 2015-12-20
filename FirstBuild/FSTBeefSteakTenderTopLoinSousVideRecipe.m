@@ -15,7 +15,7 @@
     self = [super init];
     if (self)
     {
-        self.name = @"Top Loin";
+        self.name = @"NY Strip";
     }
     return self;
 }

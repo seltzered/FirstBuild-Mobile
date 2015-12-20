@@ -26,16 +26,24 @@
 @optional - (void) currentPowerLevelChanged: (NSNumber*) powerLevel;
 @optional - (void) remainingHoldTimeChanged: (NSNumber*) holdTime;
 @optional - (void) userSelectedCookModeChanged : (ParagonUserSelectedCookMode) userSelectedCookMode;
+@optional - (void) paragonConnectionStatusChanged : (BOOL) isOnline;
 @end
 
 @interface FSTParagon : FSTBleProduct
+
+typedef enum {
+    FSTCookConfigurationErrorNoStages=0,
+    FSTCookConfigurationErrorNotInRapidMode=1,
+    FSTCookConfigurationErrorProbeNotConnected=2,
+    FSTCookConfigurationErrorBurnerOn=3
+} CookConfigurationErrorStates;
 
 @property (nonatomic, weak) id<FSTParagonDelegate> delegate;
 
 extern NSString * const FSTServiceParagon ;
 
 -(void)startTimerForCurrentStage;
--(BOOL)sendRecipeToCooktop: (FSTRecipe*)recipe;
+-(NSError*)sendRecipeToCooktop: (FSTRecipe*)recipe;
 -(void)moveNextStage;
 
 @property (nonatomic, retain) FSTParagonCookingSession* session;

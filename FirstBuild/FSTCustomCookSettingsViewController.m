@@ -144,21 +144,9 @@ CGFloat const SEL_HEIGHT = 90; // the standard picker height for the current sel
     stage.cookingLabel = @"Custom Profile";
     stage.maxPowerLevel = [NSNumber numberWithInt:10];
     
-    //once the temperature is confirmed to be set then it will segue because it is
-    //waiting on the cookConfigurationSet delegate. we check the return status because
-    //the user may not have the correct cook mode
     if (![self.currentParagon sendRecipeToCooktop:self.recipe])
     {
         self.continueTapGesturerRecognizer.enabled = YES;
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Press Rapid Precise"
-                                                                                 message:@"The cooktop must have the Rapid Precise setting active before pressing CONTINUE."
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alertController addAction:actionOk];
-        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 

@@ -24,11 +24,11 @@
                         [FSTBeefSteakTenderPorterHouseSousVideRecipe new],
                         [FSTBeefSteakNormalFlatIronSousVideRecipe new],
                         [FSTBeefSteakNormalSirloinSousVideRecipe new],
-                        [FSTBeefSteakToughCubedSousVideRecipe new],
+//                        [FSTBeefSteakToughCubedSousVideRecipe new],
                         [FSTBeefSteakToughFlankSousVideRecipe new],
-                        [FSTBeefSteakToughRoundSousVideRecipe new],
+//                        [FSTBeefSteakToughRoundSousVideRecipe new],
                         [FSTBeefSteakToughSkirtSousVideRecipe new],
-                        [FSTBeefSteakToughTipSousVideRecipe new],
+//                        [FSTBeefSteakToughTipSousVideRecipe new],
                         nil];
     }
     return self;

@@ -15,7 +15,7 @@
     self = [super init];
     if (self)
     {
-        self.name = @"Rib";
+        self.name = @"Filet";
     }
     return self;
 }

@@ -75,11 +75,27 @@
 
 - (void) cookModeChanged:(ParagonCookMode)cookMode
 {
-    if(self.currentParagon.session.cookMode != FSTCookingStateOff)
+    if(cookMode != FSTCookingStateOff)
     {
         [self performSegueWithIdentifier:@"segueCooking" sender:self];
     }
     else
+    {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+}
+
+-(void)userSelectedCookModeChanged:(ParagonUserSelectedCookMode)userSelectedCookMode
+{
+    if (userSelectedCookMode != FSTParagonUserSelectedCookModeRemote)
+    {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+}
+
+-(void)paragonConnectionStatusChanged:(BOOL)isOnline
+{
+    if (!isOnline)
     {
         [self.navigationController popToRootViewControllerAnimated:NO];
     }

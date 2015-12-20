@@ -11,6 +11,9 @@
 #import "FSTSavedRecipeManager.h"
 #import "FSTRecipe.h"
 #import "FSTParagonUserInformation.h"
+#import "MBProgressHUD.h"
+#import "FSTBleCentralManager.h"
+
 
 typedef enum {
     OtaStateIdle = 0,
@@ -32,6 +35,13 @@ typedef enum {
     uint otaBytesWrittenInTrailer;
     
     NSMutableData* _debugPayload;
+    
+    FSTRecipe* _pendingRecipe;
+    MBProgressHUD *pendingRecipeHud;
+    
+    NSObject* _deviceDisconnectedObserver;
+    NSObject* _deviceConnectedObserver;
+
 }
 
 //app info service
@@ -78,6 +88,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (self)
     {
+        _pendingRecipe = nil;
         otaState = OtaStateIdle;
         otaBytesWritten = 0;
         otaBytesWrittenInTrailer = 0;
@@ -107,29 +118,124 @@ static const uint8_t STAGE_SIZE = 8;
         self.session.cookState = FSTParagonCookStateOff;
         self.session.cookMode = FSTCookingStateOff;
         self.isProbeConnected = NO;
+        
+        _deviceDisconnectedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:FSTBleCentralManagerDeviceDisconnected
+                                                          object:nil
+                                                           queue:nil
+                                                      usingBlock:^(NSNotification *notification)
+       {
+           CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+           if (self.peripheral == peripheral)
+           {
+               NSLog(@"paragon disconnected.");
+               UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+               UIView *view = window.rootViewController.view;
+               [MBProgressHUD hideAllHUDsForView:view animated:YES];
+               _pendingRecipe = nil;
+               if ([self.delegate respondsToSelector:@selector(paragonConnectionStatusChanged:)])
+               {
+                   [self.delegate paragonConnectionStatusChanged:NO];
+               }
+           }
+       }];
+        
+        _deviceConnectedObserver = [[NSNotificationCenter defaultCenter] addObserverForName:FSTBleCentralManagerDeviceConnected
+                                                                                        object:nil
+                                                                                         queue:nil
+                                                                                    usingBlock:^(NSNotification *notification)
+       {
+           CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+           if (self.peripheral == peripheral)
+           {
+               NSLog(@"paragon connected.");
+               if ([self.delegate respondsToSelector:@selector(paragonConnectionStatusChanged:)])
+               {
+                   [self.delegate paragonConnectionStatusChanged:YES];
+               }
+           }
+       }];
+        
     }
 
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceDisconnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
+
+}
+
 #pragma mark - External Interface Selectors
 
--(BOOL)sendRecipeToCooktop: (FSTRecipe*)recipe
+-(NSError*)sendRecipeToCooktop: (FSTRecipe*)recipe
 {
+    NSError* error;
+    NSString* details;
+    NSString* actionToCorrect;
+    _pendingRecipe = recipe;
+    
     if (!recipe.paragonCookingStages)
     {
-        DLog(@"recipe does not contain any stages");
-        return NO;
+        actionToCorrect = nil;
+        details = nil;
+        error = [NSError errorWithDomain:@"no paragon cooking stages" code:FSTCookConfigurationErrorNoStages userInfo:nil];
     }
-    else if (self.session.userSelectedCookMode ==  FSTParagonUserSelectedCookModeDirect ||
-             self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeScreenOff)
+    else if (self.session.burnerMode==1)
     {
-        DLog(@"paragon is not in gentle or rapid cook mode");
-        return NO;
+        actionToCorrect = @"Press Stop on Paragon";
+        details = @"The Paragon is currently cooking. Please press Stop on the Paragon.";
+        error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorBurnerOn userInfo:nil];
+    }
+    else if (!self.isProbeConnected)
+    {
+        actionToCorrect = @"Connect Probe";
+        details = @"Probe is not connected. Please connect the temperature probe by pressing the button on the side of the probe.";
+        error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorProbeNotConnected userInfo:nil];
+    }
+    else if (self.session.userSelectedCookMode != FSTParagonUserSelectedCookModeRapid)
+    {
+        actionToCorrect = @"Select Rapid Precise";
+        details =@"Please press Rapid Precise on the cooktop";
+        error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorNotInRapidMode userInfo:nil];
+    }
+    else
+    {
+        error = nil;
+        _pendingRecipe = nil;
+        [self writeCookConfiguration:recipe];
     }
     
-    [self writeCookConfiguration:recipe];
-    return YES;
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    
+    if (error && actionToCorrect)
+    {
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+        pendingRecipeHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        pendingRecipeHud.mode = MBProgressHUDModeText;
+        pendingRecipeHud.labelText = actionToCorrect;
+        pendingRecipeHud.detailsLabelText = details;
+    }
+    else
+    {
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, .8 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [MBProgressHUD hideAllHUDsForView:view animated:YES];
+        });
+    }
+    
+    return error;
+    
+}
+
+-(void)checkAndSendPendingRecipe
+{
+    if (_pendingRecipe)
+    {
+        [self sendRecipeToCooktop:_pendingRecipe];
+    }
 }
 
 -(void)startTimerForCurrentStage
@@ -758,6 +864,7 @@ static const uint8_t STAGE_SIZE = 8;
     else
     {
         self.isProbeConnected = YES;
+        [self checkAndSendPendingRecipe];
     }
 
 }
@@ -1037,6 +1144,11 @@ static const uint8_t STAGE_SIZE = 8;
         [self.delegate userSelectedCookModeChanged:self.session.userSelectedCookMode];
     }
     
+    if (self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeRapid)
+    {
+        [self checkAndSendPendingRecipe];
+    }
+    
     [self determineCookMode];
 }
 
@@ -1255,6 +1367,10 @@ static const uint8_t STAGE_SIZE = 8;
     if (bytes[0] == 1 || bytes[0] == 0)
     {
         self.session.burnerMode = bytes[0];
+        if (bytes[0] == 0)
+        {
+            [self checkAndSendPendingRecipe];
+        }
     }
     else
     {

@@ -32,22 +32,23 @@
 @end
 
 @implementation ProductTableViewController
-
-#pragma mark - Private
+{
+    
+    NSObject* _connectedToBleObserver;
+    NSObject* _deviceReadyObserver;
+    NSObject* _newDeviceBoundObserver;
+    NSObject* _deviceRenamedObserver;
+    NSObject* _deviceEssentialDataChangedObserver;
+    NSObject* _deviceDisconnectedObserver;
+    NSObject* _deviceBatteryChangedObserver;
+    NSObject* _deviceConnectedObserver;
+    NSObject* _deviceLoadProgressUpdated;
+    
+    NSIndexPath *_indexPathForDeletion;
+}
 
 static NSString * const reuseIdentifier = @"ProductCell";
 static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
-NSObject* _connectedToBleObserver;
-NSObject* _deviceReadyObserver;
-NSObject* _newDeviceBoundObserver;
-NSObject* _deviceRenamedObserver;
-NSObject* _deviceEssentialDataChangedObserver;
-NSObject* _deviceDisconnectedObserver;
-NSObject* _deviceBatteryChangedObserver;
-NSObject* _deviceConnectedObserver;
-NSObject* _deviceLoadProgressUpdated;
-
-NSIndexPath *_indexPathForDeletion;
 
 #pragma mark - <UIViewDelegate>
 
