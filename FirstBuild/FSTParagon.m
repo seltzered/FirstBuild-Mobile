@@ -224,12 +224,14 @@ static const uint8_t STAGE_SIZE = 8;
         [MBProgressHUD hideAllHUDsForView:view animated:YES];
         pendingRecipeHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
         pendingRecipeHud.mode = MBProgressHUDModeDeterminate;
-//        pendingRecipeHud.mode = MBProgressHUDModeDeterminateHorizontalBar;
         pendingRecipeHud.labelText = actionToCorrect;
         pendingRecipeHud.detailsLabelText = details;
         pendingRecipeHud.progress = 1.0;
         
+        [_pendingRecipeTimer invalidate];
+        _pendingRecipeTimer = nil;
         _pendingTimerTicks = 0;
+        
         _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
         
         UITapGestureRecognizer *HUDSingleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
@@ -287,7 +289,11 @@ static const uint8_t STAGE_SIZE = 8;
 {
     if (_pendingRecipe)
     {
-        [self sendRecipeToCooktop:_pendingRecipe];
+        //there are a few issues that require a small delay to make sure everything is accounted for
+        //before re-submitting the recipe
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self sendRecipeToCooktop:_pendingRecipe];
+        });
     }
 }
 
