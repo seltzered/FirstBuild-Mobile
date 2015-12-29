@@ -23,7 +23,7 @@
         
         self.donenessLabels = @{@140:@"Medium",
                                 @150:@"Medium-Well",
-                                @165:@"Well",
+                                @160:@"Well",
                                 };
         
         self.thicknesses = @[
