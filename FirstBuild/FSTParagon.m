@@ -244,7 +244,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)pendingRecipeTimerFired: (NSTimer*)timer
 {
-    if (_pendingTimerTicks==80)
+    if (_pendingTimerTicks==120)
     {
         _pendingTimerTicks =0;
         [_pendingRecipeTimer invalidate];
@@ -259,7 +259,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     else
     {
-        pendingRecipeHud.progress = (float)(80 -_pendingTimerTicks++)/80;
+        pendingRecipeHud.progress = (float)(120 -_pendingTimerTicks++)/120;
     }
 }
 
