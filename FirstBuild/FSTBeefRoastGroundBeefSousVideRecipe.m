@@ -19,7 +19,7 @@
         self.donenesses = @[@130,
                             @140,
                             @150,
-                            @158
+                            @160
                             ];
         
         self.donenessLabels = @{@130:@"Medium-Rare",
