@@ -190,19 +190,19 @@ static const uint8_t STAGE_SIZE = 8;
     else if (self.session.burnerMode==1)
     {
         actionToCorrect = @"Press Stop on Paragon";
-        details = @"The Paragon is currently cooking. Please press Stop on the Paragon.";
+        details = @"The Paragon is currently cooking. Please press Stop on the Paragon. \n(tap here to cancel)";
         error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorBurnerOn userInfo:nil];
     }
     else if (!self.isProbeConnected)
     {
         actionToCorrect = @"Connect Probe";
-        details = @"Probe is not connected. Please connect the temperature probe by holding the button on the side of the probe FOR 3 SECONDS.";
+        details = @"Probe is not connected. Please connect the temperature probe by holding the button on the side of the probe FOR 3 SECONDS. \n(tap here to cancel)";
         error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorProbeNotConnected userInfo:nil];
     }
     else if (self.session.userSelectedCookMode != FSTParagonUserSelectedCookModeRapid)
     {
         actionToCorrect = @"Select Rapid Precise";
-        details =@"Please press Rapid Precise on the cooktop";
+        details =@"Please press Rapid Precise on the cooktop. \n(tap here to cancel)";
         error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorNotInRapidMode userInfo:nil];
     }
     else
@@ -217,20 +217,30 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (error && actionToCorrect)
     {
+        //there is some situation that doesn't allow
+        //the cooking configuration to be set. present
+        //the screen with appropriate action the user needs to take
+        //it will automatically proceed to the next failure (or success)
         [MBProgressHUD hideAllHUDsForView:view animated:YES];
         pendingRecipeHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
         pendingRecipeHud.mode = MBProgressHUDModeDeterminate;
+//        pendingRecipeHud.mode = MBProgressHUDModeDeterminateHorizontalBar;
         pendingRecipeHud.labelText = actionToCorrect;
         pendingRecipeHud.detailsLabelText = details;
         pendingRecipeHud.progress = 1.0;
         
         _pendingTimerTicks = 0;
         _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
+        
+        UITapGestureRecognizer *HUDSingleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+        [pendingRecipeHud addGestureRecognizer:HUDSingleTap];
     }
     else
     {
+        //everything is ok now, cancel the timer and close any HUD that was leftover
         [_pendingRecipeTimer invalidate];
         _pendingRecipeTimer = nil;
+        _pendingTimerTicks = 0;
         
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, .8 * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -242,20 +252,30 @@ static const uint8_t STAGE_SIZE = 8;
     
 }
 
+-(void)cancelPendingRecipe
+{
+    _pendingTimerTicks =0;
+    [_pendingRecipeTimer invalidate];
+    _pendingRecipeTimer = nil;
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    [MBProgressHUD hideAllHUDsForView:view animated:YES];
+    if ([self.delegate respondsToSelector:@selector(pendingRecipeCancelled)])
+    {
+        [self.delegate pendingRecipeCancelled];
+    }
+}
+
+-(void)singleTap:(UITapGestureRecognizer*)sender
+{
+    [self cancelPendingRecipe];
+}
+
 -(void)pendingRecipeTimerFired: (NSTimer*)timer
 {
     if (_pendingTimerTicks==120)
     {
-        _pendingTimerTicks =0;
-        [_pendingRecipeTimer invalidate];
-        _pendingRecipeTimer = nil;
-        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-        UIView *view = window.rootViewController.view;
-        [MBProgressHUD hideAllHUDsForView:view animated:YES];
-        if ([self.delegate respondsToSelector:@selector(pendingRecipeCancelled)])
-        {
-            [self.delegate pendingRecipeCancelled];
-        }
+        [self cancelPendingRecipe];
     }
     else
     {
