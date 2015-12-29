@@ -225,7 +225,7 @@ static const uint8_t STAGE_SIZE = 8;
         pendingRecipeHud.progress = 1.0;
         
         _pendingTimerTicks = 0;
-        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
+        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
     }
     else
     {
@@ -244,7 +244,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)pendingRecipeTimerFired: (NSTimer*)timer
 {
-    if (_pendingTimerTicks==200)
+    if (_pendingTimerTicks==80)
     {
         _pendingTimerTicks =0;
         [_pendingRecipeTimer invalidate];
@@ -259,7 +259,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     else
     {
-        pendingRecipeHud.progress = (float)(200 -_pendingTimerTicks++)/200;
+        pendingRecipeHud.progress = (float)(80 -_pendingTimerTicks++)/80;
     }
 }
 
