@@ -1456,9 +1456,10 @@ static const uint8_t STAGE_SIZE = 8;
     [data getBytes:bytes length:characteristic.value.length];
     uint16_t raw = OSReadBigInt16(bytes, 0);
     
-    self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:raw/100];
+    self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:rintf((float)raw/100)];
     if ([self.delegate respondsToSelector:@selector(actualTemperatureChanged:)])
     {
+        NSLog(@"%d, %@", raw, self.session.currentProbeTemperature);
         [self.delegate actualTemperatureChanged:self.session.currentProbeTemperature];
     }
     
