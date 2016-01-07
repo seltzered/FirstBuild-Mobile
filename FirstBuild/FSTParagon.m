@@ -1459,7 +1459,7 @@ static const uint8_t STAGE_SIZE = 8;
     self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:rintf((float)raw/100)];
     if ([self.delegate respondsToSelector:@selector(actualTemperatureChanged:)])
     {
-        NSLog(@"%d, %@", raw, self.session.currentProbeTemperature);
+//        NSLog(@"%d, %@", raw, self.session.currentProbeTemperature);
         [self.delegate actualTemperatureChanged:self.session.currentProbeTemperature];
     }
     

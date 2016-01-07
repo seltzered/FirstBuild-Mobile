@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EKb-eh-HBY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EKb-eh-HBY">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -13,9 +13,6 @@
         </mutableArray>
         <mutableArray key="FSEmeric-SemiBold.otf">
             <string>FSEmeric-SemiBold</string>
-        </mutableArray>
-        <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
-            <string>PTSans-NarrowBold</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Regular.ttf">
             <string>PTSans-Narrow</string>
@@ -475,7 +472,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wk-og-4WN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="1wk-og-4WN">
                                 <rect key="frame" x="199" y="268" width="200" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="C8e-JE-VEq">
@@ -535,8 +532,8 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" text="Name Your Paragon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="e51-e3-tg9">
-                                <rect key="frame" x="182" y="290" width="235" height="34"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Name Your Paragon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="e51-e3-tg9">
+                                <rect key="frame" x="183" y="290" width="233.5" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Uqb-13-QZ6"/>
                                     <constraint firstAttribute="height" constant="35" id="fB4-hy-5UP">
@@ -558,8 +555,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a2p-OA-5ga">
-                                <rect key="frame" x="59" y="340" width="480" height="42.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a2p-OA-5ga">
+                                <rect key="frame" x="59" y="340" width="480" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="TtA-0U-D77">
                                         <variation key="heightClass=regular-widthClass=regular" constant="55"/>
@@ -582,8 +579,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kYK-qy-P1L">
-                                <rect key="frame" x="134" y="437" width="330" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kYK-qy-P1L">
+                                <rect key="frame" x="134" y="435" width="330" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="0.25" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="pAo-uf-sm9">
@@ -600,9 +597,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITX-t3-yHe" userLabel="continueButtonHolderView">
                                 <rect key="frame" x="0.0" y="535" width="600" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0t-Pm-ykv">
-                                        <rect key="frame" x="0.0" y="16" width="600" height="34"/>
-                                        <fontDescription key="fontDescription" name="PTSans-NarrowBold" family="PT Sans Narrow" pointSize="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONTINUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0t-Pm-ykv">
+                                        <rect key="frame" x="0.0" y="21" width="600" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -671,6 +668,7 @@
                     </view>
                     <connections>
                         <outlet property="paragonNameField" destination="kYK-qy-P1L" id="IHy-Q4-8cf"/>
+                        <segue destination="5c0-y2-R45" kind="show" identifier="segueWarning" id="NGk-kQ-TbR"/>
                     </connections>
                 </viewController>
                 <tapGestureRecognizer id="Fbk-OB-GF8">
@@ -682,8 +680,173 @@
             </objects>
             <point key="canvasLocation" x="3987" y="1676"/>
         </scene>
+        <!--Paragon Commissioning Warning View Controller-->
+        <scene sceneID="Kb9-or-fnn">
+            <objects>
+                <viewController id="5c0-y2-R45" customClass="FSTParagonCommissioningWarningViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W9l-ee-uYb"/>
+                        <viewControllerLayoutGuide type="bottom" id="ajf-1g-4PT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7Jg-uD-Oiw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Warning" translatesAutoresizingMaskIntoConstraints="NO" id="dPa-38-ArF">
+                                <rect key="frame" x="200" y="30" width="200" height="106.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dPa-38-ArF" secondAttribute="height" multiplier="15:8" id="tNq-an-t1o"/>
+                                    <constraint firstAttribute="width" constant="200" id="vca-Ra-Uu2"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WARNING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSd-Lq-ypW">
+                                <rect key="frame" x="0.0" y="140" width="600" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="wordWrap" numberOfLines="22" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mW5-Ar-7st">
+                                <rect key="frame" x="75" y="186" width="450" height="339"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20.5" id="AOz-Ax-NLm"/>
+                                    <constraint firstAttribute="height" constant="250" id="eDE-ii-z8J"/>
+                                </constraints>
+                                <mutableString key="text"> • Consuming unpasteurized foods can increase your risk of foodbourne illness.   • Sous vide cooking often involves temperatures below FDA recommended safe minimum cooking temperatures, but can still be safe when done for the correct amount of time as long as the temperature remains above 54°C (130°F).   • Several factors impact the time required to pasteurize foods, including cooking temperature, initial food temperature, food thickness, and food preparation.  
+ • Follow all proper instructions related to preparation, cooking including time and temperature requirements and storage during sous vide cooking to prevent foodbourne illness caused by harmful bacteria.    • Discard food if it has been at temperatures in the FDA Danger Zone (4°C (40°F) to 60°C (140°F) for more than four hours. Cool foods quickly using an ice bath if not consuming directly after cooking.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="AOz-Ax-NLm"/>
+                                        <exclude reference="eDE-ii-z8J"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fuf-cl-nRQ">
+                                <rect key="frame" x="0.0" y="535" width="600" height="65"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8a-hA-Ud6" userLabel="left">
+                                        <rect key="frame" x="0.0" y="0.0" width="298.5" height="65"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEARN MORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKN-cT-k7m">
+                                                <rect key="frame" x="0.0" y="20" width="298.5" height="23.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="mKN-cT-k7m" firstAttribute="width" secondItem="a8a-hA-Ud6" secondAttribute="width" id="Ib1-ev-tnm"/>
+                                            <constraint firstItem="mKN-cT-k7m" firstAttribute="centerY" secondItem="a8a-hA-Ud6" secondAttribute="centerY" id="Ptr-Fe-ut4"/>
+                                            <constraint firstItem="mKN-cT-k7m" firstAttribute="centerX" secondItem="a8a-hA-Ud6" secondAttribute="centerX" id="kbt-Wg-XKY"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ZTP-np-7Pb" appends="YES" id="wVd-EN-xiD"/>
+                                        </connections>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5w-0z-yp0" userLabel="middle">
+                                        <rect key="frame" x="298" y="0.0" width="3" height="65"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="3" id="Chv-PY-RSk"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VVa-cW-v30" userLabel="right">
+                                        <rect key="frame" x="301" y="0.0" width="298.5" height="65"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISMISS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNQ-wl-C0H">
+                                                <rect key="frame" x="0.0" y="20.5" width="298.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstItem="vNQ-wl-C0H" firstAttribute="centerX" secondItem="VVa-cW-v30" secondAttribute="centerX" id="AOl-7f-80J"/>
+                                            <constraint firstItem="vNQ-wl-C0H" firstAttribute="width" secondItem="VVa-cW-v30" secondAttribute="width" id="oRm-HG-XDl"/>
+                                            <constraint firstItem="vNQ-wl-C0H" firstAttribute="centerY" secondItem="VVa-cW-v30" secondAttribute="centerY" id="sQf-Dc-FHa"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="UIL-AR-R4P" appends="YES" id="S4m-Hr-xZm"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="f5w-0z-yp0" firstAttribute="centerX" secondItem="fuf-cl-nRQ" secondAttribute="centerX" id="Ag1-cr-wkN"/>
+                                    <constraint firstItem="VVa-cW-v30" firstAttribute="height" secondItem="fuf-cl-nRQ" secondAttribute="height" id="F0X-Wo-fJR"/>
+                                    <constraint firstItem="a8a-hA-Ud6" firstAttribute="trailing" secondItem="f5w-0z-yp0" secondAttribute="leading" id="K4W-9z-SLw"/>
+                                    <constraint firstAttribute="trailing" secondItem="VVa-cW-v30" secondAttribute="trailing" id="L6N-Ia-hYS"/>
+                                    <constraint firstItem="a8a-hA-Ud6" firstAttribute="centerY" secondItem="fuf-cl-nRQ" secondAttribute="centerY" id="R2F-sk-oGe"/>
+                                    <constraint firstItem="VVa-cW-v30" firstAttribute="centerY" secondItem="fuf-cl-nRQ" secondAttribute="centerY" id="f0a-N7-hCh"/>
+                                    <constraint firstItem="VVa-cW-v30" firstAttribute="leading" secondItem="f5w-0z-yp0" secondAttribute="trailing" id="nY7-NL-GVd"/>
+                                    <constraint firstItem="f5w-0z-yp0" firstAttribute="centerY" secondItem="fuf-cl-nRQ" secondAttribute="centerY" id="nck-RM-rTR"/>
+                                    <constraint firstItem="a8a-hA-Ud6" firstAttribute="leading" secondItem="fuf-cl-nRQ" secondAttribute="leading" id="no6-YH-XJP"/>
+                                    <constraint firstItem="f5w-0z-yp0" firstAttribute="height" secondItem="fuf-cl-nRQ" secondAttribute="height" id="qXS-2y-yGA"/>
+                                    <constraint firstItem="a8a-hA-Ud6" firstAttribute="height" secondItem="fuf-cl-nRQ" secondAttribute="height" id="uR5-X8-VeD"/>
+                                    <constraint firstAttribute="height" constant="65" id="vn8-0A-N4Y"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qSd-Lq-ypW" firstAttribute="centerX" secondItem="7Jg-uD-Oiw" secondAttribute="centerX" id="3LC-K0-2w2"/>
+                            <constraint firstItem="fuf-cl-nRQ" firstAttribute="top" secondItem="mW5-Ar-7st" secondAttribute="bottom" constant="260" id="4X0-AG-3Wj"/>
+                            <constraint firstItem="mW5-Ar-7st" firstAttribute="centerX" secondItem="7Jg-uD-Oiw" secondAttribute="centerX" id="9uT-k3-eyW"/>
+                            <constraint firstItem="fuf-cl-nRQ" firstAttribute="height" secondItem="7Jg-uD-Oiw" secondAttribute="height" multiplier="0.1" id="CgB-gb-Rzt"/>
+                            <constraint firstItem="fuf-cl-nRQ" firstAttribute="width" secondItem="7Jg-uD-Oiw" secondAttribute="width" id="Hph-CF-BBg"/>
+                            <constraint firstItem="dPa-38-ArF" firstAttribute="top" secondItem="W9l-ee-uYb" secondAttribute="bottom" constant="10" id="Huy-hX-tfl"/>
+                            <constraint firstItem="mW5-Ar-7st" firstAttribute="top" secondItem="dPa-38-ArF" secondAttribute="bottom" constant="25" id="JSu-Nf-eKK"/>
+                            <constraint firstItem="fuf-cl-nRQ" firstAttribute="top" secondItem="mW5-Ar-7st" secondAttribute="bottom" constant="10" id="Mkw-uC-ZZk"/>
+                            <constraint firstItem="qSd-Lq-ypW" firstAttribute="top" secondItem="dPa-38-ArF" secondAttribute="bottom" constant="3.5" id="Pj0-oP-YZv"/>
+                            <constraint firstItem="qSd-Lq-ypW" firstAttribute="width" secondItem="7Jg-uD-Oiw" secondAttribute="width" id="Qlh-uc-jln"/>
+                            <constraint firstItem="ajf-1g-4PT" firstAttribute="top" secondItem="mW5-Ar-7st" secondAttribute="bottom" constant="10" id="UF3-er-IKE"/>
+                            <constraint firstItem="ajf-1g-4PT" firstAttribute="top" secondItem="mW5-Ar-7st" secondAttribute="bottom" constant="324.5" id="awl-n2-6rI"/>
+                            <constraint firstItem="fuf-cl-nRQ" firstAttribute="top" secondItem="mW5-Ar-7st" secondAttribute="bottom" constant="259.5" id="dtk-s7-TdM"/>
+                            <constraint firstItem="dPa-38-ArF" firstAttribute="centerX" secondItem="7Jg-uD-Oiw" secondAttribute="centerX" id="eDD-l5-B3T"/>
+                            <constraint firstItem="ajf-1g-4PT" firstAttribute="top" secondItem="fuf-cl-nRQ" secondAttribute="bottom" id="eRV-af-Cd4"/>
+                            <constraint firstItem="qSd-Lq-ypW" firstAttribute="top" secondItem="dPa-38-ArF" secondAttribute="bottom" constant="3.5" id="kkv-d1-Km1"/>
+                            <constraint firstItem="mW5-Ar-7st" firstAttribute="width" secondItem="7Jg-uD-Oiw" secondAttribute="width" multiplier="0.75" id="nhk-b0-pg2"/>
+                            <constraint firstItem="ajf-1g-4PT" firstAttribute="top" secondItem="mW5-Ar-7st" secondAttribute="bottom" constant="95" id="pVy-XW-gUT"/>
+                            <constraint firstItem="mW5-Ar-7st" firstAttribute="top" secondItem="qSd-Lq-ypW" secondAttribute="bottom" constant="10" id="y0y-Bx-jJJ"/>
+                            <constraint firstItem="fuf-cl-nRQ" firstAttribute="centerX" secondItem="7Jg-uD-Oiw" secondAttribute="centerX" id="ynp-LQ-bv4"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Pj0-oP-YZv"/>
+                                <exclude reference="JSu-Nf-eKK"/>
+                                <exclude reference="4X0-AG-3Wj"/>
+                                <exclude reference="CgB-gb-Rzt"/>
+                                <exclude reference="dtk-s7-TdM"/>
+                                <exclude reference="UF3-er-IKE"/>
+                                <exclude reference="awl-n2-6rI"/>
+                                <exclude reference="pVy-XW-gUT"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2o1-Zw-Eod" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ZTP-np-7Pb" userLabel="learnMoreTap">
+                    <connections>
+                        <action selector="learnMoreTap:" destination="5c0-y2-R45" id="kin-Ez-89u"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="UIL-AR-R4P" userLabel="dismissTap">
+                    <connections>
+                        <action selector="dismissTap:" destination="5c0-y2-R45" id="ves-vE-6WP"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="4755" y="1676"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="Warning" width="145" height="130"/>
         <image name="White_bg_with_dots" width="640" height="1136"/>
         <image name="cell_paragon_product_logo" width="457" height="155"/>
         <image name="cell_paragon_product_logo_grey" width="457" height="155"/>
