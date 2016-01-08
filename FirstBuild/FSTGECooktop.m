@@ -378,7 +378,7 @@ NSString * const FSTGECooktopCharacteristicRecipeId              = @"FF";
         NSData *data = characteristic.value;
         Byte bytes[characteristic.value.length] ;
         [data getBytes:bytes length:characteristic.value.length];
-        uint16_t raw = OSReadBigInt16(bytes, 0);
+//        uint16_t raw = OSReadBigInt16(bytes, 0);
         //self.session.currentStageCookTimeElapsed = [[NSNumber alloc] initWithDouble:raw];
         [self determineCookMode];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:FSTElapsedTimeChangedNotification object:self];

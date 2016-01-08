@@ -70,6 +70,9 @@
         case FSTCookingStatePrecisionCookingTemperatureReached:
             self.state.text = @"P. Reached";
             break;
+        case FSTCookingStatePrecisionCookingCurrentStageDone:
+            self.state.text = @"S. Done";
+            break;
     }
     
 }

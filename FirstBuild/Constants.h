@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
-#ifndef FirstBuild-Mobile_Constants_h
-#define FirstBuild-Mobile_Constants_h
+#ifndef FirstBuildMobile_Constants_h
+#define FirstBuildMobile_Constants_h
 
 #define _EXPERIMENTAL //remove _ if experimental enabled
 #define _CHILLHUB

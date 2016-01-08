@@ -50,9 +50,6 @@
     UIFont *labelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:14.0];
     NSDictionary *labelFontDict = [NSDictionary dictionaryWithObject: labelFont forKey:NSFontAttributeName];
     
-    UIFont *bigLabelFont = [UIFont fontWithName:@"FSEmeric-Thin" size:22.0];
-    NSDictionary *bigLabelFontDict = [NSDictionary dictionaryWithObject: bigLabelFont forKey:NSFontAttributeName];
-    
     FSTParagonCookingStage* stage = self.recipe.paragonCookingStages[0];
     
     // min time values

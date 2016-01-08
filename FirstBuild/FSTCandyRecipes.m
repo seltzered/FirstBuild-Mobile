@@ -13,6 +13,7 @@
 
 - (instancetype)init
 {
+    self = [super init];
     if (self) {
         self.recipes = [[NSArray alloc] initWithObjects:
                         [FSTCaramelBrittleCandyRecipe new],

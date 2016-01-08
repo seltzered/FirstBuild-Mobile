@@ -123,7 +123,7 @@
 //    } else {
         minMinutes = [[convert numberFromString:[pickerTimeData[1][minMinuteIndex] substringFromIndex:1]] integerValue];
 //    }
-    return [NSNumber numberWithInt:(minHourMinutes + minMinutes)];
+    return [NSNumber numberWithInt:(int)(minHourMinutes + minMinutes)];
     
 }
 
@@ -137,7 +137,7 @@
     } else {
         maxMinutes = [[convert numberFromString:[pickerTimeData[1][maxMinuteActual] substringFromIndex:1]] integerValue];
     }
-    return [NSNumber numberWithInt:(maxHourMinutes + maxMinutes)];
+    return [NSNumber numberWithInt:(int)(maxHourMinutes + maxMinutes)];
 }
 
 - (NSNumber*)temperatureChosen {
