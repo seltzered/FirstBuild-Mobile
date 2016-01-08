@@ -192,29 +192,5 @@
     [self updateLabels];
 }
 
-//
-//#pragma mark <UIPickerViewDelegate, UIPickerViewDataSource>
-//
-//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-//{
-//    
-//}
-//
-//-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-//{
-//    NSArray *keys = [_eggRecipe.data allKeys];
-//    return [keys objectAtIndex:row];
-//
-//}
-//
-//
-//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-//{
-//    return _eggRecipe.data.count;
-//}
-//
-//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-//{
-//    return 1;
-//}
+
 @end
