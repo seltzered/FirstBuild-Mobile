@@ -9,5 +9,4 @@
 #import "ProductTableViewCell.h"
 
 @implementation ProductTableViewCell
-
 @end

@@ -355,6 +355,7 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
         
         productCell.batteryView.batteryLevel = [paragon.batteryLevel doubleValue]/100;
         [productCell.batteryView setNeedsDisplay]; // redraw
+        
         //Taken out since those properties were not connected
         [productCell.statusLabel setText:@"---"];
 
@@ -533,4 +534,6 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
         }
     }
 }
+
+
 @end

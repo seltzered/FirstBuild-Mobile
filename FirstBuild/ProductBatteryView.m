@@ -11,8 +11,15 @@
 @implementation ProductBatteryView
 
 
+- (void)dealloc
+{
+    DLog(@"dealloc");
+}
+
 - (void)drawRect:(CGRect)rect { // battery view
     // outer container of battery
+    
+    [self.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     
     // should all be proportional to rectangle
     CGFloat tip_width = self.frame.size.width/3;
@@ -39,19 +46,28 @@
     
     UIView *liquid = [[UIView alloc] initWithFrame:CGRectMake(liquid_inset, liquid_inset + max_height - liquid_height, container.frame.size.width - 2*liquid_inset, liquid_height)]; // inset from superview
     
-    if (self.batteryLevel < 0.20) {
+    if (self.batteryLevel < 0.29) {
+        liquid.layer.borderColor = [UIColor redColor].CGColor;
         liquid.backgroundColor = [UIColor redColor]; // almost empty
     } else {
+        liquid.layer.borderColor = [UIColor blackColor].CGColor;
         liquid.backgroundColor = [UIColor blackColor];
     }
-    liquid.layer.cornerRadius = MIN(liquid.frame.size.height, liquid.frame.size.width)/7; // was just set to container radius
-    [container addSubview:liquid];
     
-    UIView *tip = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - tip_width/2, 0.0, tip_width, inset*2)]; // middle of frame minus width of tip, a tiny bit offset from the top, 2 times inset of battery
+    // was just set to container radius
+    liquid.layer.cornerRadius = MIN(liquid.frame.size.height, liquid.frame.size.width)/7;    [container addSubview:liquid];
+    
+    liquid.layer.borderWidth = 1;
+    
+    // middle of frame minus width of tip, a tiny bit offset from the top, 2 times inset of battery
+    UIView *tip = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - tip_width/2, 0.0, tip_width, inset*2)];
     tip.backgroundColor = [UIColor blackColor];
     tip.layer.cornerRadius = tip_width/2;
+    tip.layer.borderColor = [UIColor blackColor].CGColor;
+    tip.layer.borderWidth = 1;
     
     [self insertSubview:tip belowSubview:container];
+    
 }
 
 @end
