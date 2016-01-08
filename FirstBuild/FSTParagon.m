@@ -136,7 +136,8 @@ static const uint8_t STAGE_SIZE = 8;
                UIWindow *window = [[UIApplication sharedApplication] keyWindow];
                UIView *view = window.rootViewController.view;
                [MBProgressHUD hideAllHUDsForView:view animated:YES];
-               _pendingRecipe = nil;
+               self.isProbeConnected = NO;
+               
                if ([self.delegate respondsToSelector:@selector(paragonConnectionStatusChanged:)])
                {
                    [self.delegate paragonConnectionStatusChanged:NO];
@@ -180,6 +181,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSString* details;
     NSString* actionToCorrect;
     _pendingRecipe = recipe;
+    float retryDelayInterval = 0.0;
     
     if (!recipe.paragonCookingStages)
     {
@@ -187,23 +189,33 @@ static const uint8_t STAGE_SIZE = 8;
         details = nil;
         error = [NSError errorWithDomain:@"no paragon cooking stages" code:FSTCookConfigurationErrorNoStages userInfo:nil];
     }
+    else if (!self.online)
+    {
+        actionToCorrect = @"Turn on Paragon";
+        details = @"The Paragon is currently offline. Please plug in the Paragon or return within range. \n(tap here to cancel)";
+        error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorBurnerOn userInfo:nil];
+        retryDelayInterval = 0.5;
+    }
     else if (self.session.burnerMode==1)
     {
         actionToCorrect = @"Press Stop on Paragon";
         details = @"The Paragon is currently cooking. Please press Stop on the Paragon. \n(tap here to cancel)";
         error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorBurnerOn userInfo:nil];
+        retryDelayInterval = 0.25;
     }
     else if (!self.isProbeConnected)
     {
         actionToCorrect = @"Connect Probe";
         details = @"Probe is not connected. Please connect the temperature probe by holding the button on the side of the probe FOR 3 SECONDS. \n(tap here to cancel)";
         error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorProbeNotConnected userInfo:nil];
+        retryDelayInterval = 0.25;
     }
     else if (self.session.userSelectedCookMode != FSTParagonUserSelectedCookModeRapid)
     {
         actionToCorrect = @"Select Rapid Precise";
         details =@"Please press Rapid Precise on the cooktop. \n(tap here to cancel)";
         error = [NSError errorWithDomain:@"" code:FSTCookConfigurationErrorNotInRapidMode userInfo:nil];
+        retryDelayInterval = 0.25;
     }
     else
     {
@@ -232,7 +244,7 @@ static const uint8_t STAGE_SIZE = 8;
         _pendingRecipeTimer = nil;
         _pendingTimerTicks = 0;
         
-        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
+        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:retryDelayInterval target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
         
         UITapGestureRecognizer *HUDSingleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
         [pendingRecipeHud addGestureRecognizer:HUDSingleTap];
