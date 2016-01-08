@@ -10,7 +10,7 @@
 
 @interface FSTBleSavedProduct : FSTBleProduct
 
-@property (nonatomic,strong) NSString* friendlyName;
+//@property (nonatomic,strong) NSString* friendlyName;
 @property (nonatomic,strong) NSString* classNameString;
 
 @end
