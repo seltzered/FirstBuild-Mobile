@@ -57,7 +57,6 @@
 
     FSTParagonCookingStage* stage = self.recipe.paragonCookingStages[0];
     
-    
     // min time values
     
     NSNumber* hour = [NSNumber numberWithInt:[stage.cookTimeMinimum intValue]/60];
@@ -174,17 +173,18 @@
             stage.targetTemperature = @148;
             break;
         case 4:
-            self.donenessLabel.text = @"firm white, firm yolk";
-            stage.cookTimeMinimum = @45;
-            stage.cookTimeMaximum = @60;
-            stage.targetTemperature = @165;
-            break;
-        case 5:
             self.donenessLabel.text = @"firm white, runny yolk";
             stage.cookTimeMinimum = @13;
             stage.cookTimeMaximum = @15;
             stage.targetTemperature = @167;
             break;
+        case 5:
+            self.donenessLabel.text = @"firm white, firm yolk";
+            stage.cookTimeMinimum = @45;
+            stage.cookTimeMaximum = @60;
+            stage.targetTemperature = @165;
+            break;
+        
     }
     [self updateLabels];
 }
