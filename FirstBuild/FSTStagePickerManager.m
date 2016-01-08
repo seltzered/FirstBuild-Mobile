@@ -152,7 +152,8 @@
     NSMutableArray* tempData = [[NSMutableArray alloc] init];
     
     for (NSInteger i = 80; i <= 375; i+=1) {
-        [tempData addObject:[NSString stringWithFormat:@"%.01f", (float)i]];
+        //[tempData addObject:[NSString stringWithFormat:@"%.01f", (float)i]];
+        [tempData addObject:[NSString stringWithFormat:@"%ld", (long)i]];
     }
     
     return (NSArray*)tempData;
