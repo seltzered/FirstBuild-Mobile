@@ -331,7 +331,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Got it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="vJN-76-2dn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="Got it!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="35" translatesAutoresizingMaskIntoConstraints="NO" id="vJN-76-2dn">
                                 <rect key="frame" x="226" y="268" width="148" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="vJN-76-2dn" secondAttribute="height" multiplier="123:74" id="CpD-4S-RoN"/>
@@ -361,7 +361,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We found your Paragon." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJ8-yV-rJR" customClass="FSTLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We found your Paragon." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJ8-yV-rJR" customClass="FSTLabel">
                                 <rect key="frame" x="167" y="342" width="267" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="267" id="bIW-BL-m7A">
@@ -461,7 +461,7 @@
                                     <constraint firstAttribute="width" constant="280" id="oDG-nL-lWT"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We were unable to connect to Paragon Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcA-lY-E9K">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="We were unable to connect to Paragon Please try again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QcA-lY-E9K">
                                 <rect key="frame" x="146" y="324" width="307" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="307" id="STa-NU-QGy">
@@ -472,7 +472,7 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="1wk-og-4WN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Connection Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="1wk-og-4WN">
                                 <rect key="frame" x="199" y="268" width="200" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="C8e-JE-VEq">
@@ -532,7 +532,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Name Your Paragon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="e51-e3-tg9">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" text="Name Your Paragon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="e51-e3-tg9">
                                 <rect key="frame" x="183" y="290" width="233.5" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Uqb-13-QZ6"/>
@@ -555,7 +555,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a2p-OA-5ga">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is how your paragon will appear in the list. You can change it later." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="a2p-OA-5ga">
                                 <rect key="frame" x="59" y="340" width="480" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="TtA-0U-D77">
@@ -579,7 +579,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kYK-qy-P1L">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="My Paragon" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kYK-qy-P1L">
                                 <rect key="frame" x="134" y="435" width="330" height="30"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="0.25" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -711,8 +711,8 @@
                                     <constraint firstAttribute="height" constant="20.5" id="AOz-Ax-NLm"/>
                                     <constraint firstAttribute="height" constant="250" id="eDE-ii-z8J"/>
                                 </constraints>
-                                <mutableString key="text"> • Consuming unpasteurized foods can increase your risk of foodbourne illness.   • Sous vide cooking often involves temperatures below FDA recommended safe minimum cooking temperatures, but can still be safe when done for the correct amount of time as long as the temperature remains above 54°C (130°F).   • Several factors impact the time required to pasteurize foods, including cooking temperature, initial food temperature, food thickness, and food preparation.  
- • Follow all proper instructions related to preparation, cooking including time and temperature requirements and storage during sous vide cooking to prevent foodbourne illness caused by harmful bacteria.    • Discard food if it has been at temperatures in the FDA Danger Zone (4°C (40°F) to 60°C (140°F) for more than four hours. Cool foods quickly using an ice bath if not consuming directly after cooking.</mutableString>
+                                <string key="text"> • Consuming unpasteurized foods can increase your risk of foodbourne illness.   • Sous vide cooking often involves temperatures below FDA recommended safe minimum cooking temperatures, but can still be safe when done for the correct amount of time as long as the temperature remains above 54°C (130°F).   • Several factors impact the time required to pasteurize foods, including cooking temperature, initial food temperature, food thickness, and food preparation.  
+ • Follow all proper instructions related to preparation, cooking including time and temperature requirements and storage during sous vide cooking to prevent foodbourne illness caused by harmful bacteria.    • Discard food if it has been at temperatures in the FDA Danger Zone (4°C (40°F) to 60°C (140°F) for more than four hours. Cool foods quickly using an ice bath if not consuming directly after cooking.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

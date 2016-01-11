@@ -9,7 +9,10 @@
 #import "FSTParagonMenuAboutViewController.h"
 
 @interface FSTParagonMenuAboutViewController ()
-
+{
+    
+    IBOutlet UILabel *labelVersion;
+}
 @end
 
 @implementation FSTParagonMenuAboutViewController
@@ -19,9 +22,25 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    labelVersion.text = version;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)sourceTap:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.github.com/FirstBuild/FirstBuild-Mobile"]];
+}
+
+- (IBAction)learnMoreTap:(id)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://firstbuild.com/ChrisN/paragon-induction-cooktop-precision-cooking/updates/"]];
+
 }
 
 /*
