@@ -514,6 +514,7 @@
                                 <color key="minimumTrackTintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="thicknessSlid:" destination="uv6-e3-ONs" eventType="valueChanged" id="pgj-ql-n3R"/>
+                                    <action selector="thicknessSliderTouchUpInside:" destination="uv6-e3-ONs" eventType="touchUpInside" id="wTR-g4-dSO"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="S37-kd-9SD">
@@ -6956,9 +6957,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Oqm-D3-BPL"/>
-        <segue reference="dEM-RT-Cg9"/>
-        <segue reference="lvL-CX-hJF"/>
-        <segue reference="jGl-td-wfM"/>
         <segue reference="Lsb-5g-4vw"/>
+        <segue reference="dEM-RT-Cg9"/>
+        <segue reference="jGl-td-wfM"/>
+        <segue reference="lvL-CX-hJF"/>
     </inferredMetricsTieBreakers>
 </document>
