@@ -286,7 +286,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yC3-B1-e1H">
                                             <rect key="frame" x="257" y="9.5" width="86" height="25"/>
                                             <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="20"/>
-                                            <color key="textColor" red="0.58823529409999997" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -387,30 +387,30 @@
                         <viewControllerLayoutGuide type="bottom" id="HLG-s5-Tfj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BAr-jh-9mO">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="hBx-Dw-WHn">
-                                <rect key="frame" x="28" y="10" width="544" height="63.5"/>
+                                <rect key="frame" x="28" y="74" width="544" height="63.5"/>
                                 <string key="text">The Paragon induction cooktop monitors food and water temperature directly, offering precise control of food temperature. Precision cooking with Paragon is easier and produces restaurant quality, repeatable results.</string>
                                 <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i84-4K-x9g">
-                                <rect key="frame" x="28" y="123" width="105" height="25"/>
+                                <rect key="frame" x="28" y="187" width="105" height="25"/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-fN-FdH">
-                                <rect key="frame" x="556" y="124.5" width="16" height="23.5"/>
+                                <rect key="frame" x="556" y="188.5" width="16" height="23.5"/>
                                 <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
                                 <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Source Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8if-Qc-F4r">
-                                <rect key="frame" x="28" y="156" width="151" height="25"/>
+                                <rect key="frame" x="28" y="220" width="151" height="25"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -420,7 +420,7 @@
                                 </connections>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;&gt; Learn More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mj3-Ss-Ptm">
-                                <rect key="frame" x="28" y="79" width="89" height="16"/>
+                                <rect key="frame" x="28" y="143" width="89" height="16"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.91764705879999997" green="0.25490196079999999" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
@@ -445,6 +445,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="gcP-fN-FdH" secondAttribute="trailing" constant="8" id="xbj-oY-4an"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mBe-03-HcO">
+                        <barButtonItem key="rightBarButtonItem" title="About" id="yJZ-pg-jlz">
+                            <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="labelVersion" destination="gcP-fN-FdH" id="yUQ-2y-HJv"/>
                     </connections>

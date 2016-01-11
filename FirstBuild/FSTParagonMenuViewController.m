@@ -100,9 +100,13 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
 //    } else if (indexPath.row == kSettings) {
 //        [self performSegueWithIdentifier:@"menuSettingsSegue" sender:self];
     } else if (indexPath.row == kHelp) {
-        // open the firstbuild help website in browser
     } else if (indexPath.row == kFeedback) {
-        // open new email to firstbuild
+        NSString *subject = [NSString stringWithFormat:@"Paragon iOS App Feedback"];
+        NSString *mail = [NSString stringWithFormat:@"paragon@firstbuild.com"];
+        NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"mailto:?to=%@&subject=%@",
+                                                    [mail stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
+                                                    [subject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+        [[UIApplication sharedApplication] openURL:url];
     } else if (indexPath.row == kAbout) {
         [self performSegueWithIdentifier:@"menuAboutSegue" sender:self];
     }
