@@ -177,13 +177,29 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(NSError*)sendRecipeToCooktop: (FSTRecipe*)recipe
 {
+    _pendingRecipe = recipe;
+    FSTParagonCookingStage* stage = _pendingRecipe.paragonCookingStages[0];
+    if ([stage.targetTemperature floatValue] < 140)
+    {
+        [self showFoodWarningForPendingRecipe];
+        return nil;
+    }
+    else
+    {
+        return [self ensureCooktopReadyForPendingRecipeAndSend];
+    }
+}
+
+-(NSError*)ensureCooktopReadyForPendingRecipeAndSend
+{
+    
     NSError* error;
     NSString* details;
     NSString* actionToCorrect;
-    _pendingRecipe = recipe;
+
     float retryDelayInterval = 0.0;
     
-    if (!recipe.paragonCookingStages)
+    if (!_pendingRecipe.paragonCookingStages)
     {
         actionToCorrect = nil;
         details = nil;
@@ -220,12 +236,9 @@ static const uint8_t STAGE_SIZE = 8;
     else
     {
         error = nil;
+        [self writeCookConfiguration:_pendingRecipe];
         _pendingRecipe = nil;
-        [self writeCookConfiguration:recipe];
     }
-    
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    UIView *view = window.rootViewController.view;
     
     if (error && actionToCorrect)
     {
@@ -233,21 +246,29 @@ static const uint8_t STAGE_SIZE = 8;
         //the cooking configuration to be set. present
         //the screen with appropriate action the user needs to take
         //it will automatically proceed to the next failure (or success)
-        [MBProgressHUD hideAllHUDsForView:view animated:YES];
-        pendingRecipeHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-        pendingRecipeHud.mode = MBProgressHUDModeDeterminate;
-        pendingRecipeHud.labelText = actionToCorrect;
-        pendingRecipeHud.detailsLabelText = details;
-        pendingRecipeHud.progress = 1.0;
+
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+            UIView *view = window.rootViewController.view;
+            [MBProgressHUD hideAllHUDsForView:view animated:YES];
+            pendingRecipeHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+            pendingRecipeHud.mode = MBProgressHUDModeDeterminate;
+            pendingRecipeHud.labelText = actionToCorrect;
+            pendingRecipeHud.detailsLabelText = details;
+            pendingRecipeHud.progress = 1.0;
+            
+            [_pendingRecipeTimer invalidate];
+            _pendingRecipeTimer = nil;
+            _pendingTimerTicks = 0;
+            
+            _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:retryDelayInterval target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
+            
+            UITapGestureRecognizer *HUDSingleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+            [pendingRecipeHud addGestureRecognizer:HUDSingleTap];
+        });
         
-        [_pendingRecipeTimer invalidate];
-        _pendingRecipeTimer = nil;
-        _pendingTimerTicks = 0;
         
-        _pendingRecipeTimer = [NSTimer scheduledTimerWithTimeInterval:retryDelayInterval target:self selector:@selector(pendingRecipeTimerFired:) userInfo:nil repeats:YES];
-        
-        UITapGestureRecognizer *HUDSingleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
-        [pendingRecipeHud addGestureRecognizer:HUDSingleTap];
     }
     else
     {
@@ -258,12 +279,58 @@ static const uint8_t STAGE_SIZE = 8;
         
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, .8 * NSEC_PER_SEC);
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+            UIView *view = window.rootViewController.view;
             [MBProgressHUD hideAllHUDsForView:view animated:YES];
         });
+        
     }
     
     return error;
+}
+
+
+-(void)showFoodWarningForPendingRecipe
+{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    if(![defaults boolForKey:@"safetyPopupReminderDisabled"])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                        message:@"Cooking below 140\u00b0F increases your risks of foodborne illness"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Got It!"
+                                              otherButtonTitles: nil];
+        
+        [alert addButtonWithTitle:@"Don't Remind Me Again"];
+        [alert addButtonWithTitle:@"Cancel Recipe"];
+        [alert show];
+    }
+    else
+    {
+        [self ensureCooktopReadyForPendingRecipeAndSend];
+    }
     
+}
+
+- (void)alertView: (UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"Don't Remind Me Again"])
+    {
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        
+        [defaults setBool:YES forKey:@"safetyPopupReminderDisabled"];
+        [defaults synchronize];
+        [self ensureCooktopReadyForPendingRecipeAndSend];
+    }
+    else if([title isEqualToString:@"Got It!"])
+    {
+        [self ensureCooktopReadyForPendingRecipeAndSend];
+    }
+    else
+    {
+        //do nothing
+    }
 }
 
 -(void)cancelPendingRecipe
@@ -297,14 +364,14 @@ static const uint8_t STAGE_SIZE = 8;
     }
 }
 
--(void)checkAndSendPendingRecipe
+-(void)retryPendingRecipe
 {
     if (_pendingRecipe)
     {
         //there are a few issues that require a small delay to make sure everything is accounted for
         //before re-submitting the recipe
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self sendRecipeToCooktop:_pendingRecipe];
+            [self ensureCooktopReadyForPendingRecipeAndSend];
         });
     }
 }
@@ -873,6 +940,7 @@ static const uint8_t STAGE_SIZE = 8;
         
         /////////////////////////////////////
         //[self startOta];
+        
         /////////////////////////////////////
         
         
@@ -935,7 +1003,7 @@ static const uint8_t STAGE_SIZE = 8;
     else
     {
         self.isProbeConnected = YES;
-        [self checkAndSendPendingRecipe];
+        [self retryPendingRecipe];
     }
 
 }
@@ -1217,7 +1285,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeRapid)
     {
-        [self checkAndSendPendingRecipe];
+        [self retryPendingRecipe];
     }
     
     [self determineCookMode];
@@ -1440,7 +1508,7 @@ static const uint8_t STAGE_SIZE = 8;
         self.session.burnerMode = bytes[0];
         if (bytes[0] == 0)
         {
-            [self checkAndSendPendingRecipe];
+            [self retryPendingRecipe];
         }
     }
     else

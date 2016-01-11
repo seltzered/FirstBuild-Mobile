@@ -30,7 +30,7 @@
 @optional - (void) pendingRecipeCancelled;
 @end
 
-@interface FSTParagon : FSTBleProduct
+@interface FSTParagon : FSTBleProduct <UIAlertViewDelegate>
 
 typedef enum {
     FSTCookConfigurationErrorNoStages=0,
