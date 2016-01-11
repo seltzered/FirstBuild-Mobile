@@ -20,14 +20,18 @@
 #import "FSTParagonMenuDiagnosticsViewController.h"
 
 @implementation FSTParagonMenuViewController
+{
+    
+}
 
 typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     kHome,
-    kSettings,
+//    kSettings,
     kHelp,
     kFeedback,
     kAbout,
-    kDiagonistics
+//    kDiagonistics,
+    kFoodSafety
 
 };
 
@@ -49,7 +53,7 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,9 +63,9 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
         case kHome:
             CellIdentifier = @"home";
             break;
-        case kSettings:
-            CellIdentifier = @"settings";
-            break;
+//        case kSettings:
+//            CellIdentifier = @"settings";
+//            break;
         case kHelp:
             CellIdentifier = @"help";
             break;
@@ -71,8 +75,11 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
         case kAbout:
             CellIdentifier = @"about";
             break;
-        case kDiagonistics:
-            CellIdentifier = @"diagnostics";
+//        case kDiagonistics:
+//            CellIdentifier = @"diagnostics";
+//            break;
+        case kFoodSafety:
+            CellIdentifier = @"foodsafety";
             break;
         default:
             break;
@@ -90,8 +97,8 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
     {
         [self.revealViewController rightRevealToggle:self]; // should this happen every time?
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTMenuItemSelectedNotification object:FSTMenuItemHome];
-    } else if (indexPath.row == kSettings) {
-        [self performSegueWithIdentifier:@"menuSettingsSegue" sender:self];
+//    } else if (indexPath.row == kSettings) {
+//        [self performSegueWithIdentifier:@"menuSettingsSegue" sender:self];
     } else if (indexPath.row == kHelp) {
         // open the firstbuild help website in browser
     } else if (indexPath.row == kFeedback) {
@@ -99,9 +106,12 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
     } else if (indexPath.row == kAbout) {
         [self performSegueWithIdentifier:@"menuAboutSegue" sender:self];
     }
-    else if (indexPath.row == kDiagonistics) {
-        [self performSegueWithIdentifier:@"menuDiagnosticsSegue" sender:self];
+    else if (indexPath.row == kFoodSafety) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.foodauthority.nsw.gov.au/_Documents/scienceandtechnical/sous_vide_food_safey_precautions.pdf"]];
     }
+//    else if (indexPath.row == kDiagonistics) {
+//        [self performSegueWithIdentifier:@"menuDiagnosticsSegue" sender:self];
+//    }
     
 }
 
