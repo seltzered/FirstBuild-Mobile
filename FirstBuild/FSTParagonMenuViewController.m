@@ -100,6 +100,7 @@ NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
 //    } else if (indexPath.row == kSettings) {
 //        [self performSegueWithIdentifier:@"menuSettingsSegue" sender:self];
     } else if (indexPath.row == kHelp) {
+        [self performSegueWithIdentifier:@"menuHelpSegue" sender:self];
     } else if (indexPath.row == kFeedback) {
         NSString *subject = [NSString stringWithFormat:@"Paragon iOS App Feedback"];
         NSString *mail = [NSString stringWithFormat:@"paragon@firstbuild.com"];

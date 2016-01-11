@@ -32,6 +32,9 @@
             <string>FSEmeric-Thin</string>
             <string>FSEmeric-Thin</string>
             <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
         </mutableArray>
         <mutableArray key="PT_Sans-Narrow-Web-Bold.ttf">
             <string>PTSans-NarrowBold</string>
@@ -90,7 +93,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="485-IR-BTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2199" y="105"/>
+            <point key="canvasLocation" x="-2703" y="-1055"/>
         </scene>
         <!--Paragon Menu Diagnostics View Controller-->
         <scene sceneID="YVV-4k-yiP">
@@ -215,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7qz-yD-0am" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-810" y="-1643"/>
+            <point key="canvasLocation" x="-538" y="-1531"/>
         </scene>
         <!--Paragon Menu View Controller-->
         <scene sceneID="9e0-dr-U2g">
@@ -265,7 +268,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQU-HX-HIZ">
                                             <rect key="frame" x="280" y="10" width="42" height="24"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                            <color key="textColor" red="0.58823529409999997" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -372,11 +375,12 @@
                         <segue destination="jxM-yW-mVF" kind="show" identifier="menuSettingsSegue" id="unc-Nk-Vvz"/>
                         <segue destination="b2j-4h-WKL" kind="show" identifier="menuAboutSegue" id="joZ-R1-lme"/>
                         <segue destination="iba-GH-K72" kind="show" identifier="menuDiagnosticsSegue" id="uzP-7L-6u8"/>
+                        <segue destination="hw0-Vk-gO1" kind="show" identifier="menuHelpSegue" id="o3Q-tT-NKS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xm0-Rp-QOA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1425" y="87"/>
+            <point key="canvasLocation" x="-1649" y="-1065"/>
         </scene>
         <!--Paragon Menu About View Controller-->
         <scene sceneID="sf6-TY-LW3">
@@ -467,7 +471,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-199" y="2"/>
+            <point key="canvasLocation" x="-1627" y="-114"/>
         </scene>
         <!--Paragon Menu Diagnostics Stage Table View Controller-->
         <scene sceneID="uDj-z3-evt">
@@ -685,7 +689,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYw-uq-Gxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="603" y="-777"/>
+            <point key="canvasLocation" x="-538" y="-785"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="enf-Dr-59R">
@@ -1893,6 +1897,86 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WrU-tC-qDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1120" y="2805"/>
+        </scene>
+        <!--Paragon Menu Help View Controller-->
+        <scene sceneID="GJv-Fz-uti">
+            <objects>
+                <viewController id="hw0-Vk-gO1" customClass="FSTParagonMenuHelpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8IQ-rt-4gl"/>
+                        <viewControllerLayoutGuide type="bottom" id="T6u-bC-K4f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LaQ-Uz-rwj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact an expert" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ab-d6-4cN">
+                                <rect key="frame" x="28" y="124" width="159.5" height="25"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Jsa-MF-rIn" appends="YES" id="VAt-cF-mTH"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact warranty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1e-KZ-FHj">
+                                <rect key="frame" x="28" y="169" width="154.5" height="25"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="htL-ah-c5o" appends="YES" id="4LN-W2-CkH"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAQ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIm-GI-hpS">
+                                <rect key="frame" x="28" y="79" width="36" height="25"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Jyw-7Y-HNm" appends="YES" id="qnQ-jq-rdF"/>
+                                </connections>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Q1e-KZ-FHj" firstAttribute="leading" secondItem="7Ab-d6-4cN" secondAttribute="leading" id="3EN-N0-4Rp"/>
+                            <constraint firstItem="Q1e-KZ-FHj" firstAttribute="top" secondItem="7Ab-d6-4cN" secondAttribute="bottom" constant="20" id="MSZ-yJ-g7v"/>
+                            <constraint firstItem="AIm-GI-hpS" firstAttribute="leading" secondItem="LaQ-Uz-rwj" secondAttribute="leadingMargin" constant="8" id="RVA-7x-L8j"/>
+                            <constraint firstItem="7Ab-d6-4cN" firstAttribute="top" secondItem="AIm-GI-hpS" secondAttribute="bottom" constant="20" id="aw8-ml-cjN"/>
+                            <constraint firstItem="7Ab-d6-4cN" firstAttribute="leading" secondItem="LaQ-Uz-rwj" secondAttribute="leadingMargin" constant="8" id="f0I-44-ean"/>
+                            <constraint firstItem="AIm-GI-hpS" firstAttribute="top" secondItem="8IQ-rt-4gl" secondAttribute="bottom" constant="15" id="h7w-ol-0SA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xM2-Mn-LcR">
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="ynQ-qW-nix">
+                            <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="upo-J0-JVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Jyw-7Y-HNm" userLabel="faqTap">
+                    <connections>
+                        <action selector="faqTap:" destination="hw0-Vk-gO1" id="8wD-Mb-SoY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Jsa-MF-rIn" userLabel="expertTap">
+                    <connections>
+                        <action selector="expertTap:" destination="hw0-Vk-gO1" id="shj-Au-6aA"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="htL-ah-c5o" userLabel="warrantyTap">
+                    <connections>
+                        <action selector="warrantyTap:" destination="hw0-Vk-gO1" id="UHf-Ab-y5D"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-799" y="-2274"/>
         </scene>
     </scenes>
     <resources>
