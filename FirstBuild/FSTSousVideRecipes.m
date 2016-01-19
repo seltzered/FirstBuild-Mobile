@@ -17,12 +17,13 @@
     if (self) {
         self.recipes = [[NSArray alloc] initWithObjects:
                         [FSTBeefSousVideRecipe new],
-                        [FSTVegetableRecipe new],
-                        [FSTEggRecipe new],
-                        [FSTPoultrySousVideRecipe new],
-                        [FSTFruitSousVideRecipe new],
-                        [FSTFishSousVideRecipe new],
                         [FSTPorkSousVideRecipe new],
+                        [FSTPoultrySousVideRecipe new],
+                        [FSTFishSousVideRecipe new],
+                        [FSTEggRecipe new],
+                        [FSTVegetableRecipe new],
+                        [FSTFruitSousVideRecipe new],
+                        
                         nil];
     }
     return self;
