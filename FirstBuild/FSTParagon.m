@@ -1414,7 +1414,6 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)sendCookingStatusNotification
 {
-    //TODO: temporary notifications
     NSString* text;
     
     switch (self.session.cookMode)
@@ -1484,6 +1483,21 @@ static const uint8_t STAGE_SIZE = 8;
     
     //NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
+    
+    //hack for notification of battery level
+    static BOOL batteryLevelLowFiredAlert;
+    
+    UILocalNotification* local = [[UILocalNotification alloc]init];
+    if (local && [self.batteryLevel floatValue] < 29 && !batteryLevelLowFiredAlert)
+    {
+        batteryLevelLowFiredAlert = YES;
+        local.fireDate = [NSDate dateWithTimeIntervalSinceNow:0];
+        
+        local.alertBody = [NSString stringWithFormat:@"Battery is low for probe connected to %@.", self.friendlyName];
+        local.timeZone = [NSTimeZone defaultTimeZone];
+        [[UIApplication sharedApplication] scheduleLocalNotification:local];
+    }
+    
 }
 
 /**
