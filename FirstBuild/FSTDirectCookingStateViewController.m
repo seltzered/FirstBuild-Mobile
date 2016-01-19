@@ -10,6 +10,11 @@
 #import "FSTPrecisionCookingStateReachingMinTimeLayer.h"
 
 @interface FSTDirectCookingStateViewController ()
+{
+    
+    IBOutlet UILabel *labelPowerLevel;
+    float _powerLevel;
+}
 
 @end
 
@@ -17,14 +22,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _powerLevel =(self.cookingData.burnerLevel * 10)/100;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        self.circleProgressView.progressLayer.percent = _powerLevel;
+    });
+                   
+    
 }
 
-- (void)viewWillLayoutSubviews {
+-(void)viewWillLayoutSubviews
+{
     [self.circleProgressView setupViewsWithLayerClass:[FSTPrecisionCookingStateReachingMinTimeLayer class]];
+    [self updatePercent];
 }
 
 - (void) updatePercent {
-    self.circleProgressView.progressLayer.percent = (self.cookingData.burnerLevel * 10)/100;
+    [super updatePercent];
+    _powerLevel =(self.cookingData.burnerLevel * 10)/100;
+    labelPowerLevel.text = [NSString stringWithFormat:@"Power\n%d",(int)self.cookingData.burnerLevel];
+    self.circleProgressView.progressLayer.percent = _powerLevel;
 }
 
 - (void)didReceiveMemoryWarning {
