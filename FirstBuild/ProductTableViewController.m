@@ -25,6 +25,7 @@
 #import "FSTHoodie.h"
 #import "FSTHoodieViewController.h"
 
+
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
 @interface ProductTableViewController ()
@@ -45,6 +46,8 @@
     NSObject* _deviceLoadProgressUpdated;
     
     NSIndexPath *_indexPathForDeletion;
+    
+
 }
 
 static NSString * const reuseIdentifier = @"ProductCell";
@@ -493,6 +496,7 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     }
     
 }
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

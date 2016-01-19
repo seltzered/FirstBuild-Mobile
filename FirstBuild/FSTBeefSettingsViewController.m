@@ -155,14 +155,13 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
     }
 }
 
-//TODO: snap
-//- (IBAction)thicknessSliderTouchUpInside:(id)sender {
+- (IBAction)thicknessSliderTouchUpInside:(id)sender {
 //    float sliderValue;
 //    const float roundingValue = 0.25;
 //    int mulitpler = floor(self.thicknessSlider.value / roundingValue);
 //    sliderValue = mulitpler * roundingValue;
 //    [self.thicknessSlider setValue:sliderValue animated:YES];
-//}
+}
 
 - (IBAction)donenessSlid:(id)sender {
     

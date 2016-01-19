@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
+#import <MBProgressHUD.h>
+
+
 #import "FSTRecipeSubSelectionViewController.h"
 #import "FSTRecipes.h"
 #import "FSTSousVideRecipes.h"
@@ -18,6 +21,11 @@
 #import "FSTSavedRecipeViewController.h"
 
 @interface FSTRecipeSubSelectionViewController ()
+{
+    MBProgressHUD *probeNotConnectedHud;
+    NSTimer* _probeNotConnectedTimer;
+    uint16_t _probeNotConnectedTimerTicks;
+}
 
 @end
 
@@ -35,6 +43,52 @@
     }
     
     [self updateHeader];
+    
+    if (!self.currentParagon.isProbeConnected && self.currentParagon.online && !self.recipe && self.currentParagon.session.cookMode == FSTCookingStateOff)
+    {
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+            UIView *view = window.rootViewController.view;
+            [MBProgressHUD hideAllHUDsForView:view animated:YES];
+            probeNotConnectedHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+            probeNotConnectedHud.mode = MBProgressHUDModeDeterminate;
+            probeNotConnectedHud.labelText = @"Connect Probe";
+            probeNotConnectedHud.detailsLabelText = @"Probe is not connected. Please connect the temperature probe by holding the button on the side of the probe FOR 3 SECONDS. \n(tap here to cancel)";
+            probeNotConnectedHud.progress = 1.0;
+            
+            [_probeNotConnectedTimer invalidate];
+            _probeNotConnectedTimer = nil;
+            _probeNotConnectedTimerTicks = 0;
+            
+            _probeNotConnectedTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(probeNotConnectedTimerFired:) userInfo:nil repeats:YES];
+            
+            UITapGestureRecognizer *HUDSingleTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeProbeNotConnectedPopup)];
+            [probeNotConnectedHud addGestureRecognizer:HUDSingleTap];
+        });
+    }
+}
+
+- (void) closeProbeNotConnectedPopup
+{
+    _probeNotConnectedTimerTicks =0;
+    [_probeNotConnectedTimer invalidate];
+    _probeNotConnectedTimer = nil;
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    [MBProgressHUD hideAllHUDsForView:view animated:YES];
+}
+
+-(void)probeNotConnectedTimerFired: (NSTimer*)timer
+{
+    if (self.currentParagon.isProbeConnected || _probeNotConnectedTimerTicks==120)
+    {
+        [self closeProbeNotConnectedPopup];
+    }
+    else
+    {
+        probeNotConnectedHud.progress = (float)(120 -_probeNotConnectedTimerTicks++)/120;
+    }
 }
 
 -(void)updateHeader
