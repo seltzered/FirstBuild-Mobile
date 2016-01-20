@@ -67,6 +67,8 @@
      {
          [self.ring removeAnimationForKey:@"lineWidth"];
      }];
+    
+    self.contentMode = UIViewContentModeRedraw;
 }
 
 -(void)setupDots { // could happen after init or awake from nib. Initialize subviews
