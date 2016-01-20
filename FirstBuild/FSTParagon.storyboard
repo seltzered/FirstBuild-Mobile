@@ -985,8 +985,8 @@
                                     <outletCollection property="gestureRecognizers" destination="iaN-wn-DsJ" appends="YES" id="60R-Am-T3m"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Csz-4M-yY7" userLabel="stateBarView" customClass="FSTStateBarView">
-                                <rect key="frame" x="0.0" y="25" width="600" height="46.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Csz-4M-yY7" userLabel="stateBarView" customClass="FSTStateBarView">
+                                <rect key="frame" x="0.0" y="5" width="600" height="46.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="450" id="cga-tx-SUK"/>
@@ -1013,9 +1013,9 @@
                                     <segue destination="bAi-bP-Frd" kind="embed" identifier="containerSegue" id="Bcj-z2-2JV"/>
                                 </connections>
                             </containerView>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oV-AB-lQ8" userLabel="thumbView" customClass="FSTThumbTabView">
-                                <rect key="frame" x="-2" y="28" width="35" height="45"/>
-                                <color key="backgroundColor" red="0.88235294117647056" green="0.2196078431372549" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oV-AB-lQ8" userLabel="thumbView" customClass="FSTThumbTabView">
+                                <rect key="frame" x="-2" y="8" width="35" height="45"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="QEl-vd-eTe"/>
@@ -1025,11 +1025,11 @@
                                     <outletCollection property="gestureRecognizers" destination="VCi-vK-wA2" appends="YES" id="EMM-Cq-7PQ"/>
                                 </connections>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ECI-56-BeB" userLabel="PopOutView" customClass="FSTRoundedBorderView">
-                                <rect key="frame" x="-22" y="-22" width="25" height="537"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECI-56-BeB" userLabel="PopOutView" customClass="FSTRoundedBorderView">
+                                <rect key="frame" x="-22" y="-42" width="25" height="493"/>
                                 <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c8t-Ki-MIk">
-                                        <rect key="frame" x="20" y="25" width="545.5" height="512"/>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c8t-Ki-MIk">
+                                        <rect key="frame" x="20" y="25" width="545.5" height="468"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="3Jf-Oc-cNj" kind="embed" identifier="displayPopOut" id="dEM-RT-Cg9"/>
@@ -1050,6 +1050,9 @@
                                     <constraint firstAttribute="height" secondItem="c8t-Ki-MIk" secondAttribute="height" multiplier="0.8" id="zaX-so-Vyr"/>
                                 </constraints>
                                 <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="c8t-Ki-MIk"/>
+                                    </mask>
                                     <mask key="constraints">
                                         <exclude reference="MOf-2X-0Is"/>
                                         <exclude reference="O9V-Fz-7nV"/>
@@ -1096,6 +1099,10 @@
                             <constraint firstItem="3oV-AB-lQ8" firstAttribute="top" secondItem="ECI-56-BeB" secondAttribute="top" constant="50" id="zvo-7i-dWn"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="3oV-AB-lQ8"/>
+                                <exclude reference="ECI-56-BeB"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="GBn-XH-4SX"/>
                                 <exclude reference="Vzb-yW-4mK"/>
@@ -2289,7 +2296,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Iob-xi-g5F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Sxz-kP-m6R">
-                        <rect key="frame" x="0.0" y="0.0" width="545.5" height="512"/>
+                        <rect key="frame" x="0.0" y="0.0" width="545.5" height="468"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xhl-y7-FT9">
@@ -2674,7 +2681,7 @@
                                 </variation>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFu-DH-RJi" userLabel="saveButtonHolderView">
-                                <rect key="frame" x="0.0" y="457" width="545.5" height="55"/>
+                                <rect key="frame" x="0.0" y="413" width="545.5" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    SAVE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOY-iI-i0r" customClass="FSTLabel">
                                         <rect key="frame" x="0.0" y="16" width="545.5" height="24"/>
@@ -4269,11 +4276,11 @@
                         <viewControllerLayoutGuide type="bottom" id="fSE-LI-xW5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bcb-MU-ev5">
-                        <rect key="frame" x="0.0" y="0.0" width="545.5" height="512"/>
+                        <rect key="frame" x="0.0" y="0.0" width="545.5" height="468"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alV-dq-zvx">
-                                <rect key="frame" x="0.0" y="0.0" width="545.5" height="512"/>
+                                <rect key="frame" x="0.0" y="0.0" width="545.5" height="468"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKA-SR-Zs7" userLabel="Recipe View">
                                         <rect key="frame" x="0.0" y="230" width="545.5" height="2000"/>
@@ -4413,7 +4420,7 @@
                                 </variation>
                             </scrollView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dbI-mH-Ms2" userLabel="cookButtonHolderView">
-                                <rect key="frame" x="0.0" y="457" width="545.5" height="55"/>
+                                <rect key="frame" x="0.0" y="413" width="545.5" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    COOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P8b-Iq-NMU" customClass="FSTLabel">
                                         <rect key="frame" x="0.0" y="15" width="545.5" height="24"/>
