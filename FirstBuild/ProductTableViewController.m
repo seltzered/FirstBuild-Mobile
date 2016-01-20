@@ -64,9 +64,15 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     
     //get all the saved BLE peripherals
     [self configureBleDevices];
+ 
+#ifdef DEBUG
+    [self loadFakeParagon];
+#endif
     
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
+
+
 
 -(void)dealloc
 {
@@ -87,6 +93,44 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
 }
 
 #pragma mark - Device Configuration
+
+
+#ifdef DEBUG
+FSTParagon* _fakeParagon;
+FSTRecipe* _fakeRecipe;
+FSTParagonCookingStage* _fakeStage;
+
+-(void) loadFakeParagon
+{
+    _fakeParagon = [FSTParagon new];
+    _fakeRecipe = [FSTRecipe new];
+    _fakeStage = [_fakeRecipe addStage];
+    _fakeStage.targetTemperature = @140;
+    _fakeStage.cookTimeMaximum = @120;
+    _fakeStage.cookTimeMinimum = @60;
+    
+    
+    _fakeParagon.online = YES;
+    _fakeParagon.friendlyName = @"My Paragon";
+    _fakeParagon.loading = NO;
+    _fakeParagon.batteryLevel = @44;
+    _fakeParagon.session.cookMode = FSTCookingStateOff;
+    _fakeParagon.session.cookState = FSTParagonCookStateOff;
+//    _fakeParagon.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
+//    _fakeParagon.session.cookState = FSTParagonCookStateCooking;
+    _fakeParagon.session.burnerMode = kPARAGON_BURNER_START;
+    _fakeParagon.session.userSelectedCookMode = FSTParagonUserSelectedCookModeRemote;
+    _fakeParagon.session.remainingHoldTime = @30;
+    _fakeParagon.session.currentProbeTemperature = @141;
+    _fakeParagon.session.activeRecipe = _fakeRecipe;
+    _fakeParagon.session.currentStage = _fakeStage;
+    
+    [self.products addObject:_fakeParagon];
+    [self.delegate itemCountChanged:self.products.count];
+
+    
+}
+#endif
 
 -(void)configureBleDevices
 {
