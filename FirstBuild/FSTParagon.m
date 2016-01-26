@@ -1437,7 +1437,15 @@ static const uint8_t STAGE_SIZE = 8;
         case FSTCookingDirectCookingWithTime:
         case FSTCookingStatePrecisionCookingReachingMinTime:
         case FSTCookingStatePrecisionCookingWithoutTime:
-            text = [NSString stringWithFormat:@"Timer started on %@", self.friendlyName];
+            if (self.session.userSelectedCookMode == FSTParagonUserSelectedCookModeRemote)
+            {
+                text = [NSString stringWithFormat:@"Timer started on %@", self.friendlyName];
+            }
+            else
+            {
+                text = [NSString stringWithFormat:@"Preheat complete on %@", self.friendlyName];
+            }
+            
             break;
         case FSTCookingStatePrecisionCookingPastMaxTime:
             text = [NSString stringWithFormat:@"Food needs to be removed now from %@.", self.friendlyName];
