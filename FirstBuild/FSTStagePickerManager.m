@@ -164,7 +164,7 @@
     NSMutableArray* timeData = [[NSMutableArray alloc] init];//@[@[@"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9"], @[@":00", @":15", @":30", @":45"]]; // hour and minutes
     NSMutableArray* timeRow1 = [[NSMutableArray alloc] init] ; // hours
     NSMutableArray* timeRow2 = [[NSMutableArray alloc] init]; // minutes
-    for (int ih = 0; ih < 10; ih++) {
+    for (int ih = 0; ih < 73; ih++) {
         [timeRow1 addObject:[NSString stringWithFormat:@"%i", ih]];
     }
     
