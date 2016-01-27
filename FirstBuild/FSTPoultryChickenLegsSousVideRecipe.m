@@ -14,7 +14,7 @@
     self = [super init];
     if (self)
     {
-        self.name = @"Leg";
+        self.name = @"Leg & Thigh (bone-in)";
         FSTParagonCookingStage* stage = [self addStage];
         stage.cookTimeMinimum = @240;
         stage.cookTimeMaximum = @360;
