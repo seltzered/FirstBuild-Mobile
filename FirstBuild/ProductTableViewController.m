@@ -46,8 +46,6 @@
     NSObject* _deviceLoadProgressUpdated;
     
     NSIndexPath *_indexPathForDeletion;
-    
-
 }
 
 static NSString * const reuseIdentifier = @"ProductCell";
@@ -71,7 +69,6 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
-
 
 
 -(void)dealloc
@@ -109,15 +106,14 @@ FSTParagonCookingStage* _fakeStage;
     _fakeStage.cookTimeMaximum = @120;
     _fakeStage.cookTimeMinimum = @60;
     
-    
     _fakeParagon.online = YES;
     _fakeParagon.friendlyName = @"My Paragon";
     _fakeParagon.loading = NO;
     _fakeParagon.batteryLevel = @44;
-//    _fakeParagon.session.cookMode = FSTCookingStateOff;
-//    _fakeParagon.session.cookState = FSTParagonCookStateOff;
-    _fakeParagon.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
-    _fakeParagon.session.cookState = FSTParagonCookStateCooking;
+    _fakeParagon.session.cookMode = FSTCookingStateOff;
+    _fakeParagon.session.cookState = FSTParagonCookStateOff;
+//    _fakeParagon.session.cookMode = FSTCookingStatePrecisionCookingReachingMinTime;
+//    _fakeParagon.session.cookState = FSTParagonCookStateCooking;
     _fakeParagon.session.burnerMode = kPARAGON_BURNER_START;
     _fakeParagon.session.userSelectedCookMode = FSTParagonUserSelectedCookModeRemote;
     _fakeParagon.session.remainingHoldTime = @30;
@@ -128,7 +124,6 @@ FSTParagonCookingStage* _fakeStage;
     [self.products addObject:_fakeParagon];
     [self.delegate itemCountChanged:self.products.count];
 
-    
 }
 #endif
 
