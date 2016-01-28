@@ -161,8 +161,7 @@ CBPeripheralManager * _peripheralManager; //temporary
 }
 
 -(void) deleteSavedPeripheralWithUUIDString: (NSString*) uuidString {
-    NSMutableDictionary* savedPeripherals = [NSMutableDictionary dictionaryWithDictionary:[self getSavedPeripherals]]; // get rid of the uuid keyed device
-    [savedPeripherals removeObjectForKey:uuidString];
+    NSMutableDictionary* savedPeripherals = [NSMutableDictionary dictionaryWithDictionary:[self getSavedPeripherals]];     [savedPeripherals removeObjectForKey:uuidString];
     [self saveProductsToDefaults:[NSDictionary dictionaryWithDictionary:savedPeripherals] key:@"ble-devices"];
 }
 

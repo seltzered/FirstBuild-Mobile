@@ -150,7 +150,7 @@ FSTParagonCookingStage* _fakeStage;
     }
     
     //attempt to connect to the BLE devices
-    if ([[FSTBleCentralManager sharedInstance] isPoweredOn])
+    //if ([[FSTBleCentralManager sharedInstance] isPoweredOn])
     {
         [self connectBleDevices];
     }
@@ -590,8 +590,15 @@ FSTParagonCookingStage* _fakeStage;
         NSLog(@"delete");
         FSTBleProduct * deletedItem = self.products[indexPath.item];
         [self.products removeObjectAtIndex:indexPath.item];
-        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.peripheral.identifier UUIDString]];
-        [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
+        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.savedUuid UUIDString]];
+        
+        //if we have the actual peripheral information lets force a removal from the list. we don't have the
+        //peripheral information if central is powered off, so need to check first
+        if (deletedItem.peripheral)
+        {
+            [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
+        }
+        
         [self.tableView reloadData];
         
         if (self.products.count==0)
