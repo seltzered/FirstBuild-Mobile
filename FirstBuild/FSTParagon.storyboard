@@ -1104,16 +1104,16 @@
                                 <exclude reference="ECI-56-BeB"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="GBn-XH-4SX"/>
-                                <exclude reference="Vzb-yW-4mK"/>
-                                <exclude reference="mqT-Gw-vfK"/>
-                                <exclude reference="IBO-Mk-4eo"/>
-                                <exclude reference="skh-Gl-pLN"/>
                                 <exclude reference="c3w-IT-99Y"/>
                                 <exclude reference="hxV-ng-wLP"/>
                                 <exclude reference="x0t-Oo-4zE"/>
                                 <exclude reference="8DR-a2-edA"/>
+                                <exclude reference="GBn-XH-4SX"/>
+                                <exclude reference="IBO-Mk-4eo"/>
+                                <exclude reference="skh-Gl-pLN"/>
                                 <exclude reference="wIe-Pm-Yqj"/>
+                                <exclude reference="Vzb-yW-4mK"/>
+                                <exclude reference="mqT-Gw-vfK"/>
                             </mask>
                         </variation>
                     </view>
@@ -3511,6 +3511,30 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOF-1R-jpO" userLabel="progressView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="get started" translatesAutoresizingMaskIntoConstraints="NO" id="Dqp-Fg-CZ9">
+                                        <rect key="frame" x="180" y="180" width="240" height="240"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="270" id="5BQ-LP-aOh"/>
+                                            <constraint firstAttribute="width" id="95U-1k-hrT"/>
+                                            <constraint firstAttribute="width" secondItem="Dqp-Fg-CZ9" secondAttribute="height" multiplier="1:1" id="9Jz-fr-H6e"/>
+                                            <constraint firstAttribute="width" constant="300" id="NGE-Xl-W0j"/>
+                                            <constraint firstAttribute="width" secondItem="Dqp-Fg-CZ9" secondAttribute="height" multiplier="1:1" id="iEs-IV-kYJ"/>
+                                            <constraint firstAttribute="height" constant="270" id="l0l-tK-JNS"/>
+                                            <constraint firstAttribute="width" secondItem="Dqp-Fg-CZ9" secondAttribute="height" multiplier="1:1" id="lFW-Ll-Tm1"/>
+                                            <constraint firstAttribute="width" secondItem="Dqp-Fg-CZ9" secondAttribute="height" multiplier="1:1" id="xFb-kp-rMS"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="5BQ-LP-aOh"/>
+                                                <exclude reference="95U-1k-hrT"/>
+                                                <exclude reference="9Jz-fr-H6e"/>
+                                                <exclude reference="NGE-Xl-W0j"/>
+                                                <exclude reference="l0l-tK-JNS"/>
+                                                <exclude reference="lFW-Ll-Tm1"/>
+                                                <exclude reference="xFb-kp-rMS"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wB8-6F-Yp9" userLabel="circleProgressView" customClass="FSTCookingProgressView">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
@@ -3528,15 +3552,22 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="wB8-6F-Yp9" secondAttribute="centerY" id="Afc-MJ-8Lb"/>
+                                    <constraint firstItem="Dqp-Fg-CZ9" firstAttribute="width" secondItem="wB8-6F-Yp9" secondAttribute="height" multiplier="1:1" id="CF8-i9-FYd"/>
                                     <constraint firstItem="wB8-6F-Yp9" firstAttribute="height" secondItem="tOF-1R-jpO" secondAttribute="height" multiplier="0.7" id="E8g-6Z-gvo"/>
                                     <constraint firstAttribute="width" secondItem="tOF-1R-jpO" secondAttribute="height" multiplier="1:1" id="NeN-gy-9ti"/>
+                                    <constraint firstItem="Dqp-Fg-CZ9" firstAttribute="centerX" secondItem="tOF-1R-jpO" secondAttribute="centerX" id="SQS-2d-8EX"/>
                                     <constraint firstItem="wB8-6F-Yp9" firstAttribute="width" secondItem="tOF-1R-jpO" secondAttribute="width" id="XdM-nj-IJT"/>
+                                    <constraint firstItem="Dqp-Fg-CZ9" firstAttribute="width" secondItem="tOF-1R-jpO" secondAttribute="width" id="gfP-FC-Qfc"/>
+                                    <constraint firstItem="Dqp-Fg-CZ9" firstAttribute="width" secondItem="wB8-6F-Yp9" secondAttribute="width" multiplier="0.4" id="ixD-yS-XJf"/>
+                                    <constraint firstItem="Dqp-Fg-CZ9" firstAttribute="centerY" secondItem="tOF-1R-jpO" secondAttribute="centerY" id="jgX-U8-TF9"/>
                                     <constraint firstAttribute="centerX" secondItem="wB8-6F-Yp9" secondAttribute="centerX" id="x9W-f0-RiA"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="NeN-gy-9ti"/>
                                         <exclude reference="E8g-6Z-gvo"/>
+                                        <exclude reference="CF8-i9-FYd"/>
+                                        <exclude reference="gfP-FC-Qfc"/>
                                     </mask>
                                 </variation>
                             </view>
