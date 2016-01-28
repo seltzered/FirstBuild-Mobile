@@ -175,7 +175,7 @@
                 )
             {
                 // entire recipe is complete
-                self.continueButtonText.text = @"     COMPLETE";
+                self.continueButtonText.text = @"          COMPLETE";
             }
             else
             {
@@ -194,7 +194,7 @@
             self.stageBar.hidden = NO;
             break;
         case FSTCookingStatePrecisionCookingPastMaxTime:
-            self.continueButtonText.text = @"     COMPLETE";
+            self.continueButtonText.text = @"          COMPLETE";
             self.continueButton.userInteractionEnabled = YES;
             stateIdentifier = @"pastMaxStateSegue";
             self.continueButton.hidden = NO;
