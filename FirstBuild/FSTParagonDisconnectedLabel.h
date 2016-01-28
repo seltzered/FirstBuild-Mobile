@@ -19,4 +19,5 @@
 @interface FSTParagonDisconnectedLabel : UILabel
 
 @property (nonatomic, weak) id<FSTParagonDisconnectedLabelDelegate> delegate;
+@property (nonatomic, strong) NSString* message;
 @end

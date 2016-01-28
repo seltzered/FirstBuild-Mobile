@@ -44,6 +44,7 @@
     NSObject* _deviceBatteryChangedObserver;
     NSObject* _deviceConnectedObserver;
     NSObject* _deviceLoadProgressUpdated;
+    NSObject* _bleCentralManagerPoweredOffObserver;
     
     NSIndexPath *_indexPathForDeletion;
 }
@@ -82,6 +83,9 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceLoadProgressUpdated];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceEssentialDataChangedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_bleCentralManagerPoweredOffObserver];
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -323,6 +327,26 @@ FSTParagonCookingStage* _fakeStage;
         }
     }];
     
+    //ble turned off
+    _bleCentralManagerPoweredOffObserver = [center addObserverForName:FSTBleCentralManagerPoweredOff
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *notification)
+   {
+       for (FSTProduct* product in self.products)
+       {
+           if ([product isKindOfClass:[FSTBleProduct class]])
+           {
+               FSTBleProduct* bleDevice = (FSTBleProduct*)product;
+               
+               //since it is still in our list lets reconnect
+               bleDevice.online = NO;
+               bleDevice.loading = NO;
+               [weakSelf.tableView reloadData];
+           }
+       }
+   }];
+
     _deviceBatteryChangedObserver = [center addObserverForName:FSTBatteryLevelChangedNotification
                                                         object:nil
                                                          queue:nil
@@ -401,7 +425,6 @@ FSTParagonCookingStage* _fakeStage;
         //Taken out since those properties were not connected
         [productCell.statusLabel setText:@"---"];
 
-        //TODO: come back when we understand what the correct text should be on the product listing
         switch (paragon.session.cookMode)
         {
             case FSTCookingStateOff:

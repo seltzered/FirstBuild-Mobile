@@ -24,14 +24,19 @@
 @end
 
 @implementation ProductMainViewController
+{
+    NSObject* _bleCentralManagerPoweredOffObserver;
+    NSObject* _menuItemSelectedObserver;
+    NSObject* _bleDeviceDisconnectedObserver;
+    NSObject* _bleDeviceConnectedObserver;
+    NSObject* _bleCentralManagerPoweredOnObserver;
+    
+    NSMutableArray* _offlineDevices;
+    
+    FSTParagonDisconnectedLabel* _warningLabel;
+    FSTParagonDisconnectedLabel* _bleOffWarningLabel;
+}
 
-NSObject* _menuItemSelectedObserver;
-NSObject* _bleDeviceDisconnectedObserver;
-NSObject* _bleDeviceConnectedObserver;
-
-NSMutableArray* _offlineDevices;
-
-FSTParagonDisconnectedLabel* _warningLabel;
 
 - (void)viewDidLoad
 {
@@ -54,6 +59,38 @@ FSTParagonDisconnectedLabel* _warningLabel;
         }
     }];
     
+    //ble turned off
+    _bleCentralManagerPoweredOffObserver = [center addObserverForName:FSTBleCentralManagerPoweredOff
+                                                               object:nil
+                                                                queue:nil
+                                                           usingBlock:^(NSNotification *notification)
+    {
+        if (!_bleOffWarningLabel)
+        {
+            UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];//
+            _bleOffWarningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, 0, activeController.view.frame.size.width, activeController.view.frame.size.height/8.7)];
+            _bleOffWarningLabel.delegate = self; // set delegate to main home screen
+            _bleOffWarningLabel.message = @"Please enable bluetooth";
+            [activeController.view addSubview:_bleOffWarningLabel];
+            [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made
+        }
+    }];
+    
+    //ble turned on
+    _bleCentralManagerPoweredOnObserver = [center addObserverForName:FSTBleCentralManagerPoweredOn
+                                                              object:nil
+                                                               queue:nil
+                                                          usingBlock:^(NSNotification *notification)
+   {
+       if (_bleOffWarningLabel)
+       {
+           [_bleOffWarningLabel removeFromSuperview];
+           _bleOffWarningLabel = nil;
+       }
+   }];
+
+    
+    //device connected
     _bleDeviceConnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceConnected
                                                    object:nil
                                                     queue:nil
@@ -69,20 +106,25 @@ FSTParagonDisconnectedLabel* _warningLabel;
     }];
 
     
+    //device disconnected
     _bleDeviceDisconnectedObserver = [center addObserverForName:FSTBleCentralManagerDeviceDisconnected
                                                        object:nil
                                                         queue:nil
                                                    usingBlock:^(NSNotification *notification)
     {
-        CBPeripheral* peripheral = (CBPeripheral*)notification.object;
 
-        [_offlineDevices addObject:peripheral];
-        UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];//
-        _warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, activeController.view.frame.size.height/9, activeController.view.frame.size.width, activeController.view.frame.size.height/9)];
-        _warningLabel.delegate = self; // set delegate to main home screen
-        [activeController.view addSubview:_warningLabel];//addSubview:warningLabel];//add label to take in space that view slid out
-        [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made
-     
+        if (!_warningLabel)
+        {
+            CBPeripheral* peripheral = (CBPeripheral*)notification.object;
+
+            [_offlineDevices addObject:peripheral];
+            UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController];//
+            _warningLabel = [[FSTParagonDisconnectedLabel alloc] initWithFrame:CGRectMake(0, 0, activeController.view.frame.size.width, activeController.view.frame.size.height/8.7)];
+            _warningLabel.delegate = self; // set delegate to main home screen
+            _warningLabel.message = @"A device is not connected.";
+            [activeController.view addSubview:_warningLabel];//addSubview:warningLabel];//add label to take in space that view slid out
+            [[[UIApplication sharedApplication] keyWindow] setRootViewController:activeController]; // set all the changes made
+        }
     }];
     
 }
@@ -100,6 +142,10 @@ FSTParagonDisconnectedLabel* _warningLabel;
     [[NSNotificationCenter defaultCenter] removeObserver:_menuItemSelectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceDisconnectedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_bleDeviceConnectedObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_bleCentralManagerPoweredOffObserver];
+    [[NSNotificationCenter defaultCenter] removeObserver:_bleCentralManagerPoweredOnObserver];
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -202,8 +248,9 @@ FSTParagonDisconnectedLabel* _warningLabel;
 }
 
 -(void) popFromWarning { // label delegate method
-    [self.navigationController popToViewController:self animated:NO]; // UILabel should do this
- // this definitely calls
+    
+    //remove all warnings
+    [self.navigationController popToViewController:self animated:NO];
     UIViewController* activeController = [[[UIApplication sharedApplication] keyWindow] rootViewController]; // get back that swholder (might be a better way)
     
     for (UIView* subview in activeController.view.subviews) {
