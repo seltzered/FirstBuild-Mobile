@@ -563,7 +563,7 @@ FSTParagonCookingStage* _fakeStage;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120.0; // edit hight of table view cell
+    return 80.0; // edit hight of table view cell
 }
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
