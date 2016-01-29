@@ -24,6 +24,7 @@
 #import "FSTBleSavedProduct.h"
 #import "FSTHoodie.h"
 #import "FSTHoodieViewController.h"
+#import "UIAlertView+Blocks.h"
 
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
@@ -586,27 +587,49 @@ FSTParagonCookingStage* _fakeStage;
 
 -(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(indexPath) weakIndexPath = indexPath;
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSLog(@"delete");
-        FSTBleProduct * deletedItem = self.products[indexPath.item];
-        [self.products removeObjectAtIndex:indexPath.item];
-        [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.savedUuid UUIDString]];
         
-        //if we have the actual peripheral information lets force a removal from the list. we don't have the
-        //peripheral information if central is powered off, so need to check first
-        if (deletedItem.peripheral)
-        {
-            [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
-        }
-        
-        [self.tableView reloadData];
-        
-        if (self.products.count==0)
-        {
-            [self.delegate itemCountChanged:0];
-        }
+        [UIAlertView showWithTitle:@"Confirm Delete"
+                           message:@"Are you sure you wish to remove this device?"
+                 cancelButtonTitle:@"Cancel"
+                 otherButtonTitles:@[@"OK"]
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                              if (buttonIndex == [alertView cancelButtonIndex])
+                              {
+                                  [weakSelf.tableView reloadData];
+                                  NSLog(@"delete cancelled");
+                              }
+                              else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"OK"])
+                              {
+                                  NSLog(@"delete device");
+
+                                  FSTBleProduct * deletedItem = weakSelf.products[weakIndexPath.item];
+                                  [weakSelf.products removeObjectAtIndex:weakIndexPath.item];
+                                  [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.savedUuid UUIDString]];
+                                  
+                                  //if we have the actual peripheral information lets force a removal from the list. we don't have the
+                                  //peripheral information if central is powered off, so need to check first
+                                  if (deletedItem.peripheral)
+                                  {
+                                      [[FSTBleCentralManager sharedInstance] disconnectPeripheral:deletedItem.peripheral];
+                                  }
+                                  
+                                  [weakSelf.tableView reloadData];
+                                  
+                                  if (weakSelf.products.count==0)
+                                  {
+                                      [weakSelf.delegate itemCountChanged:0];
+                                  }
+                              }
+                          }];
+
     }
 }
+
+
 
 
 @end
