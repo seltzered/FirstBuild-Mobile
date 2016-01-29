@@ -10,6 +10,7 @@
 #import "FSTBleConnectingViewController.h"
 #import "FSTBleCommissioningViewController.h"
 #import "FSTBleCommissioningTableViewController.h"
+#import "UIAlertView+Blocks.h"
 
 #import "FSTHumanaPillBottle.h"
 #import "FSTParagon.h"
@@ -21,11 +22,15 @@
 @end
 
 @implementation FSTBleCommissioningViewController
+{
+    NSMutableArray* _devices;
+    
+    NSObject* _discoveryObserver;
+    NSObject* _undiscoveryObserver;
+    NSTimer* _maxDiscoveryTimer;
+}
 
-NSMutableArray* _devices;
 
-NSObject* _discoveryObserver;
-NSObject* _undiscoveryObserver;
 
 FSTBleCommissioningTableViewController* tableController; // need to hold it to access tableView
 
@@ -153,7 +158,45 @@ CBPeripheral* _currentlySelectedPeripheral;
     [self.searchingIcon setAnimationImages:imgListArray];
     [self.searchingIcon setAnimationDuration:.75];
     [self.searchingIcon startAnimating];
+    
+    _maxDiscoveryTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:weakSelf selector:@selector(maxDiscoveryTimeoutHandler:) userInfo:nil repeats:NO];
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+
+{
+    [super viewWillDisappear:animated];
+    [_maxDiscoveryTimer invalidate];
+    _maxDiscoveryTimer = nil;
+}
+
+- (void)maxDiscoveryTimeoutHandler:(NSTimer*)timer
+
+{
+    __weak typeof(self) weakSelf = self;
+
+    [UIAlertView showWithTitle:@"Continue Searching?"
+                       message:@"The device cannot be found, please be sure it is plugged in and you are close to the device."
+
+             cancelButtonTitle:@"Cancel Search"
+             otherButtonTitles:@[@"Continue Searching"]
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                          if (buttonIndex == [alertView cancelButtonIndex])
+                          {
+                              NSLog(@"search cancelled");
+                              [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                          }
+                          else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Continue Searching"])
+
+                          {
+                              NSLog(@"continue search");
+                              _maxDiscoveryTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:weakSelf selector:@selector(maxDiscoveryTimeoutHandler:) userInfo:nil repeats:NO];
+
+                          }
+                      }];
+    
+}
+
 
 -(void)dealloc
 {

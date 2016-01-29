@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKI-8F-pJe" userLabel="tableContainerView">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HKI-8F-pJe" userLabel="tableContainerView">
                                 <rect key="frame" x="0.0" y="200" width="600" height="300"/>
                                 <connections>
                                     <segue destination="aXV-CX-BWc" kind="embed" identifier="tableSegue" id="7CN-OK-aYc"/>
@@ -71,14 +71,14 @@
                                     <constraint firstItem="HIO-nP-1Px" firstAttribute="centerX" secondItem="yns-pg-2NG" secondAttribute="centerX" constant="100" id="xsV-uu-BaF"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_paragon_product_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gLD-GN-PwV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cell_paragon_product_logo" translatesAutoresizingMaskIntoConstraints="NO" id="gLD-GN-PwV">
                                 <rect key="frame" x="177" y="20" width="256" height="118"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="256" id="1IK-oG-ZCg"/>
                                     <constraint firstAttribute="height" constant="118" id="tFV-R4-9el"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your Paragon from the list below:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dc-hQ-QYw">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select your Paragon from the list below:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dc-hQ-QYw">
                                 <rect key="frame" x="133" y="171" width="335" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="335" id="YU8-VS-01Z"/>
@@ -104,17 +104,6 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_paragon_product_logo_grey" translatesAutoresizingMaskIntoConstraints="NO" id="3Q5-3h-K4n" userLabel="Paragon Image View">
-                                        <rect key="frame" x="212" y="315" width="175" height="48"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="1Wt-Kz-xO3">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="65"/>
-                                            </constraint>
-                                            <constraint firstAttribute="width" constant="175" id="4c6-l1-bDN">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="210"/>
-                                            </constraint>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon. This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="40w-LY-aXa" customClass="FSTRegularLabel">
                                         <rect key="frame" x="169" y="393" width="260" height="41"/>
                                         <constraints>
@@ -134,6 +123,17 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="65" id="QRj-SH-hA2">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Q5-3h-K4n" userLabel="Paragon Image View">
+                                        <rect key="frame" x="212" y="315" width="175" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="1Wt-Kz-xO3">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="65"/>
+                                            </constraint>
+                                            <constraint firstAttribute="width" constant="175" id="4c6-l1-bDN">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="210"/>
                                             </constraint>
                                         </constraints>
                                     </imageView>
@@ -185,6 +185,8 @@
                             <constraint firstAttribute="centerX" secondItem="yns-pg-2NG" secondAttribute="centerX" id="vVV-l4-RXY"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="activityWheel" destination="HIO-nP-1Px" id="BNH-nq-KfK"/>
                         <outlet property="searchingIcon" destination="bo0-Xq-fbv" id="e09-vU-uSL"/>
@@ -261,7 +263,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_paragon_product_logo_grey" translatesAutoresizingMaskIntoConstraints="NO" id="u6d-U0-8GW" userLabel="Paragon Image View">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u6d-U0-8GW" userLabel="Paragon Image View">
                                 <rect key="frame" x="213" y="335" width="175" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="E8K-Vt-MHn">
@@ -278,8 +280,8 @@
                                     <constraint firstAttribute="height" constant="65" id="Qlx-VM-RAF"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for your Paragon. This might take a few minutes." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKq-fc-GoK" customClass="FSTRegularLabel">
-                                <rect key="frame" x="170" y="413" width="260" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecting to your Paragon." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKq-fc-GoK" customClass="FSTRegularLabel">
+                                <rect key="frame" x="170" y="413" width="260" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="260" id="PfG-24-6FO">
                                         <variation key="heightClass=regular-widthClass=regular" constant="280"/>
@@ -858,7 +860,6 @@
         <image name="BG_Ipad" width="1536" height="2048"/>
         <image name="Warning" width="145" height="130"/>
         <image name="cell_paragon_product_logo" width="457" height="155"/>
-        <image name="cell_paragon_product_logo_grey" width="457" height="155"/>
         <image name="icon-my-name-is-paragon" width="600" height="581"/>
         <image name="icon-paragon-with-pot" width="600" height="581"/>
         <image name="icon-warning-error" width="600" height="581"/>
