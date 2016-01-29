@@ -22,15 +22,9 @@
     // Do any additional setup after loading the view.
 }
 
-/*- (void)viewDidAppear:(BOOL)animated {
-    [self performSegueWithIdentifier:@"segueNaming" sender:self];
- // this is bad, it performs too many segues and doesn't dealloc view controllers safely
-}
-*/
 - (void)timedSegue:(NSTimer*)timer {
     
     [self performSegueWithIdentifier:@"segueNaming" sender:self];
-    // Press the icon. just to test segues until I figure out when the segue actually happens. 
 }
 
 

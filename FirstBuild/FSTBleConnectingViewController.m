@@ -15,12 +15,17 @@
 @end
 
 @implementation FSTBleConnectingViewController
-
-NSObject* _deviceConnectedObserver;
-CBCharacteristic* _manufacturerNameCharacteristic;
+{
+    
+    NSObject* _deviceConnectedObserver;
+    CBCharacteristic* _manufacturerNameCharacteristic;
+    BOOL _segueInProgress;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _segueInProgress = NO;
     // not loading?
         
     __weak typeof(self) weakSelf = self;
@@ -93,13 +98,14 @@ CBCharacteristic* _manufacturerNameCharacteristic;
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    if (!error)
+    if (!error && !_segueInProgress)
     {
         [self performSegueWithIdentifier:@"segueFound" sender:self]; 
         [[FSTBleCentralManager sharedInstance] savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:@"My Paragon" className:self.bleProductClass];
     }
-    else
+    else if (!_segueInProgress)
     {
+        [[FSTBleCentralManager sharedInstance]disconnectPeripheral:peripheral];
         [self performSegueWithIdentifier:@"segueError" sender:self];
         DLog(@"<<<<<<FAILED TO READ CHARACTERISTIC, TERMINATE CONNECTION>>>>>>>>>>");
     }
@@ -113,11 +119,14 @@ CBCharacteristic* _manufacturerNameCharacteristic;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    _segueInProgress = YES;
+    
     if ([segue.identifier isEqualToString:@"segueFound"]) {
         FSTBleFoundViewController *vc = segue.destinationViewController;
         vc.peripheral = self.peripheral; // we have to do this for a while don't we, is there a better way? // why does this happen later? after the connected screen! maybe it goes through segues through the navigation controller? need to dealloc something else?
         vc.bleProductClass = self.bleProductClass;
     }
+
     
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceConnectedObserver];
 

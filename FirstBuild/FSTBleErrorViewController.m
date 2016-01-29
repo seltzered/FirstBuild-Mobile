@@ -16,7 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timeout:) userInfo:nil repeats:NO];
+
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)timeout:(NSTimer*)timer {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    // Press the icon. just to test segues until I figure out when the segue actually happens.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +32,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
