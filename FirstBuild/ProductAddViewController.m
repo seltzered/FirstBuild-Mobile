@@ -12,6 +12,7 @@
 #import "FSTParagon.h"
 #import "FSTHoodie.h"
 #import "FSTBleCommissioningViewController.h"
+#import "FSTBleCentralManager.h"
 
 @interface ProductAddViewController ()
 
@@ -139,7 +140,21 @@
 
 - (IBAction)paragonTouchHandler:(id)sender
 {
-    [self performSegueWithIdentifier:@"segueAddParagon" sender:[FSTParagon class]];
+    if (!([[FSTBleCentralManager sharedInstance] isPoweredOn]))
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"Bluetooth must be enabled to add a Paragon."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"segueAddParagon" sender:[FSTParagon class]];
+    }
 
 }
 @end
