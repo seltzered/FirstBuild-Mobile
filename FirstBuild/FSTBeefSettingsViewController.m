@@ -181,6 +181,13 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
     [self updateLabels];
 }
 
+/**
+ *  <#Description#>
+ *
+ *  @param value <#value description#>
+ *
+ *  @return <#return value description#>
+ */
 - (double) meatThicknessWithSliderValue: (CGFloat)value
 {
     //find our closest index of thicknesss based on the height of the current view in relation
@@ -216,6 +223,8 @@ const uint8_t TEMPERATURE_START_INDEX = 1;
     }
     [self performSegueWithIdentifier:@"seguePreheat" sender:self];
 }
+
+
 -(void)pendingRecipeCancelled
 {
     self.continueTapGestureRecognizer.enabled = YES;
