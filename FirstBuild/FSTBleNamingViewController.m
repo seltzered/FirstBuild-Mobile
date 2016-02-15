@@ -8,6 +8,7 @@
 
 #import "FSTBleNamingViewController.h"
 #import "FSTBleCentralManager.h"
+#import "FSTParagon.h"
 
 @interface FSTBleNamingViewController ()
 
@@ -37,8 +38,18 @@
 - (IBAction)continueTap:(id)sender {
     
     [[FSTBleCentralManager sharedInstance]savePeripheral:self.peripheral havingUUIDString:[self.peripheral.identifier UUIDString] withName:self.paragonNameField.text className:self.bleProductClass]; // get text from box and save peripheral
-    //[self.navigationController popToRootViewControllerAnimated:NO];
-    [self performSegueWithIdentifier:@"segueWarning" sender:nil];
+
+    // this is a little bit of a hack, but if its a paragon product we need to show
+    // the food warning screen
+    if (self.bleProductClass == [FSTParagon class])
+    {
+        [self performSegueWithIdentifier:@"segueWarning" sender:nil];
+
+    }
+    else
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - TextFieldDelegate

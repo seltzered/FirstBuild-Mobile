@@ -9,15 +9,7 @@
 // TODO: probably shouldn't attach the firebase ref here
 #import <Foundation/Foundation.h>
 
-#ifdef EXPERIMENTAL
-#import <Firebase/Firebase.h>
-#endif
-
 @interface FSTProduct : NSObject
-
-#ifdef EXPERIMENTAL
-@property (strong, nonatomic) Firebase* firebaseRef;
-#endif
 
 @property (strong, nonatomic) NSString* identifier;
 @property (strong, nonatomic) NSString* created;

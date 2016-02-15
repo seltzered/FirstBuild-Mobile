@@ -8,9 +8,8 @@
 
 #import "ProductAddViewController.h"
 #import <SWRevealViewController.h>
-#import "FSTHumanaPillBottle.h"
 #import "FSTParagon.h"
-#import "FSTHoodie.h"
+#import "FSTPizzaOven.h"
 #import "FSTBleCommissioningViewController.h"
 #import "FSTBleCentralManager.h"
 
@@ -26,10 +25,22 @@
     return 1;
 }
 
+/**
+ *  This essentially determines which products the application actually supports. The 
+ *  experimental products should be after the production ones
+ *
+ *  @param tableView
+ *  @param section
+ *
+ *  @return number of products support
+ */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //TODO: need to fix this correctly for conditional build
+#ifdef EXPERIMENTAL_PRODUCTS
+    return 2;
+#else
     return 1;
+#endif
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -42,16 +53,7 @@
             break;
             
         case 1:
-            CellIdentifier = @"chillhub";
-            
-            break;
-            
-        case 2:
-            CellIdentifier = @"humanapillbottle";
-            break;
-            
-        case 3:
-            CellIdentifier = @"hoodie";
+            CellIdentifier = @"oven";
             break;
             
         default:
@@ -65,7 +67,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = [UIColor whiteColor];//UIColorFromRGB(0x00B5CC);
+    cell.backgroundColor = [UIColor whiteColor];
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -113,29 +115,34 @@
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"segueAddHumanaPillBottle"])
+    if ([segue.identifier isEqualToString:@"segueAddParagon"])
     {
         FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
         vc.bleProductClass = sender;
     }
-    else if ([segue.identifier isEqualToString:@"segueAddParagon"])
-    {
-        FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
-        vc.bleProductClass = sender;
-    }
-    else if ([segue.identifier isEqualToString:@"segueAddHoodie"])
+    else if ([segue.identifier isEqualToString:@"segueAddOven"])
     {
         FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
         vc.bleProductClass = sender;
     }
 }
 
-- (IBAction)pillBottleTouchHandler:(id)sender
-{
-    [self performSegueWithIdentifier:@"segueAddHumanaPillBottle" sender:[FSTHumanaPillBottle class]];
-}
-- (IBAction)hoodieTouchHandler:(id)sender {
-    [self performSegueWithIdentifier:@"segueAddHoodie" sender:[FSTHoodie class]];
+- (IBAction)ovenTouchHandler:(id)sender {
+    if (!([[FSTBleCentralManager sharedInstance] isPoweredOn]))
+    {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                                 message:@"Bluetooth must be enabled to add the Pizza Oven."
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"segueAddOven" sender:[FSTPizzaOven class]];
+    }
 }
 
 - (IBAction)paragonTouchHandler:(id)sender

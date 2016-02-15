@@ -11,7 +11,6 @@
 
 #ifdef CHILLHUB
 #import <RKMIMETypes.h>
-#import <Firebase/Firebase.h>
 //#import <GooglePlus/GooglePlus.h>
 //#import <FBSDKCoreKit/FBSDKCoreKit.h>
 //#import <FBSDKLoginKit/FBSDKLoginKit.h>

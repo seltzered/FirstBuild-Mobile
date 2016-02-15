@@ -10,11 +10,7 @@
 #import "ProductTableViewCell.h"
 #import <SWRevealViewController.h>
 #import <RBStoryboardLink.h>
-#import "FirebaseShared.h"
-#import "FSTChillHub.h"
 #import "FSTParagon.h"
-#import "FSTHumanaPillBottle.h"
-#import "ChillHubViewController.h"
 #import "MobiNavigationController.h"
 #import "FSTRecipeSubSelectionViewController.h"
 #import "FSTBleCentralManager.h"
@@ -22,10 +18,9 @@
 #import "FSTBleProduct.h"
 #import "ProductGradientView.h" // to control up or down gradient
 #import "FSTBleSavedProduct.h"
-#import "FSTHoodie.h"
-#import "FSTHoodieViewController.h"
+#import "FSTPizzaOven.h"
+#import "FSTPizzaOvenViewController.h"
 #import "UIAlertView+Blocks.h"
-
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
@@ -50,12 +45,8 @@
     NSIndexPath *_indexPathForDeletion;
 }
 
-static NSString * const reuseIdentifier = @"ProductCell";
-static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
-
 #pragma mark - <UIViewDelegate>
 
-//TODO: firebase objects
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -85,8 +76,6 @@ static NSString * const reuseIdentifierParagon = @"ProductCellParagon";
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceLoadProgressUpdated];
     [[NSNotificationCenter defaultCenter] removeObserver:_deviceEssentialDataChangedObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:_bleCentralManagerPoweredOffObserver];
-
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,7 +101,7 @@ FSTParagonCookingStage* _fakeStage;
     _fakeStage.cookTimeMinimum = @60;
     
     _fakeParagon.online = YES;
-    _fakeParagon.friendlyName = @"My Paragon";
+    _fakeParagon.friendlyName = @"My Fake Paragon";
     _fakeParagon.loading = NO;
     _fakeParagon.batteryLevel = @44;
     _fakeParagon.session.cookMode = FSTCookingStateOff;
@@ -466,6 +455,14 @@ FSTParagonCookingStage* _fakeStage;
                 [productCell.statusLabel setText:@"Cooking"];
                 break;
         }
+    }
+    
+    if ([product isKindOfClass:[FSTPizzaOven class]])
+    {
+//        FSTPizzaOven* paragon = (FSTPizzaOven*)product; // cast it to check the cooking status
+        productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellPizzaOven" forIndexPath:indexPath];
+        productCell.friendlyName.text = product.friendlyName;
+        [productCell.statusLabel setText:@"---"];
     }
     
     // status label, online/offline etc

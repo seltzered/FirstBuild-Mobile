@@ -12,10 +12,9 @@
 #import "FSTBleCommissioningTableViewController.h"
 #import "UIAlertView+Blocks.h"
 
-#import "FSTHumanaPillBottle.h"
 #import "FSTParagon.h"
 #import "FSTGECooktop.h"
-#import "FSTHoodie.h"
+#import "FSTPizzaOven.h"
 
 @interface FSTBleCommissioningViewController ()
 
@@ -123,21 +122,13 @@ CBPeripheral* _currentlySelectedPeripheral;
     
     //TODO: rethink this approach / decouple a bit more
     //TODO: service advertisement is the same for paragon and BLE ACM
-    if (self.bleProductClass == [FSTHumanaPillBottle class])
-    {
-        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"a495ff10-c5b1-4b44-b512-1370f02d74de"];
-    }
-    else if(self.bleProductClass == [FSTParagon class])
+    if(self.bleProductClass == [FSTParagon class])
     {
         [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
     }
-    else if(self.bleProductClass == [FSTGECooktop class])
+    else if(self.bleProductClass == [FSTPizzaOven class])
     {
-        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
-    }
-    else if(self.bleProductClass == [FSTHoodie class])
-    {
-        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"713D0000-503E-4C75-BA94-3148F18D941E"];
+        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"13333333-3333-3333-3333-333333333337"];
     }
     
     [self.wheelBackground.layer setCornerRadius:self.wheelBackground.frame.size.width/2]; // make it a circle

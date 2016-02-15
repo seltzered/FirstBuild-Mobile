@@ -9,7 +9,7 @@
 #ifndef FirstBuildMobile_Constants_h
 #define FirstBuildMobile_Constants_h
 
-#define _EXPERIMENTAL //remove _ if experimental enabled
+
 #define _CHILLHUB
 
 #ifdef CHILLHUB
@@ -25,6 +25,7 @@ FOUNDATION_EXPORT NSString *const FirebaseUrl;
 #endif
 
 #ifdef DEBUG
+#   define EXPERIMENTAL_PRODUCTS
 #   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #   define DLog(...)

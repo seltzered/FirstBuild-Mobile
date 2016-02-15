@@ -6,12 +6,7 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
-#ifdef EXPERIMENTAL
-#import <Firebase/Firebase.h>
-#endif
-
 #import "ProductMainViewController.h"
-#import "FirebaseShared.h"
 #import "FSTBleCentralManager.h"
 #import "FSTParagonDisconnectedLabel.h"
 #import "FSTParagonMenuViewController.h"

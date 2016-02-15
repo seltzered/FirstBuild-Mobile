@@ -1,21 +1,19 @@
 //
-//  FSTHoodie.m
+//  FSTPizzaOven.m
 //  FirstBuild
 //
 //  Created by Myles Caley on 10/5/15.
 //  Copyright © 2015 FirstBuild. All rights reserved.
 //
 
-#import "FSTHoodie.h"
+#import "FSTPizzaOven.h"
 
-@implementation FSTHoodie
+@implementation FSTPizzaOven
 {
     NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
 }
 
-NSString * const FSTCharacteristicHoodieWrite =  @"713D0003-503E-4C75-BA94-3148F18D941E";
-NSString * const FSTCharacteristicHoodieNotify = @"713D0002-503E-4C75-BA94-3148F18D941E";
-NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notify
+NSString * const FSTCharacteristicPizzaOvenDisplayTemperature = @"13333333-3333-3333-3333-333333330003";
 
 - (id)init
 {
@@ -26,7 +24,7 @@ NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notif
 
         // booleans for all the required characteristics, tell us whether or not the characteristic loaded
         requiredCharacteristics = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                   [[NSNumber alloc] initWithBool:0], FSTCharacteristicHoodieNotify,
+                                   [[NSNumber alloc] initWithBool:0], FSTCharacteristicPizzaOvenDisplayTemperature,
                                    nil];
     }
     
@@ -37,27 +35,23 @@ NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notif
 {
     [super writeHandler:characteristic error:error];
     
-    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicHoodieWrite])
-    {
-        DLog(@"successfully wrote FSTCharacteristicHoodieWrite");
-        //[self handleCooktimeWritten];
-    }
+//    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOvenWrite])
+//    {
+//        DLog(@"successfully wrote FSTCharacteristicOvenWrite");
+//        //[self handleCooktimeWritten];
+//    }
 }
 
 -(void)readHandler: (CBCharacteristic*)characteristic
 {
     [super readHandler:characteristic];
     
-    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicHoodieNotify])
+    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicPizzaOvenDisplayTemperature])
     {
-        NSLog(@"char: FSTCharacteristicHoodieNotify, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicHoodieNotify];
+        NSLog(@"char: FSTCharacteristicPizzaOvenDisplayTemperature, data: %@", characteristic.value);
+        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicPizzaOvenDisplayTemperature];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelHoodie])
-    {
-        [self handleBatteryLevel:characteristic];
-    }
-
+    
     NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
     NSInteger requiredCount = 0; // count the number of discovered characteristics
     for (NSString* characteristic in requiredEnum) {
@@ -92,33 +86,20 @@ NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notif
     }
 }
 
--(void)handleBatteryLevel: (CBCharacteristic*)characteristic
-{
-    if (characteristic.value.length != 1)
-    {
-        DLog(@"handleBatteryLevel length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
-        return;
-    }
-    
-    NSData *data = characteristic.value;
-    Byte bytes[characteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.value.length];
-    self.batteryLevel = [NSNumber numberWithUnsignedInt:bytes[0]];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:FSTBatteryLevelChangedNotification  object:self];
-}
+#pragma mark - Characteristic Discovery Handler
 
+    
 /**
  *  call method called when characteristics are discovered
  *
  *  @param characteristics an array of the characteristics
  */
--(void)handleDiscoverCharacteristics: (NSArray*)characteristics
+-(void) handleDiscoverCharacteristics: (NSArray*)characteristics
 {
     [super handleDiscoverCharacteristics:characteristics];
     
     self.initialCharacteristicValuesRead = NO;
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicHoodieNotify];
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicPizzaOvenDisplayTemperature];
     NSLog(@"=======================================================================");
     //  NSLog(@"SERVICE %@", [service.UUID UUIDString]);
     
@@ -135,8 +116,7 @@ NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notif
         if (characteristic.properties & CBCharacteristicPropertyNotify)
         {
             if  (
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicHoodieNotify] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevelHoodie]
+                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicPizzaOvenDisplayTemperature]
                  )
             {
                 [self.peripheral readValueForCharacteristic:characteristic];
@@ -154,34 +134,6 @@ NSString * const FSTCharacteristicBatteryLevelHoodie     = @"2A19"; //read,notif
             NSLog(@"        CAN WRITE WITHOUT RESPONSE");
         }
     }
-}
-
-- (void) writeTextOnHoodie: (NSString*)text
-{
-    NSUInteger chunkSize = 20;
-    
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicHoodieWrite];
-    
-    if (!characteristic)
-    {
-        return;
-    }
-    
-    for (int i = 0; i < text.length ; i += chunkSize)
-    {
-        if (i + chunkSize > text.length)
-        {
-            chunkSize = text.length - i;
-        }
-       
-        NSData *data = [[text substringWithRange:NSMakeRange(i, chunkSize)] dataUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"to write %@", data);
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
-    }
-    char nullterm[] = "\0";
-    NSData * data = [NSData dataWithBytes:nullterm length:1];
-    NSLog(@"to write %@", data);
-    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
 }
 
 @end
