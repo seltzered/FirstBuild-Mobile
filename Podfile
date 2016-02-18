@@ -3,17 +3,8 @@
 
 source 'https://github.com/CocoaPods/Specs.git'
 pod 'RBStoryboardLink'
-# pod 'Firebase'
 pod 'SWRevealViewController'
 pod 'MBProgressHUD', '~> 0.9.1'
-# pod 'RestKit'
-# pod 'SSKeychain'
-# pod 'ActionSheetPicker-3.0'
-# pod 'google-plus-ios-sdk'
-# pod "Color-Picker-for-iOS"
-# pod 'FBSDKCoreKit'
-# pod 'FBSDKLoginKit'
-# pod 'STTwitter'
 
 #target 'FirstBuild' do
 
