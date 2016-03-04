@@ -50,6 +50,7 @@ NSString * const FSTCharacteristicPizzaOvenDisplayTemperature = @"13333333-3333-
     {
         NSLog(@"char: FSTCharacteristicPizzaOvenDisplayTemperature, data: %@", characteristic.value);
         [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicPizzaOvenDisplayTemperature];
+        [self handleDisplayTemperature:characteristic];
     }
     
     NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
@@ -84,6 +85,27 @@ NSString * const FSTCharacteristicPizzaOvenDisplayTemperature = @"13333333-3333-
         
         [self notifyDeviceLoadProgressUpdated];
     }
+}
+
+-(void)handleDisplayTemperature: (CBCharacteristic*)characteristic
+{
+ 
+  if (characteristic.value.length != 2)
+  {
+    DLog(@"handleDisplayTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
+    return;
+  }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
+  uint16_t raw = OSReadBigInt16(bytes, 0);
+  
+  NSNumber* displayTemperature = [[NSNumber alloc] initWithDouble:rintf((float)raw)];
+  if ([self.delegate respondsToSelector:@selector(displayTemperatureChanged:)])
+  {
+    [self.delegate displayTemperatureChanged:displayTemperature];
+  }
 }
 
 #pragma mark - Characteristic Discovery Handler

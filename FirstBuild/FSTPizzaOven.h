@@ -9,6 +9,7 @@
 #import "FSTBleProduct.h"
 
 @protocol FSTPizzaOvenDelegate <NSObject>
+@optional - (void) displayTemperatureChanged: (NSNumber*) temperature;
 
 @end
 

@@ -375,6 +375,12 @@ FSTParagonCookingStage* _fakeStage;
             DLog(@"seguing to nowhere...");
         }
     }
+    else if ([sender isKindOfClass:[FSTPizzaOven class]])
+    {
+      FSTPizzaOvenViewController *vc = (FSTPizzaOvenViewController*)destination.scene;
+      vc.oven = sender;
+    }
+  
 }
 
 #pragma mark <UITableViewDataSource>
@@ -554,7 +560,11 @@ FSTParagonCookingStage* _fakeStage;
 
         }
     }
-    
+    else if([product isKindOfClass:[FSTPizzaOven class]])
+    {
+      [self performSegueWithIdentifier:@"segueOven" sender:product];
+    }
+  
 }
 
 

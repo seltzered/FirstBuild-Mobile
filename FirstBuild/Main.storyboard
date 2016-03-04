@@ -685,28 +685,6 @@
             <point key="canvasLocation" x="-538" y="-785"/>
         </scene>
         <!--Storyboard Link-->
-        <scene sceneID="enf-Dr-59R">
-            <objects>
-                <viewController id="sZO-RU-ozf" customClass="RBStoryboardLink" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6g1-Kz-rO7"/>
-                        <viewControllerLayoutGuide type="bottom" id="zno-5t-uMx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0pg-JD-Mhk">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="ChillHub"/>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
-                    </userDefinedRuntimeAttributes>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="M38-qo-hbq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2048" y="2525"/>
-        </scene>
-        <!--Storyboard Link-->
         <scene sceneID="tjj-Ew-KcD">
             <objects>
                 <viewController id="lhL-8p-Ygk" customClass="RBStoryboardLink" sceneMemberID="viewController">
@@ -726,7 +704,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRD-tt-Q2W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2510" y="1714"/>
+            <point key="canvasLocation" x="1558" y="1419"/>
         </scene>
         <!--Mobi Navigation Controller-->
         <scene sceneID="sz5-Lr-6cD">
@@ -1250,7 +1228,6 @@
                     <connections>
                         <outlet property="productTable" destination="g8o-UE-XJL" id="fe7-pD-0G5"/>
                         <outlet property="swipeLeftGesture" destination="lSQ-Zh-t8X" id="EIX-G3-yZD"/>
-                        <segue destination="sZO-RU-ozf" kind="show" identifier="segueChillHub" id="ZHf-8p-Egt"/>
                         <segue destination="lhL-8p-Ygk" kind="show" identifier="segueParagon" id="CLf-Iv-xe2"/>
                         <segue destination="dJA-hw-Leo" kind="show" identifier="segueAddProduct" id="vWQ-Kt-73W"/>
                         <segue destination="0MH-GP-rik" kind="show" identifier="segueOven" id="lzr-RJ-fWM"/>
@@ -1563,13 +1540,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="oven"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="PizzaOven"/>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="needsTopLayoutGuide" value="NO"/>
                     </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WrU-tC-qDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1120" y="2805"/>
+            <point key="canvasLocation" x="1558" y="2133"/>
         </scene>
         <!--Paragon Menu Help View Controller-->
         <scene sceneID="GJv-Fz-uti">

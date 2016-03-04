@@ -9,6 +9,7 @@
 #import "FSTPizzaOvenViewController.h"
 
 @interface FSTPizzaOvenViewController ()
+@property (strong, nonatomic) IBOutlet UILabel *labelDisplayTemperature;
 
 @end
 
@@ -19,7 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.oven.delegate = self;
+    self.labelDisplayTemperature.text = @"-";
 }
 
 
@@ -28,7 +30,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(void)displayTemperatureChanged:(NSNumber *)temperature
+{
+  self.labelDisplayTemperature.text = [temperature stringValue];
+}
 
 @end
 

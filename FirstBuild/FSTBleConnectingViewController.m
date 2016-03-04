@@ -78,7 +78,14 @@
         {
             DLog(@"found device service");
             [peripheral discoverCharacteristics:nil forService:service];
-        }        
+        }
+      // TODO: hack, the pi isn't showing the 180A server for whatever reason, so
+      // hardcoding the pizza oven
+        else if ([[service.UUID UUIDString] isEqualToString:@"13333333-3333-3333-3333-333333333337"])
+        {
+          DLog(@"found device service");
+          [peripheral discoverCharacteristics:nil forService:service];
+        }
     }
 }
 
@@ -93,6 +100,12 @@
             _manufacturerNameCharacteristic = characteristic;
             [peripheral readValueForCharacteristic:_manufacturerNameCharacteristic];
         }
+      // TODO: hack, the pi isn't showing the 180A server for whatever reason, so
+      // hardcoding the pizza oven
+      else if ([[characteristic.UUID UUIDString] isEqualToString:@"13333333-3333-3333-3333-333333330003"])
+      {
+        [peripheral readValueForCharacteristic:characteristic];
+      }
     }
 }
 
