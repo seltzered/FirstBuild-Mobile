@@ -1147,9 +1147,9 @@
                                                         <constraint firstAttribute="width" constant="60" id="WOY-3p-hYz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friendlyName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDI-SL-ArL" userLabel="friendlyname">
-                                                    <rect key="frame" x="23" y="20" width="93" height="26"/>
-                                                    <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="friendlyName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDI-SL-ArL" userLabel="friendlyname">
+                                                    <rect key="frame" x="70" y="20" width="93" height="26"/>
+                                                    <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="24"/>
                                                     <color key="textColor" red="0.42745098040000001" green="0.43137254899999999" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1157,7 +1157,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="584" height="27"/>
                                                     <subviews>
                                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FvW-jV-TPt">
-                                                            <rect key="frame" x="175" y="12" width="234" height="4"/>
+                                                            <rect key="frame" x="175" y="12" width="234" height="2"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="234" id="ixM-Le-Hye"/>
                                                             </constraints>
@@ -1201,7 +1201,7 @@
                                                 <constraint firstItem="LDI-SL-ArL" firstAttribute="top" secondItem="pyP-Mn-klM" secondAttribute="top" constant="20" id="C8u-20-Gfm"/>
                                                 <constraint firstAttribute="trailing" secondItem="uoM-VA-Grw" secondAttribute="trailing" id="K6o-bf-WNj"/>
                                                 <constraint firstItem="uoM-VA-Grw" firstAttribute="centerY" secondItem="pyP-Mn-klM" secondAttribute="centerY" id="O5e-jP-dQn"/>
-                                                <constraint firstItem="LDI-SL-ArL" firstAttribute="leading" secondItem="pyP-Mn-klM" secondAttribute="leading" constant="23" id="TUv-ZS-MDn"/>
+                                                <constraint firstItem="LDI-SL-ArL" firstAttribute="leading" secondItem="pyP-Mn-klM" secondAttribute="leading" constant="70" id="TUv-ZS-MDn"/>
                                                 <constraint firstItem="5zz-z5-zx0" firstAttribute="leading" secondItem="pyP-Mn-klM" secondAttribute="leading" id="TfN-uL-yYg"/>
                                                 <constraint firstAttribute="bottom" secondItem="uoM-VA-Grw" secondAttribute="bottom" constant="5" id="e93-hs-Z9Z"/>
                                                 <constraint firstItem="5zz-z5-zx0" firstAttribute="top" secondItem="pyP-Mn-klM" secondAttribute="top" constant="6" id="l1h-FP-LPw"/>
