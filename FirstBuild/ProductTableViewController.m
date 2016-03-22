@@ -21,6 +21,8 @@
 #import "FSTPizzaOven.h"
 #import "FSTPizzaOvenViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "FSTOpalDebugViewController.h"
+#import "FSTOpal.h"
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
 
@@ -380,6 +382,11 @@ FSTParagonCookingStage* _fakeStage;
       FSTPizzaOvenViewController *vc = (FSTPizzaOvenViewController*)destination.scene;
       vc.oven = sender;
     }
+    else if ([sender isKindOfClass:[FSTOpal class]])
+    {
+      FSTOpalDebugViewController *vc = (FSTOpalDebugViewController*)destination.scene;
+      vc.opal = sender;
+    }
   
 }
 
@@ -465,12 +472,18 @@ FSTParagonCookingStage* _fakeStage;
     
     if ([product isKindOfClass:[FSTPizzaOven class]])
     {
-//        FSTPizzaOven* paragon = (FSTPizzaOven*)product; // cast it to check the cooking status
         productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellPizzaOven" forIndexPath:indexPath];
         productCell.friendlyName.text = product.friendlyName;
         [productCell.statusLabel setText:@"---"];
     }
-    
+  
+    if ([product isKindOfClass:[FSTOpal class]])
+    {
+      productCell = [tableView dequeueReusableCellWithIdentifier:@"ProductCellOpal" forIndexPath:indexPath];
+      productCell.friendlyName.text = product.friendlyName;
+      [productCell.statusLabel setText:@"---"];
+    }
+  
     // status label, online/offline etc
     if (product.online)
     {
@@ -563,6 +576,10 @@ FSTParagonCookingStage* _fakeStage;
     else if([product isKindOfClass:[FSTPizzaOven class]])
     {
       [self performSegueWithIdentifier:@"segueOven" sender:product];
+    }
+    else if([product isKindOfClass:[FSTOpal class]])
+    {
+      [self performSegueWithIdentifier:@"segueOpal" sender:product];
     }
   
 }

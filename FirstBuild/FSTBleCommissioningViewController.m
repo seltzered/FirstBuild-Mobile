@@ -15,6 +15,7 @@
 #import "FSTParagon.h"
 #import "FSTGECooktop.h"
 #import "FSTPizzaOven.h"
+#import "FSTOpal.h"
 
 @interface FSTBleCommissioningViewController ()
 
@@ -129,6 +130,10 @@ CBPeripheral* _currentlySelectedPeripheral;
     else if(self.bleProductClass == [FSTPizzaOven class])
     {
         [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"13333333-3333-3333-3333-333333333337"];
+    }
+    else if(self.bleProductClass == [FSTOpal class])
+    {
+      [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"E2779DA7-0A82-4BE7-B754-31ED3E727253"];
     }
     
     [self.wheelBackground.layer setCornerRadius:self.wheelBackground.frame.size.width/2]; // make it a circle

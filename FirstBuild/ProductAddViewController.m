@@ -10,6 +10,7 @@
 #import <SWRevealViewController.h>
 #import "FSTParagon.h"
 #import "FSTPizzaOven.h"
+#import "FSTOpal.h"
 #import "FSTBleCommissioningViewController.h"
 #import "FSTBleCentralManager.h"
 
@@ -37,7 +38,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #ifdef EXPERIMENTAL_PRODUCTS
-    return 2;
+    return 3;
 #else
     return 1;
 #endif
@@ -55,7 +56,11 @@
         case 1:
             CellIdentifier = @"oven";
             break;
-            
+        
+        case 2:
+          CellIdentifier = @"opal";
+          break;
+        
         default:
             break;
     }
@@ -125,6 +130,11 @@
         FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
         vc.bleProductClass = sender;
     }
+    else if ([segue.identifier isEqualToString:@"segueAddOpal"])
+    {
+      FSTBleCommissioningViewController* vc = (FSTBleCommissioningViewController*)segue.destinationViewController;
+      vc.bleProductClass = sender;
+    }
 }
 
 - (IBAction)ovenTouchHandler:(id)sender {
@@ -143,6 +153,23 @@
     {
         [self performSegueWithIdentifier:@"segueAddOven" sender:[FSTPizzaOven class]];
     }
+}
+- (IBAction)opalTouchHandler:(id)sender {
+  if (!([[FSTBleCentralManager sharedInstance] isPoweredOn]))
+  {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops!"
+                                                                             message:@"Bluetooth must be enabled to add the Opal."
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    [alertController addAction:actionOk];
+    [self presentViewController:alertController animated:YES completion:nil];
+  }
+  else
+  {
+    [self performSegueWithIdentifier:@"segueAddOpal" sender:[FSTOpal class]];
+  }
 }
 
 - (IBAction)paragonTouchHandler:(id)sender

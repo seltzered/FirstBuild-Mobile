@@ -75,6 +75,10 @@
 		5B059F8A1C0FB36F0072AAB5 /* FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F891C0FB36F0072AAB5 /* FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController.m */; };
 		5B059F8D1C109EF20072AAB5 /* FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F8C1C109EF20072AAB5 /* FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m */; };
 		5B0817BD1BAB3771000437AC /* FSTGECooktop.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0817BC1BAB3771000437AC /* FSTGECooktop.m */; };
+		5B1282641CA17D8D00778C88 /* Opal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1282631CA17D8D00778C88 /* Opal.storyboard */; };
+		5B1282671CA17DC900778C88 /* FSTOpalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1282661CA17DC900778C88 /* FSTOpalViewController.m */; };
+		5B12826A1CA17E1200778C88 /* FSTOpalDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1282691CA17E1200778C88 /* FSTOpalDebugViewController.m */; };
+		5B12826D1CA1877400778C88 /* FSTOpal.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12826C1CA1877400778C88 /* FSTOpal.m */; };
 		5B174DDB1A5F40C500A00505 /* ProductAddWrapperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B174DDA1A5F40C500A00505 /* ProductAddWrapperViewController.m */; };
 		5B174DE01A60717000A00505 /* FirstBuildAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B174DDF1A60717000A00505 /* FirstBuildAssets.xcassets */; };
 		5B174DE61A64266100A00505 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B8C10871A39324C00F481E6 /* fontawesome-webfont.ttf */; };
@@ -374,6 +378,13 @@
 		5B059F8C1C109EF20072AAB5 /* FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m; sourceTree = "<group>"; };
 		5B0817BB1BAB3771000437AC /* FSTGECooktop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTGECooktop.h; sourceTree = "<group>"; };
 		5B0817BC1BAB3771000437AC /* FSTGECooktop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTGECooktop.m; sourceTree = "<group>"; };
+		5B1282631CA17D8D00778C88 /* Opal.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opal.storyboard; sourceTree = "<group>"; };
+		5B1282651CA17DC900778C88 /* FSTOpalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalViewController.h; sourceTree = "<group>"; };
+		5B1282661CA17DC900778C88 /* FSTOpalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalViewController.m; sourceTree = "<group>"; };
+		5B1282681CA17E1200778C88 /* FSTOpalDebugViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalDebugViewController.h; sourceTree = "<group>"; };
+		5B1282691CA17E1200778C88 /* FSTOpalDebugViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalDebugViewController.m; sourceTree = "<group>"; };
+		5B12826B1CA1877400778C88 /* FSTOpal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpal.h; sourceTree = "<group>"; };
+		5B12826C1CA1877400778C88 /* FSTOpal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpal.m; sourceTree = "<group>"; };
 		5B174DD91A5F40C500A00505 /* ProductAddWrapperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ProductAddWrapperViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5B174DDA1A5F40C500A00505 /* ProductAddWrapperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ProductAddWrapperViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5B174DDF1A60717000A00505 /* FirstBuildAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FirstBuildAssets.xcassets; sourceTree = "<group>"; };
@@ -724,6 +735,44 @@
 				7C32915B6E0C4545E2A923B7 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5B12825F1CA17D5700778C88 /* Opal */ = {
+			isa = PBXGroup;
+			children = (
+				5B1282621CA17D7900778C88 /* controllers */,
+				5B1282611CA17D6D00778C88 /* model */,
+				5B1282601CA17D6800778C88 /* views */,
+			);
+			name = Opal;
+			sourceTree = "<group>";
+		};
+		5B1282601CA17D6800778C88 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				5B1282631CA17D8D00778C88 /* Opal.storyboard */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		5B1282611CA17D6D00778C88 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				5B12826B1CA1877400778C88 /* FSTOpal.h */,
+				5B12826C1CA1877400778C88 /* FSTOpal.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		5B1282621CA17D7900778C88 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5B1282651CA17DC900778C88 /* FSTOpalViewController.h */,
+				5B1282661CA17DC900778C88 /* FSTOpalViewController.m */,
+				5B1282681CA17E1200778C88 /* FSTOpalDebugViewController.h */,
+				5B1282691CA17E1200778C88 /* FSTOpalDebugViewController.m */,
+			);
+			name = controllers;
 			sourceTree = "<group>";
 		};
 		5B3F1C9A19E8845400303242 /* Main */ = {
@@ -1316,6 +1365,7 @@
 		5BA064D01B8743DB002FCE59 /* Apps */ = {
 			isa = PBXGroup;
 			children = (
+				5B12825F1CA17D5700778C88 /* Opal */,
 				5B6364B01BC2E20800322D4F /* PizzaOven */,
 				5B99DFBF1AB1EA2200247034 /* Paragon */,
 			);
@@ -1743,6 +1793,7 @@
 				51FAEFEC1B62722500A7DCF9 /* Images.xcassets in Resources */,
 				51FAEFFC1B62F52300A7DCF9 /* FSEmeric-Thin.otf in Resources */,
 				5B9EF10219DEEE1000E8D9F1 /* LaunchScreen.xib in Resources */,
+				5B1282641CA17D8D00778C88 /* Opal.storyboard in Resources */,
 				5B174DE61A64266100A00505 /* fontawesome-webfont.ttf in Resources */,
 				67926FF919EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf in Resources */,
 				51FAEFF61B62F51400A7DCF9 /* FSEmeric-Light.otf in Resources */,
@@ -1912,6 +1963,7 @@
 				5B6364BB1BC2E6CA00322D4F /* FSTPizzaOvenViewController.m in Sources */,
 				5B99E0871A1AA744005FB881 /* FSTNetwork.m in Sources */,
 				5B4A76D21BFF7C0400018281 /* FSTBeefSteakToughSkirtSousVideRecipe.m in Sources */,
+				5B12826D1CA1877400778C88 /* FSTOpal.m in Sources */,
 				51DFCAE41B66B7D500E48084 /* FSTParagonMenuAboutViewController.m in Sources */,
 				51A9D0401B73DE6E000AE293 /* FSTCookingStateReachingTemperatureViewController.m in Sources */,
 				51EA9E4F1B823E2900A3F421 /* FSTSavedRecipeTableViewController.m in Sources */,
@@ -1971,6 +2023,7 @@
 				5B9EF0F419DEEE1000E8D9F1 /* main.m in Sources */,
 				5B80FAC91C208A9700818E33 /* FSTVegetableFennelSousVideRecipe.m in Sources */,
 				5BE8F3521C244E0800DBB32C /* FSTFishSousVideRecipe.m in Sources */,
+				5B12826A1CA17E1200778C88 /* FSTOpalDebugViewController.m in Sources */,
 				5B4A76D51BFF7C2C00018281 /* FSTBeefSteakToughTipSousVideRecipe.m in Sources */,
 				5B4460291B1E25D5001A4953 /* FSTParagonCookingSession.m in Sources */,
 				51DFCAE11B66B6E700E48084 /* FSTParagonMenuSettingsViewController.m in Sources */,
@@ -2001,6 +2054,7 @@
 				5B4A76E71BFF7ED700018281 /* FSTBeefRoastShortRibsSousVideRecipe.m in Sources */,
 				5B059F841C0E2AC20072AAB5 /* FSTParagonUserInformation.m in Sources */,
 				5BEB7D921C234225006823E2 /* FSTPoultryDuckSousVideRecipe.m in Sources */,
+				5B1282671CA17DC900778C88 /* FSTOpalViewController.m in Sources */,
 				5B99DFC51AB1EB2D00247034 /* FSTParagon.m in Sources */,
 				51A9D02B1B72492E000AE293 /* FSTBleCharacteristic.m in Sources */,
 				5B7C17A81C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.m in Sources */,
