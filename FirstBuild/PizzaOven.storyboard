@@ -23,14 +23,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mad-rf-822" userLabel="labelDisplayTemperature">
-                                <rect key="frame" x="20" y="28" width="560" height="287"/>
-                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="180"/>
-                                <color key="textColor" red="0.88235294119999996" green="0.21960784310000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKF-2Z-s8Y" userLabel="buttonSetTemp">
-                                <rect key="frame" x="172" y="467" width="256" height="74"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKF-2Z-s8Y" userLabel="buttonSetTemp">
+                                <rect key="frame" x="207" y="342" width="187" height="66"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <state key="normal" title="Set Temp">
                                     <color key="titleColor" red="0.88235294119999996" green="0.21960784310000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -39,8 +33,14 @@
                                     <action selector="buttonSetTempTapped:" destination="KAm-Qr-YWf" eventType="touchUpInside" id="n3G-Su-Frj"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="777" borderStyle="bezel" textAlignment="center" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="9f2-6Y-RZY" userLabel="textBoxSetTemperature">
-                                <rect key="frame" x="172" y="347" width="256" height="92"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mad-rf-822" userLabel="labelDisplayTemperature">
+                                <rect key="frame" x="131" y="28" width="339" height="172"/>
+                                <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="180"/>
+                                <color key="textColor" red="0.88235294119999996" green="0.21960784310000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="777" borderStyle="bezel" textAlignment="center" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="9f2-6Y-RZY" userLabel="textBoxSetTemperature">
+                                <rect key="frame" x="202" y="280" width="197" height="59"/>
                                 <color key="textColor" red="0.88235294119999996" green="0.21960784310000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -48,10 +48,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Mad-rf-822" firstAttribute="leading" secondItem="a61-OO-aJd" secondAttribute="leadingMargin" id="DJ3-Lq-iV9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Mad-rf-822" secondAttribute="trailing" id="FDo-uR-WeZ"/>
-                            <constraint firstItem="rgA-S2-UZE" firstAttribute="top" secondItem="Mad-rf-822" secondAttribute="bottom" id="YCc-Qf-EW8"/>
-                            <constraint firstItem="Mad-rf-822" firstAttribute="top" secondItem="Zwe-s9-7PH" secondAttribute="bottom" id="p3T-zu-k2G"/>
+                            <constraint firstItem="Mad-rf-822" firstAttribute="leading" secondItem="a61-OO-aJd" secondAttribute="leadingMargin" constant="111" id="0fO-dd-Fsg"/>
+                            <constraint firstItem="9f2-6Y-RZY" firstAttribute="top" secondItem="Mad-rf-822" secondAttribute="bottom" constant="8" id="3gU-jF-FnA"/>
+                            <constraint firstItem="9f2-6Y-RZY" firstAttribute="centerX" secondItem="a61-OO-aJd" secondAttribute="centerX" id="9DJ-XN-9qv"/>
+                            <constraint firstItem="qKF-2Z-s8Y" firstAttribute="top" secondItem="9f2-6Y-RZY" secondAttribute="bottom" constant="8" id="B7J-Fx-H9g"/>
+                            <constraint firstItem="qKF-2Z-s8Y" firstAttribute="centerX" secondItem="a61-OO-aJd" secondAttribute="centerX" id="KKP-eB-4CA"/>
+                            <constraint firstItem="Mad-rf-822" firstAttribute="top" secondItem="Zwe-s9-7PH" secondAttribute="bottom" constant="8" id="XXN-xm-n4x"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mad-rf-822" secondAttribute="trailing" constant="110" id="sNy-25-g0m"/>
                         </constraints>
                     </view>
                     <connections>
