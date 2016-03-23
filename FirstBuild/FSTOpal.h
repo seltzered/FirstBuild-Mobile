@@ -20,6 +20,7 @@
 
   @property (strong, nonatomic) NSNumber* status;
   @property (strong, nonatomic) NSNumber* cleanCycle;
+  @property (strong, nonatomic) NSDate* time;
   @property BOOL iceMakerOn;
   @property BOOL nightLightOn;
 

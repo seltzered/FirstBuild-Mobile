@@ -18,9 +18,9 @@ NSString * const FSTCharacteristicOpalStatus = @"097A2751-CA0D-432F-87B5-7D2F31E
 NSString * const FSTCharacteristicOpalMode = @"79994230-4B04-40CD-85C9-02DD1A8D4DD0";
 NSString * const FSTCharacteristicOpalLight = @"37988F00-EA39-4A2D-9983-AFAD6535C02E";
 NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC81AF0D9AAF";
-//NSString * const FSTCharacteristicOpal
-//NSString * const FSTCharacteristicOpal
-//NSString * const FSTCharacteristicOpal
+NSString * const FSTCharacteristicOpalTime = @"ED9E0784-FBF1-47F4-AFE2-D439A6C207FC";
+NSString * const FSTCharacteristicOpalEnableSchedule = @"B45163B3-1092-4725-95DC-1A43AC4A9B88";
+NSString * const FSTCharacteristicOpalSchedule = @"9E1AE873-CB5E-4485-9884-5C5A3AD60E47";
 
 - (id)init
 {
@@ -35,7 +35,9 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
                                [[NSNumber alloc] initWithBool:0], FSTCharacteristicOpalMode,
                                [[NSNumber alloc] initWithBool:0], FSTCharacteristicOpalLight,
                                [[NSNumber alloc] initWithBool:0], FSTCharacteristicOpalCleanCycle,
-                              
+                               [[NSNumber alloc] initWithBool:0], FSTCharacteristicOpalTime,
+                               [[NSNumber alloc] initWithBool:0], FSTCharacteristicOpalEnableSchedule,
+                               [[NSNumber alloc] initWithBool:0], FSTCharacteristicOpalSchedule,
                                nil];
     self.status = @0;
   }
@@ -51,14 +53,85 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
   
   if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalLight])
   {
-      DLog(@"successfully wrote handleWriteNightLight");
+      DLog(@"successfully wrote FSTCharacteristicOpalLight");
       [self handleWriteNightLight:error];
   }
   else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalMode])
   {
-    DLog(@"successfully wrote handleWriteNightLight");
+    DLog(@"successfully wrote FSTCharacteristicOpalMode");
     [self handleWriteMode:error];
   }
+  else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalTime])
+  {
+    DLog(@"successfully wrote FSTCharacteristicOpalTime");
+    [self handleWriteTime:error];
+  }
+  else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalEnableSchedule])
+  {
+    DLog(@"successfully wrote FSTCharacteristicOpalEnableSchedule");
+    [self handleWriteScheduleEnabled:error];
+  }
+  else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalSchedule])
+  {
+    DLog(@"successfully wrote FSTCharacteristicOpalSchedule");
+    [self handleWriteSchedule:error];
+  }
+}
+
+-(void)writeScheduleEnable: (BOOL)on {
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule];
+  Byte bytes[1];
+  bytes[0] = !on;
+  
+  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+  if (characteristic)
+  {
+    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+  }
+}
+
+-(void)writeSchedule {
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalSchedule];
+  
+  Byte bytes[14];
+  memset(bytes,0,sizeof(bytes));
+  OSWriteBigInt16(&bytes, 0, 0x0000); //sun
+  OSWriteBigInt16(&bytes, 2, 0x0000); //mon
+  OSWriteBigInt16(&bytes, 4, 0x0000); //tue
+  OSWriteBigInt16(&bytes, 6, 0x0f2b); //wed
+  OSWriteBigInt16(&bytes, 8, 0x0000); //thu
+  OSWriteBigInt16(&bytes, 10, 0x0000); //fri
+  OSWriteBigInt16(&bytes, 12, 0x0000); //sat
+  
+  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+  
+  if (characteristic)
+  {
+    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+  }
+}
+
+-(void)writeCurrentTime {
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTime];
+  
+  Byte bytes[4];
+  memset(bytes, 0, sizeof(bytes));
+  
+//1458762162, 0x56F2F1B2
+//Wednesday March 23, 2016 15:42:42 (pm)
+  
+  bytes[0] = 0x56;
+  bytes[1] = 0xf2;
+  bytes[2] = 0xf1;
+  bytes[3] = 0xb2;
+
+  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+
+  if (characteristic)
+  {
+    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+  }
+  
 }
 
 -(void)writeNightLight: (BOOL)on
@@ -109,6 +182,25 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
   NSLog(@"handleWriteMode written");
 }
 
+-(void)handleWriteSchedule: (NSError *)error
+{
+  NSLog(@"handleWriteMode written");
+  [self writeScheduleEnable:YES];
+}
+
+-(void)handleWriteScheduleEnabled: (NSError *)error
+{
+  NSLog(@"handleWriteScheduleEnabled written");
+}
+
+-(void)handleWriteTime: (NSError *)error
+{
+  NSLog(@"handleWriteTime written");
+  CBCharacteristic* timeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTime];
+  [self.peripheral readValueForCharacteristic:timeCharacteristic];
+  
+}
+
 #pragma mark - read
 
 -(void)readHandler: (CBCharacteristic*)characteristic
@@ -138,6 +230,24 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
     NSLog(@"char: FSTCharacteristicOpalCleanCycle, data: %@", characteristic.value);
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalCleanCycle];
     [self handleCleanCycle:characteristic];
+  }
+  else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalTime])
+  {
+    NSLog(@"char: FSTCharacteristicOpalTime, data: %@", characteristic.value);
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalTime];
+    [self handleTime:characteristic];
+  }
+  else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalEnableSchedule])
+  {
+    NSLog(@"char: FSTCharacteristicOpalEnableSchedule, data: %@", characteristic.value);
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalEnableSchedule];
+    [self handleScheduleEnable:characteristic];
+  }
+  else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalSchedule])
+  {
+    NSLog(@"char: FSTCharacteristicOpalSchedule, data: %@", characteristic.value);
+    [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalSchedule];
+    [self handleSchedule:characteristic];
   }
   
   NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
@@ -172,6 +282,50 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
     
     [self notifyDeviceLoadProgressUpdated];
   }
+}
+
+-(void)handleTime: (CBCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 4)
+  {
+    DLog(@"handleTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 4);
+    return;
+  }
+  
+  // TODO: Hack
+  [self writeSchedule];
+  
+//  NSData *data = characteristic.value;
+//  Byte bytes[characteristic.value.length] ;
+//  [data getBytes:bytes length:characteristic.value.length];
+//  self.status = [NSNumber numberWithInt:bytes[0]];
+//
+//  if ([self.delegate respondsToSelector:@selector(iceMakerStatusChanged:)])
+//  {
+//    [self.delegate iceMakerStatusChanged:self.status];
+//  }
+}
+
+-(void)handleSchedule: (CBCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 14)
+  {
+    DLog(@"handleSchedule length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 14);
+    return;
+  }
+}
+
+-(void)handleScheduleEnable: (CBCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 1)
+  {
+    DLog(@"handleScheduleEnable length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+    return;
+  }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
 }
 
 -(void)handleStatus: (CBCharacteristic*)characteristic
@@ -290,7 +444,7 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
            [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalCleanCycle]
            )
       {
-        NSLog(@"reading initial value... %@", characteristic.UUID);
+        NSLog(@"reading initial value ... %@", characteristic.UUID);
         [self.peripheral readValueForCharacteristic:characteristic];
       }
       NSLog(@"        CAN NOTIFY");
@@ -298,6 +452,23 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
     
     if (characteristic.properties & CBCharacteristicPropertyRead)
     {
+      if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalTime])
+      {
+        NSLog(@"reading initial value. (no subscribe).. %@", characteristic.UUID);
+//        [self.peripheral readValueForCharacteristic:characteristic];
+        [self writeCurrentTime];
+      }
+      else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalSchedule])
+      {
+        NSLog(@"reading initial value. (no subscribe).. %@", characteristic.UUID);
+        [self.peripheral readValueForCharacteristic:characteristic];
+//        [self writeSchedule];
+      }
+      else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalEnableSchedule])
+      {
+        NSLog(@"reading initial value. (no subscribe).. %@", characteristic.UUID);
+        [self.peripheral readValueForCharacteristic:characteristic];
+      }
       NSLog(@"        CAN READ");
     }
     
