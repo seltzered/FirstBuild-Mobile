@@ -10,6 +10,7 @@
 #import "FSTOpal.h"
 
 @interface FSTOpalDebugViewController : UIViewController  <FSTOpalDelegate>
+
 @property (weak, nonatomic) FSTOpal* opal;
 
 @end

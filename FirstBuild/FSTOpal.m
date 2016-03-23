@@ -11,7 +11,7 @@
 @implementation FSTOpal
 {
   NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-  NSNumber* status;
+ 
 }
 
 NSString * const FSTCharacteristicOpalStatus = @"097A2751-CA0D-432F-87B5-7D2F31E45551";
@@ -37,23 +37,79 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
                                [[NSNumber alloc] initWithBool:0], FSTCharacteristicOpalCleanCycle,
                               
                                nil];
-    status = @0;
+    self.status = @0;
   }
   
   return self;
 }
 
+#pragma mark - write
+
 -(void)writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error
 {
   [super writeHandler:characteristic error:error];
   
-  //    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOvenWrite])
-  //    {
-  //        DLog(@"successfully wrote FSTCharacteristicOvenWrite");
-  //        //[self handleCooktimeWritten];
-  //    }
+  if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalLight])
+  {
+      DLog(@"successfully wrote handleWriteNightLight");
+      [self handleWriteNightLight:error];
+  }
+  else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalMode])
+  {
+    DLog(@"successfully wrote handleWriteNightLight");
+    [self handleWriteMode:error];
+  }
 }
 
+-(void)writeNightLight: (BOOL)on
+{
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLight];
+  
+  Byte bytes[1];
+  bytes[0] = on;
+  
+  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+  if (characteristic)
+  {
+    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+  }
+}
+
+-(void)writeMode: (BOOL)on
+{
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalMode];
+  
+  Byte bytes[1];
+  bytes[0] = on;
+  
+  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+  if (characteristic)
+  {
+    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+  }
+}
+
+-(void)handleWriteNightLight: (NSError *)error
+{
+  NSLog(@"handleWriteNightLight written");
+//  if ([self.delegate respondsToSelector:@selector(nextStageSet:)])
+//  {
+//    [self.delegate nextStageSet:error];
+//  }
+//  
+//  if (!error)
+//  {
+//    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
+//    [self.peripheral readValueForCharacteristic:characteristic];
+//  }
+}
+
+-(void)handleWriteMode: (NSError *)error
+{
+  NSLog(@"handleWriteMode written");
+}
+
+#pragma mark - read
 
 -(void)readHandler: (CBCharacteristic*)characteristic
 {
@@ -69,19 +125,19 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
   {
     NSLog(@"char: FSTCharacteristicOpalMode, data: %@", characteristic.value);
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalMode];
-//    [self handleStatus:characteristic];
+    [self handleMode:characteristic];
   }
   else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalLight])
   {
     NSLog(@"char: FSTCharacteristicOpalLight, data: %@", characteristic.value);
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalLight];
-//    [self handleStatus:characteristic];
+    [self handleLight:characteristic];
   }
   else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalCleanCycle])
   {
     NSLog(@"char: FSTCharacteristicOpalCleanCycle, data: %@", characteristic.value);
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalCleanCycle];
-//    [self handleStatus:characteristic];
+    [self handleCleanCycle:characteristic];
   }
   
   NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
@@ -129,11 +185,70 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
   NSData *data = characteristic.value;
   Byte bytes[characteristic.value.length] ;
   [data getBytes:bytes length:characteristic.value.length];
-  status = [NSNumber numberWithInt:bytes[0]];
+  self.status = [NSNumber numberWithInt:bytes[0]];
   
   if ([self.delegate respondsToSelector:@selector(iceMakerStatusChanged:)])
   {
-    [self.delegate  iceMakerStatusChanged:status];
+    [self.delegate iceMakerStatusChanged:self.status];
+  }
+}
+
+-(void)handleMode: (CBCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 1)
+  {
+    DLog(@"handleMode length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+    return;
+  }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
+  
+  self.iceMakerOn = [NSNumber numberWithInt:bytes[0]].intValue;
+  
+  if ([self.delegate respondsToSelector:@selector(iceMakerModeChanged:)])
+  {
+    [self.delegate iceMakerModeChanged:_iceMakerOn];
+  }
+}
+
+-(void)handleCleanCycle: (CBCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 1)
+  {
+    DLog(@"handleMode length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+    return;
+  }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
+  _cleanCycle = [NSNumber numberWithInt:bytes[0]];
+  
+  if ([self.delegate respondsToSelector:@selector(iceMakerCleanCycleChanged:)])
+  {
+    [self.delegate iceMakerCleanCycleChanged:_cleanCycle];
+  }
+}
+
+-(void)handleLight: (CBCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 1)
+  {
+    DLog(@"handleLight length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+    return;
+  }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
+  self.nightLightOn = [NSNumber numberWithInt:bytes[0]].intValue;
+  
+  
+  if ([self.delegate respondsToSelector:@selector(iceMakerLightChanged:)])
+  {
+    [self.delegate iceMakerLightChanged:_nightLightOn];
   }
 }
 
@@ -195,6 +310,14 @@ NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC8
   NSLog(@"Characteristic discovery complete.");
 }
 
+#pragma mark - external
+- (void) turnIceMakerOn: (BOOL) on {
+  [self writeMode:on];
+  
+}
 
+- (void) turnNightLightOn:(BOOL)on  {
+  [self writeNightLight:on];
+}
 
 @end
