@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTOpal.h"
 
-@interface FSTOpalViewController : UIViewController
+@interface FSTOpalViewController : UIViewController <FSTOpalDelegate>
 @property (weak, nonatomic) FSTOpal* opal;
 
 @end
