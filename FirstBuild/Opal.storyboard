@@ -14,6 +14,9 @@
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
             <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
+            <string>FSEmeric-SemiBold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -125,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mer-jY-rwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="325" y="331"/>
+            <point key="canvasLocation" x="325" y="2195"/>
         </scene>
         <!--Opal View Controller-->
         <scene sceneID="pa6-jg-aDn">
@@ -271,6 +274,9 @@
                                                 <constraint firstItem="afj-ZF-7Uu" firstAttribute="leading" secondItem="Zy9-ml-b60" secondAttribute="leadingMargin" constant="10" id="wRM-yu-6gM"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="xGR-Jv-Bkn" kind="show" id="o8f-eF-nTd"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -283,7 +289,126 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jZ4-xn-C6K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1085" y="1027.5"/>
+            <point key="canvasLocation" x="1093" y="1027.5"/>
+        </scene>
+        <!--FSTOpalScheduleTableViewController-->
+        <scene sceneID="mC8-Ye-m9h">
+            <objects>
+                <tableViewController id="xGR-Jv-Bkn" userLabel="FSTOpalScheduleTableViewController" customClass="FSTOpalScheduleTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="Muy-Oz-7RI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="481"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="1dG-bA-T6b">
+                            <rect key="frame" x="0.0" y="304" width="600" height="0.5"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.66274509803921566" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dateCell" id="3ZM-Ww-D6C" customClass="FSTOpalScheduleTableViewCell">
+                                <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3ZM-Ww-D6C" id="Qzt-ar-4h3">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fVx-Nw-fHU" userLabel="switchEnabled">
+                                            <rect key="frame" x="532" y="14" width="51" height="31"/>
+                                        </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9N-Rv-Lwr">
+                                            <rect key="frame" x="21" y="31" width="41" height="21.5"/>
+                                            <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="17"/>
+                                            <color key="textColor" red="0.99607843139999996" green="0.75686274509999996" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6:30 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Odb-7L-gkW" userLabel="labelTime">
+                                            <rect key="frame" x="70" y="32" width="120" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="120" id="pEn-qM-tvs"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lPr-PR-fDp" userLabel="labelDay">
+                                            <rect key="frame" x="21" y="6" width="60.5" height="22.5"/>
+                                            <fontDescription key="fontDescription" name="FSEmeric-SemiBold" family="FS Emeric" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Odb-7L-gkW" firstAttribute="centerY" secondItem="G9N-Rv-Lwr" secondAttribute="centerY" id="7c7-6r-vUn"/>
+                                        <constraint firstItem="G9N-Rv-Lwr" firstAttribute="top" secondItem="lPr-PR-fDp" secondAttribute="bottom" constant="3" id="I07-lM-vI4"/>
+                                        <constraint firstItem="Odb-7L-gkW" firstAttribute="bottom" secondItem="G9N-Rv-Lwr" secondAttribute="bottom" id="KDC-xk-rnp"/>
+                                        <constraint firstItem="lPr-PR-fDp" firstAttribute="top" secondItem="Qzt-ar-4h3" secondAttribute="topMargin" constant="-2" id="NoI-Ti-7Mc"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="fVx-Nw-fHU" secondAttribute="trailing" constant="11" id="ZLB-95-c3U"/>
+                                        <constraint firstItem="lPr-PR-fDp" firstAttribute="leading" secondItem="Qzt-ar-4h3" secondAttribute="leadingMargin" constant="13" id="brw-2r-PPX"/>
+                                        <constraint firstItem="Odb-7L-gkW" firstAttribute="leading" secondItem="G9N-Rv-Lwr" secondAttribute="trailing" constant="8" id="emW-9X-2Re"/>
+                                        <constraint firstItem="fVx-Nw-fHU" firstAttribute="centerY" secondItem="Qzt-ar-4h3" secondAttribute="centerY" id="nmT-fe-ZN5"/>
+                                        <constraint firstItem="G9N-Rv-Lwr" firstAttribute="leading" secondItem="lPr-PR-fDp" secondAttribute="leading" id="qZP-Sr-qhP"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="KDC-xk-rnp"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="labelDayOutlet" destination="lPr-PR-fDp" id="CzM-b7-emr"/>
+                                    <outlet property="labelTimeOutlet" destination="Odb-7L-gkW" id="tEi-2S-Cso"/>
+                                    <outlet property="switchEnabledOutlet" destination="fVx-Nw-fHU" id="3Za-ps-8Dn"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="datePicker" rowHeight="216" id="fgJ-PQ-pXg">
+                                <rect key="frame" x="0.0" y="88" width="600" height="216"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fgJ-PQ-pXg" id="VYN-Bn-fU0">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="215.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <datePicker tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnq-AR-vLJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="216"/>
+                                            <date key="date" timeIntervalSinceReferenceDate="393205466.33293098">
+                                                <!--2013-06-17 23:44:26 +0000-->
+                                            </date>
+                                            <connections>
+                                                <action selector="dateAction:" destination="xGR-Jv-Bkn" eventType="valueChanged" id="WWm-ls-33a"/>
+                                            </connections>
+                                        </datePicker>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstItem="vnq-AR-vLJ" firstAttribute="top" secondItem="fgJ-PQ-pXg" secondAttribute="top" id="DDu-s3-Uxg"/>
+                                    <constraint firstItem="vnq-AR-vLJ" firstAttribute="leading" secondItem="fgJ-PQ-pXg" secondAttribute="leading" id="Epc-8y-hH0"/>
+                                    <constraint firstItem="vnq-AR-vLJ" firstAttribute="trailing" secondItem="fgJ-PQ-pXg" secondAttribute="trailing" id="fgg-gP-Sm8"/>
+                                    <constraint firstItem="vnq-AR-vLJ" firstAttribute="centerY" secondItem="fgJ-PQ-pXg" secondAttribute="centerY" id="m79-hM-WgA"/>
+                                </constraints>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="DateCell" id="U75-gO-Mlg"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="pickerView" destination="p1Y-Sl-c83" id="L8e-Wq-vbI"/>
+                        <outlet property="view" destination="Muy-Oz-7RI" id="FHX-YO-cUg"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="imf-A2-M2W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" id="p1Y-Sl-c83">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <date key="date" timeIntervalSinceReferenceDate="377204788.09288597">
+                        <!--2012-12-14 19:06:28 +0000-->
+                    </date>
+                    <connections>
+                        <action selector="dateAction:" destination="xGR-Jv-Bkn" eventType="valueChanged" id="Rac-AT-0H4"/>
+                    </connections>
+                </datePicker>
+            </objects>
+            <point key="canvasLocation" x="1953" y="1027.5"/>
         </scene>
     </scenes>
 </document>

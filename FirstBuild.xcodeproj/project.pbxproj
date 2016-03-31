@@ -172,6 +172,8 @@
 		5BA3A9871B3C95FF00E51C51 /* FSTBleProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */; };
 		5BB985151CAD569900B50242 /* FSTOpalMainMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB985141CAD569900B50242 /* FSTOpalMainMenuTableViewController.m */; };
 		5BB985171CAD637000B50242 /* Opal.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BB985161CAD637000B50242 /* Opal.xcassets */; };
+		5BB9851A1CAD88A600B50242 /* FSTOpalScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB985191CAD88A600B50242 /* FSTOpalScheduleTableViewController.m */; };
+		5BB9851D1CADE07400B50242 /* FSTOpalScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB9851C1CADE07400B50242 /* FSTOpalScheduleTableViewCell.m */; };
 		5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBC7A791A66F7F100A79080 /* WifiCommissioningFoundViewController.m */; };
 		5BBDE3961B9F754800FFC8EC /* FSTParagon.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BBDE3951B9F754800FFC8EC /* FSTParagon.storyboard */; };
 		5BBFACFF19E495FC00E42575 /* ProductTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBFACFE19E495FC00E42575 /* ProductTableViewController.m */; };
@@ -567,6 +569,10 @@
 		5BB985131CAD569900B50242 /* FSTOpalMainMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalMainMenuTableViewController.h; sourceTree = "<group>"; };
 		5BB985141CAD569900B50242 /* FSTOpalMainMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalMainMenuTableViewController.m; sourceTree = "<group>"; };
 		5BB985161CAD637000B50242 /* Opal.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Opal.xcassets; sourceTree = "<group>"; };
+		5BB985181CAD88A600B50242 /* FSTOpalScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalScheduleTableViewController.h; sourceTree = "<group>"; };
+		5BB985191CAD88A600B50242 /* FSTOpalScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalScheduleTableViewController.m; sourceTree = "<group>"; };
+		5BB9851B1CADE07400B50242 /* FSTOpalScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalScheduleTableViewCell.h; sourceTree = "<group>"; };
+		5BB9851C1CADE07400B50242 /* FSTOpalScheduleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalScheduleTableViewCell.m; sourceTree = "<group>"; };
 		5BBC7A761A65BD7200A79080 /* splashvideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = splashvideo.mp4; sourceTree = "<group>"; };
 		5BBC7A781A66F7F100A79080 /* WifiCommissioningFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = WifiCommissioningFoundViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5BBC7A791A66F7F100A79080 /* WifiCommissioningFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WifiCommissioningFoundViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -778,6 +784,10 @@
 				5B1282691CA17E1200778C88 /* FSTOpalDebugViewController.m */,
 				5BB985131CAD569900B50242 /* FSTOpalMainMenuTableViewController.h */,
 				5BB985141CAD569900B50242 /* FSTOpalMainMenuTableViewController.m */,
+				5BB985181CAD88A600B50242 /* FSTOpalScheduleTableViewController.h */,
+				5BB985191CAD88A600B50242 /* FSTOpalScheduleTableViewController.m */,
+				5BB9851B1CADE07400B50242 /* FSTOpalScheduleTableViewCell.h */,
+				5BB9851C1CADE07400B50242 /* FSTOpalScheduleTableViewCell.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1943,6 +1953,7 @@
 				517CA53C1B86176600CE9F1B /* FSTDottedDividerView.m in Sources */,
 				5B4A76E11BFF7EA800018281 /* FSTBeefRoastChuckRoastSousVideRecipe.m in Sources */,
 				5BEB7D951C234234006823E2 /* FSTPoultryTurkeySousVideRecipe.m in Sources */,
+				5BB9851D1CADE07400B50242 /* FSTOpalScheduleTableViewCell.m in Sources */,
 				51DC77661B8B99B300313611 /* FSTSavedRecipeIngredientsViewController.m in Sources */,
 				5BEB7DA41C236947006823E2 /* FSTPoultryDuckSousVideRecipes.m in Sources */,
 				5B4A76B11BFF735600018281 /* FSTBeefRoastTenderLoinSousVideRecipe.m in Sources */,
@@ -2022,6 +2033,7 @@
 				5BF6FA4F1B74EF9B00D3EB85 /* FSTCookingViewSegue.m in Sources */,
 				5BE8F3421C24493A00DBB32C /* FSTFruitApricotsSousVideRecipe.m in Sources */,
 				5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */,
+				5BB9851A1CAD88A600B50242 /* FSTOpalScheduleTableViewController.m in Sources */,
 				5B4A76C91BFF7BC700018281 /* FSTBeefSteakToughRoundSousVideRecipe.m in Sources */,
 				5B4A76CC1BFF7BDE00018281 /* FSTBeefSteakToughCubedSousVideRecipe.m in Sources */,
 				5BEB7DAE1C243083006823E2 /* FSTPoultryTurkeyLegsSousVideRecipe.m in Sources */,
