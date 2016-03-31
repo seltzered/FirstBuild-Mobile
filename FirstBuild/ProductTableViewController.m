@@ -21,7 +21,7 @@
 #import "FSTPizzaOven.h"
 #import "FSTPizzaOvenViewController.h"
 #import "UIAlertView+Blocks.h"
-#import "FSTOpalDebugViewController.h"
+#import "FSTOpalViewController.h"
 #import "FSTOpal.h"
 
 #import "FSTCookingProgressLayer.h" //TODO: TEMP
@@ -60,6 +60,7 @@
  
 #ifdef DEBUG
     [self loadFakeParagon];
+  [self loadFakeOpal];
 #endif
     
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -120,6 +121,25 @@ FSTParagonCookingStage* _fakeStage;
     [self.products addObject:_fakeParagon];
     [self.delegate itemCountChanged:self.products.count];
 
+}
+
+FSTOpal* _fakeOpal;
+
+-(void) loadFakeOpal
+{
+  _fakeOpal = [FSTOpal new];
+  
+  _fakeOpal.online = YES;
+  _fakeOpal.friendlyName = @"My Fake Opal";
+  _fakeOpal.loading = NO;
+
+  _fakeOpal.status = @1;
+  _fakeOpal.nightLightOn = YES;
+  _fakeOpal.cleanCycle = 0;
+  
+  [self.products addObject:_fakeOpal];
+  [self.delegate itemCountChanged:self.products.count];
+  
 }
 #endif
 
@@ -384,7 +404,7 @@ FSTParagonCookingStage* _fakeStage;
     }
     else if ([sender isKindOfClass:[FSTOpal class]])
     {
-      FSTOpalDebugViewController *vc = (FSTOpalDebugViewController*)destination.scene;
+      FSTOpalViewController *vc = (FSTOpalViewController*)destination.scene;
       vc.opal = sender;
     }
   
