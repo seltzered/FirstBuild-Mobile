@@ -62,18 +62,37 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   }
 }
 
--(void)writeSchedule {
+-(void)writeSchedule: (NSArray*) schedule {
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalSchedule];
   
+  // written in local time
   Byte bytes[14];
   memset(bytes,0,sizeof(bytes));
-  OSWriteBigInt16(&bytes, 0, 0x130e); //sun
-  OSWriteBigInt16(&bytes, 2, 0x130e); //mon
-  OSWriteBigInt16(&bytes, 4, 0x130e); //tue
-  OSWriteBigInt16(&bytes, 6, 0x130e); //wed
-  OSWriteBigInt16(&bytes, 8, 0x0c36); //thu 12:54
-  OSWriteBigInt16(&bytes, 10, 0x130e); //fri
-  OSWriteBigInt16(&bytes, 12, 0x130e); //sat
+  
+  NSDateFormatter* hourFormatter = [[NSDateFormatter alloc] init];
+  [hourFormatter setDateFormat:@"HH"];
+  NSDateFormatter* minuteFormatter = [[NSDateFormatter alloc] init];
+  [minuteFormatter setDateFormat:@"mm"];
+  
+  for (uint8_t i=0; i<=6; i++) {
+    if (schedule[i]) {
+      NSDictionary* element = (NSDictionary*)schedule[i];
+      NSDate* time = element[@"date"];
+      uint8_t hour = [[hourFormatter stringFromDate:time] intValue];
+      uint8_t minute = [[minuteFormatter stringFromDate:time] intValue];
+      bytes[i*2] = hour;
+      bytes[i*2 + 1] = minute;
+      NSLog(@"element %d %d : %d", i, hour, minute);
+    }
+  }
+  
+//  OSWriteBigInt16(&bytes, 0, 0x130e); //sun
+//  OSWriteBigInt16(&bytes, 2, 0x130e); //mon
+//  OSWriteBigInt16(&bytes, 4, 0x130e); //tue
+//  OSWriteBigInt16(&bytes, 6, 0x130e); //wed
+//  OSWriteBigInt16(&bytes, 8, 0x0c36); //thu 12:54
+//  OSWriteBigInt16(&bytes, 10, 0x0f18); //fri
+//  OSWriteBigInt16(&bytes, 12, 0x041e); //sat
   
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   
@@ -84,30 +103,33 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 }
 
 -(void)writeCurrentTime {
+  
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTime];
   
-  Byte bytes[4];
-  memset(bytes, 0, sizeof(bytes));
+  //
+  //  Need to write in the following format...
+  //
+  //  bytes[0] = 0x32;
+  //  bytes[1] = 0xe3;
+  //  bytes[2] = 0xf3;
+  //  bytes[3] = 0x56;
+    
+  //  result = 196519986
+  //  
+  //  56f3e332 = 1458823986
+  //  
+  //  1458823986 - 1262304000 (40 years) = 196519986
+  //  uint32_t val = ((bytes[3] << 24) + (bytes[2] << 16) + (bytes[1] << 8) + bytes[0]) - 1262304000;
+  //  
+  //  NSLog(@"time that should match broadcom print %d", val);
+  //  GMT: Thu, 24 Mar 2016 12:53:06 GMT <<<< 12:53
+  //  Your time zone: 3/24/2016, 8:53:06 AM GMT-4:00 DST
+
   
+  uint32_t secondsSince1970 = (uint32_t)[[NSDate date]timeIntervalSince1970] + (int32_t)[[NSTimeZone systemTimeZone] secondsFromGMT];
+  NSLog(@"current date: %d", secondsSince1970);
   
-  bytes[0] = 0x32;
-  bytes[1] = 0xe3;
-  bytes[2] = 0xf3;
-  bytes[3] = 0x56;
-  
-//  result = 196519986
-//  
-//  56f3e332 = 1458823986
-//  
-//  1458823986 - 1262304000 (40 years) = 196519986
-//  uint32_t val = ((bytes[3] << 24) + (bytes[2] << 16) + (bytes[1] << 8) + bytes[0]) - 1262304000;
-//  
-//  NSLog(@"time that should match broadcom print %d", val);
-//  GMT: Thu, 24 Mar 2016 12:53:06 GMT <<<< 12:53
-//  Your time zone: 3/24/2016, 8:53:06 AM GMT-4:00 DST
-  
-  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-  
+  NSMutableData *data = [[NSMutableData alloc] initWithBytes:&secondsSince1970 length:sizeof(uint32_t)];
   if (characteristic)
   {
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
@@ -267,7 +289,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   }
   else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalError])
   {
-    NSLog(@"char: FSTCharacteristicOpalError, data: %@", characteristic.value);
+//    NSLog(@"char: FSTCharacteristicOpalError, data: %@", characteristic.value);
     [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicOpalError];
     [self handleErrorRead:characteristic];
   }
@@ -315,7 +337,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   }
   
   // TODO: Hack
-  [self writeSchedule];
+//  [self writeSchedule];
   
 //  NSData *data = characteristic.value;
 //  Byte bytes[characteristic.value.length] ;
@@ -375,10 +397,40 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   Byte bytes[characteristic.value.length] ;
   [data getBytes:bytes length:characteristic.value.length];
   self.status = [NSNumber numberWithInt:bytes[0]];
+  self.statusLabel = [self getLabelForStatus:bytes[0]];
   
-  if ([self.delegate respondsToSelector:@selector(iceMakerStatusChanged:)])
+  if ([self.delegate respondsToSelector:@selector(iceMakerStatusChanged:withLabel:)])
   {
-    [self.delegate iceMakerStatusChanged:self.status];
+    [self.delegate iceMakerStatusChanged:self.status withLabel:self.statusLabel];
+  }
+}
+
+
+- (NSString*) getLabelForStatus: (uint8_t)status {
+  switch (status) {
+    case 0:
+      return @"idle";
+      break;
+      
+    case 1:
+      return @"ice making";
+      break;
+      
+    case 2:
+      return @"add water";
+      break;
+      
+    case 3:
+      return @"ice full";
+      break;
+      
+    case 4:
+      return @"cleaning";
+      break;
+      
+    default:
+      return @"...";
+      break;
   }
 }
 
@@ -489,8 +541,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
     {
       if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalTime])
       {
-        NSLog(@"reading initial value. (no subscribe).. %@", characteristic.UUID);
-//        [self.peripheral readValueForCharacteristic:characteristic];
+        // whenever we first connect send the current time
         [self writeCurrentTime];
       }
       else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalSchedule] ||
@@ -520,6 +571,10 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 - (void) turnNightLightOn:(BOOL)on  {
   [self writeNightLight:on];
+}
+
+- (void) configureSchedule: (NSArray*) schedule {
+  [self writeSchedule:schedule];
 }
 
 @end

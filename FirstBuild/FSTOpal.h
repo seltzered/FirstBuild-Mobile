@@ -9,7 +9,7 @@
 #import "FSTBleProduct.h"
 
 @protocol FSTOpalDelegate <NSObject>
-@optional - (void) iceMakerStatusChanged: (NSNumber*) status;
+@optional - (void) iceMakerStatusChanged: (NSNumber*) status withLabel: (NSString*)label;
 @optional - (void) iceMakerModeChanged: (BOOL) on;
 @optional - (void) iceMakerLightChanged: (BOOL) on;
 @optional - (void) iceMakerCleanCycleChanged: (NSNumber*) cycle;
@@ -19,6 +19,7 @@
 @interface FSTOpal : FSTBleProduct
 
   @property (strong, nonatomic) NSNumber* status;
+  @property (strong, nonatomic) NSString* statusLabel;
   @property (strong, nonatomic) NSNumber* cleanCycle;
   @property (strong, nonatomic) NSDate* time;
   @property BOOL iceMakerOn;
@@ -28,5 +29,6 @@
 
 - (void) turnNightLightOn: (BOOL) on;
 - (void) turnIceMakerOn: (BOOL) on;
+- (void) configureSchedule: (NSArray*) schedule ;
 
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSTOpal.h"
 
-@interface FSTOpalScheduleTableViewController : UITableViewController
+@interface FSTOpalScheduleTableViewController : UITableViewController <FSTOpalDelegate>
+@property (weak, nonatomic) FSTOpal* opal;
 
 @end

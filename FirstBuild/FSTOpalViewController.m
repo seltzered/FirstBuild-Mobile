@@ -7,68 +7,81 @@
 //
 
 #import "FSTOpalViewController.h"
+#import "FSTOpalMainMenuTableViewController.h"
 
 @interface FSTOpalViewController ()
+
 
 @end
 
 @implementation FSTOpalViewController
+{
+  FSTOpalMainMenuTableViewController* tableVc;
+
+  IBOutlet UIView *makeIceButtonOutlet;
+  IBOutlet UILabel *iceMakerStatusLabelOutlet;
+}
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  self.opal.delegate = self;
+  
+  if (self.opal.iceMakerOn) {
+    iceMakerStatusLabelOutlet.text = @"STOP MAKING ICE";
+  } else {
+    iceMakerStatusLabelOutlet.text = @"START MAKING ICE";
+  }
+  // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)iceTapGestureAction:(id)sender {
+  makeIceButtonOutlet.userInteractionEnabled = NO;
+  [self.opal turnIceMakerOn:!self.opal.iceMakerOn];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.destinationViewController isKindOfClass:[FSTOpalMainMenuTableViewController class]])
+  {
+    FSTOpalMainMenuTableViewController* vc = (FSTOpalMainMenuTableViewController*)segue.destinationViewController;
+    tableVc = vc;
+    vc.opal = self.opal;
+  }
 }
 
 # pragma mark - delegate
-- (void) iceMakerStatusChanged:(NSNumber *)status {
-  NSLog(@"iceMakerStatusChanged: %d", status.intValue);
-//  
-//  switch (status.intValue) {
-//    case 0:
-//      self.stateOutlet.text = @"idle";
-//      break;
-//      
-//    case 1:
-//      self.stateOutlet.text = @"ice making";
-//      break;
-//      
-//    case 2:
-//      self.stateOutlet.text = @"add water";
-//      break;
-//      
-//    case 3:
-//      self.stateOutlet.text = @"ice full";
-//      break;
-//      
-//    case 4:
-//      self.stateOutlet.text = @"cleaning";
-//      break;
-//      
-//    default:
-//      break;
-//  }
-  
+-(void)iceMakerStatusChanged:(NSNumber *)status withLabel:(NSString *)label {
+  NSLog(@"iceMakerStatusChanged: %d %@", status.intValue, label);
+  tableVc.statusLabelOutlet.text = label;
 }
 
+#pragma mark - opal delegate
 - (void)iceMakerLightChanged:(BOOL)on {
   NSLog(@"iceMakerLightChanged: %d", on);
-//  [self.lightOutlet setOn:on];
+  [tableVc.nightLightSwitchOutlet setOn:on];
+  tableVc.nightLightSwitchOutlet.userInteractionEnabled = YES;
 }
 
 - (void)iceMakerModeChanged:(BOOL)on {
+  makeIceButtonOutlet.userInteractionEnabled = YES;
   NSLog(@"iceMakerModeChanged: %d", on);
-//  [self.modeOutlet setOn:on];
+  if (self.opal.iceMakerOn) {
+    iceMakerStatusLabelOutlet.text = @"STOP MAKING ICE";
+  } else {
+    iceMakerStatusLabelOutlet.text = @"START MAKING ICE";
+  }
+  //  [self.modeOutlet setOn:on];
   
 }
 
+#pragma mark - opal delegate
 - (void)iceMakerCleanCycleChanged:(NSNumber *)cycle {
   NSLog(@"iceMakerCleanCycleChanged: %d", cycle.intValue);
-//  self.cleanCycleOutlet.text = cycle.stringValue;
+  //  self.cleanCycleOutlet.text = cycle.stringValue;
 }
 
 
