@@ -7,6 +7,7 @@
 //
 
 #import "FSTOpalMainMenuTableViewController.h"
+#import "FSTOpalScheduleTableViewController.h"
 
 @interface FSTOpalMainMenuTableViewController ()
 
@@ -16,6 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+   self.opal.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +43,14 @@
   }
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  if ([segue.destinationViewController isKindOfClass:[FSTOpalScheduleTableViewController class]])
+  {
+    FSTOpalScheduleTableViewController* vc = (FSTOpalScheduleTableViewController*)segue.destinationViewController;
+    vc.opal = self.opal;
+  }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -48,5 +61,16 @@
     return 3;
 }
 
+#pragma mark - opal delegate
+- (void)iceMakerLightChanged:(BOOL)on {
+  NSLog(@"iceMakerLightChanged: %d", on);
+  //  [self.lightOutlet setOn:on];
+}
+
+- (void)iceMakerModeChanged:(BOOL)on {
+  NSLog(@"iceMakerModeChanged: %d", on);
+  //  [self.modeOutlet setOn:on];
+  
+}
 
 @end

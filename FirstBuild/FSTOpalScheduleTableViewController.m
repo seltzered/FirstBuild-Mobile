@@ -91,6 +91,8 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
 {
   [super viewDidLoad];
   
+  self.opal.delegate = self;
+  
   NSMutableDictionary *_1 = [@{ kTitleKey : @"Sunday",
                                      kDateKey : [NSDate date] } mutableCopy];
   NSMutableDictionary *_2 = [@{ kTitleKey : @"Monday",
@@ -368,5 +370,12 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
     [cell setLayoutMargins:UIEdgeInsetsZero];
   }
 }
+
+#pragma mark - opal delegate
+- (void)iceMakerCleanCycleChanged:(NSNumber *)cycle {
+  NSLog(@"iceMakerCleanCycleChanged: %d", cycle.intValue);
+  //  self.cleanCycleOutlet.text = cycle.stringValue;
+}
+
 @end
 
