@@ -16,16 +16,14 @@
 @implementation FSTOpalMainMenuTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-}
-
--(void)viewWillAppear:(BOOL)animated {
-   self.opal.delegate = self;
+  [super viewDidLoad];
+  [self.nightLightSwitchOutlet setOn:self.opal.nightLightOn];
+  self.statusLabelOutlet.text = self.opal.statusLabel;
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -54,23 +52,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+  return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+  return 3;
 }
 
-#pragma mark - opal delegate
-- (void)iceMakerLightChanged:(BOOL)on {
-  NSLog(@"iceMakerLightChanged: %d", on);
-  //  [self.lightOutlet setOn:on];
-}
 
-- (void)iceMakerModeChanged:(BOOL)on {
-  NSLog(@"iceMakerModeChanged: %d", on);
-  //  [self.modeOutlet setOn:on];
-  
+- (IBAction)nightLightSwitchAction:(id)sender {
+  //hack, but re-enabled is in the opal delegate which is the FSTOpalViewController :( 
+  self.nightLightSwitchOutlet.userInteractionEnabled = NO;
+  [self.opal turnNightLightOn:!self.opal.nightLightOn];
 }
 
 @end

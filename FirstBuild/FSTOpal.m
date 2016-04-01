@@ -397,10 +397,40 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   Byte bytes[characteristic.value.length] ;
   [data getBytes:bytes length:characteristic.value.length];
   self.status = [NSNumber numberWithInt:bytes[0]];
+  self.statusLabel = [self getLabelForStatus:bytes[0]];
   
-  if ([self.delegate respondsToSelector:@selector(iceMakerStatusChanged:)])
+  if ([self.delegate respondsToSelector:@selector(iceMakerStatusChanged:withLabel:)])
   {
-    [self.delegate iceMakerStatusChanged:self.status];
+    [self.delegate iceMakerStatusChanged:self.status withLabel:self.statusLabel];
+  }
+}
+
+
+- (NSString*) getLabelForStatus: (uint8_t)status {
+  switch (status) {
+    case 0:
+      return @"idle";
+      break;
+      
+    case 1:
+      return @"ice making";
+      break;
+      
+    case 2:
+      return @"add water";
+      break;
+      
+    case 3:
+      return @"ice full";
+      break;
+      
+    case 4:
+      return @"cleaning";
+      break;
+      
+    default:
+      return @"...";
+      break;
   }
 }
 

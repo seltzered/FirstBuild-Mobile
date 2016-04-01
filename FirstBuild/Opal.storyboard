@@ -149,7 +149,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yx-Ye-ddV" userLabel="makeIceButtonHolder">
                                 <rect key="frame" x="0.0" y="545" width="600" height="55"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAKE ICE NOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVy-ur-p3G">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAKE ICE NOW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVy-ur-p3G" userLabel="iceMakerStatusLabel">
                                         <rect key="frame" x="239.5" y="17" width="121" height="21.5"/>
                                         <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="17"/>
                                         <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -157,11 +157,15 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.2666666667" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="fVy-ur-p3G" firstAttribute="centerY" secondItem="6yx-Ye-ddV" secondAttribute="centerY" id="8Nw-6W-x3s"/>
                                     <constraint firstItem="fVy-ur-p3G" firstAttribute="centerX" secondItem="6yx-Ye-ddV" secondAttribute="centerX" id="jBs-4t-9AB"/>
                                     <constraint firstAttribute="height" constant="55" id="kaH-ni-BfL"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="RHI-eq-hnl" appends="YES" id="zcf-TU-Bec"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,8 +179,17 @@
                             <constraint firstAttribute="trailing" secondItem="AZc-3c-x1b" secondAttribute="trailing" id="vFJ-oL-vYz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="iceMakerStatusLabelOutlet" destination="fVy-ur-p3G" id="6k2-Gy-0pf"/>
+                        <outlet property="makeIceButtonOutlet" destination="6yx-Ye-ddV" id="UGf-7s-kM7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="INi-fV-JcU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="RHI-eq-hnl" userLabel="iceTapGesture">
+                    <connections>
+                        <action selector="iceTapGestureAction:" destination="rjA-09-FP4" id="fQD-WX-JY7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="325" y="1028"/>
         </scene>
@@ -241,6 +254,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vOw-ga-jjf" userLabel="nightLightSwitch">
                                                     <rect key="frame" x="541" y="6.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="nightLightSwitchAction:" destination="ME4-bZ-CSt" eventType="valueChanged" id="dQ2-oR-DI2"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -284,6 +300,10 @@
                             <outlet property="delegate" destination="ME4-bZ-CSt" id="Ieh-zw-J4K"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="nightLightSwitchOutlet" destination="vOw-ga-jjf" id="SOg-OU-kqy"/>
+                        <outlet property="statusLabelOutlet" destination="L5a-Vh-rLZ" id="6LE-8D-Gxa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jZ4-xn-C6K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
