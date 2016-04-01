@@ -120,6 +120,11 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
   
 }
 
+- (void)dealloc
+{
+  [self.opal configureSchedule:self.dataArray];
+}
+
 #pragma mark - Locale
 
 /*! Determines if the given indexPath has a cell below it with a UIDatePicker.

@@ -28,5 +28,6 @@
 
 - (void) turnNightLightOn: (BOOL) on;
 - (void) turnIceMakerOn: (BOOL) on;
+- (void) configureSchedule: (NSArray*) schedule ;
 
 @end
