@@ -91,22 +91,24 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
 {
   [super viewDidLoad];
   
-  NSMutableDictionary *_1 = [@{ kTitleKey : @"Sunday",
-                                     kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_2 = [@{ kTitleKey : @"Monday",
-                              kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_3 = [@{ kTitleKey : @"Tuesday",
-                              kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_4 = [@{ kTitleKey : @"Wednesday",
-                                kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_5 = [@{ kTitleKey : @"Thursday",
-                                kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_6 = [@{ kTitleKey : @"Friday",
-                                kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_7 = [@{ kTitleKey : @"Saturday",
-                                kDateKey : [NSDate date] } mutableCopy];
+//  NSMutableDictionary *_1 = [@{ kTitleKey : @"Sunday",
+//                                     kDateKey : [NSDate date] } mutableCopy];
+//  NSMutableDictionary *_2 = [@{ kTitleKey : @"Monday",
+//                              kDateKey : [NSDate date] } mutableCopy];
+//  NSMutableDictionary *_3 = [@{ kTitleKey : @"Tuesday",
+//                              kDateKey : [NSDate date] } mutableCopy];
+//  NSMutableDictionary *_4 = [@{ kTitleKey : @"Wednesday",
+//                                kDateKey : [NSDate date] } mutableCopy];
+//  NSMutableDictionary *_5 = [@{ kTitleKey : @"Thursday",
+//                                kDateKey : [NSDate date] } mutableCopy];
+//  NSMutableDictionary *_6 = [@{ kTitleKey : @"Friday",
+//                                kDateKey : [NSDate date] } mutableCopy];
+//  NSMutableDictionary *_7 = [@{ kTitleKey : @"Saturday",
+//                                kDateKey : [NSDate date] } mutableCopy];
+//  
+//  self.dataArray = @[_1, _2, _3, _4, _5, _6, _7];
   
-  self.dataArray = @[_1, _2, _3, _4, _5, _6, _7];
+  self.dataArray = self.opal.schedule;
   
   self.dateFormatter = [[NSDateFormatter alloc] init];
   [self.dateFormatter setDateStyle:NSDateFormatterNoStyle];    // show short-style date format

@@ -95,7 +95,6 @@
   
 }
 
-
 - (void)iceMakerNightLightWritten: (NSError *)error {
   if (error) {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops"
@@ -119,7 +118,6 @@
 
 - (void)iceMakerCleanCycleChanged:(NSNumber *)cycle {
   NSLog(@"iceMakerCleanCycleChanged: %d", cycle.intValue);
-  //  self.cleanCycleOutlet.text = cycle.stringValue;
 }
 
 

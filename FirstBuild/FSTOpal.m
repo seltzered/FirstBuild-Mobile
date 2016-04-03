@@ -26,7 +26,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 - (id)init
 {
   self = [super init];
-  
+
   if (self)
   {
     
@@ -43,6 +43,24 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
                                nil];
     self.status = @0;
+    
+    NSMutableDictionary *_1 = [@{ kTitleKey : @"Sunday",
+                                  kDateKey : [NSDate date] } mutableCopy];
+    NSMutableDictionary *_2 = [@{ kTitleKey : @"Monday",
+                                  kDateKey : [NSDate date] } mutableCopy];
+    NSMutableDictionary *_3 = [@{ kTitleKey : @"Tuesday",
+                                  kDateKey : [NSDate date] } mutableCopy];
+    NSMutableDictionary *_4 = [@{ kTitleKey : @"Wednesday",
+                                  kDateKey : [NSDate date] } mutableCopy];
+    NSMutableDictionary *_5 = [@{ kTitleKey : @"Thursday",
+                                  kDateKey : [NSDate date] } mutableCopy];
+    NSMutableDictionary *_6 = [@{ kTitleKey : @"Friday",
+                                  kDateKey : [NSDate date] } mutableCopy];
+    NSMutableDictionary *_7 = [@{ kTitleKey : @"Saturday",
+                                  kDateKey : [NSDate date] } mutableCopy];
+    
+    self.schedule = @[_1, _2, _3, _4, _5, _6, _7];
+ 
   }
   
   return self;
@@ -85,14 +103,6 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
       NSLog(@"element %d %d : %d", i, hour, minute);
     }
   }
-  
-//  OSWriteBigInt16(&bytes, 0, 0x130e); //sun
-//  OSWriteBigInt16(&bytes, 2, 0x130e); //mon
-//  OSWriteBigInt16(&bytes, 4, 0x130e); //tue
-//  OSWriteBigInt16(&bytes, 6, 0x130e); //wed
-//  OSWriteBigInt16(&bytes, 8, 0x0c36); //thu 12:54
-//  OSWriteBigInt16(&bytes, 10, 0x0f18); //fri
-//  OSWriteBigInt16(&bytes, 12, 0x041e); //sat
   
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   
@@ -223,7 +233,8 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 -(void)handleScheduleWrite: (NSError *)error
 {
   NSLog(@"handleWriteMode written");
-  [self writeScheduleEnable:YES];
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalSchedule];
+  [self.peripheral readValueForCharacteristic:characteristic];
 }
 
 -(void)handleScheduleEnabledWrite: (NSError *)error
@@ -335,19 +346,23 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
     DLog(@"handleTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 4);
     return;
   }
-  
-  // TODO: Hack
-//  [self writeSchedule];
-  
-//  NSData *data = characteristic.value;
-//  Byte bytes[characteristic.value.length] ;
-//  [data getBytes:bytes length:characteristic.value.length];
-//  self.status = [NSNumber numberWithInt:bytes[0]];
-//
-//  if ([self.delegate respondsToSelector:@selector(iceMakerStatusChanged:)])
-//  {
-//    [self.delegate iceMakerStatusChanged:self.status];
-//  }
+}
+
+// TODO: make this a component
+-(NSDate *) dateWithHour:(NSInteger)hour
+                  minute:(NSInteger)minute
+                  second:(NSInteger)second
+{
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  NSDateComponents *components = [calendar components: NSCalendarUnitYear|
+                                  NSCalendarUnitMonth|
+                                  NSCalendarUnitDay
+                                             fromDate:[NSDate date]];
+  [components setHour:hour];
+  [components setMinute:minute];
+  [components setSecond:second];
+  NSDate *newDate = [calendar dateFromComponents:components];
+  return newDate;
 }
 
 -(void)handleScheduleRead: (CBCharacteristic*)characteristic
@@ -357,6 +372,48 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
     DLog(@"handleSchedule length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 14);
     return;
   }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
+  
+  for (uint8_t i=0; i<=6; i++) {
+    if (bytes[i]) {
+      NSMutableDictionary* element = (NSMutableDictionary*)self.schedule[i];
+      uint8_t hour = bytes[i*2];
+      uint8_t minute = bytes[i*2 + 1];
+      
+      NSDate* date = [self dateWithHour:hour minute:minute second:0];
+      element[kDateKey] = date;
+      
+      switch (i) {
+        case 0 :
+          [element setValue:@"Sunday" forKey:kTitleKey];
+          break;
+        case 1 :
+          [element setValue:@"Monday" forKey:kTitleKey];
+          break;
+        case 2 :
+          [element setValue:@"Tuesday" forKey:kTitleKey];
+          break;
+        case 3 :
+          [element setValue:@"Wednesday" forKey:kTitleKey];
+          break;
+        case 4:
+          [element setValue:@"Thursday" forKey:kTitleKey];
+          break;
+        case 5:
+          [element setValue:@"Friday" forKey:kTitleKey];
+          break;
+        case 6:
+          [element setValue:@"Saturday" forKey:kTitleKey];
+          break;
+      }
+      
+      NSLog(@"schedule read %d %@ : %@", i, element[kTitleKey], element[kDateKey]);
+    }
+  }
+  
 }
 
 -(void)handleScheduleEnableRead: (CBCharacteristic*)characteristic

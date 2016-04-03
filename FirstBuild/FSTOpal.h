@@ -8,11 +8,15 @@
 
 #import "FSTBleProduct.h"
 
+#define kTitleKey       @"title"   // key for obtaining the data source item's title
+#define kDateKey        @"date"    // key for obtaining the data source item's date value
+
 @protocol FSTOpalDelegate <NSObject>
 @optional - (void) iceMakerStatusChanged: (NSNumber*) status withLabel: (NSString*)label;
 @optional - (void) iceMakerModeChanged: (BOOL) on;
 @optional - (void) iceMakerLightChanged: (BOOL) on;
 @optional - (void) iceMakerCleanCycleChanged: (NSNumber*) cycle;
+@optional - (void) iceMakerScheduleChanged: (NSArray*) schedule;
 
 @optional - (void) iceMakerModeWritten:(NSError *)error;
 @optional - (void) iceMakerNightLightWritten:(NSError *)error;
@@ -22,12 +26,13 @@
 
 @interface FSTOpal : FSTBleProduct
 
-  @property (strong, nonatomic) NSNumber* status;
-  @property (strong, nonatomic) NSString* statusLabel;
-  @property (strong, nonatomic) NSNumber* cleanCycle;
-  @property (strong, nonatomic) NSDate* time;
-  @property BOOL iceMakerOn;
-  @property BOOL nightLightOn;
+@property (strong, nonatomic) NSNumber* status;
+@property (strong, nonatomic) NSString* statusLabel;
+@property (strong, nonatomic) NSNumber* cleanCycle;
+@property (strong, nonatomic) NSDate* time;
+@property BOOL iceMakerOn;
+@property BOOL nightLightOn;
+@property (strong, nonatomic) NSArray* schedule;
 
 @property (nonatomic, weak) id<FSTOpalDelegate> delegate;
 
