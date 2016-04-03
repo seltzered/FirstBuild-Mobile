@@ -17,10 +17,12 @@
 @optional - (void) iceMakerLightChanged: (BOOL) on;
 @optional - (void) iceMakerCleanCycleChanged: (NSNumber*) cycle;
 @optional - (void) iceMakerScheduleChanged: (NSArray*) schedule;
+@optional - (void) iceMakerScheduleEnabledChanged: (BOOL) on;
 
 @optional - (void) iceMakerModeWritten:(NSError *)error;
 @optional - (void) iceMakerNightLightWritten:(NSError *)error;
 @optional - (void) iceMakerScheduleWritten:(NSError *)error;
+@optional - (void) iceMakerScheduleEnabledWritten:(NSError *)error;
 
 @end
 
@@ -32,12 +34,14 @@
 @property (strong, nonatomic) NSDate* time;
 @property BOOL iceMakerOn;
 @property BOOL nightLightOn;
+@property BOOL scheduleEnabled;
 @property (strong, nonatomic) NSArray* schedule;
 
 @property (nonatomic, weak) id<FSTOpalDelegate> delegate;
 
 - (void) turnNightLightOn: (BOOL) on;
 - (void) turnIceMakerOn: (BOOL) on;
+- (void) turnIceMakerScheduleOn: (BOOL) on;
 - (void) configureSchedule: (NSArray*) schedule ;
 
 @end

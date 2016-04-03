@@ -96,8 +96,18 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
     if (schedule[i]) {
       NSDictionary* element = (NSDictionary*)schedule[i];
       NSDate* time = element[@"date"];
-      uint8_t hour = [[hourFormatter stringFromDate:time] intValue];
-      uint8_t minute = [[minuteFormatter stringFromDate:time] intValue];
+      uint8_t hour;
+      uint8_t minute;
+    
+      if (time) {
+        hour = [[hourFormatter stringFromDate:time] intValue];
+        minute = [[minuteFormatter stringFromDate:time] intValue];
+      }
+      else {
+        hour = 0;
+        minute = 0;
+      }
+      
       bytes[i*2] = hour;
       bytes[i*2 + 1] = minute;
       NSLog(@"element %d %d : %d", i, hour, minute);
@@ -240,6 +250,15 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 -(void)handleScheduleEnabledWrite: (NSError *)error
 {
   NSLog(@"handleWriteScheduleEnabled written");
+  if ([self.delegate respondsToSelector:@selector(iceMakerScheduleEnabledWritten:)])
+  {
+    [self.delegate iceMakerScheduleEnabledWritten:error];
+  }
+  
+  // read the characteristic again, even if there is an error, this will force the correct state for app
+  // and in particular the ui switch in the opal views... too tight of coupling, yes.
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule];
+  [self.peripheral readValueForCharacteristic:characteristic];
 }
 
 -(void)handleTimeWrite: (NSError *)error
@@ -378,7 +397,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   [data getBytes:bytes length:characteristic.value.length];
   
   for (uint8_t i=0; i<=6; i++) {
-    if (bytes[i]) {
+    //if (bytes[i]) {
       NSMutableDictionary* element = (NSMutableDictionary*)self.schedule[i];
       uint8_t hour = bytes[i*2];
       uint8_t minute = bytes[i*2 + 1];
@@ -411,7 +430,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
       }
       
       NSLog(@"schedule read %d %@ : %@", i, element[kTitleKey], element[kDateKey]);
-    }
+    //}
   }
   
 }
@@ -427,6 +446,13 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   NSData *data = characteristic.value;
   Byte bytes[characteristic.value.length] ;
   [data getBytes:bytes length:characteristic.value.length];
+  
+  self.scheduleEnabled = [NSNumber numberWithInt:bytes[0]].intValue;
+  
+  if ([self.delegate respondsToSelector:@selector(iceMakerScheduleEnabledChanged:)])
+  {
+    [self.delegate iceMakerScheduleEnabledChanged:_scheduleEnabled];
+  }
 }
 
 -(void)handleErrorRead: (CBCharacteristic*)characteristic
@@ -628,6 +654,10 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 - (void) turnNightLightOn:(BOOL)on  {
   [self writeNightLight:on];
+}
+
+- (void) turnIceMakerScheduleOn:(BOOL)on  {
+  [self writeScheduleEnable:on];
 }
 
 - (void) configureSchedule: (NSArray*) schedule {

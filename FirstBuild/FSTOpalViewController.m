@@ -80,6 +80,12 @@
   tableVc.nightLightSwitchOutlet.userInteractionEnabled = YES;
 }
 
+-(void)iceMakerScheduleEnabledChanged:(BOOL)on {
+  NSLog(@"iceMakerScheduleEnabledChanged: %d", on);
+  [tableVc.scheduleEnabledSwitchOutlet setOn:on];
+  tableVc.scheduleEnabledSwitchOutlet.userInteractionEnabled = YES;
+}
+
 - (void)iceMakerModeChanged:(BOOL)on {
   makeIceButtonOutlet.userInteractionEnabled = YES;
   

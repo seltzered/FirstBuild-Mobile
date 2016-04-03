@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self.nightLightSwitchOutlet setOn:self.opal.nightLightOn];
+  [self.scheduleEnabledSwitchOutlet setOn:self.opal.scheduleEnabled];
   self.statusLabelOutlet.text = self.opal.statusLabel;
 }
 
@@ -56,7 +57,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 3;
+  return 4;
 }
 
 
@@ -64,6 +65,10 @@
   //hack, but re-enabled is in the opal delegate which is the FSTOpalViewController :( 
   self.nightLightSwitchOutlet.userInteractionEnabled = NO;
   [self.opal turnNightLightOn:!self.opal.nightLightOn];
+}
+- (IBAction)scheduleEnabledSwitchAction:(id)sender {
+  self.scheduleEnabledSwitchOutlet.userInteractionEnabled = NO;
+  [self.opal turnIceMakerScheduleOn:!self.opal.scheduleEnabled];
 }
 
 @end
