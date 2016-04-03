@@ -203,16 +203,16 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 -(void)handleNightLightWrite: (NSError *)error
 {
   NSLog(@"handleWriteNightLight written");
-//  if ([self.delegate respondsToSelector:@selector(nextStageSet:)])
-//  {
-//    [self.delegate nextStageSet:error];
-//  }
-//  
-//  if (!error)
-//  {
-//    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
-//    [self.peripheral readValueForCharacteristic:characteristic];
-//  }
+  if ([self.delegate respondsToSelector:@selector(iceMakerNightLightWritten:)])
+  {
+    [self.delegate iceMakerNightLightWritten:error];
+  }
+ 
+  // read the characteristic again, even if there is an error, this will force the correct state for app
+  // and in particular the ui switch in the opal views... too tight of coupling, yes.
+  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLight];
+  [self.peripheral readValueForCharacteristic:characteristic];
+  
 }
 
 -(void)handleModeWrite: (NSError *)error

@@ -8,6 +8,7 @@
 
 #import "FSTOpalViewController.h"
 #import "FSTOpalMainMenuTableViewController.h"
+#import "MBProgressHUD.h"
 
 @interface FSTOpalViewController ()
 
@@ -20,6 +21,8 @@
 
   IBOutlet UIView *makeIceButtonOutlet;
   IBOutlet UILabel *iceMakerStatusLabelOutlet;
+  
+  MBProgressHUD *userActivityHud;
 }
 
 - (void)viewDidLoad {
@@ -42,6 +45,11 @@
 - (IBAction)iceTapGestureAction:(id)sender {
   makeIceButtonOutlet.userInteractionEnabled = NO;
   [self.opal turnIceMakerOn:!self.opal.iceMakerOn];
+  
+  UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+  UIView *view = window.rootViewController.view;
+  [MBProgressHUD hideAllHUDsForView:view animated:YES];
+  userActivityHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -53,13 +61,19 @@
   }
 }
 
-# pragma mark - delegate
+-(void)hideHud {
+  UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+  UIView *view = window.rootViewController.view;
+  [MBProgressHUD hideAllHUDsForView:view animated:YES];
+}
+
+#pragma mark - opal delegate
+
 -(void)iceMakerStatusChanged:(NSNumber *)status withLabel:(NSString *)label {
   NSLog(@"iceMakerStatusChanged: %d %@", status.intValue, label);
   tableVc.statusLabelOutlet.text = label;
 }
 
-#pragma mark - opal delegate
 - (void)iceMakerLightChanged:(BOOL)on {
   NSLog(@"iceMakerLightChanged: %d", on);
   [tableVc.nightLightSwitchOutlet setOn:on];
@@ -68,6 +82,9 @@
 
 - (void)iceMakerModeChanged:(BOOL)on {
   makeIceButtonOutlet.userInteractionEnabled = YES;
+  
+  [self hideHud];
+  
   NSLog(@"iceMakerModeChanged: %d", on);
   if (self.opal.iceMakerOn) {
     iceMakerStatusLabelOutlet.text = @"STOP MAKING ICE";
@@ -78,7 +95,28 @@
   
 }
 
-#pragma mark - opal delegate
+
+- (void)iceMakerNightLightWritten: (NSError *)error {
+  if (error) {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Oops"
+                                                                             message:@"Opal must be ON to change the night light mode."
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    [alertController addAction:actionOk];
+    [self presentViewController:alertController animated:YES completion:nil];
+  }
+}
+
+- (void)iceMakerScheduleWritten: (NSError *)error {
+  // do nothing
+}
+
+- (void)iceMakerModeWritten: (NSError *)error {
+    [self hideHud];
+}
+
 - (void)iceMakerCleanCycleChanged:(NSNumber *)cycle {
   NSLog(@"iceMakerCleanCycleChanged: %d", cycle.intValue);
   //  self.cleanCycleOutlet.text = cycle.stringValue;

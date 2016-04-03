@@ -14,6 +14,10 @@
 @optional - (void) iceMakerLightChanged: (BOOL) on;
 @optional - (void) iceMakerCleanCycleChanged: (NSNumber*) cycle;
 
+@optional - (void) iceMakerModeWritten:(NSError *)error;
+@optional - (void) iceMakerNightLightWritten:(NSError *)error;
+@optional - (void) iceMakerScheduleWritten:(NSError *)error;
+
 @end
 
 @interface FSTOpal : FSTBleProduct
