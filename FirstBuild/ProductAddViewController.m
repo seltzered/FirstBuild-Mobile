@@ -40,7 +40,7 @@
 #ifdef EXPERIMENTAL_PRODUCTS
     return 3;
 #else
-    return 1;
+    return 2;
 #endif
 }
 
@@ -54,11 +54,11 @@
             break;
             
         case 1:
-            CellIdentifier = @"oven";
+            CellIdentifier = @"opal";
             break;
         
         case 2:
-          CellIdentifier = @"opal";
+          CellIdentifier = @"oven";
           break;
         
         default:

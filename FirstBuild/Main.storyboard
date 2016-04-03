@@ -1487,47 +1487,8 @@
                                     <outletCollection property="gestureRecognizers" destination="8WW-0r-rHE" appends="YES" id="7n0-HB-EWh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oven" id="VAA-fB-37e" userLabel="oven">
-                                <rect key="frame" x="0.0" y="66" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VAA-fB-37e" id="T3k-X9-wrd">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Plus_orange" translatesAutoresizingMaskIntoConstraints="NO" id="hRh-kA-pBQ">
-                                            <rect key="frame" x="8" y="0.0" width="20" height="43"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="20" id="fHH-Z0-TDx"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pizza Oven" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Zfo-gp-xLS" userLabel="Paragon">
-                                            <rect key="frame" x="40" y="7" width="520" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="JoM-xb-9Ae"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="26"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="Zfo-gp-xLS" firstAttribute="leading" secondItem="hRh-kA-pBQ" secondAttribute="trailing" constant="12" id="0HR-nr-Hep"/>
-                                        <constraint firstItem="hRh-kA-pBQ" firstAttribute="leadingMargin" secondItem="T3k-X9-wrd" secondAttribute="leading" constant="16" id="KWd-1w-bs1"/>
-                                        <constraint firstItem="hRh-kA-pBQ" firstAttribute="top" secondItem="T3k-X9-wrd" secondAttribute="top" id="aRB-IK-ri4"/>
-                                        <constraint firstAttribute="centerY" secondItem="Zfo-gp-xLS" secondAttribute="centerY" id="c3z-cd-c2n"/>
-                                        <constraint firstAttribute="bottom" secondItem="hRh-kA-pBQ" secondAttribute="bottom" id="tra-Q2-4B5"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Zfo-gp-xLS" secondAttribute="trailing" constant="32" id="zSD-Rj-kEe"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="sec-ns-0Cf" appends="YES" id="csy-P5-1Kf"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="opal" id="YD6-ny-vIn" userLabel="opal">
-                                <rect key="frame" x="0.0" y="110" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="66" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YD6-ny-vIn" id="d3P-7q-Rkl">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -1564,6 +1525,45 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="EKX-xY-7i0" appends="YES" id="01O-cQ-VCE"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oven" id="VAA-fB-37e" userLabel="oven">
+                                <rect key="frame" x="0.0" y="110" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VAA-fB-37e" id="T3k-X9-wrd">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Plus_orange" translatesAutoresizingMaskIntoConstraints="NO" id="hRh-kA-pBQ">
+                                            <rect key="frame" x="8" y="0.0" width="20" height="43"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="fHH-Z0-TDx"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pizza Oven" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Zfo-gp-xLS" userLabel="Paragon">
+                                            <rect key="frame" x="40" y="7" width="520" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="JoM-xb-9Ae"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="PTSans-Narrow" family="PT Sans Narrow" pointSize="26"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="Zfo-gp-xLS" firstAttribute="leading" secondItem="hRh-kA-pBQ" secondAttribute="trailing" constant="12" id="0HR-nr-Hep"/>
+                                        <constraint firstItem="hRh-kA-pBQ" firstAttribute="leadingMargin" secondItem="T3k-X9-wrd" secondAttribute="leading" constant="16" id="KWd-1w-bs1"/>
+                                        <constraint firstItem="hRh-kA-pBQ" firstAttribute="top" secondItem="T3k-X9-wrd" secondAttribute="top" id="aRB-IK-ri4"/>
+                                        <constraint firstAttribute="centerY" secondItem="Zfo-gp-xLS" secondAttribute="centerY" id="c3z-cd-c2n"/>
+                                        <constraint firstAttribute="bottom" secondItem="hRh-kA-pBQ" secondAttribute="bottom" id="tra-Q2-4B5"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Zfo-gp-xLS" secondAttribute="trailing" constant="32" id="zSD-Rj-kEe"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="sec-ns-0Cf" appends="YES" id="csy-P5-1Kf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

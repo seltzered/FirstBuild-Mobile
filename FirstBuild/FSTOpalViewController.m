@@ -9,6 +9,7 @@
 #import "FSTOpalViewController.h"
 #import "FSTOpalMainMenuTableViewController.h"
 #import "MBProgressHUD.h"
+#import "MobiNavigationController.h"
 
 @interface FSTOpalViewController ()
 
@@ -34,6 +35,10 @@
   } else {
     iceMakerStatusLabelOutlet.text = @"START MAKING ICE";
   }
+  
+  MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
+  [navigation setHeaderText:@"OPAL" withFrameRect:CGRectMake(0, 0, 120, 30)];
+
   // Do any additional setup after loading the view.
 }
 
