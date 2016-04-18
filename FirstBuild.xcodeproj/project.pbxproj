@@ -68,6 +68,7 @@
 		51FAEFFA1B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFF91B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf */; };
 		51FAEFFC1B62F52300A7DCF9 /* FSEmeric-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFFB1B62F52300A7DCF9 /* FSEmeric-Thin.otf */; };
 		51FAEFFE1B62F52B00A7DCF9 /* FSEmeric-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 51FAEFFD1B62F52B00A7DCF9 /* FSEmeric-Regular.otf */; };
+		5B027B8F1CC510730060A49F /* FSTGeBleProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B027B8E1CC510730060A49F /* FSTGeBleProduct.m */; };
 		5B05836C1B15F4DE003782E2 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */; };
 		5B059F7E1C0DF4400072AAB5 /* FSTRecipeTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F7D1C0DF4400072AAB5 /* FSTRecipeTabBar.m */; };
 		5B059F811C0DFD9E0072AAB5 /* FSTDottedBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F801C0DFD9E0072AAB5 /* FSTDottedBorderView.m */; };
@@ -368,6 +369,8 @@
 		51FAEFF91B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FSEmeric-SemiBold.otf"; path = "OpenType/FSEmeric-SemiBold.otf"; sourceTree = "<group>"; };
 		51FAEFFB1B62F52300A7DCF9 /* FSEmeric-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FSEmeric-Thin.otf"; path = "OpenType/FSEmeric-Thin.otf"; sourceTree = "<group>"; };
 		51FAEFFD1B62F52B00A7DCF9 /* FSEmeric-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FSEmeric-Regular.otf"; path = "OpenType/FSEmeric-Regular.otf"; sourceTree = "<group>"; };
+		5B027B8D1CC510730060A49F /* FSTGeBleProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTGeBleProduct.h; sourceTree = "<group>"; };
+		5B027B8E1CC510730060A49F /* FSTGeBleProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTGeBleProduct.m; sourceTree = "<group>"; };
 		5B05836A1B15F4DE003782E2 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
 		5B05836B1B15F4DE003782E2 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		5B059F7C1C0DF4400072AAB5 /* FSTRecipeTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTRecipeTabBar.h; sourceTree = "<group>"; };
@@ -1412,13 +1415,15 @@
 		5BA064D31B874434002FCE59 /* BLE */ = {
 			isa = PBXGroup;
 			children = (
+				5BA3A96F1B3470FA00E51C51 /* BLECommissioning */,
 				5BA3A9851B3C95FF00E51C51 /* FSTBleProduct.h */,
 				5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */,
 				51A9D0291B72492E000AE293 /* FSTBleCharacteristic.h */,
 				51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */,
 				5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */,
 				5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */,
-				5BA3A96F1B3470FA00E51C51 /* BLECommissioning */,
+				5B027B8D1CC510730060A49F /* FSTGeBleProduct.h */,
+				5B027B8E1CC510730060A49F /* FSTGeBleProduct.m */,
 			);
 			name = BLE;
 			sourceTree = "<group>";
@@ -1927,6 +1932,7 @@
 				5B99E0841A1AA63F005FB881 /* WifiCommissioningNetworkListViewController.m in Sources */,
 				5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */,
 				5BEB7DB71C24344C006823E2 /* FSTPoultryChickenBoneInSousVideRecipe.m in Sources */,
+				5B027B8F1CC510730060A49F /* FSTGeBleProduct.m in Sources */,
 				51A9D0431B73DE96000AE293 /* FSTPrecisionCookingStateReachingMinTimeViewController.m in Sources */,
 				5BCBB9E01B02A24100B8E043 /* FSTReadyToReachTemperatureViewController.m in Sources */,
 				51A114D91B8BC65F00E662D3 /* FSTSavedRecipeSettingsViewController.m in Sources */,
