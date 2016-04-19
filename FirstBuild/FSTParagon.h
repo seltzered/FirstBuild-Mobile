@@ -7,7 +7,7 @@
 //
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#import "FSTBleProduct.h"
+#import "FSTGeBleProduct.h"
 #import "FSTParagonCookingSession.h"
 #import "FSTRecipe.h"
 #import "FSTBurner.h"
@@ -30,7 +30,7 @@
 @optional - (void) pendingRecipeCancelled;
 @end
 
-@interface FSTParagon : FSTBleProduct <UIAlertViewDelegate>
+@interface FSTParagon : FSTGeBleProduct <UIAlertViewDelegate>
 
 typedef enum {
     FSTCookConfigurationErrorNoStages=0,

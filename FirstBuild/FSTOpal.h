@@ -6,7 +6,7 @@
 //  Copyright © 2016 FirstBuild. All rights reserved.
 //
 
-#import "FSTBleProduct.h"
+#import "FSTGeBleProduct.h"
 
 #define kTitleKey       @"title"   // key for obtaining the data source item's title
 #define kDateKey        @"date"    // key for obtaining the data source item's date value
@@ -26,7 +26,7 @@
 
 @end
 
-@interface FSTOpal : FSTBleProduct
+@interface FSTOpal : FSTGeBleProduct
 
 @property (strong, nonatomic) NSNumber* status;
 @property (strong, nonatomic) NSString* statusLabel;
