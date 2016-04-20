@@ -98,16 +98,17 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   {
     [self writeOtaImageVerify];
   }
-  else if (otaIsApplicationImage && otaBytesWritten==otaImage.length)
+  else if (otaIsApplicationImage && count==otaImage.length)
   {
     [self writeOtaImageVerify];
   }
   else
   {
-    otaBytesWritten = otaBytesWritten + 20;
+    otaBytesWritten = count;
+    //otaBytesWritten = otaBytesWritten + 20;
     otaState = OtaStateDownloading;
     [self writeImageBytes];
-    printf(".");
+    //printf(".");
   }
 }
 
@@ -177,6 +178,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   
 }
 
+NSUInteger count = 0;
+
 -(void)writeApplicationImageBytes
 {
   NSData* data;
@@ -195,7 +198,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
       memcpy(remainingBytes,[lastChunk bytes],20);
       
       data = [NSData dataWithBytes:remainingBytes length:otaRemainingLength];
-      otaBytesWritten = otaImage.length;
+      //otaBytesWritten = otaImage.length;
       
       NSLog(@"final bytes");
     }
@@ -207,6 +210,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     
     otaState = OtaStateChunkWriteRequest;
     [_debugPayload appendData:data];
+    count = count + data.length;
+    printf("%lu,",(unsigned long)count);
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     
   }
