@@ -6,19 +6,14 @@
 //  Copyright © 2016 FirstBuild. All rights reserved.
 //
 
+#import <TransitionKit.h>
 #import "FSTGeBleProduct.h"
 
 typedef enum {
-  OtaStateIdle = 0,
-  OtaStateSetImageType = 1,
-  OtaStateStartRequested = 2,
-  OtaStateDownloadRequested = 3,
-  OtaStateDownloading = 4,
-  OtaStateChunkWriteRequest = 10,
-  OtaStateVerifyImageRequest = 11,
-  OtaStateAbortRequested = 400,
-  OtaStateFailed = 500
-} OtaState;
+  OtaImageTypeBle = 0x00,
+  OtaImageTypeApplication = 0x01,
+  OtaImageTypeUndefined = 0x9999
+} OtaImageType;
 
 //firmware
 NSString * const FSTCharacteristicOtaControlCommand     = @"4FB34AB1-6207-E5A0-484F-E24A7F638FFF"; //write,notify
@@ -26,16 +21,36 @@ NSString * const FSTCharacteristicOtaImageData          = @"78282AE5-3060-C3B6-7
 NSString * const FSTCharacteristicOtaImageType          = @"5EA370C7-2059-41DB-9999-36527B43A4B4"; //read,write
 NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-927D-759E1A9A8446"; //read,notify
 
-
 @implementation FSTGeBleProduct
 {
   NSData* otaImage;
-  BOOL otaIsApplicationImage;
-  OtaState otaState;
   NSUInteger otaBytesWritten;
+  NSUInteger otaBytesWriteRequested;
+  
   uint otaBytesWrittenInTrailer;
   
   NSMutableData* _debugPayload;
+  
+  TKStateMachine* stateMachine;
+  TKState* otaStateIdle;
+  TKState* otaStateStart;
+  TKState* otaStateStartRequested;
+  TKState* otaStateDownloadBleStart;
+  TKState* otaStateDownloadApplicationStart;
+  TKState* otaStateDownloading;
+  TKState* otaStateVerifyImageRequest;
+  TKState* otaStateAbortRequested;
+  TKState* otaStateFailed;
+  
+  TKEvent *otaEventStart;
+  TKEvent *otaEventFailed;
+  TKEvent *otaEventImageTypeSet;
+  TKEvent *otaEventStartApplicationOta;
+  TKEvent *otaEventStartBleOta;
+  TKEvent *otaEventDownloadReady;
+  TKEvent *otaEventDownloadCompleted;
+  
+  OtaImageType otaImageType;
 }
 
 - (instancetype)init
@@ -43,13 +58,118 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   self = [super init];
   if (self) {
     _debugPayload = [NSMutableData new];
-    otaState = OtaStateIdle;
     otaBytesWritten = 0;
     otaBytesWrittenInTrailer = 0;
-    otaIsApplicationImage = NO;
+    otaBytesWriteRequested = 0;
+    otaImageType = OtaImageTypeUndefined;
+    
+    [self configureStateMachine];
+    
   }
   return self;
 }
+
+#pragma mark - state machine setup
+
+-(void)configureStateMachine {
+  stateMachine = [TKStateMachine new];
+  
+  stateMachine.initialState = otaStateIdle;
+  
+  [self configureStateMachineStates];
+  [self configureStateMachineEvents];
+  [stateMachine activate];
+}
+
+-(void)configureStateMachineStates {
+  __weak FSTGeBleProduct* weakSelf = self;
+  
+  otaStateIdle = [TKState stateWithName:@"otaStateIdle"];
+  otaStateStart = [TKState stateWithName:@"otaStateStart"];
+  
+  otaStateStartRequested = [TKState stateWithName:@"otaStateStartRequested"];
+  otaStateDownloadBleStart = [TKState stateWithName:@"otaStateDownloadBleStart"];
+  otaStateDownloadApplicationStart = [TKState stateWithName:@"otaStateDownloadApplicationStart"];
+  otaStateDownloading = [TKState stateWithName:@"otaStateDownloading"];
+  otaStateVerifyImageRequest = [TKState stateWithName:@"otaStateVerifyImageRequest"];
+  otaStateAbortRequested = [TKState stateWithName:@"otaStateAbortRequested"];
+  otaStateFailed = [TKState stateWithName:@"otaStateFailed"];
+  
+  [stateMachine addStates:@[ otaStateIdle, otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart , otaStateDownloadBleStart, otaStateDownloading , otaStateVerifyImageRequest, otaStateAbortRequested, otaStateFailed]];
+  
+  [otaStateIdle setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateIdle>>");
+  }];
+  
+  
+  [otaStateStart setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateStart>>");
+    [weakSelf writeImageType];
+  }];
+  
+  [otaStateStartRequested setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateStartRequested>>");
+    [weakSelf writeStartOta];
+  }];
+  
+  [otaStateDownloadApplicationStart setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateDownloadApplicationStart>>");
+    [weakSelf readOtaFileFromBundle];
+    [weakSelf writeOtaStartDownloadApplicationCommand];
+  }];
+  
+  [otaStateDownloadBleStart setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateDownloadBleStart>>");
+    [weakSelf readOtaFileFromBundle];
+    [weakSelf writeOtaStartDownloadBleCommand];
+  }];
+  
+  [otaStateDownloading setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateDownloading>>");
+    [weakSelf writeImageBytes];
+  }];
+  
+  [otaStateVerifyImageRequest setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateVerifyImageRequest>>");
+    [weakSelf writeOtaImageVerify];
+  }];
+  
+  [otaStateAbortRequested setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateAbortRequested>>");
+  }];
+  
+  [otaStateFailed setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateFailed>>");
+    
+  }];
+}
+
+-(void)configureStateMachineEvents {
+  
+  //event that initializes and begins the entire OTA process, whether its an application or BLE update
+  otaEventStart = [TKEvent eventWithName:@"otaEventStart" transitioningFromStates:@[ otaStateIdle ] toState:otaStateStart];
+  
+  //event that occurs from almost any state, this will reset the state machine
+  otaEventFailed = [TKEvent eventWithName:@"otaEventFailed" transitioningFromStates:@[  otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart, otaStateDownloadBleStart ,otaStateDownloading  , otaStateVerifyImageRequest] toState:otaStateFailed];
+  
+  //event that signals the application or ble image type has been set
+  otaEventImageTypeSet = [TKEvent eventWithName:@"otaEventImageTypeSet" transitioningFromStates:@[ otaStateStart ] toState:otaStateStartRequested];
+  
+  //event that signals the start of an application ota
+  otaEventStartApplicationOta =[TKEvent eventWithName:@"otaEventStartApplicationOta" transitioningFromStates:@[ otaStateStartRequested ] toState:otaStateDownloadApplicationStart];
+  
+  //event that signals the start of a ble ota
+  otaEventStartBleOta =[TKEvent eventWithName:@"otaEventStartBleOta" transitioningFromStates:@[ otaStateStartRequested ] toState:otaStateDownloadBleStart];
+  
+  //event that signals the module is ready for the download
+  otaEventDownloadReady =[TKEvent eventWithName:@"otaEventDownloadReady" transitioningFromStates:@[ otaStateDownloadBleStart, otaStateDownloadApplicationStart ] toState:otaStateDownloading];
+  
+  //event that signals the completion of the download
+  otaEventDownloadCompleted =[TKEvent eventWithName:@"otaEventDownloadCompleted" transitioningFromStates:@[ otaStateDownloading  ] toState:otaStateVerifyImageRequest];
+  
+  [stateMachine addEvents:@[ otaEventStart, otaEventFailed, otaEventImageTypeSet ]];
+}
+
 
 # pragma mark - helper functions
 -(void)readOtaFileFromBundle
@@ -75,80 +195,99 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 
 -(void)handleOtaImageTypeWriteResponse: (NSError*) error
 {
-  if (error || otaState != OtaStateSetImageType)
+  if (error)
   {
-    otaState = OtaStateFailed;
-    NSLog(@"image type write error");
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaImageTypeWriteResponse:write error"} error:nil];
+    return;
+  } else if (stateMachine.currentState != otaStateStart)
+  {
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaImageTypeWriteResponse:incorrect state"} error:nil];
     return;
   }
   
-  [self writeStartOta];
+  [stateMachine fireEvent:otaEventImageTypeSet userInfo:nil error:nil];
+  
 }
 
 -(void)handleOtaImageDataWriteResponse: (NSError*) error
 {
-  if (error || otaState != OtaStateChunkWriteRequest)
+  if (error)
   {
-    otaState = OtaStateFailed;
-    NSLog(@"image data write error");
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaImageDataWriteResponse:write error"} error:nil];
+    return;
+  }
+  else if (stateMachine.currentState == otaStateDownloadApplicationStart)
+  {
+    [stateMachine fireEvent:otaEventDownloadReady userInfo:nil error:nil];
+    return;
+  }
+  else if (stateMachine.currentState != otaStateDownloading)
+  {
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaImageDataWriteResponse:incorrect state"} error:nil];
     return;
   }
   
-  if (otaBytesWrittenInTrailer == 160)
+  otaBytesWritten = otaBytesWritten + otaBytesWriteRequested;
+  
+  //check and see if we are done writing
+  if (otaImageType == OtaImageTypeBle)
   {
-    [self writeOtaImageVerify];
-  }
-  else if (otaIsApplicationImage && count==otaImage.length)
-  {
-    [self writeOtaImageVerify];
+    //check to see if we have written all the bytes in the trailer
+    //TODO include this as part of bytes written (i.e. just add 160)
+    if (otaBytesWrittenInTrailer == 160) {
+      [stateMachine fireEvent:otaEventDownloadCompleted userInfo:nil error:nil];
+      return;
+    }
   }
   else
   {
-    otaBytesWritten = count;
-    //otaBytesWritten = otaBytesWritten + 20;
-    otaState = OtaStateDownloading;
-    [self writeImageBytes];
-    //printf(".");
+    if (otaBytesWritten + otaBytesWriteRequested == otaImage.length) {
+      [stateMachine fireEvent:otaEventDownloadCompleted userInfo:nil error:nil];
+      return;
+    }
   }
+  
+  printf("%lu,",(unsigned long)otaBytesWritten);
+  
+  [self writeImageBytes];
+  
 }
 
 #pragma mark - write
 
 -(void)writeOtaAbort
 {
-  otaState = OtaStateFailed;
-  
-  NSLog(@">>>>>>>>> abort OTA <<<<<<<<<<");
-  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
-  
-  Byte bytes[1];
-  bytes[0] = 0x07;
-  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-  if (characteristic)
-  {
-    otaState = OtaStateAbortRequested;
-    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-  }
+//  
+//  NSLog(@">>>>>>>>> abort OTA <<<<<<<<<<");
+//  CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
+//  
+//  Byte bytes[1];
+//  bytes[0] = 0x07;
+//  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
+//  if (characteristic)
+//  {
+//    otaState = OtaStateAbortRequested;
+//    [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+//  }
 }
 
--(void)writeImageIsApplicationType: (BOOL)isApplicationImage
+-(void)writeImageType
 {
-  otaState = OtaStateFailed;
-  otaIsApplicationImage = isApplicationImage;
-  
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaImageType];
   Byte bytes[1];
   
-  if (otaIsApplicationImage) {
+  if (otaImageType == OtaImageTypeApplication) {
     bytes[0] = 0x01;
-  } else {
+  } else if(otaImageType == OtaImageTypeBle) {
     bytes[0] = 0x00;
+  } else {
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"writeImageType:unknown image type"} error:nil];
+    return;
   }
   
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    otaState = OtaStateSetImageType;
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
   }
 }
@@ -157,14 +296,14 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 {
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaImageData];
   
-  if (characteristic && otaState == OtaStateDownloading && otaImage.length > 0)
+  if (characteristic && stateMachine.currentState == otaStateDownloading && otaImage.length > 0)
   {
-    if (otaBytesWritten > 0 && otaBytesWritten%500==0)
-    {
-      NSLog(@"written %lu", (unsigned long)otaBytesWritten);
-    }
+//    if (otaBytesWritten > 0 && otaBytesWritten%500==0)
+//    {
+//      NSLog(@"written %lu", (unsigned long)otaBytesWritten);
+//    }
     
-    if (otaIsApplicationImage == YES) {
+    if (otaImageType == OtaImageTypeApplication) {
       [self writeApplicationImageBytes];
     } else {
       [self writeBleImageBytes];
@@ -172,13 +311,11 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   }
   else
   {
-    otaState = OtaStateFailed;
-    NSLog(@"ota failed during image write, unknown state");
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"writeImageBytes:unknown state"} error:nil];
+    return;
   }
   
 }
-
-NSUInteger count = 0;
 
 -(void)writeApplicationImageBytes
 {
@@ -198,7 +335,6 @@ NSUInteger count = 0;
       memcpy(remainingBytes,[lastChunk bytes],20);
       
       data = [NSData dataWithBytes:remainingBytes length:otaRemainingLength];
-      //otaBytesWritten = otaImage.length;
       
       NSLog(@"final bytes");
     }
@@ -208,12 +344,13 @@ NSUInteger count = 0;
       data = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, 20)];
     }
     
-    otaState = OtaStateChunkWriteRequest;
     [_debugPayload appendData:data];
-    count = count + data.length;
-    printf("%lu,",(unsigned long)count);
+    otaBytesWriteRequested = data.length;
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    
+  }
+  else
+  {
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"writeApplicationImageBytes:byte issue"} error:nil];
   }
 }
 
@@ -245,33 +382,26 @@ NSUInteger count = 0;
       // normal
       data = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, 20)];
     }
-    otaState = OtaStateChunkWriteRequest;
     [_debugPayload appendData:data];
+    otaBytesWriteRequested = data.length;
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
   }
   else if (otaBytesWrittenInTrailer != 160)
   {
     data = [otaImage subdataWithRange:NSMakeRange(otaImageActualLength+otaBytesWrittenInTrailer, 20)];
     otaBytesWrittenInTrailer = otaBytesWrittenInTrailer + 20;
-    otaState = OtaStateChunkWriteRequest;
     [_debugPayload appendData:data];
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
   }
   else
   {
-    otaState = OtaStateFailed;
-    NSLog(@"ota failed during image write, byte issue");
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"writeBleImageBytes:byte issue"} error:nil];
   }
   
 }
 
 -(void)writeStartOta
 {
-  otaState = OtaStateFailed;
-  
-  otaBytesWritten = 0;
-  
-  NSLog(@">>>>>>>>> start OTA <<<<<<<<<<");
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
   
   Byte bytes[1];
@@ -279,34 +409,13 @@ NSUInteger count = 0;
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    otaState = OtaStateStartRequested;
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
   }
 }
 
-
-
--(void)writeOtaDownloadCommand
-{
-  otaState = OtaStateFailed;
-  
-  [self readOtaFileFromBundle];
-  
-  if (otaIsApplicationImage == NO)
-  {
-    [self writeOtaDownloadBleCommand];
-  }
-  else
-  {
-    [self writeOtaDownloadApplicationCommand];
-  }
-  
-}
-
--(void)writeOtaDownloadBleCommand
+-(void)writeOtaStartDownloadBleCommand
 {
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
-  NSLog(@">>>>>>>>> start OTA download - BLE <<<<<<<<<<");
   
   if (otaImage.length > 160 && otaImage.length < (60*1024))
   {
@@ -320,22 +429,20 @@ NSUInteger count = 0;
     NSLog(@"read image from file system, length is %lu, byte[1] = 0x%02x, byte[2] = 0x%02x", (unsigned long)otaImage.length, bytes[1], bytes[2]);
     if (characteristic)
     {
-      otaState = OtaStateDownloadRequested;
       [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
   }
   else
   {
-    NSLog(@"image size is incorrect");
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"writeOtaStartDownloadBleCommand:image length incorrect"} error:nil];
   }
   
 }
 
--(void)writeOtaDownloadApplicationCommand
+-(void)writeOtaStartDownloadApplicationCommand
 {
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaImageData];
   
-  NSLog(@">>>>>>>>> start OTA download - application <<<<<<<<<<");
   if (otaImage.length > 0)
   {
     Byte bytes[20];
@@ -366,7 +473,6 @@ NSUInteger count = 0;
     
     if (characteristic)
     {
-      otaState = OtaStateChunkWriteRequest;
       [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
     }
   }
@@ -374,18 +480,13 @@ NSUInteger count = 0;
 
 -(void)writeOtaImageVerify
 {
-  NSLog(@">>>>>>>>> image Verify <<<<<<<<<<");
-  
   CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
-  
-  otaState = OtaStateFailed;
   
   Byte bytes[1];
   bytes[0] = 0x03;
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    otaState = OtaStateVerifyImageRequest;
     [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
   }
 }
@@ -411,7 +512,7 @@ NSUInteger count = 0;
 {
   if (characteristic.value.length != 1)
   {
-    DLog(@"handleOtaAppUpdateReadResponse length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaAppUpdateReadResponse:incorrect data length"} error:nil];
     return;
   }
   
@@ -427,8 +528,8 @@ NSUInteger count = 0;
 -(void)handleOtaControlCommandReadResponse: (CBCharacteristic*)characteristic
 {
   if (characteristic.value.length != 1)
-  {
-    DLog(@"handleOtaControlCommand length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+  {    
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaControlCommandReadResponse:incorrect data length"} error:nil];
     return;
   }
   
@@ -439,33 +540,30 @@ NSUInteger count = 0;
   
   if (response==0)
   {
-    switch (otaState) {
-      case OtaStateDownloadRequested:
-        otaState = OtaStateDownloading;
-        [self writeImageBytes];
-        break;
-        
-      case OtaStateStartRequested:
-        [self writeOtaDownloadCommand];
-        break;
-        
-      case OtaStateAbortRequested:
-        NSLog(@">>>>>>>>> aborted OTA <<<<<<<<<<");
-        otaState = OtaStateIdle;
-        break;
-        
-      case OtaStateVerifyImageRequest:
-        break;
-        
-      default:
-        NSLog(@"unknown ota state in handleOtaControlCommand");
-        break;
+    if (stateMachine.currentState==otaStateDownloadBleStart)
+    {
+      [stateMachine fireEvent:otaEventDownloadReady userInfo:nil error:nil];
     }
-    
+    else if (stateMachine.currentState==otaStateStartRequested)
+    {
+      //ble says we are good to commence an OTA. need to decide if this is an application ota
+      //or ble ota. ble ota will require an additional command to be written, but the application ota
+      //begins straight-away, but requires a 20 byte header to be sent first
+      if (otaImageType==OtaImageTypeBle) {
+        [stateMachine fireEvent:otaEventStartBleOta userInfo:nil error:nil];
+      } else {
+        [stateMachine fireEvent:otaEventStartApplicationOta userInfo:nil error:nil];
+      }
+      
+    }
+    else
+    {
+      [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaControlCommandReadResponse,unknown state"} error:nil];
+    }
   }
   else
   {
-    NSLog(@"ota command response indicated failure during state %d", otaState);
+    [stateMachine fireEvent:otaStateFailed userInfo:@{@"error":@"handleOtaControlCommandReadResponse,device reported error in control command"} error:nil];
   }
   
 }
@@ -474,7 +572,8 @@ NSUInteger count = 0;
 - (void)startOta
 {
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-    [self writeImageIsApplicationType:YES];
+    otaImageType = OtaImageTypeApplication;
+    [stateMachine fireEvent:otaStateStart userInfo:nil error:nil];
   });
 }
 
@@ -499,14 +598,13 @@ NSUInteger count = 0;
     
     if (characteristic.properties & CBCharacteristicPropertyNotify)
     {
-      if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaControlCommand])
+      if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaControlCommand] ||
+          [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaAppUpdateStatus])
       {
         [self.peripheral setNotifyValue:YES forCharacteristic:characteristic ];
       }
-      else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaAppUpdateStatus])
-      {
-        [self.peripheral setNotifyValue:YES forCharacteristic:characteristic ];
-      }
+      NSLog(@"reading initial value ... %@", characteristic.UUID);
+      [self.peripheral readValueForCharacteristic:characteristic];
       NSLog(@"        CAN NOTIFY");
     }
   }
