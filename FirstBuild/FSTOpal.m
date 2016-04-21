@@ -340,6 +340,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
     [self notifyDeviceReady]; // logic contained in notification center
     
     //TEMP
+    [self abortOta];
     [self startOta];
     
     for (NSString* requiredCharacteristic in requiredCharacteristics)

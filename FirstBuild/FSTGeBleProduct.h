@@ -11,5 +11,6 @@
 @interface FSTGeBleProduct : FSTBleProduct
 
 - (void)startOta;
+- (void)abortOta;
 
 @end
