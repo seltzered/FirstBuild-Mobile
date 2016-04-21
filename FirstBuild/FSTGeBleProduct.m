@@ -271,8 +271,6 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     return;
   }
   
-  otaBytesWritten = otaBytesWritten + otaBytesWriteRequested;
-  
   //check and see if we are done writing
   if (requestedOtaImageType == OtaImageTypeBle)
   {
@@ -283,6 +281,11 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
       return;
     }
   }
+  else if(otaBytesWritten == otaImage.length)
+  {
+    NSLog(@"image transfer complete");
+    return;
+  }
   else
   {
     if (otaBytesWritten + otaBytesWriteRequested == otaImage.length) {
@@ -290,6 +293,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
       return;
     }
   }
+  
+  otaBytesWritten = otaBytesWritten + otaBytesWriteRequested;
   
   printf("%lu,",(unsigned long)otaBytesWritten);
   
@@ -623,6 +628,10 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
       } else {
         [stateMachine fireEvent:otaEventStartApplicationOta userInfo:nil error:nil];
       }
+      
+    }
+    else if (stateMachine.currentState==otaStateVerifyImageRequest)
+    {
       
     }
     else if (stateMachine.currentState==otaStateIdle)
