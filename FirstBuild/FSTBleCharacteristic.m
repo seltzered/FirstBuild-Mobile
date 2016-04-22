@@ -10,4 +10,18 @@
 
 @implementation FSTBleCharacteristic
 
+- (instancetype)initWithCBCharacteristic: (CBCharacteristic*)characteristic
+{
+  self = [super init];
+  if (self) {
+    self.bleCharacteristic = characteristic;
+    self.hasValue = NO;
+    self.requiresValue = NO;
+    self.wantNotification = NO;
+  }
+  return self;
+}
+
+
+
 @end

@@ -8,8 +8,14 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface FSTBleCharacteristic : CBCharacteristic
+@interface FSTBleCharacteristic : NSObject
 
-@property (nonatomic) BOOL loaded;
+@property (nonatomic, strong) CBCharacteristic* bleCharacteristic;
+@property BOOL requiresValue;
+@property BOOL hasValue;
+@property BOOL wantNotification;
+
+- (instancetype)initWithCBCharacteristic: (CBCharacteristic*)characteristic;
+
 
 @end

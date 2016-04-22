@@ -76,7 +76,6 @@
 		5B059F8A1C0FB36F0072AAB5 /* FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F891C0FB36F0072AAB5 /* FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController.m */; };
 		5B059F8D1C109EF20072AAB5 /* FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B059F8C1C109EF20072AAB5 /* FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m */; };
 		5B06932A1CC6A783001436A8 /* opal_61k.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5BF9C6F01CC67F1900AEFBCF /* opal_61k.ota */; };
-		5B0817BD1BAB3771000437AC /* FSTGECooktop.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B0817BC1BAB3771000437AC /* FSTGECooktop.m */; };
 		5B1282641CA17D8D00778C88 /* Opal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1282631CA17D8D00778C88 /* Opal.storyboard */; };
 		5B1282671CA17DC900778C88 /* FSTOpalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1282661CA17DC900778C88 /* FSTOpalViewController.m */; };
 		5B12826A1CA17E1200778C88 /* FSTOpalDebugViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1282691CA17E1200778C88 /* FSTOpalDebugViewController.m */; };
@@ -386,8 +385,6 @@
 		5B059F891C0FB36F0072AAB5 /* FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingStateReachingMinTimeNonSousVideViewController.m; sourceTree = "<group>"; };
 		5B059F8B1C109EF20072AAB5 /* FSTPrecisionCookingMinTimeReachedNonSousVideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTPrecisionCookingMinTimeReachedNonSousVideViewController.h; sourceTree = "<group>"; };
 		5B059F8C1C109EF20072AAB5 /* FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPrecisionCookingMinTimeReachedNonSousVideViewController.m; sourceTree = "<group>"; };
-		5B0817BB1BAB3771000437AC /* FSTGECooktop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTGECooktop.h; sourceTree = "<group>"; };
-		5B0817BC1BAB3771000437AC /* FSTGECooktop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTGECooktop.m; sourceTree = "<group>"; };
 		5B1282631CA17D8D00778C88 /* Opal.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Opal.storyboard; sourceTree = "<group>"; };
 		5B1282651CA17DC900778C88 /* FSTOpalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalViewController.h; sourceTree = "<group>"; };
 		5B1282661CA17DC900778C88 /* FSTOpalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalViewController.m; sourceTree = "<group>"; };
@@ -1425,12 +1422,12 @@
 				5BA3A96F1B3470FA00E51C51 /* BLECommissioning */,
 				5BA3A9851B3C95FF00E51C51 /* FSTBleProduct.h */,
 				5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */,
+				5B027B8D1CC510730060A49F /* FSTGeBleProduct.h */,
+				5B027B8E1CC510730060A49F /* FSTGeBleProduct.m */,
 				51A9D0291B72492E000AE293 /* FSTBleCharacteristic.h */,
 				51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */,
 				5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */,
 				5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */,
-				5B027B8D1CC510730060A49F /* FSTGeBleProduct.h */,
-				5B027B8E1CC510730060A49F /* FSTGeBleProduct.m */,
 			);
 			name = BLE;
 			sourceTree = "<group>";
@@ -1468,8 +1465,6 @@
 				5B9879C11BB5716600472130 /* FSTPrecisionCooking.h */,
 				5B99DFC31AB1EB2D00247034 /* FSTParagon.h */,
 				5B99DFC41AB1EB2D00247034 /* FSTParagon.m */,
-				5B0817BB1BAB3771000437AC /* FSTGECooktop.h */,
-				5B0817BC1BAB3771000437AC /* FSTGECooktop.m */,
 				5B4460271B1E25D5001A4953 /* FSTParagonCookingSession.h */,
 				5B4460281B1E25D5001A4953 /* FSTParagonCookingSession.m */,
 				5B44602A1B1E2601001A4953 /* FSTParagonCookingStage.h */,
@@ -1933,7 +1928,6 @@
 				5B4A76BD1BFF7AF100018281 /* FSTBeefSteakTenderTBoneSousVideRecipe.m in Sources */,
 				5BEB7DA81C243057006823E2 /* FSTPoultryTurkeyBonelessSousVideRecipe.m in Sources */,
 				5B4A769F1BFE33A700018281 /* FSTBeefSteakTenderRibEyeSousVideRecipe.m in Sources */,
-				5B0817BD1BAB3771000437AC /* FSTGECooktop.m in Sources */,
 				51441A491B98DD3600AF10E6 /* FSTThumbTabView.m in Sources */,
 				5BBFACFF19E495FC00E42575 /* ProductTableViewController.m in Sources */,
 				5B80FAB71C20872D00818E33 /* FSTVegetableRecipe.m in Sources */,
