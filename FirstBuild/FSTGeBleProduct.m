@@ -7,6 +7,7 @@
 //
 
 #import <TransitionKit.h>
+#import "MBProgressHUD.h"
 #import "FSTGeBleProduct.h"
 
 typedef enum {
@@ -59,6 +60,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   
   //the value the user has requested for the image type
   OtaImageType requestedOtaImageType;
+  
+  MBProgressHUD *hud;
 }
 
 - (instancetype)init
@@ -157,7 +160,25 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   
   [otaStateDownloading setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateDownloading>>");
+    
+    FSTGeBleProduct* strongSelf = weakSelf;
+    
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    [MBProgressHUD hideAllHUDsForView:view animated:YES];
+    strongSelf->hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    strongSelf->hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    strongSelf->hud.labelText = @"Downloading...";
+    strongSelf->hud.detailsLabelText = @"";
+    strongSelf->hud.progress = 0.0;
+
     [weakSelf writeImageBytes];
+  }];
+  
+  [otaStateDownloading setDidExitStateBlock:^(TKState *state, TKTransition *transition) {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    [MBProgressHUD hideAllHUDsForView:view animated:YES];
   }];
   
   [otaStateVerifyImageRequest setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
@@ -170,9 +191,16 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   }];
   
   [otaStateFailed setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    
     NSLog(@"<<otaStateFailed>>");
+
     NSString* error = [transition.userInfo objectForKey:@"error"];
     NSLog(@"<<<<< OTA FAILURE, ABORTING %@ >>>>>>", error);
+    
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    [MBProgressHUD hideAllHUDsForView:view animated:YES];
+    
     [weakSelf abortOta];
   }];
 }
@@ -284,20 +312,20 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
       return;
     }
   }
-  else if(otaBytesWritten == otaImage.length)
+//  else if(otaBytesWritten == otaImage.length)
+//  {
+//    NSLog(@"image transfer complete");
+//    return;
+//  }
+  else if (otaBytesWritten + otaBytesWriteRequested == otaImage.length)
   {
-    NSLog(@"image transfer complete");
+    [stateMachine fireEvent:otaEventDownloadCompleted userInfo:nil error:nil];
     return;
-  }
-  else
-  {
-    if (otaBytesWritten + otaBytesWriteRequested == otaImage.length) {
-      [stateMachine fireEvent:otaEventDownloadCompleted userInfo:nil error:nil];
-      return;
-    }
   }
   
   otaBytesWritten = otaBytesWritten + otaBytesWriteRequested;
+  
+  hud.progress = (float)otaBytesWritten / (float)otaImage.length;
   
   printf("%lu,",(unsigned long)otaBytesWritten);
   

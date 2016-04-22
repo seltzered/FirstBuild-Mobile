@@ -524,6 +524,8 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 {
   [super deviceReady];
   [self writeCurrentTime];
+  [self abortOta];
+  [self startOta];
 }
 
 /**
@@ -544,8 +546,8 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).requiresValue = YES;
   
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
   
 }
 
