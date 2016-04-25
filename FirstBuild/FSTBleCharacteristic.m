@@ -2,7 +2,7 @@
 //  FSTBleCharacteristic.m
 //  FirstBuild
 //
-//  Created by John Nolan on 8/5/15.
+//  Created by Myles Caley on 4/25/16.
 //  Copyright (c) 2015 FirstBuild. All rights reserved.
 //
 
@@ -15,9 +15,10 @@
   self = [super init];
   if (self) {
     self.bleCharacteristic = characteristic;
-    self.hasValue = NO;
+    self.value = characteristic.value;
     self.requiresValue = NO;
     self.wantNotification = NO;
+    self.UUID = [characteristic.UUID UUIDString];
   }
   return self;
 }

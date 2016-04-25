@@ -61,7 +61,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
@@ -103,7 +103,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
@@ -137,7 +137,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   NSMutableData *data = [[NSMutableData alloc] initWithBytes:&secondsSince1970 length:sizeof(uint32_t)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
   
 }
@@ -152,7 +152,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
@@ -166,7 +166,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
@@ -176,27 +176,27 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 {
   [super writeHandler:characteristic error:error];
   
-  if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalLight])
+  if([characteristic.UUID isEqualToString: FSTCharacteristicOpalLight])
   {
       DLog(@"wrote FSTCharacteristicOpalLight");
       [self handleNightLightWrite:error];
   }
-  else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalMode])
+  else if([characteristic.UUID isEqualToString: FSTCharacteristicOpalMode])
   {
     DLog(@"wrote FSTCharacteristicOpalMode");
     [self handleModeWrite:error];
   }
-  else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalTime])
+  else if([characteristic.UUID isEqualToString: FSTCharacteristicOpalTime])
   {
     DLog(@"wrote FSTCharacteristicOpalTime");
     [self handleTimeWrite:error];
   }
-  else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalEnableSchedule])
+  else if([characteristic.UUID isEqualToString: FSTCharacteristicOpalEnableSchedule])
   {
     DLog(@"wrote FSTCharacteristicOpalEnableSchedule");
     [self handleScheduleEnabledWrite:error];
   }
-  else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalSchedule])
+  else if([characteristic.UUID isEqualToString: FSTCharacteristicOpalSchedule])
   {
     DLog(@"wrote FSTCharacteristicOpalSchedule");
     [self handleScheduleWrite:error];
@@ -216,7 +216,8 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   // read the characteristic again, even if there is an error, this will force the correct state for app
   // and in particular the ui switch in the opal views... too tight of coupling, yes.
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLight];
-  [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+  [self readFstBleCharacteristic:characteristic];
+  
   
 }
 
@@ -229,7 +230,7 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 {
   NSLog(@"handleWriteMode written");
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalSchedule];
-  [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+  [self readFstBleCharacteristic:characteristic];
 }
 
 -(void)handleScheduleEnabledWrite: (NSError *)error
@@ -243,14 +244,14 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   // read the characteristic again, even if there is an error, this will force the correct state for app
   // and in particular the ui switch in the opal views... too tight of coupling, yes.
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule];
-  [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+  [self readFstBleCharacteristic:characteristic];
 }
 
 -(void)handleTimeWrite: (NSError *)error
 {
   NSLog(@"handleWriteTime written");
   FSTBleCharacteristic* timeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTime];
-  [self.peripheral readValueForCharacteristic:timeCharacteristic.bleCharacteristic];
+  [self readFstBleCharacteristic:timeCharacteristic];
 }
 
 #pragma mark - read handlers
@@ -259,42 +260,42 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 {
   [super readHandler:characteristic];
   
-  if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalStatus])
+  if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalStatus])
   {
-    NSLog(@"char: FSTCharacteristicOpalStatus, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOpalStatus, data: %@", characteristic.value);
     [self handleStatusRead:characteristic];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalMode])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalMode])
   {
-    NSLog(@"char: FSTCharacteristicOpalMode, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOpalMode, data: %@", characteristic.value);
     [self handleModeRead:characteristic];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalLight])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLight])
   {
-    NSLog(@"char: FSTCharacteristicOpalLight, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOpalLight, data: %@", characteristic.value);
     [self handleLightRead:characteristic];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalCleanCycle])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalCleanCycle])
   {
-    NSLog(@"char: FSTCharacteristicOpalCleanCycle, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOpalCleanCycle, data: %@", characteristic.value);
     [self handleCleanCycleRead:characteristic];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalTime])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalTime])
   {
-    NSLog(@"char: FSTCharacteristicOpalTime, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOpalTime, data: %@", characteristic.value);
     [self handleTimeRead:characteristic];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalEnableSchedule])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalEnableSchedule])
   {
-    NSLog(@"char: FSTCharacteristicOpalEnableSchedule, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOpalEnableSchedule, data: %@", characteristic.value);
     [self handleScheduleEnableRead:characteristic];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalSchedule])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalSchedule])
   {
-    NSLog(@"char: FSTCharacteristicOpalSchedule, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOpalSchedule, data: %@", characteristic.value);
     [self handleScheduleRead:characteristic];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOpalError])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalError])
   {
     [self handleErrorRead:characteristic];
   }
@@ -303,9 +304,9 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 -(void)handleTimeRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 4)
+  if (characteristic.value.length != 4)
   {
-    DLog(@"handleTime length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 4);
+    DLog(@"handleTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 4);
     return;
   }
 }
@@ -329,15 +330,15 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 -(void)handleScheduleRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 14)
+  if (characteristic.value.length != 14)
   {
-    DLog(@"handleSchedule length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 14);
+    DLog(@"handleSchedule length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 14);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   
   for (uint8_t i=0; i<=6; i++) {
     //if (bytes[i]) {
@@ -380,15 +381,15 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 -(void)handleScheduleEnableRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
-    DLog(@"handleScheduleEnable length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+    DLog(@"handleScheduleEnable length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   
   self.scheduleEnabled = [NSNumber numberWithInt:bytes[0]].intValue;
   
@@ -400,28 +401,28 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 -(void)handleErrorRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
-    DLog(@"handleError length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+    DLog(@"handleError length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
 }
 
 -(void)handleStatusRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
-    DLog(@"handleStatus length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+    DLog(@"handleStatus length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   self.status = [NSNumber numberWithInt:bytes[0]];
   self.statusLabel = [self getLabelForStatus:bytes[0]];
   
@@ -462,15 +463,15 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 -(void)handleModeRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
-    DLog(@"handleMode length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+    DLog(@"handleMode length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   
   self.iceMakerOn = [NSNumber numberWithInt:bytes[0]].intValue;
   
@@ -482,15 +483,15 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 -(void)handleCleanCycleRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
-    DLog(@"handleMode length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+    DLog(@"handleMode length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   _cleanCycle = [NSNumber numberWithInt:bytes[0]];
   
   if ([self.delegate respondsToSelector:@selector(iceMakerCleanCycleChanged:)])
@@ -501,15 +502,15 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
 
 -(void)handleLightRead: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
-    DLog(@"handleLight length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+    DLog(@"handleLight length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   self.nightLightOn = [NSNumber numberWithInt:bytes[0]].intValue;
   
   if ([self.delegate respondsToSelector:@selector(iceMakerLightChanged:)])

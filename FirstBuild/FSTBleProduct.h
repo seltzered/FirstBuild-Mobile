@@ -31,6 +31,8 @@ extern NSString * const FSTBatteryLevelChangedNotification;
 - (void) writeHandler: (FSTBleCharacteristic*)characteristic error:(NSError *)error;
 - (void) readHandler: (FSTBleCharacteristic*)characteristic;
 - (void) handleDiscoverCharacteristics: (NSArray*)characteristics;
+- (void) writeFstBleCharacteristic: (FSTBleCharacteristic*)characteristic withValue: (NSData*)data;
+- (void) readFstBleCharacteristic: (FSTBleCharacteristic*)characteristic;
 
 
 @end

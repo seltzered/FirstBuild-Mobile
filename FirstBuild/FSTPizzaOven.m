@@ -53,15 +53,15 @@ NSString * const FSTCharacteristicPizzaOvenSetTemperature = @"35D00001-E537-11E5
 {
     [super readHandler:characteristic];
     
-    if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicPizzaOvenDisplayTemperature])
+    if ([characteristic.UUID isEqualToString: FSTCharacteristicPizzaOvenDisplayTemperature])
     {
-        NSLog(@"char: FSTCharacteristicPizzaOvenDisplayTemperature, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicPizzaOvenDisplayTemperature, data: %@", characteristic.value);
         [self handleDisplayTemperature:characteristic];
     }
 
-    if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicPizzaOvenSetTemperature])
+    if ([characteristic.UUID isEqualToString: FSTCharacteristicPizzaOvenSetTemperature])
     {
-        NSLog(@"char: FSTCharacteristicPizzaOvenSetTemperature, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicPizzaOvenSetTemperature, data: %@", characteristic.value);
         [self handleSetTemperature:characteristic];
     }
 }
@@ -69,15 +69,15 @@ NSString * const FSTCharacteristicPizzaOvenSetTemperature = @"35D00001-E537-11E5
 -(void)handleSetTemperature: (FSTBleCharacteristic*)characteristic
 {
     
-  if (characteristic.bleCharacteristic.value.length != 2)
+  if (characteristic.value.length != 2)
   {
-    DLog(@"handleDisplayTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 2);
+    DLog(@"handleDisplayTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   uint16_t raw = OSReadBigInt16(bytes, 0);
     
   currentSetPoint = [[NSNumber alloc] initWithDouble:rintf((float)raw)];
@@ -90,15 +90,15 @@ NSString * const FSTCharacteristicPizzaOvenSetTemperature = @"35D00001-E537-11E5
 
 -(void)handleDisplayTemperature: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 2)
+    if (characteristic.value.length != 2)
     {
-        DLog(@"handleDisplayTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 2);
+        DLog(@"handleDisplayTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     uint16_t raw = OSReadBigInt16(bytes, 0);
     
     currentDisplayTemperature = [[NSNumber alloc] initWithDouble:rintf((float)raw)];
@@ -142,7 +142,7 @@ NSString * const FSTCharacteristicPizzaOvenSetTemperature = @"35D00001-E537-11E5
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     }
 }
 

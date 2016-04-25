@@ -248,15 +248,16 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 -(void)writeHandler:(FSTBleCharacteristic *)characteristic error:(NSError *)error
 {
   [super writeHandler:characteristic error:error];
-  if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaImageData])
+  
+  if([characteristic.UUID isEqualToString: FSTCharacteristicOtaImageData])
   {
     [self handleOtaImageDataWriteResponse:error];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaImageType])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOtaImageType])
   {
     [self handleOtaImageTypeWriteResponse:error];
   }
-  else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaControlCommand ])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOtaControlCommand ])
   {
     [self handleOtaControlCommandWriteResponse:error];
   }
@@ -337,6 +338,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 
 -(void)writeOtaAbort
 {
+  NSLog(@"writing OTA abort");
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
   
   Byte bytes[1];
@@ -344,12 +346,14 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
 -(void)writeImageType
 {
+  NSLog(@"writing image type");
+  
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaImageType];
   Byte bytes[1];
   
@@ -365,7 +369,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
@@ -423,7 +427,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     
     [_debugPayload appendData:data];
     otaBytesWriteRequested = data.length;
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
   else
   {
@@ -461,14 +465,14 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     }
     [_debugPayload appendData:data];
     otaBytesWriteRequested = data.length;
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
   else if (otaBytesWrittenInTrailer != 160)
   {
     data = [otaImage subdataWithRange:NSMakeRange(otaImageActualLength+otaBytesWrittenInTrailer, 20)];
     otaBytesWrittenInTrailer = otaBytesWrittenInTrailer + 20;
     [_debugPayload appendData:data];
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
   else
   {
@@ -479,6 +483,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 
 -(void)writeStartOta
 {
+  NSLog(@"writing OTA start");
+  
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
   
   Byte bytes[1];
@@ -486,12 +492,14 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
 -(void)writeOtaStartDownloadBleCommand
 {
+  NSLog(@"writing OTA start ble download");
+  
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
   
   if (otaImage.length > 160 && otaImage.length < (60*1024))
@@ -506,7 +514,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     NSLog(@"read image from file system, length is %lu, byte[1] = 0x%02x, byte[2] = 0x%02x", (unsigned long)otaImage.length, bytes[1], bytes[2]);
     if (characteristic)
     {
-      [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+      [self writeFstBleCharacteristic:characteristic withValue:data];
     }
   }
   else
@@ -518,6 +526,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 
 -(void)writeOtaStartDownloadApplicationCommand
 {
+  NSLog(@"writing OTA start app download");
+
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaImageData];
   
   if (otaImage.length > 0)
@@ -550,13 +560,15 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     
     if (characteristic)
     {
-      [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+      [self writeFstBleCharacteristic:characteristic withValue:data];
     }
   }
 }
 
 -(void)writeOtaImageVerify
 {
+  NSLog(@"writing OTA image verify");
+
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
   
   Byte bytes[1];
@@ -564,7 +576,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
   if (characteristic)
   {
-    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+    [self writeFstBleCharacteristic:characteristic withValue:data];
   }
 }
 
@@ -573,34 +585,34 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 {
   [super readHandler:characteristic];
   
-  if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicOtaControlCommand])
+  if([characteristic.UUID isEqualToString:FSTCharacteristicOtaControlCommand])
   {
-    NSLog(@"char: FSTCharacteristicOtaControlCommand, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOtaControlCommand, data: %@", characteristic.value);
     [self handleOtaControlCommandReadResponse:characteristic];
   }
-  else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicOtaAppUpdateStatus])
+  else if([characteristic.UUID isEqualToString:FSTCharacteristicOtaAppUpdateStatus])
   {
-    NSLog(@"char: FSTCharacteristicOtaAppUpdateStatus, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOtaAppUpdateStatus, data: %@", characteristic.value);
     [self handleOtaAppUpdateReadResponse:characteristic];
   }
-  else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicOtaImageType])
+  else if([characteristic.UUID isEqualToString:FSTCharacteristicOtaImageType])
   {
-    NSLog(@"char: FSTCharacteristicOtaImageType, data: %@", characteristic.bleCharacteristic.value);
+    NSLog(@"char: FSTCharacteristicOtaImageType, data: %@", characteristic.value);
     [self handleOtaImageTypeReadResponse:characteristic];
   }
 }
 
 -(void)handleOtaAppUpdateReadResponse: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
     [stateMachine fireEvent:otaEventFailed userInfo:@{@"error":@"handleOtaAppUpdateReadResponse:incorrect data length"} error:nil];
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   applicationFlashPercent = bytes[0];
   NSLog(@"percent: %lu", (unsigned long)applicationFlashPercent);
   
@@ -608,15 +620,15 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 
 -(void)handleOtaImageTypeReadResponse: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
     [stateMachine fireEvent:otaEventFailed userInfo:@{@"error":@"handleOtaImageTypeReadResponse data length"} error:nil];
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   
   if (bytes[0] == 0x01) {
     actualOtaImageType = OtaImageTypeApplication;
@@ -633,15 +645,15 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 
 -(void)handleOtaControlCommandReadResponse: (FSTBleCharacteristic*)characteristic
 {
-  if (characteristic.bleCharacteristic.value.length != 1)
+  if (characteristic.value.length != 1)
   {
     [stateMachine fireEvent:otaEventFailed userInfo:@{@"error":@"handleOtaControlCommandReadResponse:incorrect data length"} error:nil];
     return;
   }
   
-  NSData *data = characteristic.bleCharacteristic.value;
-  Byte bytes[characteristic.bleCharacteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
   uint8_t response = bytes[0];
   
   if (response==0)

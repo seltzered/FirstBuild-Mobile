@@ -53,7 +53,7 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
     [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceEssentialDataChangedNotification  object:self.peripheral];
 }
 
-#pragma mark - Stub Interface Selectors
+#pragma mark - Interface Selectors
 - (void) writeHandler: (FSTBleCharacteristic*)characteristic error:(NSError *)error;
 {
 }
@@ -68,8 +68,8 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
   {
     FSTBleCharacteristic* c = [self.characteristics objectForKey:key];
     if (c.requiresValue) {
-      [self.peripheral readValueForCharacteristic:c.bleCharacteristic];
-      NSLog(@"reading initial value... %@", c.bleCharacteristic.UUID);
+      [self readFstBleCharacteristic:c];
+      NSLog(@"reading initial value... %@", c.UUID);
     }
   }
 }
@@ -111,11 +111,37 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
   NSLog(@"characteristic discovery complete for this service");
 }
 
+-(void)writeFstBleCharacteristic: (FSTBleCharacteristic*)characteristic withValue: (NSData*)data
+{
+  if (characteristic && characteristic.bleCharacteristic)
+  {
+    //note... this only handle withResponse for simplicity, if there is a use case that we need to handle
+    //without response will need to update the selector signature to add type
+    [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+  }
+  else
+  {
+    NSLog(@"writeFstBleCharacteristic: no characteristic to write");
+  }
+}
+
+-(void) readFstBleCharacteristic: (FSTBleCharacteristic*)characteristic
+{
+  if (characteristic && characteristic.bleCharacteristic)
+  {
+    [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+  }
+  else
+  {
+    NSLog(@"readFstBleCharacteristic: no characteristic to read");
+  }
+}
+
 -(void)updateRequiredCharacteristicProgressWithCharacteristic: (FSTBleCharacteristic*)characteristic
 {
-  if (!characteristic.hasValue && characteristic.requiresValue)
+  if (!characteristic.hasInitialValue && characteristic.requiresValue)
   {
-    characteristic.hasValue = YES;
+    characteristic.hasInitialValue = YES;
     float requiredCharacteristicsCount = 0;
     float requiredCharacteristicsWithValueCount = 0;
     
@@ -125,7 +151,7 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
       if (c.requiresValue) {
         requiredCharacteristicsCount++;
       }
-      if (c.hasValue) {
+      if (c.hasInitialValue) {
         requiredCharacteristicsWithValueCount++;
       }
     }

@@ -349,27 +349,27 @@ static const uint8_t STAGE_SIZE = 8;
 {
     [super writeHandler:characteristic error:error];
   
-    if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
+    if([characteristic.UUID isEqualToString: FSTCharacteristicCurrentCookStage])
     {
         DLog(@"write respone FSTCharacteristicCurrentCookStage");
         [self handleWriteMoveNextStage:error];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicTempDisplayUnit])
     {
         //[self handleElapsedTimeWritten];
         DLog(@"attempted write FSTCharacteristicTempDisplayUnit");
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicStartHoldTimer])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicStartHoldTimer])
     {
         DLog(@"attempted write FSTCharacteristicStartHoldTimer");
         [self handleHoldTimerWritten ];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicUserInfo])
     {
         DLog(@"attempted write FSTCharacteristicUserInfo");
         [self handleUserInformationWritten:error];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCookConfiguration])
     {
         DLog(@"attempted write FSTCharacteristicCookConfiguration");
         [self handleCookConfigurationWritten:error];
@@ -388,7 +388,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     }
 }
 
@@ -424,7 +424,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     }
 }
 
@@ -442,7 +442,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     
     // we need to read this back now to make sure we have everything set
-    [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+    [self readFstBleCharacteristic:characteristic];
     if ([self.delegate respondsToSelector:@selector(userInformationSet:)])
     {
         [self.delegate userInformationSet:error];
@@ -459,7 +459,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     }
 }
 
@@ -473,7 +473,7 @@ static const uint8_t STAGE_SIZE = 8;
     if (!error)
     {
         FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
-        [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+        [self readFstBleCharacteristic:characteristic];
     }
 }
 
@@ -533,7 +533,7 @@ static const uint8_t STAGE_SIZE = 8;
     if (characteristic)
     {
         // write the actual characteristic
-        [self.peripheral writeValue:data forCharacteristic:characteristic.bleCharacteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     
         FSTParagonUserInformation* info = [FSTParagonUserInformation new];
         info.recipeId = [recipe.recipeId unsignedShortValue];
@@ -555,7 +555,7 @@ static const uint8_t STAGE_SIZE = 8;
     self.session.activeRecipe = nil;
     
     // request a rebuild of the recipe now
-    [self.peripheral readValueForCharacteristic:cookConfigurationCharacteristic.bleCharacteristic];
+    [self readFstBleCharacteristic:cookConfigurationCharacteristic];
     
     if ([self.delegate respondsToSelector:@selector(cookConfigurationSet:)])
     {
@@ -575,73 +575,73 @@ static const uint8_t STAGE_SIZE = 8;
 {
     [super readHandler:characteristic];
     
-    if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeFirmwareInfo])
+    if ([characteristic.UUID isEqualToString: FSTCharacteristicProbeFirmwareInfo])
     {
-        NSLog(@"char: FSTCharacteristicProbeFirmwareInfo, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicProbeFirmwareInfo, data: %@", characteristic.value);
         //not implemented
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCurrentCookStage])
     {
-        NSLog(@"char: FSTCharacteristicCurrentCookStage, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicCurrentCookStage, data: %@", characteristic.value);
         [self handleCurrentCookStage: characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicErrorState])
     {
-        NSLog(@"char: FSTCharacteristicErrorState, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicErrorState, data: %@", characteristic.value);
         //not implemented
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicProbeConnectionState])
     {
-        NSLog(@"char: FSTCharacteristicProbeConnectionState, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicProbeConnectionState, data: %@", characteristic.value);
         [self handleProbeState:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicBatteryLevel])
     {
-        NSLog(@"char: FSTCharacteristicBatteryLevel, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicBatteryLevel, data: %@", characteristic.value);
         [self handleBatteryLevel:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicBurnerState])
     {
-        NSLog(@"char: FSTCharacteristicBurnerState, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicBurnerState, data: %@", characteristic.value);
         [self handleBurnerStatus:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCurrentCookState])
     {
-        NSLog(@"char: FSTCharacteristicCurrentCookState, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicCurrentCookState, data: %@", characteristic.value);
         [self handleCurrentCookState:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCookConfiguration])
     {
-        NSLog(@"char: FSTCharacteristicCookConfiguration, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicCookConfiguration, data: %@", characteristic.value);
         [self handleCookConfiguration:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicUserInfo])
     {
-        NSLog(@"char: FSTCharacteristicUserInfo, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicUserInfo, data: %@", characteristic.value);
         [self handleUserInformation:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+    else if([characteristic.UUID isEqualToString:FSTCharacteristicCurrentTemperature])
     {
         [self handleCurrentTemperature:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicUserSelectedCookMode])
+    else if([characteristic.UUID isEqualToString:FSTCharacteristicUserSelectedCookMode])
     {
-        NSLog(@"char: FSTCharacteristicUserSelectedCookMode, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicUserSelectedCookMode, data: %@", characteristic.value);
         [self handleUserSelectedCookMode:characteristic];
     }
-    else if([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentPowerLevel])
+    else if([characteristic.UUID isEqualToString:FSTCharacteristicCurrentPowerLevel])
     {
-        NSLog(@"char: FSTCharacteristicCurrentPowerLevel, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicCurrentPowerLevel, data: %@", characteristic.value);
         [self handleCurrentPowerLevel:characteristic];
     }
-    else if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicRemainingHoldTime])
+    else if ([characteristic.UUID isEqualToString:FSTCharacteristicRemainingHoldTime])
     {
-        NSLog(@"char: FSTCharacteristicRemainingHoldTime, data: %@", characteristic.bleCharacteristic.value);
+        NSLog(@"char: FSTCharacteristicRemainingHoldTime, data: %@", characteristic.value);
         [self handleRemainingHoldTime:characteristic];
     }// end all characteristic cases
   
 #ifdef DEBUG
-    if ([[[characteristic.bleCharacteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+    if ([characteristic.UUID isEqualToString:FSTCharacteristicCurrentTemperature])
     {
         //printf(".");
     }
@@ -656,14 +656,14 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)handleProbeState: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 1)
+    if (characteristic.value.length != 1)
     {
-        DLog(@"handleProbeState length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+        DLog(@"handleProbeState length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
         return;
     }
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     
     if (bytes[0]!=1)
     {
@@ -681,18 +681,18 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)handleUserInformation: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 16)
+    if (characteristic.value.length != 16)
     {
-        DLog(@"handleUserInformation length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 16);
+        DLog(@"handleUserInformation length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 16);
         return;
     }
     
     FSTParagonUserInformation* _userInformation = [FSTParagonUserInformation new];
 
     // this reflects the most recent version of the user information
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     
     _userInformation.recipeType = bytes[0];
     _userInformation.recipeId   = OSReadBigInt16(&bytes[1],0);
@@ -717,15 +717,15 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)handleCurrentPowerLevel: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 1)
+    if (characteristic.value.length != 1)
     {
-        DLog(@"handleCurrentPowerLevel length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+        DLog(@"handleCurrentPowerLevel length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     self.session.currentPowerLevel = [NSNumber numberWithInt:bytes[0]];
     
     if ([self.delegate respondsToSelector:@selector(currentPowerLevelChanged:)])
@@ -755,15 +755,15 @@ static const uint8_t STAGE_SIZE = 8;
 {
     //TODO: there is a bug, when reading a user selected mode of rapid or gentle then its
     //only reporting 38 bytes.
-    if (!(characteristic.bleCharacteristic.value.length == 40 || characteristic.bleCharacteristic.value.length == 8 ||  characteristic.bleCharacteristic.value.length == 38))
+    if (!(characteristic.value.length == 40 || characteristic.value.length == 8 ||  characteristic.value.length == 38))
     {
-        DLog(@"handleCookConfiguration length of %lu not what was expected, %d or %d", (unsigned long)characteristic.bleCharacteristic.value.length, 40, 8);
+        DLog(@"handleCookConfiguration length of %lu not what was expected, %d or %d", (unsigned long)characteristic.value.length, 40, 8);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     
     // the active recipe is no longer valid, lets create a new one
     self.session.activeRecipe = [FSTRecipe new];
@@ -772,7 +772,7 @@ static const uint8_t STAGE_SIZE = 8;
     
     //TODO: there is a bug, when reading a user selected mode of rapid or gentle then its
     //only reporting 38 bytes.
-    if (characteristic.bleCharacteristic.value.length == 8 || characteristic.bleCharacteristic.value.length == 38)
+    if (characteristic.value.length == 8 || characteristic.value.length == 38)
     {
         numberOfStages = 1;
     }
@@ -830,14 +830,14 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleCurrentCookStage: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 1)
+    if (characteristic.value.length != 1)
     {
-        DLog(@"handleCurrentCookStage length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+        DLog(@"handleCurrentCookStage length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
         return;
     }
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     
     uint8_t stage = bytes[0];
     self.session.currentStageIndex = stage;
@@ -887,14 +887,14 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleRemainingHoldTime: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 2)
+    if (characteristic.value.length != 2)
     {
-        DLog(@"handleRemainingHoldTime length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 2);
+        DLog(@"handleRemainingHoldTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
         return;
     }
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     uint16_t raw = OSReadBigInt16(bytes, 0);
     self.session.remainingHoldTime = [[NSNumber alloc] initWithDouble:raw];
     if ([self.delegate respondsToSelector:@selector(remainingHoldTimeChanged:)])
@@ -916,15 +916,15 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleCurrentCookState: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 1)
+    if (characteristic.value.length != 1)
     {
-        DLog(@"handleCurrentCookState length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+        DLog(@"handleCurrentCookState length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     self.session.cookState = bytes[0];
     
     [self determineCookMode];
@@ -938,15 +938,15 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleUserSelectedCookMode: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 1)
+    if (characteristic.value.length != 1)
     {
-        DLog(@"handleUserSelectedCookMode length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+        DLog(@"handleUserSelectedCookMode length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     self.session.userSelectedCookMode = bytes[0];
     
     if ([self.delegate respondsToSelector:@selector(userSelectedCookModeChanged:)])
@@ -1149,15 +1149,15 @@ static const uint8_t STAGE_SIZE = 8;
 //TODO: move to ble product
 -(void)handleBatteryLevel: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 1)
+    if (characteristic.value.length != 1)
     {
-        DLog(@"handleBatteryLevel length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+        DLog(@"handleBatteryLevel length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     self.batteryLevel = [NSNumber numberWithUnsignedInt:bytes[0]];
     
     //NSLog(@"FSTCharacteristicBatteryLevel: %@", self.batteryLevel );
@@ -1187,15 +1187,15 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleBurnerStatus: (FSTBleCharacteristic*)characteristic
 {
-    if (characteristic.bleCharacteristic.value.length != 1)
+    if (characteristic.value.length != 1)
     {
-        DLog(@"handleBurnerStatus length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 1);
+        DLog(@"handleBurnerStatus length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     if (bytes[0] == 1 || bytes[0] == 0)
     {
         self.session.burnerMode = bytes[0];
@@ -1218,15 +1218,15 @@ static const uint8_t STAGE_SIZE = 8;
 -(void)handleCurrentTemperature: (FSTBleCharacteristic*)characteristic
 {
     NSNumber* oldTemp = self.session.currentProbeTemperature;
-    if (characteristic.bleCharacteristic.value.length != 2)
+    if (characteristic.value.length != 2)
     {
-        DLog(@"handleCurrentTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.bleCharacteristic.value.length, 2);
+        DLog(@"handleCurrentTemperature length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 2);
         return;
     }
     
-    NSData *data = characteristic.bleCharacteristic.value;
-    Byte bytes[characteristic.bleCharacteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.bleCharacteristic.value.length];
+    NSData *data = characteristic.value;
+    Byte bytes[characteristic.value.length] ;
+    [data getBytes:bytes length:characteristic.value.length];
     uint16_t raw = OSReadBigInt16(bytes, 0);
     
     self.session.currentProbeTemperature = [[NSNumber alloc] initWithDouble:rintf((float)raw/100)];
@@ -1289,7 +1289,7 @@ static const uint8_t STAGE_SIZE = 8;
 //                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentPowerLevel]
 //                 )
 //            {
-//                [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+//                [self readFstBleCharacteristic:characteristic];
 //            }
 //
 //            NSLog(@"        CAN NOTIFY");
@@ -1301,7 +1301,7 @@ static const uint8_t STAGE_SIZE = 8;
 //               [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo]
 //               )
 //            {
-//                [self.peripheral readValueForCharacteristic:characteristic.bleCharacteristic];
+//                [self readFstBleCharacteristic:characteristic];
 //            }
 //            NSLog(@"        CAN READ");
 //        }
