@@ -22,6 +22,8 @@ NSString * const FSTCharacteristicOtaControlCommand     = @"4FB34AB1-6207-E5A0-4
 NSString * const FSTCharacteristicOtaImageData          = @"78282AE5-3060-C3B6-7D49-EC74702414E5"; //write
 NSString * const FSTCharacteristicOtaImageType          = @"5EA370C7-2059-41DB-9999-36527B43A4B4"; //read,write
 NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-927D-759E1A9A8446"; //read,notify
+NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8E21-BB9E78A40ECC"; //read
+
 
 @implementation FSTGeBleProduct
 {
@@ -43,6 +45,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   TKState* otaStateDownloadApplicationStart;
   TKState* otaStateDownloading;
   TKState* otaStateVerifyImageRequest;
+  TKState* otaStateTransferringApplication;
   TKState* otaStateAbortRequested;
   TKState* otaStateFailed;
   
@@ -54,6 +57,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   TKEvent *otaEventStartBleOta;
   TKEvent *otaEventDownloadReady;
   TKEvent *otaEventDownloadCompleted;
+  TKEvent *otaEventVerificationCompleted;
+  TKEvent *otaEventApplicationTransferCompleted;
   
   //the value of the actual image type from the BLE module
   OtaImageType actualOtaImageType;
@@ -62,6 +67,10 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   OtaImageType requestedOtaImageType;
   
   MBProgressHUD *hud;
+  
+  //timer for transfering the file from the ble board to the actual device
+  NSTimer* applicationTransferTimer;
+
 }
 
 - (instancetype)init
@@ -104,8 +113,9 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   otaStateVerifyImageRequest = [TKState stateWithName:@"otaStateVerifyImageRequest"];
   otaStateAbortRequested = [TKState stateWithName:@"otaStateAbortRequested"];
   otaStateFailed = [TKState stateWithName:@"otaStateFailed"];
+  otaStateTransferringApplication = [TKState stateWithName:@"otaStateTransferringApplication"];
   
-  [stateMachine addStates:@[ otaStateIdle, otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart , otaStateDownloadBleStart, otaStateDownloading , otaStateVerifyImageRequest, otaStateAbortRequested, otaStateFailed]];
+  [stateMachine addStates:@[ otaStateIdle, otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart , otaStateDownloadBleStart, otaStateDownloading , otaStateVerifyImageRequest, otaStateAbortRequested, otaStateFailed, otaStateTransferringApplication]];
   
   [otaStateIdle setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateIdle>>");
@@ -114,6 +124,10 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     otaBytesWrittenInTrailer = 0;
     otaBytesWriteRequested = 0;
     requestedOtaImageType = OtaImageTypeUnknown;
+    
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    [MBProgressHUD hideAllHUDsForView:view animated:YES];
   }];
   
   [otaStateStart setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
@@ -169,7 +183,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     strongSelf->hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
     strongSelf->hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     strongSelf->hud.labelText = @"Downloading...";
-    strongSelf->hud.detailsLabelText = @"";
+    strongSelf->hud.detailsLabelText = @"Please keep application open, stay within 10 feet, and do not unplug the device. The update can take up to 10 minutes.";
     strongSelf->hud.progress = 0.0;
 
     [weakSelf writeImageBytes];
@@ -184,6 +198,31 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   [otaStateVerifyImageRequest setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateVerifyImageRequest>>");
     [weakSelf writeOtaImageVerify];
+  }];
+  
+  [otaStateTransferringApplication setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateTransferringApplication>>");
+    FSTGeBleProduct* strongSelf = weakSelf;
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+      UIView *view = window.rootViewController.view;
+      [MBProgressHUD hideAllHUDsForView:view animated:YES];
+      strongSelf->hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+      strongSelf->hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+      strongSelf->hud.labelText = @"Updating...";
+      strongSelf->hud.detailsLabelText = @"Please DO NOT turn the power off on your device.";
+      strongSelf->hud.progress = 0.0;
+      
+      [strongSelf->applicationTransferTimer invalidate];
+      strongSelf->applicationTransferTimer = nil;
+      strongSelf->applicationTransferTimer = 0;
+      
+      strongSelf->applicationTransferTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(readApplicationTransferPercent) userInfo:nil repeats:YES];
+
+    });
+    
   }];
   
   [otaStateAbortRequested setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
@@ -212,7 +251,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   otaEventStart = [TKEvent eventWithName:@"otaEventStart" transitioningFromStates:@[ otaStateIdle ] toState:otaStateStart];
   
   //event that occurs from almost any state, this will reset the state machine
-  otaEventFailed = [TKEvent eventWithName:@"otaEventFailed" transitioningFromStates:@[  otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart, otaStateDownloadBleStart ,otaStateDownloading  , otaStateVerifyImageRequest] toState:otaStateFailed];
+  otaEventFailed = [TKEvent eventWithName:@"otaEventFailed" transitioningFromStates:@[  otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart, otaStateDownloadBleStart ,otaStateDownloading  , otaStateVerifyImageRequest, otaStateTransferringApplication] toState:otaStateFailed];
   
   //event that signals the application or ble image type has been set
   otaEventImageTypeSet = [TKEvent eventWithName:@"otaEventImageTypeSet" transitioningFromStates:@[ otaStateStart ] toState:otaStateStartRequested];
@@ -229,10 +268,15 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   //event that signals the completion of the download
   otaEventDownloadCompleted =[TKEvent eventWithName:@"otaEventDownloadCompleted" transitioningFromStates:@[ otaStateDownloading  ] toState:otaStateVerifyImageRequest];
   
+  //event that signals the verification is completed
+  otaEventVerificationCompleted =[TKEvent eventWithName:@"otaEventVerificationCompleted" transitioningFromStates:@[ otaStateVerifyImageRequest  ] toState:otaStateTransferringApplication];
+  
+  otaEventApplicationTransferCompleted = [TKEvent eventWithName:@"otaEventApplicationTransferCompleted" transitioningFromStates:@[ otaStateTransferringApplication  ] toState:otaStateIdle];
+  
   //event that signals a reset
   otaEventInitialize =[TKEvent eventWithName:@"otaEventInitialize" transitioningFromStates:@[ otaStateIdle, otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart , otaStateDownloadBleStart, otaStateDownloading , otaStateVerifyImageRequest, otaStateAbortRequested, otaStateFailed  ] toState:otaStateIdle];
   
-  [stateMachine addEvents:@[ otaEventStart, otaEventFailed, otaEventImageTypeSet,otaEventStartApplicationOta,otaEventStartBleOta,otaEventDownloadReady,otaEventDownloadCompleted,otaEventInitialize ]];
+  [stateMachine addEvents:@[ otaEventStart, otaEventFailed, otaEventImageTypeSet,otaEventStartApplicationOta,otaEventStartBleOta,otaEventDownloadReady,otaEventDownloadCompleted,otaEventInitialize, otaEventVerificationCompleted, otaEventVerificationCompleted ]];
 }
 
 
@@ -242,6 +286,12 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
 //  NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"opal_ble_1_02_00_00" ofType:@"ota"];
   NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"opal_61k" ofType:@"ota"];
   otaImage = [NSData dataWithContentsOfFile:otaFileName];
+}
+
+-(void)readApplicationTransferPercent
+{
+  FSTBleCharacteristic* appDownloadCharacteristic = [self.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus];
+  [self readFstBleCharacteristic:appDownloadCharacteristic];
 }
 
 # pragma mark - write handlers
@@ -541,8 +591,10 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     bytes[1] = 0x01;
     bytes[2] = 0x00;
     bytes[3] = 0x00;
-    bytes[4] = 0x02;
+    bytes[4] = 0x05;
     
+    //file size
+    //TODO: remove hardcode
     bytes[5] = 0x20;
     bytes[6] = 0xf4;
     bytes[7] = 0x00;
@@ -600,6 +652,15 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     NSLog(@"char: FSTCharacteristicOtaImageType, data: %@", characteristic.value);
     [self handleOtaImageTypeReadResponse:characteristic];
   }
+  else if([characteristic.UUID isEqualToString:FSTCharacteristicOtaAppVersion])
+  {
+    NSLog(@"char: FSTCharacteristicOtaAppVersion, data: %@", characteristic.value);
+    [self handleOtaAppVersionReadResponse:characteristic];
+  }
+}
+
+-(void)handleOtaAppVersionReadResponse: (FSTBleCharacteristic*)characteristic
+{
 }
 
 -(void)handleOtaAppUpdateReadResponse: (FSTBleCharacteristic*)characteristic
@@ -615,6 +676,12 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   [data getBytes:bytes length:characteristic.value.length];
   applicationFlashPercent = bytes[0];
   NSLog(@"percent: %lu", (unsigned long)applicationFlashPercent);
+  
+  if (applicationFlashPercent==1) {
+    [stateMachine fireEvent:otaEventApplicationTransferCompleted userInfo:nil error:nil];
+  }
+  
+  hud.progress = (float)applicationFlashPercent/100;
   
 }
 
@@ -676,7 +743,8 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
     }
     else if (stateMachine.currentState==otaStateVerifyImageRequest)
     {
-      
+      NSLog(@"handleOtaControlCommandReadResponse, verify");
+      [stateMachine fireEvent:otaEventVerificationCompleted userInfo:nil error:nil];
     }
     else if (stateMachine.currentState==otaStateIdle)
     {
@@ -721,6 +789,7 @@ NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-9
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaControlCommand]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaImageType]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaAppVersion]).requiresValue = YES;
   
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaControlCommand]).wantNotification = YES;
