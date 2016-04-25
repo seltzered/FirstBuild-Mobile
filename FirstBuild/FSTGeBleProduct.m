@@ -591,7 +591,7 @@ NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8
     bytes[1] = 0x01;
     bytes[2] = 0x00;
     bytes[3] = 0x00;
-    bytes[4] = 0x05;
+    bytes[4] = 0x01;
     
     //file size
     //TODO: remove hardcode

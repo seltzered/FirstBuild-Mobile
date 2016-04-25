@@ -31,5 +31,8 @@ FOUNDATION_EXPORT NSString *const FirebaseUrl;
 #   define DLog(...)
 #endif
 
+extern NSString * const FSTMenuItemSelectedNotification;
+extern NSString * const FSTMenuItemHome ;
+
 #endif
 

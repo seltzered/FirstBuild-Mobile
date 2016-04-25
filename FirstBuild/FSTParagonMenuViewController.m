@@ -35,9 +35,6 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
 
 };
 
-NSString * const FSTMenuItemSelectedNotification = @"FSTMenuItemSelectedNotification";
-NSString * const FSTMenuItemHome = @"FSTMenuItemHome";
-
 -(void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.interactivePopGestureRecognizer.enabled = false;

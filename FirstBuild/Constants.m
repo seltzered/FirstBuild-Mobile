@@ -6,3 +6,6 @@
 //  Copyright (c) 2014 FirstBuild. All rights reserved.
 //
 
+
+NSString * const FSTMenuItemSelectedNotification = @"FSTMenuItemSelectedNotification";
+NSString * const FSTMenuItemHome = @"FSTMenuItemHome";

@@ -10,6 +10,7 @@
 #import "FSTOpalMainMenuTableViewController.h"
 #import "MBProgressHUD.h"
 #import "MobiNavigationController.h"
+#import "FSTRevealViewController.h"
 
 @interface FSTOpalViewController ()
 
@@ -131,5 +132,8 @@
   NSLog(@"iceMakerCleanCycleChanged: %d", cycle.intValue);
 }
 
+- (IBAction)menuToggleTapAction:(id)sender {
+  [self.revealViewController rightRevealToggle:self.opal]; 
+}
 
 @end
