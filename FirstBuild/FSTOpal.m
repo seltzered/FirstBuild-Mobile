@@ -630,9 +630,9 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   }
   else {
     [UIAlertView showWithTitle:@"No Updates Available"
-                       message:@"Your Opal's Bluetooth and application firmware are up-to-date!"
+                       message:@"Your Opal's Bluetooth and application firmware are up-to-date. Also make sure you have the latest version of this app from the Apple App Store."
      
-             cancelButtonTitle:@"Cancel Update"
+             cancelButtonTitle:@"OK"
              otherButtonTitles:nil
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
                         // do nothing

@@ -9,6 +9,7 @@
 #import <TransitionKit.h>
 #import "MBProgressHUD.h"
 #import "FSTGeBleProduct.h"
+#import "UIAlertView+Blocks.h"
 
 //firmware
 NSString * const FSTCharacteristicOtaControlCommand     = @"4FB34AB1-6207-E5A0-484F-E24A7F638FFF"; //write,notify
@@ -79,6 +80,9 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
     actualOtaImageType = OtaImageTypeUnknown;
     otaImageFileName = @"";
     applicationFlashPercent = 0;
+    
+    self.currentBleVersion = 0xffffffff;
+    self.currentAppVersion = 0xffffffff;
     
   }
   return self;
@@ -199,26 +203,31 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   
   [otaStateTransferringApplication setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateTransferringApplication>>");
-    FSTGeBleProduct* strongSelf = weakSelf;
     
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-      UIView *view = window.rootViewController.view;
-      [MBProgressHUD hideAllHUDsForView:view animated:YES];
-      strongSelf->hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-      strongSelf->hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-      strongSelf->hud.labelText = @"Updating...";
-      strongSelf->hud.detailsLabelText = @"Please DO NOT turn the power off on your device.";
-      strongSelf->hud.progress = 0.0;
-      
-      [strongSelf->applicationTransferTimer invalidate];
-      strongSelf->applicationTransferTimer = nil;
-      strongSelf->applicationTransferTimer = 0;
-      
-      strongSelf->applicationTransferTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(readApplicationTransferPercent) userInfo:nil repeats:YES];
-
-    });
+    FSTGeBleProduct* strongSelf = weakSelf;
+    if (requestedOtaImageType==OtaImageTypeBle) {
+      NSLog(@"its a ble image, no need to trasnfer");
+      [strongSelf->stateMachine fireEvent:strongSelf->otaEventApplicationTransferCompleted userInfo:nil error:nil];
+    } else {
+      dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+      dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+        UIView *view = window.rootViewController.view;
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+        strongSelf->hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        strongSelf->hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+        strongSelf->hud.labelText = @"Updating...";
+        strongSelf->hud.detailsLabelText = @"Please DO NOT turn the power off on your device.";
+        strongSelf->hud.progress = 0.0;
+        
+        [strongSelf->applicationTransferTimer invalidate];
+        strongSelf->applicationTransferTimer = nil;
+        strongSelf->applicationTransferTimer = 0;
+        
+        strongSelf->applicationTransferTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(readApplicationTransferPercent) userInfo:nil repeats:YES];
+        
+      });
+    }
     
   }];
   
@@ -238,6 +247,14 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
     [MBProgressHUD hideAllHUDsForView:view animated:YES];
     
     [weakSelf abortOta];
+    
+    [UIAlertView showWithTitle:@"Oops! Firmware Update Failure"
+                       message:@"Unfortunately, the update failed, please try again later. If you continue to have problems please select the Help option above."
+             cancelButtonTitle:@"Cancel Update"
+             otherButtonTitles:nil
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        // do nothing
+                      }];
   }];
 }
 
@@ -280,7 +297,7 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
 # pragma mark - helper functions
 -(void)readOtaFileFromBundle
 {
-  NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"opal_61k" ofType:@"ota"];
+  NSString *otaFileName = [[NSBundle mainBundle] pathForResource:otaImageFileName ofType:@"ota"];
   otaImage = [NSData dataWithContentsOfFile:otaFileName];
 }
 
@@ -675,13 +692,9 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   Byte bytes[characteristic.value.length] ;
   
   [data getBytes:bytes length:characteristic.value.length];
-  self.currentAppVersion  = OSReadBigInt32(bytes, 2);
+  self.currentBleVersion  = OSReadBigInt32(bytes, 2);
   
-  if (self.availableBleVersion > self.currentAppVersion) {
-    NSLog(@"<<< BLE - UPDATE AVAILABLE >>>");
-  } else {
-    NSLog(@"<<< BLE - NO UPDATE AVAILABLE >>>");
-  }
+  NSLog(@"current Ble version: %d", self.currentBleVersion);
 }
 
 -(void)handleOtaAppUpdateReadResponse: (FSTBleCharacteristic*)characteristic
@@ -791,7 +804,7 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
 
 - (void)startOtaType:(OtaImageType)otaImageType forFileName:(NSString*)filename
 {
-  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
     requestedOtaImageType = otaImageType;
     otaImageFileName = filename;
     [stateMachine fireEvent:otaEventStart userInfo:nil error:nil];
