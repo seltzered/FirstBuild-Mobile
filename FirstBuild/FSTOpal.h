@@ -43,5 +43,6 @@
 - (void) turnIceMakerOn: (BOOL) on;
 - (void) turnIceMakerScheduleOn: (BOOL) on;
 - (void) configureSchedule: (NSArray*) schedule ;
+- (void) checkForAndUpdateFirmware ;
 
 @end

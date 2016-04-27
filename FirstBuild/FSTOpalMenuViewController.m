@@ -20,10 +20,10 @@
 
 typedef NS_ENUM(NSInteger, FSTMenuOptions) {
   kHome,
-  //    kSettings,
   kHelp,
   kFeedback,
   kAbout,
+  kUpdates
   //    kDiagonistics,
   
 };
@@ -65,6 +65,9 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     case kAbout:
       CellIdentifier = @"about";
       break;
+    case kUpdates:
+      CellIdentifier = @"updates";
+      break;
       //        case kDiagonistics:
       //            CellIdentifier = @"diagnostics";
       //            break;
@@ -98,7 +101,10 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     [[UIApplication sharedApplication] openURL:url];
   } else if (indexPath.row == kAbout) {
     [self performSegueWithIdentifier:@"menuAboutSegue" sender:self];
+  } else if (indexPath.row == kUpdates) {
+    [self.currentOpal checkForAndUpdateFirmware];
   }
+  
   //    else if (indexPath.row == kDiagonistics) {
   //        [self performSegueWithIdentifier:@"menuDiagnosticsSegue" sender:self];
   //    }

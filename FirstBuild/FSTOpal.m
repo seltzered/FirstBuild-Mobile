@@ -7,6 +7,7 @@
 //
 
 #import "FSTOpal.h"
+#import "UIAlertView+Blocks.h"
 #import "Ota.h"
 
 @implementation FSTOpal
@@ -547,9 +548,10 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   [super deviceReady];
   [self writeCurrentTime];
   [self abortOta];
-  [self startOtaType:OtaImageTypeBle forFileName:OPAL_BLE_FIRMWARE_FILE_NAME];
 //  [self startOta];
 }
+
+
 
 /**
  *  call method called when characteristics are discovered
@@ -583,6 +585,62 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 }
 
 #pragma mark - external
+-(void) checkForAndUpdateFirmware {
+  
+  if (OPAL_BLE_AVAILABLE_VERSION > self.currentBleVersion)
+  {
+    [UIAlertView showWithTitle:@"Bluetooth Update Available"
+                       message:@"There is a bluetooth update available for your Opal, would you like to update now? It will take about 1 minute and you will need to keep the app open and nearby your Opal."
+     
+             cancelButtonTitle:@"Cancel Update"
+             otherButtonTitles:@[@"Update Now"]
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        if (buttonIndex == [alertView cancelButtonIndex])
+                        {
+                          NSLog(@"ble update cancelled");
+                        }
+                        else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Update Now"])
+                        {
+                          NSLog(@"continue update");
+                          [self startOtaType:OtaImageTypeBle forFileName:OPAL_BLE_FIRMWARE_FILE_NAME];
+                        }
+                      }];
+
+    
+  }
+  else if (OPAL_APP_AVAILABLE_VERSION > self.currentAppVersion)
+  {
+    [UIAlertView showWithTitle:@"Opal Update Available"
+                      message:@"There is an Opal update available, would you like to update now? It will take about 6 minutes and you will need to keep the app open and nearby your Opal."
+    
+            cancelButtonTitle:@"Cancel Update"
+            otherButtonTitles:@[@"Update Now"]
+                     tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                       if (buttonIndex == [alertView cancelButtonIndex])
+                       {
+                         NSLog(@"ble update cancelled");
+                       }
+                       else if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Update Now"])
+                       {
+                         NSLog(@"continue update");
+                         [self startOtaType:OtaImageTypeApplication forFileName:OPAL_APP_FIRMWARE_FILE_NAME];
+                       }
+                     }];
+    
+  }
+  else {
+    [UIAlertView showWithTitle:@"No Updates Available"
+                       message:@"Your Opal's Bluetooth and application firmware are up-to-date!"
+     
+             cancelButtonTitle:@"Cancel Update"
+             otherButtonTitles:nil
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        // do nothing
+                      }];
+  }
+  
+}
+
 - (void) turnIceMakerOn: (BOOL) on {
   [self writeMode:on];
   
