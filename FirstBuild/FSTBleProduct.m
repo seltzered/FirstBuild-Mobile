@@ -82,7 +82,7 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
   {
     NSLog(@"    CHARACTERISTIC %@", [characteristic.UUID UUIDString]);
     
-    FSTBleCharacteristic* c = [[FSTBleCharacteristic alloc] initWithCBCharacteristic:characteristic];
+    FSTBleCharacteristic* c = [[FSTBleCharacteristic alloc] initWithCBCharacteristic:characteristic onPeripheral: self.peripheral];
     
     [self.characteristics setObject:c forKey:[c.bleCharacteristic.UUID UUIDString]];
 

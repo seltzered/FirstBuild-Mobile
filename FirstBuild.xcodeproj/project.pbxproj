@@ -172,6 +172,7 @@
 		5BA3A9801B38B47300E51C51 /* FSTBleConnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A97F1B38B47300E51C51 /* FSTBleConnectedViewController.m */; };
 		5BA3A9871B3C95FF00E51C51 /* FSTBleProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */; };
 		5BAE5F871CCEA629003CD1E1 /* FSTOpalMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE5F861CCEA629003CD1E1 /* FSTOpalMenuViewController.m */; };
+		5BAE5F8A1CD122FC003CD1E1 /* Ota.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE5F891CD122FC003CD1E1 /* Ota.m */; };
 		5BB985151CAD569900B50242 /* FSTOpalMainMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB985141CAD569900B50242 /* FSTOpalMainMenuTableViewController.m */; };
 		5BB985171CAD637000B50242 /* Opal.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BB985161CAD637000B50242 /* Opal.xcassets */; };
 		5BB9851A1CAD88A600B50242 /* FSTOpalScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB985191CAD88A600B50242 /* FSTOpalScheduleTableViewController.m */; };
@@ -572,6 +573,9 @@
 		5BA3A9861B3C95FF00E51C51 /* FSTBleProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTBleProduct.m; sourceTree = "<group>"; };
 		5BAE5F851CCEA629003CD1E1 /* FSTOpalMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalMenuViewController.h; sourceTree = "<group>"; };
 		5BAE5F861CCEA629003CD1E1 /* FSTOpalMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalMenuViewController.m; sourceTree = "<group>"; };
+		5BAE5F891CD122FC003CD1E1 /* Ota.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ota.m; sourceTree = "<group>"; };
+		5BAE5F8B1CD1232B003CD1E1 /* Ota.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ota.h; sourceTree = "<group>"; };
+		5BAE5F8C1CD12521003CD1E1 /* opal_ble_1_03_00_00.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = opal_ble_1_03_00_00.ota; sourceTree = "<group>"; };
 		5BB985131CAD569900B50242 /* FSTOpalMainMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalMainMenuTableViewController.h; sourceTree = "<group>"; };
 		5BB985141CAD569900B50242 /* FSTOpalMainMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalMainMenuTableViewController.m; sourceTree = "<group>"; };
 		5BB985161CAD637000B50242 /* Opal.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Opal.xcassets; sourceTree = "<group>"; };
@@ -1432,6 +1436,8 @@
 				51A9D02A1B72492E000AE293 /* FSTBleCharacteristic.m */,
 				5BA3A96C1B345DAF00E51C51 /* FSTBleCentralManager.h */,
 				5BA3A96D1B345DAF00E51C51 /* FSTBleCentralManager.m */,
+				5BAE5F8B1CD1232B003CD1E1 /* Ota.h */,
+				5BAE5F891CD122FC003CD1E1 /* Ota.m */,
 			);
 			name = BLE;
 			sourceTree = "<group>";
@@ -1738,6 +1744,7 @@
 			children = (
 				5BF9C6EE1CC66FC800AEFBCF /* opal_ble_1_01_00_00.ota */,
 				5BF9C6EA1CC56F5200AEFBCF /* opal_ble_1_02_00_00.ota */,
+				5BAE5F8C1CD12521003CD1E1 /* opal_ble_1_03_00_00.ota */,
 				5BF9C6F01CC67F1900AEFBCF /* opal_61k.ota */,
 				5BF9C6EB1CC56F5200AEFBCF /* GE8868_ota_01010000_ppr3.bin.ota */,
 			);
@@ -1938,6 +1945,7 @@
 				51B2974C1B8E34900017DCA2 /* FSTStageSettingsViewController.m in Sources */,
 				5B80FADE1C20917500818E33 /* FSTAutoCookViewController.m in Sources */,
 				51DB66FA1B74DD8F0057717B /* FSTPrecisionCookingStatePastMaxTimeViewController.m in Sources */,
+				5BAE5F8A1CD122FC003CD1E1 /* Ota.m in Sources */,
 				5B4A76BD1BFF7AF100018281 /* FSTBeefSteakTenderTBoneSousVideRecipe.m in Sources */,
 				5BEB7DA81C243057006823E2 /* FSTPoultryTurkeyBonelessSousVideRecipe.m in Sources */,
 				5B4A769F1BFE33A700018281 /* FSTBeefSteakTenderRibEyeSousVideRecipe.m in Sources */,

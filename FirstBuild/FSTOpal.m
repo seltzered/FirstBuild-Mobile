@@ -7,6 +7,7 @@
 //
 
 #import "FSTOpal.h"
+#import "Ota.h"
 
 @implementation FSTOpal
 { 
@@ -20,6 +21,10 @@ NSString * const FSTCharacteristicOpalTime = @"ED9E0784-FBF1-47F4-AFE2-D439A6C20
 NSString * const FSTCharacteristicOpalEnableSchedule = @"B45163B3-1092-4725-95DC-1A43AC4A9B88";
 NSString * const FSTCharacteristicOpalSchedule = @"9E1AE873-CB5E-4485-9884-5C5A3AD60E47";
 NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB984707B6";
+
+NSString * const FSTCharacteristicOpalLogIndex = @"1F122C31-D1EA-447D-8409-56196DF130D2";
+NSString * const FSTCharacteristicOpalLog0 = @"1CE417B2-5BE0-4D4F-99C6-4086F49AE901";
+NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC510D";
 
 - (id)init
 {
@@ -45,6 +50,9 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
                                   kDateKey : [NSDate date] } mutableCopy];
     
     self.schedule = @[_1, _2, _3, _4, _5, _6, _7];
+    
+    self.availableBleVersion = OPAL_BLE_AVAILABLE_VERSION;
+    self.availableAppVersion = OPAL_APP_AVAILABLE_VERSION;
  
   }
   
@@ -297,7 +305,20 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   }
   else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalError])
   {
+    NSLog(@"char: FSTCharacteristicOpalError, data: %@", characteristic.value);
     [self handleErrorRead:characteristic];
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLogIndex])
+  {
+    NSLog(@"char: FSTCharacteristicOpalLogIndex, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog0])
+  {
+    NSLog(@"char: FSTCharacteristicOpalLog0, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog6])
+  {
+    NSLog(@"char: FSTCharacteristicOpalLog6, data: %@", characteristic.value);
   }
 
 }
@@ -526,7 +547,8 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   [super deviceReady];
   [self writeCurrentTime];
   [self abortOta];
-  [self startOta];
+  [self startOtaType:OtaImageTypeBle forFileName:OPAL_BLE_FIRMWARE_FILE_NAME];
+//  [self startOta];
 }
 
 /**
@@ -546,9 +568,17 @@ NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB9847
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLog0]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLog6]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLogIndex]).requiresValue = YES;
+
   
-//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
-//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
+  
+//  [((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]) pollWithInterval:0.5];
+  
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
   
 }
 

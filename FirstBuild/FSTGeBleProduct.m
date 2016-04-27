@@ -10,20 +10,13 @@
 #import "MBProgressHUD.h"
 #import "FSTGeBleProduct.h"
 
-typedef enum {
-  OtaImageTypeBle = 0x00,
-  OtaImageTypeApplication = 0x01,
-  OtaImageTypeNone = 0xFF,
-  OtaImageTypeUnknown = 0xFE
-} OtaImageType;
-
 //firmware
 NSString * const FSTCharacteristicOtaControlCommand     = @"4FB34AB1-6207-E5A0-484F-E24A7F638FFF"; //write,notify
 NSString * const FSTCharacteristicOtaImageData          = @"78282AE5-3060-C3B6-7D49-EC74702414E5"; //write
 NSString * const FSTCharacteristicOtaImageType          = @"5EA370C7-2059-41DB-9999-36527B43A4B4"; //read,write
 NSString * const FSTCharacteristicOtaAppUpdateStatus    = @"14FF6DFB-36FA-4456-927D-759E1A9A8446"; //read,notify
 NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8E21-BB9E78A40ECC"; //read
-
+NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6A41-1EECA0C744CE";//read
 
 @implementation FSTGeBleProduct
 {
@@ -66,11 +59,13 @@ NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8
   //the value the user has requested for the image type
   OtaImageType requestedOtaImageType;
   
+  NSString* otaImageFileName;
+  
   MBProgressHUD *hud;
   
   //timer for transfering the file from the ble board to the actual device
   NSTimer* applicationTransferTimer;
-
+  
 }
 
 - (instancetype)init
@@ -80,7 +75,9 @@ NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8
     
     [self initializeStateMachine];
     
+    requestedOtaImageType = OtaImageTypeUnknown;
     actualOtaImageType = OtaImageTypeUnknown;
+    otaImageFileName = @"";
     applicationFlashPercent = 0;
     
   }
@@ -283,7 +280,6 @@ NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8
 # pragma mark - helper functions
 -(void)readOtaFileFromBundle
 {
-//  NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"opal_ble_1_02_00_00" ofType:@"ota"];
   NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"opal_61k" ofType:@"ota"];
   otaImage = [NSData dataWithContentsOfFile:otaFileName];
 }
@@ -657,10 +653,35 @@ NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8
     NSLog(@"char: FSTCharacteristicOtaAppVersion, data: %@", characteristic.value);
     [self handleOtaAppVersionReadResponse:characteristic];
   }
+  else if([characteristic.UUID isEqualToString:FSTCharacteristicOtaBleInfo])
+  {
+    NSLog(@"char: FSTCharacteristicOtaBleInfo, data: %@", characteristic.value);
+    [self handleOtaBleInfoReadResponse:characteristic];
+  }
 }
 
 -(void)handleOtaAppVersionReadResponse: (FSTBleCharacteristic*)characteristic
 {
+}
+
+-(void)handleOtaBleInfoReadResponse: (FSTBleCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 6)
+  {
+    NSLog(@"ble info is not correct length");
+    return;
+  }
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  
+  [data getBytes:bytes length:characteristic.value.length];
+  self.currentAppVersion  = OSReadBigInt32(bytes, 2);
+  
+  if (self.availableBleVersion > self.currentAppVersion) {
+    NSLog(@"<<< BLE - UPDATE AVAILABLE >>>");
+  } else {
+    NSLog(@"<<< BLE - NO UPDATE AVAILABLE >>>");
+  }
 }
 
 -(void)handleOtaAppUpdateReadResponse: (FSTBleCharacteristic*)characteristic
@@ -767,10 +788,12 @@ NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8
 }
 
 #pragma mark - external
-- (void)startOta
+
+- (void)startOtaType:(OtaImageType)otaImageType forFileName:(NSString*)filename
 {
   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-    requestedOtaImageType = OtaImageTypeApplication;
+    requestedOtaImageType = otaImageType;
+    otaImageFileName = filename;
     [stateMachine fireEvent:otaEventStart userInfo:nil error:nil];
   });
 }
@@ -790,6 +813,7 @@ NSString * const FSTCharacteristicOtaAppVersion         = @"CF88A5B6-6687-4F14-8
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaImageType]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaAppVersion]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaBleInfo]).requiresValue = YES;
   
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOtaControlCommand]).wantNotification = YES;

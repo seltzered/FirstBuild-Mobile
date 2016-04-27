@@ -9,8 +9,12 @@
 #import "FSTBleCharacteristic.h"
 
 @implementation FSTBleCharacteristic
+{
+  NSMutableDictionary* _timers;
+  CBPeripheral* _peripheral;
+}
 
-- (instancetype)initWithCBCharacteristic: (CBCharacteristic*)characteristic
+- (instancetype)initWithCBCharacteristic: (CBCharacteristic*)characteristic onPeripheral: (CBPeripheral*) peripheral
 {
   self = [super init];
   if (self) {
@@ -19,10 +23,32 @@
     self.requiresValue = NO;
     self.wantNotification = NO;
     self.UUID = [characteristic.UUID UUIDString];
+    _timers = [[NSMutableDictionary alloc]init];
+    _peripheral = peripheral;
   }
   return self;
 }
 
+-(void) pollWithInterval: (NSTimeInterval) interval
+{
+  NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(readCharacteristic:) userInfo:self repeats:YES];
+  
+  [_timers setObject:timer forKey:self.UUID];
+}
+
+-(void) unpoll
+{
+  NSTimer* timer = [_timers objectForKey:self.UUID];
+  [timer invalidate];
+  timer = nil;
+  [_timers setObject:timer forKey:self.UUID];
+}
+
+-(void)readCharacteristic: (NSTimer*)timer
+{
+  CBCharacteristic* characteristic = ((FSTBleCharacteristic*)timer.userInfo).bleCharacteristic;
+  [_peripheral readValueForCharacteristic:characteristic];
+}
 
 
 @end

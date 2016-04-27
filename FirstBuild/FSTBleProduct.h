@@ -25,6 +25,7 @@ extern NSString * const FSTBatteryLevelChangedNotification;
 @property (nonatomic, strong) NSString* serialNumber;
 @property (nonatomic, strong) NSString* modelNumber;
 
+
 - (void) deviceReady;
 - (void) notifyDeviceLoadProgressUpdated;
 - (void) notifyDeviceEssentialDataChanged;

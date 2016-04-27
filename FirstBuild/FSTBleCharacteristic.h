@@ -31,6 +31,12 @@
 // should the characteristic be auto subscribed
 @property BOOL wantNotification;
 
-- (instancetype)initWithCBCharacteristic: (CBCharacteristic*)characteristic;
+// method to force a reading of a characteristic at a set interval. this can be used in lieu of notifications in case you want
+// to restrict how often the data is read or if the characteristic doesnt support notifications
+-(void) pollWithInterval: (NSTimeInterval) interval;
+-(void) unpoll;
+
+
+- (instancetype)initWithCBCharacteristic: (CBCharacteristic*)characteristic onPeripheral: (CBPeripheral*) peripheral;
 
 @end

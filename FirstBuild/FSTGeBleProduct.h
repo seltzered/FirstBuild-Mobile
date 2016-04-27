@@ -7,10 +7,17 @@
 //
 
 #import "FSTBleProduct.h"
+#import "Ota.h"
 
 @interface FSTGeBleProduct : FSTBleProduct
 
-- (void)startOta;
+@property (nonatomic) uint32_t currentBleVersion;
+@property (nonatomic) uint32_t availableBleVersion;
+@property (nonatomic) uint32_t currentAppVersion;
+@property (nonatomic) uint32_t availableAppVersion;
+
+- (void)startOtaType:(OtaImageType)otaImageType forFileName:(NSString*)filename;
+
 - (void)abortOta;
 
 @end
