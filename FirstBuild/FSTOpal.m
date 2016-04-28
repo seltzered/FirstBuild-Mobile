@@ -597,9 +597,22 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 #pragma mark - external
 -(void) checkForAndUpdateFirmware {
   
+  
+  
+  if ([self.status intValue] != 0)
+  {
+    [UIAlertView showWithTitle:@"Please ensure Opal is not on"
+                       message:@"Opal needs to be off in order to make ice. Please ensure the unit is plugged in, but not making ice or in cleaning mode."
+     
+             cancelButtonTitle:@"OK"
+             otherButtonTitles:nil
+                      tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        // do nothing
+                      }];
+  }
 //  if (OPAL_BLE_AVAILABLE_VERSION > self.currentBleVersion)
 //TODO : reimplment if statement
-    if (1==1)
+  else  if (1==1)
   {
     [UIAlertView showWithTitle:@"Bluetooth Update Available"
                        message:@"There is a bluetooth update available for your Opal, would you like to update now? It will take about 1 minute and you will need to keep the app open and nearby your Opal."
