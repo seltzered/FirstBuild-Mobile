@@ -597,27 +597,37 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   {
     Byte bytes[20];
     memset(bytes,0,20);
-    //app image type
+    //app image type, required to be the first byte
     bytes[0] = 0x01;
     
-    //app version
-    bytes[1] = 0x01;
-    bytes[2] = 0x00;
-    bytes[3] = 0x00;
-    bytes[4] = 0x01;
+    //
+    // write the version of teh application as 4 bytes and then the file size, below is example valid data
+    //
+    // app version
+    //
+    // bytes[1] = 0x01;
+    // bytes[2] = 0x00;
+    // bytes[3] = 0x00;
+    // bytes[4] = 0x01;
     
-    //file size
-    //TODO: remove hardcode
-    bytes[5] = 0x20;
-    bytes[6] = 0xf4;
-    bytes[7] = 0x00;
-    bytes[8] = 0x00;
+    bytes[1] = (self.availableAppVersion>>24)&0xFF;
+    bytes[2] = (self.availableAppVersion>>16)&0xFF;
+    bytes[3] = (self.availableAppVersion>>8)&0xFF;
+    bytes[4] = (self.availableAppVersion>>0)&0xFF;
     
-    //file size
-//    bytes[5] = (otaImage.length>>24)&0xFF;
-//    bytes[6] = (otaImage.length>>16)&0xFF;
-//    bytes[7] = (otaImage.length>>8)&0xFF;
-//    bytes[8] = (otaImage.length>>0)&0xFF;
+    // file size
+    //
+    // bytes[5] = 0x20;
+    // bytes[6] = 0xf4;
+    // bytes[7] = 0x00;
+    // bytes[8] = 0x00;
+    
+    bytes[5] = (otaImage.length>>0)&0xFF;
+    bytes[6] = (otaImage.length>>8)&0xFF;
+    bytes[7] = (otaImage.length>>16)&0xFF;
+    bytes[8] = (otaImage.length>>24)&0xFF;
+    
+    
 //    OSWriteLittleInt32(bytes, 5, otaImage.length);
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     
@@ -679,13 +689,25 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
 
 -(void)handleOtaAppVersionReadResponse: (FSTBleCharacteristic*)characteristic
 {
+  if (characteristic.value.length != 4)
+  {
+    NSLog(@"handleOtaAppVersionReadResponse incorrect length");
+    return;
+  }
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  
+  [data getBytes:bytes length:characteristic.value.length];
+  self.currentAppVersion  = OSReadBigInt32(bytes, 0);
+  
+  NSLog(@"current App version: 0%04x, available App version: 0%04x", self.currentAppVersion, self.availableAppVersion);
 }
 
 -(void)handleOtaBleInfoReadResponse: (FSTBleCharacteristic*)characteristic
 {
   if (characteristic.value.length != 6)
   {
-    NSLog(@"ble info is not correct length");
+    NSLog(@"handleOtaBleInfoReadResponse incorrect length");
     return;
   }
   NSData *data = characteristic.value;
@@ -694,7 +716,7 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   [data getBytes:bytes length:characteristic.value.length];
   self.currentBleVersion  = OSReadBigInt32(bytes, 2);
   
-  NSLog(@"current Ble version: %d", self.currentBleVersion);
+  NSLog(@"current Ble version: 0%04x, available Ble version: 0%04x", self.currentBleVersion, self.availableBleVersion);
 }
 
 -(void)handleOtaAppUpdateReadResponse: (FSTBleCharacteristic*)characteristic

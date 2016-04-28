@@ -590,14 +590,12 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
   
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
   
 }
 
 #pragma mark - external
 -(void) checkForAndUpdateFirmware {
-  
-  
   
   if ([self.status intValue] != 0)
   {
@@ -610,9 +608,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
                         // do nothing
                       }];
   }
-//  if (OPAL_BLE_AVAILABLE_VERSION > self.currentBleVersion)
-//TODO : reimplment if statement
-  else  if (1==1)
+  else if (OPAL_BLE_AVAILABLE_VERSION > self.currentBleVersion)
   {
     [UIAlertView showWithTitle:@"Bluetooth Update Available"
                        message:@"There is a bluetooth update available for your Opal, would you like to update now? It will take about 1 minute and you will need to keep the app open and nearby your Opal."
@@ -653,7 +649,8 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
                      }];
     
   }
-  else {
+  else
+  {
     [UIAlertView showWithTitle:@"No Updates Available"
                        message:@"Your Opal's Bluetooth and application firmware are up-to-date. Also make sure you have the latest version of this app from the Apple App Store."
      
