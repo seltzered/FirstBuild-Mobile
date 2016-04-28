@@ -31,8 +31,19 @@
             <string>FSEmeric</string>
             <string>FSEmeric</string>
             <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
+            <string>FSEmeric</string>
         </mutableArray>
         <mutableArray key="FSEmeric-Thin.otf">
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
+            <string>FSEmeric-Thin</string>
             <string>FSEmeric-Thin</string>
             <string>FSEmeric-Thin</string>
             <string>FSEmeric-Thin</string>
@@ -473,7 +484,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1627" y="-114"/>
+            <point key="canvasLocation" x="-1401" y="-334"/>
         </scene>
         <!--Paragon Menu Diagnostics Stage Table View Controller-->
         <scene sceneID="uDj-z3-evt">
@@ -1778,7 +1789,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-799" y="-2274"/>
+            <point key="canvasLocation" x="-781" y="-1990"/>
         </scene>
         <!--Storyboard Link-->
         <scene sceneID="14y-tv-KKg">
@@ -1818,7 +1829,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ri8-kR-elb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2737" y="-2715"/>
+            <point key="canvasLocation" x="-3151" y="-3419"/>
         </scene>
         <!--Opal Menu View Controller-->
         <scene sceneID="OcG-Zx-qhQ">
@@ -1994,11 +2005,13 @@
                     <navigationItem key="navigationItem" id="r1N-HX-0HD"/>
                     <connections>
                         <segue destination="mk8-yb-fji" kind="show" identifier="menuDiagnosticsSegue" id="cvk-Dv-mQH"/>
+                        <segue destination="ULc-pN-2e1" kind="show" identifier="menuHelpSegue" id="MN3-jo-q9G"/>
+                        <segue destination="KGz-0o-7d9" kind="show" identifier="menuAboutSegue" id="oO8-42-9zZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TDr-Q5-fTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1985" y="-2715"/>
+            <point key="canvasLocation" x="-2369" y="-3413"/>
         </scene>
         <!--Opal Diagnostics View Controller-->
         <scene sceneID="MSw-Aj-RW8">
@@ -2040,7 +2053,233 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncn-Dz-XDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1307" y="-2715"/>
+            <point key="canvasLocation" x="-1577" y="-2541"/>
+        </scene>
+        <!--Opal Menu Help View Controller-->
+        <scene sceneID="dLH-8M-hq2">
+            <objects>
+                <viewController id="ULc-pN-2e1" customClass="FSTOpalMenuHelpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g3h-Il-k3f"/>
+                        <viewControllerLayoutGuide type="bottom" id="amp-VV-9A8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iLS-zR-gPA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact an expert" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmj-4d-GGT">
+                                <rect key="frame" x="28" y="124" width="160" height="25"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="eSB-IX-wra" appends="YES" id="XqZ-Za-40P"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact warranty" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SiU-Gy-DTC">
+                                <rect key="frame" x="28" y="169" width="155" height="25"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="BAL-6j-lWI" appends="YES" id="nbs-eO-eIi"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAQ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2i-fk-SEr">
+                                <rect key="frame" x="28" y="79" width="36" height="25"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="1ZR-Wl-duK" appends="YES" id="jsJ-nY-bLU"/>
+                                </connections>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Z2i-fk-SEr" firstAttribute="top" secondItem="g3h-Il-k3f" secondAttribute="bottom" constant="15" id="AvP-BX-qFy"/>
+                            <constraint firstItem="SiU-Gy-DTC" firstAttribute="top" secondItem="Jmj-4d-GGT" secondAttribute="bottom" constant="20" id="CJR-GH-ntQ"/>
+                            <constraint firstItem="Jmj-4d-GGT" firstAttribute="top" secondItem="Z2i-fk-SEr" secondAttribute="bottom" constant="20" id="GJc-Fk-n0x"/>
+                            <constraint firstItem="SiU-Gy-DTC" firstAttribute="leading" secondItem="Jmj-4d-GGT" secondAttribute="leading" id="fW6-MO-MCq"/>
+                            <constraint firstItem="Z2i-fk-SEr" firstAttribute="leading" secondItem="iLS-zR-gPA" secondAttribute="leadingMargin" constant="8" id="pAm-ax-9zn"/>
+                            <constraint firstItem="Jmj-4d-GGT" firstAttribute="leading" secondItem="iLS-zR-gPA" secondAttribute="leadingMargin" constant="8" id="s38-R5-tA0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="j27-9K-2U1">
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="YYM-Js-Frs">
+                            <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eQr-hY-KyJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1ZR-Wl-duK" userLabel="faqTap">
+                    <connections>
+                        <action selector="faqTap:" destination="ULc-pN-2e1" id="9jk-vN-7uh"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="eSB-IX-wra" userLabel="expertTap">
+                    <connections>
+                        <action selector="expertTap:" destination="ULc-pN-2e1" id="q01-c2-qAR"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="BAL-6j-lWI" userLabel="warrantyTap">
+                    <connections>
+                        <action selector="warrantyTap:" destination="ULc-pN-2e1" id="rai-e3-rJb"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1594" y="-4165"/>
+        </scene>
+        <!--Opal Menu About View Controller-->
+        <scene sceneID="KDK-Ia-mAF">
+            <objects>
+                <viewController id="KGz-0o-7d9" customClass="FSTOpalMenuAboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1fY-zE-I78"/>
+                        <viewControllerLayoutGuide type="bottom" id="BdF-Fc-U6b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yD6-Wv-TJh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cbo-wK-KKw">
+                                <rect key="frame" x="28" y="74" width="544" height="105.5"/>
+                                <string key="text">Opal is smart enough to know when to start and stop making ice. It’s equipped with a sensor that will identify the fill level of the bucket to turn the ice maker on and off. Just like in any cooler, ice will slowly melt within the air-insulated bucket. Opal will automatically turn on to make sure that the bucket is refilling with ice.</string>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Version" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0c-OR-Dy8">
+                                <rect key="frame" x="28" y="229" width="105" height="25"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="oPj-yg-fRl">
+                                <rect key="frame" x="522" y="230" width="50" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="rFx-vH-KFK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Source Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8KT-GT-Xeu">
+                                <rect key="frame" x="28" y="262" width="151" height="25"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="bLQ-x0-h9x" appends="YES" id="VXh-Te-yIr"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;&gt; Learn More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCp-ud-BA8">
+                                <rect key="frame" x="28" y="185" width="89" height="16"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.91764705879999997" green="0.25490196079999999" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ev9-pk-gDK" appends="YES" id="RXB-qv-TVL"/>
+                                </connections>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyz-vB-l5f">
+                                <rect key="frame" x="28" y="295" width="155.5" height="25"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Firmware Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWS-7N-1oT">
+                                <rect key="frame" x="28" y="328" width="151" height="25"/>
+                                <fontDescription key="fontDescription" name="FSEmeric-Thin" family="FS Emeric" pointSize="20"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="fm5-ih-WbC">
+                                <rect key="frame" x="522" y="328.5" width="50" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="4vV-NK-NOa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="HvC-6w-xLw">
+                                <rect key="frame" x="522" y="296" width="50" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8Dc-kj-gR8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FSEmeric" family="FS Emeric" pointSize="19"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HvC-6w-xLw" firstAttribute="leading" secondItem="jyz-vB-l5f" secondAttribute="trailing" constant="372.5" id="2Xt-YL-h7v"/>
+                            <constraint firstItem="fm5-ih-WbC" firstAttribute="leading" secondItem="oPj-yg-fRl" secondAttribute="leading" id="4fG-vD-9VD"/>
+                            <constraint firstItem="HvC-6w-xLw" firstAttribute="leading" secondItem="jyz-vB-l5f" secondAttribute="leading" id="5s3-XD-ADx"/>
+                            <constraint firstItem="fm5-ih-WbC" firstAttribute="leading" secondItem="oWS-7N-1oT" secondAttribute="leading" id="Cqh-Yt-VS1"/>
+                            <constraint firstItem="8KT-GT-Xeu" firstAttribute="leading" secondItem="n0c-OR-Dy8" secondAttribute="leading" id="D5z-dw-gjB"/>
+                            <constraint firstItem="Cbo-wK-KKw" firstAttribute="leading" secondItem="8KT-GT-Xeu" secondAttribute="leading" id="FQ1-D2-pWO"/>
+                            <constraint firstItem="oWS-7N-1oT" firstAttribute="leading" secondItem="HvC-6w-xLw" secondAttribute="leading" id="Hq9-ZV-Apc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oPj-yg-fRl" secondAttribute="trailing" constant="8" id="JFs-CB-Lx0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cbo-wK-KKw" secondAttribute="trailing" constant="8" id="MvR-ox-cA1"/>
+                            <constraint firstItem="jyz-vB-l5f" firstAttribute="leading" secondItem="8KT-GT-Xeu" secondAttribute="leading" id="Pz7-Es-oof"/>
+                            <constraint firstItem="oWS-7N-1oT" firstAttribute="leading" secondItem="jyz-vB-l5f" secondAttribute="leading" id="XzC-pl-gw7"/>
+                            <constraint firstItem="jyz-vB-l5f" firstAttribute="top" secondItem="8KT-GT-Xeu" secondAttribute="bottom" constant="8" id="eI6-WQ-2Qi"/>
+                            <constraint firstItem="TCp-ud-BA8" firstAttribute="top" secondItem="Cbo-wK-KKw" secondAttribute="bottom" constant="5.5" id="hAD-mV-dNv"/>
+                            <constraint firstItem="n0c-OR-Dy8" firstAttribute="top" secondItem="Cbo-wK-KKw" secondAttribute="bottom" constant="50" id="k62-Do-zxf"/>
+                            <constraint firstItem="n0c-OR-Dy8" firstAttribute="leading" secondItem="yD6-Wv-TJh" secondAttribute="leadingMargin" constant="8" id="m9W-iT-1Ar"/>
+                            <constraint firstItem="8KT-GT-Xeu" firstAttribute="top" secondItem="n0c-OR-Dy8" secondAttribute="bottom" constant="8" id="o1z-Zo-xDf"/>
+                            <constraint firstItem="oPj-yg-fRl" firstAttribute="centerY" secondItem="n0c-OR-Dy8" secondAttribute="centerY" id="sbd-LN-sMl"/>
+                            <constraint firstItem="Cbo-wK-KKw" firstAttribute="top" secondItem="1fY-zE-I78" secondAttribute="bottom" constant="10" id="tce-YH-BWp"/>
+                            <constraint firstItem="TCp-ud-BA8" firstAttribute="leading" secondItem="Cbo-wK-KKw" secondAttribute="leading" id="uby-bb-cdO"/>
+                            <constraint firstItem="HvC-6w-xLw" firstAttribute="leading" secondItem="oPj-yg-fRl" secondAttribute="leading" id="vpg-u6-XHd"/>
+                            <constraint firstItem="fm5-ih-WbC" firstAttribute="centerY" secondItem="oWS-7N-1oT" secondAttribute="centerY" id="xB7-TG-6bM"/>
+                            <constraint firstItem="oWS-7N-1oT" firstAttribute="top" secondItem="jyz-vB-l5f" secondAttribute="bottom" constant="8" id="xIV-sV-w2c"/>
+                            <constraint firstItem="HvC-6w-xLw" firstAttribute="centerY" secondItem="jyz-vB-l5f" secondAttribute="centerY" id="y9K-qz-Yzr"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Hq9-ZV-Apc"/>
+                                <exclude reference="2Xt-YL-h7v"/>
+                                <exclude reference="5s3-XD-ADx"/>
+                                <exclude reference="Cqh-Yt-VS1"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="Q86-0a-9CU">
+                        <barButtonItem key="rightBarButtonItem" title="About" id="qD2-0M-UUX">
+                            <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="labelBluetoothVersion" destination="HvC-6w-xLw" id="Hds-Ts-aAj"/>
+                        <outlet property="labelFirmwareVersion" destination="fm5-ih-WbC" id="6wZ-70-hIc"/>
+                        <outlet property="labelVersion" destination="oPj-yg-fRl" id="QbV-AN-TD4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CGr-if-TIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ev9-pk-gDK" userLabel="learnMoreTap">
+                    <connections>
+                        <action selector="learnMoreTap:" destination="KGz-0o-7d9" id="G1b-dN-jrH"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="bLQ-x0-h9x" userLabel="sourceTap">
+                    <connections>
+                        <action selector="sourceTap:" destination="KGz-0o-7d9" id="mY3-51-JW8"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-1601" y="-3369"/>
         </scene>
     </scenes>
     <resources>

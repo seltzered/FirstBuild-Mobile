@@ -9,6 +9,7 @@
 #import "FSTOpalMenuViewController.h"
 #import "FSTRevealViewController.h"
 #import "FSTOpalDiagnosticsViewController.h"
+#import "FSTOpalMenuAboutViewController.h"
 
 @interface FSTOpalMenuViewController ()
 
@@ -116,8 +117,13 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
 //  } else if([segue.identifier isEqualToString:@"menuAboutSegue"]) {
 //    // set paragon (not yet a member)
 //  }
-  if([segue.identifier isEqualToString:@"menuDiagnosticsSegue"]) {
+  if([segue.identifier isEqualToString:@"menuDiagnosticsSegue"])
+  {
     ((FSTOpalDiagnosticsViewController*)vc).currentOpal = self.currentOpal;
+  }
+  else if([segue.identifier isEqualToString:@"menuAboutSegue"])
+  {
+    ((FSTOpalMenuAboutViewController*)vc).opal = self.currentOpal;
   }
 }
 #pragma mark - BONEYARD

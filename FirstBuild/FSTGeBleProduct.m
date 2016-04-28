@@ -63,10 +63,6 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   NSString* otaImageFileName;
   
   MBProgressHUD *hud;
-  
-  //timer for transfering the file from the ble board to the actual device
-  NSTimer* applicationTransferTimer;
-  
 }
 
 - (instancetype)init
@@ -191,6 +187,8 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   }];
   
   [otaStateDownloading setDidExitStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateDownloading:EXIT>>");
+
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UIView *view = window.rootViewController.view;
     [MBProgressHUD hideAllHUDsForView:view animated:YES];
@@ -209,6 +207,9 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
       NSLog(@"its a ble image, no need to trasnfer");
       [strongSelf->stateMachine fireEvent:strongSelf->otaEventApplicationTransferCompleted userInfo:nil error:nil];
     } else {
+      FSTBleCharacteristic* appDownloadCharacteristic = [strongSelf.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus];
+//      [appDownloadCharacteristic pollWithInterval:1.0];
+      
       dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
       dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         UIWindow *window = [[UIApplication sharedApplication] keyWindow];
@@ -219,16 +220,18 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
         strongSelf->hud.labelText = @"Updating...";
         strongSelf->hud.detailsLabelText = @"Please DO NOT turn the power off on your device.";
         strongSelf->hud.progress = 0.0;
-        
-        [strongSelf->applicationTransferTimer invalidate];
-        strongSelf->applicationTransferTimer = nil;
-        strongSelf->applicationTransferTimer = 0;
-        
-        strongSelf->applicationTransferTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(readApplicationTransferPercent) userInfo:nil repeats:YES];
-        
       });
     }
     
+  }];
+  
+  [otaStateTransferringApplication setDidExitStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateTransferringApplication:EXIT>>");
+    FSTGeBleProduct* strongSelf = weakSelf;
+
+    FSTBleCharacteristic* appDownloadCharacteristic = [strongSelf.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus];
+
+//    [appDownloadCharacteristic unpoll];
   }];
   
   [otaStateAbortRequested setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
@@ -301,12 +304,6 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   otaImage = [NSData dataWithContentsOfFile:otaFileName];
 }
 
--(void)readApplicationTransferPercent
-{
-  FSTBleCharacteristic* appDownloadCharacteristic = [self.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus];
-  [self readFstBleCharacteristic:appDownloadCharacteristic];
-}
-
 # pragma mark - write handlers
 -(void)writeHandler:(FSTBleCharacteristic *)characteristic error:(NSError *)error
 {
@@ -376,11 +373,6 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
       return;
     }
   }
-//  else if(otaBytesWritten == otaImage.length)
-//  {
-//    NSLog(@"image transfer complete");
-//    return;
-//  }
   else if (otaBytesWritten + otaBytesWriteRequested == otaImage.length)
   {
     [stateMachine fireEvent:otaEventDownloadCompleted userInfo:nil error:nil];
@@ -442,11 +434,6 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   
   if (characteristic && stateMachine.currentState == otaStateDownloading && otaImage.length > 0)
   {
-//    if (otaBytesWritten > 0 && otaBytesWritten%500==0)
-//    {
-//      NSLog(@"written %lu", (unsigned long)otaBytesWritten);
-//    }
-    
     if (requestedOtaImageType == OtaImageTypeApplication) {
       [self writeApplicationImageBytes];
     } else {
@@ -627,8 +614,6 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
     bytes[7] = (otaImage.length>>16)&0xFF;
     bytes[8] = (otaImage.length>>24)&0xFF;
     
-    
-//    OSWriteLittleInt32(bytes, 5, otaImage.length);
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     
     NSLog(@"read app image from file system, length is %lu,  0x%02x, 0x%02x, 0x%02x, 0x%02x", (unsigned long)otaImage.length, bytes[5], bytes[6], bytes[7], bytes[8]);
