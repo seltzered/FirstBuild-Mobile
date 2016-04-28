@@ -174,6 +174,7 @@
 		5BAE5F871CCEA629003CD1E1 /* FSTOpalMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE5F861CCEA629003CD1E1 /* FSTOpalMenuViewController.m */; };
 		5BAE5F8A1CD122FC003CD1E1 /* Ota.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE5F891CD122FC003CD1E1 /* Ota.m */; };
 		5BAE5F8D1CD13D12003CD1E1 /* opal_ble_1_03_00_00.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5BAE5F8C1CD12521003CD1E1 /* opal_ble_1_03_00_00.ota */; };
+		5BAE5F901CD1470C003CD1E1 /* FSTOpalDiagnosticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAE5F8F1CD1470C003CD1E1 /* FSTOpalDiagnosticsViewController.m */; };
 		5BB985151CAD569900B50242 /* FSTOpalMainMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB985141CAD569900B50242 /* FSTOpalMainMenuTableViewController.m */; };
 		5BB985171CAD637000B50242 /* Opal.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BB985161CAD637000B50242 /* Opal.xcassets */; };
 		5BB9851A1CAD88A600B50242 /* FSTOpalScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB985191CAD88A600B50242 /* FSTOpalScheduleTableViewController.m */; };
@@ -576,6 +577,8 @@
 		5BAE5F891CD122FC003CD1E1 /* Ota.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ota.m; sourceTree = "<group>"; };
 		5BAE5F8B1CD1232B003CD1E1 /* Ota.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ota.h; sourceTree = "<group>"; };
 		5BAE5F8C1CD12521003CD1E1 /* opal_ble_1_03_00_00.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = opal_ble_1_03_00_00.ota; sourceTree = "<group>"; };
+		5BAE5F8E1CD1470C003CD1E1 /* FSTOpalDiagnosticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalDiagnosticsViewController.h; sourceTree = "<group>"; };
+		5BAE5F8F1CD1470C003CD1E1 /* FSTOpalDiagnosticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalDiagnosticsViewController.m; sourceTree = "<group>"; };
 		5BB985131CAD569900B50242 /* FSTOpalMainMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalMainMenuTableViewController.h; sourceTree = "<group>"; };
 		5BB985141CAD569900B50242 /* FSTOpalMainMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalMainMenuTableViewController.m; sourceTree = "<group>"; };
 		5BB985161CAD637000B50242 /* Opal.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Opal.xcassets; sourceTree = "<group>"; };
@@ -1545,6 +1548,8 @@
 			children = (
 				5BAE5F851CCEA629003CD1E1 /* FSTOpalMenuViewController.h */,
 				5BAE5F861CCEA629003CD1E1 /* FSTOpalMenuViewController.m */,
+				5BAE5F8E1CD1470C003CD1E1 /* FSTOpalDiagnosticsViewController.h */,
+				5BAE5F8F1CD1470C003CD1E1 /* FSTOpalDiagnosticsViewController.m */,
 			);
 			name = "menu system";
 			sourceTree = "<group>";
@@ -1959,6 +1964,7 @@
 				5B80FAD81C208AF000818E33 /* FSTVegetableSweetPotatoesSousVideRecipe.m in Sources */,
 				5BA3A97A1B34760700E51C51 /* FSTBleCommissioningTableViewController.m in Sources */,
 				5BCBB9FE1B0390C500B8E043 /* FSTBeefSousVideRecipe.m in Sources */,
+				5BAE5F901CD1470C003CD1E1 /* FSTOpalDiagnosticsViewController.m in Sources */,
 				5194A9461B6A9EC80033BA26 /* FSTLabel.m in Sources */,
 				51A9D0461B73DEC1000AE293 /* FSTPrecisionCookingStateReachingMaxTimeViewController.m in Sources */,
 				5B4A76DE1BFF7E9200018281 /* FSTBeefRoastRibEyeSousVideRecipe.m in Sources */,

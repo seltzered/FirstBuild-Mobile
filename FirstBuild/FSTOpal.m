@@ -54,6 +54,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     
     self.availableBleVersion = OPAL_BLE_AVAILABLE_VERSION;
     self.availableAppVersion = OPAL_APP_AVAILABLE_VERSION;
+    self.opalErrorCode = 0;
  
   }
   
@@ -432,6 +433,15 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   NSData *data = characteristic.value;
   Byte bytes[characteristic.value.length] ;
   [data getBytes:bytes length:characteristic.value.length];
+  if (self.opalErrorCode != bytes[0])
+  {
+    self.opalErrorCode = bytes[0];
+    if ([self.delegate respondsToSelector:@selector(iceMakerErrorChanged)])
+    {
+      [self.delegate iceMakerErrorChanged];
+    }
+  }
+  
 }
 
 -(void)handleStatusRead: (FSTBleCharacteristic*)characteristic
@@ -548,7 +558,9 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   [super deviceReady];
   [self writeCurrentTime];
   [self abortOta];
-//  [self startOta];
+  
+//  [((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]) pollWithInterval:2.0];
+
 }
 
 
@@ -578,16 +590,16 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
   
-//  [((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]) pollWithInterval:0.5];
-  
-//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
   
 }
 
 #pragma mark - external
 -(void) checkForAndUpdateFirmware {
   
-  if (OPAL_BLE_AVAILABLE_VERSION > self.currentBleVersion)
+//  if (OPAL_BLE_AVAILABLE_VERSION > self.currentBleVersion)
+//TODO : reimplment if statement
+    if (1==1)
   {
     [UIAlertView showWithTitle:@"Bluetooth Update Available"
                        message:@"There is a bluetooth update available for your Opal, would you like to update now? It will take about 1 minute and you will need to keep the app open and nearby your Opal."
@@ -643,7 +655,6 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 
 - (void) turnIceMakerOn: (BOOL) on {
   [self writeMode:on];
-  
 }
 
 - (void) turnNightLightOn:(BOOL)on  {

@@ -8,6 +8,7 @@
 
 #import "FSTOpalMenuViewController.h"
 #import "FSTRevealViewController.h"
+#import "FSTOpalDiagnosticsViewController.h"
 
 @interface FSTOpalMenuViewController ()
 
@@ -23,9 +24,8 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
   kHelp,
   kFeedback,
   kAbout,
-  kUpdates
-  //    kDiagonistics,
-  
+  kUpdates,
+  kDiagnostics
 };
 
 -(void)viewDidLoad {
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 5;
+  return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -68,9 +68,9 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     case kUpdates:
       CellIdentifier = @"updates";
       break;
-      //        case kDiagonistics:
-      //            CellIdentifier = @"diagnostics";
-      //            break;
+    case kDiagnostics:
+        CellIdentifier = @"diagnostics";
+        break;
       break;
     default:
       break;
@@ -103,11 +103,9 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
     [self performSegueWithIdentifier:@"menuAboutSegue" sender:self];
   } else if (indexPath.row == kUpdates) {
     [self.currentOpal checkForAndUpdateFirmware];
+  } else if (indexPath.row == kDiagnostics) {
+      [self performSegueWithIdentifier:@"menuDiagnosticsSegue" sender:self];
   }
-  
-  //    else if (indexPath.row == kDiagonistics) {
-  //        [self performSegueWithIdentifier:@"menuDiagnosticsSegue" sender:self];
-  //    }
   
 }
 
@@ -118,9 +116,9 @@ typedef NS_ENUM(NSInteger, FSTMenuOptions) {
 //  } else if([segue.identifier isEqualToString:@"menuAboutSegue"]) {
 //    // set paragon (not yet a member)
 //  }
-//  else if([segue.identifier isEqualToString:@"menuDiagnosticsSegue"]) {
-//    ((FSTParagonMenuDiagnosticsViewController*)vc).currentParagon = self.currentParagon;
-//  }
+  if([segue.identifier isEqualToString:@"menuDiagnosticsSegue"]) {
+    ((FSTOpalDiagnosticsViewController*)vc).currentOpal = self.currentOpal;
+  }
 }
 #pragma mark - BONEYARD
 

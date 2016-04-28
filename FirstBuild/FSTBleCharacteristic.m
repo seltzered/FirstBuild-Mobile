@@ -31,6 +31,9 @@
 
 -(void) pollWithInterval: (NSTimeInterval) interval
 {
+  if ([_timers objectForKey:self.UUID] != nil) {
+    [self unpoll];
+  }
   NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(readCharacteristic:) userInfo:self repeats:YES];
   
   [_timers setObject:timer forKey:self.UUID];
@@ -38,10 +41,10 @@
 
 -(void) unpoll
 {
-  NSTimer* timer = [_timers objectForKey:self.UUID];
+  NSTimer* timer  = [_timers objectForKey:self.UUID];
   [timer invalidate];
   timer = nil;
-  [_timers setObject:timer forKey:self.UUID];
+  [_timers removeObjectForKey:self.UUID];
 }
 
 -(void)readCharacteristic: (NSTimer*)timer
