@@ -11,16 +11,20 @@
 @implementation FSTOpalDiagnosticsViewController
 {
   IBOutlet UILabel *bucketStatusOutlet;
-  
+  id previousOpalDelegate;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  previousOpalDelegate = self.currentOpal.delegate;
   self.currentOpal.delegate = self;
   [self setBucketLabel];
+}
 
-  
+- (void)dealloc
+{
+  self.currentOpal.delegate = previousOpalDelegate;
 }
 
 -(void)setBucketLabel

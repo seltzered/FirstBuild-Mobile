@@ -19,7 +19,6 @@
   self = [super init];
   if (self) {
     self.bleCharacteristic = characteristic;
-    self.value = characteristic.value;
     self.requiresValue = NO;
     self.wantNotification = NO;
     self.UUID = [characteristic.UUID UUIDString];
@@ -27,6 +26,11 @@
     _peripheral = peripheral;
   }
   return self;
+}
+
+-(NSData*)value {
+  //this is a getter method because the pointer to the value changes dynamically
+  return self.bleCharacteristic.value;
 }
 
 -(void) pollWithInterval: (NSTimeInterval) interval

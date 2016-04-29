@@ -29,6 +29,11 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
   self.opal.delegate = self;
   
   if (self.opal.iceMakerOn) {
@@ -39,8 +44,6 @@
   
   MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
   [navigation setHeaderText:@"OPAL" withFrameRect:CGRectMake(0, 0, 120, 30)];
-
-  // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

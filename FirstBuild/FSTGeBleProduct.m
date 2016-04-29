@@ -207,8 +207,6 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
       NSLog(@"its a ble image, no need to trasnfer");
       [strongSelf->stateMachine fireEvent:strongSelf->otaEventApplicationTransferCompleted userInfo:nil error:nil];
     } else {
-      FSTBleCharacteristic* appDownloadCharacteristic = [strongSelf.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus];
-//      [appDownloadCharacteristic pollWithInterval:1.0];
       
       dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
       dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -227,11 +225,6 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   
   [otaStateTransferringApplication setDidExitStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateTransferringApplication:EXIT>>");
-    FSTGeBleProduct* strongSelf = weakSelf;
-
-    FSTBleCharacteristic* appDownloadCharacteristic = [strongSelf.characteristics objectForKey:FSTCharacteristicOtaAppUpdateStatus];
-
-//    [appDownloadCharacteristic unpoll];
   }];
   
   [otaStateAbortRequested setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
