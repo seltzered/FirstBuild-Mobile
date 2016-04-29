@@ -16,8 +16,7 @@
 #import <UIKit/UIKit.h>
 #import "FSTParagon.h"
 
-extern NSString * const FSTMenuItemSelectedNotification;
-extern NSString * const FSTMenuItemHome ;
+
 
 @interface FSTParagonMenuViewController : UITableViewController
 

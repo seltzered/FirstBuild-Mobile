@@ -14,28 +14,8 @@
 #import "MBProgressHUD.h"
 #import "FSTBleCentralManager.h"
 
-
-typedef enum {
-    OtaStateIdle = 0,
-    OtaStateStartRequested = 1,
-    OtaStateDownloadRequested = 2,
-    OtaStateDownloading = 3,
-    OtaStateChunkWriteRequest = 10,
-    OtaStateVerifyImageRequest = 11,
-    OtaStateAbortRequested = 400,
-    OtaStateFailed = 500
-} OtaState;
-
 @implementation FSTParagon
-{
-    NSMutableDictionary *requiredCharacteristics; // a dictionary of strings with booleans
-    NSData* otaImage;
-    OtaState otaState;
-    uint otaBytesWritten;
-    uint otaBytesWrittenInTrailer;
-    
-    NSMutableData* _debugPayload;
-    
+{  
     FSTRecipe* _pendingRecipe;
     MBProgressHUD *pendingRecipeHud;
     NSTimer* _pendingRecipeTimer;
@@ -68,10 +48,6 @@ NSString * const FSTCharacteristicStartHoldTimer        = @"4F568285-9D2F-4C3D-8
 NSString * const FSTCharacteristicUserInfo              = @"007A7511-0D69-4749-AAE3-856CFF257912"; //write,read
 NSString * const FSTCharacteristicCookConfiguration     = @"E0BA615A-A869-1C9D-BE45-4E3B83F592D9"; //write,notify,read
 
-//firmware
-NSString * const FSTCharacteristicOtaControlCommand     = @"4FB34AB1-6207-E5A0-484F-E24A7F638FFF"; //write,notify
-NSString * const FSTCharacteristicOtaImageData          = @"78282AE5-3060-C3B6-7D49-EC74702414E5"; //write
-
 static const uint8_t NUMBER_OF_STAGES = 5;
 static const uint8_t POS_POWER = 0;
 static const uint8_t POS_MIN_HOLD_TIME = POS_POWER + 1;
@@ -93,33 +69,12 @@ static const uint8_t STAGE_SIZE = 8;
         _pendingRecipe = nil;
         _pendingRecipeTimer = nil;
         _pendingTimerTicks = 0;
-
-        otaState = OtaStateIdle;
-        otaBytesWritten = 0;
-        otaBytesWrittenInTrailer = 0;
-        
-        _debugPayload = [NSMutableData new];
         
         //setup the current cooking method and session, which is the actual
         //state of the cooking as reported by the cooktop
         self.session = [[FSTParagonCookingSession alloc] init];
         self.session.activeRecipe = nil;
-        
-        // booleans for all the required characteristics, tell us whether or not the characteristic loaded
-        requiredCharacteristics = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicProbeConnectionState,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicBatteryLevel,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicBurnerState,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicCurrentTemperature,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicCurrentCookStage,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicCurrentCookState,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicCookConfiguration,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicUserInfo,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicRemainingHoldTime,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicUserSelectedCookMode,
-            [[NSNumber alloc] initWithBool:0], FSTCharacteristicCurrentPowerLevel,
-                                   nil];
-        
+      
         self.session.cookState = FSTParagonCookStateOff;
         self.session.cookMode = FSTCookingStateOff;
         self.isProbeConnected = NO;
@@ -386,44 +341,35 @@ static const uint8_t STAGE_SIZE = 8;
     [self writeMoveNextStage];
 }
 
-- (void)startOta
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self writeStartOta];
-    });
-}
+
 
 #pragma mark - Write Handlers
 
--(void)writeHandler: (CBCharacteristic*)characteristic error:(NSError *)error
+-(void)writeHandler: (FSTBleCharacteristic*)characteristic error:(NSError *)error
 {
     [super writeHandler:characteristic error:error];
-    
-    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaImageData])
-    {
-        [self handleOtaImageDataResponse:error];
-    }
-    if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
+  
+    if([characteristic.UUID isEqualToString: FSTCharacteristicCurrentCookStage])
     {
         DLog(@"write respone FSTCharacteristicCurrentCookStage");
         [self handleWriteMoveNextStage:error];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicTempDisplayUnit])
     {
         //[self handleElapsedTimeWritten];
         DLog(@"attempted write FSTCharacteristicTempDisplayUnit");
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicStartHoldTimer])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicStartHoldTimer])
     {
         DLog(@"attempted write FSTCharacteristicStartHoldTimer");
         [self handleHoldTimerWritten ];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicUserInfo])
     {
         DLog(@"attempted write FSTCharacteristicUserInfo");
         [self handleUserInformationWritten:error];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCookConfiguration])
     {
         DLog(@"attempted write FSTCharacteristicCookConfiguration");
         [self handleCookConfigurationWritten:error];
@@ -432,227 +378,9 @@ static const uint8_t STAGE_SIZE = 8;
 
 }
 
-// TODO: TEMPORARY
-
--(void)readOtaFileFromBundle
-{
-    NSString *otaFileName = [[NSBundle mainBundle] pathForResource:@"paragon_master_01_03_00_00" ofType:@"ota"];
-    otaImage = [NSData dataWithContentsOfFile:otaFileName];
-}
-
--(void)handleOtaControlCommand: (CBCharacteristic*)characteristic
-{
-    if (characteristic.value.length != 1)
-    {
-        DLog(@"handleOtaControlCommand length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
-        return;
-    }
-    
-    NSData *data = characteristic.value;
-    Byte bytes[characteristic.value.length] ;
-    [data getBytes:bytes length:characteristic.value.length];
-    uint8_t response = bytes[0];
-    
-    if (response==0)
-    {
-        switch (otaState) {
-            case OtaStateDownloadRequested:
-                otaState = OtaStateDownloading;
-                [self writeImageBytes];
-                break;
-            
-            case OtaStateStartRequested:
-                [self writeOtaDownloadCommand];
-                break;
-                
-            case OtaStateAbortRequested:
-                NSLog(@">>>>>>>>> aborted OTA <<<<<<<<<<");
-                otaState = OtaStateIdle;
-                break;
-                
-            case OtaStateVerifyImageRequest:
-                break;
-                
-            default:
-                NSLog(@"unknown ota state in handleOtaControlCommand");
-                break;
-        }
-        
-    }
-    else
-    {
-        NSLog(@"ota command response indicated failure during state %d", otaState);
-    }
-    
-}
-
--(void)writeOtaAbort
-{
-    otaState = OtaStateFailed;
-    
-    NSLog(@">>>>>>>>> abort OTA <<<<<<<<<<");
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
-    
-    Byte bytes[1];
-    bytes[0] = 0x07;
-    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-    if (characteristic)
-    {
-        otaState = OtaStateAbortRequested;
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }
-}
-
--(void)handleOtaImageDataResponse: (NSError*) error
-{
-    if (error || otaState != OtaStateChunkWriteRequest)
-    {
-        otaState = OtaStateFailed;
-        NSLog(@"image write error");
-        return;
-    }
-    
-    if (otaBytesWrittenInTrailer == 160)
-    {
-        [self writeOtaImageVerify];
-    }
-    else
-    {
-        otaBytesWritten = otaBytesWritten + 20;
-        otaState = OtaStateDownloading;
-        [self writeImageBytes];
-        printf(".");
-    }
-}
-
--(void)writeImageBytes
-{
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaImageData];
-    
-    if (characteristic && otaState == OtaStateDownloading && otaImage.length > 0)
-    {
-        if (otaBytesWritten > 0 && otaBytesWritten%500==0)
-        {
-            NSLog(@"written %u", otaBytesWritten);
-        }
-        
-        NSUInteger otaImageActualLength = otaImage.length - 160;
-        NSData* data;
-        
-        if (otaBytesWritten <= otaImageActualLength)
-        {
-            
-            if (otaBytesWritten+20 > otaImageActualLength)
-            {
-                // padding
-                NSUInteger otaRemainingLength = otaImageActualLength - otaBytesWritten;
-                NSData* lastChunk = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, otaRemainingLength)];
-
-                char remainingBytes[20];
-                memset(remainingBytes,0,20);
-                memcpy(remainingBytes,[lastChunk bytes],otaRemainingLength);
-                
-                data = [NSData dataWithBytes:remainingBytes length:20];
-                NSLog(@"final bytes");
-            }
-            else
-            {
-                // normal
-                data = [otaImage subdataWithRange:NSMakeRange(otaBytesWritten, 20)];
-            }
-            otaState = OtaStateChunkWriteRequest;
-            [_debugPayload appendData:data];
-            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-        }
-        else if (otaBytesWrittenInTrailer != 160)
-        {
-            data = [otaImage subdataWithRange:NSMakeRange(otaImageActualLength+otaBytesWrittenInTrailer, 20)];
-            otaBytesWrittenInTrailer = otaBytesWrittenInTrailer + 20;
-            otaState = OtaStateChunkWriteRequest;
-            [_debugPayload appendData:data];
-            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-        }
-        else
-        {
-            otaState = OtaStateFailed;
-            NSLog(@"ota failed during image write, byte issue");
-        }
-    }
-    else
-    {
-        otaState = OtaStateFailed;
-        NSLog(@"ota failed during image write, unknown state");
-    }
-    
-}
-
--(void)writeStartOta
-{
-    otaState = OtaStateFailed;
-    
-    otaBytesWritten = 0;
-    
-    NSLog(@">>>>>>>>> start OTA <<<<<<<<<<");
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
-    
-    Byte bytes[1];
-    bytes[0] = 0x01;
-    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-    if (characteristic)
-    {
-        otaState = OtaStateStartRequested;
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }
-}
-
--(void)writeOtaDownloadCommand
-{
-    NSLog(@">>>>>>>>> start OTA download <<<<<<<<<<");
-    otaState = OtaStateFailed;
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
-    
-    [self readOtaFileFromBundle];
-    
-    if (otaImage.length > 160 && otaImage.length < (60*1024))
-    {
-        Byte bytes[3];
-        bytes[0] = 0x02;
-        
-        //if the size is 10245, data[1] = 0x05, data[2] = 0x28
-        OSWriteLittleInt16(&bytes[1],   0, otaImage.length);
-        NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-
-        NSLog(@"read image from file system, length is %lu, byte[1] = 0x%02x, byte[2] = 0x%02x", (unsigned long)otaImage.length, bytes[1], bytes[2]);
-        if (characteristic)
-        {
-            otaState = OtaStateDownloadRequested;
-            [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-        }
-    }
-
-}
-
--(void)writeOtaImageVerify
-{
-    NSLog(@">>>>>>>>> image Verify <<<<<<<<<<");
-    
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOtaControlCommand];
-    
-    otaState = OtaStateFailed;
-    
-    Byte bytes[1];
-    bytes[0] = 0x03;
-    NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-    if (characteristic)
-    {
-        otaState = OtaStateVerifyImageRequest;
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
-    }
-}
-
 -(void)writeStartHoldTimer
 {
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicStartHoldTimer];
+    FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicStartHoldTimer];
 
     Byte bytes[1];
     bytes[0] = 0x01;
@@ -660,7 +388,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     }
 }
 
@@ -681,7 +409,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)writeUserInformation: (FSTParagonUserInformation*)userInformation
 {
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicUserInfo];
+    FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicUserInfo];
     
     Byte bytes[16];
     memset(bytes,0,sizeof(bytes));
@@ -696,13 +424,13 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     }
 }
 
 -(void)handleUserInformationWritten: (NSError *)error
 {
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicUserInfo];
+    FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicUserInfo];
 
     // the session's active recipe id and type are no longer valid
     // which are stored in the user information portion of the cook configuration
@@ -714,7 +442,7 @@ static const uint8_t STAGE_SIZE = 8;
     }
     
     // we need to read this back now to make sure we have everything set
-    [self.peripheral readValueForCharacteristic:characteristic];
+    [self readFstBleCharacteristic:characteristic];
     if ([self.delegate respondsToSelector:@selector(userInformationSet:)])
     {
         [self.delegate userInformationSet:error];
@@ -723,7 +451,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)writeMoveNextStage
 {
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
+    FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
     
     Byte bytes[1];
     bytes[0] = self.session.currentStageIndex + 1;
@@ -731,7 +459,7 @@ static const uint8_t STAGE_SIZE = 8;
     NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
     if (characteristic)
     {
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     }
 }
 
@@ -744,8 +472,8 @@ static const uint8_t STAGE_SIZE = 8;
     
     if (!error)
     {
-        CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
-        [self.peripheral readValueForCharacteristic:characteristic];
+        FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCurrentCookStage];
+        [self readFstBleCharacteristic:characteristic];
     }
 }
 
@@ -763,7 +491,7 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)writeCookConfiguration: (FSTRecipe*)recipe
 {
-    CBCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
+    FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
     
     if (recipe.paragonCookingStages.count > NUMBER_OF_STAGES)
     {
@@ -805,7 +533,7 @@ static const uint8_t STAGE_SIZE = 8;
     if (characteristic)
     {
         // write the actual characteristic
-        [self.peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+        [self writeFstBleCharacteristic:characteristic withValue:data];
     
         FSTParagonUserInformation* info = [FSTParagonUserInformation new];
         info.recipeId = [recipe.recipeId unsignedShortValue];
@@ -820,14 +548,14 @@ static const uint8_t STAGE_SIZE = 8;
  */
 -(void)handleCookConfigurationWritten: (NSError *)error
 {
-    CBCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
+    FSTBleCharacteristic* cookConfigurationCharacteristic = [self.characteristics objectForKey:FSTCharacteristicCookConfiguration];
 
     // the session's active recipe is no longer valid, set it to nil. a new one will
     // be created when we read it back from the paragon
     self.session.activeRecipe = nil;
     
     // request a rebuild of the recipe now
-    [self.peripheral readValueForCharacteristic:cookConfigurationCharacteristic];
+    [self readFstBleCharacteristic:cookConfigurationCharacteristic];
     
     if ([self.delegate respondsToSelector:@selector(cookConfigurationSet:)])
     {
@@ -843,134 +571,77 @@ static const uint8_t STAGE_SIZE = 8;
  *
  *  @param characteristic the characteristic whose value changed
  */
--(void)readHandler: (CBCharacteristic*)characteristic
+-(void)readHandler: (FSTBleCharacteristic*)characteristic
 {
     [super readHandler:characteristic];
     
-    if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeFirmwareInfo])
+    if ([characteristic.UUID isEqualToString: FSTCharacteristicProbeFirmwareInfo])
     {
         NSLog(@"char: FSTCharacteristicProbeFirmwareInfo, data: %@", characteristic.value);
         //not implemented
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCurrentCookStage])
     {
         NSLog(@"char: FSTCharacteristicCurrentCookStage, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentCookStage];
         [self handleCurrentCookStage: characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicErrorState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicErrorState])
     {
         NSLog(@"char: FSTCharacteristicErrorState, data: %@", characteristic.value);
         //not implemented
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicProbeConnectionState])
     {
         NSLog(@"char: FSTCharacteristicProbeConnectionState, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicProbeConnectionState];
         [self handleProbeState:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicBatteryLevel])
     {
         NSLog(@"char: FSTCharacteristicBatteryLevel, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicBatteryLevel];
         [self handleBatteryLevel:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicBurnerState])
     {
         NSLog(@"char: FSTCharacteristicBurnerState, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicBurnerState];
         [self handleBurnerStatus:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookState])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCurrentCookState])
     {
         NSLog(@"char: FSTCharacteristicCurrentCookState, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentCookState];
         [self handleCurrentCookState:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicCookConfiguration])
     {
         NSLog(@"char: FSTCharacteristicCookConfiguration, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCookConfiguration];
         [self handleCookConfiguration:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo])
+    else if([characteristic.UUID isEqualToString: FSTCharacteristicUserInfo])
     {
         NSLog(@"char: FSTCharacteristicUserInfo, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicUserInfo];
         [self handleUserInformation:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+    else if([characteristic.UUID isEqualToString:FSTCharacteristicCurrentTemperature])
     {
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentTemperature];
         [self handleCurrentTemperature:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicUserSelectedCookMode])
+    else if([characteristic.UUID isEqualToString:FSTCharacteristicUserSelectedCookMode])
     {
         NSLog(@"char: FSTCharacteristicUserSelectedCookMode, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicUserSelectedCookMode];
         [self handleUserSelectedCookMode:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentPowerLevel])
+    else if([characteristic.UUID isEqualToString:FSTCharacteristicCurrentPowerLevel])
     {
         NSLog(@"char: FSTCharacteristicCurrentPowerLevel, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicCurrentPowerLevel];
         [self handleCurrentPowerLevel:characteristic];
     }
-    else if([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicOtaControlCommand])
-    {
-        NSLog(@"char: FSTCharacteristicOtaControlCommand, data: %@", characteristic.value);
-        [self handleOtaControlCommand:characteristic];
-    }
-    else if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicRemainingHoldTime])
+    else if ([characteristic.UUID isEqualToString:FSTCharacteristicRemainingHoldTime])
     {
         NSLog(@"char: FSTCharacteristicRemainingHoldTime, data: %@", characteristic.value);
-        [requiredCharacteristics setObject:[NSNumber numberWithBool:1] forKey:FSTCharacteristicRemainingHoldTime];
         [self handleRemainingHoldTime:characteristic];
     }// end all characteristic cases
-    
-    NSEnumerator* requiredEnum = [requiredCharacteristics keyEnumerator]; // count how many characteristics are ready
-    NSInteger requiredCount = 0; // count the number of discovered characteristics
-    for (NSString* characteristic in requiredEnum) {
-        requiredCount += [(NSNumber*)[requiredCharacteristics objectForKey:characteristic] integerValue];
-    }
-    
-    if (requiredCount == [requiredCharacteristics count] && self.initialCharacteristicValuesRead == NO) // found all required characteristics
-    {
-        //TODO: ENABLE REAL OTA
-        
-        /////////////////////////////////////
-        //[self startOta];
-        
-        /////////////////////////////////////
-        
-        
-        //we havent informed the application that the device is completely loaded, but we have
-        //all the data we need
-        self.initialCharacteristicValuesRead = YES;
-        
-        [self notifyDeviceReady]; // logic contained in notification center
-        for (NSString* requiredCharacteristic in requiredCharacteristics)
-        {
-            CBCharacteristic* c =[self.characteristics objectForKey:requiredCharacteristic];
-            if (c.properties & CBCharacteristicPropertyNotify)
-            {
-                [self.peripheral setNotifyValue:YES forCharacteristic:c ];
-            }
-        }
-    }
-    else if(self.initialCharacteristicValuesRead == NO)
-    {
-        //we dont have all the data yet...
-        // calculate fraction
-        double progressCount = [[NSNumber numberWithInt:(int)requiredCount] doubleValue];
-        double progressTotal = [[NSNumber numberWithInt:(int)[requiredCharacteristics count]] doubleValue];
-        self.loadingProgress = [NSNumber numberWithDouble: progressCount/progressTotal];
-        
-        [self notifyDeviceLoadProgressUpdated];
-    }
-    
+  
 #ifdef DEBUG
-    if ([[[characteristic UUID] UUIDString] isEqualToString:FSTCharacteristicCurrentTemperature])
+    if ([characteristic.UUID isEqualToString:FSTCharacteristicCurrentTemperature])
     {
         //printf(".");
     }
@@ -983,7 +654,7 @@ static const uint8_t STAGE_SIZE = 8;
     
 } // end assignToProperty
 
--(void)handleProbeState: (CBCharacteristic*)characteristic
+-(void)handleProbeState: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
     {
@@ -1008,7 +679,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 }
 
--(void)handleUserInformation: (CBCharacteristic*)characteristic
+-(void)handleUserInformation: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 16)
     {
@@ -1044,7 +715,7 @@ static const uint8_t STAGE_SIZE = 8;
 #endif
 }
 
--(void)handleCurrentPowerLevel: (CBCharacteristic*)characteristic
+-(void)handleCurrentPowerLevel: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
     {
@@ -1080,7 +751,7 @@ static const uint8_t STAGE_SIZE = 8;
  *
  *  @param characteristic BLE characteristic
  */
--(void)handleCookConfiguration: (CBCharacteristic*)characteristic
+-(void)handleCookConfiguration: (FSTBleCharacteristic*)characteristic
 {
     //TODO: there is a bug, when reading a user selected mode of rapid or gentle then its
     //only reporting 38 bytes.
@@ -1157,7 +828,7 @@ static const uint8_t STAGE_SIZE = 8;
  *
  *  @param characteristic BLE characteristic
  */
--(void)handleCurrentCookStage: (CBCharacteristic*)characteristic
+-(void)handleCurrentCookStage: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
     {
@@ -1214,7 +885,7 @@ static const uint8_t STAGE_SIZE = 8;
  *
  *  @param characteristic BLE characteristic
  */
--(void)handleRemainingHoldTime: (CBCharacteristic*)characteristic
+-(void)handleRemainingHoldTime: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 2)
     {
@@ -1243,7 +914,7 @@ static const uint8_t STAGE_SIZE = 8;
  *
  *  @param characteristic <#characteristic description#>
  */
--(void)handleCurrentCookState: (CBCharacteristic*)characteristic
+-(void)handleCurrentCookState: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
     {
@@ -1265,7 +936,7 @@ static const uint8_t STAGE_SIZE = 8;
  *
  * @param characteristic BLE characteristc
  */
--(void)handleUserSelectedCookMode: (CBCharacteristic*)characteristic
+-(void)handleUserSelectedCookMode: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
     {
@@ -1476,7 +1147,7 @@ static const uint8_t STAGE_SIZE = 8;
 
 
 //TODO: move to ble product
--(void)handleBatteryLevel: (CBCharacteristic*)characteristic
+-(void)handleBatteryLevel: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
     {
@@ -1514,7 +1185,7 @@ static const uint8_t STAGE_SIZE = 8;
  *
  *  @param characteristic <#characteristic description#>
  */
--(void)handleBurnerStatus: (CBCharacteristic*)characteristic
+-(void)handleBurnerStatus: (FSTBleCharacteristic*)characteristic
 {
     if (characteristic.value.length != 1)
     {
@@ -1544,7 +1215,7 @@ static const uint8_t STAGE_SIZE = 8;
  *
  *  @param characteristic <#characteristic description#>
  */
--(void)handleCurrentTemperature: (CBCharacteristic*)characteristic
+-(void)handleCurrentTemperature: (FSTBleCharacteristic*)characteristic
 {
     NSNumber* oldTemp = self.session.currentProbeTemperature;
     if (characteristic.value.length != 2)
@@ -1573,76 +1244,73 @@ static const uint8_t STAGE_SIZE = 8;
 
 #pragma mark - Characteristic Discovery Handler
 
--(void)handleDiscoverCharacteristics: (NSArray*)characteristics
+-(void)handleDiscoverCharacteristics: (NSMutableArray*)characteristics
 {
     [super handleDiscoverCharacteristics:characteristics];
     
-    self.initialCharacteristicValuesRead = NO;
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicProbeConnectionState];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBatteryLevel];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBurnerState];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentTemperature];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentCookStage];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentCookState];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCookConfiguration];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserInfo];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicRemainingHoldTime];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentPowerLevel];
-    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserSelectedCookMode];
-    
-    NSLog(@"=======================================================================");
+//    self.initialCharacteristicValuesRead = NO;
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicProbeConnectionState];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBatteryLevel];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBurnerState];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentTemperature];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentCookStage];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentCookState];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCookConfiguration];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserInfo];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicRemainingHoldTime];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentPowerLevel];
+//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserSelectedCookMode];
+  
+//    NSLog(@"=======================================================================");
     //NSLog(@"SERVICE %@", [service.UUID UUIDString]);
     
-    for (CBCharacteristic *characteristic in characteristics)
-    {
-        [self.characteristics setObject:characteristic forKey:[characteristic.UUID UUIDString]];
-        NSLog(@"    CHARACTERISTIC %@", [characteristic.UUID UUIDString]);
-        
-        if (characteristic.properties & CBCharacteristicPropertyWrite)
-        {
-            NSLog(@"        CAN WRITE");
-        }
-        
-        if (characteristic.properties & CBCharacteristicPropertyNotify)
-        {
-            if  (
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerState] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentTemperature] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookState] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicRemainingHoldTime] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserSelectedCookMode] ||
-                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentPowerLevel]
-                 )
-            {
-                [self.peripheral readValueForCharacteristic:characteristic];
-            }
-            else if ([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicOtaControlCommand])
-            {
-                [self.peripheral setNotifyValue:YES forCharacteristic:characteristic ];
-            }
-            NSLog(@"        CAN NOTIFY");
-        }
-        
-        if (characteristic.properties & CBCharacteristicPropertyRead)
-        {
-            if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration] ||
-               [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo]
-               )
-            {
-                [self.peripheral readValueForCharacteristic:characteristic];
-            }
-            NSLog(@"        CAN READ");
-        }
-        
-        if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)
-        {
-            NSLog(@"        CAN WRITE WITHOUT RESPONSE");
-        }
-    }
+//    for (CBCharacteristic *characteristic in characteristics)
+//    {
+//        [self.characteristics setObject:characteristic forKey:[characteristic.UUID UUIDString]];
+//        NSLog(@"    CHARACTERISTIC %@", [characteristic.UUID UUIDString]);
+//        
+//        if (characteristic.properties & CBCharacteristicPropertyWrite)
+//        {
+//            NSLog(@"        CAN WRITE");
+//        }
+//        
+//        if (characteristic.properties & CBCharacteristicPropertyNotify)
+//        {
+//            if  (
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerState] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentTemperature] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookState] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicRemainingHoldTime] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserSelectedCookMode] ||
+//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentPowerLevel]
+//                 )
+//            {
+//                [self readFstBleCharacteristic:characteristic];
+//            }
+//
+//            NSLog(@"        CAN NOTIFY");
+//        }
+//        
+//        if (characteristic.properties & CBCharacteristicPropertyRead)
+//        {
+//            if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration] ||
+//               [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo]
+//               )
+//            {
+//                [self readFstBleCharacteristic:characteristic];
+//            }
+//            NSLog(@"        CAN READ");
+//        }
+//        
+//        if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)
+//        {
+//            NSLog(@"        CAN WRITE WITHOUT RESPONSE");
+//        }
+//    }
 }
 
 #ifdef DEBUG

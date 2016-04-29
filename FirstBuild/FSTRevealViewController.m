@@ -8,7 +8,9 @@
 
 #import "FSTRevealViewController.h"
 #import "FSTParagon.h"
+#import "FSTOpal.h"
 #import "FSTParagonMenuViewController.h"
+#import "FSTOpalMenuViewController.h"
 
 @interface FSTRevealViewController ()
 
@@ -34,7 +36,12 @@
         vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"paragonMenu"];
         ((FSTParagonMenuViewController*)[((UINavigationController*)vc).childViewControllers objectAtIndex:0]).currentParagon = sender;
     }
-    
+    else if ([sender isKindOfClass:[FSTOpal class]])
+    {
+      vc = [[self storyboard] instantiateViewControllerWithIdentifier:@"opalMenu"];
+      ((FSTOpalMenuViewController*)[((UINavigationController*)vc).childViewControllers objectAtIndex:0]).currentOpal = sender;
+    }
+  
     if (vc)
     {
         self.rightViewController = vc;        

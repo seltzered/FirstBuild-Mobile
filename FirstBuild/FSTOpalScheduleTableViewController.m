@@ -91,22 +91,7 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
 {
   [super viewDidLoad];
   
-  NSMutableDictionary *_1 = [@{ kTitleKey : @"Sunday",
-                                     kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_2 = [@{ kTitleKey : @"Monday",
-                              kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_3 = [@{ kTitleKey : @"Tuesday",
-                              kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_4 = [@{ kTitleKey : @"Wednesday",
-                                kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_5 = [@{ kTitleKey : @"Thursday",
-                                kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_6 = [@{ kTitleKey : @"Friday",
-                                kDateKey : [NSDate date] } mutableCopy];
-  NSMutableDictionary *_7 = [@{ kTitleKey : @"Saturday",
-                                kDateKey : [NSDate date] } mutableCopy];
-  
-  self.dataArray = @[_1, _2, _3, _4, _5, _6, _7];
+  self.dataArray = self.opal.schedule;
   
   self.dateFormatter = [[NSDateFormatter alloc] init];
   [self.dateFormatter setDateStyle:NSDateFormatterNoStyle];    // show short-style date format
@@ -353,7 +338,15 @@ static NSString *kDatePickerID = @"datePicker"; // the cell containing the date 
   
   // update our data model
   NSMutableDictionary *itemData = self.dataArray[targetedCellIndexPath.row];
-  [itemData setValue:targetedDatePicker.date forKey:kDateKey];
+  
+  if (cell.switchEnabledOutlet.on) {
+    [itemData setValue:targetedDatePicker.date forKey:kDateKey];
+  }
+  else {
+    // TODO : FIX
+    [itemData setValue:nil forKey:kDateKey];
+  }
+  
   
   // update the cell's date string
   cell.labelTimeOutlet.text = [self.dateFormatter stringFromDate:targetedDatePicker.date];

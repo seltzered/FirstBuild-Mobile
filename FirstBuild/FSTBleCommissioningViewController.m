@@ -13,7 +13,6 @@
 #import "UIAlertView+Blocks.h"
 
 #import "FSTParagon.h"
-#import "FSTGECooktop.h"
 #import "FSTPizzaOven.h"
 #import "FSTOpal.h"
 

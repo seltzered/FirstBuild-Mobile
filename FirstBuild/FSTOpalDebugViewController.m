@@ -9,6 +9,10 @@
 #import "FSTOpalDebugViewController.h"
 
 @interface FSTOpalDebugViewController ()
+{
+  id previousOpalDelegate;
+
+}
 
 @property (strong, nonatomic) IBOutlet UILabel *stateOutlet;
 @property (strong, nonatomic) IBOutlet UISwitch *modeOutlet;
@@ -19,9 +23,10 @@
 
 @implementation FSTOpalDebugViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-  
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  previousOpalDelegate = self.opal.delegate;
   self.opal.delegate = self;
   switch ( self.opal.status.intValue) {
     case 0:
@@ -51,8 +56,15 @@
   self.lightOutlet.on = self.opal.nightLightOn;
   self.modeOutlet.on = self.opal.iceMakerOn;
   self.cleanCycleOutlet.text = self.opal.cleanCycle.stringValue;
-  
-    // Do any additional setup after loading the view.
+}
+
+- (void)dealloc
+{
+  self.opal.delegate = previousOpalDelegate;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 }
 
 - (void)didReceiveMemoryWarning {
