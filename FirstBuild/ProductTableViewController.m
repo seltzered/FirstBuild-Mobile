@@ -59,13 +59,12 @@
     [self configureBleDevices];
  
 #ifdef DEBUG
-    [self loadFakeParagon];
-  [self loadFakeOpal];
+//    [self loadFakeParagon];
+//  [self loadFakeOpal];
 #endif
     
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 }
-
 
 -(void)dealloc
 {
