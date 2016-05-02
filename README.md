@@ -8,12 +8,16 @@ The navigation is driven by SWRevealViewController which maps to a specific prod
 
 ##Current Products 
 - Paragon
+- Opal
 - Pizza Oven (in development)
 
 ###Paragon
 
 FirstBuild Induction Burner with Sous Vide capabilities.
 
+###Opal
+
+Primarily for supporting Over-The-Air upgrades of the firmware on the Opal (bluetooth and controls). Also supports scheduling of the ice maker.
 
 ###Pizza Oven
 
