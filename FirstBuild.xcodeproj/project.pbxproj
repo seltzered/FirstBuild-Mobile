@@ -123,6 +123,8 @@
 		5B7338BA1B0F9856004C931E /* FSTCookingProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338B91B0F9856004C931E /* FSTCookingProgressLayer.m */; };
 		5B7338BD1B0F9A7E004C931E /* FSTCookingProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */; };
 		5B7338C01B0F9CEA004C931E /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BF1B0F9CEA004C931E /* Session.m */; };
+		5B795E641CEF7FEB00F9107E /* opal_ble.bin.signed.01.04.test.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5B795E621CEF7FDA00F9107E /* opal_ble.bin.signed.01.04.test.ota */; };
+		5B795E651CEF7FEE00F9107E /* GE8868_01070000_ppr4_reset.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5B795E631CEF7FDA00F9107E /* GE8868_01070000_ppr4_reset.ota */; };
 		5B7C17A81C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C17A71C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.m */; };
 		5B7C17AB1C442B310016FC0D /* FSTParagonMenuHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C17AA1C442B310016FC0D /* FSTParagonMenuHelpViewController.m */; };
 		5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FB5531A4373C900553797 /* WifiCommissioningConnectingViewController.m */; };
@@ -479,6 +481,8 @@
 		5B7338BC1B0F9A7E004C931E /* FSTCookingProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTCookingProgressView.m; sourceTree = "<group>"; };
 		5B7338BE1B0F9CEA004C931E /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Session.h; sourceTree = "<group>"; };
 		5B7338BF1B0F9CEA004C931E /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
+		5B795E621CEF7FDA00F9107E /* opal_ble.bin.signed.01.04.test.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = opal_ble.bin.signed.01.04.test.ota; sourceTree = "<group>"; };
+		5B795E631CEF7FDA00F9107E /* GE8868_01070000_ppr4_reset.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = GE8868_01070000_ppr4_reset.ota; sourceTree = "<group>"; };
 		5B7C17A61C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonCommissioningWarningViewController.h; sourceTree = "<group>"; };
 		5B7C17A71C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonCommissioningWarningViewController.m; sourceTree = "<group>"; };
 		5B7C17A91C442B310016FC0D /* FSTParagonMenuHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonMenuHelpViewController.h; sourceTree = "<group>"; };
@@ -1754,6 +1758,8 @@
 			children = (
 				5B4A82461CE66F270039C5B3 /* opal_ble.bin.01.03.01.00.ota */,
 				5B4A824E1CECD0B60039C5B3 /* GE8868_01070000_ppr3.ota */,
+				5B795E621CEF7FDA00F9107E /* opal_ble.bin.signed.01.04.test.ota */,
+				5B795E631CEF7FDA00F9107E /* GE8868_01070000_ppr4_reset.ota */,
 			);
 			name = opal;
 			sourceTree = "<group>";
@@ -1850,6 +1856,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BF53D8D1C7248C8002C16A6 /* PizzaOven.xcassets in Resources */,
+				5B795E641CEF7FEB00F9107E /* opal_ble.bin.signed.01.04.test.ota in Resources */,
+				5B795E651CEF7FEE00F9107E /* GE8868_01070000_ppr4_reset.ota in Resources */,
 				5B4A824F1CECD0F90039C5B3 /* GE8868_01070000_ppr3.ota in Resources */,
 				5B4A82481CE66FCA0039C5B3 /* opal_ble.bin.01.03.01.00.ota in Resources */,
 				51FAEFFA1B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf in Resources */,
@@ -2265,8 +2273,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2277,10 +2285,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FirstBuild/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstbuild.firstbuild;
 				PRODUCT_NAME = FirstBuild;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "03f91a98-311f-4f7f-8f39-3f571ef4a3db";
 				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2292,8 +2300,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: General Electric Company, Inc. (2MMJ9338P2)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2304,10 +2312,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FirstBuild/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.firstbuild.firstbuild;
 				PRODUCT_NAME = FirstBuild;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "03f91a98-311f-4f7f-8f39-3f571ef4a3db";
 				STRIP_INSTALLED_PRODUCT = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
