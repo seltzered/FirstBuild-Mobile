@@ -19,6 +19,7 @@
 @optional - (void) iceMakerScheduleChanged: (NSArray*) schedule;
 @optional - (void) iceMakerScheduleEnabledChanged: (BOOL) on;
 @optional - (void) iceMakerErrorChanged;
+@optional - (void) iceMakerTemperatureChanged: (int) temperature;
 
 
 @optional - (void) iceMakerModeWritten:(NSError *)error;
@@ -38,6 +39,7 @@
 @property BOOL nightLightOn;
 @property BOOL scheduleEnabled;
 @property uint8_t opalErrorCode;
+@property int temperature;
 @property (strong, nonatomic) NSArray* schedule;
 
 @property (nonatomic, weak) id<FSTOpalDelegate> delegate;

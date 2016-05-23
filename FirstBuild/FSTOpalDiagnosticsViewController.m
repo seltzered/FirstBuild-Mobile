@@ -12,6 +12,7 @@
 {
   IBOutlet UILabel *bucketStatusOutlet;
   id previousOpalDelegate;
+  IBOutlet UILabel *temperatureOutlet;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -20,6 +21,7 @@
   previousOpalDelegate = self.currentOpal.delegate;
   self.currentOpal.delegate = self;
   [self setBucketLabel];
+  temperatureOutlet.text = [NSString stringWithFormat:@"%d",self.currentOpal.temperature];
 }
 
 - (void)dealloc
@@ -41,6 +43,11 @@
 -(void) iceMakerErrorChanged
 {
   [self setBucketLabel];
+}
+
+-(void) iceMakerTemperatureChanged:(int)temperature
+{
+  temperatureOutlet.text = [NSString stringWithFormat:@"%d",temperature];
 }
 
 @end

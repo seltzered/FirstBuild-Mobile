@@ -22,6 +22,8 @@ NSString * const FSTCharacteristicOpalTime = @"ED9E0784-FBF1-47F4-AFE2-D439A6C20
 NSString * const FSTCharacteristicOpalEnableSchedule = @"B45163B3-1092-4725-95DC-1A43AC4A9B88";
 NSString * const FSTCharacteristicOpalSchedule = @"9E1AE873-CB5E-4485-9884-5C5A3AD60E47";
 NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB984707B6";
+NSString * const FSTCharacteristicOpalTemperature = @"BD205030-B5CE-4847-B78D-83BFF1450A6B";
+
 
 NSString * const FSTCharacteristicOpalLogIndex = @"1F122C31-D1EA-447D-8409-56196DF130D2";
 NSString * const FSTCharacteristicOpalLog0 = @"1CE417B2-5BE0-4D4F-99C6-4086F49AE901";
@@ -55,7 +57,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     self.availableBleVersion = OPAL_BLE_AVAILABLE_VERSION;
     self.availableAppVersion = OPAL_APP_AVAILABLE_VERSION;
     self.opalErrorCode = 0;
- 
+    self.temperature = 0;
   }
   
   return self;
@@ -322,6 +324,11 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   {
     NSLog(@"char: FSTCharacteristicOpalLog6, data: %@", characteristic.value);
   }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalTemperature])
+  {
+    NSLog(@"char: FSTCharacteristicOpalTemperature, data: %@", characteristic.value);
+    [self handleTemperatureRead:characteristic];
+  }
 
 }
 
@@ -464,6 +471,24 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   }
 }
 
+-(void)handleTemperatureRead: (FSTBleCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 1)
+  {
+    DLog(@"handleTemperatureRead length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 1);
+    return;
+  }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
+  self.temperature = (char)bytes[0];
+  
+  if ([self.delegate respondsToSelector:@selector(iceMakerTemperatureChanged:)])
+  {
+    [self.delegate iceMakerTemperatureChanged:self.temperature];
+  }
+}
 
 - (NSString*) getLabelForStatus: (uint8_t)status {
   switch (status) {
@@ -572,24 +597,27 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
  */
 -(void) handleDiscoverCharacteristics: (NSMutableArray*)characteristics
 {
+  
+  //IMPORTANT: With some of the BLE devices its required to read the value before the notification
   [super handleDiscoverCharacteristics:characteristics];
   
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLight]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalCleanCycle]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTime]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTime]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTemperature]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLog0]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLog6]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLogIndex]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLog0]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLog6]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLogIndex]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalCleanCycle]).requiresValue = YES;
 
   
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
-  
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTemperature]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
   
 }

@@ -40,6 +40,7 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
       [self.peripheral setNotifyValue:YES forCharacteristic:c.bleCharacteristic];
     }
   }
+//  [self readNonRequiredCharacteristicValues];
   [[NSNotificationCenter defaultCenter] postNotificationName:FSTDeviceReadyNotification  object:self.peripheral];
 }
 
@@ -62,7 +63,20 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
 {
 }
 
-- (void) readRequiredCharacteristicValues
+- (void)readNonRequiredCharacteristicValues
+{
+  for (id key in self.characteristics)
+  {
+    FSTBleCharacteristic* c = [self.characteristics objectForKey:key];
+    if (!c.requiresValue && (c.bleCharacteristic.properties & CBCharacteristicPropertyRead)) {
+      [self readFstBleCharacteristic:c];
+      NSLog(@"reading initial value for non required... %@", c.UUID);
+    }
+  }
+}
+
+
+- (void)readRequiredCharacteristicValues
 {
   for (id key in self.characteristics)
   {
@@ -151,7 +165,7 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
       if (c.requiresValue) {
         requiredCharacteristicsCount++;
       }
-      if (c.hasInitialValue) {
+      if (c.requiresValue && c.hasInitialValue) {
         requiredCharacteristicsWithValueCount++;
       }
     }
