@@ -1829,7 +1829,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ri8-kR-elb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3151" y="-3419"/>
+            <point key="canvasLocation" x="-3183" y="-3739"/>
         </scene>
         <!--Opal Menu View Controller-->
         <scene sceneID="OcG-Zx-qhQ">
@@ -2011,7 +2011,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TDr-Q5-fTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2369" y="-3413"/>
+            <point key="canvasLocation" x="-2401" y="-3733"/>
         </scene>
         <!--Opal Diagnostics View Controller-->
         <scene sceneID="MSw-Aj-RW8">
@@ -2037,11 +2037,15 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcb-SQ-b7N">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temperature:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcb-SQ-b7N">
                                 <rect key="frame" x="39" y="56" width="103" height="21"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Fsv-U5-96r" appends="YES" id="Tit-sd-MfJ"/>
+                                </connections>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZq-H9-TVS" userLabel="temperature">
                                 <rect key="frame" x="522" y="56" width="58" height="21"/>
@@ -2070,8 +2074,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncn-Dz-XDx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Fsv-U5-96r" userLabel="temperatureTap">
+                    <connections>
+                        <segue destination="FRe-hf-PGb" kind="modal" id="vEM-Tf-2cY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1577" y="-2541"/>
+            <point key="canvasLocation" x="-1609" y="-2861"/>
         </scene>
         <!--Opal Menu Help View Controller-->
         <scene sceneID="dLH-8M-hq2">
@@ -2151,7 +2160,106 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1594" y="-4165"/>
+            <point key="canvasLocation" x="-1626" y="-4485"/>
+        </scene>
+        <!--TEMPERATURE-->
+        <scene sceneID="IE5-uF-5GX">
+            <objects>
+                <viewController id="xFG-A1-oEY" customClass="FSTOpalTemperatureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cGs-YO-Pc3"/>
+                        <viewControllerLayoutGuide type="bottom" id="eNT-l9-tqB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hhu-li-pk0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Er-JY-ieo" customClass="BEMSimpleLineGraphView">
+                                <rect key="frame" x="0.0" y="149" width="600" height="301"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.94509803920000002" green="0.34509803919999998" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableYAxisLabel" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="sizePoint">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="widthLine">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableXAxisLabel" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="colorPoint">
+                                        <color key="value" red="0.94509803920000002" green="0.34509803919999998" blue="0.17254901959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="colorXaxisLabel">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="colorYaxisLabel">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BbF-l8-mAa">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jh9-Xr-p1g">
+                                <rect key="frame" x="164" y="491" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2y-iQ-jDI">
+                                <rect key="frame" x="261" y="491" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VzH-YT-b8i">
+                                <rect key="frame" x="228" y="491" width="8" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6Er-JY-ieo" firstAttribute="centerY" secondItem="Hhu-li-pk0" secondAttribute="centerY" id="169-Xm-Ltr"/>
+                            <constraint firstItem="Jh9-Xr-p1g" firstAttribute="top" secondItem="Y2y-iQ-jDI" secondAttribute="top" id="41V-4t-hKr"/>
+                            <constraint firstItem="BbF-l8-mAa" firstAttribute="centerY" secondItem="Hhu-li-pk0" secondAttribute="centerY" id="9ME-J6-ft2"/>
+                            <constraint firstItem="VzH-YT-b8i" firstAttribute="top" secondItem="Y2y-iQ-jDI" secondAttribute="top" id="9c2-4W-Idc"/>
+                            <constraint firstItem="Y2y-iQ-jDI" firstAttribute="leading" secondItem="VzH-YT-b8i" secondAttribute="trailing" constant="25" id="Wdh-FJ-ekY"/>
+                            <constraint firstItem="6Er-JY-ieo" firstAttribute="centerX" secondItem="Hhu-li-pk0" secondAttribute="centerX" id="XEA-bs-cg9"/>
+                            <constraint firstItem="BbF-l8-mAa" firstAttribute="centerX" secondItem="Hhu-li-pk0" secondAttribute="centerX" id="Xmq-8K-MTI"/>
+                            <constraint firstItem="VzH-YT-b8i" firstAttribute="centerX" secondItem="Hhu-li-pk0" secondAttribute="centerX" id="a4B-2D-pTK"/>
+                            <constraint firstItem="6Er-JY-ieo" firstAttribute="height" secondItem="Hhu-li-pk0" secondAttribute="height" multiplier="0.5" constant="1" id="bMp-42-wW8"/>
+                            <constraint firstItem="VzH-YT-b8i" firstAttribute="centerX" secondItem="Hhu-li-pk0" secondAttribute="centerX" id="eMf-Pi-dED"/>
+                            <constraint firstItem="VzH-YT-b8i" firstAttribute="leading" secondItem="Jh9-Xr-p1g" secondAttribute="trailing" constant="22" id="icE-e2-wL9"/>
+                            <constraint firstItem="6Er-JY-ieo" firstAttribute="width" secondItem="Hhu-li-pk0" secondAttribute="width" id="ykz-cl-z4w"/>
+                            <constraint firstItem="VzH-YT-b8i" firstAttribute="top" secondItem="6Er-JY-ieo" secondAttribute="bottom" constant="40.5" id="yy7-fK-xS1"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="a4B-2D-pTK"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="TEMPERATURE" id="dMu-Rz-CKe">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="PYC-Cs-RgS">
+                            <connections>
+                                <action selector="cancelTap:" destination="xFG-A1-oEY" id="Cf6-4k-OEm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="BbF-l8-mAa" id="XHS-oU-EGi"/>
+                        <outlet property="graphView" destination="6Er-JY-ieo" id="wVG-z8-6oP"/>
+                        <outlet property="labelDates" destination="Jh9-Xr-p1g" id="iQs-CI-5Pj"/>
+                        <outlet property="labelValues" destination="Y2y-iQ-jDI" id="Bcu-Wt-rMk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pZK-fR-OhK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="-2826"/>
         </scene>
         <!--Opal Menu About View Controller-->
         <scene sceneID="KDK-Ia-mAF">
@@ -2297,7 +2405,25 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1601" y="-3369"/>
+            <point key="canvasLocation" x="-1633" y="-3689"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XPK-lS-eK1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FRe-hf-PGb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e0G-Df-9w4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xFG-A1-oEY" kind="relationship" relationship="rootViewController" id="MXf-Co-Epv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FRx-Oa-xKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-760" y="-2826"/>
         </scene>
     </scenes>
     <resources>

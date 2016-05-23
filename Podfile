@@ -6,6 +6,7 @@ pod 'RBStoryboardLink'
 pod 'SWRevealViewController'
 pod 'MBProgressHUD', '~> 0.9.1'
 pod 'TransitionKit', '~> 2.0.0'
+pod 'BEMSimpleLineGraph'
 
 #target 'FirstBuild' do
 

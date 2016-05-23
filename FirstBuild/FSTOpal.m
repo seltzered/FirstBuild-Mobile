@@ -58,6 +58,8 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     self.availableAppVersion = OPAL_APP_AVAILABLE_VERSION;
     self.opalErrorCode = 0;
     self.temperature = 0;
+    self.temperatureHistory = [[NSMutableArray alloc]init];
+    self.temperatureHistoryDates = [[NSMutableArray alloc]init];
   }
   
   return self;
@@ -483,6 +485,8 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   Byte bytes[characteristic.value.length] ;
   [data getBytes:bytes length:characteristic.value.length];
   self.temperature = (char)bytes[0];
+  [self.temperatureHistory addObject:[NSNumber numberWithInt:self.temperature]];
+  [self.temperatureHistoryDates addObject:[[NSDate alloc] init] ] ;
   
   if ([self.delegate respondsToSelector:@selector(iceMakerTemperatureChanged:)])
   {

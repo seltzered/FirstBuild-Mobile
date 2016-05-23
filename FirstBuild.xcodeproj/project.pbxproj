@@ -125,6 +125,7 @@
 		5B7338C01B0F9CEA004C931E /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7338BF1B0F9CEA004C931E /* Session.m */; };
 		5B795E641CEF7FEB00F9107E /* opal_ble.bin.signed.01.04.test.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5B795E621CEF7FDA00F9107E /* opal_ble.bin.signed.01.04.test.ota */; };
 		5B795E651CEF7FEE00F9107E /* GE8868_01070000_ppr4_reset.ota in Resources */ = {isa = PBXBuildFile; fileRef = 5B795E631CEF7FDA00F9107E /* GE8868_01070000_ppr4_reset.ota */; };
+		5B795E681CF375F900F9107E /* FSTOpalTemperatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B795E671CF375F900F9107E /* FSTOpalTemperatureViewController.m */; };
 		5B7C17A81C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C17A71C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.m */; };
 		5B7C17AB1C442B310016FC0D /* FSTParagonMenuHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7C17AA1C442B310016FC0D /* FSTParagonMenuHelpViewController.m */; };
 		5B7FB5541A4373C900553797 /* WifiCommissioningConnectingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B7FB5531A4373C900553797 /* WifiCommissioningConnectingViewController.m */; };
@@ -483,6 +484,8 @@
 		5B7338BF1B0F9CEA004C931E /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Session.m; sourceTree = "<group>"; };
 		5B795E621CEF7FDA00F9107E /* opal_ble.bin.signed.01.04.test.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = opal_ble.bin.signed.01.04.test.ota; sourceTree = "<group>"; };
 		5B795E631CEF7FDA00F9107E /* GE8868_01070000_ppr4_reset.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = GE8868_01070000_ppr4_reset.ota; sourceTree = "<group>"; };
+		5B795E661CF375F900F9107E /* FSTOpalTemperatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTOpalTemperatureViewController.h; sourceTree = "<group>"; };
+		5B795E671CF375F900F9107E /* FSTOpalTemperatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOpalTemperatureViewController.m; sourceTree = "<group>"; };
 		5B7C17A61C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonCommissioningWarningViewController.h; sourceTree = "<group>"; };
 		5B7C17A71C3F0C100016FC0D /* FSTParagonCommissioningWarningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTParagonCommissioningWarningViewController.m; sourceTree = "<group>"; };
 		5B7C17A91C442B310016FC0D /* FSTParagonMenuHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTParagonMenuHelpViewController.h; sourceTree = "<group>"; };
@@ -811,6 +814,8 @@
 				5BB985191CAD88A600B50242 /* FSTOpalScheduleTableViewController.m */,
 				5BB9851B1CADE07400B50242 /* FSTOpalScheduleTableViewCell.h */,
 				5BB9851C1CADE07400B50242 /* FSTOpalScheduleTableViewCell.m */,
+				5B795E661CF375F900F9107E /* FSTOpalTemperatureViewController.h */,
+				5B795E671CF375F900F9107E /* FSTOpalTemperatureViewController.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -1989,6 +1994,7 @@
 				5B8858191A72F63B00F22325 /* UILabel+MultiLineAutoSize.m in Sources */,
 				5B174DDB1A5F40C500A00505 /* ProductAddWrapperViewController.m in Sources */,
 				5B99E0841A1AA63F005FB881 /* WifiCommissioningNetworkListViewController.m in Sources */,
+				5B795E681CF375F900F9107E /* FSTOpalTemperatureViewController.m in Sources */,
 				5BBC7A7A1A66F7F100A79080 /* WifiCommissioningFoundViewController.m in Sources */,
 				5BEB7DB71C24344C006823E2 /* FSTPoultryChickenBoneInSousVideRecipe.m in Sources */,
 				5B027B8F1CC510730060A49F /* FSTGeBleProduct.m in Sources */,

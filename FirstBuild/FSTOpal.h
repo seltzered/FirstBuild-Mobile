@@ -42,6 +42,10 @@
 @property int temperature;
 @property (strong, nonatomic) NSArray* schedule;
 
+@property (strong, nonatomic) NSMutableArray* temperatureHistory;
+@property (strong, nonatomic) NSMutableArray* temperatureHistoryDates;
+
+
 @property (nonatomic, weak) id<FSTOpalDelegate> delegate;
 
 - (void) turnNightLightOn: (BOOL) on;

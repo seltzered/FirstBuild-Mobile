@@ -7,6 +7,7 @@
 //
 
 #import "FSTOpalDiagnosticsViewController.h"
+#import "FSTOpalTemperatureViewController.h"
 
 @implementation FSTOpalDiagnosticsViewController
 {
@@ -38,6 +39,13 @@
   } else {
     bucketStatusOutlet.text = @"Unknown";
   }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+  UINavigationController* nc = segue.destinationViewController;
+  ((FSTOpalTemperatureViewController*)nc.viewControllers[0]).opal = self.currentOpal;
+
 }
 
 -(void) iceMakerErrorChanged
