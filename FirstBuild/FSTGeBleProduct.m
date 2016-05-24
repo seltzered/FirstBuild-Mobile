@@ -42,6 +42,7 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   TKState* otaStateTransferringApplication;
   TKState* otaStateAbortRequested;
   TKState* otaStateFailed;
+  TKState* otaStateCompleted;
   
   TKEvent *otaEventInitialize;
   TKEvent *otaEventStart;
@@ -53,6 +54,7 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   TKEvent *otaEventDownloadCompleted;
   TKEvent *otaEventVerificationCompleted;
   TKEvent *otaEventApplicationTransferCompleted;
+  TKEvent *otaEventDone;
   
   //the value of the actual image type from the BLE module
   OtaImageType actualOtaImageType;
@@ -111,8 +113,9 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   otaStateAbortRequested = [TKState stateWithName:@"otaStateAbortRequested"];
   otaStateFailed = [TKState stateWithName:@"otaStateFailed"];
   otaStateTransferringApplication = [TKState stateWithName:@"otaStateTransferringApplication"];
+  otaStateCompleted = [TKState stateWithName:@"otaStateCompleted"];
   
-  [stateMachine addStates:@[ otaStateIdle, otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart , otaStateDownloadBleStart, otaStateDownloading , otaStateVerifyImageRequest, otaStateAbortRequested, otaStateFailed, otaStateTransferringApplication]];
+  [stateMachine addStates:@[ otaStateIdle, otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart , otaStateDownloadBleStart, otaStateDownloading , otaStateVerifyImageRequest, otaStateAbortRequested, otaStateFailed, otaStateTransferringApplication, otaStateCompleted]];
   
   [otaStateIdle setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateIdle>>");
@@ -227,6 +230,24 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
     NSLog(@"<<otaStateTransferringApplication:EXIT>>");
   }];
   
+  [otaStateCompleted setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
+    NSLog(@"<<otaStateCompleted>>");
+    FSTGeBleProduct* strongSelf = weakSelf;
+
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Update Complete"
+                                                                             message:@"The update completed successfully!"
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+      [strongSelf->stateMachine fireEvent:strongSelf->otaEventDone userInfo:nil error:nil];
+
+    }];
+    
+    [alertController addAction:actionOk];
+    [window.rootViewController presentViewController:alertController animated:YES completion:nil];
+  }];
+  
   [otaStateAbortRequested setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateAbortRequested>>");
   }];
@@ -281,12 +302,15 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   //event that signals the verification is completed
   otaEventVerificationCompleted =[TKEvent eventWithName:@"otaEventVerificationCompleted" transitioningFromStates:@[ otaStateVerifyImageRequest  ] toState:otaStateTransferringApplication];
   
-  otaEventApplicationTransferCompleted = [TKEvent eventWithName:@"otaEventApplicationTransferCompleted" transitioningFromStates:@[ otaStateTransferringApplication  ] toState:otaStateIdle];
+  otaEventApplicationTransferCompleted = [TKEvent eventWithName:@"otaEventApplicationTransferCompleted" transitioningFromStates:@[ otaStateTransferringApplication  ] toState:otaStateCompleted];
   
   //event that signals a reset
   otaEventInitialize =[TKEvent eventWithName:@"otaEventInitialize" transitioningFromStates:@[ otaStateIdle, otaStateStart,  otaStateStartRequested,otaStateDownloadApplicationStart , otaStateDownloadBleStart, otaStateDownloading , otaStateVerifyImageRequest, otaStateAbortRequested, otaStateFailed  ] toState:otaStateIdle];
   
-  [stateMachine addEvents:@[ otaEventStart, otaEventFailed, otaEventImageTypeSet,otaEventStartApplicationOta,otaEventStartBleOta,otaEventDownloadReady,otaEventDownloadCompleted,otaEventInitialize, otaEventVerificationCompleted, otaEventVerificationCompleted ]];
+  //event that signals the OTA is completely done and user accepted the notification
+  otaEventDone = [TKEvent eventWithName:@"otaEventDone" transitioningFromStates:@[ otaStateCompleted  ] toState:otaStateIdle];
+  
+  [stateMachine addEvents:@[ otaEventStart, otaEventFailed, otaEventImageTypeSet,otaEventStartApplicationOta,otaEventStartBleOta,otaEventDownloadReady,otaEventDownloadCompleted,otaEventInitialize, otaEventVerificationCompleted, otaEventVerificationCompleted, otaEventDone ]];
 }
 
 
@@ -711,7 +735,7 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   applicationFlashPercent = bytes[0];
   NSLog(@"percent: %lu", (unsigned long)applicationFlashPercent);
   
-  if (applicationFlashPercent==1) {
+  if (applicationFlashPercent==100) {
     [stateMachine fireEvent:otaEventApplicationTransferCompleted userInfo:nil error:nil];
   }
   
