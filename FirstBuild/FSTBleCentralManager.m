@@ -11,6 +11,17 @@
 #import "FSTBleSavedProduct.h"
 
 @implementation FSTBleCentralManager
+{
+  NSMutableArray* _discoveredDevicesCache;
+  NSMutableArray* _discoveredDevicesActiveScan;
+  NSTimer* _discoveryTimer;
+  BOOL _scanning;
+  NSUUID* _currentServiceScanningUuid ;
+  NSString* _discoveryNameStartsWithString;
+  
+  CBCentralManager* _centralManager;
+  CBPeripheralManager * _peripheralManager; //temporary
+}
 
 NSString * const FSTBleCentralManagerDeviceFound = @"FSTBleCentralManagerDeviceFound";
 NSString * const FSTBleCentralManagerDeviceUnFound = @"FSTBleCentralManagerDeviceUnFound";
@@ -21,14 +32,7 @@ NSString * const FSTBleCentralManagerNewDeviceBound = @"FSTBleCentralManagerNewD
 NSString * const FSTBleCentralManagerDeviceNameChanged = @"FSTBleCentralManagerDeviceNameChanged";
 NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManagerDeviceDisconnected";
 
-NSMutableArray* _discoveredDevicesCache;
-NSMutableArray* _discoveredDevicesActiveScan;
-NSTimer* _discoveryTimer;
-BOOL _scanning = NO;
-NSUUID* _currentServiceScanningUuid ;
 
-CBCentralManager* _centralManager;
-CBPeripheralManager * _peripheralManager; //temporary
 
 + (id) sharedInstance {
     
@@ -51,6 +55,8 @@ CBPeripheralManager * _peripheralManager; //temporary
         //callback check is removed we need to start the central manager here instead of in peripheralManagerDidUpdateState
         self.isPoweredOn = NO;
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        _scanning = NO;
+        _discoveryNameStartsWithString = @"";
         //_peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     }
     return self;
@@ -165,7 +171,7 @@ CBPeripheralManager * _peripheralManager; //temporary
     [self saveProductsToDefaults:[NSDictionary dictionaryWithDictionary:savedPeripherals] key:@"ble-devices"];
 }
 
--(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString
+-(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString withNameContaining: (NSString*)name
 {
     if (_scanning == YES)
     {
@@ -190,6 +196,7 @@ CBPeripheralManager * _peripheralManager; //temporary
         _currentServiceScanningUuid = uuid;
         _discoveredDevicesActiveScan = [[NSMutableArray alloc]init];
         _discoveredDevicesCache = [[NSMutableArray alloc]init];
+        _discoveryNameStartsWithString = name;
         _scanning = YES;
 
         //start a periodic timer to stop and start the scan, this is so we can find
@@ -285,6 +292,11 @@ CBPeripheralManager * _peripheralManager; //temporary
 
 -(void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+  
+    if (![peripheral.name hasPrefix:_discoveryNameStartsWithString])
+    {
+      return;
+    }
     BOOL _alreadyAnnouncedPeripheral = NO;
     
     //add it to the list of pending devices found

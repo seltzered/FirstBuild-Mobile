@@ -21,7 +21,7 @@ extern NSString * const FSTBleCentralManagerNewDeviceBound;
 extern NSString * const FSTBleCentralManagerDeviceNameChanged;
 extern NSString * const FSTBleCentralManagerDeviceDisconnected;
 
--(void)scanForDevicesWithServiceUUIDString: (NSString*)uuid;
+-(void)scanForDevicesWithServiceUUIDString: (NSString*)uuidString withNameContaining: (NSString*)name;
 -(void)stopScanning;
 -(void)savePeripheral: (CBPeripheral*)peripheral havingUUIDString: (NSString*)uuid withName: (NSString*)name className: (Class) className;
 -(NSDictionary*)getSavedPeripherals;

@@ -124,15 +124,15 @@ CBPeripheral* _currentlySelectedPeripheral;
     //TODO: service advertisement is the same for paragon and BLE ACM
     if(self.bleProductClass == [FSTParagon class])
     {
-        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253"];
+        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"e2779da7-0a82-4be7-b754-31ed3e727253" withNameContaining:@"Paragon Master"];
     }
     else if(self.bleProductClass == [FSTPizzaOven class])
     {
-        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"13333333-3333-3333-3333-333333333337"];
+        [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"13333333-3333-3333-3333-333333333337" withNameContaining:@"Pizza"];
     }
     else if(self.bleProductClass == [FSTOpal class])
     {
-      [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"E2779DA7-0A82-4BE7-B754-31ED3E727253"];
+      [[FSTBleCentralManager sharedInstance] scanForDevicesWithServiceUUIDString:@"E2779DA7-0A82-4BE7-B754-31ED3E727253" withNameContaining:@"OPAL"];
     }
     
     [self.wheelBackground.layer setCornerRadius:self.wheelBackground.frame.size.width/2]; // make it a circle
