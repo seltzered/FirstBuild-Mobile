@@ -631,7 +631,6 @@ FSTOpal* _fakeOpal;
 -(void)tableView: (UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     __weak typeof(self) weakSelf = self;
-    __weak typeof(indexPath) weakIndexPath = indexPath;
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
@@ -649,8 +648,8 @@ FSTOpal* _fakeOpal;
                               {
                                   NSLog(@"delete device");
 
-                                  FSTBleProduct * deletedItem = weakSelf.products[weakIndexPath.item];
-                                  [weakSelf.products removeObjectAtIndex:weakIndexPath.item];
+                                  FSTBleProduct * deletedItem = weakSelf.products[indexPath.item];
+                                  [weakSelf.products removeObjectAtIndex:indexPath.item];
                                   [[FSTBleCentralManager sharedInstance] deleteSavedPeripheralWithUUIDString: [deletedItem.savedUuid UUIDString]];
                                   
                                   //if we have the actual peripheral information lets force a removal from the list. we don't have the
