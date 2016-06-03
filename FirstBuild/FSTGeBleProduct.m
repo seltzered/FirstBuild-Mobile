@@ -232,7 +232,14 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
   
   [otaStateCompleted setDidEnterStateBlock:^(TKState *state, TKTransition *transition) {
     NSLog(@"<<otaStateCompleted>>");
+    
     FSTGeBleProduct* strongSelf = weakSelf;
+    
+    //read the new versions after its completed
+    FSTBleCharacteristic* characteristic = [strongSelf.characteristics objectForKey:FSTCharacteristicOtaBleInfo];
+    [strongSelf readFstBleCharacteristic:characteristic];
+    characteristic = [strongSelf.characteristics objectForKey:FSTCharacteristicOtaAppVersion];
+    [strongSelf readFstBleCharacteristic:characteristic];
 
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Update Complete"
