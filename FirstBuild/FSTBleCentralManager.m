@@ -49,15 +49,10 @@ NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManager
 {
     self = [super init];
     if (self) {
-        //TODO
-        //temporary hack for BLE ACM
-        //this startup then triggers the central manager initialization. once the service
-        //callback check is removed we need to start the central manager here instead of in peripheralManagerDidUpdateState
         self.isPoweredOn = NO;
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         _scanning = NO;
         _discoveryNameStartsWithString = @"";
-        //_peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     }
     return self;
 }
@@ -277,7 +272,6 @@ NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManager
 
 -(void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    
     if ([[self getSavedPeripherals] objectForKey:[peripheral.identifier UUIDString]])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:FSTBleCentralManagerDeviceDisconnected object:peripheral];
@@ -286,7 +280,6 @@ NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManager
     {
         DLog(@"disconnected device does not exist in saved devices, probably just removed manually");
     }
-    
 }
 
 
