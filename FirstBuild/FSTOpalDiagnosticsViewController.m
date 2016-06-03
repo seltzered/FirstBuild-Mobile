@@ -57,5 +57,10 @@
 {
   temperatureOutlet.text = [NSString stringWithFormat:@"%d",temperature];
 }
+- (IBAction)emailTapAction:(id)sender
+{
+  [self.currentOpal compileOpalLog];
+  
+}
 
 @end

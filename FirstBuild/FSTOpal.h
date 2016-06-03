@@ -53,5 +53,6 @@
 - (void) turnIceMakerScheduleOn: (BOOL) on;
 - (void) configureSchedule: (NSArray*) schedule ;
 - (void) checkForAndUpdateFirmware ;
+- (void) compileOpalLog ;
 
 @end
