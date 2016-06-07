@@ -154,10 +154,12 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   //  Your time zone: 3/24/2016, 8:53:06 AM GMT-4:00 DST
 
   
-  uint32_t secondsSince1970 = (uint32_t)[[NSDate date]timeIntervalSince1970] + (int32_t)[[NSTimeZone systemTimeZone] secondsFromGMT];
+  uint32_t secondsSince1970 = (uint32_t)[[NSDate date]timeIntervalSince1970] + (int32_t)[[NSTimeZone systemTimeZone] secondsFromGMT] + (int32_t)[[[NSCalendar currentCalendar]timeZone] isDaylightSavingTime];
   NSLog(@"current date: %d", secondsSince1970);
   
   NSMutableData *data = [[NSMutableData alloc] initWithBytes:&secondsSince1970 length:sizeof(uint32_t)];
+  
+  NSLog(@"length : %ld", sizeof(uint32_t));
   if (characteristic)
   {
     [self writeFstBleCharacteristic:characteristic withValue:data];
@@ -622,7 +624,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 - (void) deviceReady
 {
   [super deviceReady];
-  [self writeCurrentTime];
+//  [self writeCurrentTime];
   [self abortOta];
   
 //  [((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]) pollWithInterval:2.0];
@@ -645,7 +647,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLight]).requiresValue = YES;
-//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTime]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTime]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTemperature]).requiresValue = YES;
 //  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule]).requiresValue = YES;
 //  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).requiresValue = YES;
@@ -741,7 +743,9 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 }
 
 - (void) turnIceMakerScheduleOn:(BOOL)on  {
-  [self writeScheduleEnable:on];
+  [self writeCurrentTime];
+//  [self writeScheduleEnable:on];
+  
 }
 
 - (void) configureSchedule: (NSArray*) schedule {
