@@ -186,6 +186,7 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
   FSTBleCharacteristic* _characteristic = [self.characteristics objectForKey:[characteristic.UUID UUIDString]];
   
   if ([self.loadingProgress intValue] < 1) {
+    NSLog(@"loading progress for %@ is %@ complete", self.friendlyName, self.loadingProgress);
     [self updateRequiredCharacteristicProgressWithCharacteristic:_characteristic];
   }
   
@@ -218,6 +219,7 @@ NSString * const FSTBatteryLevelChangedNotification         = @"FSTBatteryLevelC
 {
     DLog("discovered services for peripheral %@", peripheral.identifier);
     numberOfServicesFullyDiscovered = 0;
+    _loadingProgress = @0;
     NSArray * services = [self.peripheral services];
     for (CBService *service in services)
     {

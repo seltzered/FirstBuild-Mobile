@@ -1246,71 +1246,31 @@ static const uint8_t STAGE_SIZE = 8;
 
 -(void)handleDiscoverCharacteristics: (NSMutableArray*)characteristics
 {
-    [super handleDiscoverCharacteristics:characteristics];
-    
-//    self.initialCharacteristicValuesRead = NO;
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicProbeConnectionState];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBatteryLevel];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicBurnerState];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentTemperature];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentCookStage];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentCookState];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCookConfiguration];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserInfo];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicRemainingHoldTime];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicCurrentPowerLevel];
-//    [requiredCharacteristics setObject:[NSNumber numberWithBool:0] forKey:FSTCharacteristicUserSelectedCookMode];
-  
-//    NSLog(@"=======================================================================");
-    //NSLog(@"SERVICE %@", [service.UUID UUIDString]);
-    
-//    for (CBCharacteristic *characteristic in characteristics)
-//    {
-//        [self.characteristics setObject:characteristic forKey:[characteristic.UUID UUIDString]];
-//        NSLog(@"    CHARACTERISTIC %@", [characteristic.UUID UUIDString]);
-//        
-//        if (characteristic.properties & CBCharacteristicPropertyWrite)
-//        {
-//            NSLog(@"        CAN WRITE");
-//        }
-//        
-//        if (characteristic.properties & CBCharacteristicPropertyNotify)
-//        {
-//            if  (
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBatteryLevel] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicBurnerState] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentTemperature] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookStage] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicProbeConnectionState] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentCookState] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicTempDisplayUnit] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicRemainingHoldTime] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserSelectedCookMode] ||
-//                 [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCurrentPowerLevel]
-//                 )
-//            {
-//                [self readFstBleCharacteristic:characteristic];
-//            }
-//
-//            NSLog(@"        CAN NOTIFY");
-//        }
-//        
-//        if (characteristic.properties & CBCharacteristicPropertyRead)
-//        {
-//            if([[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicCookConfiguration] ||
-//               [[[characteristic UUID] UUIDString] isEqualToString: FSTCharacteristicUserInfo]
-//               )
-//            {
-//                [self readFstBleCharacteristic:characteristic];
-//            }
-//            NSLog(@"        CAN READ");
-//        }
-//        
-//        if (characteristic.properties & CBCharacteristicPropertyWriteWithoutResponse)
-//        {
-//            NSLog(@"        CAN WRITE WITHOUT RESPONSE");
-//        }
-//    }
+  [super handleDiscoverCharacteristics:characteristics];
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicProbeConnectionState]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicBatteryLevel]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicBurnerState]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentTemperature]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentCookStage]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentCookState]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCookConfiguration]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicUserInfo]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicRemainingHoldTime]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentPowerLevel]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicUserSelectedCookMode]).requiresValue = YES;
+
+
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicProbeConnectionState]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicBatteryLevel]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicBurnerState]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentTemperature]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentCookStage]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentCookState]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCookConfiguration]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicRemainingHoldTime]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicCurrentPowerLevel]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicUserSelectedCookMode]).wantNotification = YES;
+
 }
 
 #ifdef DEBUG

@@ -9,9 +9,13 @@
 #import "FSTOpal.h"
 #import "UIAlertView+Blocks.h"
 #import "Ota.h"
+#import "MBProgressHUD.h"
 
 @implementation FSTOpal
-{ 
+{
+  int opalLogsCollected;
+  MBProgressHUD *userActivityHud;
+
 }
 
 NSString * const FSTCharacteristicOpalStatus = @"097A2751-CA0D-432F-87B5-7D2F31E45551";
@@ -24,9 +28,13 @@ NSString * const FSTCharacteristicOpalSchedule = @"9E1AE873-CB5E-4485-9884-5C5A3
 NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB984707B6";
 NSString * const FSTCharacteristicOpalTemperature = @"BD205030-B5CE-4847-B78D-83BFF1450A6B";
 
-
 NSString * const FSTCharacteristicOpalLogIndex = @"1F122C31-D1EA-447D-8409-56196DF130D2";
 NSString * const FSTCharacteristicOpalLog0 = @"1CE417B2-5BE0-4D4F-99C6-4086F49AE901";
+NSString * const FSTCharacteristicOpalLog1 = @"3E2D48C7-0336-40D7-B281-E5C5F70366B8";
+NSString * const FSTCharacteristicOpalLog2 = @"21959717-F8D2-46ED-925E-FCDFEB666F65";
+NSString * const FSTCharacteristicOpalLog3 = @"EC780A17-1E86-4633-8BB7-4AD614413942";
+NSString * const FSTCharacteristicOpalLog4 = @"06124193-F87C-49F3-AB44-59AA1DBA82F1";
+NSString * const FSTCharacteristicOpalLog5 = @"21D3FDBB-5C1D-4ACE-9578-7D3D3CEBA147";
 NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC510D";
 
 - (id)init
@@ -60,6 +68,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     self.temperature = 0;
     self.temperatureHistory = [[NSMutableArray alloc]init];
     self.temperatureHistoryDates = [[NSMutableArray alloc]init];
+    opalLogsCollected = 0;
   }
   
   return self;
@@ -314,22 +323,50 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     NSLog(@"char: FSTCharacteristicOpalError, data: %@", characteristic.value);
     [self handleErrorRead:characteristic];
   }
-  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLogIndex])
-  {
-    NSLog(@"char: FSTCharacteristicOpalLogIndex, data: %@", characteristic.value);
-  }
-  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog0])
-  {
-    NSLog(@"char: FSTCharacteristicOpalLog0, data: %@", characteristic.value);
-  }
-  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog6])
-  {
-    NSLog(@"char: FSTCharacteristicOpalLog6, data: %@", characteristic.value);
-  }
   else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalTemperature])
   {
     NSLog(@"char: FSTCharacteristicOpalTemperature, data: %@", characteristic.value);
     [self handleTemperatureRead:characteristic];
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLogIndex])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLogIndex, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog0])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLog0, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog1])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLog1, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog2])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLog2, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog3])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLog3, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog4])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLog4, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog5])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLog5, data: %@", characteristic.value);
+  }
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalLog6])
+  {
+    [self checkCompileOpalLogComplete];
+    NSLog(@"char: FSTCharacteristicOpalLog6, data: %@", characteristic.value);
   }
 
 }
@@ -710,5 +747,107 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 - (void) configureSchedule: (NSArray*) schedule {
   [self writeSchedule:schedule];
 }
+
+- (void) compileOpalLog {
+  
+  UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+  UIView *view = window.rootViewController.view;
+  [MBProgressHUD hideAllHUDsForView:view animated:YES];
+  userActivityHud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+  opalLogsCollected = 0;
+  
+  FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog0];
+  [self readFstBleCharacteristic:characteristic];
+  
+  characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog1];
+  [self readFstBleCharacteristic:characteristic];
+
+  characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog2];
+  [self readFstBleCharacteristic:characteristic];
+
+  characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog3];
+  [self readFstBleCharacteristic:characteristic];
+
+  characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog4];
+  [self readFstBleCharacteristic:characteristic];
+
+  characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog5];
+  [self readFstBleCharacteristic:characteristic];
+
+  characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog6];
+  [self readFstBleCharacteristic:characteristic];
+  
+  characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLogIndex];
+  [self readFstBleCharacteristic:characteristic];
+}
+
+- (void)checkCompileOpalLogComplete {
+  opalLogsCollected++;
+  
+  NSMutableString* data = [[NSMutableString alloc]init];
+  
+  if (opalLogsCollected==8)
+  {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIView *view = window.rootViewController.view;
+    [MBProgressHUD hideAllHUDsForView:view animated:YES];
+
+    FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLogIndex];
+    NSString* header = [NSString stringWithFormat:@"------------ DATA DUMP (index: %@) ------------------",characteristic.value ];
+    data = (NSMutableString*)[data stringByAppendingString:header];
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog1];
+    data = (NSMutableString*)[data stringByAppendingString:[self getStringValueForCharacteristic:characteristic] ];
+   
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog1];
+    data = (NSMutableString*)[data stringByAppendingString:[self getStringValueForCharacteristic:characteristic] ];
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog2];
+    data = (NSMutableString*)[data stringByAppendingString:[self getStringValueForCharacteristic:characteristic] ];
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog3];
+    data = (NSMutableString*)[data stringByAppendingString:[self getStringValueForCharacteristic:characteristic] ];
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog4];
+    data = (NSMutableString*)[data stringByAppendingString:[self getStringValueForCharacteristic:characteristic] ];
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog5];
+    data = (NSMutableString*)[data stringByAppendingString:[self getStringValueForCharacteristic:characteristic] ];
+    characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalLog6];
+    data = (NSMutableString*)[data stringByAppendingString:[self getStringValueForCharacteristic:characteristic] ];
+    
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    data= (NSMutableString*)[data stringByAppendingString:@"\n\n TEMP DATA \n\n"];
+    for (int i = 0; i< self.temperatureHistoryDates.count; i++) {
+      NSString* value = [NSString stringWithFormat:@"%@", self.temperatureHistory[i]];
+      NSString* date = [dateFormatter stringFromDate:self.temperatureHistoryDates[i]];
+      NSString* logEntry = [NSString stringWithFormat:@"%@:%@,",date, value];
+      data = (NSMutableString*)[data stringByAppendingString:logEntry];
+    }
+    
+    self.temperatureHistory = [[NSMutableArray alloc]init];
+    self.temperatureHistoryDates = [[NSMutableArray alloc]init];
+    NSLog(@"contents: %@", data);
+    NSString *subject = [NSString stringWithFormat:@"Opal Logfile Diagnostics"];
+    NSString *mail = [NSString stringWithFormat:@"scott@firstbuild.com"];
+    NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"mailto:?to=%@&subject=%@&body=%@",
+                                                [mail stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
+                                                [subject stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding],
+                                                [data stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+    [[UIApplication sharedApplication] openURL:url];
+
+  }
+}
+
+- (NSString*) getStringValueForCharacteristic: (FSTBleCharacteristic*) characteristic {
+  NSData *data = characteristic.value;
+  NSUInteger capacity = data.length * 2;
+  NSMutableString *sbuf = [NSMutableString stringWithCapacity:capacity];
+  const unsigned char *buf = data.bytes;
+  NSInteger i;
+  for (i=0; i<data.length; ++i) {
+    [sbuf appendFormat:@"%02lX,", (unsigned long)buf[i]];
+  }
+  return [sbuf stringByAppendingString:@"::::::"];
+}
+
 
 @end

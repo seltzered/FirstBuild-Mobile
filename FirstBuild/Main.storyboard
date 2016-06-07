@@ -2053,6 +2053,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Logfile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Na-cU-ntV">
+                                <rect key="frame" x="39" y="85" width="96.5" height="21"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="aNE-lJ-OlY" appends="YES" id="u9d-QH-ZBt"/>
+                                </connections>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2062,7 +2072,9 @@
                             <constraint firstItem="xZq-H9-TVS" firstAttribute="leading" secondItem="TJD-so-xfO" secondAttribute="leading" id="VD2-xD-zUj"/>
                             <constraint firstItem="TJD-so-xfO" firstAttribute="leading" secondItem="TYt-sA-RrX" secondAttribute="trailing" constant="5" id="Vo1-sl-Bv1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xZq-H9-TVS" secondAttribute="trailing" id="bnG-lQ-kfj"/>
+                            <constraint firstItem="9Na-cU-ntV" firstAttribute="leading" secondItem="O50-Ya-Kfg" secondAttribute="leadingMargin" constant="19" id="fCC-g0-y2l"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TJD-so-xfO" secondAttribute="trailing" constant="50" id="iiP-0D-GL6"/>
+                            <constraint firstItem="9Na-cU-ntV" firstAttribute="top" secondItem="mcb-SQ-b7N" secondAttribute="bottom" constant="8" id="ijp-Dd-X69"/>
                             <constraint firstItem="mcb-SQ-b7N" firstAttribute="top" secondItem="TYt-sA-RrX" secondAttribute="bottom" constant="8" id="o8v-f1-R4w"/>
                             <constraint firstItem="TJD-so-xfO" firstAttribute="centerY" secondItem="TYt-sA-RrX" secondAttribute="centerY" id="rU6-HA-IY6"/>
                             <constraint firstItem="xZq-H9-TVS" firstAttribute="centerY" secondItem="mcb-SQ-b7N" secondAttribute="centerY" id="tq2-Cv-JU7"/>
@@ -2077,6 +2089,11 @@
                 <tapGestureRecognizer id="Fsv-U5-96r" userLabel="temperatureTap">
                     <connections>
                         <segue destination="FRe-hf-PGb" kind="modal" id="vEM-Tf-2cY"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="aNE-lJ-OlY" userLabel="emailTap">
+                    <connections>
+                        <action selector="emailTapAction:" destination="mk8-yb-fji" id="bSO-YT-0Dn"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
