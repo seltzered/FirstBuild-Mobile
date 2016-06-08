@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33F1E1BA1D082B3500A30E0C /* GE8868_01070410_PPR4.ota in Resources */ = {isa = PBXBuildFile; fileRef = 33F1E1B91D082B2600A30E0C /* GE8868_01070410_PPR4.ota */; };
 		511A71621B5ED7C10015E4B5 /* ProductBatteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 511A71611B5ED7C10015E4B5 /* ProductBatteryView.m */; };
 		51441A3D1B9771F400AF10E6 /* FSTRecipeTypeTableContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51441A3C1B9771F400AF10E6 /* FSTRecipeTypeTableContainerViewController.m */; };
 		51441A431B9786E300AF10E6 /* FSTSavedDisplayRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51441A421B9786E300AF10E6 /* FSTSavedDisplayRecipeViewController.m */; };
@@ -265,6 +266,7 @@
 
 /* Begin PBXFileReference section */
 		1D09D3E714F461A55F66EB58 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		33F1E1B91D082B2600A30E0C /* GE8868_01070410_PPR4.ota */ = {isa = PBXFileReference; lastKnownFileType = file; path = GE8868_01070410_PPR4.ota; sourceTree = "<group>"; };
 		511A71601B5ED7C10015E4B5 /* ProductBatteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductBatteryView.h; sourceTree = "<group>"; };
 		511A71611B5ED7C10015E4B5 /* ProductBatteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductBatteryView.m; sourceTree = "<group>"; };
 		51441A3B1B9771F400AF10E6 /* FSTRecipeTypeTableContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSTRecipeTypeTableContainerViewController.h; sourceTree = "<group>"; };
@@ -1771,6 +1773,7 @@
 				5BDF37251D0701E000F77BF4 /* GE8868_01070311_PPR4.ota */,
 				5B795E631CEF7FDA00F9107E /* GE8868_01070000_ppr4_reset.ota */,
 				5BDF37231D01D84300F77BF4 /* GE8868_01070110_ota.ota */,
+				33F1E1B91D082B2600A30E0C /* GE8868_01070410_PPR4.ota */,
 			);
 			name = opal;
 			sourceTree = "<group>";
@@ -1839,7 +1842,7 @@
 				TargetAttributes = {
 					5B9EF0ED19DEEE1000E8D9F1 = {
 						CreatedOnToolsVersion = 6.0.1;
-						DevelopmentTeam = BQ7X69DNU7;
+						DevelopmentTeam = 2MMJ9338P2;
 					};
 				};
 			};
@@ -1870,6 +1873,7 @@
 				5B795E641CEF7FEB00F9107E /* opal_ble.bin.signed.01.04.test.ota in Resources */,
 				5B795E651CEF7FEE00F9107E /* GE8868_01070000_ppr4_reset.ota in Resources */,
 				5BC81FB41D071A9100DAA006 /* GE8868_01070311_PPR4.ota in Resources */,
+				33F1E1BA1D082B3500A30E0C /* GE8868_01070410_PPR4.ota in Resources */,
 				5B4A824F1CECD0F90039C5B3 /* GE8868_01070000_ppr3.ota in Resources */,
 				5B4A82481CE66FCA0039C5B3 /* opal_ble.bin.01.03.01.00.ota in Resources */,
 				51FAEFFA1B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf in Resources */,
@@ -2299,7 +2303,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FirstBuild/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.field.firstbuild;
 				PRODUCT_NAME = FirstBuild;
 				PROVISIONING_PROFILE = "";
@@ -2314,8 +2318,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
