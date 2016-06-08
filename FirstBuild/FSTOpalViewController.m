@@ -46,9 +46,7 @@
   // update schedule switch
   [tableVc.scheduleEnabledSwitchOutlet setOn:self.opal.scheduleEnabled];
   
-  NSLog(@"gina] schedule :%@", (self.opal.scheduleEnabled)?@"yes":@"no");
-  NSLog(@"gina] schedule array:\n%@", self.opal.schedule);
-  NSLog(@"gina] time sync: %@", self.opal.time);
+  NSLog(@"gina] time sync: %@", self.opal.timeSync);
   
   MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
   [navigation setHeaderText:@"OPAL" withFrameRect:CGRectMake(0, 0, 120, 30)];

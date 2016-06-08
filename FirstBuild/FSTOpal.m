@@ -22,7 +22,7 @@ NSString * const FSTCharacteristicOpalStatus = @"097A2751-CA0D-432F-87B5-7D2F31E
 NSString * const FSTCharacteristicOpalMode = @"79994230-4B04-40CD-85C9-02DD1A8D4DD0";
 NSString * const FSTCharacteristicOpalLight = @"37988F00-EA39-4A2D-9983-AFAD6535C02E";
 NSString * const FSTCharacteristicOpalCleanCycle = @"EFE4BD77-0600-47D7-B3F6-DC81AF0D9AAF";
-NSString * const FSTCharacteristicOpalTime = @"ED9E0784-FBF1-47F4-AFE2-D439A6C207FC";
+NSString * const FSTCharacteristicOpalTimeSync = @"ED9E0784-FBF1-47F4-AFE2-D439A6C207FC";
 NSString * const FSTCharacteristicOpalEnableSchedule = @"B45163B3-1092-4725-95DC-1A43AC4A9B88";
 NSString * const FSTCharacteristicOpalSchedule = @"9E1AE873-CB5E-4485-9884-5C5A3AD60E47";
 NSString * const FSTCharacteristicOpalError = @"5BCBF6B1-DE80-94B6-0F4B-99FB984707B6";
@@ -132,7 +132,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 
 -(void)writeCurrentTime {
   
-  FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTime];
+  FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTimeSync];
   
   //
   //  Need to write in the following format...
@@ -154,12 +154,12 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   //  Your time zone: 3/24/2016, 8:53:06 AM GMT-4:00 DST
 
   
-  uint32_t secondsSince1970 = (uint32_t)[[NSDate date]timeIntervalSince1970] + (int32_t)[[NSTimeZone systemTimeZone] secondsFromGMT] + (int32_t)[[[NSCalendar currentCalendar]timeZone] isDaylightSavingTime];
-  NSLog(@"current date: %d", secondsSince1970);
+  uint32_t secondsSince1970 = (uint32_t)[[NSDate date]timeIntervalSince1970];
+  DLog(@"current date: %d", secondsSince1970);
   
   NSMutableData *data = [[NSMutableData alloc] initWithBytes:&secondsSince1970 length:sizeof(uint32_t)];
+  DLog(@"length : %ld", sizeof(uint32_t));
   
-  NSLog(@"length : %ld", sizeof(uint32_t));
   if (characteristic)
   {
     [self writeFstBleCharacteristic:characteristic withValue:data];
@@ -211,7 +211,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     DLog(@"wrote FSTCharacteristicOpalMode");
     [self handleModeWrite:error];
   }
-  else if([characteristic.UUID isEqualToString: FSTCharacteristicOpalTime])
+  else if([characteristic.UUID isEqualToString: FSTCharacteristicOpalTimeSync])
   {
     DLog(@"wrote FSTCharacteristicOpalTime");
     [self handleTimeWrite:error];
@@ -275,8 +275,10 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 -(void)handleTimeWrite: (NSError *)error
 {
   NSLog(@"handleWriteTime written");
-  FSTBleCharacteristic* timeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTime];
+  FSTBleCharacteristic* timeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTimeSync];
   [self readFstBleCharacteristic:timeCharacteristic];
+  
+  NSLog(@"RYAN 2) Send characteristic: %@", timeCharacteristic.value);
 }
 
 #pragma mark - read handlers
@@ -284,6 +286,8 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 -(void)readHandler: (FSTBleCharacteristic*)characteristic
 {
   [super readHandler:characteristic];
+  
+  NSLog(@"readHandler: %@", characteristic);
   
   if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalStatus])
   {
@@ -305,10 +309,10 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     NSLog(@"char: FSTCharacteristicOpalCleanCycle, data: %@", characteristic.value);
     [self handleCleanCycleRead:characteristic];
   }
-  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalTime])
+  else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalTimeSync])
   {
     NSLog(@"char: FSTCharacteristicOpalTime, data: %@", characteristic.value);
-    [self handleTimeRead:characteristic];
+    [self handleTimeSyncRead:characteristic];
   }
   else if ([characteristic.UUID isEqualToString: FSTCharacteristicOpalEnableSchedule])
   {
@@ -371,15 +375,6 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     NSLog(@"char: FSTCharacteristicOpalLog6, data: %@", characteristic.value);
   }
 
-}
-
--(void)handleTimeRead: (FSTBleCharacteristic*)characteristic
-{
-  if (characteristic.value.length != 4)
-  {
-    DLog(@"handleTime length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 4);
-    return;
-  }
 }
 
 // TODO: make this a component
@@ -619,13 +614,35 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   }
 }
 
+-(void)handleTimeSyncRead: (FSTBleCharacteristic*)characteristic
+{
+  if (characteristic.value.length != 4)
+  {
+    DLog(@"handleTimeSync length of %lu not what was expected, %d", (unsigned long)characteristic.value.length, 4);
+    return;
+  }
+  
+  NSData *data = characteristic.value;
+  Byte bytes[characteristic.value.length] ;
+  [data getBytes:bytes length:characteristic.value.length];
+
+  for (uint32_t i=0; i<=2; i++) {
+    DLog(@"------ index: %d, data %d", i, (uint32_t)bytes[i*2]);
+  }
+  
+  
+  
+//  DLog(@"gina] data: %@", time);
+//  self.timeSync = time;
+}
+
 
 #pragma mark - Characteristic Discovery Handler
 - (void) deviceReady
 {
   [super deviceReady];
-//  [self writeCurrentTime];
-  [self abortOta];
+  [self writeCurrentTime];
+//  [self abortOta];
   
 //  [((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]) pollWithInterval:2.0];
 
@@ -647,7 +664,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLight]).requiresValue = YES;
-  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTime]).requiresValue = YES;
+//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTime]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTemperature]).requiresValue = YES;
 //  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule]).requiresValue = YES;
 //  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).requiresValue = YES;
@@ -743,8 +760,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 }
 
 - (void) turnIceMakerScheduleOn:(BOOL)on  {
-  [self writeCurrentTime];
-//  [self writeScheduleEnable:on];
+  [self writeScheduleEnable:on];
   
 }
 

@@ -15,6 +15,7 @@
 @optional - (void) iceMakerStatusChanged: (NSNumber*) status withLabel: (NSString*)label;
 @optional - (void) iceMakerModeChanged: (BOOL) on;
 @optional - (void) iceMakerLightChanged: (BOOL) on;
+@optional - (void) iceMakerTimeSyncChanged: (NSDate*) date;
 @optional - (void) iceMakerCleanCycleChanged: (NSNumber*) cycle;
 @optional - (void) iceMakerScheduleChanged: (NSArray*) schedule;
 @optional - (void) iceMakerScheduleEnabledChanged: (BOOL) on;
@@ -34,7 +35,7 @@
 @property (strong, nonatomic) NSNumber* status;
 @property (strong, nonatomic) NSString* statusLabel;
 @property (strong, nonatomic) NSNumber* cleanCycle;
-@property (strong, nonatomic) NSDate* time;
+@property (strong, nonatomic) NSDate* timeSync;
 @property BOOL iceMakerOn;
 @property BOOL nightLightOn;
 @property BOOL scheduleEnabled;
