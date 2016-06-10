@@ -164,7 +164,6 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   {
     [self writeFstBleCharacteristic:characteristic withValue:data];
   }
-  
 }
 
 -(void)writeNightLight: (BOOL)on
@@ -277,8 +276,6 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   NSLog(@"handleWriteTime written");
   FSTBleCharacteristic* timeCharacteristic = [self.characteristics objectForKey:FSTCharacteristicOpalTimeSync];
   [self readFstBleCharacteristic:timeCharacteristic];
-  
-  NSLog(@"RYAN 2) Send characteristic: %@", timeCharacteristic.value);
 }
 
 #pragma mark - read handlers
@@ -623,17 +620,37 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   }
   
   NSData *data = characteristic.value;
-  Byte bytes[characteristic.value.length] ;
-  [data getBytes:bytes length:characteristic.value.length];
-
-  for (uint32_t i=0; i<=2; i++) {
-    DLog(@"------ index: %d, data %d", i, (uint32_t)bytes[i*2]);
+  NSUInteger len = [data length];
+  Byte *byteData = (Byte *)malloc(len);
+  memcpy(byteData, [data bytes], len);
+  
+  uint32_t value = 0;
+  
+  for(int i =0; i<len; i++){
+    
+    if(i == 0) {
+      value = value + byteData[0];
+    }
+    else if (i == 1) {
+      value = value + (byteData[1] << 8);
+    }
+    else if (i == 2) {
+      value = value + (byteData[2] << 16);
+    }
+    else if (i == 3) {
+      value = value + (byteData[3] << 24);
+    }
+    
   }
+  free(byteData);
   
+  NSDate *time = [NSDate dateWithTimeIntervalSince1970:value];
+  self.timeSync = time;
   
-  
-//  DLog(@"gina] data: %@", time);
-//  self.timeSync = time;
+  if([self.delegate respondsToSelector:@selector(iceMakerTimeSyncChanged:)])
+  {
+    [self.delegate iceMakerTimeSyncChanged:self.timeSync];
+  }
 }
 
 
@@ -645,7 +662,6 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 //  [self abortOta];
   
 //  [((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]) pollWithInterval:2.0];
-
 }
 
 
@@ -664,9 +680,9 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLight]).requiresValue = YES;
-//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTime]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTimeSync]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTemperature]).requiresValue = YES;
-//  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule]).requiresValue = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalEnableSchedule]).requiresValue = YES;
 //  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).requiresValue = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).requiresValue = YES;
 //  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLog0]).requiresValue = YES;
@@ -677,6 +693,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalStatus]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalMode]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLight]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTemperature]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
   
@@ -755,13 +772,12 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   [self writeMode:on];
 }
 
-- (void) turnNightLightOn:(BOOL)on  {
+- (void) turnNightLightOn: (BOOL)on  {
   [self writeNightLight:on];
 }
 
-- (void) turnIceMakerScheduleOn:(BOOL)on  {
+- (void) turnIceMakerScheduleOn: (BOOL)on  {
   [self writeScheduleEnable:on];
-  
 }
 
 - (void) configureSchedule: (NSArray*) schedule {

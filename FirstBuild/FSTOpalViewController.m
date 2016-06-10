@@ -43,10 +43,9 @@
     iceMakerStatusLabelOutlet.text = @"START MAKING ICE";
   }
   
-  // update schedule switch
+  // update switches
+  [tableVc.nightLightSwitchOutlet setOn:self.opal.nightLightOn];
   [tableVc.scheduleEnabledSwitchOutlet setOn:self.opal.scheduleEnabled];
-  
-  NSLog(@"gina] time sync: %@", self.opal.timeSync);
   
   MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
   [navigation setHeaderText:@"OPAL" withFrameRect:CGRectMake(0, 0, 120, 30)];
@@ -139,6 +138,10 @@
 
 - (void)iceMakerCleanCycleChanged:(NSNumber *)cycle {
   NSLog(@"iceMakerCleanCycleChanged: %d", cycle.intValue);
+}
+
+- (void)iceMakerTimeSyncChanged:(NSDate *)date {
+  DLog(@"time sync changed %@", date);
 }
 
 - (IBAction)menuToggleTapAction:(id)sender {
