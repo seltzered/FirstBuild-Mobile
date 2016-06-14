@@ -42,6 +42,7 @@
 @property uint8_t opalErrorCode;
 @property int temperature;
 @property (strong, nonatomic) NSArray* schedule;
+@property (strong, nonatomic) NSArray* schedules;
 
 @property (strong, nonatomic) NSMutableArray* temperatureHistory;
 @property (strong, nonatomic) NSMutableArray* temperatureHistoryDates;
