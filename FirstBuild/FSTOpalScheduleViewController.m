@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *viewList;
 @property (strong, nonatomic) NSMutableDictionary *frames;
-@property (strong, nonatomic) NSString *tag;
+@property (strong, nonatomic) NSString *selected;
 
 @end
 
@@ -44,22 +44,11 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  NSLog(@"schedule set as: %@", self.opal.schedules);
-  
-  for(int j=1; j<=7; j++) {
-      
-    NSString *time = [self.opal.schedules objectAtIndex:(j-1)];
+  [self updateData];
+}
 
-    for(int i=0; i<24; i++) {
-      
-      NSString *indexed = [time substringWithRange:NSMakeRange(i, 1)];
-      int tag = (i*10)+j;
-      BOOL on = ([indexed isEqualToString:@"1"])?YES:NO;
-      
-      [self schdule:[NSString stringWithFormat:@"%d", tag] shouldOn:on];
-    }
-    
-  }
+- (void)dealloc {
+  
 }
 
 - (void)addDots
@@ -110,15 +99,15 @@
   }
   else {
     NSString *tag = [self getTag:pos];
-    [self exchangeBackground:tag];
-    self.tag = nil;
+    [self toggleBackground:tag];
+    self.selected = nil;
   }
 }
 
 - (void)dragged:(UIPanGestureRecognizer *)gesture {
   
   if(gesture.state == UIGestureRecognizerStateEnded) {
-    self.tag = nil;
+    self.selected = nil;
   }
   else {
 //    CGPoint vel = [gesture velocityInView:self.viewList];
@@ -130,7 +119,25 @@
     }
     else {
       NSString *tag = [self getTag:pos];
-      [self exchangeBackground:tag];
+      [self toggleBackground:tag];
+    }
+  }
+}
+
+- (void)updateData {
+  NSLog(@"schedule set as: %@", self.opal.schedules);
+  
+  for(int j=1; j<=7; j++) {
+    
+    NSString *time = [self.opal.schedules objectAtIndex:(j-1)];
+    
+    for(int i=0; i<24; i++) {
+      
+      NSString *indexed = [time substringWithRange:NSMakeRange(i, 1)];
+      int tag = (i*10)+j;
+      BOOL on = ([indexed isEqualToString:@"1"])?YES:NO;
+      
+      [self schdule:tag shouldOn:on];
     }
   }
 }
@@ -152,35 +159,45 @@
   return nil;
 }
 
-- (void)exchangeBackground:(NSString *)tag {
+- (void)toggleBackground:(NSString *)tag {
   
-  if([self.tag isEqualToString:tag]) {
+  if([self.selected isEqualToString:tag]) {
     // ignore
   }
   else {
-    
-    UILabel *label = (UILabel *)[self.viewList viewWithTag:[tag integerValue]];
-    UIColor *color = [label backgroundColor];
-    
-    if([color isEqual:[UIColor lightGrayColor]]){
-      [self schdule:tag shouldOn:YES];
+    if(tag.length == 0){
+      // ignore
     }
     else {
-      [self schdule:tag shouldOn:NO];
-    }
+      int intTag = [tag intValue];
+      UILabel *label = (UILabel *)[self.viewList viewWithTag:intTag];
+      UIColor *color = [label backgroundColor];
+      
+      if([color isEqual:[UIColor lightGrayColor]]){
+        [self schdule:intTag shouldOn:YES];
+      }
+      else {
+        [self schdule:intTag shouldOn:NO];
+      }
 
-    self.tag = tag;
+      self.selected = tag;
+    }
   }
 }
 
-- (void)schdule:(NSString *)tag shouldOn:(BOOL)on
+- (void)schdule:(int)tag shouldOn:(BOOL)on
 {
-  UILabel *label = (UILabel *)[self.viewList viewWithTag:[tag integerValue]];
-  if(on) {
-    label.backgroundColor = [UIColor redColor];
+  if(tag == 0) {
+    //ignore
   }
   else {
-    label.backgroundColor = [UIColor lightGrayColor];
+    UILabel *label = (UILabel *)[self.viewList viewWithTag:tag];
+    if(on) {
+      label.backgroundColor = [UIColor redColor];
+    }
+    else {
+      label.backgroundColor = [UIColor lightGrayColor];
+    }
   }
 }
 
