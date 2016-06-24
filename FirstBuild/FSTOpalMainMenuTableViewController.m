@@ -7,7 +7,6 @@
 //
 
 #import "FSTOpalMainMenuTableViewController.h"
-#import "FSTOpalScheduleTableViewController.h"
 #import "FSTOpalScheduleViewController.h"
 
 @interface FSTOpalMainMenuTableViewController ()
@@ -44,11 +43,6 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-  if ([segue.destinationViewController isKindOfClass:[FSTOpalScheduleTableViewController class]])
-  {
-    FSTOpalScheduleTableViewController* vc = (FSTOpalScheduleTableViewController*)segue.destinationViewController;
-    vc.opal = self.opal;
-  }
   
   if([segue.destinationViewController isKindOfClass:[FSTOpalScheduleViewController class]])
   {

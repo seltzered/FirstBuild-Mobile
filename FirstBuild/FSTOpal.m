@@ -45,23 +45,6 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   {
     self.status = @0;
     
-    NSMutableDictionary *_1 = [@{ kTitleKey : @"Sunday",
-                                  kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *_2 = [@{ kTitleKey : @"Monday",
-                                  kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *_3 = [@{ kTitleKey : @"Tuesday",
-                                  kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *_4 = [@{ kTitleKey : @"Wednesday",
-                                  kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *_5 = [@{ kTitleKey : @"Thursday",
-                                  kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *_6 = [@{ kTitleKey : @"Friday",
-                                  kDateKey : [NSDate date] } mutableCopy];
-    NSMutableDictionary *_7 = [@{ kTitleKey : @"Saturday",
-                                  kDateKey : [NSDate date] } mutableCopy];
-    
-    self.schedule = @[_1, _2, _3, _4, _5, _6, _7];
-    
     self.availableBleVersion = OPAL_BLE_AVAILABLE_VERSION;
     self.availableAppVersion = OPAL_APP_AVAILABLE_VERSION;
     self.opalErrorCode = 0;
@@ -70,7 +53,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
     self.temperatureHistoryDates = [[NSMutableArray alloc]init];
     opalLogsCollected = 0;
     
-    self.schedules = nil;
+    self.schedules = [[NSMutableArray alloc] init];
   }
   
   return self;
@@ -91,46 +74,44 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 }
 
 -(void)writeSchedule: (NSArray*) schedule {
+  
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalSchedule];
   
-  // written in local time
-  Byte bytes[24];
-  memset(bytes,0,sizeof(bytes));
-//  
-//  NSDateFormatter* hourFormatter = [[NSDateFormatter alloc] init];
-//  [hourFormatter setDateFormat:@"HH"];
-//  NSDateFormatter* minuteFormatter = [[NSDateFormatter alloc] init];
-//  [minuteFormatter setDateFormat:@"mm"];
-//  
-//  for (uint8_t i=0; i<=6; i++) {
-//    if (schedule[i]) {
-//      NSDictionary* element = (NSDictionary*)schedule[i];
-//      NSDate* time = element[@"date"];
-//      uint8_t hour;
-//      uint8_t minute;
-//    
-//      if (time) {
-//        hour = [[hourFormatter stringFromDate:time] intValue];
-//        minute = [[minuteFormatter stringFromDate:time] intValue];
-//      }
-//      else {
-//        hour = 0;
-//        minute = 0;
-//      }
-//      
-//      bytes[i*2] = hour;
-//      bytes[i*2 + 1] = minute;
-//      NSLog(@"element %d %d : %d", i, hour, minute);
-//    }
-//  }
+  NSMutableString *string = [[NSMutableString alloc] init];
   
-//  NSData *data = [[NSData alloc]initWithBytes:bytes length:sizeof(bytes)];
-  NSData *data = [[NSData alloc] initWithBytes:@"000000000000000000000000000000000000000000000000" length:sizeof(bytes)];
-  
+  for(NSString *binary in schedule) {
+    NSUInteger value = 0;
+    
+    for(int i=0; i<[binary length]; i++){
+      
+      NSString *indexed = [binary substringWithRange:NSMakeRange(i, 1)];
+      value = value + ([indexed integerValue] << i);
+    }
+    
+    NSString *hex = [NSString stringWithFormat:@"%02lX", value];
+    [string appendString:hex];
+  }
+
+  NSData *data = [self hexToBytes:string];
+
   if (characteristic)
   {
     [self writeFstBleCharacteristic:characteristic withValue:data];
   }
+}
+
+-(NSData*)hexToBytes:(NSString *)string {
+  NSMutableData* data = [NSMutableData data];
+  
+  for (int i = 0; i+2 <= string.length; i+=2) {
+    NSRange range = NSMakeRange(i, 2);
+    NSString* hexStr = [string substringWithRange:range];
+    NSScanner* scanner = [NSScanner scannerWithString:hexStr];
+    unsigned int intValue;
+    [scanner scanHexInt:&intValue];
+    [data appendBytes:&intValue length:1];
+  }
+  return data;
 }
 
 -(void)writeCurrentTime {
@@ -158,10 +139,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 
   
   uint32_t secondsSince1970 = (uint32_t)[[NSDate date]timeIntervalSince1970];
-  DLog(@"current date: %d", secondsSince1970);
-  
   NSMutableData *data = [[NSMutableData alloc] initWithBytes:&secondsSince1970 length:sizeof(uint32_t)];
-  DLog(@"length : %ld", sizeof(uint32_t));
   
   if (characteristic)
   {
@@ -407,50 +385,19 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   Byte *byteData = (Byte *)malloc(len);
   memcpy(byteData, [data bytes], len);
   
-  NSMutableString *sun = [[NSMutableString alloc] init];
-  NSMutableString *mon = [[NSMutableString alloc] init];
-  NSMutableString *tue = [[NSMutableString alloc] init];
-  NSMutableString *wed = [[NSMutableString alloc] init];
-  NSMutableString *thu = [[NSMutableString alloc] init];
-  NSMutableString *fri = [[NSMutableString alloc] init];
-  NSMutableString *sat = [[NSMutableString alloc] init];
+  if(self.schedules.count > 0) {
+    [self.schedules removeAllObjects];
+  }
   
   for(int i =0; i<len; i++){
     
     uint8_t data = byteData[i];
     
-    NSArray *array = [self getBinary:data];
-    
-    for(int bi=0; bi<7; bi++){
-      
-      NSString *object = [array objectAtIndex:bi];
-      if(bi == 0) {
-        [sun appendString:object];
-      }
-      else if(bi == 1) {
-        [mon appendString:object];
-      }
-      else if(bi == 2) {
-        [tue appendString:object];
-      }
-      else if(bi == 3) {
-        [wed appendString:object];
-      }
-      else if(bi == 4) {
-        [thu appendString:object];
-      }
-      else if(bi == 5) {
-        [fri appendString:object];
-      }
-      else if(bi == 6) {
-        [sat appendString:object];
-      }
-    }
+    NSString *binary = [self getBinary:data];
+    [self.schedules addObject:binary];
   }
   
   free(byteData);
-  
-  self.schedules = @[sun, mon, tue, wed, thu, fri, sat];
 }
 
 -(void)handleScheduleEnableRead: (FSTBleCharacteristic*)characteristic
@@ -883,7 +830,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   }
 }
 
-- (NSString*) getStringValueForCharacteristic: (FSTBleCharacteristic*) characteristic {
+- (NSString*)getStringValueForCharacteristic: (FSTBleCharacteristic*) characteristic {
   NSData *data = characteristic.value;
   NSUInteger capacity = data.length * 2;
   NSMutableString *sbuf = [NSMutableString stringWithCapacity:capacity];
@@ -895,18 +842,17 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   return [sbuf stringByAppendingString:@"::::::"];
 }
 
-- (NSArray *) getBinary: (int)byte {
+- (NSString *)getBinary: (int)byte {
   
-  NSMutableArray *binary = [[NSMutableArray alloc] init];
+  NSMutableString *binary = [[NSMutableString alloc] init];
   NSInteger numberCopy = byte;
   
   for(NSInteger i = 0; i < 8 ; i++) {
     
-    [binary addObject:((numberCopy & 1) ? @"1" : @"0")];
+    [binary appendString:((numberCopy & 1) ? @"1" : @"0")];
     numberCopy >>= 1;
   }
   
-  NSArray *reverse = [[binary reverseObjectEnumerator] allObjects];
-  return reverse;
+  return binary;
 }
 @end

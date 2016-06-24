@@ -47,24 +47,20 @@
   [self updateData];
 }
 
-- (void)dealloc {
-  
+- (void)viewWillDisappear:(BOOL)animated {
+  [self.opal configureSchedule:[self createData]];
 }
 
 - (void)addDots
 {
   NSArray *orderHour = @[@4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @0, @1, @2, @3];
   
-//  CGFloat eachWidth = (self.viewList.frame.size.width)/7;
-//  CGFloat eachHeight = (self.viewList.frame.size.height)/24;
-  
   for(int hour = 1; hour <= 24; hour++) {
-    
     for(int day = 1; day <= 7; day++) {
       
       UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 6, 6)];
       [label setTranslatesAutoresizingMaskIntoConstraints:NO];
-      [label setBackgroundColor:[UIColor redColor]];
+      [label setBackgroundColor:[self nonSelectedColor]];
       [label setClipsToBounds:YES];
       [label setUserInteractionEnabled:NO];
       [[label layer] setCornerRadius:3];
@@ -76,7 +72,6 @@
       NSUInteger selectedHour = [[orderHour objectAtIndex:(hour-1)] unsignedIntegerValue];
       NSUInteger tag = (((selectedHour)*10)+day);
       [label setTag:tag];
-      
       [self.viewList addSubview:label];
       
       CGFloat x = ((double)hour/24.5);
@@ -95,7 +90,7 @@
   
   CGPoint pos = [gesture locationInView:self.viewList];
   if(pos.x < 0 || pos.y < 0) {
-    NSLog(@"out of range");
+    // out of range
   }
   else {
     NSString *tag = [self getTag:pos];
@@ -107,15 +102,18 @@
 - (void)dragged:(UIPanGestureRecognizer *)gesture {
   
   if(gesture.state == UIGestureRecognizerStateEnded) {
+    
     self.selected = nil;
   }
   else {
+    
 //    CGPoint vel = [gesture velocityInView:self.viewList];
 //    NSLog(@"vert? %@", (vel.y > vel.x)? @"yes":@"no");
 //    
     CGPoint pos = [gesture locationInView:self.viewList];
+    
     if(pos.x < 0 || pos.y < 0) {
-      NSLog(@"out of range");
+      // out of range
     }
     else {
       NSString *tag = [self getTag:pos];
@@ -125,32 +123,38 @@
 }
 
 - (void)updateData {
-  NSLog(@"schedule set as: %@", self.opal.schedules);
   
-  for(int j=1; j<=7; j++) {
+  for(int i=1; i<=237; i++) { //237 - last tag number of dots. 23 - hour, 7 day(sat)
     
-    NSString *time = [self.opal.schedules objectAtIndex:(j-1)];
+    int day = i%10;
     
-    for(int i=0; i<24; i++) {
+    if(day > 0 && day < 8) {
       
-      NSString *indexed = [time substringWithRange:NSMakeRange(i, 1)];
-      int tag = (i*10)+j;
+      int hour = (i-day) / 10;
+      NSString *time = [self.opal.schedules objectAtIndex:hour];
+      
+      NSString *indexed= [time substringWithRange:NSMakeRange((day-1), 1)];
+      
       BOOL on = ([indexed isEqualToString:@"1"])?YES:NO;
       
-      [self schdule:tag shouldOn:on];
+      [self schdule:i shouldOn:on];
     }
   }
 }
 
-- (NSString *)getTag:(CGPoint)point
-{
-  CGPoint got = CGPointMake(round(point.x /7/7) , round(point.y /24));
+- (NSString *)getTag:(CGPoint)point {
+
+  CGFloat targetWidth = self.viewList.frame.size.width;
+  CGFloat targetHeight = self.viewList.frame.size.height+25; // 25 day title height
+  
+  CGFloat x = round((point.x / targetWidth) * 7);
+  CGFloat y = round((point.y / (targetHeight)) * 24);
   
   for(NSValue *point in [self.frames allValues]) {
     
     CGPoint conv = point.CGPointValue;
     
-    if(conv.x == got.x && conv.y == got.y){
+    if(conv.x == x && conv.y == y){
       NSArray *list = [self.frames allKeysForObject:point];
       return  [list objectAtIndex:0];
     }
@@ -173,7 +177,7 @@
       UILabel *label = (UILabel *)[self.viewList viewWithTag:intTag];
       UIColor *color = [label backgroundColor];
       
-      if([color isEqual:[UIColor lightGrayColor]]){
+      if([color isEqual:[self nonSelectedColor]]){
         [self schdule:intTag shouldOn:YES];
       }
       else {
@@ -193,12 +197,43 @@
   else {
     UILabel *label = (UILabel *)[self.viewList viewWithTag:tag];
     if(on) {
-      label.backgroundColor = [UIColor redColor];
+      label.backgroundColor = [self selectedColor];
     }
     else {
-      label.backgroundColor = [UIColor lightGrayColor];
+      label.backgroundColor = [self nonSelectedColor];
     }
   }
 }
 
+- (NSArray *)createData {
+  NSMutableString *data = [[NSMutableString alloc] init];
+  
+  for(int i=1; i<=237; i++) { //237 - last tag number of dots. 23 - hour, 7 day(sat)
+    
+    int day = i%10;
+    
+    if(day > 0 && day < 8) {
+      
+      UILabel *label = (UILabel *)[self.viewList viewWithTag:i];
+      BOOL isSelected = [label.backgroundColor isEqual:[self selectedColor]];
+      
+      [data appendString:(isSelected)?@"1":@"0"];
+      
+      if(day == 7 && i != 237){
+        [data appendString:@"\n"];
+      }
+    }
+  }
+  
+  NSArray *array = [data componentsSeparatedByString:@"\n"];
+  return array;
+}
+
+- (UIColor *)selectedColor {
+  return [UIColor orangeColor];
+}
+
+- (UIColor *)nonSelectedColor {
+  return [UIColor lightGrayColor];
+}
 @end
