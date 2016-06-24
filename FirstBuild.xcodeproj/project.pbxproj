@@ -256,7 +256,6 @@
 		6743AE1F19E30E46000D9CF3 /* MobiNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6743AE1E19E30E46000D9CF3 /* MobiNavigationController.m */; };
 		67926FF919EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67926FF819EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf */; };
 		99EF3DC41F5C03279158245A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D09D3E714F461A55F66EB58 /* libPods.a */; };
-		D52424B11D11D79B00B635B4 /* GE8868_01070510_PPR5.bin.ota in Resources */ = {isa = PBXBuildFile; fileRef = D52424AD1D11CD6D00B635B4 /* GE8868_01070510_PPR5.bin.ota */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -749,7 +748,6 @@
 		67926FF819EDCB6F00E346C2 /* PT_Sans-Narrow-Web-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PT_Sans-Narrow-Web-Bold.ttf"; sourceTree = "<group>"; };
 		7C32915B6E0C4545E2A923B7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8E41CC8E45B35A1D2EC877B4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		D52424AD1D11CD6D00B635B4 /* GE8868_01070510_PPR5.bin.ota */ = {isa = PBXFileReference; lastKnownFileType = file; name = GE8868_01070510_PPR5.bin.ota; path = ../../../Downloads/GE8868_01070510_PPR5.bin.ota; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1759,7 +1757,6 @@
 		5BF9C6E81CC56F0200AEFBCF /* opal */ = {
 			isa = PBXGroup;
 			children = (
-				D52424AD1D11CD6D00B635B4 /* GE8868_01070510_PPR5.bin.ota */,
 				5B4A82461CE66F270039C5B3 /* opal_ble.bin.01.03.01.00.ota */,
 				5B4A824E1CECD0B60039C5B3 /* GE8868_01070000_ppr3.ota */,
 				5B795E621CEF7FDA00F9107E /* opal_ble.bin.signed.01.04.test.ota */,
@@ -1862,7 +1859,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D52424B11D11D79B00B635B4 /* GE8868_01070510_PPR5.bin.ota in Resources */,
 				5B4A824F1CECD0F90039C5B3 /* GE8868_01070000_ppr3.ota in Resources */,
 				5B4A82481CE66FCA0039C5B3 /* opal_ble.bin.01.03.01.00.ota in Resources */,
 				51FAEFFA1B62F51E00A7DCF9 /* FSEmeric-SemiBold.otf in Resources */,
@@ -2306,7 +2302,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: GE Consumer & Industrial";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: GE Consumer & Industrial";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
