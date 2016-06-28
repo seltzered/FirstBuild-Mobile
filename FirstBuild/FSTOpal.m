@@ -93,6 +93,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   }
 
   NSData *data = [self hexToBytes:string];
+  NSLog(@"send scedule %@", data);
 
   if (characteristic)
   {

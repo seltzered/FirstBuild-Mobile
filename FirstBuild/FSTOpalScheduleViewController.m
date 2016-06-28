@@ -63,10 +63,10 @@
       [label setBackgroundColor:[self nonSelectedColor]];
       [label setClipsToBounds:YES];
       [label setUserInteractionEnabled:NO];
-      [[label layer] setCornerRadius:3];
+      [[label layer] setCornerRadius:5];
       
-      NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:6];
-      NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:6];
+      NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10];
+      NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10];
       [label addConstraints:@[width, height]];
       
       NSUInteger selectedHour = [[orderHour objectAtIndex:(hour-1)] unsignedIntegerValue];
@@ -74,8 +74,8 @@
       [label setTag:tag];
       [self.viewList addSubview:label];
       
-      CGFloat x = ((double)hour/24.5);
-      CGFloat y = ((double)day/7.5);
+      CGFloat x = ((double)hour/24.3);
+      CGFloat y = ((double)day/7.4);
   
       NSLayoutConstraint *xPos = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.viewList attribute:NSLayoutAttributeBottom multiplier:x constant:0];
       NSLayoutConstraint *yPos = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.viewList attribute:NSLayoutAttributeTrailing multiplier:y constant:0];
@@ -88,8 +88,9 @@
 
 - (void)tapped:(UITapGestureRecognizer *)gesture {
   
+  NSLog(@"taped!");
   CGPoint pos = [gesture locationInView:self.viewList];
-  if(pos.x < 0 || pos.y < 0) {
+  if(pos.y < 0) {
     // out of range
   }
   else {
@@ -112,7 +113,7 @@
 //    
     CGPoint pos = [gesture locationInView:self.viewList];
     
-    if(pos.x < 0 || pos.y < 0) {
+    if(pos.y < 0) {
       // out of range
     }
     else {
@@ -144,10 +145,10 @@
 
 - (NSString *)getTag:(CGPoint)point {
 
-  CGFloat targetWidth = self.viewList.frame.size.width;
+  CGFloat targetWidth = self.viewList.frame.size.width;//+100;
   CGFloat targetHeight = self.viewList.frame.size.height+25; // 25 day title height
   
-  CGFloat x = round((point.x / targetWidth) * 7);
+  CGFloat x = round(((point.x-40) / targetWidth) * 7);
   CGFloat y = round((point.y / (targetHeight)) * 24);
   
   for(NSValue *point in [self.frames allValues]) {
@@ -173,6 +174,8 @@
       // ignore
     }
     else {
+      
+      NSLog(@"update the button. %@", tag);
       int intTag = [tag intValue];
       UILabel *label = (UILabel *)[self.viewList viewWithTag:intTag];
       UIColor *color = [label backgroundColor];
