@@ -236,6 +236,24 @@
   [self resetAllApplyButton];
 }
 
+- (void)setDayData:(NSUInteger)index to:(BOOL)data {
+  
+  NSString *string = nil;
+  if(data) {
+    string = @"1";
+  }
+  else {
+    string = @"0";
+  }
+  
+  NSMutableString *daily = [_schedule objectAtIndex:_selectedDay];
+  [daily replaceCharactersInRange:NSMakeRange(index, 1) withString:string];
+  [_schedule replaceObjectAtIndex:_selectedDay withObject:daily];
+  
+  NSLog(@"updated! %@", _schedule);
+  [self resetAllApplyButton];
+}
+
 - (IBAction)onTimePressed:(id)sender {
   
   UIButton *button = (UIButton *)sender;
@@ -256,23 +274,6 @@
   [self setDayData:index to:data];
 }
 
-- (void)setDayData:(NSUInteger)index to:(BOOL)data {
-  
-  NSString *string = nil;
-  if(data) {
-    string = @"1";
-  }
-  else {
-    string = @"0";
-  }
-  
-  NSMutableString *daily = [_schedule objectAtIndex:_selectedDay];
-  [daily replaceCharactersInRange:NSMakeRange(index, 1) withString:string];
-  [_schedule replaceObjectAtIndex:_selectedDay withObject:daily];
-  
-  NSLog(@"updated! %@", _schedule);
-  [self resetAllApplyButton];
-}
 
 - (void)onTimeDragged:(UIPanGestureRecognizer *)gesture {
   
