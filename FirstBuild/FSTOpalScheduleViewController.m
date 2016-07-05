@@ -10,11 +10,6 @@
 #import "FSTOpalScheduleViewController.h"
 
 @interface FSTOpalScheduleViewController ()
-
-//@property (weak, nonatomic) IBOutlet UIView *viewList;
-@property (strong, nonatomic) NSMutableDictionary *frames;
-@property (strong, nonatomic) NSString *selected;
-
 @end
 
 @implementation FSTOpalScheduleViewController {
