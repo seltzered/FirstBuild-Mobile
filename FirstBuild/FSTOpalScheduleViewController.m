@@ -29,6 +29,7 @@
   __weak IBOutlet UIButton *_buttonFriday;
   __weak IBOutlet UIButton *_buttonSaturday;
   
+  NSArray *_labels;
   __weak IBOutlet UILabel *_labelSunday;
   __weak IBOutlet UILabel *_labelMonday;
   __weak IBOutlet UILabel *_labelTuesday;
@@ -64,11 +65,17 @@
   __weak IBOutlet UIButton *_button10pm;
   __weak IBOutlet UIButton *_button11pm;
   
+  __weak IBOutlet UIView *_viewHours;
+  
+  __weak IBOutlet UIButton *_buttonApplyAll;
+  
   // Today
-  NSUInteger _today;
+  NSUInteger _selectedDay;
   
   // Schedule
   NSMutableArray *_schedule;
+  
+  CGPoint _dragBegin;
 }
 
 - (void)viewDidLoad {
@@ -76,60 +83,54 @@
   [super viewDidLoad];
   
   _days = @[_buttonSunday, _buttonMonday, _buttonTuesday, _buttonWednesday, _buttonThursday, _buttonFriday, _buttonSaturday];
+  _labels = @[_labelSunday, _labelMonday, _labelTuesday, _labelWednesday, _labelThursday, _labelFriday, _labelSaturday];
   _hours = @[_buttonMidnight, _button1am, _button2am, _button3am, _button4am, _button5am, _button6am, _button7am, _button8am, _button9am, _button10am, _button11am, _buttonNoon, _button1pm, _button2pm, _button3pm, _button4pm, _button5pm, _button6pm, _button7pm, _button8pm, _button9pm, _button10pm, _button11pm];
   
   _schedule = [[NSMutableArray alloc] init];
   
-  
-  // Do any additional setup after loading the view.
-//  self.frames = [[NSMutableDictionary alloc] init];
-  
-//  UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragged:)];
-//  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
-//  [self.view addGestureRecognizer:pan];
-//  [self.view addGestureRecognizer:tap];
-//  
-//  [self addDots];
-  
-  
+  UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(onTimeDragged:)];
+  [_viewHours addGestureRecognizer:pan];
 }
 
 - (void)didReceiveMemoryWarning {
   
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
-  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+  self.opal.delegate = self;
   
   MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
   [navigation setHeaderText:@"EDIT SCHEDULE" withFrameRect:CGRectMake(0, 0, 160, 40)];
   
   [self getSchedule];
-  
 }
 
 - (void)viewDidAppear:(BOOL)animated {
   
-  [self updateData];
   [self updateToday];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-  [self.opal configureSchedule:[self createData]];
+  
+  [self sendData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [self resetAllApplyButton];
 }
 
 - (void)getSchedule
 {
   // make schedule to daily.
-  NSMutableString *sun = [[NSMutableString alloc] init];
-  NSMutableString *mon = [[NSMutableString alloc] init];
-  NSMutableString *tue = [[NSMutableString alloc] init];
-  NSMutableString *wed = [[NSMutableString alloc] init];
-  NSMutableString *thu = [[NSMutableString alloc] init];
-  NSMutableString *fri = [[NSMutableString alloc] init];
-  NSMutableString *sat = [[NSMutableString alloc] init];
+  NSMutableString *sun = [[NSMutableString alloc] initWithCapacity:24];
+  NSMutableString *mon = [[NSMutableString alloc] initWithCapacity:24];
+  NSMutableString *tue = [[NSMutableString alloc] initWithCapacity:24];
+  NSMutableString *wed = [[NSMutableString alloc] initWithCapacity:24];
+  NSMutableString *thu = [[NSMutableString alloc] initWithCapacity:24];
+  NSMutableString *fri = [[NSMutableString alloc] initWithCapacity:24];
+  NSMutableString *sat = [[NSMutableString alloc] initWithCapacity:24];
   
   for(NSString *times in self.opal.schedules) {
     
@@ -160,6 +161,10 @@
     }
   }
   
+  if(_schedule.count > 0) {
+    [_schedule removeAllObjects];
+  }
+  
   [_schedule addObject:sun];
   [_schedule addObject:mon];
   [_schedule addObject:tue];
@@ -168,7 +173,7 @@
   [_schedule addObject:fri];
   [_schedule addObject:sat];
   
-  NSLog(@"gina] schedule converted \n%@", _schedule);
+  NSLog(@"schedule converted as daily \n%@", _schedule);
 }
 
 - (void)updateToday {
@@ -177,10 +182,9 @@
   NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
   NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
   NSUInteger weekday = [comps weekday];
-  _today = weekday - 1; // make it to index
+  _selectedDay = weekday - 1; // make it to index
   
-  [self setSelected:YES to:[_days objectAtIndex:_today]];
-  [self updateTime:_today];
+  [self setDaySelected:_selectedDay];
 }
 
 - (void)updateTime:(NSUInteger)day {
@@ -201,6 +205,22 @@
   }
 }
 
+- (void)setDaySelected:(NSUInteger)day {
+  
+  _selectedDay = day;
+  
+  for(int index = 0; index < _days.count; index++){
+    
+    if(index == day) {
+      [self setSelected:YES to:[_days objectAtIndex:index]];
+      [self updateTime:index];
+    }
+    else {
+      [self setSelected:NO to:[_days objectAtIndex:index]];
+    }
+  }
+}
+
 - (void)setSelected:(BOOL)on to:(UIButton*)button {
   
   if(on){
@@ -213,186 +233,227 @@
   }
 }
 
-- (void)addDots
-{
-//  NSArray *orderHour = @[@4, @5, @6, @7, @8, @9, @10, @11, @12, @13, @14, @15, @16, @17, @18, @19, @20, @21, @22, @23, @0, @1, @2, @3];
-//  
-//  for(int hour = 1; hour <= 24; hour++) {
-//    for(int day = 1; day <= 7; day++) {
-//      
-//      UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 6, 6)];
-//      [label setTranslatesAutoresizingMaskIntoConstraints:NO];
-//      [label setBackgroundColor:[self nonSelectedColor]];
-//      [label setClipsToBounds:YES];
-//      [label setUserInteractionEnabled:NO];
-//      [[label layer] setCornerRadius:5];
-//      
-//      NSLayoutConstraint *width = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10];
-//      NSLayoutConstraint *height = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:10];
-//      [label addConstraints:@[width, height]];
-//      
-//      NSUInteger selectedHour = [[orderHour objectAtIndex:(hour-1)] unsignedIntegerValue];
-//      NSUInteger tag = (((selectedHour)*10)+day);
-//      [label setTag:tag];
-//      [self.viewList addSubview:label];
-//      
-//      CGFloat x = ((double)hour/24.3);
-//      CGFloat y = ((double)day/7.4);
-//  
-//      NSLayoutConstraint *xPos = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.viewList attribute:NSLayoutAttributeBottom multiplier:x constant:0];
-//      NSLayoutConstraint *yPos = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.viewList attribute:NSLayoutAttributeTrailing multiplier:y constant:0];
-//      
-//      [self.viewList addConstraints:@[xPos, yPos]];
-//      [self.frames setObject:[NSValue valueWithCGPoint:CGPointMake((day-1), (hour-1))] forKey:[NSString stringWithFormat:@"%ld", tag]];
-//    }
-//  }
+- (IBAction)onDayPressed:(id)sender {
+  
+  NSUInteger index = [_days indexOfObject:sender];
+  [self setDaySelected:index];
+  
+  [self resetAllApplyButton];
 }
 
-- (void)tapped:(UITapGestureRecognizer *)gesture {
+- (IBAction)onTimePressed:(id)sender {
   
-  NSLog(@"taped!");
-//  CGPoint pos = [gesture locationInView:self.viewList];
-//  if(pos.y < 0) {
-//    // out of range
-//  }
-//  else {
-//    NSString *tag = [self getTag:pos];
-//    [self toggleBackground:tag];
-//    self.selected = nil;
-//  }
+  UIButton *button = (UIButton *)sender;
+  NSLog(@"%@ tapped!", button.titleLabel.text);
+  
+  BOOL data = NO;
+  
+  if([button.backgroundColor isEqual:[self selectedColor]]) {
+    data = NO;
+  }
+  else {
+    data = YES;
+  }
+  
+  [self setSelected:data to:sender];
+
+  NSUInteger index = [_hours indexOfObject:sender];
+  [self setDayData:index to:data];
 }
 
-- (void)dragged:(UIPanGestureRecognizer *)gesture {
+- (void)setDayData:(NSUInteger)index to:(BOOL)data {
   
-//  if(gesture.state == UIGestureRecognizerStateEnded) {
-//    
-//    self.selected = nil;
-//  }
-//  else {
-//    
-////    CGPoint vel = [gesture velocityInView:self.viewList];
-////    NSLog(@"vert? %@", (vel.y > vel.x)? @"yes":@"no");
-////    
-//    CGPoint pos = [gesture locationInView:self.viewList];
-//    
-//    if(pos.y < 0) {
-//      // out of range
-//    }
-//    else {
-//      NSString *tag = [self getTag:pos];
-//      [self toggleBackground:tag];
-//    }
-//  }
+  NSString *string = nil;
+  if(data) {
+    string = @"1";
+  }
+  else {
+    string = @"0";
+  }
+  
+  NSMutableString *daily = [_schedule objectAtIndex:_selectedDay];
+  [daily replaceCharactersInRange:NSMakeRange(index, 1) withString:string];
+  [_schedule replaceObjectAtIndex:_selectedDay withObject:daily];
+  
+  NSLog(@"updated! %@", _schedule);
+  [self resetAllApplyButton];
 }
 
-- (void)updateData {
+- (void)onTimeDragged:(UIPanGestureRecognizer *)gesture {
   
-  for(int i=1; i<=237; i++) { //237 - last tag number of dots. 23 - hour, 7 day(sat)
+  if(gesture.state == UIGestureRecognizerStateBegan) {
+    _dragBegin = [gesture locationInView:_viewHours];
+  }
+  else if(gesture.state == UIGestureRecognizerStateEnded){
+    CGPoint end = [gesture locationInView:_viewHours];
+    [self getAreaFrom:_dragBegin to:end];
+  }
+}
+
+- (void)getAreaFrom:(CGPoint)begin to:(CGPoint)end {
+  
+  if(begin.x < 0 || begin.y < 0 ||
+     begin.x > _viewHours.frame.size.width ||  begin.y > _viewHours.frame.size.height) {
+    NSLog(@"out of frame x: %f y: %f", begin.x, begin.y);
+  }
+  else {
+    [self updateButtonsInArea:begin to:end];
+  }
+}
+
+- (void)updateButtonsInArea:(CGPoint)begin to:(CGPoint)end {
+  
+  CGFloat startXPoint = floorf((begin.x / _viewHours.frame.size.width)* 3);
+  CGFloat startYPoint = floorf((begin.y / _viewHours.frame.size.height) * 8);
+  CGFloat endXPoint = floorf((end.x / _viewHours.frame.size.width)* 3);
+  CGFloat endYPoint = floorf((end.y / _viewHours.frame.size.height) * 8);
+  
+  endXPoint = (endXPoint > 2)?2:endXPoint;
+  endYPoint = (endYPoint > 7)?7:endYPoint;
+  
+  CGFloat xLines = (endXPoint - startXPoint) + 1;
+  CGFloat yLines = (endYPoint - startYPoint) + 1;
+  
+  NSArray *hoursAsUi = @[@[_buttonMidnight, _button1am, _button2am], @[_button3am, _button4am, _button5am], @[_button6am, _button7am, _button8am], @[_button9am, _button10am, _button11am], @[_buttonNoon, _button1pm, _button2pm], @[_button3pm, _button4pm, _button5pm], @[_button6pm, _button7pm, _button8pm], @[_button9pm, _button10pm, _button11pm]];
+  
+  for(int y = startYPoint; y < yLines; y++) {
     
-    int day = i%10;
+    NSArray *yItems = [hoursAsUi objectAtIndex:y];
     
-    if(day > 0 && day < 8) {
+    for(int x = startXPoint; x < xLines; x++) {
       
-      int hour = (i-day) / 10;
-      NSString *time = [self.opal.schedules objectAtIndex:hour];
+      UIButton *button = [yItems objectAtIndex:x];
+      [self setSelected:YES to:button];
       
-      NSString *indexed= [time substringWithRange:NSMakeRange((day-1), 1)];
-      
-      BOOL on = ([indexed isEqualToString:@"1"])?YES:NO;
-      
-      [self schdule:i shouldOn:on];
+      NSUInteger index = [_hours indexOfObject:button];
+      [self setDayData:index to:YES];
     }
   }
 }
 
-- (NSString *)getTag:(CGPoint)point {
-
-//  CGFloat targetWidth = self.viewList.frame.size.width;//+100;
-//  CGFloat targetHeight = self.viewList.frame.size.height+25; // 25 day title height
-//  
-//  CGFloat x = round(((point.x-40) / targetWidth) * 7);
-//  CGFloat y = round((point.y / (targetHeight)) * 24);
-//  
-//  for(NSValue *point in [self.frames allValues]) {
-//    
-//    CGPoint conv = point.CGPointValue;
-//    
-//    if(conv.x == x && conv.y == y){
-//      NSArray *list = [self.frames allKeysForObject:point];
-//      return  [list objectAtIndex:0];
-//    }
-//    
-//  }
-  return nil;
-}
-
-- (void)toggleBackground:(NSString *)tag {
+- (IBAction)onApplyAllPressed:(id)sender {
   
-//  if([self.selected isEqualToString:tag]) {
-//    // ignore
-//  }
-//  else {
-//    if(tag.length == 0){
-//      // ignore
-//    }
-//    else {
-//      
-//      NSLog(@"update the button. %@", tag);
-//      int intTag = [tag intValue];
-//      UILabel *label = (UILabel *)[self.viewList viewWithTag:intTag];
-//      UIColor *color = [label backgroundColor];
-//      
-//      if([color isEqual:[self nonSelectedColor]]){
-//        [self schdule:intTag shouldOn:YES];
-//      }
-//      else {
-//        [self schdule:intTag shouldOn:NO];
-//      }
-//
-//      self.selected = tag;
-//    }
-//  }
+  [self showDayDots];
+  [_buttonApplyAll setUserInteractionEnabled:NO];
+  
+  NSMutableString *currentDayData = [_schedule objectAtIndex:_selectedDay];
+  
+  for(int index = 0; index < _schedule.count; index++) {
+    
+    if(index != _selectedDay) {
+      [_schedule replaceObjectAtIndex:index withObject:currentDayData];
+    }
+  }
+  
+  [self sendData];
 }
 
-- (void)schdule:(int)tag shouldOn:(BOOL)on
-{
-//  if(tag == 0) {
-//    //ignore
-//  }
-//  else {
-//    UILabel *label = (UILabel *)[self.viewList viewWithTag:tag];
-//    if(on) {
-//      label.backgroundColor = [self selectedColor];
-//    }
-//    else {
-//      label.backgroundColor = [self nonSelectedColor];
-//    }
-//  }
+- (void)showDayDots {
+  for(int index = 0; index < _labels.count; index++){
+    
+    UILabel *label = [_labels objectAtIndex:index];
+    
+    if(index == _selectedDay) {
+      [label setHidden:YES];
+    }
+    else {
+      [label setHidden:NO];
+    }
+  }
+}
+
+- (void)hideDayDots {
+  for(int index = 0; index < _labels.count; index++){
+    
+    UILabel *label = [_labels objectAtIndex:index];
+    [label setHidden:YES];
+  }
+}
+
+- (void)didAllApplied {
+  
+  [_buttonApplyAll setBackgroundColor:[self selectedColor]];
+  [_buttonApplyAll setTitle:@"APPLIED ALL" forState:UIControlStateNormal];
+  [_buttonApplyAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+  [_buttonApplyAll setUserInteractionEnabled:YES];
+  [self hideDayDots];
+}
+
+- (void)resetAllApplyButton {
+  
+  if([_buttonApplyAll.backgroundColor isEqual:[self selectedColor]]) {
+    [_buttonApplyAll setBackgroundColor:[UIColor whiteColor]];
+    [_buttonApplyAll setTitle:@"APPLY ALL DAYS" forState:UIControlStateNormal];
+    [_buttonApplyAll setTitleColor:[self selectedColor] forState:UIControlStateNormal];
+    [_buttonApplyAll setUserInteractionEnabled:YES];
+  }
+}
+
+- (void)sendData {
+  
+  NSLog(@"created %@", [self createData]);
+  [self.opal configureSchedule:[self createData]];
 }
 
 - (NSArray *)createData {
-//  NSMutableString *data = [[NSMutableString alloc] init];
-//  
-//  for(int i=1; i<=237; i++) { //237 - last tag number of dots. 23 - hour, 7 day(sat)
-//    
-//    int day = i%10;
-//    
-//    if(day > 0 && day < 8) {
-//      
-//      UILabel *label = (UILabel *)[self.viewList viewWithTag:i];
-//      BOOL isSelected = [label.backgroundColor isEqual:[self selectedColor]];
-//      
-//      [data appendString:(isSelected)?@"1":@"0"];
-//      
-//      if(day == 7 && i != 237){
-//        [data appendString:@"\n"];
-//      }
-//    }
-//  }
-//  
-//  NSArray *array = [data componentsSeparatedByString:@"\n"];
-//  return array;
-    return nil;
+  
+  NSMutableString *midnight = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *oneAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *twoAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *threeAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *fourAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *fiveAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *sixAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *sevenAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *eightAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *nineAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *tenAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *elevenAm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *noon = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *onePm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *twoPm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *threePm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *fourPm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *fivePm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *sixPm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *sevenPm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *eightPm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *ninePm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *tenPm = [[NSMutableString alloc] initWithCapacity:8];
+  NSMutableString *elevenPm = [[NSMutableString alloc] initWithCapacity:8];
+
+  NSArray *times = @[midnight, oneAm, twoAm, threeAm, fourAm, fiveAm, sixAm, sevenAm, eightAm, nineAm, tenAm, elevenAm,
+                     noon, onePm, twoPm, threePm, fourPm, fivePm, sixPm, sevenPm, eightPm, ninePm, tenPm, elevenPm];
+  
+  // convert to daily
+  for(NSString *daily in _schedule) {
+    
+    for(int index = 0; index < daily.length; index++) {
+      
+      NSString *selected = [daily substringWithRange:NSMakeRange(index, 1)];
+      NSMutableString *string = [times objectAtIndex:index];
+      
+      [string appendString:selected];
+    }
+  }
+  
+  // Add zero at the end
+  for(NSMutableString *string in times) {
+    [string appendString:@"0"];
+  }
+  
+  return @[midnight, oneAm, twoAm, threeAm, fourAm, fiveAm, sixAm, sevenAm, eightAm, nineAm, tenAm, elevenAm,
+           noon, onePm, twoPm, threePm, fourPm, fivePm, sixPm, sevenPm, eightPm, ninePm, tenPm, elevenPm];
+}
+
+#pragma mark - opal delegate
+- (void)iceMakerScheduleWritten: (NSError *)error {
+  
+  if(!_buttonApplyAll.isUserInteractionEnabled) {
+    
+    // update all apply button if only the button is pressed
+    [self didAllApplied];
+  }
 }
 
 - (UIColor *)selectedColor {

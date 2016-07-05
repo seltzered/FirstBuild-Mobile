@@ -234,7 +234,12 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 
 -(void)handleScheduleWrite: (NSError *)error
 {
-  NSLog(@"handleWriteMode written");
+  NSLog(@"handleWriteSchedule written");
+  if ([self.delegate respondsToSelector:@selector(iceMakerScheduleWritten:)])
+  {
+    [self.delegate iceMakerScheduleWritten:error];
+  }
+  
   FSTBleCharacteristic* characteristic = [self.characteristics objectForKey:FSTCharacteristicOpalSchedule];
   [self readFstBleCharacteristic:characteristic];
 }
@@ -654,6 +659,7 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalLight]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalTemperature]).wantNotification = YES;
   ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]).wantNotification = YES;
+  ((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalSchedule]).wantNotification = YES;
   
 }
 
