@@ -138,8 +138,18 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   //  GMT: Thu, 24 Mar 2016 12:53:06 GMT <<<< 12:53
   //  Your time zone: 3/24/2016, 8:53:06 AM GMT-4:00 DST
 
+  NSDate* sourceDate = [NSDate date];
   
-  uint32_t secondsSince1970 = (uint32_t)[[NSDate date]timeIntervalSince1970];
+  NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+  NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+  
+  NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:sourceDate];
+  NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:sourceDate];
+  NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
+  
+  NSDate* destinationDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:sourceDate];
+  uint32_t secondsSince1970 = (uint32_t)[destinationDate timeIntervalSince1970];
+  
   NSMutableData *data = [[NSMutableData alloc] initWithBytes:&secondsSince1970 length:sizeof(uint32_t)];
   
   if (characteristic)
@@ -622,6 +632,8 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
 {
   [super deviceReady];
   [self writeCurrentTime];
+  
+  // gina - why the OTA should be aborted
   [self abortOta];
   
 //  [((FSTBleCharacteristic*)[self.characteristics objectForKey:FSTCharacteristicOpalError]) pollWithInterval:2.0];

@@ -231,9 +231,12 @@
 - (IBAction)onDayPressed:(id)sender {
   
   NSUInteger index = [_days indexOfObject:sender];
+  
   [self setDaySelected:index];
   
-  [self resetAllApplyButton];
+  if([_buttonApplyAll.backgroundColor isEqual:[self selectedColor]]){
+    [self updateDayDots];
+  }
 }
 
 - (void)setDayData:(NSUInteger)index to:(BOOL)data {
@@ -246,12 +249,13 @@
     string = @"0";
   }
   
-  NSMutableString *daily = [_schedule objectAtIndex:_selectedDay];
+  NSMutableString *daily = [[_schedule objectAtIndex:_selectedDay] mutableCopy];
   [daily replaceCharactersInRange:NSMakeRange(index, 1) withString:string];
   [_schedule replaceObjectAtIndex:_selectedDay withObject:daily];
   
   NSLog(@"updated! %@", _schedule);
   [self resetAllApplyButton];
+  [self resetDayDots];
 }
 
 - (IBAction)onTimePressed:(id)sender {
@@ -329,7 +333,7 @@
 
 - (IBAction)onApplyAllPressed:(id)sender {
   
-  [self showDayDots];
+  [self updateDayDots];
   [_buttonApplyAll setUserInteractionEnabled:NO];
   
   NSMutableString *currentDayData = [_schedule objectAtIndex:_selectedDay];
@@ -344,7 +348,7 @@
   [self sendData];
 }
 
-- (void)showDayDots {
+- (void)updateDayDots {
   for(int index = 0; index < _labels.count; index++){
     
     UILabel *label = [_labels objectAtIndex:index];
@@ -358,7 +362,7 @@
   }
 }
 
-- (void)hideDayDots {
+- (void)resetDayDots {
   for(int index = 0; index < _labels.count; index++){
     
     UILabel *label = [_labels objectAtIndex:index];
@@ -372,7 +376,6 @@
   [_buttonApplyAll setTitle:@"APPLIED ALL" forState:UIControlStateNormal];
   [_buttonApplyAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
   [_buttonApplyAll setUserInteractionEnabled:YES];
-  [self hideDayDots];
 }
 
 - (void)resetAllApplyButton {
