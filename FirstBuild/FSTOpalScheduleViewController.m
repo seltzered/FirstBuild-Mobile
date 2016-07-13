@@ -7,6 +7,7 @@
 //
 
 #import "MobiNavigationController.h"
+#import "FTSOpalScheduleInstructionViewcontroller.h"
 #import "FSTOpalScheduleViewController.h"
 
 @interface FSTOpalScheduleViewController ()
@@ -99,6 +100,10 @@
   MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
   [navigation setHeaderText:@"EDIT SCHEDULE" withFrameRect:CGRectMake(0, 0, 160, 40)];
   
+  // set question button
+  UIBarButtonItem *instructionButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon-question"] style:UIBarButtonItemStylePlain target:self action:@selector(onQuestionPressed:)];
+  self.navigationItem.rightBarButtonItem = instructionButton;
+  
   [self getSchedule];
 }
 
@@ -180,6 +185,23 @@
   _selectedDay = weekday - 1; // make it to index
   
   [self setDaySelected:_selectedDay];
+  
+  NSString *today = [_schedule objectAtIndex:_selectedDay];
+  BOOL isAllSame = YES;
+  
+  // check schedule
+  for(NSString *daily in _schedule) {
+    
+    if([today isEqualToString:daily] == NO) {
+      isAllSame = NO;
+      break;
+    }
+  }
+  
+  if(isAllSame) {
+    [self updateDayDots];
+    [self didAllApplied];
+  }
 }
 
 - (void)updateTime:(NSUInteger)day {
@@ -200,6 +222,7 @@
   }
 }
 
+#pragma mark - selected
 - (void)setDaySelected:(NSUInteger)day {
   
   _selectedDay = day;
@@ -219,23 +242,14 @@
 - (void)setSelected:(BOOL)on to:(UIButton*)button {
   
   if(on){
+    NSLog(@"gina] %@ selected", button.titleLabel.text);
     [button setBackgroundColor:[self selectedColor]];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
   }
   else {
+    NSLog(@"gina] %@ unselected", button.titleLabel.text);
     [button setBackgroundColor:[self unselectedColor]];
     [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-  }
-}
-
-- (IBAction)onDayPressed:(id)sender {
-  
-  NSUInteger index = [_days indexOfObject:sender];
-  
-  [self setDaySelected:index];
-  
-  if([_buttonApplyAll.backgroundColor isEqual:[self selectedColor]]){
-    [self updateDayDots];
   }
 }
 
@@ -258,6 +272,18 @@
   [self resetDayDots];
 }
 
+#pragma mark - buttons
+- (IBAction)onDayPressed:(id)sender {
+  
+  NSUInteger index = [_days indexOfObject:sender];
+  
+  [self setDaySelected:index];
+  
+  if([_buttonApplyAll.backgroundColor isEqual:[self selectedColor]]){
+    [self updateDayDots];
+  }
+}
+
 - (IBAction)onTimePressed:(id)sender {
   
   UIButton *button = (UIButton *)sender;
@@ -278,14 +304,17 @@
   [self setDayData:index to:data];
 }
 
-
 - (void)onTimeDragged:(UIPanGestureRecognizer *)gesture {
   
   if(gesture.state == UIGestureRecognizerStateBegan) {
     _dragBegin = [gesture locationInView:_viewHours];
+    
+    NSLog(@"gina] drag began %f %f", _dragBegin.x, _dragBegin.y);
   }
   else if(gesture.state == UIGestureRecognizerStateEnded){
     CGPoint end = [gesture locationInView:_viewHours];
+    
+    NSLog(@"gina] ended %f %f", end.x, end.y);
     [self getAreaFrom:_dragBegin to:end];
   }
 }
@@ -316,11 +345,11 @@
   
   NSArray *hoursAsUi = @[@[_buttonMidnight, _button1am, _button2am], @[_button3am, _button4am, _button5am], @[_button6am, _button7am, _button8am], @[_button9am, _button10am, _button11am], @[_buttonNoon, _button1pm, _button2pm], @[_button3pm, _button4pm, _button5pm], @[_button6pm, _button7pm, _button8pm], @[_button9pm, _button10pm, _button11pm]];
   
-  for(int y = startYPoint; y < yLines; y++) {
+  for(int y = startYPoint; y < (startYPoint+yLines); y++) {
     
     NSArray *yItems = [hoursAsUi objectAtIndex:y];
     
-    for(int x = startXPoint; x < xLines; x++) {
+    for(int x = startXPoint; x < (startXPoint+xLines); x++) {
       
       UIButton *button = [yItems objectAtIndex:x];
       [self setSelected:YES to:button];
@@ -348,6 +377,18 @@
   [self sendData];
 }
 
+- (void)onQuestionPressed:(id)sender
+{
+  NSLog(@"gina] show instruction");
+  // grab the view controller we want to show
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Opal" bundle:nil];
+  UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"ScheduleInstruction"];
+  
+  controller.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:controller animated:YES completion:nil];
+}
+
+#pragma mark - ui update
 - (void)updateDayDots {
   for(int index = 0; index < _labels.count; index++){
     

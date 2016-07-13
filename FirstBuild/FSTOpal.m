@@ -150,6 +150,8 @@ NSString * const FSTCharacteristicOpalLog6 = @"352DDEA3-79F7-410F-B5B5-4D3F96DC5
   NSDate* destinationDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:sourceDate];
   uint32_t secondsSince1970 = (uint32_t)[destinationDate timeIntervalSince1970];
   
+  NSLog(@"gina] sending time - %d", secondsSince1970);
+  
   NSMutableData *data = [[NSMutableData alloc] initWithBytes:&secondsSince1970 length:sizeof(uint32_t)];
   
   if (characteristic)

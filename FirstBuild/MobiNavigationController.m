@@ -24,9 +24,7 @@ CGFloat _midY = 0;
     [self setHeaderImageNamed:@"logo_1b_orange_no_firstbuild" withFrameRect:CGRectMake(0, 0, 44, 26)];
     
     [self.navigationBar setBarTintColor:[UIColor whiteColor]];
-    
 }
-
 
 - (void)setHeaderImageNamed: (NSString*)imageName withFrameRect: (CGRect)frame
 {
