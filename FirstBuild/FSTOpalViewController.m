@@ -37,11 +37,7 @@
   [super viewWillAppear:animated];
   self.opal.delegate = self;
   
-  if (self.opal.iceMakerOn) {
-    iceMakerStatusLabelOutlet.text = @"STOP MAKING ICE";
-  } else {
-    iceMakerStatusLabelOutlet.text = @"START MAKING ICE";
-  }
+  [self updateIceMakerState:self.opal.statusLabel];
   
   // update switches
   [tableVc.nightLightSwitchOutlet setOn:self.opal.nightLightOn];
@@ -54,6 +50,27 @@
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (void)updateIceMakerState:(NSString *)state {
+  
+  // possible
+  // @"idle" @"ice making" @"add water" @"ice full" @"cleaning" @"..."
+  
+  if([state isEqualToString:@"idle"] ||
+     [state isEqualToString:@"ice making"]) {
+    
+    makeIceButtonOutlet.hidden = NO;
+    
+    if (self.opal.iceMakerOn) {
+      iceMakerStatusLabelOutlet.text = @"STOP MAKING ICE";
+    } else {
+      iceMakerStatusLabelOutlet.text = @"START MAKING ICE";
+    }
+  }
+  else {
+    makeIceButtonOutlet.hidden = YES;
+  }
 }
 
 - (IBAction)iceTapGestureAction:(id)sender {
@@ -84,8 +101,12 @@
 #pragma mark - opal delegate
 
 -(void)iceMakerStatusChanged:(NSNumber *)status withLabel:(NSString *)label {
+  
   NSLog(@"iceMakerStatusChanged: %d %@", status.intValue, label);
+  
   tableVc.statusLabelOutlet.text = label;
+  
+  [self updateIceMakerState:label];
 }
 
 - (void)iceMakerLightChanged:(BOOL)on {
