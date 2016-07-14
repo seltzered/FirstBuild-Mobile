@@ -9,7 +9,7 @@
 #ifndef FirstBuildMobile_Constants_h
 #define FirstBuildMobile_Constants_h
 
-#define IS_FIELD_TRIAL
+//#define IS_FIELD_TRIAL
 
 #define _CHILLHUB
 
