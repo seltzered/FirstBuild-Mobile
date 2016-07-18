@@ -112,11 +112,6 @@
   [self updateToday];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-  
-  [self sendData];
-}
-
 - (void)viewDidDisappear:(BOOL)animated {
   [self resetAllApplyButton];
 }
@@ -302,6 +297,7 @@
 
   NSUInteger index = [_hours indexOfObject:sender];
   [self setDayData:index to:data];
+  [self sendData];
 }
 
 - (void)onTimeDragged:(UIPanGestureRecognizer *)gesture {
@@ -338,7 +334,13 @@
   CGFloat endYPoint = floorf((end.y / _viewHours.frame.size.height) * 8);
   
   endXPoint = (endXPoint > 2)?2:endXPoint;
-  endYPoint = (endYPoint > 7)?7:endYPoint;
+  endYPoint = (endYPoint > 7)?7:endYPoint; 
+  
+  if(startXPoint == endXPoint) {
+    
+    NSLog(@"you select one line, make it to select from the x position to the end");
+    endXPoint = 2;
+  }
   
   CGFloat xLines = (endXPoint - startXPoint) + 1;
   CGFloat yLines = (endYPoint - startYPoint) + 1;
@@ -358,6 +360,8 @@
       [self setDayData:index to:YES];
     }
   }
+  
+  [self sendData];
 }
 
 - (IBAction)onApplyAllPressed:(id)sender {
