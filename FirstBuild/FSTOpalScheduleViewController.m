@@ -113,12 +113,6 @@
   [self updateToday];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-  [self sendData];
-  [super viewWillDisappear:animated];
-}
-
-
 - (void)viewDidDisappear:(BOOL)animated {
   [self resetAllApplyButton];
   [super viewDidDisappear:animated];
