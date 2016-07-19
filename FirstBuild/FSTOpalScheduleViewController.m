@@ -95,6 +95,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
   self.opal.delegate = self;
   
   MobiNavigationController* navigation = (MobiNavigationController*)self.navigationController;
@@ -108,12 +109,19 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  
+  [super viewDidAppear:animated];
   [self updateToday];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+  [self sendData];
+  [super viewWillDisappear:animated];
+}
+
+
 - (void)viewDidDisappear:(BOOL)animated {
   [self resetAllApplyButton];
+  [super viewDidDisappear:animated];
 }
 
 - (void)getSchedule
