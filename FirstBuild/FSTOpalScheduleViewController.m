@@ -334,31 +334,18 @@
   CGFloat endYPoint = floorf((end.y / _viewHours.frame.size.height) * 8);
   
   endXPoint = (endXPoint > 2)?2:endXPoint;
-  endYPoint = (endYPoint > 7)?7:endYPoint; 
+  endYPoint = (endYPoint > 7)?7:endYPoint;
   
-  if(startXPoint == endXPoint) {
+  NSArray *indexes = @[@[@0, @1, @2], @[@3, @4, @5], @[@6, @7, @8], @[@9, @10, @11], @[@12, @13, @14], @[@15, @16, @17], @[@18, @19, @20], @[@21, @22, @23]];
+  
+  NSUInteger startIndex = [[[indexes objectAtIndex:startYPoint] objectAtIndex:startXPoint] unsignedIntegerValue];
+  NSUInteger endIndex = [[[indexes objectAtIndex:endYPoint] objectAtIndex:endXPoint] unsignedIntegerValue];
+  
+  for(NSUInteger index = startIndex; index <= endIndex; index++) {
+    UIButton *button = [_hours objectAtIndex:index];
     
-    NSLog(@"you select one line, make it to select from the x position to the end");
-    endXPoint = 2;
-  }
-  
-  CGFloat xLines = (endXPoint - startXPoint) + 1;
-  CGFloat yLines = (endYPoint - startYPoint) + 1;
-  
-  NSArray *hoursAsUi = @[@[_buttonMidnight, _button1am, _button2am], @[_button3am, _button4am, _button5am], @[_button6am, _button7am, _button8am], @[_button9am, _button10am, _button11am], @[_buttonNoon, _button1pm, _button2pm], @[_button3pm, _button4pm, _button5pm], @[_button6pm, _button7pm, _button8pm], @[_button9pm, _button10pm, _button11pm]];
-  
-  for(int y = startYPoint; y < (startYPoint+yLines); y++) {
-    
-    NSArray *yItems = [hoursAsUi objectAtIndex:y];
-    
-    for(int x = startXPoint; x < (startXPoint+xLines); x++) {
-      
-      UIButton *button = [yItems objectAtIndex:x];
-      [self setSelected:YES to:button];
-      
-      NSUInteger index = [_hours indexOfObject:button];
-      [self setDayData:index to:YES];
-    }
+    [self setSelected:YES to:button];
+    [self setDayData:index to:YES];
   }
   
   [self sendData];
