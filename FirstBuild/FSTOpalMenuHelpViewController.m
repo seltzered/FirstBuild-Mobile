@@ -31,6 +31,6 @@
 
 - (IBAction)faqTap:(id)sender
 {
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://nuggetice.com/"]];
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://firstbuildhelp.zendesk.com/hc/en-us/categories/203029708-Opal-Nugget-Ice-Maker"]];
 }
 @end

@@ -40,7 +40,7 @@
 
 - (IBAction)learnMoreTap:(id)sender {
   
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://cocreate.firstbuild.com/JBerg/opal-nugget-ice-maker/activity/"]];
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://nuggetice.com"]];
   
 }
 
