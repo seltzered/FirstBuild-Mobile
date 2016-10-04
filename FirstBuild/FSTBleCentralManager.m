@@ -172,14 +172,14 @@ NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManager
     {
        DLog(@"already scanning");
     }
-    else if (!uuidString)
-    {
-        DLog(@"uuidString null");
-    }
-    else if (uuidString.length ==0)
-    {
-        DLog(@"uuidString length is 0");
-    }
+//    else if (!uuidString)
+//    {
+//        DLog(@"uuidString null");
+//    }
+//    else if (uuidString.length ==0)
+//    {
+//        DLog(@"uuidString length is 0");
+//    }
     else if (_centralManager.state != CBCentralManagerStatePoweredOn)
     {
         DLog(@"central is not powered on, can't scan");
@@ -199,11 +199,15 @@ NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManager
         _discoveryTimer = [NSTimer timerWithTimeInterval:5.0 target:self selector:@selector(discoveryTimerTimeout:) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:_discoveryTimer forMode:NSRunLoopCommonModes];
 
-        [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
+        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber  numberWithBool:YES], CBCentralManagerScanOptionAllowDuplicatesKey, nil];
+        
+        [_centralManager scanForPeripheralsWithServices:nil options:options];
+
+//        [_centralManager scanForPeripheralsWithServices:[NSArray arrayWithObject:_currentServiceScanningUuid] options:nil];
     }
 }
 
--(void)stopScanning
+-(void) Scanning
 {
      DLog(@"stop scanning...");
     _scanning = NO;
