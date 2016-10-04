@@ -207,7 +207,7 @@ NSString * const FSTBleCentralManagerDeviceDisconnected = @"FSTBleCentralManager
     }
 }
 
--(void) Scanning
+-(void)stopScanning
 {
      DLog(@"stop scanning...");
     _scanning = NO;
