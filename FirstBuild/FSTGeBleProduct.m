@@ -243,7 +243,7 @@ NSString * const FSTCharacteristicOtaBleInfo            = @"318DB1F5-67F1-119B-6
 
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Update Complete"
-                                                                             message:@"The update completed successfully!"
+                                                                             message:@"The update completed successfully!\nPlease click on “Updates” again to check if there is another update available."
                                                                       preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
