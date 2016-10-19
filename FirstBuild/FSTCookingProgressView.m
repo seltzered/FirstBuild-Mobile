@@ -36,6 +36,7 @@
 
 - (void)awakeFromNib {
    // [self setupViews];
+   [super awakeFromNib];
 }
 
 - (void)layoutSubviews {
